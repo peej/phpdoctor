@@ -34,11 +34,13 @@ class packageIndexWriter extends htmlWriter {
 	
 		parent::htmlWriter($doclet);
 		
+		$phpdoctor =& $this->_doclet->phpdoctor();
+		
 		$this->_sections[0] = array('title' => 'Overview', 'selected' => TRUE);
 		$this->_sections[1] = array('title' => 'Package');
 		$this->_sections[2] = array('title' => 'Class');
 		$this->_sections[3] = array('title' => 'Use');
-		$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
+		if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
 		$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 
 		ob_start();

@@ -151,7 +151,7 @@ class htmlWriter {
 					$output .= '<span class="location">'.$section['title'].'</span> &nbsp; ';
 				} else {
 					if (isset($section['url'])) {
-						$output .= '<a href="'.str_repeat('../', $this->_depth).''.$section['url'].'">'.$section['title'].'</a> &nbsp; ';
+						$output .= '<a href="'.str_repeat('../', $this->_depth).$section['url'].'">'.$section['title'].'</a> &nbsp; ';
 					} else {
 						$output .= $section['title'].' &nbsp; ';
 					}

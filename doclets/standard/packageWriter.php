@@ -34,18 +34,49 @@ class packageWriter extends htmlWriter {
 	
 		parent::htmlWriter($doclet);
 		
-		$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-		$this->_sections[1] = array('title' => 'Package', 'selected' => TRUE);
-		$this->_sections[2] = array('title' => 'Class');
-		$this->_sections[3] = array('title' => 'Use');
-		$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-		$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
-
 		$rootDoc =& $this->_doclet->rootDoc();
+		$phpdoctor =& $this->_doclet->phpdoctor();
+		
+		$displayTree = $phpdoctor->getOption('tree');
+		
+		if ($displayTree) {
+			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
+			$this->_sections[1] = array('title' => 'Package');
+			$this->_sections[2] = array('title' => 'Class');
+			$this->_sections[3] = array('title' => 'Use');
+			$this->_sections[4] = array('title' => 'Tree', 'selected' => TRUE);
+			$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+
+			$tree = array();
+			$classes =& $rootDoc->classes();
+			if ($classes) {
+				foreach ($classes as $class) {
+					$this->_buildTree($tree, $class);
+				}
+			}
+
+			ob_start();
+
+			echo '<h1>Class Hierarchy</h1>';
+
+			$this->_displayTree($tree);
+
+			$this->_output = ob_get_contents();
+			ob_end_clean();
+
+			$this->_write('overview-tree.html', 'Overview', TRUE);
+		}
 
 		foreach($rootDoc->packages() as $packageName => $package) {
 		
 			$this->_depth = $package->depth() + 1;
+
+			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
+			$this->_sections[1] = array('title' => 'Package', 'selected' => TRUE);
+			$this->_sections[2] = array('title' => 'Class');
+			$this->_sections[3] = array('title' => 'Use');
+			if ($displayTree) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
+			$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 			
 			ob_start();
 			
@@ -142,8 +173,71 @@ class packageWriter extends htmlWriter {
 			
 			$this->_write($package->asPath().'/package-summary.html', $package->name(), TRUE);
 			
+			if ($displayTree) {
+			
+				$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
+				$this->_sections[1] = array('title' => 'Package', 'url' => 'package-summary.html', 'relative' => TRUE);
+				$this->_sections[2] = array('title' => 'Class');
+				$this->_sections[3] = array('title' => 'Use');
+				$this->_sections[4] = array('title' => 'Tree', 'url' => 'package-tree.html', 'selected' => TRUE, 'relative' => TRUE);
+				$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+
+				$tree = array();
+				$classes =& $package->ordinaryClasses();
+				if ($classes) {
+					foreach ($classes as $class) {
+						$this->_buildTree($tree, $class);
+					}
+				}
+
+				ob_start();
+
+				echo '<h1>Class Hierarchy for Package ', $package->name(),'</h1>';
+
+				$this->_displayTree($tree);
+
+				$this->_output = ob_get_contents();
+				ob_end_clean();
+
+				$this->_write($package->asPath().'/package-tree.html', $package->name(), TRUE);
+			}
+			
 		}
 	
+	}
+	
+	/**
+	 * Build the class tree branch for the given element
+	 *
+	 * @param classDoc[] tree
+	 * @param classDoc element
+	 */
+	function _buildTree(&$tree, &$element) {
+		$tree[$element->name()] = $element;
+		if ($element->superclass()) {
+			$rootDoc =& $this->_doclet->rootDoc();
+			$this->_buildTree($tree, $rootDoc->classNamed($element->superclass()));
+		}
+	}
+	
+	/**
+	 * Build the class tree branch for the given element
+	 *
+	 * @param classDoc[] tree
+	 * @param classDoc parent
+	 */
+	function _displayTree($tree, $parent = NULL) {
+		$outputList = TRUE;
+		foreach($tree as $name => $element) {
+			if ($element->superclass() == $parent) {
+				if ($outputList) echo "<ul>\n";
+				echo '<li><a href="', str_repeat('../', $this->_depth), $element->asPath(), '">', $element->qualifiedName(), '</a>';
+				$this->_displayTree($tree, $name);
+				echo "</li>\n";
+				$outputList = FALSE;
+			}
+		}
+		if (!$outputList) echo "</ul>\n";
 	}
 
 }

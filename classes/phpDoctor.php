@@ -142,6 +142,12 @@ class phpDoctor {
 	 */
 	var $_constants = TRUE;
 
+	/** Display class tree.
+	 *
+	 * @var bool
+	 */
+	var $_tree = TRUE;
+
 	/** Parse only public classes and members.
 	 *
 	 * @var bool
@@ -239,6 +245,7 @@ class phpDoctor {
 
 		if (isset($this->_options['globals'])) $this->_globals = $this->_options['globals'];
 		if (isset($this->_options['constants'])) $this->_constants = $this->_options['constants'];
+		if (isset($this->_options['tree'])) $this->_tree = $this->_options['tree'];
 
 		if (isset($this->_options['public']) && $this->_options['public']) {
 			$this->_public = TRUE;

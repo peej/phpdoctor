@@ -37,6 +37,7 @@ class classWriter extends htmlWriter {
 		$this->_id = 'definition';
 
 		$rootDoc =& $this->_doclet->rootDoc();
+		$phpdoctor =& $this->_doclet->phpdoctor();
 		
 		$packages =& $rootDoc->packages();
 
@@ -46,7 +47,7 @@ class classWriter extends htmlWriter {
 			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);
 			$this->_sections[3] = array('title' => 'Use');
-			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
+			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
 			$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 		
 			$this->_depth = $package->depth() + 1;
