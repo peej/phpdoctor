@@ -38,11 +38,29 @@ class tag {
 	 * @var str
 	 */
 	var $_text = NULL;
-
-	/** Constructor
+		
+	/** Reference to the root element.
+	 *
+	 * @var rootDoc
 	 */
-	function tag($name, $text) {
+	var $_root = NULL;
+
+	/** Reference to the elements parent.
+	 *
+	 * @var programElementDoc
+	 */
+	var $_parent = NULL;
+
+	/**
+	 * Constructor
+	 *
+	 * @param str name The name of the tag (including @)
+	 * @param str text The contents of the tag
+	 * @param rootDoc root The root object
+	 */
+	function tag($name, $text, &$root) {
 		$this->_name = $name;
+		$this->_root =& $root;
 		foreach(explode("\n", $text) as $line) {
 			if ($this->_text) {
 				$this->_text .= ' '.trim($line, "\n\r\t */");
@@ -74,6 +92,88 @@ class tag {
 	 */
 	function text() {
 		return $this->_text;
+	}
+	
+	/** Set this tags parent
+	 *
+	 * @param programElementDoc element The parent element
+	 */
+	function setParent(&$element) {
+		$this->_parent =& $element;
+	}
+	
+	/**
+	 * For documentation comment with embedded @link tags, return the array of
+	 * tags. Within a comment string "This is an example of inline tags for a
+	 * documentaion comment {@link Doc commentlabel}", where inside the inner
+	 * braces, the first "Doc" carries exactly the same syntax as a SeeTag and
+	 * the second "commentlabel" is label for the HTML link, will return an array
+	 * of tags with first element as tag with comment text "This is an example of
+	 * inline tags for a documentation comment" and second element as SeeTag with
+	 * referenced class as "Doc" and the label for the HTML link as
+	 * "commentlabel".
+	 *
+	 * @return tag[] Array of tags with inline tags.
+	 * @todo This method does not act as described but should be altered to do so
+	 */
+	function &inlineTags() {
+		return $this->_getInlineTags($this->text());
+	}
+	
+	/**
+	 * Return the first sentence of the comment as tags. Includes inline tags
+	 * (i.e. {@link reference} tags) but not regular tags. Each section of plain
+	 * text is represented as a Tag of kind "Text". Inline tags are represented
+	 * as a SeeTag of kind "link". The sentence ends at the first period that is
+	 * followed by a space, tab, or a line terminator, at the first tagline, or
+	 * at closing of a HTML block element (<p> <h1> <h2> <h3> <h4> <h5> <h6> <hr>
+	 * <pre>).
+	 *
+	 * @return tag[] An array of Tags representing the first sentence of the
+	 * comment
+	 * @todo This method does not act as described but should be altered to do so
+	 */
+	function &firstSentenceTags() {
+		if (preg_match('/^(.+)\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)/sU', $this->text(), $matches)) {
+			return $this->_getInlineTags($matches[1].'.'.$matches[2]);
+		} else {
+			return array(&$this);
+		}
+	}
+	
+	/**
+	 * Parse out inline tags from within a text string
+	 *
+	 * @param str text
+	 * @return tag[]
+	 */
+	function &_getInlineTags($text) {
+		$tagStrings = preg_split('/{(@.+)}/sU', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+		if ($tagStrings) {
+			$inlineTags = NULL;
+			$phpdoctor =& $this->_root->phpdoctor();
+			foreach ($tagStrings as $tag) {
+				if (substr($tag, 0, 1) == '@') {
+					$pos = strpos($tag, ' ');
+					if ($pos !== FALSE) {
+						$name = trim(substr($tag, 0, $pos));
+						$text = trim(substr($tag, $pos + 1));
+					} else {
+						$name = $tag;
+						$text = NULL;
+					}
+				} else {
+					$name = '@text';
+					$text = $tag;
+				}
+				$data = NULL;
+				$inlineTag =& $phpdoctor->createTag($name, $text, $data, $this->_root);
+				$inlineTag->setParent($this->_parent);
+				$inlineTags[] = $inlineTag;
+			}
+			return $inlineTags;
+		}
+		return NULL;
 	}
 
 	/** Return true if this Taglet is used in constructor documentation. */

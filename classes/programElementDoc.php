@@ -29,7 +29,7 @@ class programElementDoc extends doc {
 
 	/** Reference to the elements parent.
 	 *
-	 * @var mixed
+	 * @var programElementDoc
 	 */
 	var $_parent = NULL;
 
@@ -77,27 +77,42 @@ class programElementDoc extends doc {
 	 *
 	 * @return classDoc
 	 */
-	function containingClass() {
-		return $_parent;
+	function &containingClass() {
+		return $this->_parent;
 	}
 
 	/** Get the package that this program element is contained in.
 	 *
 	 * @return packageDoc
 	 */
-	function containingPackage() {
+	function &containingPackage() {
+		return $this->_root->packageNamed($this->_package);
+	}
+	
+	/** Get the name of the package that this program element is contained in.
+	 *
+	 * @return str
+	 */
+	function packageName() {
 		return $this->_package;
 	}
 
 	/** Get the fully qualified name.
 	 *
 	 * <pre>Example:
-for the method bar() in class Foo in the unnamed package, return:
-	Foo.bar()</pre>
+for the method bar() in class Foo in the package Baz, return:
+	Baz.Foo.bar()</pre>
 	 *
 	 * @return str
 	 */
-	function qualifiedName() {}
+	function qualifiedName() {
+		$parent =& $this->containingClass();
+		if ($parent && $parent->name() != '' && $this->_package != $parent->name()) {
+			return $this->_package.'.'.$parent->name().'.'.$this->_name;
+		} else {
+			return $this->_package.'.'.$this->_name;
+		}
+	}
 
 	/** Get modifiers string.
 	 *
@@ -176,6 +191,25 @@ modifiers() would return:
 	function isStatic() {
 		return $this->_static;
 	}
+
+	/** Return the element path.
+	 *
+	 * @return str
+	 */
+	function asPath() {
+		if ($this->isClass() || $this->isInterface() || $this->isException()) {
+			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html';
+		} elseif ($this->isConstructor() || $this->isMethod() || $this->isField()) {
+			$class =& $this->containingClass();
+			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#'.$this->_name;
+		} elseif ($this->isGlobal()) {
+			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#'.$this->_name;
+		} elseif ($this->isFunction()) {
+			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#'.$this->_name;
+		}
+		return NULL;
+	}
+
 
 }
 

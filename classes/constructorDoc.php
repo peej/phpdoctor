@@ -24,11 +24,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 class constructorDoc extends executableDoc {
 
-	/** Get the qualified name of the constructor.
+	/** Construct is a constructor.
 	 *
-	 * @return str
+	 * @return bool
 	 */
-	function qualifiedName() {}
+	function isConstructor() {
+		return TRUE;
+	}
 
 }
 

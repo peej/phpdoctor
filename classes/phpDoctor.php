@@ -169,6 +169,12 @@ class phpDoctor {
 	 */
 	var $_tagletPath = 'taglets';
 
+	/** The path and filename of the current file being parsed.
+	 *
+	 * @var str
+	 */
+	var $_currentFilename = NULL;
+	
 	/** Constructor
 	 *
 	 * @param str config The configuration file to use for this run of PHPDoctor
@@ -415,6 +421,8 @@ class phpDoctor {
 			$this->message('Reading file "'.$filename.'"');
 			$fileString = @file_get_contents($filename);
 			if ($fileString) {
+				$this->_currentFilename = $filename;
+				
 				$tokens = token_get_all($fileString);
 
 				$this->message('Parsing tokens...');
@@ -439,7 +447,7 @@ class phpDoctor {
 						case T_COMMENT: // read comment
 						case T_ML_COMMENT: // and multiline comment (deprecated in newer versions)
 						case T_DOC_COMMENT: // and catch PHP5 doc comment token too
-							$currentData = $this->processDocComment($token[1]);
+							$currentData = $this->processDocComment($token[1], $rootDoc);
 							break;
 
 						case T_CLASS:
@@ -455,11 +463,13 @@ class phpDoctor {
 							} else {
 								$class->set('package', $currentPackage);
 							}
-							$parentPackage =& $rootDoc->packageNamed($class->containingPackage()); // get parent package
+							$parentPackage =& $rootDoc->packageNamed($class->packageName(), TRUE); // get parent package
 							$parentPackage->addClass($class); // add class to package
 							$class->setByRef('parent', $parentPackage); // set parent reference
 							$currentData = array(); // empty data store
-							$currentElement[count($currentElement)] =& $class; // re-assign current element
+							if ($this->_includeElements($class)) {
+								$currentElement[count($currentElement)] =& $class; // re-assign current element
+							}
 							$ce =& $class;
 							break;
 							
@@ -477,11 +487,13 @@ class phpDoctor {
 							} else {
 								$interface->set('package', $currentPackage);
 							}
-							$parentPackage =& $rootDoc->packageNamed($interface->containingPackage()); // get parent package
+							$parentPackage =& $rootDoc->packageNamed($interface->packageName(), TRUE); // get parent package
 							$parentPackage->addClass($interface); // add class to package
 							$interface->setByRef('parent', $parentPackage); // set parent reference
 							$currentData = array(); // empty data store
-							$currentElement[count($currentElement)] =& $interface; // re-assign current element
+							if ($this->_includeElements($interface)) {
+								$currentElement[count($currentElement)] =& $interface; // re-assign current element
+							}
 							$ce =& $interface;
 							break;
 
@@ -557,17 +569,19 @@ class phpDoctor {
 								} else {
 									$method->set('package', $currentPackage);
 								}
-								$parentPackage =& $rootDoc->packageNamed($method->containingPackage()); // get parent package
+								$parentPackage =& $rootDoc->packageNamed($method->packageName(), TRUE); // get parent package
 								$parentPackage->addFunction($method); // add method to package
 							} elseif (get_class($ce) == 'classdoc' || get_class($ce) == 'methoddoc') { // class method, add to class
-								$method->set('package', $ce->containingPackage()); // set package
+								$method->set('package', $ce->packageName()); // set package
 								if (substr($method->name(), 0, 1) == '_') $method->makePrivate();
 								if ($method->name() == '__constructor' || $method->name() == $ce->name()) { // constructor
 									$this->verbose(' is a constructor of '.get_class($ce).' '.$ce->name());
 									$ce->addConstructor($method);
 								} else {
 									$this->verbose(' is a method of '.get_class($ce).' '.$ce->name());
-									$ce->addMethod($method);
+									if ($this->_includeElements($method)) {
+										$ce->addMethod($method);
+									}
 								}
 							}
 							$currentData = array(); // empty data store
@@ -603,7 +617,7 @@ class phpDoctor {
 									$const->set('package', $currentPackage);
 								}
 								$const->mergeData();
-								$parentPackage =& $rootDoc->packageNamed($const->containingPackage()); // get parent package
+								$parentPackage =& $rootDoc->packageNamed($const->packageName(), TRUE); // get parent package
 								$parentPackage->addGlobal($const); // add constant to package
 								$currentData = array(); // empty data store
 								
@@ -623,10 +637,12 @@ class phpDoctor {
 											$const->set('docComment', $currentData['docComment']);
 										}
 										$const->set('data', $currentData); // set data
-										$const->set('package', $ce->containingPackage()); // set package
+										$const->set('package', $ce->packageName()); // set package
 										$this->verbose(' is a member constant of '.get_class($ce).' '.$ce->name());
 										$const->mergeData();
-										$ce->addField($const);
+										if ($this->_includeElements($const)) {
+											$ce->addField($const);
+										}
 										unset($value);
 									} elseif(isset($value)) { // set value
 										if (is_array($tokens[$key])) {
@@ -652,7 +668,7 @@ class phpDoctor {
 												$param->set('docComment', $currentData['docComment']);
 											}
 											$param->set('data', $currentData); // set data
-											$param->set('package', $ce->containingPackage()); // set package
+											$param->set('package', $ce->packageName()); // set package
 											$this->verbose(' is a parameter of '.get_class($ce).' '.$ce->name());
 											$param->mergeData();
 											$ce->addParameter($param);
@@ -684,10 +700,12 @@ class phpDoctor {
 											$field->set('docComment', $currentData['docComment']);
 										}
 										$field->set('data', $currentData); // set data
-										$field->set('package', $ce->containingPackage()); // set package
+										$field->set('package', $ce->packageName()); // set package
 										$this->verbose(' is a member variable of '.get_class($ce).' '.$ce->name());
 										$field->mergeData();
-										$ce->addField($field);
+										if ($this->_includeElements($field)) {
+											$ce->addField($field);
+										}
 										unset($value);
 									} elseif(isset($value)) { // set value
 										if (is_array($tokens[$key])) {
@@ -729,7 +747,7 @@ class phpDoctor {
 									$global->set('package', $currentPackage);
 								}
 								$global->mergeData();
-								$parentPackage =& $rootDoc->packageNamed($global->containingPackage()); // get parent package
+								$parentPackage =& $rootDoc->packageNamed($global->packageName(), TRUE); // get parent package
 								$parentPackage->addGlobal($global); // add constant to package
 								$currentData = array(); // empty data store
 							}
@@ -881,9 +899,10 @@ class phpDoctor {
 	 * Process a doc comment into a doc tag array.
 	 *
 	 * @param str comment The comment to process
+	 * @param rootDoc root The root object
 	 * @return mixed[] Array of doc comment data
 	 */
-	function processDocComment($comment) {
+	function processDocComment($comment, &$root) {
 		if (substr(trim($comment), 0, 3) != '/**') return FALSE; // not doc comment, abort
 
 		$data = array(
@@ -893,9 +912,13 @@ class phpDoctor {
 		
 		$explodedComment = preg_split('/[\n|\r][ \r\n\t\*\/]*@/', "\n".$comment);
 		
-		$text = trim(array_shift($explodedComment), "\n\r \t/*");
+		$text = trim(array_shift($explodedComment), "\r\n \t/*");
 		if ($text != '') {
-			$data['tags']['@text'] = $this->_createTag('@text', $text, $data);
+			$cleanText = '';
+			foreach(explode("\n", $text) as $line) {
+				$cleanText .= trim($line, "\r\n \t/*")."\n";
+			}
+			$data['tags']['@text'] = $this->createTag('@text', $cleanText, $data, $root);
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags
@@ -932,12 +955,12 @@ class phpDoctor {
 				$name = '@'.$name;
 				if (isset($data['tags'][$name])) {
 					if (is_array($data['tags'][$name])) {
-						$data['tags'][$name][] = $this->_createTag($name, $text, $data);
+						$data['tags'][$name][] = $this->createTag($name, $text, $data, $root);
 					} else {
-						$data['tags'][$name] = array($data['tags'][$name], $this->_createTag($name, $text, $data));
+						$data['tags'][$name] = array($data['tags'][$name], $this->createTag($name, $text, $data, $root));
 					}
 				} else {
-					$data['tags'][$name] =& $this->_createTag($name, $text, $data);
+					$data['tags'][$name] =& $this->createTag($name, $text, $data, $root);
 				}
 			}
 		}
@@ -953,29 +976,48 @@ class phpDoctor {
 	 * @param str name The name of the tag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
+	 * @param rootDoc root The root object
 	 * @return tag
 	 */
-	function &_createTag($name, $text, &$data) {
+	function &createTag($name, $text, &$data, &$root) {
 		$class = substr($name, 1);
 		if ($class) {
 			$tagletFile = $this->fixPath($this->_tagletPath).substr($name, 1).'.php';
 			if (is_file($tagletFile)) { // load taglet for this tag
-				require_once($tagletFile);
-				$tag =& new $class($name, $text);
+				if (!class_exists($class)) require_once($tagletFile);
+				$tag =& new $class($name, $text, $root);
 				return $tag;
 			} else {
 				$tagFile = 'classes/'.$class.'Tag.php';
 				if (is_file($tagFile)) { // load class for this tag
-					require_once($tagFile);
 					$class .= 'Tag';
-					$tag =& new $class($text, $data);
+					if (!class_exists($class)) require_once($tagFile);
+					$tag =& new $class($text, $data, $root);
 					return $tag;
 				} else { // create standard tag
-					$tag =& new tag($name, $text);
+					$tag =& new tag($name, $text, $root);
 					return $tag;
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Is an element private and we are including private elements, or element is
+	 * protected and we are including protected elements.
+	 *
+	 * @param programElementDoc element The element to check
+	 * @return bool
+	 */
+	function _includeElements(&$element) {
+		if ($this->_private) {
+			return TRUE;	
+		} elseif ($this->_protected && ($element->isPublic() || $element->isProtected)) {
+			return TRUE;
+		} elseif ($this->_public && $element->isPublic()) {
+			return TRUE;
+		}
+		return FALSE;
 	}
 
 

@@ -30,19 +30,24 @@ class seeTag extends tag {
 	 */
 	var $_link = NULL;
 
-	/** Constructor
+	/**
+	 * Constructor
+	 *
+	 * @param str text The contents of the tag
+	 * @param str[] data Reference to doc comment data array
+	 * @param rootDoc root The root object
 	 */
-	function seeTag($text) {
+	function seeTag($text, &$data, &$root) {
 		if (preg_match('/^<a href="(.+)">(.+)<\/a>$/', $text, $matches)) {
 			$this->_link = $matches[1];
 			$text = $matches[2];
-		} elseif (preg_match('/^(((.+\.)?.+#)?.+) ?(.*)$/', $text, $matches)) {
+		} elseif (preg_match('/^([^ ]+)[ \t](.*)$/', $text, $matches)) {
 			$this->_link = $matches[1];
-			$text = $matches[4];
+			$text = $matches[2];
 		} else {
 			$this->_link = NULL;
 		}
-		parent::tag('@see', $text);
+		parent::tag('@see', $text, $root);
 	}
 	
 	/** Get display name of this tag.
@@ -51,6 +56,190 @@ class seeTag extends tag {
 	 */
 	function displayName() {
 		return 'See Also';
+	}
+	
+	/** Get value of this tag.
+	 *
+	 * @return str
+	 */
+	function text() {
+		if ($this->_text && $this->_text != '') {
+			$link = $this->_text;
+		} else {
+			$link = $this->_link;
+		}
+		$element =& $this->_resolveLink();
+		if ($element) {
+			$package =& $this->_parent->containingPackage();
+			$path = str_repeat('../', $package->depth() + 1).$element->asPath();
+			return '<a href="'.$path.'">'.$link.'</a>';
+		} else {
+			return $link;
+		}
+	}
+	
+	/**
+	 * Turn the objects link text into a link to the element it refers to.
+	 *
+	 * @return programElementDoc
+	 */
+	function &_resolveLink() {
+		$labelRegex = '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*';
+		if (preg_match('/^(([a-zA-Z0-9_\x7f-\xff .-]+)\.)?(('.$labelRegex.')#)?('.$labelRegex.')$/', $this->_link, $matches)) {
+			$packageName = $matches[2];
+			$className = $matches[4];
+			$elementName = $matches[5];
+			if ($packageName) { // get package
+				$package =& $this->_root->packageNamed($packageName);
+			}
+			if ($className) { // get class
+				if (isset($package)) {
+					$classes =& $package->allClasses();
+				} else {
+					$classes =& $this->_root->classes();
+				}
+				foreach ($classes as $key => $class) {
+					if ($class->name() == $className) {
+						break;
+					}
+				}
+				$class =& $classes[$key];
+			}
+			if ($elementName) { // get element
+				if (isset($class)) { // from class
+					$constructors =& $class->constructor();
+					foreach($constructors as $key => $constructor) {
+						if ($constructor->name() == $elementName) {
+							$element =& $constructors[$key];
+							break;
+						}
+					}
+					if (!isset($element)) {
+						$methods =& $class->methods();
+						foreach($methods as $key => $method) {
+							if ($method->name() == $elementName) {
+								$element =& $methods[$key];
+								break;
+							}
+						}
+						if (!isset($element)) {
+							$fields =& $class->fields();
+							foreach($fields as $key => $field) {
+								if ($field->name() == $elementName) {
+									$element =& $fields[$key];
+									break;
+								}
+							}
+						}
+					}
+				} elseif (isset($package)) { // from package
+					$classes =& $package->allClasses();
+					foreach($classes as $key => $class) {
+						if ($class->name() == $elementName) {
+							$element =& $classes[$key];
+							break;
+						}
+						$constructors =& $class->constructor();
+						foreach($constructors as $key => $constructor) {
+							if ($constructor->name() == $elementName) {
+								$element =& $constructors[$key];
+								break 2;
+							}
+						}
+						if (!isset($element)) {
+							$methods =& $class->methods();
+							foreach($methods as $key => $method) {
+								if ($method->name() == $elementName) {
+									$element =& $methods[$key];
+									break 2;
+								}
+							}
+							if (!isset($element)) {
+								$fields =& $class->fields();
+								foreach($fields as $key => $field) {
+									if ($field->name() == $elementName) {
+										$element =& $fields[$key];
+										break 2;
+									}
+								}
+							}
+						}
+					}
+					if (!isset($element)) {
+						$functions =& $package->functions();
+						foreach($functions as $key => $function) {
+							if ($function->name() == $elementName) {
+								$element =& $functions[$key];
+								break;
+							}
+						}
+						if (!isset($element)) {
+							$globals =& $package->globals();
+							foreach($globals as $key => $global) {
+								if ($global->name() == $elementName) {
+									$element =& $globals[$key];
+									break;
+								}
+							}
+						}
+					}
+				} else { // from anywhere
+					$classes =& $this->_root->classes();
+					foreach($classes as $key => $class) {
+						if ($class->name() == $elementName) {
+							$element =& $classes[$key];
+							break;
+						}
+						$constructors =& $class->constructor();
+						foreach($constructors as $key => $constructor) {
+							if ($constructor->name() == $elementName) {
+								$element =& $constructors[$key];
+								break 2;
+							}
+						}
+						if (!isset($element)) {
+							$methods =& $class->methods();
+							foreach($methods as $key => $method) {
+								if ($method->name() == $elementName) {
+									$element =& $methods[$key];
+									break 2;
+								}
+							}
+							if (!isset($element)) {
+								$fields =& $class->fields();
+								foreach($fields as $key => $field) {
+									if ($field->name() == $elementName) {
+										$element =& $fields[$key];
+										break 2;
+									}
+								}
+							}
+						}
+					}
+					if (!isset($element)) {
+						$functions =& $this->_root->functions();
+						foreach($functions as $key => $function) {
+							if ($function->name() == $elementName) {
+								$element =& $functions[$key];
+								break;
+							}
+						}
+						if (!isset($element)) {
+							$globals =& $this->_root->globals();
+							foreach($globals as $key => $global) {
+								if ($global->name() == $elementName) {
+									$element =& $globals[$key];
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+			return $element;
+		} else {
+			return NULL;
+		}
 	}
 	
 	/** Return true if this Taglet is used in constructor documentation. */

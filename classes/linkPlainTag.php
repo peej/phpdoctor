@@ -18,11 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/** Represents a return tag.
+require_once('seeTag.php');
+
+/** Represents an inline link tag.
  *
  * @package PHPDoctor.Tags
  */
-class returnTag extends tag {
+class linkPlainTag extends seeTag {
 
 	/**
 	 * Constructor
@@ -31,20 +33,18 @@ class returnTag extends tag {
 	 * @param str[] data Reference to doc comment data array
 	 * @param rootDoc root The root object
 	 */
-	function returnTag($text, &$data, &$root) {
+	function linkPlainTag($text, &$data, &$root) {
 		$explode = preg_split('/[ \t]+/', $text);
-		$data['return'] = array_shift($explode);
-		parent::tag('@return', join(' ', $explode), $root);
+		$link = array_shift($explode);
+		if ($link) {
+			$this->_link = $link;
+			$text = join(' ', $explode);
+		} else {
+			$this->_link = NULL;
+		}
+		parent::tag('@linkplain', $text, $root);
 	}
-	
-	/** Get display name of this tag.
-	 *
-	 * @return str
-	 */
-	function displayName() {
-		return 'Returns';
-	}
-	
+
 	/** Return true if this Taglet is used in constructor documentation. */
 	function inConstructor() {
 		return TRUE;
@@ -52,7 +52,7 @@ class returnTag extends tag {
 
 	/** Return true if this Taglet is used in field documentation. */
 	function inField() {
-		return FALSE;
+		return TRUE;
 	}
 
 	/** Return true if this Taglet is used in method documentation. */          
@@ -62,22 +62,22 @@ class returnTag extends tag {
 
 	/** Return true if this Taglet is used in overview documentation. */
 	function inOverview() {
-		return FALSE;
+		return TRUE;
 	}
 
 	/** Return true if this Taglet is used in package documentation. */
 	function inPackage() {
-		return FALSE;
+		return TRUE;
 	}
 
 	/** Return true if this Taglet is used in class or interface documentation. */
 	function inType() {
-		return FALSE;
+		return TRUE;
 	}
 
 	/** Return true if this Taglet is an inline tag. */
 	function isInlineTag() {
-		return FALSE;
+		return TRUE;
 	}
 
 }

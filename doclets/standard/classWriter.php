@@ -95,9 +95,7 @@ class classWriter extends htmlWriter {
 					
 					$textTag =& $class->tags('@text');
 					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-						echo '<p>', $description[0], "</p>\n";
-						if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
+						echo '<div class="comment" id="overview_description">', $this->_processInlineTags($textTag), "</div>\n\n";
 					}
 
 					$this->_processTags($class->tags());
@@ -114,19 +112,16 @@ class classWriter extends htmlWriter {
 						echo '<tr><th colspan="2" class="title">Field Summary</th></tr>', "\n";
 						foreach ($fields as $field) {
 							$textTag =& $field->tags('@text');
-							if ($textTag) {
-								$description =& $this->_splitComment($textTag->text());
-							} else {
-								$description[0] = NULL;
-							}
 							$type =& $field->type();
 							echo "<tr>\n";
 							echo '<td class="type">', $field->modifiers(FALSE), ' ', $field->typeAsString(), "</td>\n";
 							echo '<td class="description">';
-							echo '<p class="name"><a href="#'.$field->name().'">';
+							echo '<p class="name"><a href="#', $field->name(), '">';
 							if (!$field->constantValue()) echo '$';
 							echo $field->name(), '</a></p>';
-							echo '<p class="description">'.$description[0].'</p>';
+							if ($textTag) {
+								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+							}
 							echo "</td>\n";
 							echo "</tr>\n";
 						}
@@ -139,15 +134,12 @@ class classWriter extends htmlWriter {
 						echo '<tr><th colspan="2" class="title">Constructor Summary</th></tr>', "\n";
 						foreach ($constructors as $constructor) {
 							$textTag =& $constructor->tags('@text');
-							if ($textTag) {
-								$description =& $this->_splitComment($textTag->text());
-							} else {
-								$description[0] = NULL;
-							}
 							echo "<tr>\n";
 							echo '<td class="description">';
-							echo '<p class="name"><a href="#'.$constructor->name().'">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
-							echo '<p class="description">'.$description[0].'</p>';
+							echo '<p class="name"><a href="#', $constructor->name(), '">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
+							if ($textTag) {
+								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+							}
 							echo "</td>\n";
 							echo "</tr>\n";
 						}
@@ -160,16 +152,13 @@ class classWriter extends htmlWriter {
 						echo '<tr><th colspan="2" class="title">Method Summary</th></tr>', "\n";
 						foreach($methods as $method) {
 							$textTag =& $method->tags('@text');
-							if ($textTag) {
-								$description =& $this->_splitComment($textTag->text());
-							} else {
-								$description[0] = NULL;
-							}
 							echo "<tr>\n";
 							echo '<td class="type">', $method->modifiers(FALSE), ' ', $method->returnTypeAsString(), "</td>\n";
 							echo '<td class="description">';
-							echo '<p class="name"><a href="#'.$method->name().'">', $method->name(), '</a>', $method->flatSignature(), '</p>';
-							echo '<p class="description">'.$description[0].'</p>';
+							echo '<p class="name"><a href="#', $method->name(), '">', $method->name(), '</a>', $method->flatSignature(), '</p>';
+							if ($textTag) {
+								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+							}
 							echo "</td>\n";
 							echo "</tr>\n";
 						}
@@ -183,11 +172,6 @@ class classWriter extends htmlWriter {
 						echo "</table>\n";
 						foreach($fields as $field) {
 							$textTag =& $field->tags('@text');
-							if ($textTag) {
-								$description =& $this->_splitComment($textTag->text());
-							} else {
-								$description[0] = NULL;
-							}
 							$type =& $field->type();
 							echo '<a name="', $field->name(),'"></a>', "\n";
 							echo '<h2>', $field->name(), "</h2>\n";
@@ -196,10 +180,11 @@ class classWriter extends htmlWriter {
 							echo $field->name(), '</strong>';
 							if ($field->value()) echo ' = ', $field->value();
 							echo "</code>\n";
-							echo '<div class="details">', "\n";
-							echo '<p>', $description[0], "</p>\n";
-							if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
-							echo "</div>\n\n";
+							if ($textTag) {
+								echo '<div class="details">', "\n";
+								echo $this->_processInlineTags($textTag);
+								echo "</div>\n\n";
+							}
 							$this->_processTags($field->tags());
 							echo "<hr />\n\n";
 						}
@@ -212,20 +197,16 @@ class classWriter extends htmlWriter {
 						echo "</table>\n";
 						foreach($constructors as $constructor) {
 							$textTag =& $constructor->tags('@text');
-							if ($textTag) {
-								$description =& $this->_splitComment($textTag->text());
-							} else {
-								$description[0] = NULL;
-							}
 							echo '<a name="', $constructor->name(),'"></a>', "\n";
 							echo '<h2>', $constructor->name(), "</h2>\n";
 							echo '<code>public <strong>';
 							echo $constructor->name(), '</strong>', $constructor->flatSignature();
 							echo "</code>\n";
-							echo '<div class="details">', "\n";
-							echo '<p>', $description[0], "</p>\n";
-							if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
-							echo "</div>\n\n";
+							if ($textTag) {
+								echo '<div class="details">', "\n";
+								echo $this->_processInlineTags($textTag);
+								echo "</div>\n\n";
+							}
 							$this->_processTags($constructor->tags());
 							echo "<hr />\n\n";
 						}
@@ -238,20 +219,16 @@ class classWriter extends htmlWriter {
 						echo "</table>\n";
 						foreach($methods as $method) {
 							$textTag =& $method->tags('@text');
-							if ($textTag) {
-								$description =& $this->_splitComment($textTag->text());
-							} else {
-								$description[0] = NULL;
-							}
 							echo '<a name="', $method->name(),'"></a>', "\n";
 							echo '<h2>', $method->name(), "</h2>\n";
 							echo '<code>', $method->modifiers(), ' ', $method->returnTypeAsString(), ' <strong>';
 							echo $method->name(), '</strong>', $method->flatSignature();
 							echo "</code>\n";
-							echo '<div class="details">', "\n";
-							echo '<p>', $description[0], "</p>\n";
-							if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
-							echo "</div>\n\n";
+							if ($textTag) {
+								echo '<div class="details">', "\n";
+								echo $this->_processInlineTags($textTag);
+								echo "</div>\n\n";
+							}
 							$this->_processTags($method->tags());
 							echo "<hr />\n\n";
 						}

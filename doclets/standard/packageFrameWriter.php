@@ -135,7 +135,7 @@ class packageFrameWriter extends htmlWriter {
 			echo "<h2>Classes</h2>\n";
 			echo "<ul>\n";
 			foreach($classes as $name => $class) {
-				$package =& $rootDoc->packageNamed($classes[$name]->containingPackage());
+				$package =& $classes[$name]->containingPackage();
 				if ($class->isInterface()) {
 					echo '<li><em><a href="', $package->asPath(), '/', $classes[$name]->name(), '.html" target="main">', $classes[$name]->name(), "</a></em></li>\n";
 				} else {
@@ -150,7 +150,7 @@ class packageFrameWriter extends htmlWriter {
 			echo "<h2>Functions</h2>\n";
 			echo "<ul>\n";
 			foreach($functions as $name => $function) {
-				$package =& $rootDoc->packageNamed($functions[$name]->containingPackage());
+				$package =& $functions[$name]->containingPackage();
 				echo '<li><a href="', $package->asPath(), '/package-functions.html#', $functions[$name]->name(), '" target="main">', $functions[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
@@ -161,7 +161,7 @@ class packageFrameWriter extends htmlWriter {
 			echo "<h2>Globals</h2>\n";
 			echo "<ul>\n";
 			foreach($globals as $name => $global) {
-				$package =& $rootDoc->packageNamed($globals[$name]->containingPackage());
+				$package =& $globals[$name]->containingPackage();
 				echo '<li><a href="', $package->asPath(), '/package-globals.html#', $globals[$name]->name(), '" target="main">', $globals[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";

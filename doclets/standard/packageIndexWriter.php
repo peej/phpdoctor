@@ -50,30 +50,22 @@ class packageIndexWriter extends htmlWriter {
 
 		$textTag =& $rootDoc->tags('@text');
 		if ($textTag) {
-			$comment =& $this->_splitComment($textTag->text());
-
-			echo '<div class="comment">'.$comment[0]."</div>\n\n";
-			if (isset($comment[1])) {
-				echo '<dl><dt>See:</dt><dd><b><a href="#overview_description">Description</a></b></dd></dl>'."\n\n";
-			}
+			echo '<div class="comment">', $this->_processInlineTags($textTag, TRUE), "</div>\n\n";
+			echo '<dl><dt>See:</dt><dd><b><a href="#overview_description">Description</a></b></dd></dl>'."\n\n";
 		}
 
 		echo '<table class="title">'."\n";
 		echo '<tr><th colspan="2" class="title">Packages</th></tr>'."\n";
 		foreach($rootDoc->packages() as $name => $package) {
 			$textTag =& $package->tags('@text');
-			if ($textTag) {
-				$description =& $this->_splitComment($textTag->text());
-			} else {
-				$description[0] = NULL;
-			}
 			echo '<tr><td class="name"><a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a></td>';
-			echo '<td class="description">'.$description[0].'</td></tr>'."\n";
+			echo '<td class="description">'.strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>').'</td></tr>'."\n";
 		}
 		echo '</table>'."\n\n";
 
-		if (isset($comment[1])) {
-			echo '<div class="comment" id="overview_description">'.$comment[1]."</div>\n\n";
+		$textTag =& $rootDoc->tags('@text');
+		if ($textTag) {
+			echo '<div class="comment" id="overview_description">', $this->_processInlineTags($textTag), "</div>\n\n";
 		}
 		
 		echo "<hr />\n\n";

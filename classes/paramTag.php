@@ -30,21 +30,25 @@ class paramTag extends tag {
 	 */
 	var $_var = NULL;
 
-	/** Constructor
+	/**
+	 * Constructor
 	 *
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
+	 * @param rootDoc root The root object
 	 */
-	function paramTag($text, &$data) {
+	function paramTag($text, &$data, &$root) {
 		$explode = preg_split('/[ \t]+/', $text);
 		$type = array_shift($explode);
-		$this->_var = trim(array_shift($explode), '$');
-		$data['parameters'][$this->_var]['type'] = $type;
-		$text = join(' ', $explode);
+		if ($type) {
+			$this->_var = trim(array_shift($explode), '$');
+			$data['parameters'][$this->_var]['type'] = $type;
+			$text = join(' ', $explode);
+		}
 		if ($text != '') {
-			parent::tag('@param', $this->_var.' - '.$text);
+			parent::tag('@param', $this->_var.' - '.$text, $root);
 		} else {
-			parent::tag('@param', NULL);
+			parent::tag('@param', NULL, $root);
 		}
 	}
 	

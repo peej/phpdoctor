@@ -240,6 +240,7 @@ class doc {
 								($thisClass == 'fielddoc' && $this->_data['tags'][$name][$key]->inField())
 							) {
 								$this->_tags[$name][$key] =& $this->_data['tags'][$name][$key];	
+								$this->_tags[$name][$key]->setParent($this);
 							}
 						}
 					} else {
@@ -251,7 +252,8 @@ class doc {
 							($thisClass == 'methoddoc' && $this->_data['tags'][$name]->inMethod()) ||
 							($thisClass == 'fielddoc' && $this->_data['tags'][$name]->inField())
 						) {
-							$this->_tags[$name] =& $this->_data['tags'][$name];				
+							$this->_tags[$name] =& $this->_data['tags'][$name];
+							$this->_tags[$name]->setParent($this);
 						}
 					}
 				}

@@ -18,25 +18,35 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+require_once('seeTag.php');
+
 /** Represents a throws tag.
  *
  * @package PHPDoctor.Tags
  */
-class throwsTag extends tag {
+class throwsTag extends seeTag {
 
-	/** The exception that is thrown
+	/**
+	 * Constructor
 	 *
-	 * @var str
+	 * @param str text The contents of the tag
+	 * @param str[] data Reference to doc comment data array
+	 * @param rootDoc root The root object
+	 * @param programElementDoc parent The tags parent element
 	 */
-	var $_class = NULL;
-
-	/** Constructor
-	 */
-	function throwsTag($text, &$data) {
+	function throwsTag($text, &$data, &$root) {
 		$explode = preg_split('/[ \t]+/', $text);
-		$this->_class = array_shift($explode);
-		$data['throws'][$this->_class] = $this->_class;
-		parent::tag('@throws', join(' ', $explode));
+		$this->_link = array_shift($explode);
+		$data['throws'][$this->_link] = $this->_link;
+		parent::tag('@throws', join(' ', $explode), $root);
+	}
+
+	/** Get display name of this tag.
+	 *
+	 * @return str
+	 */
+	function displayName() {
+		return 'Throws';
 	}
 	
 	/** Return true if this Taglet is used in constructor documentation. */

@@ -63,16 +63,13 @@ class functionWriter extends htmlWriter {
 				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
 					echo "<tr>\n";
 					echo '<td class="type">', $function->modifiers(FALSE), ' ', $function->returnTypeAsString(), "</td>\n";
 					echo '<td class="description">';
-					echo '<p class="name"><a href="#'.$function->name().'">', $function->name(), '</a>', $function->flatSignature(), '</p>';
-					echo '<p class="description">'.$description[0].'</p>';
+					echo '<p class="name"><a href="#', $function->name(), '">', $function->name(), '</a>', $function->flatSignature(), '</p>';
+					if ($textTag) {
+						echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+					}
 					echo "</td>\n";
 					echo "</tr>\n";
 				}
@@ -84,20 +81,16 @@ class functionWriter extends htmlWriter {
 				echo "</table>\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
 					echo '<a name="', $function->name(),'"></a>', "\n";
 					echo '<h2>', $function->name(), "</h2>\n";
 					echo '<code>', $function->modifiers(), ' ', $function->returnTypeAsString(), ' <strong>';
 					echo $function->name(), '</strong>', $function->flatSignature();
 					echo "</code>\n";
-					echo '<div class="details">', "\n";
-					echo '<p>', $description[0], "</p>\n";
-					if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
-					echo "</div>\n\n";
+					if ($textTag) {
+						echo '<div class="details">', "\n";
+						echo $this->_processInlineTags($textTag), "\n";
+						echo "</div>\n\n";
+					}
 					$this->_processTags($function->tags());
 					echo "<hr />\n\n";
 				}

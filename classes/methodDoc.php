@@ -71,13 +71,37 @@ class methodDoc extends executableDoc {
 	 * @return str The string representation of the return type
 	 */
 	function returnTypeAsString() {
-		$myPackage =& $this->_root->packageNamed($this->containingPackage());
+		$myPackage =& $this->containingPackage();
 		$classDoc =& $this->_returnType->asClassDoc();
 		if ($classDoc) {
-			$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+			$packageDoc =& $classDoc->containingPackage();
 			return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().'</a>';
 		} else {
 			return $this->_returnType->typeName();
+		}
+	}
+
+	/** Is this construct a function.
+	 *
+	 * @return bool
+	 */
+	function isFunction() {
+		if (get_class($this->_parent) == 'rootdoc') {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	/** Is this construct a method.
+	 *
+	 * @return bool
+	 */
+	function isMethod() {
+		if (get_class($this->_parent) == 'rootdoc') {
+			return FALSE;
+		} else {
+			return TRUE;
 		}
 	}
 

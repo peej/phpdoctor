@@ -135,7 +135,7 @@ class classDoc extends programElementDoc {
 	function &interfaces() {
 		return $this->_interfaces;
 	}
-
+	
 	/** Return true if this class is abstract.
 	 *
 	 * @return bool

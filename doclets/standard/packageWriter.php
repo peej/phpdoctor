@@ -50,31 +50,24 @@ class packageWriter extends htmlWriter {
 			
 			echo "<hr />\n\n";
 		
-			echo '<h1>Package '.$package->name()."</h1>\n\n";
+			echo '<h1>Package ', $package->name(), "</h1>\n\n";
 
 			$textTag =& $package->tags('@text');
 			if ($textTag) {
-				$comment =& $this->_splitComment($textTag->text());
-				
-				echo '<div class="comment">'.$comment[0]."</div>\n\n";
-				if (isset($comment[1])) {
-					echo '<dl><dt>See:</dt><dd><b><a href="#overview_description">Description</a></b></dd></dl>', "\n\n";
-				}
+				echo '<div class="comment">', $this->_processInlineTags($textTag, TRUE), "</div>\n\n";
+				echo '<dl><dt>See:</dt><dd><b><a href="#overview_description">Description</a></b></dd></dl>', "\n\n";
 			}
 
 			$classes =& $package->ordinaryClasses();
 			if ($classes) {
-				echo '<table class="title">'."\n";
-				echo '<tr><th colspan="2" class="title">Class Summary</th></tr>'."\n";
+				echo '<table class="title">', "\n";
+				echo '<tr><th colspan="2" class="title">Class Summary</th></tr>', "\n";
 				foreach($classes as $name => $class) {
 					$textTag =& $classes[$name]->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
-					echo '<tr><td class="name"><a href="'.$classes[$name]->name().'.html">'.$classes[$name]->name().'</a></td>';
-					echo '<td class="description">', $description[0], "</td></tr>\n";
+					echo '<tr><td class="name"><a href="', $classes[$name]->name(), '.html">', $classes[$name]->name(), '</a></td>';
+					echo '<td class="description">';
+					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+					echo "</td></tr>\n";
 				}
 				echo "</table>\n\n";
 			}
@@ -85,15 +78,12 @@ class packageWriter extends htmlWriter {
 				echo '<tr><th colspan="2" class="title">Interface Summary</th></tr>'."\n";
 				foreach($interfaces as $name => $interface) {
 					$textTag =& $interfaces[$name]->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
-					echo '<tr><td class="name"><a href="'.$interfaces[$name]->name().'.html">'.$interfaces[$name]->name().'</a></td>';
-					echo '<td class="description">'.$description[0].'</td></tr>'."\n";
+					echo '<tr><td class="name"><a href="', $interfaces[$name]->name(), '.html">', $interfaces[$name]->name(), '</a></td>';
+					echo '<td class="description">';
+					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+					echo "</td></tr>\n";
 				}
-				echo '</table>'."\n\n";
+				echo "</table>\n\n";
 			}
 
 			$exceptions =& $package->exceptions();
@@ -102,53 +92,45 @@ class packageWriter extends htmlWriter {
 				echo '<tr><th colspan="2" class="title">Exception Summary</th></tr>'."\n";
 				foreach($exceptions as $name => $exception) {
 					$textTag =& $exceptions[$name]->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
-					echo '<tr><td class="name"><a href="'.$exceptions[$name]->name().'.html">'.$exceptions[$name]->name().'</a></td>';
-					echo '<td class="description">'.$description[0].'</td></tr>'."\n";
+					echo '<tr><td class="name"><a href="', $exceptions[$name]->name(), '.html">', $exceptions[$name]->name(), '</a></td>';
+					echo '<td class="description">';
+					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+					echo "</td></tr>\n";
 				}
-				echo '</table>'."\n\n";
+				echo "</table>\n\n";
 			}
 			
 			$functions =& $package->functions();
 			if ($functions) {
-				echo '<table class="title">'."\n";
-				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>'."\n";
+				echo '<table class="title">', "\n";
+				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
 				foreach($functions as $name => $function) {
 					$textTag =& $functions[$name]->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
-					echo '<tr><td class="name"><a href="package-functions.html#'.$functions[$name]->name().'">'.$functions[$name]->name().'</a></td>';
-					echo '<td class="description">'.$description[0].'</td></tr>'."\n";
+					echo '<tr><td class="name"><a href="package-functions.html#', $functions[$name]->name(), '">', $functions[$name]->name(), '</a></td>';
+					echo '<td class="description">';
+					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+					echo "</td></tr>\n";
 				}
-				echo '</table>'."\n\n";
+				echo "</table>\n\n";
 			}
 			
 			$globals =& $package->globals();
 			if ($globals) {
-				echo '<table class="title">'."\n";
-				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>'."\n";
+				echo '<table class="title">', "\n";
+				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>', "\n";
 				foreach($globals as $name => $global) {
 					$textTag =& $globals[$name]->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
-					echo '<tr><td class="name"><a href="package-globals.html#'.$globals[$name]->name().'">'.$globals[$name]->name().'</a></td>';
-					echo '<td class="description">'.$description[0].'</td></tr>'."\n";
+					echo '<tr><td class="name"><a href="package-globals.html#', $globals[$name]->name(), '">', $globals[$name]->name(), '</a></td>';
+					echo '<td class="description">';
+					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+					echo "</td></tr>\n";
 				}
-				echo '</table>'."\n\n";
+				echo "</table>\n\n";
 			}
 
-			if (isset($comment[1])) {
-				echo '<div class="comment" id="overview_description">'.$comment[1]."</div>\n\n";
+			$textTag =& $package->tags('@text');
+			if ($textTag) {
+				echo '<div class="comment" id="overview_description">'. $this->_processInlineTags($textTag), "</div>\n\n";
 			}
 			
 			echo "<hr />\n\n";

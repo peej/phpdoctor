@@ -52,11 +52,15 @@ class rootDoc extends doc {
 		$options = $phpdoctor->options();
 	
 		// parse overview file
-		if (isset($options['overview']) && is_file($options['overview'])) {
-			$phpdoctor->message('Reading overview file "'.$options['overview'].'".');
-			if ($html = $this->getHTMLContents($options['overview'])) {
-				$this->_data = $phpdoctor->processDocComment('/** '.$html.' */');
-				$this->mergeData();
+		if (isset($options['overview'])) {
+			if (is_file($options['overview'])) {
+				$phpdoctor->message('Reading overview file "'.$options['overview'].'".');
+				if ($html = $this->getHTMLContents($options['overview'])) {
+					$this->_data = $phpdoctor->processDocComment('/** '.$html.' */', $this);
+					$this->mergeData();
+				}
+			} else {
+				$phpdoctor->warning('Could not find overview file "'.$options['overview'].'".');
 			}
 		}
 	
@@ -67,7 +71,7 @@ class rootDoc extends doc {
 	 * @param packageDoc package
 	 */
 	function addPackage(&$package) {
-		$this->_packages[$package->_name] =& $package;
+		$this->_packages[$package->name()] =& $package;
 	}
 
 	/** Return a reference to the PHPDoctor application object.
@@ -153,15 +157,18 @@ class rootDoc extends doc {
 	 * package object, add it to the root and return it.
 	 *
 	 * @param str name Package name
+	 * @param bool create Create package if it does not exist
 	 * @return packageDoc
 	 */
-	function &packageNamed($name) {
+	function &packageNamed($name, $create = FALSE) {
 		if (isset($this->_packages[$name])) {
 			return $this->_packages[$name];
-		} else {
+		} elseif ($create) {
 			$newPackage =& new packageDoc($name, $this);
 			$this->addPackage($newPackage);
 			return $newPackage;
+		} else {
+			return NULL;
 		}
 	}
 

@@ -222,19 +222,6 @@ class htmlWriter {
 		}
 	}
 	
-	/** Extract the first line from a comment and return it and the remaining
-	 * comment for outputting.
-	 *
-	 * @param str comment
-	 * @return str[]
-	 */
-	function _splitComment($comment) {
-		if (preg_match('/^(.+)\. ?(.*)$/sU', $comment, $matches)) {
-			return array($matches[1], $matches[2]);
-		}
-		return array($comment);
-	}
-	
 	/** Format tags for output.
 	 *
 	 * @param tag[] tags
@@ -249,13 +236,44 @@ class htmlWriter {
 					foreach ($tag as $tagFromGroup) {
 						echo '<dd>', $tagFromGroup->text(), "</dd>\n";
 					}		
-				} elseif ($tag->text() != '') {
-					echo '<dt>', $tag->displayName(), ':</dt>';
-					echo '<dd>', $tag->text(), "</dd>\n";
+				} else {
+					$text = $tag->text();
+					if ($text != '') {
+						echo '<dt>', $tag->displayName(), ':</dt>';
+						echo '<dd>', $text, "</dd>\n";
+					} else {
+						echo '<dt>', $tag->displayName(), '.</dt>';
+					}
 				}
 			}
 		}
 		echo "</dl>\n";
+	}
+	
+	/** Convert inline tags into a string for outputting.
+	 *
+	 * @param tag tag The text tag to process
+	 * @param bool first process first line of tag only
+	 * @return str The string representation of the elements doc tags
+	 */
+	function _processInlineTags(&$tag, $first = FALSE) {
+		if ($tag) {
+			$description = '';
+			if ($first) {
+				$tags =& $tag->firstSentenceTags();
+			} else {
+				$tags =& $tag->inlineTags();
+			}
+			if ($tags) {
+				foreach ($tags as $aTag) {
+					if ($aTag) {
+						$description .= $aTag->text().' ';
+					}
+				}
+			}
+			return substr($description, 0, -1);
+		}
+		return NULL;
 	}
 
 }

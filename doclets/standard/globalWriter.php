@@ -63,17 +63,14 @@ class globalWriter extends htmlWriter {
 				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>', "\n";
 				foreach($globals as $global) {
 					$textTag =& $global->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
 					$type =& $global->type();
 					echo "<tr>\n";
 					echo '<td class="type">', $global->modifiers(FALSE), ' ', $global->typeAsString(), "</td>\n";
 					echo '<td class="description">';
-					echo '<p class="name"><a href="#'.$global->name().'">', $global->name(), '</a></p>';
-					echo '<p class="description">'.$description[0].'</p>';
+					echo '<p class="name"><a href="#', $global->name(), '">', $global->name(), '</a></p>';
+					if ($textTag) {
+						echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+					}
 					echo "</td>\n";
 					echo "</tr>\n";
 				}
@@ -85,11 +82,6 @@ class globalWriter extends htmlWriter {
 				echo "</table>\n";
 				foreach($globals as $global) {
 					$textTag =& $global->tags('@text');
-					if ($textTag) {
-						$description =& $this->_splitComment($textTag->text());
-					} else {
-						$description[0] = NULL;
-					}
 					$type =& $global->type();
 					echo '<a name="', $global->name(),'"></a>', "\n";
 					echo '<h2>', $global->name(), "</h2>\n";
@@ -97,10 +89,11 @@ class globalWriter extends htmlWriter {
 					echo $global->name(), '</strong>';
 					if ($global->value()) echo ' = ', $global->value();
 					echo "</code>\n";
-					echo '<div class="details">', "\n";
-					echo '<p>', $description[0], "</p>\n";
-					if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
-					echo "</div>\n\n";
+					if ($textTag) {
+						echo '<div class="details">', "\n";
+						echo $this->_processInlineTags($textTag), "\n";
+						echo "</div>\n\n";
+					}
 					$this->_processTags($global->tags());
 					echo "<hr />\n\n";
 				}

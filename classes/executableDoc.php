@@ -122,12 +122,12 @@ it will return
 	 */
 	function signature() {
 		$signature = '(';
-		$myPackage =& $this->_root->packageNamed($this->containingPackage());
+		$myPackage =& $this->containingPackage();
 		foreach($this->_parameters as $param) {
 			$type = $param->type();
 			$classDoc =& $type->asClassDoc();
 			if ($classDoc) {
-				$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+				$packageDoc =& $classDoc->containingPackage();
 				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->containingPackage().'.'.$classDoc->name().'</a> '.$param->name().$type->dimension().', ';
 			} else {
 				$signature .= $type->typeName().$type->dimension().', ';
@@ -151,12 +151,12 @@ it will return
 	 */
 	function flatSignature() {
 		$signature = '';
-		$myPackage =& $this->_root->packageNamed($this->containingPackage());
+		$myPackage =& $this->containingPackage();
 		foreach($this->_parameters as $param) {
 			$type =& $param->type();
 			$classDoc =& $type->asClassDoc();
 			if ($classDoc) {
-				$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+				$packageDoc =& $classDoc->containingPackage();
 				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().'</a> '.$param->name().', ';
 			} else {
 				$signature .= $type->typeName().' '.$param->name().', ';

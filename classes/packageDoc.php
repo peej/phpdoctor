@@ -25,12 +25,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 class packageDoc extends doc {
 
-	/** Reference to the root element.
-	 *
-	 * @var rootDoc
-	 */
-	var $_root = NULL;
-
 	/** The classes in this package
 	 *
 	 * @var classDoc[]
@@ -65,13 +59,18 @@ class packageDoc extends doc {
 		if (isset($options['packageCommentDir'])) {
 			$overviewFile = $options['packageCommentDir'].$this->_name.'html';
 		} else {
-			$overviewFile = $phpdoctor->sourcePath().$this->asPath().$this->_name.'html';
+			$pos = strrpos(str_replace('\\', '/', $phpdoctor->_currentFilename), '/');
+			if ($pos !== FALSE) {
+				$overviewFile = substr($phpdoctor->_currentFilename, 0, $pos).'/package.html';
+			} else {
+				$overviewFile = $phpdoctor->sourcePath().$this->_name.'.html';
+			}
 		}
 		if (is_file($overviewFile)) {
-			$phpdoctor->message('Reading package overview file "'.$options['overview'].'".');
+			$phpdoctor->message('Reading package overview file "'.$overviewFile.'".');
 			if ($html = $this->getHTMLContents($overviewFile)) {
-				$this->_data = $phpdoctor->processDocComment('/** '.$html.' */');
-				$this->_mergeData();
+				$this->_data = $phpdoctor->processDocComment('/** '.$html.' */', $this->_root);
+				$this->mergeData();
 			}
 		}
 
@@ -82,7 +81,6 @@ class packageDoc extends doc {
 	 * @return str
 	 */
 	function asPath() {
-		$phpdoctor =& $this->_root->phpdoctor();
 		return str_replace('.', '/', str_replace('\\', '/', $this->_name));
 	}
 	

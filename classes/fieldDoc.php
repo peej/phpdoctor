@@ -65,6 +65,13 @@ class fieldDoc extends programElementDoc {
 		return $this->_value;
 	}
 
+	/** Construct is a field.
+	 *
+	 * @return bool
+	 */
+	function isField() {
+		return TRUE;
+	}
 	
 	/** Format a field type for outputting. Recognised types are turned into
 	 * HTML anchor tags to the documentation page for the class defining them.
@@ -72,10 +79,10 @@ class fieldDoc extends programElementDoc {
 	 * @return str The string representation of the field type
 	 */
 	function typeAsString() {
-		$myPackage =& $this->_root->packageNamed($this->containingPackage());
+		$myPackage =& $this->containingPackage();
 		$classDoc =& $this->_type->asClassDoc();
 		if ($classDoc) {
-			$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+			$packageDoc =& $classDoc->containingPackage();
 			return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().$this->_type->dimension().'</a>';
 		} else {
 			return $this->_type->typeName().$this->_type->dimension();
