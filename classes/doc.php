@@ -61,12 +61,16 @@ class doc {
 	 */
 	var $inBody = 0;
 	
-	/** Constructor
+	/** Reference to the root element.
+	 *
+	 * @var rootDoc
 	 */
-	function doc() {}
-
+	var $_root = NULL;
+	
 	/** Setter method.
 	 *
+	 * @param str member Name of the member to set
+	 * @param mixed value The value to set member to
 	 * @return bool
 	 */
 	function set($member, $value) {
@@ -85,6 +89,8 @@ class doc {
 
 	/** Setter by reference method.
 	 *
+	 * @param str member Name of the member to set
+	 * @param mixed value The value to set member to
 	 * @return bool
 	 */
 	function setByRef($member, &$value) {
@@ -115,20 +121,13 @@ class doc {
 	 * item are returned.
 	 *
 	 * @param str tagName Name of the tag kind to search for
-	 * @return tag[] An array of Tag containing all tags whose 'kind()' matches 'tagname'
+	 * @return tag[] An array of Tag containing all tags of name 'tagname'
 	 */
-	function tags($tagName) {}
-	
-	/** Return the first sentence of the comment as tags.
-	 *
-	 * @return tag
-	 */
-	function firstSentenceTags() {
-		if (isset($this->_tags['text'])) {
-			return $this->_tags['text'];
-		} else {
-			return NULL;
+	function &tags($tagName = NULL) {
+		if (isset($this->_tags[$tagName])) {
+			return $this->_tags[$tagName];
 		}
+		return $this->_tags;
 	}
 	
 	/** Return the full unprocessed text of the comment.
@@ -220,7 +219,7 @@ class doc {
 			foreach ($this->_data as $member => $value) {
 				if (!is_array($value)) {
 					if ($member == 'type') {
-						$this->set('type', new type($value));
+						$this->set('type', new type($value, $this->_root));
 					} else {
 						$this->set($member, $value);
 					}
@@ -261,16 +260,16 @@ class doc {
 			if (isset($this->_parameters) && isset($this->_data['parameters'])) {
 				foreach($this->_data['parameters'] as $name => $param) {
 					if (!isset($this->_parameters[$name])) {
-						phpdoctor::warning('Unknown parameter "'.$name.'" found for method "'.$this->_package.'.'.$this->_parent->name().'::'.$this->_name.'".');
-						$this->_parameters[$name] =& new fieldDoc($name, $this);
+						//phpdoctor::warning('Unknown parameter "'.$name.'" found for method "'.$this->_package.'.'.$this->_parent->name().'::'.$this->_name.'".');
+						$this->_parameters[$name] =& new fieldDoc($name, $this, $this->_root);
 						if (isset($this->_package)) $this->_parameters[$name]->set('package', $this->_package);
 					}
-					$this->_parameters[$name]->set('type', new type($param['type']));
+					$this->_parameters[$name]->set('type', new type($param['type'], $this->_root));
 				}
 			}
 			// merge return type
 			if (isset($this->_returnType) && isset($this->_data['return'])) {
-				$this->_returnType =& new type($this->_data['return']);
+				$this->_returnType =& new type($this->_data['return'], $this->_root);
 			}
 			// merge exceptions
 			if (isset($this->_throws) && isset($this->_data['throws'])) {

@@ -18,18 +18,29 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+// load classes
+require('htmlWriter.php');
+require('frameOutputWriter.php');
+require('packageIndexWriter.php');
+require('packageIndexFrameWriter.php');
+require('packageFrameWriter.php');
+require('packageWriter.php');
+require('classWriter.php');
+require('functionWriter.php');
+require('globalWriter.php');
+
 /** The standard doclet. This doclet generates HTML output similar to that
  * produced by the Javadoc standard doclet.
  *
- * @package PHPDoctor.doclets.standard
+ * @package PHPDoctor.Doclets.Standard
  */
 class standard {
 
-	/** Our path to evaluate relative paths from.
+	/** A reference to the root doc.
 	 *
-	 * @var str
+	 * @var rootDoc
 	 */
-	var $_rootPath;
+	var $_rootDoc;
 
 	/** The directory to place the generated files.
 	 *
@@ -85,19 +96,25 @@ class standard {
 	function standard(&$rootDoc) {
 	
 		// set doclet options
+		$this->_rootDoc =& $rootDoc;
 		$phpdoctor =& $rootDoc->phpdoctor();
 		$options =& $rootDoc->options();
 		
-		$this->_rootPath = $phpdoctor->_sourcePath;
-
 		if (isset($options['d'])) {
-			$this->_d = $phpdoctor->makeAbsolutePath($options['d'], $phpdoctor->_sourcePath);
+			$this->_d = $phpdoctor->makeAbsolutePath($options['d'], $phpdoctor->sourcePath());
 		} elseif (isset($options['output_dir'])) {
-			$this->_d = $phpdoctor->makeAbsolutePath($options['output_dir'], $phpdoctor->_sourcePath);
+			$this->_d = $phpdoctor->makeAbsolutePath($options['output_dir'], $phpdoctor->sourcePath());
 		} else {
-			$this->_d = $phpdoctor->makeAbsolutePath('apidocs', $phpdoctor->_sourcePath);
+			$this->_d = $phpdoctor->makeAbsolutePath('apidocs', $phpdoctor->sourcePath());
 		}
 		$this->_d = $phpdoctor->fixPath($this->_d);
+		
+		if (is_dir($this->_d)) {
+			$phpdoctor->warning('Output directory already exists, overwriting');
+		} else {
+			mkdir($this->_d);
+		}
+		$phpdoctor->verbose('Setting output directory to "'.$this->_d.'"');
 		
 		if (isset($options['windowtitle'])) $this->_windowTitle = $options['windowtitle'];
 		if (isset($options['doctitle'])) $this->_docTitle = $options['doctitle'];
@@ -107,10 +124,120 @@ class standard {
 
 		if (isset($options['tree'])) $this->_tree = $options['tree'];
 		
-		var_dump($this);
+		// write frame
+		$frameOutputWriter =& new frameOutputWriter($this);
+
+		// write overview summary
+		$packageIndexWriter =& new packageIndexWriter($this);
+
+		// write package overview frame
+		$packageIndexFrameWriter =& new packageIndexFrameWriter($this);
+
+		// write package summaries
+		$packageWriter =& new packageWriter($this);
 		
-		echo "Done\n";
+		// write package frame
+		$packageFrameWriter =& new packageFrameWriter($this);
+		
+		// write classes
+		$classWriter =& new classWriter($this);
+		
+		// write global functions
+		$functionWriter =& new functionWriter($this);
+		
+		// write global variables
+		$globalWriter =& new globalWriter($this);
+		
+		// copy stylesheet
+		$phpdoctor->message('Copying stylesheet');
+		copy($phpdoctor->docletPath().'stylesheet.css', $this->_d.'stylesheet.css');
 	
+	}
+
+	/** Return a reference to the root doc.
+	 *
+	 * @return rootDoc
+	 */
+	function &rootDoc() {
+		return $this->_rootDoc;
+	}
+	
+	/** Return a reference to the application object.
+	 *
+	 * @return phpdoctor
+	 */
+	function &phpdoctor() {
+		return $this->_rootDoc->phpdoctor();
+	}
+
+	/** Get the destination path to write the doclet output to.
+	 *
+	 * @return str
+	 */	
+	function destinationPath() {
+		return $this->_d;
+	}
+
+	/** Return the title to be placed in the HTML <title> tag.
+	 *
+	 * @return str
+	 */
+	function windowTitle() {
+		return $this->_windowTitle;
+	}
+
+	/** Return the title to be placed near the top of the overview summary
+	 * file.
+	 *
+	 * @return str
+	 */
+	function docTitle() {
+		return $this->_docTitle;
+	}
+
+	/** Return the header text to be placed at the top of each output file.
+	 * The header will be placed to the right of the upper navigation bar.
+	 *
+	 * @return str
+	 */
+	function getHeader() {
+		return $this->_header;
+	}
+
+	/** Return the footer text to be placed at the bottom of each output file.
+	 * The footer will be placed to the right of the lower navigation bar.
+	 *
+	 * @return str
+	 */
+	function getFooter() {
+		return $this->_footer;
+	}
+
+	/** Return the text to be placed at the bottom of each output file. The
+	 * text will be placed at the bottom of the page, below the lower navigation
+	 * bar.
+	 *
+	 * @return str
+	 */
+	function bottom() {
+		return $this->_bottom;
+	}
+
+	/** Return whether to create a class tree or not.
+	 *
+	 * @return bool
+	 */
+	function tree() {
+		return $this->_tree;
+	}
+
+	/** Return the version of PHPDoctor.
+	 *
+	 * @return str
+	 */
+	function version() {
+		$phpdoctor =& $this->_rootDoc->phpdoctor();
+		return $phpdoctor->version();
 	}
 	
 }

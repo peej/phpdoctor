@@ -1,0 +1,311 @@
+<?php
+/*
+PHPDoctor: The PHP Documentation Creator
+Copyright (C) 2004 Paul James <paul@peej.co.uk>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/** This generates the HTML API documentation for each individual interface
+ * and class.
+ *
+ * @package PHPDoctor.Doclets.Standard
+ */
+class classWriter extends htmlWriter {
+
+	/** Build the class definitons.
+	 *
+	 * @param doclet doclet
+	 */
+	function classWriter(&$doclet) {
+	
+		parent::htmlWriter($doclet);
+		
+		$this->_id = 'definition';
+
+		$rootDoc =& $this->_doclet->rootDoc();
+		
+		$packages =& $rootDoc->packages();
+
+		foreach ($packages as $packageName => $package) {
+
+			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
+			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
+			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);
+			$this->_sections[3] = array('title' => 'Use');
+			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
+			$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+		
+			$this->_depth = $package->depth() + 1;
+
+			$classes =& $package->ordinaryClasses();
+			
+			if ($classes) {
+				foreach ($classes as $name => $class) {
+				
+					ob_start();
+					
+					echo "<hr />\n\n";
+					
+					echo '<h3>', $class->name(), "</h3>\n\n";
+					
+					echo '<h1>Class ', $class->name(), "</h1>\n\n";
+
+					echo '<pre>';
+					$result =& $this->_buildTree($rootDoc, $classes[$name]);
+					echo $result[0];
+					echo "</pre>\n\n";
+				
+					$implements =& $class->interfaces();
+					if (count($implements) > 0) {
+						echo "<dl>\n";
+						echo "<dt>All Implemented Interfaces:</dt>\n";
+						echo '<dd>';
+						foreach ($implements as $interface) {
+							echo $interface->name(), ' ';
+						}
+						echo "</dt>\n";
+						echo "</dl>\n\n";
+					}
+					
+					echo "<hr />\n\n";
+
+					echo '<p>', $class->modifiers(), ' class <strong>', $class->name(), '</strong>';
+					if ($class->superclass()) {
+						$superclass =& $rootDoc->classNamed($class->superclass());
+						if ($superclass) {
+							echo '<br />extends <a href="', $superclass->name(), '.html">', $superclass->name(), "</a></p>\n\n";
+						} else {
+							echo '<br />extends ', $class->superclass(), "</p>\n\n";
+						}
+					}
+					echo "</p>\n\n";
+					
+					$textTag =& $class->tags('@text');
+					if ($textTag) {
+						$description =& $this->_splitComment($textTag->text());
+						echo '<p>', $description[0], "</p>\n";
+						if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
+					}
+
+					$this->_processTags($class->tags());
+
+					echo "<hr />\n\n";
+					
+					$fields =& $class->fields();
+					$constructors =& $class->constructor();
+					$methods =& $class->methods();
+					
+					if ($fields) {
+						echo '<a name="summary_field"></a>', "\n";
+						echo '<table class="title">', "\n";
+						echo '<tr><th colspan="2" class="title">Field Summary</th></tr>', "\n";
+						foreach ($fields as $field) {
+							$textTag =& $field->tags('@text');
+							if ($textTag) {
+								$description =& $this->_splitComment($textTag->text());
+							} else {
+								$description[0] = NULL;
+							}
+							$type =& $field->type();
+							echo "<tr>\n";
+							echo '<td class="type">', $field->modifiers(FALSE), ' ', $field->typeAsString(), "</td>\n";
+							echo '<td class="description">';
+							echo '<p class="name"><a href="#'.$field->name().'">';
+							if (!$field->constantValue()) echo '$';
+							echo $field->name(), '</a></p>';
+							echo '<p class="description">'.$description[0].'</p>';
+							echo "</td>\n";
+							echo "</tr>\n";
+						}
+						echo "</table>\n\n";
+					}
+
+					if ($constructors) {
+						echo '<a name="summary_constr"></a>', "\n";
+						echo '<table class="title">', "\n";
+						echo '<tr><th colspan="2" class="title">Constructor Summary</th></tr>', "\n";
+						foreach ($constructors as $constructor) {
+							$textTag =& $constructor->tags('@text');
+							if ($textTag) {
+								$description =& $this->_splitComment($textTag->text());
+							} else {
+								$description[0] = NULL;
+							}
+							echo "<tr>\n";
+							echo '<td class="description">';
+							echo '<p class="name"><a href="#'.$constructor->name().'">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
+							echo '<p class="description">'.$description[0].'</p>';
+							echo "</td>\n";
+							echo "</tr>\n";
+						}
+						echo "</table>\n\n";
+					}
+
+					if ($methods) {
+						echo '<a name="summary_method"></a>', "\n";
+						echo '<table class="title">', "\n";
+						echo '<tr><th colspan="2" class="title">Method Summary</th></tr>', "\n";
+						foreach($methods as $method) {
+							$textTag =& $method->tags('@text');
+							if ($textTag) {
+								$description =& $this->_splitComment($textTag->text());
+							} else {
+								$description[0] = NULL;
+							}
+							echo "<tr>\n";
+							echo '<td class="type">', $method->modifiers(FALSE), ' ', $method->returnTypeAsString(), "</td>\n";
+							echo '<td class="description">';
+							echo '<p class="name"><a href="#'.$method->name().'">', $method->name(), '</a>', $method->flatSignature(), '</p>';
+							echo '<p class="description">'.$description[0].'</p>';
+							echo "</td>\n";
+							echo "</tr>\n";
+						}
+						echo "</table>\n\n";
+					}
+					
+					if ($fields) {
+						echo '<a name="detail_field"></a>', "\n";
+						echo '<table class="detail">', "\n";
+						echo '<tr><th colspan="2" class="title">Field Detail</th></tr>', "\n";
+						echo "</table>\n";
+						foreach($fields as $field) {
+							$textTag =& $field->tags('@text');
+							if ($textTag) {
+								$description =& $this->_splitComment($textTag->text());
+							} else {
+								$description[0] = NULL;
+							}
+							$type =& $field->type();
+							echo '<a name="', $field->name(),'"></a>', "\n";
+							echo '<h2>', $field->name(), "</h2>\n";
+							echo '<code>', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
+							if (!$field->constantValue()) echo '$';
+							echo $field->name(), '</strong>';
+							if ($field->value()) echo ' = ', $field->value();
+							echo "</code>\n";
+							echo '<div class="details">', "\n";
+							echo '<p>', $description[0], "</p>\n";
+							if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
+							echo "</div>\n\n";
+							$this->_processTags($field->tags());
+							echo "<hr />\n\n";
+						}
+					}
+
+					if ($constructors) {
+						echo '<a name="detail_constr"></a>', "\n";
+						echo '<table class="detail">', "\n";
+						echo '<tr><th colspan="2" class="title">Constructor Detail</th></tr>', "\n";
+						echo "</table>\n";
+						foreach($constructors as $constructor) {
+							$textTag =& $constructor->tags('@text');
+							if ($textTag) {
+								$description =& $this->_splitComment($textTag->text());
+							} else {
+								$description[0] = NULL;
+							}
+							echo '<a name="', $constructor->name(),'"></a>', "\n";
+							echo '<h2>', $constructor->name(), "</h2>\n";
+							echo '<code>public <strong>';
+							echo $constructor->name(), '</strong>', $constructor->flatSignature();
+							echo "</code>\n";
+							echo '<div class="details">', "\n";
+							echo '<p>', $description[0], "</p>\n";
+							if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
+							echo "</div>\n\n";
+							$this->_processTags($constructor->tags());
+							echo "<hr />\n\n";
+						}
+					}
+
+					if ($methods) {
+						echo '<a name="detail_method"></a>', "\n";
+						echo '<table class="detail">', "\n";
+						echo '<tr><th colspan="2" class="title">Method Detail</th></tr>', "\n";
+						echo "</table>\n";
+						foreach($methods as $method) {
+							$textTag =& $method->tags('@text');
+							if ($textTag) {
+								$description =& $this->_splitComment($textTag->text());
+							} else {
+								$description[0] = NULL;
+							}
+							echo '<a name="', $method->name(),'"></a>', "\n";
+							echo '<h2>', $method->name(), "</h2>\n";
+							echo '<code>', $method->modifiers(), ' ', $method->returnTypeAsString(), ' <strong>';
+							echo $method->name(), '</strong>', $method->flatSignature();
+							echo "</code>\n";
+							echo '<div class="details">', "\n";
+							echo '<p>', $description[0], "</p>\n";
+							if (isset($description[1])) echo '<p>', $description[1], "</p>\n";
+							echo "</div>\n\n";
+							$this->_processTags($method->tags());
+							echo "<hr />\n\n";
+						}
+					}
+
+					$this->_output = ob_get_contents();
+					ob_end_clean();
+			
+					$this->_write($package->asPath().'/'.$class->name().'.html', $class->name(), TRUE);
+				}
+			}
+		}
+	
+	}
+
+	/** Build the class hierarchy tree which is placed at the top of the page.
+	 *
+	 * @param rootDoc rootDoc The root doc
+	 * @param classDoc class Class to generate tree for
+	 * @param int depth Depth of recursion
+	 * @return mixed[]
+	 */
+	function _buildTree(&$rootDoc, &$class, $depth = NULL) {
+		if ($depth === NULL) {
+			$start = TRUE;
+			$depth = 0;
+		} else {
+			$start = FALSE;
+		}
+		$output = '';
+		if ($class->superclass()) {
+			$superclass =& $rootDoc->classNamed($class->superclass());
+			if ($superclass) {
+				$result = $this->_buildTree($rootDoc, $superclass, $depth);
+				$output .= $result[0];
+				$depth = ++$result[1];
+			} else {
+				$output .= $class->superclass().'<br />';
+				$output .= str_repeat('     ', $depth).'  |<br />';
+				$output .= str_repeat('     ', $depth).'  +--';
+			}
+		}
+		if ($depth > 0) {
+			$output .= str_repeat('     ', $depth - 1).'  |<br />';
+			$output .= str_repeat('     ', $depth - 1).'  +--';
+		}
+		if ($start) {
+			$output .= '<strong>'.$class->name().'</strong><br />';			
+		} else {
+			$output .= '<a href="'.$class->name().'.html">'.$class->name().'</a><br />';
+		}
+		return array($output, $depth);
+	}
+
+}
+
+?>

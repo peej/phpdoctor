@@ -40,7 +40,20 @@ class paramTag extends tag {
 		$type = array_shift($explode);
 		$this->_var = trim(array_shift($explode), '$');
 		$data['parameters'][$this->_var]['type'] = $type;
-		parent::tag('@param', join(' ', $explode));
+		$text = join(' ', $explode);
+		if ($text != '') {
+			parent::tag('@param', $this->_var.' - '.$text);
+		} else {
+			parent::tag('@param', NULL);
+		}
+	}
+	
+	/** Get display name of this tag.
+	 *
+	 * @return str
+	 */
+	function displayName() {
+		return 'Parameters';
 	}
 	
 	/** Return true if this Taglet is used in constructor documentation. */

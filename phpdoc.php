@@ -47,21 +47,9 @@ if (!isset($argv[1])) {
 
 $phpdoc =& new phpDoctor($argv[1]);
 
-require('classes/doc.php');
-require('classes/rootDoc.php');
-require('classes/packageDoc.php');
-require('classes/programElementDoc.php');
-require('classes/fieldDoc.php');
-require('classes/classDoc.php');
-require('classes/executableDoc.php');
-require('classes/constructorDoc.php');
-require('classes/methodDoc.php');
-require('classes/type.php');
-require('classes/tag.php');
-
 $rootDoc =& $phpdoc->parse();
 
-/* DEBUG
+/* DEBUG -- WARNING: MAY CAUSE UNTRAPPED RECURSIVE LOOP IN PRINT_R
 if ($fp = fopen('output.txt', 'w')) {
 	ob_start();
 	print_r($phpdoc);

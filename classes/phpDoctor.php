@@ -32,12 +32,26 @@ if (!defined('T_CONST')) define('T_CONST', 0);
 if (!defined('T_THROW')) define('T_THROW', 0);
 if (!defined('GLOB_ONLYDIR')) define('GLOB_ONLYDIR', FALSE);
 
+// load classes
+require('classes/doc.php');
+require('classes/rootDoc.php');
+require('classes/packageDoc.php');
+require('classes/programElementDoc.php');
+require('classes/fieldDoc.php');
+require('classes/classDoc.php');
+require('classes/executableDoc.php');
+require('classes/constructorDoc.php');
+require('classes/methodDoc.php');
+require('classes/type.php');
+require('classes/tag.php');
+
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
  * of the parsed tokens and is passed to the doclet to be formatted into
  * output.
  *
  * @package PHPDoctor
+ * @version 2a
  */
 class phpDoctor {
 
@@ -349,12 +363,28 @@ class phpDoctor {
 		}
 	}
 
+	/** Return the path PHPDoctor is running from.
+	 *
+	 * @return str
+	 */
+	function docletPath() {
+		return $this->makeAbsolutePath($this->fixPath($this->_docletPath).$this->fixPath($this->_doclet), $this->_path);
+	}
+
 	/** Return the source path.
 	 *
 	 * @return str
 	 */
 	function sourcePath() {
 		return $this->_sourcePath;
+	}
+
+	/** Return the version of PHPDoctor.
+	 *
+	 * @return str
+	 */
+	function version() {
+		return $this->_version;
 	}
 
 	/** Return the default package.
@@ -414,7 +444,7 @@ class phpDoctor {
 
 						case T_CLASS:
 						// read class
-							$class =& new classDoc($this->_getNext($tokens, $key, T_STRING)); // create class object
+							$class =& new classDoc($this->_getNext($tokens, $key, T_STRING), $rootDoc); // create class object
 							$this->verbose('+ Entering '.get_class($class).': '.$class->name());
 							if (isset($currentData['docComment'])) { // set doc comment
 								$class->set('docComment', $currentData['docComment']);
@@ -435,7 +465,7 @@ class phpDoctor {
 							
 						case T_INTERFACE:
 						// read interface
-							$interface =& new classDoc($this->_getNext($tokens, $key, T_STRING)); // create interface object
+							$interface =& new classDoc($this->_getNext($tokens, $key, T_STRING), $rootDoc); // create interface object
 							$this->verbose('+ Entering '.get_class($interface).': '.$interface->name());
 							if (isset($currentData['docComment'])) { // set doc comment
 								$interface->set('docComment', $currentData['docComment']);
@@ -514,7 +544,7 @@ class phpDoctor {
 
 						case T_FUNCTION:
 						// read function
-							$method =& new methodDoc($this->_getNext($tokens, $key, T_STRING), $ce); // create method object
+							$method =& new methodDoc($this->_getNext($tokens, $key, T_STRING), $ce, $rootDoc); // create method object
 							$this->verbose('+ Entering '.get_class($method).': '.$method->name());
 							if (isset($currentData['docComment'])) { // set doc comment
 								$method->set('docComment', $currentData['docComment']); // set doc comment
@@ -548,7 +578,7 @@ class phpDoctor {
 						case T_STRING:
 						// read global constant
 							if ($token[1] == 'define' && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
-								$const =& new fieldDoc($tokens[$key + 2][1], $ce); // create constant object
+								$const =& new fieldDoc($tokens[$key + 2][1], $ce, $rootDoc); // create constant object
 								$this->verbose('Found '.get_class($const).': global constant '.$const->name());
 								$const->set('final', TRUE); // is constant
 								$value = '';
@@ -584,7 +614,7 @@ class phpDoctor {
 									if ($tokens[$key] == '=') {
 										$value = '';
 									} elseif ($tokens[$key] == ',' || $tokens[$key] == ';') {
-										$const =& new fieldDoc($this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING)), $ce); // create field object
+										$const =& new fieldDoc($this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING)), $ce, $rootDoc); // create field object
 										$this->verbose('Found '.get_class($const).': '.$const->name());
 										if (substr($const->name(), 0, 1) == '_') $const->makePrivate();
 										$const->set('final', TRUE);
@@ -616,7 +646,7 @@ class phpDoctor {
 										unset($param);
 									} elseif (is_array($tokens[$key])) {
 										if ($tokens[$key][0] == T_VARIABLE && !isset($param)) {
-											$param =& new fieldDoc($tokens[$key][1], $ce); // create constant object
+											$param =& new fieldDoc($tokens[$key][1], $ce, $rootDoc); // create constant object
 											$this->verbose('Found '.get_class($param).': '.$param->name());
 											if (isset($currentData['docComment'])) { // set doc comment
 												$param->set('docComment', $currentData['docComment']);
@@ -646,7 +676,7 @@ class phpDoctor {
 									if ($tokens[$key] == '=') {
 										$value = '';
 									} elseif ($tokens[$key] == ',' || $tokens[$key] == ';') {
-										$field =& new fieldDoc($this->_getPrev($tokens, $key, T_VARIABLE), $ce); // create field object
+										$field =& new fieldDoc($this->_getPrev($tokens, $key, T_VARIABLE), $ce, $rootDoc); // create field object
 										$this->verbose('Found '.get_class($field).': '.$field->name());
 										if (substr($field->name(), 0, 1) == '_') $field->makePrivate();
 										if (isset($value)) $field->set('value', trim($value)); // set value
@@ -671,10 +701,10 @@ class phpDoctor {
 
 							// read global variable
 							} elseif (get_class($ce) == 'rootdoc') { // global var, add to package
-								$global =& new fieldDoc($tokens[$key][1], $ce); // create constant object
+								$global =& new fieldDoc($tokens[$key][1], $ce, $rootDoc); // create constant object
 								$this->verbose('Found '.get_class($global).': global variable '.$global->name());
 								if (isset($tokens[$key - 1][0]) && is_array($tokens[$key - 2]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
-									$global->set('type', new type($tokens[$key - 2][1]));
+									$global->set('type', new type($tokens[$key - 2][1]), $rootDoc);
 								}
 								if ($tokens[$key + 1] == '=' || $tokens[$key + 2] == '=') {
 									$default = '';
@@ -784,6 +814,7 @@ class phpDoctor {
 		} else {
 			$this->error('Could not find doclet "'.$docletFile.'"');
 		}
+		$this->message('Done ('.round($this->_getTime() - $this->_startTime, 2).' seconds)');
 	}
 
 	/**

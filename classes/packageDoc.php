@@ -51,10 +51,10 @@ class packageDoc extends doc {
 	
 	/** Constructor
 	 *
-	 * @param rootDoc root
 	 * @param str name
+	 * @param rootDoc root
 	 */
-	function packageDoc(&$root, $name) {
+	function packageDoc($name, &$root) {
 		$this->_name = $name;
 		$this->_root =& $root;
 		
@@ -65,7 +65,7 @@ class packageDoc extends doc {
 		if (isset($options['packageCommentDir'])) {
 			$overviewFile = $options['packageCommentDir'].$this->_name.'html';
 		} else {
-			$overviewFile = $this->asPath().$this->_name.'html';
+			$overviewFile = $phpdoctor->sourcePath().$this->asPath().$this->_name.'html';
 		}
 		if (is_file($overviewFile)) {
 			$phpdoctor->message('Reading package overview file "'.$options['overview'].'".');
@@ -83,7 +83,18 @@ class packageDoc extends doc {
 	 */
 	function asPath() {
 		$phpdoctor =& $this->_root->phpdoctor();
-		return $phpdoctor->sourcePath().str_replace('.', '/', str_replace('\\', '/', $this->_name));
+		return str_replace('.', '/', str_replace('\\', '/', $this->_name));
+	}
+	
+	/** Calculate the depth of this package from the root.
+	 *
+	 * @return int
+	 */
+	function depth() {
+		$depth = substr_count($this->_name, '.');
+		$depth += substr_count($this->_name, '\\');
+		$depth += substr_count($this->_name, '/');
+		return $depth;
 	}
 	
 	/** Add a class to this package.
@@ -124,9 +135,9 @@ class packageDoc extends doc {
 	 */
 	function &exceptions() {
 		$exceptions = NULL;
-		foreach ($this->_classes as $name => $class) {
-			if ($class->isException()) {
-				$exceptions[$name] =& $class;
+		foreach ($this->_classes as $name => $exception) {
+			if ($exception->isException()) {
+				$exceptions[$name] =& $this->_classes[$name];
 			}
 		}
 		return $exceptions;
@@ -138,9 +149,9 @@ class packageDoc extends doc {
 	 */
 	function &interfaces() {
 		$interfaces = NULL;
-		foreach ($this->_classes as $name => $class) {
-			if ($class->isInterface()) {
-				$interfaces[$name] =& $class;
+		foreach ($this->_classes as $name => $interface) {
+			if ($interface->isInterface()) {
+				$interfaces[$name] =& $this->_classes[$name];
 			}
 		}
 		return $interfaces;
@@ -154,7 +165,7 @@ class packageDoc extends doc {
 		$classes = NULL;
 		foreach ($this->_classes as $name => $class) {
 			if ($class->isOrdinaryClass()) {
-				$classes[$name] =& $class;
+				$classes[$name] =& $this->_classes[$name];
 			}
 		}
 		return $classes;
@@ -183,11 +194,10 @@ class packageDoc extends doc {
 	 */
 	function &findClass($className) {
 		if (isset($this->_classes[$className])) {
-			$class =& $this->_classes[$className];
+			return $this->_classes[$className];
 		} else {
-			$class = NULL;
+			return NULL;
 		}
-		return $class;
 	}
 
 }

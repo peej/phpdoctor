@@ -60,6 +60,14 @@ class tag {
 		return $this->_name;
 	}
 
+	/** Get display name of this tag.
+	 *
+	 * @return str
+	 */
+	function displayName() {
+		return ucfirst(substr($this->_name, 1));
+	}
+
 	/** Get value of this tag.
 	 *
 	 * @return str
@@ -101,14 +109,6 @@ class tag {
 	/** Return true if this Taglet is an inline tag. */
 	function isInlineTag() {
 		return FALSE;
-	}
-
-	/** Return the kind of this tag.
-	 *
-	 * @return str
-	 */
-	function kind() {
-		return $this->_name;
 	}
 
 }

@@ -36,14 +36,21 @@ class type {
 	 */
 	var $_dimension = 0;
 
+	/** Reference to the root element.
+	 *
+	 * @var rootDoc
+	 */
+	var $_root = NULL;
+
 	/** Constructor
 	 */
-	function type($name) {
+	function type($name, &$root) {
 		while (substr($name, -2) == '[]') {
 			$this->_dimension++;
 			$name = substr($name, 0, -2);
 		}
 		$this->_name = $name;
+		$this->_root =& $root;
 	}
 
 	/** Get name of this type.
@@ -80,7 +87,9 @@ class type {
 	 *
 	 * @return classDoc A classDoc if the type is a class, null if it is a primitive type.
 	 */
-	function asClassDoc() {}
+	function &asClassDoc() {
+		return $this->_root->classNamed($this->_name);
+	}
 
 }
 

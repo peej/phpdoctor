@@ -28,7 +28,7 @@ class methodDoc extends executableDoc {
 	 *
 	 * @var type
 	 */
-	var $_returnType = NULL;
+	var $_returnType;
 
 	/** Is this class abstract.
 	 *
@@ -40,10 +40,13 @@ class methodDoc extends executableDoc {
 	 *
 	 * @param str name Name of this element
 	 * @param classDoc|methodDoc parent The parent of this element
+	 * @param rootDoc root The root element
 	 */
-	function methodDoc($name, &$parent) {
+	function methodDoc($name, &$parent, &$root) {
 		$this->_name = $name;
 		$this->_parent =& $parent; // set reference to parent
+		$this->_root =& $root; // set reference to root
+		$this->_returnType =& new type('void', $root);
 	}
 
 	/** Add a parameter to this method.
@@ -60,6 +63,22 @@ class methodDoc extends executableDoc {
 	 */
 	function returnType() {
 		return $this->_returnType;
+	}
+	
+	/** Format a return type for outputting. Recognised types are turned into
+	 * HTML anchor tags to the documentation page for the class defining them.
+	 *
+	 * @return str The string representation of the return type
+	 */
+	function returnTypeAsString() {
+		$myPackage =& $this->_root->packageNamed($this->containingPackage());
+		$classDoc =& $this->_returnType->asClassDoc();
+		if ($classDoc) {
+			$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+			return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().'</a>';
+		} else {
+			return $this->_returnType->typeName();
+		}
 	}
 
 	/** Return true if this class is abstract.

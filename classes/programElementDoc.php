@@ -56,10 +56,6 @@ class programElementDoc extends doc {
 	 * @var bool
 	 */
 	var $_static = FALSE;
-	
-	/** Constructor
-	 */
-	function programElementDoc() {}
 
 	/** Set element to have public access */
 	function makePublic() {
@@ -112,9 +108,9 @@ modifiers() would return:
 	 *
 	 * @return str
 	 */
-	function modifiers($showAccess = TRUE) {
+	function modifiers($showPublic = TRUE) {
 		$modifiers = '';
-		if ($showAccess && isset($this->_access)) {
+		if ($showPublic || $this->_access != 'public') {
 			$modifiers .= $this->_access.' ';
 		}
 		if ($this->_final) {

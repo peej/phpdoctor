@@ -27,7 +27,7 @@ class executableDoc extends programElementDoc {
 
 	/** The parameters this function takes.
 	 *
-	 * @var parameter[]
+	 * @var fieldDoc[]
 	 */
 	var $_parameters = array();
 	
@@ -43,10 +43,6 @@ class executableDoc extends programElementDoc {
 	 */
 	var $_throws = array();
 
-	/** Constructor
-	 */
-	function executableDoc() {}
-	
 	/** Add a subfunction to this function.
 	 *
 	 * @param methodDoc function
@@ -82,7 +78,7 @@ class executableDoc extends programElementDoc {
 
 	/** Return the param tags in this function.
 	 *
-	 * @return tags[]
+	 * @return tag[]
 	 */
 	function paramTags() {
 		if (isset($this->_tags['@param'])) {
@@ -117,15 +113,25 @@ class executableDoc extends programElementDoc {
 	 * <pre>for a function
 	mymethod(foo x, int y)
 it will return
-	(bar.foo, int)</pre>
+	(bar.foo x, int y)</pre>
+	 *
+	 * Recognised types are turned into HTML anchor tags to the documentation
+	 * page for the class defining them.
 	 *
 	 * @return str
 	 */
 	function signature() {
 		$signature = '(';
+		$myPackage =& $this->_root->packageNamed($this->containingPackage());
 		foreach($this->_parameters as $param) {
 			$type = $param->type();
-			$signature .= $type->typeName().', ';
+			$classDoc =& $type->asClassDoc();
+			if ($classDoc) {
+				$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->containingPackage().'.'.$classDoc->name().'</a> '.$param->name().$type->dimension().', ';
+			} else {
+				$signature .= $type->typeName().$type->dimension().', ';
+			}
 		}
 		return substr($signature, 0, -2).')';
 	}
@@ -134,17 +140,27 @@ it will return
 	 * function. It is the parameter list, type is not qualified.
 	 *
 	 * <pre>for a function
-	mymethod(str x, int y)
+	mymethod(foo x, int y)
 it will return
-	(str, int)</pre>
+	(foo x, int y)</pre>
+	 *
+	 * Recognised types are turned into HTML anchor tags to the documentation
+	 * page for the class defining them.
 	 *
 	 * @return str
 	 */
 	function flatSignature() {
 		$signature = '';
+		$myPackage =& $this->_root->packageNamed($this->containingPackage());
 		foreach($this->_parameters as $param) {
-			$type = $param->type();
-			$signature .= $type->typeName().', ';
+			$type =& $param->type();
+			$classDoc =& $type->asClassDoc();
+			if ($classDoc) {
+				$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().'</a> '.$param->name().', ';
+			} else {
+				$signature .= $type->typeName().' '.$param->name().', ';
+			}
 		}
 		return '('.substr($signature, 0, -2).')';
 	}

@@ -45,6 +45,14 @@ class seeTag extends tag {
 		parent::tag('@see', $text);
 	}
 	
+	/** Get display name of this tag.
+	 *
+	 * @return str
+	 */
+	function displayName() {
+		return 'See Also';
+	}
+	
 	/** Return true if this Taglet is used in constructor documentation. */
 	function inConstructor() {
 		return TRUE;

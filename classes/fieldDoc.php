@@ -38,12 +38,15 @@ class fieldDoc extends programElementDoc {
 
 	/** Constructor
 	 *
+	 * @param str name Name of this element
 	 * @param classDoc|methodDoc parent The parent of this element
+	 * @param rootDoc root The root element
 	 */
-	function fieldDoc($name, &$parent) {
+	function fieldDoc($name, &$parent, &$root) {
 		$this->_name = trim($name, '$\'"');
 		$this->_parent =& $parent; // set reference to parent
-		$this->_type = new type('mixed');
+		$this->_root =& $root; // set reference to root
+		$this->_type =& new type('mixed', $root);
 	}
 
 	/** Get type of this variable.
@@ -62,6 +65,23 @@ class fieldDoc extends programElementDoc {
 		return $this->_value;
 	}
 
+	
+	/** Format a field type for outputting. Recognised types are turned into
+	 * HTML anchor tags to the documentation page for the class defining them.
+	 *
+	 * @return str The string representation of the field type
+	 */
+	function typeAsString() {
+		$myPackage =& $this->_root->packageNamed($this->containingPackage());
+		$classDoc =& $this->_type->asClassDoc();
+		if ($classDoc) {
+			$packageDoc =& $this->_root->packageNamed($classDoc->containingPackage());
+			return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().$this->_type->dimension().'</a>';
+		} else {
+			return $this->_type->typeName().$this->_type->dimension();
+		}
+	}
+	
 	/** Returns the value of the constant.
 	 *
 	 * @return mixed

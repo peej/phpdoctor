@@ -35,6 +35,14 @@ class returnTag extends tag {
 		parent::tag('@return', join(' ', $explode));
 	}
 	
+	/** Get display name of this tag.
+	 *
+	 * @return str
+	 */
+	function displayName() {
+		return 'Returns';
+	}
+	
 	/** Return true if this Taglet is used in constructor documentation. */
 	function inConstructor() {
 		return TRUE;

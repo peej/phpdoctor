@@ -18,48 +18,48 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/** This generates the index.html file used for presenting the frame-formated
- * "cover page" of the API documentation.
+/** This generates the overview-frame.html file used for displaying the list
+ * of package links in the upper-left frame in the frame-formatted default
+ * output.
  *
  * @package PHPDoctor.Doclets.Standard
  */
-class frameOutputWriter extends htmlWriter {
+class packageIndexFrameWriter extends htmlWriter {
 
-	/** Build the HTML frameset.
+	/** Build the package frame index.
 	 *
 	 * @param doclet doclet
 	 */
-	function frameOutputWriter(&$doclet) {
+	function packageIndexFrameWriter(&$doclet) {
 	
 		parent::htmlWriter($doclet);
-
-		ob_start();
-		echo <<<END
 		
-<frameset cols="20%,80%">
+		ob_start();
+		
+		echo '<body id="frame">', "\n\n";
+		
+		echo '<h1>'.$this->_doclet->getHeader()."</h1>\n\n";
+		
+		echo "<ul>\n";
+		echo '<li><a href="allitems-frame.html" target="index">All Items</a></li>'."\n";
+		echo "</ul>\n\n";
+		
+		echo "<h1>Packages</h1>\n\n";
 
-<frameset rows="30%,70%">
+		$rootDoc =& $this->_doclet->rootDoc();
 
-<frame src="overview-frame.html" name="packagelist" />
-<frame src="allitems-frame.html" name="index" />
-
-</frameset>
-
-<frame src="overview-summary.html" name="main" />
-
-<noframes>
-<h2>Frame Alert</h2>
-<p>This document is designed to be viewed using frames. If you see this message, you are using a non-frame-capable browser.<br />
-Link to <a href="overview-summary.html">Non-frame version</a>.</p>
-</noframes>
-
-</frameset>
-END;
+		echo "<ul>\n";
+		foreach($rootDoc->packages() as $name => $package) {
+			echo '<li><a href="'.$package->asPath().'/package-frame.html" target="index">'.$package->name().'</a></li>'."\n";
+		}
+		echo "</ul>\n\n";
+		
+		echo '</body>', "\n\n";
 
 		$this->_output = ob_get_contents();
 		ob_end_clean();
 		
-		$this->_write('index.html', FALSE, FALSE);
+		$this->_write('overview-frame.html', 'Overview', FALSE);
 	
 	}
 

@@ -108,9 +108,46 @@ class rootDoc extends doc {
 				}
 			}
 		}
+		if ($classes != NULL) ksort($classes);
 		return $classes;
 	}
 
+	/** Return a reference to the functions to be documented.
+	 *
+	 * @return methodDoc[]
+	 */
+	function &functions() {
+		$functions = NULL;
+		foreach ($this->_packages as $name => $package) {
+			$packageFunctions =& $this->_packages[$name]->functions();
+			if ($packageFunctions) {
+				foreach ($packageFunctions as $key => $pack) {
+					$functions[$name.'.'.$key] =& $packageFunctions[$key];
+				}
+			}
+		}
+		if ($functions != NULL) ksort($functions);
+		return $functions;
+	}
+
+	/** Return a reference to the globals to be documented.
+	 *
+	 * @return fieldDoc[]
+	 */
+	function &globals() {
+		$globals = NULL;
+		foreach ($this->_packages as $name => $package) {
+			$packageGlobals =& $this->_packages[$name]->globals();
+			if ($packageGlobals) {
+				foreach ($packageGlobals as $key => $pack) {
+					$globals[$name.'.'.$key] =& $packageGlobals[$key];
+				}
+			}
+		}
+		if ($globals != NULL) ksort($globals);
+		return $globals;
+	}
+	
 	/** Return a reference to a packageDoc for the specified package name. If a
 	 * package of the requested name does not exist, this method will create the
 	 * package object, add it to the root and return it.
@@ -122,7 +159,7 @@ class rootDoc extends doc {
 		if (isset($this->_packages[$name])) {
 			return $this->_packages[$name];
 		} else {
-			$newPackage =& new packageDoc($this, $name);
+			$newPackage =& new packageDoc($name, $this);
 			$this->addPackage($newPackage);
 			return $newPackage;
 		}
@@ -134,8 +171,9 @@ class rootDoc extends doc {
 	 * @return classDoc
 	 */
 	function &classNamed($name) {
-		foreach($this->_packages as $packageName => $package) {
-			$class =& $this->_packages[$packageName]->findClass($name);
+		$packages = $this->_packages; // we do this copy so as not to upset the internal pointer of the array outside this scope
+		foreach($packages as $packageName => $package) {
+			$class =& $package->findClass($name);
 			if ($class != NULL) break;
 		}
 		return $class;

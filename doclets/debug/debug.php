@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /** The debugging doclet. This doclet outputs all the parsed data in a format
  * suitable for debugging PHPDoctor.
  *
- * @package PHPDoctor.doclets.debug
+ * @package PHPDoctor.Doclets.Debug
  */
 class debug {
 

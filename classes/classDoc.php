@@ -42,15 +42,15 @@ class classDoc extends programElementDoc {
 
 	/** The class constructor.
 	 *
-	 * @var constructorDoc
+	 * @var constructorDoc[]
 	 */
-	var $_constructor = NULL;
+	var $_constructor = array();
 
 	/** The class fields.
 	 *
 	 * @var fieldDoc[]
 	 */
-	var $_fields = NULL;
+	var $_fields = array();
 
 	/** The class methods.
 	 *
@@ -73,9 +73,11 @@ class classDoc extends programElementDoc {
 	/** Constructor
 	 *
 	 * @param str name Name of this element
+	 * @param rootDoc root The root element
 	 */
-	function classDoc($name) {
+	function classDoc($name, &$root) {
 		$this->_name = $name;
+		$this->_root =& $root;
 	}
 
 	/** Add a field to this class.
