@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /** Represents a PHP variable type. Type can be a class or primitive data type.
  *
  * @package PHPDoctor
+ * @version $id$
  */
 class type {
 

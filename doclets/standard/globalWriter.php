@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /** This generates the HTML API documentation for each global variable.
  *
  * @package PHPDoctor.Doclets.Standard
+ * @version $id$
  */
 class globalWriter extends htmlWriter {
 

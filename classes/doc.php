@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * and have been processed by this run of PHPDoctor.
  *
  * @package PHPDoctor
+ * @version $id$
  * @abstract
  */
 class doc {
@@ -168,6 +169,14 @@ class doc {
 	 * @return bool
 	 */
 	function isGlobal() {
+		return FALSE;
+	}
+	
+	/** Is this construct final. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isFinal() {
 		return FALSE;
 	}
 

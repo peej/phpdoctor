@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * packages.
  *
  * @package PHPDoctor.Doclets.Standard
+ * @version $id$
  */
 class packageIndexWriter extends htmlWriter {
 

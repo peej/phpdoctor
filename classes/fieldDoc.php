@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /** Represents a PHP variable, constant or member variable (field).
  *
  * @package PHPDoctor
+ * @version $id$
  */
 class fieldDoc extends programElementDoc {
 
@@ -72,7 +73,19 @@ class fieldDoc extends programElementDoc {
 	function isField() {
 		return TRUE;
 	}
-	
+
+	/** Construct is a global.
+	 *
+	 * @return bool
+	 */
+	function isGlobal() {
+		if (get_class($this->_parent) == 'rootdoc') {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+		
 	/** Format a field type for outputting. Recognised types are turned into
 	 * HTML anchor tags to the documentation page for the class defining them.
 	 *

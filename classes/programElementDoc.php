@@ -23,13 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * information common to these elements.
  *
  * @package PHPDoctor
+ * @version $id$
  * @abstract
  */
 class programElementDoc extends doc {
 
 	/** Reference to the elements parent.
 	 *
-	 * @var programElementDoc
+	 * @var doc
 	 */
 	var $_parent = NULL;
 

@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * type (which can be converted to classDoc, if possible).
  *
  * @package PHPDoctor
+ * @version $id$
  */
 class classDoc extends programElementDoc {
 

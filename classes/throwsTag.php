@@ -23,6 +23,7 @@ require_once('seeTag.php');
 /** Represents a throws tag.
  *
  * @package PHPDoctor.Tags
+ * @version $id$
  */
 class throwsTag extends seeTag {
 

@@ -23,6 +23,7 @@ require_once('seeTag.php');
 /** Represents an inline link tag.
  *
  * @package PHPDoctor.Tags
+ * @version $id$
  */
 class linkPlainTag extends seeTag {
 

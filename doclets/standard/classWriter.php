@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
+ * @version $id$
  */
 class classWriter extends htmlWriter {
 
@@ -126,6 +127,10 @@ class classWriter extends htmlWriter {
 							echo "</tr>\n";
 						}
 						echo "</table>\n\n";
+					}
+					
+					if ($class->superclass()) {
+						$this->inheritFields($rootDoc->classNamed($class->superclass()));
 					}
 
 					if ($constructors) {
@@ -281,6 +286,12 @@ class classWriter extends htmlWriter {
 			$output .= '<a href="'.$class->name().'.html">'.$class->name().'</a><br />';
 		}
 		return array($output, $depth);
+	}
+	
+	function inheritFields($element) {
+		echo '<table class="inherit">', "\n";
+		echo '<tr><th colspan="2" class="inherit">Fields inherited from ', $element->qualifiedName(),'</th></tr>', "\n";
+		echo "</table>\n\n";
 	}
 
 }

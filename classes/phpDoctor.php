@@ -51,7 +51,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version 2a
+ * @version $id$
  */
 class phpDoctor {
 
@@ -129,6 +129,18 @@ class phpDoctor {
 	 * @var str
 	 */
 	var $_packageCommentDir = NULL;
+
+	/** Parse out global variables.
+	 *
+	 * @var bool
+	 */
+	var $_globals = TRUE;
+
+	/** Parse out global constants.
+	 *
+	 * @var bool
+	 */
+	var $_constants = TRUE;
 
 	/** Parse only public classes and members.
 	 *
@@ -224,6 +236,9 @@ class phpDoctor {
 		if (isset($this->_options['default_package'])) $this->_defaultPackage = $this->_options['default_package'];
 		if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->_sourcePath);
 		if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->_sourcePath);
+
+		if (isset($this->_options['globals'])) $this->_globals = $this->_options['globals'];
+		if (isset($this->_options['constants'])) $this->_constants = $this->_options['constants'];
 
 		if (isset($this->_options['public']) && $this->_options['public']) {
 			$this->_public = TRUE;
@@ -618,7 +633,9 @@ class phpDoctor {
 								}
 								$const->mergeData();
 								$parentPackage =& $rootDoc->packageNamed($const->packageName(), TRUE); // get parent package
-								$parentPackage->addGlobal($const); // add constant to package
+								if ($this->_includeElements($const)) {
+									$parentPackage->addGlobal($const); // add constant to package
+								}
 								$currentData = array(); // empty data store
 								
 							// member constant
@@ -748,7 +765,9 @@ class phpDoctor {
 								}
 								$global->mergeData();
 								$parentPackage =& $rootDoc->packageNamed($global->packageName(), TRUE); // get parent package
-								$parentPackage->addGlobal($global); // add constant to package
+								if ($this->_includeElements($global)) {
+									$parentPackage->addGlobal($global); // add constant to package
+								}
 								$currentData = array(); // empty data store
 							}
 							break;
@@ -914,11 +933,7 @@ class phpDoctor {
 		
 		$text = trim(array_shift($explodedComment), "\r\n \t/*");
 		if ($text != '') {
-			$cleanText = '';
-			foreach(explode("\n", $text) as $line) {
-				$cleanText .= trim($line, "\r\n \t/*")."\n";
-			}
-			$data['tags']['@text'] = $this->createTag('@text', $cleanText, $data, $root);
+			$data['tags']['@text'] = $this->createTag('@text', $text, $data, $root);
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags
@@ -1010,7 +1025,11 @@ class phpDoctor {
 	 * @return bool
 	 */
 	function _includeElements(&$element) {
-		if ($this->_private) {
+		if ($element->isGlobal() && !$element->isFinal() && !$this->_globals) {
+			return FALSE;
+		} elseif ($element->isGlobal() && $element->isFinal() && !$this->_constants) {
+			return FALSE;
+		} elseif ($this->_private) {
 			return TRUE;	
 		} elseif ($this->_protected && ($element->isPublic() || $element->isProtected)) {
 			return TRUE;

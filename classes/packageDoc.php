@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * the package's comment and tags, and the classes in the package.
  *
  * @package PHPDoctor
+ * @version $id$
  */
 class packageDoc extends doc {
 

@@ -33,6 +33,7 @@ require('globalWriter.php');
  * produced by the Javadoc standard doclet.
  *
  * @package PHPDoctor.Doclets.Standard
+ * @version $id$
  */
 class standard {
 

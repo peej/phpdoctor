@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /** Represents a see tag.
  *
  * @package PHPDoctor.Tags
+ * @version $id$
  */
 class seeTag extends tag {
 

@@ -76,7 +76,7 @@ dt {
 	font-weight: bold;
 }
 
-table.title {
+table.title, table.inherit {
 	margin: 10px 0 0 0;
 	width: 100%;
 	border-collapse: collapse;
@@ -182,7 +182,7 @@ td.short_title {
 }
 
 table.inherit, td.inherit, th.inherit {
-	border: 1px solid #999;
+	border: 2px solid #999;
 }
 
 th.inherit {

@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /** Represents a return tag.
  *
  * @package PHPDoctor.Tags
+ * @version $id$
  */
 class returnTag extends tag {
 

@@ -24,6 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * by subclasses.
  *
  * @package PHPDoctor.Tags
+ * @version $id$
  */
 class tag {
 
@@ -63,9 +64,9 @@ class tag {
 		$this->_root =& $root;
 		foreach(explode("\n", $text) as $line) {
 			if ($this->_text) {
-				$this->_text .= ' '.trim($line, "\n\r\t */");
+				$this->_text .= trim($line, "\n\r\t */")."\n";
 			} else {
-				$this->_text = trim($line, "\n\r\t */");
+				$this->_text = trim($line, "\n\r\t */")."\n";
 			}
 		}
 	}
