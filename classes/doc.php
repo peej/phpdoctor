@@ -1,0 +1,303 @@
+<?php
+/*
+PHPDoctor: The PHP Documentation Creator
+Copyright (C) 2004 Paul James <paul@peej.co.uk>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/** Abstract base class of all Doc classes. Doc item's are representations of
+ * PHP language constructs (class, package, method,...) which have comments
+ * and have been processed by this run of PHPDoctor.
+ *
+ * @package PHPDoctor
+ * @abstract
+ */
+class doc {
+
+	/** The name of this construct
+	 *
+	 * @var str
+	 */
+	var $_name = NULL;
+
+	/** Data about the element creamed from the token stream before the object
+	 * for this element was created. This array contains extra data about the
+	 * element that occurs before the element definition in the token stream
+	 * (including doc comment data), it is merged with the objects fields upon
+	 * object completion.
+	 *
+	 * @var mixed[]
+	 */
+	var $_data = NULL; // this must be NULL so set does not nest the arrays when $currentData is assigned
+
+	/** The unprocessed doc comment.
+	 *
+	 * @var str
+	 */
+	var $_docComment = '';
+
+	/** Array of doc tags.
+	 *
+	 * @var tag[]
+	 */
+	var $_tags = array();
+
+	/** Whether parsing is inside this elements curly braces.
+	 *
+	 * @var int
+	 */
+	var $inBody = 0;
+	
+	/** Constructor
+	 */
+	function doc() {}
+
+	/** Setter method.
+	 *
+	 * @return bool
+	 */
+	function set($member, $value) {
+		$member = '_'.$member;
+		$members = get_object_vars($this);
+		if (array_key_exists($member, $members)) {
+			if (is_array($this->$member)) {
+				$this->{$member}[] = $value;
+			} else {
+				$this->$member = $value;
+			}
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/** Setter by reference method.
+	 *
+	 * @return bool
+	 */
+	function setByRef($member, &$value) {
+		$member = '_'.$member;
+		$members = get_object_vars($this);
+		if (array_key_exists($member, $members)) {
+			if (is_array($this->$member)) {
+				$this->{$member}[] =& $value;
+			} else {
+				$this->$member =& $value;
+			}
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/** Return the name of this doc item.
+	 *
+	 * @return str
+	 */
+	function name() {
+		return $this->_name;
+	}
+	
+	/** Return tags of the specified kind in this Doc item. For example, if
+	 * 'tagName' has value "@serial", all tags in this Doc item of type "@serial"
+	 * will be returned. If NULL is given for 'tagName', all tags in this Doc
+	 * item are returned.
+	 *
+	 * @param str tagName Name of the tag kind to search for
+	 * @return tag[] An array of Tag containing all tags whose 'kind()' matches 'tagname'
+	 */
+	function tags($tagName) {}
+	
+	/** Return the first sentence of the comment as tags.
+	 *
+	 * @return tag
+	 */
+	function firstSentenceTags() {
+		if (isset($this->_tags['text'])) {
+			return $this->_tags['text'];
+		} else {
+			return NULL;
+		}
+	}
+	
+	/** Return the full unprocessed text of the comment.
+	 *
+	 * @return str
+	 */
+	function getRawCommentText() {
+		return $this->_docComment;
+	}
+
+	/** Is this construct a class. Note: interfaces are not classes. False until
+	 * overridden.
+	 *
+	 * @return bool
+	 */
+	function isClass() {
+		return FALSE;
+	}
+
+	/** Is this construct a constructor. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isConstructor() {
+		return FALSE;
+	}
+	
+	/** Is this construct an exception. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isException() {
+		return FALSE;
+	}
+	
+	/** Is this construct a global variable. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isGlobal() {
+		return FALSE;
+	}
+
+	/** Is this construct a field. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isField() {
+		return FALSE;
+	}
+
+	/** Is this construct a function. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isFunction() {
+		return FALSE;
+	}
+	
+	/** Is this construct an interface. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isInterface() {
+		return FALSE;
+	}
+	
+	/** Is this construct a method. False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isMethod() {
+		return FALSE;
+	}
+	
+	/** Is this construct an ordinary class (not an interface or an exception).
+	 * False until overridden.
+	 *
+	 * @return bool
+	 */
+	function isOrdinaryClass() {
+		return FALSE;
+	}
+	
+	/** Merge the contents of the doc comment into the element object. */
+	function mergeData() {
+		if (is_array($this->_data)) {
+			// merge primitive types
+			foreach ($this->_data as $member => $value) {
+				if (!is_array($value)) {
+					if ($member == 'type') {
+						$this->set('type', new type($value));
+					} else {
+						$this->set($member, $value);
+					}
+				}
+			}
+			// merge tags array
+			if (isset($this->_data['tags']) && is_array($this->_data['tags'])) {
+				$thisClass = get_class($this);
+				foreach ($this->_data['tags'] as $name => $tag) {
+					if (is_array($tag)) {
+						foreach ($this->_data['tags'][$name] as $key => $tag) {
+							if (
+								($thisClass == 'rootdoc' && $this->_data['tags'][$name][$key]->inOverview()) ||
+								($thisClass == 'packagedoc' && $this->_data['tags'][$name][$key]->inPackage()) ||
+								($thisClass == 'classdoc' && $this->_data['tags'][$name][$key]->inType()) ||
+								($thisClass == 'constructordoc' && $this->_data['tags'][$name][$key]->inConstructor()) ||
+								($thisClass == 'methoddoc' && $this->_data['tags'][$name][$key]->inMethod()) ||
+								($thisClass == 'fielddoc' && $this->_data['tags'][$name][$key]->inField())
+							) {
+								$this->_tags[$name][$key] =& $this->_data['tags'][$name][$key];	
+							}
+						}
+					} else {
+						if (
+							($thisClass == 'rootdoc' && $this->_data['tags'][$name]->inOverview()) ||
+							($thisClass == 'packagedoc' && $this->_data['tags'][$name]->inPackage()) ||
+							($thisClass == 'classdoc' && $this->_data['tags'][$name]->inType()) ||
+							($thisClass == 'constructordoc' && $this->_data['tags'][$name]->inConstructor()) ||
+							($thisClass == 'methoddoc' && $this->_data['tags'][$name]->inMethod()) ||
+							($thisClass == 'fielddoc' && $this->_data['tags'][$name]->inField())
+						) {
+							$this->_tags[$name] =& $this->_data['tags'][$name];				
+						}
+					}
+				}
+			}
+			// merge parameter types
+			if (isset($this->_parameters) && isset($this->_data['parameters'])) {
+				foreach($this->_data['parameters'] as $name => $param) {
+					if (!isset($this->_parameters[$name])) {
+						phpdoctor::warning('Unknown parameter "'.$name.'" found for method "'.$this->_package.'.'.$this->_parent->name().'::'.$this->_name.'".');
+						$this->_parameters[$name] =& new fieldDoc($name, $this);
+						if (isset($this->_package)) $this->_parameters[$name]->set('package', $this->_package);
+					}
+					$this->_parameters[$name]->set('type', new type($param['type']));
+				}
+			}
+			// merge return type
+			if (isset($this->_returnType) && isset($this->_data['return'])) {
+				$this->_returnType =& new type($this->_data['return']);
+			}
+			// merge exceptions
+			if (isset($this->_throws) && isset($this->_data['throws'])) {
+				foreach($this->_data['throws'] as $name => $exception) {
+					$this->_throws[$name] =& $this->_data['throws'][$name];
+				}
+			}
+		}
+		// remove data array since we no longer need it
+		unset($this->_data);
+	}
+
+	/**
+	 * Get body of a HTML document
+	 *
+	 * @param str filename
+	 * @return str
+	 */
+	function getHTMLContents($filename) {
+			if ($contents = file_get_contents($filename)) {
+				if (preg_match('/<body ?.*?>(.+)<\/body>/s', $contents, $matches)) {
+					return $matches[1];
+				}
+			}
+			return FALSE;
+	}
+
+}
+
+?>

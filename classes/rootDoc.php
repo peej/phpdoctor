@@ -1,0 +1,146 @@
+<?php
+/*
+PHPDoctor: The PHP Documentation Creator
+Copyright (C) 2004 Paul James <paul@peej.co.uk>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/** This class holds the information from one run of PHPDoctor. Particularly
+ * the packages, classes and options specified by the user. It is the root
+ * of the parsed tokens and is passed to the doclet to be formatted into
+ * output.
+ *
+ * @package PHPDoctor
+ */
+class rootDoc extends doc {
+
+	/** Reference to the PHPDoctor application object.
+	 *
+	 * @var phpdoctor
+	 */
+	var $_phpdoctor = NULL;
+
+	/** The parsed packages.
+	 *
+	 * @var packageDoc[]
+	 */
+	var $_packages = array();
+
+	/** Constructor
+	 *
+	 * @param phpdoctor phpdoctor Application object
+	 */
+	function rootDoc(&$phpdoctor) {
+	
+		// set a reference to application object
+		$this->_phpdoctor =& $phpdoctor;
+		
+		// get options array
+		$options = $phpdoctor->options();
+	
+		// parse overview file
+		if (isset($options['overview']) && is_file($options['overview'])) {
+			$phpdoctor->message('Reading overview file "'.$options['overview'].'".');
+			if ($html = $this->getHTMLContents($options['overview'])) {
+				$this->_data = $phpdoctor->processDocComment('/** '.$html.' */');
+				$this->mergeData();
+			}
+		}
+	
+	}
+	
+	/** Add a package to this root.
+	 *
+	 * @param packageDoc package
+	 */
+	function addPackage(&$package) {
+		$this->_packages[$package->_name] =& $package;
+	}
+
+	/** Return a reference to the PHPDoctor application object.
+	 *
+	 * @return str[] An array of strings.
+	 */
+	function &phpdoctor() {
+		return $this->_phpdoctor;
+	}
+
+	/** Return a reference to the set options.
+	 *
+	 * @return str[] An array of strings.
+	 */
+	function &options() {
+		return $this->_phpdoctor->options();
+	}
+
+	/** Return a reference to the packages to be documented.
+	 *
+	 * @return packageDoc[]
+	 */
+	function &packages() {
+		return $this->_packages;
+	}
+
+	/** Return a reference to the classes and interfaces to be documented.
+	 *
+	 * @return classDoc[]
+	 */
+	function &classes() {
+		$classes = NULL;
+		foreach ($this->_packages as $name => $package) {
+			$packageClasses =& $this->_packages[$name]->allClasses();
+			if ($packageClasses) {
+				foreach ($packageClasses as $key => $pack) {
+					$classes[$name.'.'.$key] =& $packageClasses[$key];
+				}
+			}
+		}
+		return $classes;
+	}
+
+	/** Return a reference to a packageDoc for the specified package name. If a
+	 * package of the requested name does not exist, this method will create the
+	 * package object, add it to the root and return it.
+	 *
+	 * @param str name Package name
+	 * @return packageDoc
+	 */
+	function &packageNamed($name) {
+		if (isset($this->_packages[$name])) {
+			return $this->_packages[$name];
+		} else {
+			$newPackage =& new packageDoc($this, $name);
+			$this->addPackage($newPackage);
+			return $newPackage;
+		}
+	}
+
+	/** Return a reference to a classDoc for the specified class/interface name
+	 *
+	 * @param str name Class name
+	 * @return classDoc
+	 */
+	function &classNamed($name) {
+		foreach($this->_packages as $packageName => $package) {
+			$class =& $this->_packages[$packageName]->findClass($name);
+			if ($class != NULL) break;
+		}
+		return $class;
+	}
+
+}
+
+?>
