@@ -42,7 +42,7 @@ class classWriter extends htmlWriter {
 		$packages =& $rootDoc->packages();
 
 		foreach ($packages as $packageName => $package) {
-echo $packageName, "\n";
+
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);

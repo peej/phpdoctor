@@ -111,26 +111,32 @@ class seeTag extends tag {
 			if ($elementName) { // get element
 				if (isset($class)) { // from class
 					$constructors =& $class->constructor();
-					foreach($constructors as $key => $constructor) {
-						if ($constructor->name() == $elementName) {
-							$element =& $constructors[$key];
-							break;
+					if ($constructors) {
+						foreach($constructors as $key => $constructor) {
+							if ($constructor->name() == $elementName) {
+								$element =& $constructors[$key];
+								break;
+							}
 						}
 					}
 					if (!isset($element)) {
 						$methods =& $class->methods();
-						foreach($methods as $key => $method) {
-							if ($method->name() == $elementName) {
-								$element =& $methods[$key];
-								break;
+						if ($method) {
+							foreach($methods as $key => $method) {
+								if ($method->name() == $elementName) {
+									$element =& $methods[$key];
+									break;
+								}
 							}
 						}
 						if (!isset($element)) {
 							$fields =& $class->fields();
-							foreach($fields as $key => $field) {
-								if ($field->name() == $elementName) {
-									$element =& $fields[$key];
-									break;
+							if ($fields) {
+								foreach($fields as $key => $field) {
+									if ($field->name() == $elementName) {
+										$element =& $fields[$key];
+										break;
+									}
 								}
 							}
 						}
@@ -143,26 +149,32 @@ class seeTag extends tag {
 							break;
 						}
 						$constructors =& $class->constructor();
-						foreach($constructors as $key => $constructor) {
-							if ($constructor->name() == $elementName) {
-								$element =& $constructors[$key];
-								break 2;
+						if ($constructors) {
+							foreach($constructors as $key => $constructor) {
+								if ($constructor->name() == $elementName) {
+									$element =& $constructors[$key];
+									break 2;
+								}
 							}
 						}
 						if (!isset($element)) {
 							$methods =& $class->methods();
-							foreach($methods as $key => $method) {
-								if ($method->name() == $elementName) {
-									$element =& $methods[$key];
-									break 2;
+							if ($methods) {
+								foreach($methods as $key => $method) {
+									if ($method->name() == $elementName) {
+										$element =& $methods[$key];
+										break 2;
+									}
 								}
 							}
 							if (!isset($element)) {
 								$fields =& $class->fields();
-								foreach($fields as $key => $field) {
-									if ($field->name() == $elementName) {
-										$element =& $fields[$key];
-										break 2;
+								if ($fields) {
+									foreach($fields as $key => $field) {
+										if ($field->name() == $elementName) {
+											$element =& $fields[$key];
+											break 2;
+										}
 									}
 								}
 							}
@@ -170,50 +182,62 @@ class seeTag extends tag {
 					}
 					if (!isset($element)) {
 						$functions =& $package->functions();
-						foreach($functions as $key => $function) {
-							if ($function->name() == $elementName) {
-								$element =& $functions[$key];
-								break;
+						if ($functions) {
+							foreach($functions as $key => $function) {
+								if ($function->name() == $elementName) {
+									$element =& $functions[$key];
+									break;
+								}
 							}
 						}
 						if (!isset($element)) {
 							$globals =& $package->globals();
-							foreach($globals as $key => $global) {
-								if ($global->name() == $elementName) {
-									$element =& $globals[$key];
-									break;
+							if ($globals) {
+								foreach($globals as $key => $global) {
+									if ($global->name() == $elementName) {
+										$element =& $globals[$key];
+										break;
+									}
 								}
 							}
 						}
 					}
 				} else { // from anywhere
 					$classes =& $this->_root->classes();
-					foreach($classes as $key => $class) {
-						if ($class->name() == $elementName) {
-							$element =& $classes[$key];
-							break;
-						}
-						$constructors =& $class->constructor();
-						foreach($constructors as $key => $constructor) {
-							if ($constructor->name() == $elementName) {
-								$element =& $constructors[$key];
-								break 2;
+					if ($classes) {
+						foreach($classes as $key => $class) {
+							if ($class->name() == $elementName) {
+								$element =& $classes[$key];
+								break;
 							}
-						}
-						if (!isset($element)) {
-							$methods =& $class->methods();
-							foreach($methods as $key => $method) {
-								if ($method->name() == $elementName) {
-									$element =& $methods[$key];
-									break 2;
+							$constructors =& $class->constructor();
+							if ($constructors) {
+								foreach($constructors as $key => $constructor) {
+									if ($constructor->name() == $elementName) {
+										$element =& $constructors[$key];
+										break 2;
+									}
 								}
 							}
 							if (!isset($element)) {
-								$fields =& $class->fields();
-								foreach($fields as $key => $field) {
-									if ($field->name() == $elementName) {
-										$element =& $fields[$key];
-										break 2;
+								$methods =& $class->methods();
+								if ($methods) {
+									foreach($methods as $key => $method) {
+										if ($method->name() == $elementName) {
+											$element =& $methods[$key];
+											break 2;
+										}
+									}
+								}
+								if (!isset($element)) {
+									$fields =& $class->fields();
+									if ($fields) {
+										foreach($fields as $key => $field) {
+											if ($field->name() == $elementName) {
+												$element =& $fields[$key];
+												break 2;
+											}
+										}
 									}
 								}
 							}
@@ -221,18 +245,22 @@ class seeTag extends tag {
 					}
 					if (!isset($element)) {
 						$functions =& $this->_root->functions();
-						foreach($functions as $key => $function) {
-							if ($function->name() == $elementName) {
-								$element =& $functions[$key];
-								break;
+						if ($functions) {
+							foreach($functions as $key => $function) {
+								if ($function->name() == $elementName) {
+									$element =& $functions[$key];
+									break;
+								}
 							}
 						}
 						if (!isset($element)) {
 							$globals =& $this->_root->globals();
-							foreach($globals as $key => $global) {
-								if ($global->name() == $elementName) {
-									$element =& $globals[$key];
-									break;
+							if ($$globals) {
+								foreach($globals as $key => $global) {
+									if ($global->name() == $elementName) {
+										$element =& $globals[$key];
+										break;
+									}
 								}
 							}
 						}
