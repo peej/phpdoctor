@@ -42,13 +42,14 @@ class classWriter extends htmlWriter {
 		$packages =& $rootDoc->packages();
 
 		foreach ($packages as $packageName => $package) {
-
+echo $packageName, "\n";
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);
 			$this->_sections[3] = array('title' => 'Use');
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
-			$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 		
 			$this->_depth = $package->depth() + 1;
 
@@ -103,11 +104,11 @@ class classWriter extends htmlWriter {
 					$this->_processTags($class->tags());
 
 					echo "<hr />\n\n";
-					
+
 					$fields =& $class->fields();
 					$constructors =& $class->constructor();
 					$methods =& $class->methods();
-					
+
 					if ($fields) {
 						echo '<a name="summary_field"></a>', "\n";
 						echo '<table class="title">', "\n";
@@ -163,7 +164,7 @@ class classWriter extends htmlWriter {
 							echo '<td class="description">';
 							echo '<p class="name"><a href="#', $method->name(), '">', $method->name(), '</a>', $method->flatSignature(), '</p>';
 							if ($textTag) {
-								//echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
 							}
 							echo "</td>\n";
 							echo "</tr>\n";
@@ -174,7 +175,7 @@ class classWriter extends htmlWriter {
 					if ($class->superclass()) {
 						$this->inheritMethods($rootDoc->classNamed($class->superclass()), $rootDoc, $package);
 					}
-					
+
 					if ($fields) {
 						echo '<a name="detail_field"></a>', "\n";
 						echo '<table class="detail">', "\n";

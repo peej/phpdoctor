@@ -103,7 +103,8 @@ class rootDoc extends doc {
 	 */
 	function &classes() {
 		$classes = NULL;
-		foreach ($this->_packages as $name => $package) {
+		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
+		foreach ($packages as $name => $package) {
 			$packageClasses =& $this->_packages[$name]->allClasses();
 			if ($packageClasses) {
 				foreach ($packageClasses as $key => $pack) {
@@ -121,7 +122,8 @@ class rootDoc extends doc {
 	 */
 	function &functions() {
 		$functions = NULL;
-		foreach ($this->_packages as $name => $package) {
+		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
+		foreach ($packages as $name => $package) {
 			$packageFunctions =& $this->_packages[$name]->functions();
 			if ($packageFunctions) {
 				foreach ($packageFunctions as $key => $pack) {
@@ -139,7 +141,8 @@ class rootDoc extends doc {
 	 */
 	function &globals() {
 		$globals = NULL;
-		foreach ($this->_packages as $name => $package) {
+		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
+		foreach ($packages as $name => $package) {
 			$packageGlobals =& $this->_packages[$name]->globals();
 			if ($packageGlobals) {
 				foreach ($packageGlobals as $key => $pack) {

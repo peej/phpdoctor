@@ -45,7 +45,8 @@ class packageWriter extends htmlWriter {
 			$this->_sections[2] = array('title' => 'Class');
 			$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'selected' => TRUE);
-			$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 
 			$tree = array();
 			$classes =& $rootDoc->classes();
@@ -76,7 +77,8 @@ class packageWriter extends htmlWriter {
 			$this->_sections[2] = array('title' => 'Class');
 			$this->_sections[3] = array('title' => 'Use');
 			if ($displayTree) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
-			$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 			
 			ob_start();
 			
@@ -180,7 +182,8 @@ class packageWriter extends htmlWriter {
 				$this->_sections[2] = array('title' => 'Class');
 				$this->_sections[3] = array('title' => 'Use');
 				$this->_sections[4] = array('title' => 'Tree', 'url' => 'package-tree.html', 'selected' => TRUE, 'relative' => TRUE);
-				$this->_sections[5] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+				$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+				$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 
 				$tree = array();
 				$classes =& $package->ordinaryClasses();

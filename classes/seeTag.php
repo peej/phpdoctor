@@ -92,10 +92,8 @@ class seeTag extends tag {
 			$packageName = $matches[2];
 			$className = $matches[4];
 			$elementName = $matches[5];
-			//var_dump($packageName, $className, $elementName);
 			if ($packageName) { // get package
 				$package =& $this->_root->packageNamed($packageName);
-				//var_dump($package->name());
 			}
 			if ($className) { // get class
 				if (isset($package)) {
@@ -109,7 +107,6 @@ class seeTag extends tag {
 					}
 				}
 				$class =& $classes[$key];
-				//var_dump($class->name());
 			}
 			if ($elementName) { // get element
 				if (isset($class)) { // from class
@@ -241,7 +238,6 @@ class seeTag extends tag {
 						}
 					}
 				}
-				//var_dump($element->name());
 			}
 			return $element;
 		} else {
