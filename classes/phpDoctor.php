@@ -424,6 +424,16 @@ class phpDoctor {
 		return $this->_options;
 	}
 
+	/** Get a configuration option.
+	 *
+	 * @param str option
+	 * @return str
+	 */
+	function getOption($option) {
+		$option = '_'.$option;
+		return $this->$option;
+	}
+
 	/** Parse files into tokens and create rootDoc.
 	 *
 	 * @return rootDoc
@@ -942,7 +952,7 @@ class phpDoctor {
 			$pos = strpos($tag, ' ');
 			if ($pos !== FALSE) {
 				$name = trim(substr($tag, 0, $pos));
-				$text = trim(substr($tag, $pos + 1));
+				$text = trim(substr($tag, $pos + 1), "\n\r \t");
 			} else {
 				$name = $tag;
 				$text = NULL;

@@ -62,13 +62,11 @@ class tag {
 	function tag($name, $text, &$root) {
 		$this->_name = $name;
 		$this->_root =& $root;
+		$processedText = '';
 		foreach(explode("\n", $text) as $line) {
-			if ($this->_text) {
-				$this->_text .= trim($line, "\n\r\t */")."\n";
-			} else {
-				$this->_text = trim($line, "\n\r\t */")."\n";
-			}
+			$processedText .= trim($line, " \n\r\t\0\x0B*/")."\n";
 		}
+		$this->_text = substr($processedText, 0, -1);
 	}
 
 	/** Get name of this tag.
@@ -210,6 +208,11 @@ class tag {
 	/** Return true if this Taglet is an inline tag. */
 	function isInlineTag() {
 		return FALSE;
+	}
+	
+	/** Return true if this Taglet should be outputted even if it has no text content. */
+	function displayEmpty() {
+		return TRUE;
 	}
 
 }

@@ -131,6 +131,7 @@ class packageWriter extends htmlWriter {
 
 			$textTag =& $package->tags('@text');
 			if ($textTag) {
+				echo '<h1>Package ', $package->name(), " Description</h1>\n\n";
 				echo '<div class="comment" id="overview_description">'. $this->_processInlineTags($textTag), "</div>\n\n";
 			}
 			

@@ -242,7 +242,7 @@ class htmlWriter {
 					if ($text != '') {
 						echo '<dt>', $tag->displayName(), ':</dt>';
 						echo '<dd>', $text, "</dd>\n";
-					} else {
+					} elseif ($tag->displayEmpty()) {
 						echo '<dt>', $tag->displayName(), '.</dt>';
 					}
 				}

@@ -51,8 +51,11 @@ class packageIndexWriter extends htmlWriter {
 
 		$textTag =& $rootDoc->tags('@text');
 		if ($textTag) {
-			echo '<div class="comment">', $this->_processInlineTags($textTag, TRUE), "</div>\n\n";
-			echo '<dl><dt>See:</dt><dd><b><a href="#overview_description">Description</a></b></dd></dl>'."\n\n";
+			$description = $this->_processInlineTags($textTag, TRUE);
+			if ($description) {
+				echo '<div class="comment">', $description, "</div>\n\n";
+				echo '<dl><dt>See:</dt><dd><b><a href="#overview_description">Description</a></b></dd></dl>'."\n\n";
+			}
 		}
 
 		echo '<table class="title">'."\n";
@@ -66,7 +69,10 @@ class packageIndexWriter extends htmlWriter {
 
 		$textTag =& $rootDoc->tags('@text');
 		if ($textTag) {
-			echo '<div class="comment" id="overview_description">', $this->_processInlineTags($textTag), "</div>\n\n";
+			$description = $this->_processInlineTags($textTag);
+			if ($description) {
+				echo '<div class="comment" id="overview_description">', $description, "</div>\n\n";
+			}
 		}
 		
 		echo "<hr />\n\n";

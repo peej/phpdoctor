@@ -42,9 +42,11 @@ class seeTag extends tag {
 		if (preg_match('/^<a href="(.+)">(.+)<\/a>$/', $text, $matches)) {
 			$this->_link = $matches[1];
 			$text = $matches[2];
-		} elseif (preg_match('/^([^ ]+)[ \t](.*)$/', $text, $matches)) {
+		} elseif (preg_match('/^([^ ]+)([ \t](.*))?$/', $text, $matches)) {
 			$this->_link = $matches[1];
-			$text = $matches[2];
+			if (isset($matches[3])) {
+				$text = $matches[3];
+			}
 		} else {
 			$this->_link = NULL;
 		}
@@ -64,7 +66,7 @@ class seeTag extends tag {
 	 * @return str
 	 */
 	function text() {
-		if ($this->_text && $this->_text != '') {
+		if ($this->_text && $this->_text != "\n") {
 			$link = $this->_text;
 		} else {
 			$link = $this->_link;
@@ -90,8 +92,10 @@ class seeTag extends tag {
 			$packageName = $matches[2];
 			$className = $matches[4];
 			$elementName = $matches[5];
+			//var_dump($packageName, $className, $elementName);
 			if ($packageName) { // get package
 				$package =& $this->_root->packageNamed($packageName);
+				//var_dump($package->name());
 			}
 			if ($className) { // get class
 				if (isset($package)) {
@@ -105,6 +109,7 @@ class seeTag extends tag {
 					}
 				}
 				$class =& $classes[$key];
+				//var_dump($class->name());
 			}
 			if ($elementName) { // get element
 				if (isset($class)) { // from class
@@ -236,6 +241,7 @@ class seeTag extends tag {
 						}
 					}
 				}
+				//var_dump($element->name());
 			}
 			return $element;
 		} else {

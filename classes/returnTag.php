@@ -81,6 +81,12 @@ class returnTag extends tag {
 		return FALSE;
 	}
 
+	/** Return true if this Taglet should be outputted even if it has no text content. */
+	function displayEmpty() {
+		return FALSE;
+	}
+
+
 }
 
 ?>

@@ -49,19 +49,17 @@ class rootDoc extends doc {
 		// set a reference to application object
 		$this->_phpdoctor =& $phpdoctor;
 		
-		// get options array
-		$options = $phpdoctor->options();
-	
+		$overview = $phpdoctor->getOption('overview');
 		// parse overview file
-		if (isset($options['overview'])) {
-			if (is_file($options['overview'])) {
-				$phpdoctor->message('Reading overview file "'.$options['overview'].'".');
-				if ($html = $this->getHTMLContents($options['overview'])) {
+		if (isset($overview)) {
+			if (is_file($overview)) {
+				$phpdoctor->message('Reading overview file "'.$overview.'".');
+				if ($html = $this->getHTMLContents($overview)) {
 					$this->_data = $phpdoctor->processDocComment('/** '.$html.' */', $this);
 					$this->mergeData();
 				}
 			} else {
-				$phpdoctor->warning('Could not find overview file "'.$options['overview'].'".');
+				$phpdoctor->warning('Could not find overview file "'.$overview.'".');
 			}
 		}
 	

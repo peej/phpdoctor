@@ -122,13 +122,16 @@ class doc {
 	 * item are returned.
 	 *
 	 * @param str tagName Name of the tag kind to search for
-	 * @return tag[] An array of Tag containing all tags of name 'tagname'
+	 * @return tag[] An array of Tag containing all tags of name 'tagname' or a
+	 * singular tag object if only one exists for the given 'tagname'
 	 */
 	function &tags($tagName = NULL) {
-		if (isset($this->_tags[$tagName])) {
+		if ($tagName == NULL) {
+			return $this->_tags;
+		} elseif (isset($this->_tags[$tagName])) {
 			return $this->_tags[$tagName];
 		}
-		return $this->_tags;
+		return NULL;
 	}
 	
 	/** Return the full unprocessed text of the comment.
@@ -248,7 +251,7 @@ class doc {
 								($thisClass == 'methoddoc' && $this->_data['tags'][$name][$key]->inMethod()) ||
 								($thisClass == 'fielddoc' && $this->_data['tags'][$name][$key]->inField())
 							) {
-								$this->_tags[$name][$key] =& $this->_data['tags'][$name][$key];	
+								$this->_tags[$name][$key] =& $this->_data['tags'][$name][$key];
 								$this->_tags[$name][$key]->setParent($this);
 							}
 						}

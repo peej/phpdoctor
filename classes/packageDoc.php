@@ -54,11 +54,11 @@ class packageDoc extends doc {
 		$this->_root =& $root;
 		
 		$phpdoctor =& $root->phpdoctor();
-		$options =& $phpdoctor->options();
 		
 		// parse overview file
-		if (isset($options['packageCommentDir'])) {
-			$overviewFile = $options['packageCommentDir'].$this->_name.'html';
+		$packageCommentDir = $phpdoctor->getOption('packageCommentDir');
+		if (isset($packageCommentDir) && is_file($packageCommentDir.$this->_name.'.html')) {
+			$overviewFile = $packageCommentDir.$this->_name.'.html';
 		} else {
 			$pos = strrpos(str_replace('\\', '/', $phpdoctor->_currentFilename), '/');
 			if ($pos !== FALSE) {

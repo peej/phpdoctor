@@ -60,7 +60,7 @@ class classWriter extends htmlWriter {
 					
 					echo "<hr />\n\n";
 					
-					echo '<h3>', $class->name(), "</h3>\n\n";
+					echo '<h3>', $class->qualifiedName(), "</h3>\n\n";
 					
 					echo '<h1>Class ', $class->name(), "</h1>\n\n";
 
@@ -130,7 +130,7 @@ class classWriter extends htmlWriter {
 					}
 					
 					if ($class->superclass()) {
-						$this->inheritFields($rootDoc->classNamed($class->superclass()));
+						$this->inheritFields($rootDoc->classNamed($class->superclass()), $rootDoc, $package);
 					}
 
 					if ($constructors) {
@@ -162,12 +162,16 @@ class classWriter extends htmlWriter {
 							echo '<td class="description">';
 							echo '<p class="name"><a href="#', $method->name(), '">', $method->name(), '</a>', $method->flatSignature(), '</p>';
 							if ($textTag) {
-								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+								//echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
 							}
 							echo "</td>\n";
 							echo "</tr>\n";
 						}
 						echo "</table>\n\n";
+					}
+					
+					if ($class->superclass()) {
+						$this->inheritMethods($rootDoc->classNamed($class->superclass()), $rootDoc, $package);
 					}
 					
 					if ($fields) {
@@ -288,10 +292,60 @@ class classWriter extends htmlWriter {
 		return array($output, $depth);
 	}
 	
-	function inheritFields($element) {
-		echo '<table class="inherit">', "\n";
-		echo '<tr><th colspan="2" class="inherit">Fields inherited from ', $element->qualifiedName(),'</th></tr>', "\n";
-		echo "</table>\n\n";
+	/** Display the inherited fields of an element. This method calls itself
+	 * recursively if the element has a parent class.
+	 *
+	 * @param programElementDoc element
+	 * @param rootDoc rootDoc
+	 * @param packageDoc package
+	 */
+	function inheritFields(&$element, &$rootDoc, &$package) {
+		$fields =& $element->fields();
+		if ($fields) {
+			$num = count($fields); $foo = 0;
+			echo '<table class="inherit">', "\n";
+			echo '<tr><th colspan="2" class="inherit">Fields inherited from ', $element->qualifiedName(), "</th></tr>\n";
+			echo '<tr><td>';
+			foreach($fields as $field) {
+				echo '<a href="', str_repeat('../', $package->depth() + 1), $field->asPath(), '">', $field->name(), '</a>';
+				if (++$foo < $num) {
+					echo ', ';
+				}
+			}
+			echo '</td></tr>';
+			echo "</table>\n\n";
+			if ($element->superclass()) {
+				$this->inheritFields($rootDoc->classNamed($element->superclass()), $rootDoc, $package);
+			}
+		}
+	}
+	
+	/** Display the inherited methods of an element. This method calls itself
+	 * recursively if the element has a parent class.
+	 *
+	 * @param programElementDoc element
+	 * @param rootDoc rootDoc
+	 * @param packageDoc package
+	 */
+	function inheritMethods(&$element, &$rootDoc, &$package) {
+		$methods =& $element->methods();
+		if ($methods) {
+			$num = count($methods); $foo = 0;
+			echo '<table class="inherit">', "\n";
+			echo '<tr><th colspan="2" class="inherit">Methods inherited from ', $element->qualifiedName(), "</th></tr>\n";
+			echo '<tr><td>';
+			foreach($methods as $method) {
+				echo '<a href="', str_repeat('../', $package->depth() + 1), $method->asPath(), '">', $method->name(), '</a>';
+				if (++$foo < $num) {
+					echo ', ';
+				}
+			}
+			echo '</td></tr>';
+			echo "</table>\n\n";
+			if ($element->superclass()) {
+				$this->inheritMethods($rootDoc->classNamed($element->superclass()), $rootDoc, $package);
+			}
+		}
 	}
 
 }
