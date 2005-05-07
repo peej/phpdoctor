@@ -18,6 +18,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+// $Id: phpDoctor.php,v 1.8 2005/05/07 13:35:11 peejeh Exp $
+
 // define undefined internal constants so we don't throw undefined constant errors later on
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
 if (!defined('T_ML_COMMENT')) define('T_ML_COMMENT', 0);
@@ -51,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $id$
+ * @version $Revision: 1.8 $
  */
 class phpDoctor {
 

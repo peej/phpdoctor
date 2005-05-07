@@ -18,12 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+// $Id: programElementDoc.php,v 1.5 2005/05/07 13:35:11 peejeh Exp $
+
 /** Represents a PHP program element: global, function, class, interface,
  * field, constructor, or method. This is an abstract class dealing with
  * information common to these elements.
  *
  * @package PHPDoctor
- * @version $id$
+ * @version $Revision: 1.5 $
  * @abstract
  */
 class programElementDoc extends doc {

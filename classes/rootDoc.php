@@ -18,13 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+// $Id: rootDoc.php,v 1.7 2005/05/07 13:35:11 peejeh Exp $
+
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
  * of the parsed tokens and is passed to the doclet to be formatted into
  * output.
  *
  * @package PHPDoctor
- * @version $id$
+ * @version $Revision: 1.7 $
  */
 class rootDoc extends doc {
 

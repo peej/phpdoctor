@@ -18,13 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+// $Id: tag.php,v 1.6 2005/05/07 13:35:11 peejeh Exp $
+
 /** Represents a documentation tag, e.g. @since, @author, @version. Given a tag
  * (e.g. "@since 1.2"), holds tag name (e.g. "@since") and tag text (e.g.
  * "1.2"). Tags with structure or which require special processing are handled
  * by subclasses.
  *
  * @package PHPDoctor.Tags
- * @version $id$
+ * @version $Revision: 1.6 $
  */
 class tag {
 

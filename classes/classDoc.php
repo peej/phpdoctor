@@ -18,6 +18,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+// $Id: classDoc.php,v 1.5 2005/05/07 13:35:10 peejeh Exp $
+
 /** Represents a PHP class and provides access to information about the class,
  * the class' comment and tags, and the members of the class. A classDoc only
  * exists if it was processed in this run of PHPDoctor. References to classes
@@ -25,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * type (which can be converted to classDoc, if possible).
  *
  * @package PHPDoctor
- * @version $id$
+ * @version $Revision: 1.5 $
  */
 class classDoc extends programElementDoc {
 
