@@ -1,0 +1,215 @@
+NAME
+	PHPDoctor: The PHP Documentation Creator
+	Peej's Quick & Dirty PHPDoc Clone
+
+VERSION
+	2
+
+DESCRIPTION
+	PHPDoctor is a Javadoc style comment parser for PHP, written with an
+	emphasis on speed and simplicity. It is designed to be as close a
+	clone to Javadoc as possible.
+	
+REQUIREMENTS
+	PHP 4.3.0+ is required due to use of the PHP tokenizer extension. The
+	tokenizer is built into PHP 4.3.0 by default, this program may work
+	with older versions of PHP with the tokenizer extension enabled but it
+	has not been tested and you are recommended to upgrade to 4.3.0+ for
+	using this program.
+
+Q&A
+	Q: WHY DO WE NEED ANOTHER PHPDOC CLONE?
+	A: I wrote PHPDoctor because I couldn't find a Javadoc clone for PHP
+	that was small and simple and worked out of the box or that worked
+	at all. The PHP tokenizer extension has made creating PHPDoc programs
+	really easy since PHP can now do the hard work for you.
+	
+	Q: WHY IS PHPDOCTOR DIFFERENT FROM OTHER PHPDOC PROGRAMS?
+	A: PHPDoctor is very small and easy to use, sticking as closely as
+	possible to the way Javadoc works, including using the same program
+	structure and doclet approach to templating. PHPDoctor has a very small
+	learning curve, most people should be able to generate API
+	documentation in only a few minutes.
+	
+	Q: TELL ME MORE ABOUT HOW PHPDOCTOR WORKS
+	A: PHPDoctor uses the PHP tokenizer extension, this means that it lets
+	PHP do the parsing of your source code. PHPDoctor just takes the tokens
+	PHP parses out and turns them into API documentation. This means it will
+	work for any valid PHP code, no exceptions, it also makes it very fast.
+	The down side of this is that it needs PHP 4.3 or above to work.
+
+FEATURES
+	* Fast running speed, uses PHP 4.3 tokenizer function to take advantage
+	of PHPs internal parsing functionality.
+	* Parsing of any valid PHP file, with multiple classes and functions in
+	the same file.
+	* Simple output template layer, allowing easy changing of the output
+	format by copying and editing of a few simple PHP template files.
+	* Simple to install and use, instant results.
+	* Will generates API documentation bare bones without Javadoc comments
+	present.
+	* Works with both OO and procedural code, also documents global
+	variables and constants.
+	* Supports PHP5 enhanced syntax, including interfaces (requires PHP5
+	to work).
+	* Minimal changes to Sun's Javadoc specification.
+	* Javadoc extensions compatible with other PHPDoc programs.
+	* Did I say it was fast?
+
+INSTALLATION
+	Unzip the archive somewhere, edit the default config file and then run
+	phpdoc.php with your CLI version of PHP.
+
+FILES
+	phpdoc.php - PHPDoctor commandline script
+	default.ini - Default ini file
+	README - This file
+	readme.html - HTML version of this file
+	classes/*.php - Classes used by PHPDoctor
+	doclets/debug/*.php - Debugging doclet
+	doclets/standard/*.php - Standard HTML doclet
+
+USAGE
+	phpdoc.php <config_file>
+	
+	If you are using MS Windows and don't have the .php file type registered
+	with the PHP CLI executable, you will need to call the PHP executable
+	explicitly as in:
+
+	c:\php\cli\php.exe phpdoc.php <config_file>
+	
+	To create a config file for your project, copy the default.ini file and
+	edit it to your needs, it's fully commented.
+	
+CONFIGURATION
+	PHPDoctor supports a number of configuration directives:
+
+	* files - Names of files to parse. This can be a single filename, or a
+		comma separated list of filenames. Wildcards are allowed.
+	* source_path - The directory to look for files in, if not used the
+		PHPDoctor will look in the current directory (the directory it
+		is run from).
+	* subdirs - If you do not want PHPDoctor to look in each sub directory
+		for files uncomment this line.
+	* quiet - Quiet mode suppresses	all output other than warnings and
+		errors.
+	* verbose - Verbose mode outputs additional messages during execution.
+	* doclet - Select the doclet to use for generating output.
+	* doclet_path - The directory to find the doclet in. Doclets are
+		expected to be in a directory named after themselves at the
+		location given.
+	* taglet_path - The directory to find taglets in. Taglets allow you to
+		make PHPDoctor handle new tags and to alter the behavour of
+		existing tags and their output.
+	* default_package - If the code you are parsing does not use package
+		tags or not all elements have package tags, use this setting to
+		place unbound elements into a particular package.
+	* overview - Specifies the name of a HTML file containing text for the
+		overview documentation to be placed on the overview page. The
+		path is relative to "source_path" unless an absolute path is
+		given.
+	* package_comment_dir - Package comments will be looked for in a file
+		named package.html in the same directory as the first source
+		file parsed in that package or in the directory given below. If
+		the directive below is used then package comments should be
+		named "<packageName>.html".
+	* globals - Parse out global variables.
+	* constants - Parse out global constants.
+	* private - Generate documentation for all class members.
+	* protected - Generate documentation for public and protected class
+		members.
+	* public - Generate documentation for only public class members.
+
+	The following directives are specific for the standard doclet:
+
+	* d - The directory to place generated documentation in. If the given
+		path is relative to it will be relative to "source_path".
+	* windowtitle - Specifies the title to be placed in the HTML <title>
+		tag.
+	* doctitle - Specifies the title to be placed near the top of the
+		overview summary file.
+	* header - Specifies the header text to be placed at the top of each
+		output file. The header will be placed to the right of the
+		upper navigation bar.
+	* footer - Specifies the footer text to be placed at the bottom of each
+		output file. The footer will be placed to the right of the
+		lower navigation bar.
+	* bottom - Specifies the text to be placed at the bottom of each output
+		file. The text will be placed at the bottom of the page, below
+		the lower navigation bar.
+	* tree - Create a class tree
+
+DOC COMMENTS
+	A full description of the format of doc comments can be found on the
+	Sun Javadoc web site (http://java.sun.com/j2se/javadoc/). Doc comments
+	look like this:
+	
+	/**
+	 * This is the typical format of a simple documentation comment
+	 * that spans two lines.
+	 */
+
+TAGS
+	PHPDoctor supports the following tags:
+	
+	@abstract
+	@access access-type
+	@author name-text
+	@deprecated deprecated-text
+	@final
+	{@link package.class#member label}
+	{@linkplain package.class#member label}
+	@package package-name
+	@param parameter-type parameter-name description
+	@return return-type description
+	@see packahge.class#member
+	@since since-text
+	@static
+	@var var-type
+	@version version-text
+	
+	Some Javadoc tags are not relevant to PHP and so are ignored, others
+	are added or slightly changed due to PHPs loose typing:
+	
+	@abstract is a new tag defining a class or method as abstract.
+	@access is a new tag and is valid within field and method doc comments.
+		The first word after the tag should denote the access type of
+		the field or method.
+	@final is a new tag defining a class or method as final.
+	@package is a new tag that places an item into a specific package and
+		is valid within any doc comment of a top level item.
+	@param has a parameter-type value added as the first word after the
+		tag. This value should denote the data type of the parameter.
+	@return has a return-type value added as the first word after the tag.
+		This value should denote the methods or functions return data
+		type.
+	@static is a new tag defining a class, method or member variable as
+		static.
+	
+	PHPDoc 1.1+ also supports the new tags @abstract, @static and @final
+	which correspond to the equivalent PHP5 keywords and can be used if
+	required.
+	
+COPYRIGHT AND LICENSE
+	The information below applies to everything in this distribution, except
+	where noted.
+
+	Copyright 2004 by Paul James.
+
+		paul@peej.co.uk
+		http://www.peej.co.uk/
+
+	This program is free software; you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by the Free
+	Software Foundation; either version 2 of the License, or (at your
+	option) any later version.
+
+	This program is distributed in the hope that it will be useful, but
+	WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+	or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+	for more details.
+
+	You should have received a copy of the GNU General Public License along
+	with this program (COPYING); if not, go to http://www.fsf.org/ or write
+	to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+	MA 02111-1307, USA.

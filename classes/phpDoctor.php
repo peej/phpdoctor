@@ -59,7 +59,7 @@ class phpDoctor {
 	 *
 	 * @var str
 	 */
-	var $_version = '2a';
+	var $_version = '2';
 
 	/** The path PHPDoctor is running from.
 	 *

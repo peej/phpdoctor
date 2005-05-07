@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+
+<title>Package "PHPDoctor.Doclets.Debug" Overview</title>
+
+</head>
+
+<body>
+
+<p>This doclet outputs all the parsed data in a format suitable for debugging
+PHPDoctor.</p>
+
+<p>It consists of a single class that traverses the parsed tokens and
+generates a tree output of all program elements to standard output.</p>
+
+<p>Example output:</p>
+
+<pre>
+Root
+|- PHPDoctor
+||- mixed $argv
+||- mixed $_ENV
+||- mixed $phpdoc
+||- mixed $rootDoc
+||- final mixed T_DOC_COMMENT
+||- final mixed T_ML_COMMENT
+||- final mixed T_PRIVATE
+||- final mixed T_PROTECTED
+||- final mixed T_PUBLIC
+||- final mixed T_ABSTRACT
+||- final mixed T_FINAL
+||- final mixed T_INTERFACE
+||- final mixed T_IMPLEMENTS
+||- final mixed T_CONST
+||- final mixed T_THROW
+||- final mixed GLOB_ONLYDIR = FALSE
+||- final mixed STDERR = fopen("php://stderr", "wb")
+||- public class classDoc extends programElementDoc
+|||- private str $_superclass = NULL
+|||- private bool $_interface = FALSE
+|||- private constructorDoc[] $_constructor = array()
+|||- private fieldDoc[] $_fields = array()
+|||- private methodDoc[] $_methods = array()
+|||- private classDoc[] $_interfaces = array()
+|||- private bool $_abstract = FALSE
+|||- public classDoc(str name, <a href="../PHPDoctor/rootDoc.html">rootDoc</a> root)
+||||- str $name
+||||- rootDoc $root
+|||- public void addField(<a href="../PHPDoctor/fieldDoc.html">fieldDoc</a> field)
+||||- fieldDoc $field
+|||- public void addConstructor(<a href="../PHPDoctor/methodDoc.html">methodDoc</a> constructor)
+||||- methodDoc $constructor
+|||- public void addMethod(<a href="../PHPDoctor/methodDoc.html">methodDoc</a> method)
+||||- methodDoc $method
+|||- public constructorDoc constructor()
+|||- public fieldDoc[] fields()
+|||- public methodDoc[] methods()
+|||- public classDoc[] interfaces()
+|||- public bool isAbstract()
+|||- public bool isInterface()
+|||- public bool subclassOf(<a href="../PHPDoctor/classDoc.html">classDoc</a> cd)
+||||- classDoc $cd
+|||- public classDoc superclass()
+|||- public bool isClass()
+|||- public bool isOrdinaryClass()
+|||- public bool isException()
+||- public class constructorDoc extends executableDoc
+|||- public str qualifiedName()
+||- public abstract class doc
+|||- private str $_name = NULL
+|||- private mixed[] $_data = NULL
+|||- private str $_docComment = ''
+|||- private tag[] $_tags = array()
+|||- public int $inBody
+|||- private rootDoc $_root = NULL
+|||- public bool set(str member, mixed value)
+||||- str $member
+||||- mixed $value
+|||- public bool setByRef(str member, mixed value)
+||||- str $member
+||||- mixed $value
+|||- public str name()
+|||- public tag[] tags(str tagName)
+||||- str $tagName = NULL
+|||- public str getRawCommentText()
+|||- public bool isClass()
+|||- public bool isConstructor()
+|||- public bool isException()
+|||- public bool isGlobal()
+|||- public bool isField()
+|||- public bool isFunction()
+|||- public bool isInterface()
+|||- public bool isMethod()
+|||- public bool isOrdinaryClass()
+|||- public void mergeData()
+|||- public str getHTMLContents(str filename)
+||||- str $filename
+||- public abstract class executableDoc extends programElementDoc
+|||- private fieldDoc[] $_parameters = array()
+|||- private methodDoc[] $_functions = array()
+|||- private classDoc[] $_throws = array()
+|||- public void addMethod(<a href="../PHPDoctor/methodDoc.html">methodDoc</a> function)
+||||- methodDoc $function
+|||- public fieldDoc[] parameters()
+|||- public methodDoc[] functions()
+|||- public classDoc[] thrownExceptions()
+|||- public tag[] paramTags()
+|||- public type throwsTags()
+|||- public str signature()
+|||- public str flatSignature()
+||- public class fieldDoc extends programElementDoc
+|||- private type $_type = NULL
+|||- private mixed $_value = NULL
+|||- public fieldDoc(str name, classDoc|methodDoc parent, <a href="../PHPDoctor/rootDoc.html">rootDoc</a> root)
+||||- str $name
+||||- classDoc|methodDoc $parent
+||||- rootDoc $root
+|||- public type type()
+|||- public mixed value()
+|||- public str typeAsString()
+|||- public mixed constantValue()
+||- public class methodDoc extends executableDoc
+|||- private type $_returnType
+|||- private bool $_abstract = FALSE
+|||- public methodDoc(str name, classDoc|methodDoc parent, <a href="../PHPDoctor/rootDoc.html">rootDoc</a> root)
+||||- str $name
+||||- classDoc|methodDoc $parent
+||||- rootDoc $root
+|||- public void addParameter(<a href="../PHPDoctor/fieldDoc.html">fieldDoc</a> parameter)
+||||- fieldDoc $parameter
+|||- public type returnType()
+|||- public str returnTypeAsString()
+|||- public bool isAbstract()
+||- public class packageDoc extends doc
+|||- private rootDoc $_root = NULL
+|||- private classDoc[] $_classes = array()
+|||- private fieldDoc[] $_globals = array()
+|||- private methodDoc[] $_functions = array()
+|||- public packageDoc(str name, <a href="../PHPDoctor/rootDoc.html">rootDoc</a> root)
+||||- str $name
+||||- rootDoc $root
+|||- public str asPath()
+|||- public int depth()
+|||- public void addClass(<a href="../PHPDoctor/classDoc.html">classDoc</a> class)
+||||- classDoc $class
+|||- public void addGlobal(<a href="../PHPDoctor/fieldDoc.html">fieldDoc</a> global)
+||||- fieldDoc $global
+|||- public void addFunction(<a href="../PHPDoctor/methodDoc.html">methodDoc</a> function)
+||||- methodDoc $function
+|||- public classDoc[] allClasses()
+|||- public classDoc[] exceptions()
+|||- public classDoc[] interfaces()
+|||- public classDoc[] ordinaryClasses()
+|||- public fieldDoc[] globals()
+|||- public methodDoc[] functions()
+|||- public classDoc findClass(str className)
+||||- str $className
+||- public class phpDoctor
+|||- private str $_version = '2a'
+|||- private str $_path = '.'
+|||- private int $_startTime = NULL
+|||- private str[] $_options = array()
+|||- private bool $_verbose = FALSE
+|||- private bool $_quiet = FALSE
+|||- private str[] $_files = array()
+|||- private str $_sourcePath = './'
+|||- private bool $_subdirs = TRUE
+|||- private str $_defaultPackage = 'The Unknown Package'
+|||- private str $_overview = NULL
+|||- private str $_packageCommentDir = NULL
+|||- private bool $_public = TRUE
+|||- private bool $_protected = FALSE
+|||- private bool $_private = FALSE
+|||- private str $_doclet = 'standard'
+|||- private str $_docletPath = 'doclets'
+|||- private str $_tagletPath = 'taglets'
+|||- private str $_currentFilename = NULL
+|||- public phpDoctor(str config)
+||||- str $config = 'default.ini'
+|||- private void _buildFileList(array files, mixed dir)
+||||- array $files
+||||- mixed $dir
+|||- public void message(str msg)
+||||- str $msg
+|||- public void verbose(str msg)
+||||- str $msg
+|||- public void warning(str msg)
+||||- str $msg
+|||- public void error(str msg)
+||||- str $msg
+|||- private int _getTime()
+|||- public str makeAbsolutePath(str path, str prefix)
+||||- str $path
+||||- str $prefix
+|||- public str fixPath(str path)
+||||- str $path
+|||- public str docletPath()
+|||- public str sourcePath()
+|||- public str version()
+|||- public str defaultPackage()
+|||- public str[] options()
+|||- public rootDoc parse()
+|||- public bool execute(<a href="../PHPDoctor/rootDoc.html">rootDoc</a> rootDoc)
+||||- rootDoc $rootDoc
+|||- private array _mergeArrays(array one, array two)
+||||- array $one
+||||- array $two
+|||- private str _getNext(array tokens, int key, int whatToGet)
+||||- array $tokens
+||||- int $key
+||||- int $whatToGet
+|||- private str _getPrev(array tokens, int key, int whatToGet)
+||||- array $tokens
+||||- int $key
+||||- int $whatToGet
+|||- public mixed[] processDocComment(str comment)
+||||- str $comment
+|||- private tag _createTag(str name, str text, str data)
+||||- str $name
+||||- str $text
+||||- str[] $data
+||- public abstract class programElementDoc extends doc
+|||- private mixed $_parent = NULL
+|||- private str $_package = NULL
+|||- private bool $_final = FALSE
+|||- private str $_access = 'public'
+|||- private bool $_static = FALSE
+|||- public void makePublic()
+|||- public void makeProtected()
+|||- public void makePrivate()
+|||- public classDoc containingClass()
+|||- public packageDoc containingPackage()
+|||- public str qualifiedName()
+|||- public str modifiers(mixed showPublic)
+||||- mixed $showPublic = TRUE
+|||- public bool isPublic()
+|||- public bool isProtected()
+|||- public bool isPrivate()
+|||- public bool isFinal()
+|||- public bool isStatic()
+||- public class rootDoc extends doc
+|||- private phpdoctor $_phpdoctor = NULL
+|||- private packageDoc[] $_packages = array()
+|||- public rootDoc(phpdoctor phpdoctor)
+||||- phpdoctor $phpdoctor
+|||- public void addPackage(<a href="../PHPDoctor/packageDoc.html">packageDoc</a> package)
+||||- packageDoc $package
+|||- public str[] phpdoctor()
+|||- public str[] options()
+|||- public packageDoc[] packages()
+|||- public classDoc[] classes()
+|||- public methodDoc[] functions()
+|||- public fieldDoc[] globals()
+|||- public packageDoc packageNamed(str name)
+||||- str $name
+|||- public classDoc classNamed(str name)
+||||- str $name
+||- public class type
+|||- private str $_name = NULL
+|||- private int $_dimension
+|||- private rootDoc $_root = NULL
+|||- public type(mixed name, mixed root)
+||||- mixed $name
+||||- mixed $root
+|||- public str typeName()
+|||- public str dimension()
+|||- public str qualifiedTypeName()
+|||- public str toString()
+|||- public classDoc asClassDoc()
+|- PHPDoctor.Tags
+||- public class paramTag extends tag
+|||- private str $_var = NULL
+|||- public paramTag(str text, str data)
+||||- str $text
+||||- str[] $data
+|||- public str displayName()
+|||- public void inConstructor()
+|||- public void inField()
+|||- public void inMethod()
+|||- public void inOverview()
+|||- public void inPackage()
+|||- public void inType()
+|||- public void isInlineTag()
+||- public class returnTag extends tag
+|||- public returnTag(str text, str data)
+||||- str $text
+||||- str[] $data
+|||- public str displayName()
+|||- public void inConstructor()
+|||- public void inField()
+|||- public void inMethod()
+|||- public void inOverview()
+|||- public void inPackage()
+|||- public void inType()
+|||- public void isInlineTag()
+||- public class seeTag extends tag
+|||- private str $_link = NULL
+|||- public seeTag(mixed text)
+||||- mixed $text
+|||- public str displayName()
+|||- public void inConstructor()
+|||- public void inField()
+|||- public void inMethod()
+|||- public void inOverview()
+|||- public void inPackage()
+|||- public void inType()
+|||- public void isInlineTag()
+||- public class tag
+|||- private str $_name = NULL
+|||- private str $_text = NULL
+|||- public tag(mixed name, mixed text)
+||||- mixed $name
+||||- mixed $text
+|||- public str name()
+|||- public str displayName()
+|||- public str text()
+|||- public void inConstructor()
+|||- public void inField()
+|||- public void inMethod()
+|||- public void inOverview()
+|||- public void inPackage()
+|||- public void inType()
+|||- public void isInlineTag()
+||- public class throwsTag extends tag
+|||- private str $_class = NULL
+|||- public throwsTag(mixed text, mixed data)
+||||- mixed $text
+||||- mixed $data
+|||- public void inConstructor()
+|||- public void inField()
+|||- public void inMethod()
+|||- public void inOverview()
+|||- public void inPackage()
+|||- public void inType()
+|||- public void isInlineTag()
+|- PHPDoctor.Doclets.Debug
+||- public class debug
+|||- public int $depth = 1
+|||- public debug(<a href="../../../PHPDoctor/rootDoc.html">rootDoc</a> rootDoc)
+||||- rootDoc $rootDoc
+|||- public void fieldDoc(<a href="../../../PHPDoctor/fieldDoc.html">fieldDoc</a> fields, mixed showAccess)
+||||- fieldDoc[] $fields
+||||- mixed $showAccess = FALSE
+|||- public void methodDoc(<a href="../../../PHPDoctor/methodDoc.html">methodDoc</a> methods)
+||||- methodDoc[] $methods
+|||- public void constructorDoc(<a href="../../../PHPDoctor/constructorDoc.html">constructorDoc</a> constructors)
+||||- constructorDoc[] $constructors
+|||- public void classDoc(<a href="../../../PHPDoctor/classDoc.html">classDoc</a> classes)
+||||- classDoc[] $classes
+|- PHPDoctor.Doclets.Standard
+||- public class classWriter extends htmlWriter
+|||- public classWriter(doclet doclet)
+||||- doclet $doclet
+|||- private mixed[] _buildTree(<a href="../../../PHPDoctor/rootDoc.html">rootDoc</a> rootDoc, <a href="../../../PHPDoctor/classDoc.html">classDoc</a> class, int depth)
+||||- rootDoc $rootDoc
+||||- classDoc $class
+||||- int $depth = NULL
+||- public class frameOutputWriter extends htmlWriter
+|||- public frameOutputWriter(doclet doclet)
+||||- doclet $doclet
+||- public class functionWriter extends htmlWriter
+|||- public functionWriter(doclet doclet)
+||||- doclet $doclet
+||- public class globalWriter extends htmlWriter
+|||- public globalWriter(doclet doclet)
+||||- doclet $doclet
+||- public class htmlWriter
+|||- private doclet $_doclet
+|||- private str[][] $_sections = NULL
+|||- private int $_depth
+|||- private str $_id = 'overview'
+|||- private str $_output = ''
+|||- public htmlWriter(mixed doclet)
+||||- mixed $doclet
+|||- private str _htmlHeader(mixed title)
+||||- mixed $title
+|||- private str _htmlFooter()
+|||- private str _shellHeader(mixed path)
+||||- mixed $path
+|||- private str _shellFooter(mixed path)
+||||- mixed $path
+|||- private str _nav(mixed path)
+||||- mixed $path
+|||- private void _write(str path, str title, bool shell)
+||||- str $path
+||||- str $title
+||||- bool $shell
+|||- private str[] _splitComment(str comment)
+||||- str $comment
+|||- private str _processTags(<a href="../../../PHPDoctor/Tags/tag.html">tag</a> tags)
+||||- tag[] $tags
+||- public class packageFrameWriter extends htmlWriter
+|||- public packageFrameWriter(doclet doclet)
+||||- doclet $doclet
+|||- private str _buildFrame(mixed package)
+||||- mixed $package
+|||- private str _allItems(mixed rootDoc)
+||||- mixed $rootDoc
+||- public class packageIndexFrameWriter extends htmlWriter
+|||- public packageIndexFrameWriter(doclet doclet)
+||||- doclet $doclet
+||- public class packageIndexWriter extends htmlWriter
+|||- public packageIndexWriter(doclet doclet)
+||||- doclet $doclet
+||- public class packageWriter extends htmlWriter
+|||- public packageWriter(doclet doclet)
+||||- doclet $doclet
+||- public class standard
+|||- private rootDoc $_rootDoc
+|||- private str $_d
+|||- private str $_windowTitle = 'The Unknown Project'
+|||- private str $_docTitle = 'The Unknown Project'
+|||- private str $_header = 'Unknown'
+|||- private str $_footer = 'Unknown'
+|||- private str $_bottom = 'This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a>'
+|||- private str $_tree = TRUE
+|||- public standard(<a href="../../../PHPDoctor/rootDoc.html">rootDoc</a> rootDoc)
+||||- rootDoc $rootDoc
+|||- public rootDoc rootDoc()
+|||- public phpdoctor phpdoctor()
+|||- public str destinationPath()
+|||- public str windowTitle()
+|||- public str docTitle()
+|||- public str getHeader()
+|||- public str getFooter()
+|||- public str bottom()
+|||- public bool tree()
+|||- public str version()
+Done
+</pre>
+
+</body>
+</html>
