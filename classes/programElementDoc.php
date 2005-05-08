@@ -18,17 +18,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: programElementDoc.php,v 1.5 2005/05/07 13:35:11 peejeh Exp $
+// $Id: programElementDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a PHP program element: global, function, class, interface,
  * field, constructor, or method. This is an abstract class dealing with
  * information common to these elements.
  *
  * @package PHPDoctor
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @abstract
  */
-class programElementDoc extends doc {
+class ProgramElementDoc extends Doc
+{
 
 	/** Reference to the elements parent.
 	 *
@@ -61,34 +62,39 @@ class programElementDoc extends doc {
 	var $_static = FALSE;
 
 	/** Set element to have public access */
-	function makePublic() {
+	function makePublic()
+    {
 		$this->_access = 'public';
 	}
 
 	/** Set element to have protected access */
-	function makeProtected() {
+	function makeProtected()
+    {
 		$this->_access = 'protected';
 	}
 
 	/** Set element to have private access */
-	function makePrivate() {
+	function makePrivate()
+    {
 		$this->_access = 'private';
 	}
 
 	/** Get the containing class of this program element. If the element is in
 	 * the global scope and does not have a parent class, this will return null.
 	 *
-	 * @return classDoc
+	 * @return ClassDoc
 	 */
-	function &containingClass() {
+	function &containingClass()
+    {
 		return $this->_parent;
 	}
 
 	/** Get the package that this program element is contained in.
 	 *
-	 * @return packageDoc
+	 * @return PackageDoc
 	 */
-	function &containingPackage() {
+	function &containingPackage()
+    {
 		return $this->_root->packageNamed($this->_package);
 	}
 	
@@ -96,7 +102,8 @@ class programElementDoc extends doc {
 	 *
 	 * @return str
 	 */
-	function packageName() {
+	function packageName()
+    {
 		return $this->_package;
 	}
 
@@ -108,7 +115,8 @@ for the method bar() in class Foo in the package Baz, return:
 	 *
 	 * @return str
 	 */
-	function qualifiedName() {
+	function qualifiedName()
+    {
 		$parent =& $this->containingClass();
 		if ($parent && $parent->name() != '' && $this->_package != $parent->name()) {
 			return $this->_package.'.'.$parent->name().'.'.$this->_name;
@@ -126,7 +134,8 @@ modifiers() would return:
 	 *
 	 * @return str
 	 */
-	function modifiers($showPublic = TRUE) {
+	function modifiers($showPublic = TRUE)
+    {
 		$modifiers = '';
 		if ($showPublic || $this->_access != 'public') {
 			$modifiers .= $this->_access.' ';
@@ -147,7 +156,8 @@ modifiers() would return:
 	 *
 	 * @return bool
 	 */	
-	function isPublic() {
+	function isPublic()
+    {
 		if ($this->_access == 'public') {
 			return TRUE;
 		} else {
@@ -159,7 +169,8 @@ modifiers() would return:
 	 *
 	 * @return bool
 	 */	
-	function isProtected() {
+	function isProtected()
+    {
 		if ($this->_access == 'protected') {
 			return TRUE;
 		} else {
@@ -171,7 +182,8 @@ modifiers() would return:
 	 *
 	 * @return bool
 	 */	
-	function isPrivate() {
+	function isPrivate()
+    {
 		if ($this->_access == 'private') {
 			return TRUE;
 		} else {
@@ -183,7 +195,8 @@ modifiers() would return:
 	 *
 	 * @return bool
 	 */	
-	function isFinal() {
+	function isFinal()
+    {
 		return $this->_final;
 	}
 
@@ -191,7 +204,8 @@ modifiers() would return:
 	 *
 	 * @return bool
 	 */	
-	function isStatic() {
+	function isStatic()
+    {
 		return $this->_static;
 	}
 
@@ -199,16 +213,17 @@ modifiers() would return:
 	 *
 	 * @return str
 	 */
-	function asPath() {
+	function asPath()
+    {
 		if ($this->isClass() || $this->isInterface() || $this->isException()) {
-			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html';
+			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html');
 		} elseif ($this->isConstructor() || $this->isMethod() || $this->isField()) {
 			$class =& $this->containingClass();
-			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#'.$this->_name;
+			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#'.$this->_name);
 		} elseif ($this->isGlobal()) {
-			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#'.$this->_name;
+			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#'.$this->_name);
 		} elseif ($this->isFunction()) {
-			return str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#'.$this->_name;
+			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#'.$this->_name);
 		}
 		return NULL;
 	}

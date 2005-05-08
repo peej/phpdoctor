@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: rootDoc.php,v 1.7 2005/05/07 13:35:11 peejeh Exp $
+// $Id: rootDoc.php,v 1.8 2005/05/08 21:53:30 peejeh Exp $
 
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
@@ -26,9 +26,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
-class rootDoc extends doc {
+class RootDoc extends Doc
+{
 
 	/** Reference to the PHPDoctor application object.
 	 *
@@ -44,9 +45,10 @@ class rootDoc extends doc {
 
 	/** Constructor
 	 *
-	 * @param phpdoctor phpdoctor Application object
+	 * @param PHPDoctor phpdoctor Application object
 	 */
-	function rootDoc(&$phpdoctor) {
+	function rootDoc(&$phpdoctor)
+    {
 	
 		// set a reference to application object
 		$this->_phpdoctor =& $phpdoctor;
@@ -69,17 +71,19 @@ class rootDoc extends doc {
 	
 	/** Add a package to this root.
 	 *
-	 * @param packageDoc package
+	 * @param PackageDoc package
 	 */
-	function addPackage(&$package) {
+	function addPackage(&$package)
+    {
 		$this->_packages[$package->name()] =& $package;
 	}
 
 	/** Return a reference to the PHPDoctor application object.
 	 *
-	 * @return str[] An array of strings.
+	 * @return PHPDoctor.
 	 */
-	function &phpdoctor() {
+	function &phpdoctor()
+    {
 		return $this->_phpdoctor;
 	}
 
@@ -87,23 +91,26 @@ class rootDoc extends doc {
 	 *
 	 * @return str[] An array of strings.
 	 */
-	function &options() {
+	function &options()
+    {
 		return $this->_phpdoctor->options();
 	}
 
 	/** Return a reference to the packages to be documented.
 	 *
-	 * @return packageDoc[]
+	 * @return PackageDoc[]
 	 */
-	function &packages() {
+	function &packages()
+    {
 		return $this->_packages;
 	}
 
 	/** Return a reference to the classes and interfaces to be documented.
 	 *
-	 * @return classDoc[]
+	 * @return ClassDoc[]
 	 */
-	function &classes() {
+	function &classes()
+    {
 		$classes = NULL;
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
@@ -120,9 +127,10 @@ class rootDoc extends doc {
 
 	/** Return a reference to the functions to be documented.
 	 *
-	 * @return methodDoc[]
+	 * @return MethodDoc[]
 	 */
-	function &functions() {
+	function &functions()
+    {
 		$functions = NULL;
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
@@ -139,9 +147,10 @@ class rootDoc extends doc {
 
 	/** Return a reference to the globals to be documented.
 	 *
-	 * @return fieldDoc[]
+	 * @return FieldDoc[]
 	 */
-	function &globals() {
+	function &globals()
+    {
 		$globals = NULL;
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
@@ -162,9 +171,10 @@ class rootDoc extends doc {
 	 *
 	 * @param str name Package name
 	 * @param bool create Create package if it does not exist
-	 * @return packageDoc
+	 * @return PackageDoc
 	 */
-	function &packageNamed($name, $create = FALSE) {
+	function &packageNamed($name, $create = FALSE)
+    {
 		if (isset($this->_packages[$name])) {
 			return $this->_packages[$name];
 		} elseif ($create) {
@@ -179,9 +189,10 @@ class rootDoc extends doc {
 	/** Return a reference to a classDoc for the specified class/interface name
 	 *
 	 * @param str name Class name
-	 * @return classDoc
+	 * @return ClassDoc
 	 */
-	function &classNamed($name) {
+	function &classNamed($name)
+    {
 		$packages = $this->_packages; // we do this copy so as not to upset the internal pointer of the array outside this scope
 		foreach($packages as $packageName => $package) {
 			$class =& $package->findClass($name);

@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpdoc.php,v 1.5 2005/05/07 13:35:11 peejeh Exp $
+// $Id: phpdoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
 
 // check we are running from the command line
 if (!isset($argv[0])) {

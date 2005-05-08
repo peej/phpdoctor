@@ -18,22 +18,24 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: globalWriter.php,v 1.5 2005/05/07 13:35:11 peejeh Exp $
+// $Id: globalWriter.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
 
 /** This generates the HTML API documentation for each global variable.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
-class globalWriter extends htmlWriter {
+class GlobalWriter extends HTMLWriter
+{
 
 	/** Build the function definitons.
 	 *
-	 * @param doclet doclet
+	 * @param Doclet doclet
 	 */
-	function globalWriter(&$doclet) {
+	function globalWriter(&$doclet)
+    {
 	
-		parent::htmlWriter($doclet);
+		parent::HTMLWriter($doclet);
 		
 		$this->_id = 'definition';
 
@@ -44,10 +46,10 @@ class globalWriter extends htmlWriter {
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Global', 'selected' => TRUE);
-			$this->_sections[3] = array('title' => 'Use');
+			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 		
 			$this->_depth = $package->depth() + 1;
 

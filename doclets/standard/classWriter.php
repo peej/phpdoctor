@@ -18,23 +18,25 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.8 2005/05/07 13:35:11 peejeh Exp $
+// $Id: classWriter.php,v 1.9 2005/05/08 21:53:30 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
-class classWriter extends htmlWriter {
+class ClassWriter extends HTMLWriter
+{
 
 	/** Build the class definitons.
 	 *
-	 * @param doclet doclet
+	 * @param Doclet doclet
 	 */
-	function classWriter(&$doclet) {
+	function classWriter(&$doclet)
+    {
 	
-		parent::htmlWriter($doclet);
+		parent::HTMLWriter($doclet);
 		
 		$this->_id = 'definition';
 
@@ -48,10 +50,10 @@ class classWriter extends htmlWriter {
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);
-			$this->_sections[3] = array('title' => 'Use');
+			//$this->_sections[3] = array('title' => 'Use');
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 		
 			$this->_depth = $package->depth() + 1;
 
@@ -134,7 +136,10 @@ class classWriter extends htmlWriter {
 					}
 					
 					if ($class->superclass()) {
-						$this->inheritFields($rootDoc->classNamed($class->superclass()), $rootDoc, $package);
+                        $superclass =& $rootDoc->classNamed($class->superclass());
+                        if ($superclass) {
+                            $this->inheritFields($superclass, $rootDoc, $package);
+                        }
 					}
 
 					if ($constructors) {
@@ -175,7 +180,10 @@ class classWriter extends htmlWriter {
 					}
 					
 					if ($class->superclass()) {
-						$this->inheritMethods($rootDoc->classNamed($class->superclass()), $rootDoc, $package);
+                        $superclass =& $rootDoc->classNamed($class->superclass());
+                        if ($superclass) {
+                            $this->inheritMethods($superclass, $rootDoc, $package);
+                        }
 					}
 
 					if ($fields) {
@@ -250,7 +258,7 @@ class classWriter extends htmlWriter {
 					$this->_output = ob_get_contents();
 					ob_end_clean();
 			
-					$this->_write($package->asPath().'/'.$class->name().'.html', $class->name(), TRUE);
+					$this->_write($package->asPath().'/'.strtolower($class->name()).'.html', $class->name(), TRUE);
 				}
 			}
 		}
@@ -259,12 +267,13 @@ class classWriter extends htmlWriter {
 
 	/** Build the class hierarchy tree which is placed at the top of the page.
 	 *
-	 * @param rootDoc rootDoc The root doc
-	 * @param classDoc class Class to generate tree for
+	 * @param RootDoc rootDoc The root doc
+	 * @param ClassDoc class Class to generate tree for
 	 * @param int depth Depth of recursion
 	 * @return mixed[]
 	 */
-	function _buildTree(&$rootDoc, &$class, $depth = NULL) {
+	function _buildTree(&$rootDoc, &$class, $depth = NULL)
+    {
 		if ($depth === NULL) {
 			$start = TRUE;
 			$depth = 0;
@@ -299,11 +308,12 @@ class classWriter extends htmlWriter {
 	/** Display the inherited fields of an element. This method calls itself
 	 * recursively if the element has a parent class.
 	 *
-	 * @param programElementDoc element
-	 * @param rootDoc rootDoc
-	 * @param packageDoc package
+	 * @param ProgramElementDoc element
+	 * @param RootDoc rootDoc
+	 * @param PackageDoc package
 	 */
-	function inheritFields(&$element, &$rootDoc, &$package) {
+	function inheritFields(&$element, &$rootDoc, &$package)
+    {
 		$fields =& $element->fields();
 		if ($fields) {
 			$num = count($fields); $foo = 0;
@@ -319,7 +329,10 @@ class classWriter extends htmlWriter {
 			echo '</td></tr>';
 			echo "</table>\n\n";
 			if ($element->superclass()) {
-				$this->inheritFields($rootDoc->classNamed($element->superclass()), $rootDoc, $package);
+                $superclass =& $rootDoc->classNamed($element->superclass());
+                if ($superclass) {
+                    $this->inheritFields($superclass, $rootDoc, $package);
+                }
 			}
 		}
 	}
@@ -327,11 +340,12 @@ class classWriter extends htmlWriter {
 	/** Display the inherited methods of an element. This method calls itself
 	 * recursively if the element has a parent class.
 	 *
-	 * @param programElementDoc element
-	 * @param rootDoc rootDoc
-	 * @param packageDoc package
+	 * @param ProgramElementDoc element
+	 * @param RootDoc rootDoc
+	 * @param PackageDoc package
 	 */
-	function inheritMethods(&$element, &$rootDoc, &$package) {
+	function inheritMethods(&$element, &$rootDoc, &$package)
+    {
 		$methods =& $element->methods();
 		if ($methods) {
 			$num = count($methods); $foo = 0;
@@ -347,7 +361,10 @@ class classWriter extends htmlWriter {
 			echo '</td></tr>';
 			echo "</table>\n\n";
 			if ($element->superclass()) {
-				$this->inheritMethods($rootDoc->classNamed($element->superclass()), $rootDoc, $package);
+                $superclass =& $rootDoc->classNamed($element->superclass());
+                if ($superclass) {
+                    $this->inheritMethods($superclass, $rootDoc, $package);
+                }
 			}
 		}
 	}

@@ -18,9 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.8 2005/05/07 13:35:11 peejeh Exp $
+// $Id: phpDoctor.php,v 1.9 2005/05/08 21:53:30 peejeh Exp $
 
-// define undefined internal constants so we don't throw undefined constant errors later on
+/** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
 if (!defined('T_ML_COMMENT')) define('T_ML_COMMENT', 0);
 if (!defined('T_PRIVATE')) define('T_PRIVATE', 0);
@@ -53,9 +53,10 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
-class phpDoctor {
+class PHPDoctor
+{
 
 	/** The version of PHPDoctor.
 	 *
@@ -199,7 +200,8 @@ class phpDoctor {
 	 *
 	 * @param str config The configuration file to use for this run of PHPDoctor
 	 */
-	function phpDoctor($config = 'default.ini') {
+	function phpDoctor($config = 'default.ini')
+    {
 
 		// record start time
 		$this->_startTime = $this->_getTime();
@@ -272,9 +274,10 @@ class phpDoctor {
 	 * Build a complete list of file to parse. Expand out wildcards and
 	 * traverse directories if asked to.
 	 *
-	 * @param array files Array of filenames to expand
+	 * @param str[] files Array of filenames to expand
 	 */
-	function _buildFileList($files, $dir) {
+	function _buildFileList($files, $dir)
+    {
 		$list = array();
 
 		$dir = $this->fixPath($dir);
@@ -311,7 +314,8 @@ class phpDoctor {
 	 *
 	 * @param str msg Message to output
 	 */
-	function message($msg) {
+	function message($msg)
+    {
 		if (!$this->_quiet) {
 			echo $msg, "\n";
 		}
@@ -322,7 +326,8 @@ class phpDoctor {
 	 *
 	 * @param str msg Message to output
 	 */
-	function verbose($msg) {
+	function verbose($msg)
+    {
 		if ($this->_verbose) {
 			echo $msg, "\n";
 		}
@@ -333,7 +338,8 @@ class phpDoctor {
 	 *
 	 * @param str msg Warning message to output
 	 */
-	function warning($msg) {
+	function warning($msg)
+    {
 		if (!defined('STDERR')) define('STDERR', fopen("php://stderr", "wb"));
 		fwrite(STDERR, 'WARNING: '.$msg."\n");
 	}
@@ -343,7 +349,8 @@ class phpDoctor {
 	 *
 	 * @param str msg Error message to output
 	 */
-	function error($msg) {
+	function error($msg)
+    {
 		if (!defined('STDERR')) define('STDERR', fopen("php://stderr", "wb"));
 		fwrite(STDERR, 'ERROR: '.$msg."\n");
 	}
@@ -353,7 +360,8 @@ class phpDoctor {
 	 *
 	 * @return int
 	 */
-	function _getTime() {
+	function _getTime()
+    {
 		$microtime = explode(' ', microtime());
 		return $microtime[0] + $microtime[1];
 	}
@@ -365,7 +373,8 @@ class phpDoctor {
 	 * @param str prefix Absolute path to append to relative path
 	 * @return str
 	 */
-	function makeAbsolutePath($path, $prefix) {
+	function makeAbsolutePath($path, $prefix)
+    {
 		if (
 			substr($path, 0, 1) == '/' || // unix root
 			substr($path, 1, 2) == ':\\' || // windows root
@@ -375,7 +384,7 @@ class phpDoctor {
 		) {
 			return $path;
 		} else {
-			return $this->fixPath($prefix).$path;
+			return str_replace('./', '', $this->fixPath($prefix).$path);
 		}
 	}
 	
@@ -385,8 +394,9 @@ class phpDoctor {
 	 * @param str path Path to postfix
 	 * @return str
 	 */
-	function fixPath($path) {
-		if (substr($path, -1, 1) != '/') {
+	function fixPath($path)
+    {
+        if (substr($path, -1, 1) != '/') {
 			return $path.'/';
 		} else {
 			return $path;
@@ -397,7 +407,8 @@ class phpDoctor {
 	 *
 	 * @return str
 	 */
-	function docletPath() {
+	function docletPath()
+    {
 		return $this->makeAbsolutePath($this->fixPath($this->_docletPath).$this->fixPath($this->_doclet), $this->_path);
 	}
 
@@ -405,7 +416,8 @@ class phpDoctor {
 	 *
 	 * @return str
 	 */
-	function sourcePath() {
+	function sourcePath()
+    {
 		return $this->_sourcePath;
 	}
 
@@ -413,7 +425,8 @@ class phpDoctor {
 	 *
 	 * @return str
 	 */
-	function version() {
+	function version()
+    {
 		return $this->_version;
 	}
 
@@ -421,7 +434,8 @@ class phpDoctor {
 	 *
 	 * @return str
 	 */
-	function defaultPackage() {
+	function defaultPackage()
+    {
 		return $this->_defaultPackage;
 	}
 	
@@ -429,7 +443,8 @@ class phpDoctor {
 	 *
 	 * @return str[] An array of strings.
 	 */
-	function &options() {
+	function &options()
+    {
 		return $this->_options;
 	}
 
@@ -438,16 +453,18 @@ class phpDoctor {
 	 * @param str option
 	 * @return str
 	 */
-	function getOption($option) {
+	function getOption($option)
+    {
 		$option = '_'.$option;
 		return $this->$option;
 	}
 
 	/** Parse files into tokens and create rootDoc.
 	 *
-	 * @return rootDoc
+	 * @return RootDoc
 	 */
-	function &parse() {
+	function &parse()
+    {
 
 		$rootDoc =& new rootDoc($this);
 
@@ -708,7 +725,7 @@ class phpDoctor {
 											$this->verbose(' is a parameter of '.get_class($ce).' '.$ce->name());
 											$param->mergeData();
 											$ce->addParameter($param);
-										} elseif(isset($param) && $tokens[$key][0] == T_STRING || $tokens[$key][0] == T_CONSTANT_ENCAPSED_STRING) { // set value
+										} elseif(isset($param) && ($tokens[$key][0] == T_STRING || $tokens[$key][0] == T_CONSTANT_ENCAPSED_STRING)) { // set value
 											$param->set('value', $tokens[$key][1]);
 										}
 									}
@@ -858,10 +875,11 @@ class phpDoctor {
 
 	/** Loads and runs the doclet.
 	 *
-	 * @param rootDoc rootDoc
+	 * @param RootDoc rootDoc
 	 * @return bool
 	 */
-	function execute(&$rootDoc) {
+	function execute(&$rootDoc)
+    {
 		$docletFile = $this->fixPath($this->_docletPath).$this->_doclet.'/'.$this->_doclet.'.php';
 		if (is_file($docletFile)) { // load doclet
 			$this->message('Loading doclet "'.$this->_doclet.'"');
@@ -879,12 +897,13 @@ class phpDoctor {
 	 * with the same index from the first array with items from the
 	 * second.
 	 *
-	 * @param array one Array one
-	 * @param array two Array two
+	 * @param mixed[] one Array one
+	 * @param mixed[] two Array two
 	 *
-	 * @return array Merged array
+	 * @return mixed[] Merged array
 	 */
-	function _mergeArrays($one, $two) {
+	function _mergeArrays($one, $two)
+    {
 		foreach ($two as $key => $item) {
 			if (isset($one[$key]) && is_array($one[$key]) && is_array($item)) {
 				$one[$key] = $this->_mergeArrays($one[$key], $item);
@@ -898,12 +917,13 @@ class phpDoctor {
 	/**
 	 * Get next token of a certain type from token array
 	 *
-	 * @param array tokens Token array to search
+	 * @param str[] tokens Token array to search
 	 * @param int key Key to start searching from
 	 * @param int whatToGet Type of token to look for
 	 * @return str Value of found token
 	 */
-	function _getNext(&$tokens, $key, $whatToGet) {
+	function _getNext(&$tokens, $key, $whatToGet)
+    {
 		$key++;
 		if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
 		while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
@@ -917,12 +937,13 @@ class phpDoctor {
 	/**
 	 * Get previous token of a certain type from token array
 	 *
-	 * @param array tokens Token array to search
+	 * @param str[] tokens Token array to search
 	 * @param int key Key to start searching from
 	 * @param int whatToGet Type of token to look for
 	 * @return str Value of found token
 	 */
-	function _getPrev(&$tokens, $key, $whatToGet) {
+	function _getPrev(&$tokens, $key, $whatToGet)
+    {
 		$key--;
 		if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
 		while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
@@ -937,10 +958,11 @@ class phpDoctor {
 	 * Process a doc comment into a doc tag array.
 	 *
 	 * @param str comment The comment to process
-	 * @param rootDoc root The root object
+	 * @param RootDoc root The root object
 	 * @return mixed[] Array of doc comment data
 	 */
-	function processDocComment($comment, &$root) {
+	function processDocComment($comment, &$root)
+    {
 		if (substr(trim($comment), 0, 3) != '/**') return FALSE; // not doc comment, abort
 
 		$data = array(
@@ -948,7 +970,7 @@ class phpDoctor {
 			'tags' => array()
 		);
 		
-		$explodedComment = preg_split('/[\n|\r][ \r\n\t\*\/]*@/', "\n".$comment);
+		$explodedComment = preg_split('/[\n|\r][ \r\n\t\/]*\*[ \t]*@/', "\n".$comment);
 		
 		$text = trim(array_shift($explodedComment), "\r\n \t/*");
 		if ($text != '') {
@@ -1010,10 +1032,11 @@ class phpDoctor {
 	 * @param str name The name of the tag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
-	 * @param rootDoc root The root object
-	 * @return tag
+	 * @param RootDoc root The root object
+	 * @return Tag
 	 */
-	function &createTag($name, $text, &$data, &$root) {
+	function &createTag($name, $text, &$data, &$root)
+    {
 		$class = substr($name, 1);
 		if ($class) {
 			$tagletFile = $this->fixPath($this->_tagletPath).substr($name, 1).'.php';
@@ -1040,10 +1063,11 @@ class phpDoctor {
 	 * Is an element private and we are including private elements, or element is
 	 * protected and we are including protected elements.
 	 *
-	 * @param programElementDoc element The element to check
+	 * @param ProgramElementDoc element The element to check
 	 * @return bool
 	 */
-	function _includeElements(&$element) {
+	function _includeElements(&$element)
+    {
 		if ($element->isGlobal() && !$element->isFinal() && !$this->_globals) {
 			return FALSE;
 		} elseif ($element->isGlobal() && $element->isFinal() && !$this->_constants) {

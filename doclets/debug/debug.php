@@ -18,15 +18,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: debug.php,v 1.4 2005/05/07 13:35:11 peejeh Exp $
+// $Id: debug.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
 
 /** The debugging doclet. This doclet outputs all the parsed data in a format
  * suitable for debugging PHPDoctor.
  *
  * @package PHPDoctor.Doclets.Debug
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
-class debug {
+class Debug
+{
 
 	/** The depth of processing through the element hierarchy.
 	 *
@@ -36,9 +37,10 @@ class debug {
 
 	/** Doclet constructor.
 	 *
-	 * @param rootDoc rootDoc
+	 * @param RootDoc rootDoc
 	 */
-	function debug(&$rootDoc) {
+	function debug(&$rootDoc)
+    {
 	
 		echo "Root\n";
 		foreach ($rootDoc->packages() as $package) {
@@ -53,17 +55,27 @@ class debug {
 		echo "Done\n";
 	
 	}
+    
+    /** Return the depth indicator string
+     *
+     * @return str
+     */
+    function showDepth()
+    {
+        return str_repeat('|', $this->depth).'- ';
+    }
 
 	/** Output fieldDoc
 	 *
-	 * @param fieldDoc[] fields
+	 * @param FieldDoc[] fields
 	 */
-	function fieldDoc(&$fields, $showAccess = FALSE) {
+	function fieldDoc(&$fields, $showAccess = FALSE)
+    {
 		$this->depth++;
 		if ($fields) {
 			foreach ($fields as $field) {
 				$type = $field->type();
-				echo str_repeat('|', $this->depth), '- ', $field->modifiers($showAccess), $type->toString(), ' ';
+				echo $this->showDepth(), $field->modifiers($showAccess), $type->toString(), ' ';
 				if ($field->isFinal()) {
 					echo $field->name();
 				} else {
@@ -80,14 +92,15 @@ class debug {
 	
 	/** Output methodDoc
 	 *
-	 * @param methodDoc[] methods
+	 * @param MethodDoc[] methods
 	 */
-	function methodDoc(&$methods) {
+	function methodDoc(&$methods)
+    {
 		$this->depth++;
 		if ($methods) {
 			foreach ($methods as $method) {
 				$type = $method->returnType();
-				echo str_repeat('|', $this->depth), '- ', $method->modifiers();
+				echo $this->showDepth(), $method->modifiers();
 				if ($type) {
 					echo $type->toString(), ' ';
 				} else {
@@ -114,13 +127,14 @@ class debug {
 	
 	/** Output constructorDoc
 	 *
-	 * @param constructorDoc[] constructors
+	 * @param ConstructorDoc[] constructors
 	 */
-	function constructorDoc(&$constructors) {
+	function constructorDoc(&$constructors)
+    {
 		$this->depth++;
 		if ($constructors) {
 			foreach ($constructors as $constructor) {
-				echo str_repeat('|', $this->depth), '- ', $constructor->modifiers();
+				echo $this->showDepth(), $constructor->modifiers();
 				echo $constructor->name(), $constructor->flatSignature(), "\n";
 				$this->fieldDoc($constructor->parameters());
 			}
@@ -130,13 +144,14 @@ class debug {
 
 	/** Output classDoc
 	 *
-	 * @param classDoc[] classes
+	 * @param ClassDoc[] classes
 	 */
-	function classDoc(&$classes) {
+	function classDoc(&$classes)
+    {
 		$this->depth++;
 		if ($classes) {
 			foreach ($classes as $class) {
-				echo str_repeat('|', $this->depth), '- ', $class->modifiers();
+				echo $this->showDepth(), $class->modifiers();
 				if ($class->isInterface()) {
 					echo 'interface ';
 				} else {
@@ -163,4 +178,5 @@ class debug {
 	}
 	
 }
+
 ?>

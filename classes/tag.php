@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: tag.php,v 1.6 2005/05/07 13:35:11 peejeh Exp $
+// $Id: tag.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a documentation tag, e.g. @since, @author, @version. Given a tag
  * (e.g. "@since 1.2"), holds tag name (e.g. "@since") and tag text (e.g.
@@ -26,9 +26,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * by subclasses.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
-class tag {
+class Tag
+{
 
 	/** The name of the tag.
 	 *
@@ -59,9 +60,10 @@ class tag {
 	 *
 	 * @param str name The name of the tag (including @)
 	 * @param str text The contents of the tag
-	 * @param rootDoc root The root object
+	 * @param RootDoc root The root object
 	 */
-	function tag($name, $text, &$root) {
+	function tag($name, $text, &$root)
+    {
 		$this->_name = $name;
 		$this->_root =& $root;
 		$processedText = '';
@@ -75,7 +77,8 @@ class tag {
 	 *
 	 * @return str
 	 */
-	function name() {
+	function name()
+    {
 		return $this->_name;
 	}
 
@@ -83,7 +86,8 @@ class tag {
 	 *
 	 * @return str
 	 */
-	function displayName() {
+	function displayName()
+    {
 		return ucfirst(substr($this->_name, 1));
 	}
 
@@ -91,15 +95,17 @@ class tag {
 	 *
 	 * @return str
 	 */
-	function text() {
+	function text()
+    {
 		return $this->_text;
 	}
 	
 	/** Set this tags parent
 	 *
-	 * @param programElementDoc element The parent element
+	 * @param ProgramElementDoc element The parent element
 	 */
-	function setParent(&$element) {
+	function setParent(&$element)
+    {
 		$this->_parent =& $element;
 	}
 	
@@ -114,10 +120,11 @@ class tag {
 	 * referenced class as "Doc" and the label for the HTML link as
 	 * "commentlabel".
 	 *
-	 * @return tag[] Array of tags with inline tags.
+	 * @return Tag[] Array of tags with inline tags.
 	 * @todo This method does not act as described but should be altered to do so
 	 */
-	function &inlineTags() {
+	function &inlineTags()
+    {
 		return $this->_getInlineTags($this->text());
 	}
 	
@@ -130,11 +137,12 @@ class tag {
 	 * at closing of a HTML block element (<p> <h1> <h2> <h3> <h4> <h5> <h6> <hr>
 	 * <pre>).
 	 *
-	 * @return tag[] An array of Tags representing the first sentence of the
+	 * @return Tag[] An array of Tags representing the first sentence of the
 	 * comment
 	 * @todo This method does not act as described but should be altered to do so
 	 */
-	function &firstSentenceTags() {
+	function &firstSentenceTags()
+    {
 		if (preg_match('/^(.+)\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)/sU', $this->text(), $matches)) {
 			return $this->_getInlineTags($matches[1].'.'.$matches[2]);
 		} else {
@@ -146,9 +154,10 @@ class tag {
 	 * Parse out inline tags from within a text string
 	 *
 	 * @param str text
-	 * @return tag[]
+	 * @return Tag[]
 	 */
-	function &_getInlineTags($text) {
+	function &_getInlineTags($text)
+    {
 		$tagStrings = preg_split('/{(@.+)}/sU', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
 		if ($tagStrings) {
 			$inlineTags = NULL;
@@ -177,43 +186,75 @@ class tag {
 		return NULL;
 	}
 
-	/** Return true if this Taglet is used in constructor documentation. */
-	function inConstructor() {
+	/** Return true if this Taglet is used in constructor documentation.
+     *
+     * @return bool
+     */
+	function inConstructor()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in field documentation. */
-	function inField() {
+	/** Return true if this Taglet is used in field documentation.
+     *
+     * @return bool
+     */
+	function inField()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in method documentation. */          
-	function inMethod() {
+	/** Return true if this Taglet is used in method documentation.          
+     *
+     * @return bool
+     */
+	function inMethod()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in overview documentation. */
-	function inOverview() {
+	/** Return true if this Taglet is used in overview documentation.
+     *
+     * @return bool
+     */
+	function inOverview()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in package documentation. */
-	function inPackage() {
+	/** Return true if this Taglet is used in package documentation.
+     *
+     * @return bool
+     */
+	function inPackage()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in class or interface documentation. */
-	function inType() {
+	/** Return true if this Taglet is used in class or interface documentation.
+     *
+     * @return bool
+     */
+	function inType()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is an inline tag. */
-	function isInlineTag() {
+	/** Return true if this Taglet is an inline tag.
+     *
+     * @return bool
+     */
+	function isInlineTag()
+    {
 		return FALSE;
 	}
 	
-	/** Return true if this Taglet should be outputted even if it has no text content. */
-	function displayEmpty() {
+	/** Return true if this Taglet should be outputted even if it has no text content.
+     *
+     * @return bool
+     */
+	function displayEmpty()
+    {
 		return TRUE;
 	}
 

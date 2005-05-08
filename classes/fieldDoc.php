@@ -18,14 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: fieldDoc.php,v 1.5 2005/05/07 13:35:11 peejeh Exp $
+// $Id: fieldDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a PHP variable, constant or member variable (field).
  *
  * @package PHPDoctor
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
-class fieldDoc extends programElementDoc {
+class FieldDoc extends ProgramElementDoc
+{
 
 	/** The type of the variable.
 	 *
@@ -42,10 +43,11 @@ class fieldDoc extends programElementDoc {
 	/** Constructor
 	 *
 	 * @param str name Name of this element
-	 * @param classDoc|methodDoc parent The parent of this element
-	 * @param rootDoc root The root element
+	 * @param ClassDoc|MethodDoc parent The parent of this element
+	 * @param RootDoc root The root element
 	 */
-	function fieldDoc($name, &$parent, &$root) {
+	function fieldDoc($name, &$parent, &$root)
+    {
 		$this->_name = trim($name, '$\'"');
 		$this->_parent =& $parent; // set reference to parent
 		$this->_root =& $root; // set reference to root
@@ -54,9 +56,10 @@ class fieldDoc extends programElementDoc {
 
 	/** Get type of this variable.
 	 *
-	 * @return type
+	 * @return Type
 	 */
-	function &type() {
+	function &type()
+    {
 		return $this->_type;
 	}
 
@@ -64,7 +67,8 @@ class fieldDoc extends programElementDoc {
 	 *
 	 * @return mixed
 	 */
-	function value() {
+	function value()
+    {
 		return $this->_value;
 	}
 
@@ -72,7 +76,8 @@ class fieldDoc extends programElementDoc {
 	 *
 	 * @return bool
 	 */
-	function isField() {
+	function isField()
+    {
 		return TRUE;
 	}
 
@@ -80,7 +85,8 @@ class fieldDoc extends programElementDoc {
 	 *
 	 * @return bool
 	 */
-	function isGlobal() {
+	function isGlobal()
+    {
 		if (get_class($this->_parent) == 'rootdoc') {
 			return TRUE;
 		} else {
@@ -93,7 +99,8 @@ class fieldDoc extends programElementDoc {
 	 *
 	 * @return str The string representation of the field type
 	 */
-	function typeAsString() {
+	function typeAsString()
+    {
 		$myPackage =& $this->containingPackage();
 		$classDoc =& $this->_type->asClassDoc();
 		if ($classDoc) {
@@ -106,9 +113,10 @@ class fieldDoc extends programElementDoc {
 	
 	/** Returns the value of the constant.
 	 *
-	 * @return mixed
+	 * @return str
 	 */
-	function constantValue() {
+	function constantValue()
+    {
 		if ($this->_final) {
 			return $this->_value;
 		} else {

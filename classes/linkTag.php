@@ -18,25 +18,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: linkTag.php,v 1.3 2005/05/07 13:35:11 peejeh Exp $
+// $Id: linkTag.php,v 1.4 2005/05/08 21:53:30 peejeh Exp $
 
 require_once('linkPlainTag.php');
 
 /** Represents an inline link tag.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
-class linkTag extends linkPlainTag {
+class LinkTag extends LinkPlainTag
+{
 
 	/**
 	 * Constructor
 	 *
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
-	 * @param rootDoc root The root object
+	 * @param RootDoc root The root object
 	 */
-	function linkTag($text, &$data, &$root) {
+	function linkTag($text, &$data, &$root)
+    {
 		parent::linkPlainTag($text, $data, $root);
 		$this->_name = '@link';
 	}
@@ -45,42 +47,71 @@ class linkTag extends linkPlainTag {
 	 *
 	 * @return str
 	 */
-	function text() {
+	function text()
+    {
 		return '<code>'.parent::text().'</code>';
 	}
 
-	/** Return true if this Taglet is used in constructor documentation. */
-	function inConstructor() {
+	/** Return true if this Taglet is used in constructor documentation.
+     *
+     * @return bool
+     */
+	function inConstructor()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in field documentation. */
-	function inField() {
+	/** Return true if this Taglet is used in field documentation.
+     *
+     * @return bool
+     */
+	function inField()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in method documentation. */          
-	function inMethod() {
+	/** Return true if this Taglet is used in method documentation.          
+     *
+     * @return bool
+     */
+	function inMethod()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in overview documentation. */
-	function inOverview() {
+	/** Return true if this Taglet is used in overview documentation.
+     *
+     * @return bool
+     */
+	function inOverview()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in package documentation. */
-	function inPackage() {
+	/** Return true if this Taglet is used in package documentation.
+     *
+     * @return bool
+     */
+	function inPackage()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in class or interface documentation. */
-	function inType() {
+	/** Return true if this Taglet is used in class or interface documentation.
+     *
+     * @return bool
+     */
+	function inType()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is an inline tag. */
-	function isInlineTag() {
+	/** Return true if this Taglet is an inline tag.
+     *
+     * @return bool
+     */
+	function isInlineTag()
+    {
 		return TRUE;
 	}
 

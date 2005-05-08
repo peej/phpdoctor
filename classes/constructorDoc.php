@@ -18,20 +18,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: constructorDoc.php,v 1.4 2005/05/07 13:35:11 peejeh Exp $
+// $Id: constructorDoc.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a PHP constructor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
-class constructorDoc extends executableDoc {
+class ConstructorDoc extends ExecutableDoc
+{
 
 	/** Construct is a constructor.
 	 *
 	 * @return bool
 	 */
-	function isConstructor() {
+	function isConstructor()
+    {
 		return TRUE;
 	}
 

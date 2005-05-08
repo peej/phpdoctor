@@ -18,17 +18,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: doc.php,v 1.6 2005/05/07 13:35:11 peejeh Exp $
+// $Id: doc.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
 
 /** Abstract base class of all Doc classes. Doc item's are representations of
  * PHP language constructs (class, package, method,...) which have comments
  * and have been processed by this run of PHPDoctor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @abstract
  */
-class doc {
+class Doc {
 
 	/** The name of this construct
 	 *
@@ -76,7 +76,8 @@ class doc {
 	 * @param mixed value The value to set member to
 	 * @return bool
 	 */
-	function set($member, $value) {
+	function set($member, $value)
+    {
 		$member = '_'.$member;
 		$members = get_object_vars($this);
 		if (array_key_exists($member, $members)) {
@@ -96,7 +97,8 @@ class doc {
 	 * @param mixed value The value to set member to
 	 * @return bool
 	 */
-	function setByRef($member, &$value) {
+	function setByRef($member, &$value)
+    {
 		$member = '_'.$member;
 		$members = get_object_vars($this);
 		if (array_key_exists($member, $members)) {
@@ -114,7 +116,8 @@ class doc {
 	 *
 	 * @return str
 	 */
-	function name() {
+	function name()
+    {
 		return $this->_name;
 	}
 	
@@ -124,10 +127,11 @@ class doc {
 	 * item are returned.
 	 *
 	 * @param str tagName Name of the tag kind to search for
-	 * @return tag[] An array of Tag containing all tags of name 'tagname' or a
+	 * @return Tag[] An array of Tag containing all tags of name 'tagname' or a
 	 * singular tag object if only one exists for the given 'tagname'
 	 */
-	function &tags($tagName = NULL) {
+	function &tags($tagName = NULL)
+    {
 		if ($tagName == NULL) {
 			return $this->_tags;
 		} elseif (isset($this->_tags[$tagName])) {
@@ -140,7 +144,8 @@ class doc {
 	 *
 	 * @return str
 	 */
-	function getRawCommentText() {
+	function getRawCommentText()
+    {
 		return $this->_docComment;
 	}
 
@@ -149,7 +154,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isClass() {
+	function isClass()
+    {
 		return FALSE;
 	}
 
@@ -157,7 +163,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isConstructor() {
+	function isConstructor()
+    {
 		return FALSE;
 	}
 	
@@ -165,7 +172,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isException() {
+	function isException()
+    {
 		return FALSE;
 	}
 	
@@ -173,7 +181,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isGlobal() {
+	function isGlobal()
+    {
 		return FALSE;
 	}
 	
@@ -181,7 +190,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isFinal() {
+	function isFinal()
+    {
 		return FALSE;
 	}
 
@@ -189,7 +199,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isField() {
+	function isField()
+    {
 		return FALSE;
 	}
 
@@ -197,7 +208,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isFunction() {
+	function isFunction()
+    {
 		return FALSE;
 	}
 	
@@ -205,7 +217,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isInterface() {
+	function isInterface()
+    {
 		return FALSE;
 	}
 	
@@ -213,7 +226,8 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isMethod() {
+	function isMethod()
+    {
 		return FALSE;
 	}
 	
@@ -222,12 +236,14 @@ class doc {
 	 *
 	 * @return bool
 	 */
-	function isOrdinaryClass() {
+	function isOrdinaryClass()
+    {
 		return FALSE;
 	}
 	
 	/** Merge the contents of the doc comment into the element object. */
-	function mergeData() {
+	function mergeData()
+    {
 		if (is_array($this->_data)) {
 			// merge primitive types
 			foreach ($this->_data as $member => $value) {
@@ -304,11 +320,14 @@ class doc {
 	 * @param str filename
 	 * @return str
 	 */
-	function getHTMLContents($filename) {
+	function getHTMLContents($filename)
+    {
 			if ($contents = file_get_contents($filename)) {
 				if (preg_match('/<body ?.*?>(.+)<\/body>/s', $contents, $matches)) {
 					return $matches[1];
-				}
+				} else { // it's not HTML, so output it as plain text
+                    return '<pre>'.$contents.'</pre>';
+                }
 			}
 			return FALSE;
 	}

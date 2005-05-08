@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: standard.php,v 1.4 2005/05/07 13:35:11 peejeh Exp $
+// $Id: standard.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
 
 // load classes
 require('htmlWriter.php');
@@ -35,9 +35,10 @@ require('globalWriter.php');
  * produced by the Javadoc standard doclet.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
-class standard {
+class Standard
+{
 
 	/** A reference to the root doc.
 	 *
@@ -94,9 +95,10 @@ class standard {
 
 	/** Doclet constructor.
 	 *
-	 * @param rootDoc rootDoc
+	 * @param RootDoc rootDoc
 	 */
-	function standard(&$rootDoc) {
+	function standard(&$rootDoc)
+    {
 	
 		// set doclet options
 		$this->_rootDoc =& $rootDoc;
@@ -159,17 +161,19 @@ class standard {
 
 	/** Return a reference to the root doc.
 	 *
-	 * @return rootDoc
+	 * @return RootDoc
 	 */
-	function &rootDoc() {
+	function &rootDoc()
+    {
 		return $this->_rootDoc;
 	}
 	
 	/** Return a reference to the application object.
 	 *
-	 * @return phpdoctor
+	 * @return PHPDoctor
 	 */
-	function &phpdoctor() {
+	function &phpdoctor()
+    {
 		return $this->_rootDoc->phpdoctor();
 	}
 
@@ -177,7 +181,8 @@ class standard {
 	 *
 	 * @return str
 	 */	
-	function destinationPath() {
+	function destinationPath()
+    {
 		return $this->_d;
 	}
 
@@ -185,7 +190,8 @@ class standard {
 	 *
 	 * @return str
 	 */
-	function windowTitle() {
+	function windowTitle()
+    {
 		return $this->_windowTitle;
 	}
 
@@ -194,7 +200,8 @@ class standard {
 	 *
 	 * @return str
 	 */
-	function docTitle() {
+	function docTitle()
+    {
 		return $this->_docTitle;
 	}
 
@@ -203,7 +210,8 @@ class standard {
 	 *
 	 * @return str
 	 */
-	function getHeader() {
+	function getHeader()
+    {
 		return $this->_header;
 	}
 
@@ -212,7 +220,8 @@ class standard {
 	 *
 	 * @return str
 	 */
-	function getFooter() {
+	function getFooter()
+    {
 		return $this->_footer;
 	}
 
@@ -222,7 +231,8 @@ class standard {
 	 *
 	 * @return str
 	 */
-	function bottom() {
+	function bottom()
+    {
 		return $this->_bottom;
 	}
 
@@ -230,7 +240,8 @@ class standard {
 	 *
 	 * @return bool
 	 */
-	function tree() {
+	function tree()
+    {
 		return $this->_tree;
 	}
 
@@ -238,7 +249,8 @@ class standard {
 	 *
 	 * @return str
 	 */
-	function version() {
+	function version()
+    {
 		$phpdoctor =& $this->_rootDoc->phpdoctor();
 		return $phpdoctor->version();
 	}

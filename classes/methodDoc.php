@@ -18,14 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: methodDoc.php,v 1.5 2005/05/07 13:35:11 peejeh Exp $
+// $Id: methodDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a PHP function or method (member function).
  *
  * @package PHPDoctor
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
-class methodDoc extends executableDoc {
+class MethodDoc extends ExecutableDoc
+{
 
 	/** The type of variable this method returns.
 	 *
@@ -42,10 +43,11 @@ class methodDoc extends executableDoc {
 	/** Constructor
 	 *
 	 * @param str name Name of this element
-	 * @param classDoc|methodDoc parent The parent of this element
-	 * @param rootDoc root The root element
+	 * @param ClassDoc|MethodDoc parent The parent of this element
+	 * @param RootDoc root The root element
 	 */
-	function methodDoc($name, &$parent, &$root) {
+	function methodDoc($name, &$parent, &$root)
+    {
 		$this->_name = $name;
 		$this->_parent =& $parent; // set reference to parent
 		$this->_root =& $root; // set reference to root
@@ -54,17 +56,19 @@ class methodDoc extends executableDoc {
 
 	/** Add a parameter to this method.
 	 *
-	 * @param fieldDoc parameter
+	 * @param FieldDoc parameter
 	 */
-	function addParameter(&$parameter) {
+	function addParameter(&$parameter)
+    {
 		$this->_parameters[$parameter->name()] =& $parameter;
 	}
 
 	/** Get return type.
 	 *
-	 * @return type
+	 * @return Type
 	 */
-	function returnType() {
+	function returnType()
+    {
 		return $this->_returnType;
 	}
 	
@@ -73,7 +77,8 @@ class methodDoc extends executableDoc {
 	 *
 	 * @return str The string representation of the return type
 	 */
-	function returnTypeAsString() {
+	function returnTypeAsString()
+    {
 		$myPackage =& $this->containingPackage();
 		$classDoc =& $this->_returnType->asClassDoc();
 		if ($classDoc) {
@@ -88,7 +93,8 @@ class methodDoc extends executableDoc {
 	 *
 	 * @return bool
 	 */
-	function isFunction() {
+	function isFunction()
+    {
 		if (get_class($this->_parent) == 'rootdoc') {
 			return TRUE;
 		} else {
@@ -100,7 +106,8 @@ class methodDoc extends executableDoc {
 	 *
 	 * @return bool
 	 */
-	function isMethod() {
+	function isMethod()
+    {
 		if (get_class($this->_parent) == 'rootdoc') {
 			return FALSE;
 		} else {
@@ -112,7 +119,8 @@ class methodDoc extends executableDoc {
 	 *
 	 * @return bool
 	 */
-	function isAbstract() {
+	function isAbstract()
+    {
 		return $this->_abstract;
 	}
 

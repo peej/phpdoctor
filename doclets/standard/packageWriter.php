@@ -18,23 +18,25 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageWriter.php,v 1.7 2005/05/07 13:35:11 peejeh Exp $
+// $Id: packageWriter.php,v 1.8 2005/05/08 21:53:30 peejeh Exp $
 
 /** This generates the package-summary.html files that list the interfaces and
  * classes for a given package.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
-class packageWriter extends htmlWriter {
+class PackageWriter extends HTMLWriter
+{
 
 	/** Build the package summaries.
 	 *
-	 * @param doclet doclet
+	 * @param Doclet doclet
 	 */
-	function packageWriter(&$doclet) {
+	function packageWriter(&$doclet)
+    {
 	
-		parent::htmlWriter($doclet);
+		parent::HTMLWriter($doclet);
 		
 		$rootDoc =& $this->_doclet->rootDoc();
 		$phpdoctor =& $this->_doclet->phpdoctor();
@@ -45,10 +47,10 @@ class packageWriter extends htmlWriter {
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package');
 			$this->_sections[2] = array('title' => 'Class');
-			$this->_sections[3] = array('title' => 'Use');
+			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'selected' => TRUE);
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 
 			$tree = array();
 			$classes =& $rootDoc->classes();
@@ -77,10 +79,10 @@ class packageWriter extends htmlWriter {
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package', 'selected' => TRUE);
 			$this->_sections[2] = array('title' => 'Class');
-			$this->_sections[3] = array('title' => 'Use');
+			//$this->_sections[3] = array('title' => 'Use');
 			if ($displayTree) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 			
 			ob_start();
 			
@@ -182,10 +184,10 @@ class packageWriter extends htmlWriter {
 				$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 				$this->_sections[1] = array('title' => 'Package', 'url' => 'package-summary.html', 'relative' => TRUE);
 				$this->_sections[2] = array('title' => 'Class');
-				$this->_sections[3] = array('title' => 'Use');
+				//$this->_sections[3] = array('title' => 'Use');
 				$this->_sections[4] = array('title' => 'Tree', 'url' => 'package-tree.html', 'selected' => TRUE, 'relative' => TRUE);
-				$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-				$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+				//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+				//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 
 				$tree = array();
 				$classes =& $package->ordinaryClasses();
@@ -214,24 +216,29 @@ class packageWriter extends htmlWriter {
 	/**
 	 * Build the class tree branch for the given element
 	 *
-	 * @param classDoc[] tree
-	 * @param classDoc element
+	 * @param ClassDoc[] tree
+	 * @param ClassDoc element
 	 */
-	function _buildTree(&$tree, &$element) {
+	function _buildTree(&$tree, &$element)
+    {
 		$tree[$element->name()] = $element;
 		if ($element->superclass()) {
 			$rootDoc =& $this->_doclet->rootDoc();
-			$this->_buildTree($tree, $rootDoc->classNamed($element->superclass()));
+            $superclass =& $rootDoc->classNamed($element->superclass());
+            if ($superclass) {
+                $this->_buildTree($tree, $superclass);
+            }
 		}
 	}
 	
 	/**
 	 * Build the class tree branch for the given element
 	 *
-	 * @param classDoc[] tree
-	 * @param classDoc parent
+	 * @param ClassDoc[] tree
+	 * @param ClassDoc parent
 	 */
-	function _displayTree($tree, $parent = NULL) {
+	function _displayTree($tree, $parent = NULL)
+    {
 		$outputList = TRUE;
 		foreach($tree as $name => $element) {
 			if ($element->superclass() == $parent) {

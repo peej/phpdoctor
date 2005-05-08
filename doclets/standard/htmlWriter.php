@@ -18,15 +18,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.6 2005/05/07 13:35:11 peejeh Exp $
+// $Id: htmlWriter.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
-class htmlWriter {
+class HTMLWriter
+{
 
 	/** The doclet that created this object.
 	 *
@@ -60,10 +61,9 @@ class htmlWriter {
 
 	/** Writer constructor.
 	 */
-	function htmlWriter(&$doclet) {
-
+	function htmlWriter(&$doclet)
+    {
 		$this->_doclet =& $doclet;
-
 	}
 
 	/** Build the HTML header. Includes doctype definition, <html> and <head>
@@ -71,7 +71,8 @@ class htmlWriter {
 	 *
 	 * @return str
 	 */
-	function _htmlHeader($title) {
+	function _htmlHeader($title)
+    {
 	
 		$output = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">'."\n\n";
 		$output .= '<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">'."\n";
@@ -101,7 +102,8 @@ class htmlWriter {
    *
    * @return str
    */
-	function _htmlFooter() {
+	function _htmlFooter()
+    {
 		return '</html>';
 	}
 
@@ -110,14 +112,11 @@ class htmlWriter {
 	 *
 	 * @return str
 	 */
-	function _shellHeader($path) {
-	
+	function _shellHeader($path)
+    {
 		$output = '<body id="'.$this->_id.'" onload="parent.document.title=document.title;">'."\n\n";
-
 		$output .= $this->_nav($path);
-
 		return $output;
-
 	}
 	
 	/** Build the HTML shell footer. Includes the end of the <body> section, and
@@ -125,25 +124,21 @@ class htmlWriter {
 	 *
 	 * @return str
 	 */
-	function _shellFooter($path) {
-	
+	function _shellFooter($path)
+    {
 		$output = $this->_nav($path);
-
 		$output .= "<hr />\n\n";
-		
 		$output .= '<p id="footer">'.$this->_doclet->bottom().'</p>'."\n\n";
-
 		$output .= "</body>\n\n";
-
 		return $output;
-
 	}
 	
 	/** Build the navigation bar
 	 *
 	 * @return str
 	 */
-	function _nav($path) {
+	function _nav($path)
+    {
 		$output = '<table width="100%" cellpadding="0" class="header">'."\n";
 		$output .= "<tr>\n";
 		$output .= '<td class="header">';
@@ -198,7 +193,8 @@ class htmlWriter {
 	 * @param str title The title for this page
 	 * @param bool shell Include the page shell in the output
 	 */
-	function _write($path, $title, $shell) {
+	function _write($path, $title, $shell)
+    {
 		$phpdoctor =& $this->_doclet->phpdoctor();
 		
 		// make directories if they don't exist
@@ -207,7 +203,12 @@ class htmlWriter {
 		$testPath = $this->_doclet->destinationPath();
 		foreach ($dirs as $dir) {
 			$testPath .= $dir.'/';
-			if (!is_dir($testPath)) mkdir($testPath);
+			if (!is_dir($testPath)) {
+                if (!@mkdir($testPath)) {
+                    $phpdoctor->error(sprintf('Could not create directory "%s"', $testPath));
+                    exit;
+                }
+            }
 		}
 		
 		// write file
@@ -221,16 +222,18 @@ class htmlWriter {
 			fwrite($fp, $this->_htmlFooter());
 			fclose($fp);
 		} else {
-			$phpdoctor->warning('Could not write "'.$this->_doclet->destinationPath().$path.'"');
+			$phpdoctor->error('Could not write "'.$this->_doclet->destinationPath().$path.'"');
+            exit;
 		}
 	}
 	
 	/** Format tags for output.
 	 *
-	 * @param tag[] tags
+	 * @param Tag[] tags
 	 * @return str The string representation of the elements doc tags
 	 */
-	function _processTags(&$tags) {
+	function _processTags(&$tags)
+    {
 		echo "<dl>\n";
 		foreach ($tags as $key => $tag) {
 			if ($key != '@text') {
@@ -255,11 +258,12 @@ class htmlWriter {
 	
 	/** Convert inline tags into a string for outputting.
 	 *
-	 * @param tag tag The text tag to process
+	 * @param Tag tag The text tag to process
 	 * @param bool first process first line of tag only
 	 * @return str The string representation of the elements doc tags
 	 */
-	function _processInlineTags(&$tag, $first = FALSE) {
+	function _processInlineTags(&$tag, $first = FALSE)
+    {
 		if ($tag) {
 			$description = '';
 			if ($first) {
@@ -274,10 +278,23 @@ class htmlWriter {
 					}
 				}
 			}
+            if ($first) {
+                $description = $this->_stripBlockTags($description);
+            }
 			return substr($description, 0, -1);
 		}
 		return NULL;
 	}
+    
+    /** Strip block level HTML tags from a string.
+     *
+     * @param str string
+     * @return str
+     */
+    function _stripBlockTags($string)
+    {
+        return strip_tags($string, '<a><b><strong><i><em><code><q><acronym><abbr><ins><del><kbd><samp><sub><sup><tt><var><big><small>');
+    }
 
 }
 

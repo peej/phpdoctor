@@ -18,14 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: seeTag.php,v 1.8 2005/05/07 13:35:11 peejeh Exp $
+// $Id: seeTag.php,v 1.9 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a see tag.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
-class seeTag extends tag {
+class SeeTag extends Tag
+{
 
 	/** The link.
 	 *
@@ -38,9 +39,10 @@ class seeTag extends tag {
 	 *
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
-	 * @param rootDoc root The root object
+	 * @param RootDoc root The root object
 	 */
-	function seeTag($text, &$data, &$root) {
+	function seeTag($text, &$data, &$root)
+    {
 		if (preg_match('/^<a href="(.+)">(.+)<\/a>$/', $text, $matches)) {
 			$this->_link = $matches[1];
 			$text = $matches[2];
@@ -59,7 +61,8 @@ class seeTag extends tag {
 	 *
 	 * @return str
 	 */
-	function displayName() {
+	function displayName()
+    {
 		return 'See Also';
 	}
 	
@@ -67,7 +70,8 @@ class seeTag extends tag {
 	 *
 	 * @return str
 	 */
-	function text() {
+	function text()
+    {
 		if ($this->_text && $this->_text != "\n") {
 			$link = $this->_text;
 		} else {
@@ -86,9 +90,10 @@ class seeTag extends tag {
 	/**
 	 * Turn the objects link text into a link to the element it refers to.
 	 *
-	 * @return programElementDoc
+	 * @return ProgramElementDoc
 	 */
-	function &_resolveLink() {
+	function &_resolveLink()
+    {
 		$labelRegex = '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*';
 		if (preg_match('/^(([a-zA-Z0-9_\x7f-\xff .-]+)\.)?(('.$labelRegex.')#)?('.$labelRegex.')$/', $this->_link, $matches)) {
 			$packageName = $matches[2];
@@ -123,7 +128,7 @@ class seeTag extends tag {
 					}
 					if (!isset($element)) {
 						$methods =& $class->methods();
-						if ($method) {
+						if ($methods) {
 							foreach($methods as $key => $method) {
 								if ($method->name() == $elementName) {
 									$element =& $methods[$key];
@@ -275,38 +280,66 @@ class seeTag extends tag {
 		}
 	}
 	
-	/** Return true if this Taglet is used in constructor documentation. */
-	function inConstructor() {
+	/** Return true if this Taglet is used in constructor documentation.
+     *
+     * @return bool
+     */
+	function inConstructor()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in field documentation. */
-	function inField() {
+	/** Return true if this Taglet is used in field documentation.
+     *
+     * @return bool
+     */
+	function inField()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in method documentation. */          
-	function inMethod() {
+	/** Return true if this Taglet is used in method documentation.          
+     *
+     * @return bool
+     */
+	function inMethod()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in overview documentation. */
-	function inOverview() {
+	/** Return true if this Taglet is used in overview documentation.
+     *
+     * @return bool
+     */
+	function inOverview()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in package documentation. */
-	function inPackage() {
+	/** Return true if this Taglet is used in package documentation.
+     *
+     * @return bool
+     */
+	function inPackage()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is used in class or interface documentation. */
-	function inType() {
+	/** Return true if this Taglet is used in class or interface documentation.
+     *
+     * @return bool
+     */
+	function inType()
+    {
 		return TRUE;
 	}
 
-	/** Return true if this Taglet is an inline tag. */
-	function isInlineTag() {
+	/** Return true if this Taglet is an inline tag.
+     *
+     * @return bool
+     */
+	function isInlineTag()
+    {
 		return FALSE;
 	}
 

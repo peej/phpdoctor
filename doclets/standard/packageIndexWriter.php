@@ -18,21 +18,23 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageIndexWriter.php,v 1.7 2005/05/07 13:35:11 peejeh Exp $
+// $Id: packageIndexWriter.php,v 1.8 2005/05/08 21:53:30 peejeh Exp $
 
 /** This class generates the overview-summary.html file that lists all parsed
  * packages.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
-class packageIndexWriter extends htmlWriter {
+class PackageIndexWriter extends HTMLWriter
+{
 
 	/** Build the package index.
 	 *
-	 * @param doclet doclet
+	 * @param Doclet doclet
 	 */
-	function packageIndexWriter(&$doclet) {
+	function packageIndexWriter(&$doclet)
+    {
 	
 		parent::htmlWriter($doclet);
 		
@@ -41,10 +43,10 @@ class packageIndexWriter extends htmlWriter {
 		$this->_sections[0] = array('title' => 'Overview', 'selected' => TRUE);
 		$this->_sections[1] = array('title' => 'Package');
 		$this->_sections[2] = array('title' => 'Class');
-		$this->_sections[3] = array('title' => 'Use');
+		//$this->_sections[3] = array('title' => 'Use');
 		if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-		$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-		$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+		//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+		//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 
 		ob_start();
 		

@@ -18,24 +18,26 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageFrameWriter.php,v 1.4 2005/05/07 13:35:11 peejeh Exp $
+// $Id: packageFrameWriter.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
 
 /** This generates the package-frame.html file that lists the interfaces and
  * classes in a given package for displaying in the lower-left frame of the
  * frame-formatted default output.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
-class packageFrameWriter extends htmlWriter {
+class PackageFrameWriter extends HTMLWriter
+{
 
 	/** Build the package frame index.
 	 *
-	 * @param doclet doclet
+	 * @param Doclet doclet
 	 */
-	function packageFrameWriter(&$doclet) {
+	function packageFrameWriter(&$doclet)
+    {
 	
-		parent::htmlWriter($doclet);
+		parent::HTMLWriter($doclet);
 		
 		$rootDoc =& $this->_doclet->rootDoc();
 		
@@ -57,7 +59,8 @@ class packageFrameWriter extends htmlWriter {
 	 *
 	 * @return str
 	 */
-	function &_buildFrame(&$package) {
+	function &_buildFrame(&$package)
+    {
 		ob_start();
 
 		echo '<body id="frame">', "\n\n";
@@ -126,7 +129,8 @@ class packageFrameWriter extends htmlWriter {
 	 *
 	 * @return str
 	 */
-	function &_allItems(&$rootDoc) {
+	function &_allItems(&$rootDoc)
+    {
 		ob_start();
 
 		echo '<body id="frame">', "\n\n";

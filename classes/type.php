@@ -18,14 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: type.php,v 1.4 2005/05/07 13:35:11 peejeh Exp $
+// $Id: type.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a PHP variable type. Type can be a class or primitive data type.
  *
  * @package PHPDoctor
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
-class type {
+class Type
+{
 
 	/** The name of the type.
 	 *
@@ -46,8 +47,12 @@ class type {
 	var $_root = NULL;
 
 	/** Constructor
+     *
+     * @param str name The name of the variable type
+     * @param RootDoc root The RootDoc object to tie this type too
 	 */
-	function type($name, &$root) {
+	function type($name, &$root)
+    {
 		while (substr($name, -2) == '[]') {
 			$this->_dimension++;
 			$name = substr($name, 0, -2);
@@ -60,7 +65,8 @@ class type {
 	 *
 	 * @return str
 	 */
-	function typeName() {
+	function typeName()
+    {
 		return $this->_name;
 	}
 
@@ -68,29 +74,36 @@ class type {
 	 *
 	 * @return str
 	 */
-	function dimension() {
+	function dimension()
+    {
 		return str_repeat('[]', $this->_dimension);
 	}
 
 	/** Get qualified name of this type.
 	 *
 	 * @return str
+     * @todo This method is still to be implemented
 	 */
-	function qualifiedTypeName() {}
+	function qualifiedTypeName()
+    {
+        return $this->typeName();
+    }
 
 	/** Returns a string representation of the type.
 	 *
 	 * @return str
 	 */
-	function toString() {
+	function toString()
+    {
 		return $this->_name.$this->dimension();
 	}
 
 	/** Return this type as a class.
 	 *
-	 * @return classDoc A classDoc if the type is a class, null if it is a primitive type.
+	 * @return ClassDoc A classDoc if the type is a class, null if it is a primitive type.
 	 */
-	function &asClassDoc() {
+	function &asClassDoc()
+    {
 		return $this->_root->classNamed($this->_name);
 	}
 

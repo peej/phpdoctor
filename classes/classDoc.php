@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classDoc.php,v 1.5 2005/05/07 13:35:10 peejeh Exp $
+// $Id: classDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a PHP class and provides access to information about the class,
  * the class' comment and tags, and the members of the class. A classDoc only
@@ -27,9 +27,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * type (which can be converted to classDoc, if possible).
  *
  * @package PHPDoctor
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
-class classDoc extends programElementDoc {
+class ClassDoc extends ProgramElementDoc
+{
 
 	/** The super class.
 	 *
@@ -76,66 +77,74 @@ class classDoc extends programElementDoc {
 	/** Constructor
 	 *
 	 * @param str name Name of this element
-	 * @param rootDoc root The root element
+	 * @param RootDoc root The root element
 	 */
-	function classDoc($name, &$root) {
+	function classDoc($name, &$root)
+    {
 		$this->_name = $name;
 		$this->_root =& $root;
 	}
 
 	/** Add a field to this class.
 	 *
-	 * @param fieldDoc field
+	 * @param FieldDoc field
 	 */
-	function addField(&$field) {
+	function addField(&$field)
+    {
 		$this->_fields[$field->name()] =& $field;
 	}
 
 	/** Add a constructor to this class.
 	 *
-	 * @param methodDoc constructor
+	 * @param MethodDoc constructor
 	 */
-	function addConstructor(&$constructor) {
+	function addConstructor(&$constructor)
+    {
 		$this->_constructor[$constructor->name()] =& $constructor;
 	}
 
 	/** Add a method to this class.
 	 *
-	 * @param methodDoc method
+	 * @param MethodDoc method
 	 */
-	function addMethod(&$method) {
+	function addMethod(&$method)
+    {
 		$this->_methods[$method->name()] =& $method;
 	}
 	
 	/** Return the constructor for this class.
 	 *
-	 * @return constructorDoc
+	 * @return ConstructorDoc
 	 */
-	function &constructor() {
+	function &constructor()
+    {
 		return $this->_constructor;
 	}
 
 	/** Return fields in this class.
 	 *
-	 * @return fieldDoc[]
+	 * @return FieldDoc[]
 	 */
-	function &fields() {
+	function &fields()
+    {
 		return $this->_fields;
 	}
 
 	/** Return the methods in this class.
 	 *
-	 * @return methodDoc[]
+	 * @return MethodDoc[]
 	 */
-	function &methods() {
+	function &methods()
+    {
 		return $this->_methods;
 	}
 
 	/** Return interfaces implemented by this class or interfaces extended by this interface.
 	 *
-	 * @return classDoc[]
+	 * @return ClassDoc[]
 	 */
-	function &interfaces() {
+	function &interfaces()
+    {
 		return $this->_interfaces;
 	}
 	
@@ -143,7 +152,8 @@ class classDoc extends programElementDoc {
 	 *
 	 * @return bool
 	 */
-	function isAbstract() {
+	function isAbstract()
+    {
 		return $this->_abstract;
 	}
 
@@ -151,16 +161,18 @@ class classDoc extends programElementDoc {
 	 *
 	 * @return bool
 	 */
-	function isInterface() {
+	function isInterface()
+    {
 		return $this->_interface;
 	}
 
 	/** Test whether this class is a subclass of the specified class.
 	 *
-	 * @param classDoc cd
+	 * @param ClassDoc cd
 	 * @return bool
 	 */
-	function subclassOf($cd) {
+	function subclassOf($cd)
+    {
 		if ($this->_superclass == $cd->name()) {
 			return TRUE;
 		} else {
@@ -170,9 +182,10 @@ class classDoc extends programElementDoc {
 
 	/** Return the superclass of this class.
 	 *
-	 * @return classDoc
+	 * @return ClassDoc
 	 */
-	function superclass() {
+	function superclass()
+    {
 		return $this->_superclass;
 	}
 	
@@ -180,7 +193,8 @@ class classDoc extends programElementDoc {
 	 *
 	 * @return bool
 	 */
-	function isClass() {
+	function isClass()
+    {
 		return !$this->_interface;
 	}
 	
@@ -188,7 +202,8 @@ class classDoc extends programElementDoc {
 	 *
 	 * @return bool
 	 */
-	function isOrdinaryClass() {
+	function isOrdinaryClass()
+    {
 		if ($this->isClass() && !$this->isException()) {
 			return TRUE;
 		} else {
@@ -200,7 +215,8 @@ class classDoc extends programElementDoc {
 	 *
 	 * @return bool
 	 */
-	function isException() {
+	function isException()
+    {
 		if (strtolower($this->_superclass) == 'exception') {
 			return TRUE;
 		} else {

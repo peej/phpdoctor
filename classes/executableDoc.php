@@ -18,15 +18,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: executableDoc.php,v 1.5 2005/05/07 13:35:11 peejeh Exp $
+// $Id: executableDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
 
 /** Represents a PHP function, method (member function) or constructor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @abstract
  */
-class executableDoc extends programElementDoc {
+class ExecutableDoc extends ProgramElementDoc
+{
 
 	/** The parameters this function takes.
 	 *
@@ -48,42 +49,47 @@ class executableDoc extends programElementDoc {
 
 	/** Add a subfunction to this function.
 	 *
-	 * @param methodDoc function
+	 * @param MethodDoc function
 	 */
-	function addMethod(&$function) {
+	function addMethod(&$function)
+    {
 		$this->_functions[$function->name()] =& $function;
 	}
 
 	/** Get argument information.
 	 *
-	 * @return fieldDoc[] An array of parameter, one element per argument in the
+	 * @return FieldDoc[] An array of parameter, one element per argument in the
 	 * order the arguments are present
 	 */
-	function &parameters() {
+	function &parameters()
+    {
 		return $this->_parameters;
 	}
 	
 	/** Get subfunctions.
 	 *
-	 * @return methodDoc[] An array of subfunctions.
+	 * @return MethodDoc[] An array of subfunctions.
 	 */
-	function &functions() {
+	function &functions()
+    {
 		return $this->_functions;
 	}
 
 	/** Return exceptions this function throws.
 	 *
-	 * @return classDoc[]
+	 * @return ClassDoc[]
 	 */
-	function &thrownExceptions() {
+	function &thrownExceptions()
+    {
 		return $this->_throws;
 	}
 
 	/** Return the param tags in this function.
 	 *
-	 * @return tag[]
+	 * @return Tag[]
 	 */
-	function paramTags() {
+	function paramTags()
+    {
 		if (isset($this->_tags['@param'])) {
 			if (is_array($this->_tags['@param'])) {
 				return $this->_tags['@param'];
@@ -97,9 +103,10 @@ class executableDoc extends programElementDoc {
 
 	/** Return the throws tags in this function.
 	 *
-	 * @return type
+	 * @return Type
 	 */
-	function throwsTags() {
+	function throwsTags()
+    {
 		if (isset($this->_tags['@throws'])) {
 			if (is_array($this->_tags['@throws'])) {
 				return $this->_tags['@throws'];
@@ -123,7 +130,8 @@ it will return
 	 *
 	 * @return str
 	 */
-	function signature() {
+	function signature()
+    {
 		$signature = '(';
 		$myPackage =& $this->containingPackage();
 		foreach($this->_parameters as $param) {
@@ -152,7 +160,8 @@ it will return
 	 *
 	 * @return str
 	 */
-	function flatSignature() {
+	function flatSignature()
+    {
 		$signature = '';
 		$myPackage =& $this->containingPackage();
 		foreach($this->_parameters as $param) {
