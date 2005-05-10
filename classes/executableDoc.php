@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: executableDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
+// $Id: executableDoc.php,v 1.7 2005/05/10 22:40:03 peejeh Exp $
 
 /** Represents a PHP function, method (member function) or constructor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @abstract
  */
 class ExecutableDoc extends ProgramElementDoc
@@ -139,7 +139,7 @@ it will return
 			$classDoc =& $type->asClassDoc();
 			if ($classDoc) {
 				$packageDoc =& $classDoc->containingPackage();
-				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->containingPackage().'.'.$classDoc->name().'</a> '.$param->name().$type->dimension().', ';
+				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$classDoc->asPath().'">'.$classDoc->containingPackage().'.'.$classDoc->name().'</a> '.$param->name().$type->dimension().', ';
 			} else {
 				$signature .= $type->typeName().$type->dimension().', ';
 			}
@@ -169,7 +169,7 @@ it will return
 			$classDoc =& $type->asClassDoc();
 			if ($classDoc) {
 				$packageDoc =& $classDoc->containingPackage();
-				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().'</a> '.$param->name().', ';
+				$signature .= '<a href="'.str_repeat('../', $myPackage->depth() + 1).$classDoc->asPath().'">'.$classDoc->name().'</a> '.$param->name().', ';
 			} else {
 				$signature .= $type->typeName().' '.$param->name().', ';
 			}

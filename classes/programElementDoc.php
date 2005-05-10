@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: programElementDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
+// $Id: programElementDoc.php,v 1.7 2005/05/10 22:40:03 peejeh Exp $
 
 /** Represents a PHP program element: global, function, class, interface,
  * field, constructor, or method. This is an abstract class dealing with
  * information common to these elements.
  *
  * @package PHPDoctor
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @abstract
  */
 class ProgramElementDoc extends Doc
@@ -208,7 +208,7 @@ modifiers() would return:
     {
 		return $this->_static;
 	}
-
+    
 	/** Return the element path.
 	 *
 	 * @return str

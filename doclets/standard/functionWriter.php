@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
+// $Id: functionWriter.php,v 1.7 2005/05/10 22:40:04 peejeh Exp $
 
 /** This generates the HTML API documentation for each global function.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 class FunctionWriter extends HTMLWriter
 {
@@ -40,8 +40,11 @@ class FunctionWriter extends HTMLWriter
 		$this->_id = 'definition';
 
 		$rootDoc =& $this->_doclet->rootDoc();
+        
+        $packages =& $rootDoc->packages();
+        asort($packages);
 
-		foreach($rootDoc->packages() as $packageName => $package) {
+		foreach($packages as $packageName => $package) {
 
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
@@ -55,15 +58,16 @@ class FunctionWriter extends HTMLWriter
 
 			ob_start();
 
-			echo "<hr />\n\n";
+			echo "<hr>\n\n";
 
 			echo "<h1>Functions</h1>\n\n";
 					
-			echo "<hr />\n\n";
+			echo "<hr>\n\n";
 					
 			$functions =& $package->functions();
 				
 			if ($functions) {
+                asort($functions);
 				echo '<a name="summary_function"></a>', "\n";
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
@@ -98,7 +102,7 @@ class FunctionWriter extends HTMLWriter
 						echo "</div>\n\n";
 					}
 					$this->_processTags($function->tags());
-					echo "<hr />\n\n";
+					echo "<hr>\n\n";
 				}
 			}
 

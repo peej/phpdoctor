@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: frameOutputWriter.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
+// $Id: frameOutputWriter.php,v 1.6 2005/05/10 22:40:04 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 class FrameOutputWriter extends HTMLWriter
 {
@@ -45,17 +45,19 @@ class FrameOutputWriter extends HTMLWriter
 
 <frameset rows="30%,70%">
 
-<frame src="overview-frame.html" name="packagelist" />
-<frame src="allitems-frame.html" name="index" />
+<frame src="overview-frame.html" name="packagelist">
+<frame src="allitems-frame.html" name="index">
 
 </frameset>
 
-<frame src="overview-summary.html" name="main" />
+<frame src="overview-summary.html" name="main">
 
 <noframes>
-<h2>Frame Alert</h2>
-<p>This document is designed to be viewed using frames. If you see this message, you are using a non-frame-capable browser.<br />
-Link to <a href="overview-summary.html">Non-frame version</a>.</p>
+    <body>
+        <h2>Frame Alert</h2>
+        <p>This document is designed to be viewed using frames. If you see this message, you are using a non-frame-capable browser.<br>
+        Link to <a href="overview-summary.html">Non-frame version</a>.</p>
+    </body>
 </noframes>
 
 </frameset>
@@ -67,6 +69,15 @@ END;
 		$this->_write('index.html', FALSE, FALSE);
 	
 	}
+    
+    /** Get the HTML DOCTYPE for this output
+     *
+     * @return str
+     */
+    function _doctype()
+    {
+        return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">'."\n\n";
+    }
 
 }
 

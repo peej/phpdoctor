@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: globalWriter.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
+// $Id: globalWriter.php,v 1.7 2005/05/10 22:40:04 peejeh Exp $
 
 /** This generates the HTML API documentation for each global variable.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 class GlobalWriter extends HTMLWriter
 {
@@ -40,8 +40,11 @@ class GlobalWriter extends HTMLWriter
 		$this->_id = 'definition';
 
 		$rootDoc =& $this->_doclet->rootDoc();
+        
+        $packages =& $rootDoc->packages();
+        asort($packages);
 
-		foreach($rootDoc->packages() as $packageName => $package) {
+		foreach($packages as $packageName => $package) {
 
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
@@ -55,15 +58,16 @@ class GlobalWriter extends HTMLWriter
 
 			ob_start();
 
-			echo "<hr />\n\n";
+			echo "<hr>\n\n";
 
 			echo "<h1>Globals</h1>\n\n";
 					
-			echo "<hr />\n\n";
+			echo "<hr>\n\n";
 					
 			$globals =& $package->globals();
 				
 			if ($globals) {
+                asort($globals);
 				echo '<a name="summary_global"></a>', "\n";
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>', "\n";
@@ -101,7 +105,7 @@ class GlobalWriter extends HTMLWriter
 						echo "</div>\n\n";
 					}
 					$this->_processTags($global->tags());
-					echo "<hr />\n\n";
+					echo "<hr>\n\n";
 				}
 			}
 

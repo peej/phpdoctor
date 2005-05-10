@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: fieldDoc.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
+// $Id: fieldDoc.php,v 1.7 2005/05/10 22:40:03 peejeh Exp $
 
 /** Represents a PHP variable, constant or member variable (field).
  *
  * @package PHPDoctor
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 class FieldDoc extends ProgramElementDoc
 {
@@ -105,7 +105,7 @@ class FieldDoc extends ProgramElementDoc
 		$classDoc =& $this->_type->asClassDoc();
 		if ($classDoc) {
 			$packageDoc =& $classDoc->containingPackage();
-			return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$packageDoc->asPath().'/'.$classDoc->name().'.html">'.$classDoc->name().$this->_type->dimension().'</a>';
+			return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$classDoc->asPath().'">'.$classDoc->name().$this->_type->dimension().'</a>';
 		} else {
 			return $this->_type->typeName().$this->_type->dimension();
 		}

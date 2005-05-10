@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.9 2005/05/08 21:53:30 peejeh Exp $
+// $Id: phpDoctor.php,v 1.10 2005/05/10 22:40:03 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class PHPDoctor
 {
@@ -99,6 +99,12 @@ class PHPDoctor
 	 * @var str[]
 	 */
 	var $_files = array();
+    
+	/** Array of files not to parse.
+	 *
+	 * @var str[]
+	 */
+    var $_ignore = array();
 
 	/** Directory containing files for parsing.
 	 *
@@ -235,6 +241,9 @@ class PHPDoctor
 		} else {
 			$files = array('*.php');
 		}
+		if (isset($this->_options['ignore'])) {
+			$this->_ignore = explode(',', $this->_options['ignore']);
+		}
 		
 		$this->verbose('Searching for files to parse...');
 		$this->_files = array_unique($this->_buildFileList($files, $this->_sourcePath));
@@ -283,23 +292,25 @@ class PHPDoctor
 		$dir = $this->fixPath($dir);
 
 		foreach ($files as $filename) {
-			$filename = $this->makeAbsolutePath(trim($filename), $dir);
-			$globResults = glob(str_replace('\\', '/', $filename)); // switch slashes since old versions of glob need forward slashes
-			if ($globResults) {
-				foreach ($globResults as $filename) {
-					$list[] = realpath($filename);
-				}
-			} elseif (!$this->_subdirs) {
-				$this->error('Could not find file "'.$filename.'"');
-				exit;
-			}
+            if (!in_array(basename($filename), $this->_ignore)) {
+                $filename = $this->makeAbsolutePath(trim($filename), $dir);
+                $globResults = glob(str_replace('\\', '/', $filename)); // switch slashes since old versions of glob need forward slashes
+                if ($globResults) {
+                    foreach ($globResults as $filename) {
+                        $list[] = realpath($filename);
+                    }
+                } elseif (!$this->_subdirs) {
+                    $this->error('Could not find file "'.$filename.'"');
+                    exit;
+                }
+            }
 		}
 		
 		if ($this->_subdirs) { // recurse into subdir
 			$globResults = glob($dir.'*', GLOB_ONLYDIR); // get subdirs
 			if ($globResults) {
 				foreach ($globResults as $dirName) {
-					if (GLOB_ONLYDIR || is_dir($dirName)) { // handle missing only dir support
+					if ((GLOB_ONLYDIR || is_dir($dirName)) && !in_array(basename($dirName), $this->_ignore)) { // handle missing only dir support
 						$list = array_merge($list, $this->_buildFileList($files, $this->makeAbsolutePath($dirName, $this->_path)));
 					}
 				}
@@ -476,7 +487,7 @@ class PHPDoctor
 				
 				$tokens = token_get_all($fileString);
 
-				$this->message('Parsing tokens...');
+				echo 'Parsing tokens';
 
 				/* This array holds data gathered before the type of element is
 				discovered and an object is created for it, including doc comment
@@ -490,6 +501,8 @@ class PHPDoctor
 
 				$open_curly_braces = FALSE;
 				$in_parsed_string = FALSE;
+                
+                $counter = 0;
 
 				foreach ($tokens as $key => $token) {
 					if (!$in_parsed_string && is_array($token)) {
@@ -860,7 +873,14 @@ class PHPDoctor
 							break;
 						}
 					}
+                    
+                    $counter++;
+                    if ($counter > 99) {
+                        echo '.';
+                        $counter = 0;
+                    }
 				}
+                echo "\n";
 
 
 			} else {

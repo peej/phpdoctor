@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: doc.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
+// $Id: doc.php,v 1.8 2005/05/10 22:40:03 peejeh Exp $
 
 /** Abstract base class of all Doc classes. Doc item's are representations of
  * PHP language constructs (class, package, method,...) which have comments
  * and have been processed by this run of PHPDoctor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @abstract
  */
 class Doc {
@@ -120,7 +120,7 @@ class Doc {
     {
 		return $this->_name;
 	}
-	
+    
 	/** Return tags of the specified kind in this Doc item. For example, if
 	 * 'tagName' has value "@serial", all tags in this Doc item of type "@serial"
 	 * will be returned. If NULL is given for 'tagName', all tags in this Doc

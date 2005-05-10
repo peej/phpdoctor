@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
+// $Id: htmlWriter.php,v 1.8 2005/05/10 22:40:04 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class HTMLWriter
 {
@@ -74,16 +74,15 @@ class HTMLWriter
 	function _htmlHeader($title)
     {
 	
-		$output = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">'."\n\n";
-		$output .= '<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">'."\n";
+		$output = $this->_doctype();
+		$output .= '<html lang="en">'."\n";
 		$output .= "<head>\n\n";
 
-		$output .= '<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />'."\n";
-		$output .= '<meta generator="PHPDoctor '.$this->_doclet->version().' (http://phpdoctor.sourceforge.net/)" />'."\n";
-		$output .= '<meta when="'.date('r').'" />'."\n\n";
+		$output .= '<meta name="generator" content="PHPDoctor '.$this->_doclet->version().' (http://phpdoctor.sourceforge.net/)">'."\n";
+		$output .= '<meta name="when" content="'.date('r').'">'."\n\n";
 		
-		$output .= '<link rel="stylesheet" type="text/css" href="'.str_repeat('../', $this->_depth).'stylesheet.css" />'."\n";
-		$output .= '<link rel="start" href="'.str_repeat('../', $this->_depth).'overview-summary.html" />'."\n\n";
+		$output .= '<link rel="stylesheet" type="text/css" href="'.str_repeat('../', $this->_depth).'stylesheet.css">'."\n";
+		$output .= '<link rel="start" href="'.str_repeat('../', $this->_depth).'overview-summary.html">'."\n\n";
 		
 		$output .= '<title>';
 		if ($title) {
@@ -97,6 +96,15 @@ class HTMLWriter
 		return $output;
 
 	}
+    
+    /** Get the HTML DOCTYPE for this output
+     *
+     * @return str
+     */
+    function _doctype()
+    {
+        return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">'."\n\n";
+    }
 	
 	/** Build the HTML footer.
    *
@@ -127,7 +135,7 @@ class HTMLWriter
 	function _shellFooter($path)
     {
 		$output = $this->_nav($path);
-		$output .= "<hr />\n\n";
+		$output .= "<hr>\n\n";
 		$output .= '<p id="footer">'.$this->_doclet->bottom().'</p>'."\n\n";
 		$output .= "</body>\n\n";
 		return $output;

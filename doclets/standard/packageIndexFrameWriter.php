@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageIndexFrameWriter.php,v 1.4 2005/05/08 21:53:30 peejeh Exp $
+// $Id: packageIndexFrameWriter.php,v 1.5 2005/05/10 22:40:04 peejeh Exp $
 
 /** This generates the overview-frame.html file used for displaying the list
  * of package links in the upper-left frame in the frame-formatted default
  * output.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 class PackageIndexFrameWriter extends HTMLWriter
 {
@@ -54,7 +54,9 @@ class PackageIndexFrameWriter extends HTMLWriter
 		$rootDoc =& $this->_doclet->rootDoc();
 
 		echo "<ul>\n";
-		foreach($rootDoc->packages() as $name => $package) {
+        $packages =& $rootDoc->packages();
+        asort($packages);
+		foreach($packages as $name => $package) {
 			echo '<li><a href="'.$package->asPath().'/package-frame.html" target="index">'.$package->name().'</a></li>'."\n";
 		}
 		echo "</ul>\n\n";

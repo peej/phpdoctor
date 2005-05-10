@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: standard.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
+// $Id: standard.php,v 1.6 2005/05/10 22:40:04 peejeh Exp $
 
 // load classes
 require('htmlWriter.php');
@@ -35,7 +35,7 @@ require('globalWriter.php');
  * produced by the Javadoc standard doclet.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 class Standard
 {
@@ -143,7 +143,7 @@ class Standard
 		
 		// write package frame
 		$packageFrameWriter =& new packageFrameWriter($this);
-		
+        
 		// write classes
 		$classWriter =& new classWriter($this);
 		

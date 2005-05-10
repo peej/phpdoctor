@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageWriter.php,v 1.8 2005/05/08 21:53:30 peejeh Exp $
+// $Id: packageWriter.php,v 1.9 2005/05/10 22:40:04 peejeh Exp $
 
 /** This generates the package-summary.html files that list the interfaces and
  * classes for a given package.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class PackageWriter extends HTMLWriter
 {
@@ -72,7 +72,10 @@ class PackageWriter extends HTMLWriter
 			$this->_write('overview-tree.html', 'Overview', TRUE);
 		}
 
-		foreach($rootDoc->packages() as $packageName => $package) {
+        $packages =& $rootDoc->packages();
+        asort($packages);
+        
+		foreach($packages as $packageName => $package) {
 		
 			$this->_depth = $package->depth() + 1;
 
@@ -86,7 +89,7 @@ class PackageWriter extends HTMLWriter
 			
 			ob_start();
 			
-			echo "<hr />\n\n";
+			echo "<hr>\n\n";
 		
 			echo '<h1>Package ', $package->name(), "</h1>\n\n";
 
@@ -98,6 +101,7 @@ class PackageWriter extends HTMLWriter
 
 			$classes =& $package->ordinaryClasses();
 			if ($classes) {
+                asort($classes);
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Class Summary</th></tr>', "\n";
 				foreach($classes as $name => $class) {
@@ -112,11 +116,12 @@ class PackageWriter extends HTMLWriter
 
 			$interfaces =& $package->interfaces();
 			if ($interfaces) {
+                asort($interfaces);
 				echo '<table class="title">'."\n";
 				echo '<tr><th colspan="2" class="title">Interface Summary</th></tr>'."\n";
 				foreach($interfaces as $name => $interface) {
 					$textTag =& $interfaces[$name]->tags('@text');
-					echo '<tr><td class="name"><a href="', $interfaces[$name]->name(), '.html">', $interfaces[$name]->name(), '</a></td>';
+					echo '<tr><td class="name"><a href="', $interfaces[$name]->asPath(), '">', $interfaces[$name]->name(), '</a></td>';
 					echo '<td class="description">';
 					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
 					echo "</td></tr>\n";
@@ -126,11 +131,12 @@ class PackageWriter extends HTMLWriter
 
 			$exceptions =& $package->exceptions();
 			if ($exceptions) {
+                asort($exceptions);
 				echo '<table class="title">'."\n";
 				echo '<tr><th colspan="2" class="title">Exception Summary</th></tr>'."\n";
 				foreach($exceptions as $name => $exception) {
 					$textTag =& $exceptions[$name]->tags('@text');
-					echo '<tr><td class="name"><a href="', $exceptions[$name]->name(), '.html">', $exceptions[$name]->name(), '</a></td>';
+					echo '<tr><td class="name"><a href="', $exceptions[$name]->asPath(), '">', $exceptions[$name]->name(), '</a></td>';
 					echo '<td class="description">';
 					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
 					echo "</td></tr>\n";
@@ -140,6 +146,7 @@ class PackageWriter extends HTMLWriter
 			
 			$functions =& $package->functions();
 			if ($functions) {
+                asort($functions);
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
 				foreach($functions as $name => $function) {
@@ -154,6 +161,7 @@ class PackageWriter extends HTMLWriter
 			
 			$globals =& $package->globals();
 			if ($globals) {
+                asort($globals);
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>', "\n";
 				foreach($globals as $name => $global) {
@@ -172,7 +180,7 @@ class PackageWriter extends HTMLWriter
 				echo '<div class="comment" id="overview_description">'. $this->_processInlineTags($textTag), "</div>\n\n";
 			}
 			
-			echo "<hr />\n\n";
+			echo "<hr>\n\n";
 
 			$this->_output = ob_get_contents();
 			ob_end_clean();
@@ -182,16 +190,17 @@ class PackageWriter extends HTMLWriter
 			if ($displayTree) {
 			
 				$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-				$this->_sections[1] = array('title' => 'Package', 'url' => 'package-summary.html', 'relative' => TRUE);
+				$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html', 'relative' => TRUE);
 				$this->_sections[2] = array('title' => 'Class');
 				//$this->_sections[3] = array('title' => 'Use');
-				$this->_sections[4] = array('title' => 'Tree', 'url' => 'package-tree.html', 'selected' => TRUE, 'relative' => TRUE);
+				$this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html', 'selected' => TRUE, 'relative' => TRUE);
 				//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 				//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
 
 				$tree = array();
 				$classes =& $package->ordinaryClasses();
 				if ($classes) {
+                    asort($classes);
 					foreach ($classes as $class) {
 						$this->_buildTree($tree, $class);
 					}

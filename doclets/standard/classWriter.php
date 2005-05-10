@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.9 2005/05/08 21:53:30 peejeh Exp $
+// $Id: classWriter.php,v 1.10 2005/05/10 22:40:04 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -44,6 +44,7 @@ class ClassWriter extends HTMLWriter
 		$phpdoctor =& $this->_doclet->phpdoctor();
 		
 		$packages =& $rootDoc->packages();
+        asort($packages);
 
 		foreach ($packages as $packageName => $package) {
 
@@ -60,11 +61,12 @@ class ClassWriter extends HTMLWriter
 			$classes =& $package->ordinaryClasses();
 			
 			if ($classes) {
+                asort($classes);
 				foreach ($classes as $name => $class) {
 				
 					ob_start();
 					
-					echo "<hr />\n\n";
+					echo "<hr>\n\n";
 					
 					echo '<h3>', $class->qualifiedName(), "</h3>\n\n";
 					
@@ -87,15 +89,15 @@ class ClassWriter extends HTMLWriter
 						echo "</dl>\n\n";
 					}
 					
-					echo "<hr />\n\n";
+					echo "<hr>\n\n";
 
 					echo '<p>', $class->modifiers(), ' class <strong>', $class->name(), '</strong>';
 					if ($class->superclass()) {
 						$superclass =& $rootDoc->classNamed($class->superclass());
 						if ($superclass) {
-							echo '<br />extends <a href="', $superclass->name(), '.html">', $superclass->name(), "</a></p>\n\n";
+							echo '<br>extends <a href="', str_repeat('../', $this->_depth), $superclass->asPath(), '">', $superclass->name(), "</a></p>\n\n";
 						} else {
-							echo '<br />extends ', $class->superclass(), "</p>\n\n";
+							echo '<br>extends ', $class->superclass(), "</p>\n\n";
 						}
 					}
 					echo "</p>\n\n";
@@ -107,11 +109,14 @@ class ClassWriter extends HTMLWriter
 
 					$this->_processTags($class->tags());
 
-					echo "<hr />\n\n";
+					echo "<hr>\n\n";
 
 					$fields =& $class->fields();
+                    asort($fields);
 					$constructors =& $class->constructor();
+                    asort($constructors);
 					$methods =& $class->methods();
+                    asort($methods);
 
 					if ($fields) {
 						echo '<a name="summary_field"></a>', "\n";
@@ -207,7 +212,7 @@ class ClassWriter extends HTMLWriter
 								echo "</div>\n\n";
 							}
 							$this->_processTags($field->tags());
-							echo "<hr />\n\n";
+							echo "<hr>\n\n";
 						}
 					}
 
@@ -229,7 +234,7 @@ class ClassWriter extends HTMLWriter
 								echo "</div>\n\n";
 							}
 							$this->_processTags($constructor->tags());
-							echo "<hr />\n\n";
+							echo "<hr>\n\n";
 						}
 					}
 
@@ -251,7 +256,7 @@ class ClassWriter extends HTMLWriter
 								echo "</div>\n\n";
 							}
 							$this->_processTags($method->tags());
-							echo "<hr />\n\n";
+							echo "<hr>\n\n";
 						}
 					}
 
@@ -262,8 +267,7 @@ class ClassWriter extends HTMLWriter
 				}
 			}
 		}
-	
-	}
+    }
 
 	/** Build the class hierarchy tree which is placed at the top of the page.
 	 *
@@ -288,19 +292,19 @@ class ClassWriter extends HTMLWriter
 				$output .= $result[0];
 				$depth = ++$result[1];
 			} else {
-				$output .= $class->superclass().'<br />';
-				$output .= str_repeat('     ', $depth).'  |<br />';
+				$output .= $class->superclass().'<br>';
+				$output .= str_repeat('     ', $depth).'  |<br>';
 				$output .= str_repeat('     ', $depth).'  +--';
 			}
 		}
 		if ($depth > 0) {
-			$output .= str_repeat('     ', $depth - 1).'  |<br />';
+			$output .= str_repeat('     ', $depth - 1).'  |<br>';
 			$output .= str_repeat('     ', $depth - 1).'  +--';
 		}
 		if ($start) {
 			$output .= '<strong>'.$class->name().'</strong><br />';			
 		} else {
-			$output .= '<a href="'.$class->name().'.html">'.$class->name().'</a><br />';
+			$output .= '<a href="'.str_repeat('../', $this->_depth).$class->asPath().'">'.$class->name().'</a><br>';
 		}
 		return array($output, $depth);
 	}
@@ -316,12 +320,13 @@ class ClassWriter extends HTMLWriter
     {
 		$fields =& $element->fields();
 		if ($fields) {
+            asort($fields);
 			$num = count($fields); $foo = 0;
 			echo '<table class="inherit">', "\n";
 			echo '<tr><th colspan="2" class="inherit">Fields inherited from ', $element->qualifiedName(), "</th></tr>\n";
 			echo '<tr><td>';
 			foreach($fields as $field) {
-				echo '<a href="', str_repeat('../', $package->depth() + 1), $field->asPath(), '">', $field->name(), '</a>';
+				echo '<a href="', str_repeat('../', $this->_depth), $field->asPath(), '">', $field->name(), '</a>';
 				if (++$foo < $num) {
 					echo ', ';
 				}
@@ -348,12 +353,13 @@ class ClassWriter extends HTMLWriter
     {
 		$methods =& $element->methods();
 		if ($methods) {
+            asort($methods);
 			$num = count($methods); $foo = 0;
 			echo '<table class="inherit">', "\n";
 			echo '<tr><th colspan="2" class="inherit">Methods inherited from ', $element->qualifiedName(), "</th></tr>\n";
 			echo '<tr><td>';
 			foreach($methods as $method) {
-				echo '<a href="', str_repeat('../', $package->depth() + 1), $method->asPath(), '">', $method->name(), '</a>';
+				echo '<a href="', str_repeat('../', $this->_depth), $method->asPath(), '">', $method->name(), '</a>';
 				if (++$foo < $num) {
 					echo ', ';
 				}

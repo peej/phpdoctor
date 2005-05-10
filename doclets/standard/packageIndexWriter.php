@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageIndexWriter.php,v 1.8 2005/05/08 21:53:30 peejeh Exp $
+// $Id: packageIndexWriter.php,v 1.9 2005/05/10 22:40:04 peejeh Exp $
 
 /** This class generates the overview-summary.html file that lists all parsed
  * packages.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class PackageIndexWriter extends HTMLWriter
 {
@@ -50,7 +50,7 @@ class PackageIndexWriter extends HTMLWriter
 
 		ob_start();
 		
-		echo "<hr />\n\n";
+		echo "<hr>\n\n";
 		
 		echo '<h1>'.$this->_doclet->docTitle()."</h1>\n\n";
 
@@ -67,7 +67,9 @@ class PackageIndexWriter extends HTMLWriter
 
 		echo '<table class="title">'."\n";
 		echo '<tr><th colspan="2" class="title">Packages</th></tr>'."\n";
-		foreach($rootDoc->packages() as $name => $package) {
+        $packages =& $rootDoc->packages();
+        asort($packages);
+		foreach($packages as $name => $package) {
 			$textTag =& $package->tags('@text');
 			echo '<tr><td class="name"><a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a></td>';
 			echo '<td class="description">'.strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>').'</td></tr>'."\n";
@@ -82,7 +84,7 @@ class PackageIndexWriter extends HTMLWriter
 			}
 		}
 		
-		echo "<hr />\n\n";
+		echo "<hr>\n\n";
 
 		$this->_output = ob_get_contents();
 		ob_end_clean();
