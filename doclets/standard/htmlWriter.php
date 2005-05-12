@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.8 2005/05/10 22:40:04 peejeh Exp $
+// $Id: htmlWriter.php,v 1.9 2005/05/12 21:25:10 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class HTMLWriter
 {
@@ -242,26 +242,36 @@ class HTMLWriter
 	 */
 	function _processTags(&$tags)
     {
-		echo "<dl>\n";
+		$tagString = '';
 		foreach ($tags as $key => $tag) {
 			if ($key != '@text') {
 				if (is_array($tag)) {
-					echo '<dt>', $tag[0]->displayName(), '</dt>';
-					foreach ($tag as $tagFromGroup) {
-						echo '<dd>', $tagFromGroup->text(), "</dd>\n";
-					}		
+                    $hasText = FALSE;
+                    foreach ($tag as $key => $tagFromGroup) {
+                        if ($tagFromGroup->text() != '') {
+                            $hasText = TRUE;
+                        }
+                    }
+                    if ($hasText) {
+                        $tagString .= '<dt>'.$tag[0]->displayName().":</dt>\n";
+                        foreach ($tag as $tagFromGroup) {
+                            $tagString .= '<dd>'.$tagFromGroup->text()."</dd>\n";
+                        }
+                    }
 				} else {
 					$text = $tag->text();
 					if ($text != '') {
-						echo '<dt>', $tag->displayName(), ':</dt>';
-						echo '<dd>', $text, "</dd>\n";
+						$tagString .= '<dt>'.$tag->displayName().":</dt>\n";
+						$tagString .= '<dd>'.$text."</dd>\n";
 					} elseif ($tag->displayEmpty()) {
-						echo '<dt>', $tag->displayName(), '.</dt>';
+						$tagString .= '<dt>'.$tag->displayName().".</dt>\n";
 					}
 				}
 			}
 		}
-		echo "</dl>\n";
+        if ($tagString) {
+            echo "<dl>\n", $tagString, "</dl>\n";
+        }
 	}
 	
 	/** Convert inline tags into a string for outputting.

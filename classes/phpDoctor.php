@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.10 2005/05/10 22:40:03 peejeh Exp $
+// $Id: phpDoctor.php,v 1.11 2005/05/12 21:25:09 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class PHPDoctor
 {
@@ -260,18 +260,18 @@ class PHPDoctor
 		if (isset($this->_options['constants'])) $this->_constants = $this->_options['constants'];
 		if (isset($this->_options['tree'])) $this->_tree = $this->_options['tree'];
 
-		if (isset($this->_options['public']) && $this->_options['public']) {
+		if (isset($this->_options['private']) && $this->_options['private']) {
 			$this->_public = TRUE;
-			$this->_protected = FALSE;
-			$this->_private = FALSE;
+			$this->_protected = TRUE;
+			$this->_private = TRUE;
 		} elseif (isset($this->_options['protected']) && $this->_options['protected']) {
 			$this->_public = TRUE;
 			$this->_protected = TRUE;
 			$this->_private = FALSE;
-		} elseif (isset($this->_options['private']) && $this->_options['private']) {
+		} elseif (isset($this->_options['public']) && $this->_options['public']) {
 			$this->_public = TRUE;
-			$this->_protected = TRUE;
-			$this->_private = TRUE;
+			$this->_protected = FALSE;
+			$this->_private = FALSE;
 		}
 
 		if (isset($this->_options['doclet'])) $this->_doclet = $this->_options['doclet'];
@@ -748,8 +748,47 @@ class PHPDoctor
 							break;
 
 						case T_VARIABLE:
+							// read global variable
+							if (get_class($ce) == 'rootdoc') { // global var, add to package
+								$global =& new fieldDoc($tokens[$key][1], $ce, $rootDoc); // create constant object
+								$this->verbose('Found '.get_class($global).': global variable '.$global->name());
+								if (isset($tokens[$key - 1][0]) && is_array($tokens[$key - 2]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
+									$global->set('type', new type($tokens[$key - 2][1]), $rootDoc);
+								}
+                                while ($tokens[$key] != '=' && $tokens[$key] != ';') {
+                                    $key++;
+                                }
+                                if ($tokens[$key] == '=') {
+									$default = '';
+									$key2 = $key + 1;
+									do {
+										if (is_array($tokens[$key2])) {
+											if ($tokens[$key2][1] != '=') $default .= $tokens[$key2][1];
+										} else {
+											if ($tokens[$key2] != '=') $default .= $tokens[$key2];
+										}
+										$key2++;
+									} while(isset($tokens[$key2]) && $tokens[$key2] != ';' && $tokens[$key2] != ',' && $tokens[$key2] != ')');
+									$global->set('value', trim($default, ' ()')); // set value
+								}
+								if (isset($currentData['docComment'])) { // set doc comment
+									$global->set('docComment', $currentData['docComment']);
+								}
+								$global->set('data', $currentData); // set data
+								if (isset($currentData['package'])) { // set package
+									$global->set('package', $currentData['package']);
+								} else {
+									$global->set('package', $currentPackage);
+								}
+								$global->mergeData();
+								$parentPackage =& $rootDoc->packageNamed($global->packageName(), TRUE); // get parent package
+								if ($this->_includeElements($global)) {
+									$parentPackage->addGlobal($global); // add constant to package
+								}
+								$currentData = array(); // empty data store
+                                
 						// read member variable
-							if (
+							} elseif (
 								(isset($currentData['var']) && $currentData['var'] == 'var') || 
 								(isset($currentData['access']) && ($currentData['access'] == 'public' || $currentData['access'] == 'protected' || $currentData['access'] == 'private'))
 							) {
@@ -783,41 +822,6 @@ class PHPDoctor
 								} while($tokens[$key] != ';');
 								$currentData = array(); // empty data store
 
-							// read global variable
-							} elseif (get_class($ce) == 'rootdoc') { // global var, add to package
-								$global =& new fieldDoc($tokens[$key][1], $ce, $rootDoc); // create constant object
-								$this->verbose('Found '.get_class($global).': global variable '.$global->name());
-								if (isset($tokens[$key - 1][0]) && is_array($tokens[$key - 2]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
-									$global->set('type', new type($tokens[$key - 2][1]), $rootDoc);
-								}
-								if ($tokens[$key + 1] == '=' || $tokens[$key + 2] == '=') {
-									$default = '';
-									$key2 = $key + 1;
-									do {
-										if (is_array($tokens[$key2])) {
-											if ($tokens[$key2][1] != '=') $default .= $tokens[$key2][1];
-										} else {
-											if ($tokens[$key2] != '=') $default .= $tokens[$key2];
-										}
-										$key2++;
-									} while(isset($tokens[$key2]) && $tokens[$key2] != ';' && $tokens[$key2] != ',' && $tokens[$key2] != ')');
-									$global->set('value', trim($default, ' ()')); // set value
-								}
-								if (isset($currentData['docComment'])) { // set doc comment
-									$global->set('docComment', $currentData['docComment']);
-								}
-								$global->set('data', $currentData); // set data
-								if (isset($currentData['package'])) { // set package
-									$global->set('package', $currentData['package']);
-								} else {
-									$global->set('package', $currentPackage);
-								}
-								$global->mergeData();
-								$parentPackage =& $rootDoc->packageNamed($global->packageName(), TRUE); // get parent package
-								if ($this->_includeElements($global)) {
-									$parentPackage->addGlobal($global); // add constant to package
-								}
-								$currentData = array(); // empty data store
 							}
 							break;
 
@@ -876,7 +880,7 @@ class PHPDoctor
                     
                     $counter++;
                     if ($counter > 99) {
-                        echo '.';
+                        if (!$this->_verbose) echo '.';
                         $counter = 0;
                     }
 				}
@@ -1093,7 +1097,7 @@ class PHPDoctor
 		} elseif ($element->isGlobal() && $element->isFinal() && !$this->_constants) {
 			return FALSE;
 		} elseif ($this->_private) {
-			return TRUE;	
+			return TRUE;
 		} elseif ($this->_protected && ($element->isPublic() || $element->isProtected)) {
 			return TRUE;
 		} elseif ($this->_public && $element->isPublic()) {

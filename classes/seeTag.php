@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: seeTag.php,v 1.9 2005/05/08 21:53:30 peejeh Exp $
+// $Id: seeTag.php,v 1.10 2005/05/12 21:25:09 peejeh Exp $
 
 /** Represents a see tag.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class SeeTag extends Tag
 {
@@ -108,12 +108,14 @@ class SeeTag extends Tag
 				} else {
 					$classes =& $this->_root->classes();
 				}
-				foreach ($classes as $key => $class) {
-					if ($class->name() == $className) {
-						break;
-					}
-				}
-				$class =& $classes[$key];
+                if ($classes) {
+                    foreach ($classes as $key => $class) {
+                        if ($class->name() == $className) {
+                            break;
+                        }
+                    }
+                    $class =& $classes[$key];
+                }
 			}
 			if ($elementName) { // get element
 				if (isset($class)) { // from class
@@ -262,7 +264,7 @@ class SeeTag extends Tag
 						}
 						if (!isset($element)) {
 							$globals =& $this->_root->globals();
-							if ($$globals) {
+							if ($globals) {
 								foreach($globals as $key => $global) {
 									if ($global->name() == $elementName) {
 										$element =& $globals[$key];

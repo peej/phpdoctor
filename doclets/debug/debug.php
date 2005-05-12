@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: debug.php,v 1.5 2005/05/08 21:53:30 peejeh Exp $
+// $Id: debug.php,v 1.6 2005/05/12 21:25:09 peejeh Exp $
 
 /** The debugging doclet. This doclet outputs all the parsed data in a format
  * suitable for debugging PHPDoctor.
  *
  * @package PHPDoctor.Doclets.Debug
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 class Debug
 {
@@ -45,7 +45,6 @@ class Debug
 		echo "Root\n";
 		foreach ($rootDoc->packages() as $package) {
 			echo '|- ', $package->name(), "\n";
-			
 			$this->fieldDoc($package->globals());
 			$this->methodDoc($package->functions());
 			$this->classDoc($package->allClasses());
