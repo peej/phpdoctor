@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.11 2005/05/12 21:25:09 peejeh Exp $
+// $Id: phpDoctor.php,v 1.12 2005/05/13 22:35:14 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class PHPDoctor
 {
@@ -752,13 +752,13 @@ class PHPDoctor
 							if (get_class($ce) == 'rootdoc') { // global var, add to package
 								$global =& new fieldDoc($tokens[$key][1], $ce, $rootDoc); // create constant object
 								$this->verbose('Found '.get_class($global).': global variable '.$global->name());
-								if (isset($tokens[$key - 1][0]) && is_array($tokens[$key - 2]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
-									$global->set('type', new type($tokens[$key - 2][1]), $rootDoc);
+								if (isset($tokens[$key - 1][0]) && isset($tokens[$key - 2][0]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
+									$global->set('type', new type($tokens[$key - 2][1], $rootDoc));
 								}
-                                while ($tokens[$key] != '=' && $tokens[$key] != ';') {
+                                while (isset($tokens[$key]) && $tokens[$key] != '=' && $tokens[$key] != ';') {
                                     $key++;
                                 }
-                                if ($tokens[$key] == '=') {
+                                if (isset($tokens[$key]) && $tokens[$key] == '=') {
 									$default = '';
 									$key2 = $key + 1;
 									do {
