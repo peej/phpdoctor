@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.12 2005/05/13 22:35:14 peejeh Exp $
+// $Id: phpDoctor.php,v 1.13 2005/05/14 20:49:03 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 class PHPDoctor
 {
@@ -563,7 +563,11 @@ class PHPDoctor
 
 						case T_EXTENDS:
 						// get extends clause
-							$ce->set('superclass', $this->_getNext($tokens, $key, T_STRING));
+                            $superClassName = $this->_getNext($tokens, $key, T_STRING);
+							$ce->set('superclass', $superClassName);
+                            if ($superClass =& $rootDoc->classNamed($superClassName) && $commentTag =& $superClass->tags('@text')) {
+                                $ce->setTag('@text', $commentTag);
+                            }
 							break;
 
 						case T_IMPLEMENTS:
@@ -951,7 +955,6 @@ class PHPDoctor
 		$key++;
 		if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
 		while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
-//		while(!is_array($tokens[$key]) || $tokens[$key][0] != $whatToGet) {
 			$key++;
 			if (!isset($tokens[$key])) return FALSE;
 		}
@@ -971,7 +974,6 @@ class PHPDoctor
 		$key--;
 		if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
 		while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
-//		while(!is_array($tokens[$key]) || $tokens[$key][0] != $whatToGet) {
 			$key--;
 			if (!isset($tokens[$key])) return FALSE;
 		}

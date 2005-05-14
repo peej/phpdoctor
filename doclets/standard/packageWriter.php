@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageWriter.php,v 1.9 2005/05/10 22:40:04 peejeh Exp $
+// $Id: packageWriter.php,v 1.10 2005/05/14 20:49:03 peejeh Exp $
 
 /** This generates the package-summary.html files that list the interfaces and
  * classes for a given package.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class PackageWriter extends HTMLWriter
 {
@@ -50,7 +50,7 @@ class PackageWriter extends HTMLWriter
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'selected' => TRUE);
 			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 
 			$tree = array();
 			$classes =& $rootDoc->classes();
@@ -85,7 +85,7 @@ class PackageWriter extends HTMLWriter
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($displayTree) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
 			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 			
 			ob_start();
 			

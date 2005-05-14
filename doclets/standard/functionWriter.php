@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.7 2005/05/10 22:40:04 peejeh Exp $
+// $Id: functionWriter.php,v 1.8 2005/05/14 20:49:03 peejeh Exp $
 
 /** This generates the HTML API documentation for each global function.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class FunctionWriter extends HTMLWriter
 {
@@ -52,7 +52,7 @@ class FunctionWriter extends HTMLWriter
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
 			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 		
 			$this->_depth = $package->depth() + 1;
 

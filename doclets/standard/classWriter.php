@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.10 2005/05/10 22:40:04 peejeh Exp $
+// $Id: classWriter.php,v 1.11 2005/05/14 20:49:03 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -54,7 +54,7 @@ class ClassWriter extends HTMLWriter
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
 			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			//$this->_sections[6] = array('title' => 'Index', 'url' => 'index-files/index-1.html');
+			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 		
 			$this->_depth = $package->depth() + 1;
 

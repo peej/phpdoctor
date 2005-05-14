@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageDoc.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
+// $Id: packageDoc.php,v 1.8 2005/05/14 20:49:03 peejeh Exp $
 
 /** Represents a PHP package. Provides access to information about the package,
  * the package's comment and tags, and the classes in the package.
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class PackageDoc extends Doc
 {
@@ -108,6 +108,11 @@ class PackageDoc extends Doc
 	 */
 	function addClass(&$class)
     {
+        if (isset($this->_classes[$class->name()])) {
+            $phpdoctor =& $this->_root->phpdoctor();
+            echo "\n";
+            $phpdoctor->warning('Found class '.$class->name().' again, overwriting previous version');
+        }
 		$this->_classes[$class->name()] =& $class;
 	}
 
@@ -117,7 +122,9 @@ class PackageDoc extends Doc
 	 */
 	function addGlobal(&$global)
     {
-		$this->_globals[$global->name()] =& $global;
+        if (!isset($this->_globals[$global->name()])) {
+            $this->_globals[$global->name()] =& $global;
+        }
 	}
 
 	/** Add a function to this package.
@@ -126,6 +133,11 @@ class PackageDoc extends Doc
 	 */
 	function addFunction(&$function)
     {
+        if (isset($this->_functions[$function->name()])) {
+            $phpdoctor =& $this->_root->phpdoctor();
+            echo "\n";
+            $phpdoctor->warning('Found function '.$function->name().' again, overwriting previous version');
+        }
 		$this->_functions[$function->name()] =& $function;
 	}
 	

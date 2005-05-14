@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: programElementDoc.php,v 1.7 2005/05/10 22:40:03 peejeh Exp $
+// $Id: programElementDoc.php,v 1.8 2005/05/14 20:49:03 peejeh Exp $
 
 /** Represents a PHP program element: global, function, class, interface,
  * field, constructor, or method. This is an abstract class dealing with
  * information common to these elements.
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @abstract
  */
 class ProgramElementDoc extends Doc
@@ -219,11 +219,11 @@ modifiers() would return:
 			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html');
 		} elseif ($this->isConstructor() || $this->isMethod() || $this->isField()) {
 			$class =& $this->containingClass();
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#'.$this->_name);
+			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name;
 		} elseif ($this->isGlobal()) {
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#'.$this->_name);
+			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#').$this->_name;
 		} elseif ($this->isFunction()) {
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#'.$this->_name);
+			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#').$this->_name;
 		}
 		return NULL;
 	}
