@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: methodDoc.php,v 1.7 2005/05/10 22:40:03 peejeh Exp $
+// $Id: methodDoc.php,v 1.8 2005/05/15 17:21:34 peejeh Exp $
 
 /** Represents a PHP function or method (member function).
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class MethodDoc extends ExecutableDoc
 {
@@ -83,9 +83,9 @@ class MethodDoc extends ExecutableDoc
 		$classDoc =& $this->_returnType->asClassDoc();
 		if ($classDoc) {
 			$packageDoc =& $classDoc->containingPackage();
-            return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$classDoc->asPath().'">'.$classDoc->name().'</a>';
+            return '<a href="'.str_repeat('../', $myPackage->depth() + 1).$classDoc->asPath().'">'.$classDoc->name().$this->_returnType->dimension().'</a>';
 		} else {
-			return $this->_returnType->typeName();
+			return $this->_returnType->typeName().$this->_returnType->dimension();
 		}
 	}
 

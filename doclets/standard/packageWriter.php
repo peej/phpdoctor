@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageWriter.php,v 1.11 2005/05/15 15:50:52 peejeh Exp $
+// $Id: packageWriter.php,v 1.12 2005/05/15 17:21:34 peejeh Exp $
 
 /** This generates the package-summary.html files that list the interfaces and
  * classes for a given package.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class PackageWriter extends HTMLWriter
 {
@@ -106,7 +106,7 @@ class PackageWriter extends HTMLWriter
 				echo '<tr><th colspan="2" class="title">Class Summary</th></tr>', "\n";
 				foreach($classes as $name => $class) {
 					$textTag =& $classes[$name]->tags('@text');
-					echo '<tr><td class="name"><a href="', $classes[$name]->asPath(), '">', $classes[$name]->name(), '</a></td>';
+					echo '<tr><td class="name"><a href="', str_repeat('../', $this->_depth), $classes[$name]->asPath(), '">', $classes[$name]->name(), '</a></td>';
 					echo '<td class="description">';
 					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
 					echo "</td></tr>\n";
@@ -121,7 +121,7 @@ class PackageWriter extends HTMLWriter
 				echo '<tr><th colspan="2" class="title">Interface Summary</th></tr>'."\n";
 				foreach($interfaces as $name => $interface) {
 					$textTag =& $interfaces[$name]->tags('@text');
-					echo '<tr><td class="name"><a href="', $interfaces[$name]->asPath(), '">', $interfaces[$name]->name(), '</a></td>';
+					echo '<tr><td class="name"><a href="', str_repeat('../', $this->_depth), $interfaces[$name]->asPath(), '">', $interfaces[$name]->name(), '</a></td>';
 					echo '<td class="description">';
 					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
 					echo "</td></tr>\n";
@@ -136,7 +136,7 @@ class PackageWriter extends HTMLWriter
 				echo '<tr><th colspan="2" class="title">Exception Summary</th></tr>'."\n";
 				foreach($exceptions as $name => $exception) {
 					$textTag =& $exceptions[$name]->tags('@text');
-					echo '<tr><td class="name"><a href="', $exceptions[$name]->asPath(), '">', $exceptions[$name]->name(), '</a></td>';
+					echo '<tr><td class="name"><a href="', str_repeat('../', $this->_depth), $exceptions[$name]->asPath(), '">', $exceptions[$name]->name(), '</a></td>';
 					echo '<td class="description">';
 					if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
 					echo "</td></tr>\n";

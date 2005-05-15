@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: paramTag.php,v 1.6 2005/05/08 21:53:30 peejeh Exp $
+// $Id: paramTag.php,v 1.7 2005/05/15 17:21:34 peejeh Exp $
 
 /** Represents a parameter tag.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 class ParamTag extends Tag
 {
@@ -129,6 +129,15 @@ class ParamTag extends Tag
 		return FALSE;
 	}
 
+	/** Return true if this Taglet should be outputted even if it has no text content.
+     *
+     * @return bool
+     */
+	function displayEmpty()
+    {
+		return FALSE;
+	}
+    
 }
 
 ?>
