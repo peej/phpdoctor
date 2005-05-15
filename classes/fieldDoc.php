@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: fieldDoc.php,v 1.7 2005/05/10 22:40:03 peejeh Exp $
+// $Id: fieldDoc.php,v 1.8 2005/05/15 10:48:10 peejeh Exp $
 
 /** Represents a PHP variable, constant or member variable (field).
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class FieldDoc extends ProgramElementDoc
 {
@@ -78,7 +78,7 @@ class FieldDoc extends ProgramElementDoc
 	 */
 	function isField()
     {
-		return TRUE;
+		return !$this->isGlobal();
 	}
 
 	/** Construct is a global.

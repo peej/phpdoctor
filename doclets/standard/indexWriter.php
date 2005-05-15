@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: indexWriter.php,v 1.1 2005/05/14 20:49:03 peejeh Exp $
+// $Id: indexWriter.php,v 1.2 2005/05/15 10:48:11 peejeh Exp $
 
 /** This generates the element index.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 class IndexWriter extends HTMLWriter
 {
@@ -58,51 +58,60 @@ class IndexWriter extends HTMLWriter
         $globals =& $rootDoc->globals();
         
         $elements = array_merge($classes, $methods, $functions, $globals);
-        ksort($elements);
+        uasort($elements, array($this, 'compareElements'));
 
         ob_start();
 
         $letter = 64;
-        foreach ($elements as $element) {
+        foreach ($elements as $name => $element) {
             $firstChar = strtoupper(substr($element->name(), 0, 1));
             if (is_object($element) && $firstChar != chr($letter)) {
                 $letter = ord($firstChar);
-                echo '<a href="#_', chr($letter), '_">', chr($letter), '</a> ';
+                echo '<a href="#letter', chr($letter), '">', chr($letter), "</a>\n";
             }
         }
 
         echo "<hr>\n\n";
         
-        echo '<dl>';
+        $first = TRUE;
         foreach ($elements as $element) {
             if (is_object($element)) {
                 if (strtoupper(substr($element->name(), 0, 1)) != chr($letter)) {
                     $letter = ord(strtoupper(substr($element->name(), 0, 1)));
-                    echo '</dl>';
-                    echo '<h1 id="_', chr($letter), '_">', chr($letter), '</h1> ';
-                    echo '<dl>';
+                    if (!$first) {
+                        echo "</dl>\n";
+                    }
+                    $first = FALSE;
+                    echo '<h1 id="letter', chr($letter), '">', chr($letter), "</h1>\n";
+                    echo "<dl>\n";
+                }
+                $parent =& $element->containingClass();
+                if ($parent && get_class($parent) != 'rootdoc') {
+                    $in = 'class <a href="'.$parent->asPath().'">'.$parent->qualifiedName().'</a>';
+                } else {
+                    $package =& $element->containingPackage();
+                    $in = 'package <a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a>';
                 }
                 switch (get_class($element)) {
                 case 'classdoc':
                     if ($element->isOrdinaryClass()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Class ', $element->qualifiedName(), '</dt>';
+                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Class in ', $in, "</dt>\n";
                     } elseif ($element->isInterface()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Interface ', $element->qualifiedName(), '</dt>';
+                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Interface in ', $in, "</dt>\n";
                     } elseif ($element->isException()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Exception ', $element->qualifiedName(), '</dt>';
+                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Exception in ', $in, "</dt>\n";
                     }
                     break;
                 case 'methoddoc':
                     if ($element->isMethod()) {
-                        $parent =& $element->containingClass();
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Method in class ', $parent->qualifiedName(), '</dt>';
+                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Method in ', $in, "</dt>\n";
                     } elseif ($element->isFunction()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Function ', $element->qualifiedName(), '</dt>';
+                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Function in ', $in, "</dt>\n";
                     }
                     break;
                 case 'fielddoc':
                     if ($element->isGlobal()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Global ', $element->qualifiedName(), '</dt>';
+                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Global in ', $in, "</dt>\n";
                     }
                     break;
                 }
@@ -111,11 +120,11 @@ class IndexWriter extends HTMLWriter
                     foreach ($firstSentenceTags as $firstSentenceTag) {
                         echo $firstSentenceTag->text();
                     }
-                    echo '</dd>';
+                    echo "</dd>\n";
                 }
             }
         }
-        echo '</dl>';
+        echo "</dl>\n";
                 
         $this->_output = ob_get_contents();
         ob_end_clean();
@@ -123,6 +132,19 @@ class IndexWriter extends HTMLWriter
         $this->_write('index-all.html', 'Index', TRUE);
 	
 	}
+    
+    function compareElements($element1, $element2)
+    {
+        $e1 = strtolower($element1->name());
+        $e2 = strtolower($element2->name());
+        if ($e1 == $e2) {
+            return 0;
+        } elseif ($e1 < $e2) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
 
 }
 
