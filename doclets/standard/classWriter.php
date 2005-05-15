@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.11 2005/05/14 20:49:03 peejeh Exp $
+// $Id: classWriter.php,v 1.12 2005/05/15 15:50:52 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -53,7 +53,7 @@ class ClassWriter extends HTMLWriter
 			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
-			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 		
 			$this->_depth = $package->depth() + 1;
@@ -119,12 +119,10 @@ class ClassWriter extends HTMLWriter
                     asort($methods);
 
 					if ($fields) {
-						echo '<a name="summary_field"></a>', "\n";
-						echo '<table class="title">', "\n";
+						echo '<table id="summary_field" class="title">', "\n";
 						echo '<tr><th colspan="2" class="title">Field Summary</th></tr>', "\n";
 						foreach ($fields as $field) {
 							$textTag =& $field->tags('@text');
-							$type =& $field->type();
 							echo "<tr>\n";
 							echo '<td class="type">', $field->modifiers(FALSE), ' ', $field->typeAsString(), "</td>\n";
 							echo '<td class="description">';
@@ -148,8 +146,7 @@ class ClassWriter extends HTMLWriter
 					}
 
 					if ($constructors) {
-						echo '<a name="summary_constr"></a>', "\n";
-						echo '<table class="title">', "\n";
+						echo '<table id="summary_constr" class="title">', "\n";
 						echo '<tr><th colspan="2" class="title">Constructor Summary</th></tr>', "\n";
 						foreach ($constructors as $constructor) {
 							$textTag =& $constructor->tags('@text');
@@ -166,8 +163,7 @@ class ClassWriter extends HTMLWriter
 					}
 
 					if ($methods) {
-						echo '<a name="summary_method"></a>', "\n";
-						echo '<table class="title">', "\n";
+						echo '<table id="summary_method" class="title">', "\n";
 						echo '<tr><th colspan="2" class="title">Method Summary</th></tr>', "\n";
 						foreach($methods as $method) {
 							$textTag =& $method->tags('@text');
@@ -192,15 +188,13 @@ class ClassWriter extends HTMLWriter
 					}
 
 					if ($fields) {
-						echo '<a name="detail_field"></a>', "\n";
-						echo '<table class="detail">', "\n";
+						echo '<table id="detail_field" class="detail">', "\n";
 						echo '<tr><th colspan="2" class="title">Field Detail</th></tr>', "\n";
 						echo "</table>\n";
 						foreach($fields as $field) {
 							$textTag =& $field->tags('@text');
 							$type =& $field->type();
-							echo '<a name="', $field->name(),'"></a>', "\n";
-							echo '<h2>', $field->name(), "</h2>\n";
+							echo '<h2 id="', $field->name(),'">', $field->name(), "</h2>\n";
 							echo '<code>', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
 							if (!$field->constantValue()) echo '$';
 							echo $field->name(), '</strong>';
@@ -217,14 +211,12 @@ class ClassWriter extends HTMLWriter
 					}
 
 					if ($constructors) {
-						echo '<a name="detail_constr"></a>', "\n";
-						echo '<table class="detail">', "\n";
+						echo '<table id="detail_constr" class="detail">', "\n";
 						echo '<tr><th colspan="2" class="title">Constructor Detail</th></tr>', "\n";
 						echo "</table>\n";
 						foreach($constructors as $constructor) {
 							$textTag =& $constructor->tags('@text');
-							echo '<a name="', $constructor->name(),'"></a>', "\n";
-							echo '<h2>', $constructor->name(), "</h2>\n";
+							echo '<h2 id="', $constructor->name(),'">', $constructor->name(), "</h2>\n";
 							echo '<code>public <strong>';
 							echo $constructor->name(), '</strong>', $constructor->flatSignature();
 							echo "</code>\n";
@@ -239,14 +231,12 @@ class ClassWriter extends HTMLWriter
 					}
 
 					if ($methods) {
-						echo '<a name="detail_method"></a>', "\n";
-						echo '<table class="detail">', "\n";
+						echo '<table id="detail_method" class="detail">', "\n";
 						echo '<tr><th colspan="2" class="title">Method Detail</th></tr>', "\n";
 						echo "</table>\n";
 						foreach($methods as $method) {
 							$textTag =& $method->tags('@text');
-							echo '<a name="', $method->name(),'"></a>', "\n";
-							echo '<h2>', $method->name(), "</h2>\n";
+							echo '<h2 id="', $method->name(),'">', $method->name(), "</h2>\n";
 							echo '<code>', $method->modifiers(), ' ', $method->returnTypeAsString(), ' <strong>';
 							echo $method->name(), '</strong>', $method->flatSignature();
 							echo "</code>\n";

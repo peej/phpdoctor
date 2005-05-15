@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: globalWriter.php,v 1.8 2005/05/14 20:49:03 peejeh Exp $
+// $Id: globalWriter.php,v 1.9 2005/05/15 15:50:52 peejeh Exp $
 
 /** This generates the HTML API documentation for each global variable.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class GlobalWriter extends HTMLWriter
 {
@@ -51,7 +51,7 @@ class GlobalWriter extends HTMLWriter
 			$this->_sections[2] = array('title' => 'Global', 'selected' => TRUE);
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 		
 			$this->_depth = $package->depth() + 1;
@@ -68,8 +68,7 @@ class GlobalWriter extends HTMLWriter
 				
 			if ($globals) {
                 asort($globals);
-				echo '<a name="summary_global"></a>', "\n";
-				echo '<table class="title">', "\n";
+				echo '<table id="summary_global" class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>', "\n";
 				foreach($globals as $global) {
 					$textTag =& $global->tags('@text');
@@ -86,15 +85,13 @@ class GlobalWriter extends HTMLWriter
 				}
 				echo "</table>\n\n";
 
-				echo '<a name="detail_global"></a>', "\n";
-				echo '<table class="detail">', "\n";
+				echo '<table id="detail_global" class="detail">', "\n";
 				echo '<tr><th colspan="2" class="title">Global Detail</th></tr>', "\n";
 				echo "</table>\n";
 				foreach($globals as $global) {
 					$textTag =& $global->tags('@text');
 					$type =& $global->type();
-					echo '<a name="', $global->name(),'"></a>', "\n";
-					echo '<h2>', $global->name(), "</h2>\n";
+					echo '<h2 id="', $global->name(),'">', $global->name(), "</h2>\n";
 					echo '<code>', $global->modifiers(), ' ', $global->typeAsString(), ' <strong>';
 					echo $global->name(), '</strong>';
 					if ($global->value()) echo ' = ', $global->value();

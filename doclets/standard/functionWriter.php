@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.8 2005/05/14 20:49:03 peejeh Exp $
+// $Id: functionWriter.php,v 1.9 2005/05/15 15:50:52 peejeh Exp $
 
 /** This generates the HTML API documentation for each global function.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class FunctionWriter extends HTMLWriter
 {
@@ -51,7 +51,7 @@ class FunctionWriter extends HTMLWriter
 			$this->_sections[2] = array('title' => 'Function', 'selected' => TRUE);
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-			//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 		
 			$this->_depth = $package->depth() + 1;
@@ -68,8 +68,7 @@ class FunctionWriter extends HTMLWriter
 				
 			if ($functions) {
                 asort($functions);
-				echo '<a name="summary_function"></a>', "\n";
-				echo '<table class="title">', "\n";
+				echo '<table id="summary_function" class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
@@ -85,14 +84,12 @@ class FunctionWriter extends HTMLWriter
 				}
 				echo "</table>\n\n";
 
-				echo '<a name="detail_function"></a>', "\n";
-				echo '<table class="detail">', "\n";
+				echo '<table id="detail_function" class="detail">', "\n";
 				echo '<tr><th colspan="2" class="title">Function Detail</th></tr>', "\n";
 				echo "</table>\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
-					echo '<a name="', $function->name(),'"></a>', "\n";
-					echo '<h2>', $function->name(), "</h2>\n";
+					echo '<h2 id="', $function->name(),'">', $function->name(), "</h2>\n";
 					echo '<code>', $function->modifiers(), ' ', $function->returnTypeAsString(), ' <strong>';
 					echo $function->name(), '</strong>', $function->flatSignature();
 					echo "</code>\n";

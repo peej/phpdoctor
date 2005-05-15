@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.9 2005/05/12 21:25:10 peejeh Exp $
+// $Id: htmlWriter.php,v 1.10 2005/05/15 15:50:52 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class HTMLWriter
 {
@@ -147,7 +147,7 @@ class HTMLWriter
 	 */
 	function _nav($path)
     {
-		$output = '<table width="100%" cellpadding="0" class="header">'."\n";
+		$output = '<table class="header">'."\n";
 		$output .= "<tr>\n";
 		$output .= '<td class="header">';
 		if ($this->_sections) {
@@ -167,7 +167,7 @@ class HTMLWriter
 		$output .= "</tr>\n";
 		$output .= "</table>\n\n";
 
-		$output .= '<table width="100%" cellpadding="0" class="small_links">'."\n";
+		$output .= '<table class="small_links">'."\n";
 		$output .= "<tr>\n";
 		$output .= "<td>\n";
 		$output .= '<a href="'.str_repeat('../', $this->_depth).'index.html" target="_top">FRAMES</a>'."\n";

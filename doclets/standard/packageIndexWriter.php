@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageIndexWriter.php,v 1.10 2005/05/14 20:49:03 peejeh Exp $
+// $Id: packageIndexWriter.php,v 1.11 2005/05/15 15:50:52 peejeh Exp $
 
 /** This class generates the overview-summary.html file that lists all parsed
  * packages.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class PackageIndexWriter extends HTMLWriter
 {
@@ -45,7 +45,7 @@ class PackageIndexWriter extends HTMLWriter
 		$this->_sections[2] = array('title' => 'Class');
 		//$this->_sections[3] = array('title' => 'Use');
 		if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-		//$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+		$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 		$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 
 		ob_start();

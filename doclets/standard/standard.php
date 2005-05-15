@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: standard.php,v 1.7 2005/05/14 20:49:03 peejeh Exp $
+// $Id: standard.php,v 1.8 2005/05/15 15:50:52 peejeh Exp $
 
 // load classes
 require('htmlWriter.php');
@@ -31,12 +31,13 @@ require('classWriter.php');
 require('functionWriter.php');
 require('globalWriter.php');
 require('indexWriter.php');
+require('deprecatedWriter.php');
 
 /** The standard doclet. This doclet generates HTML output similar to that
  * produced by the Javadoc standard doclet.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class Standard
 {
@@ -156,6 +157,9 @@ class Standard
 
 		// write index
 		$indexWriter =& new indexWriter($this);
+        
+		// write deprecated index
+		$deprecatedWriter =& new deprecatedWriter($this);
 		
 		// copy stylesheet
 		$phpdoctor->message('Copying stylesheet');

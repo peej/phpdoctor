@@ -145,6 +145,9 @@ td.description p.description {
 	text-indent: 40px;
 }
 
+table.header {
+    width: 100%;
+}
 
 table.header, td.header {
 	border: none;

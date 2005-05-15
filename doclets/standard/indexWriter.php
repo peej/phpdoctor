@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: indexWriter.php,v 1.2 2005/05/15 10:48:11 peejeh Exp $
+// $Id: indexWriter.php,v 1.3 2005/05/15 15:50:52 peejeh Exp $
 
 /** This generates the element index.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 class IndexWriter extends HTMLWriter
 {
@@ -46,7 +46,7 @@ class IndexWriter extends HTMLWriter
         $this->_sections[2] = array('title' => 'Class');
         //$this->_sections[3] = array('title' => 'Use');
         $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-        //$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+        $this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
         $this->_sections[6] = array('title' => 'Index', 'selected' => TRUE);
         
         $classes =& $rootDoc->classes();
