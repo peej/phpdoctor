@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageDoc.php,v 1.8 2005/05/14 20:49:03 peejeh Exp $
+// $Id: packageDoc.php,v 1.9 2005/05/16 19:21:11 peejeh Exp $
 
 /** Represents a PHP package. Provides access to information about the package,
  * the package's comment and tags, and the classes in the package.
  *
  * @package PHPDoctor
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class PackageDoc extends Doc
 {
@@ -72,7 +72,7 @@ class PackageDoc extends Doc
 			}
 		}
 		if (is_file($overviewFile)) {
-			$phpdoctor->message('Reading package overview file "'.$overviewFile.'".');
+			$phpdoctor->message("\n".'Reading package overview file "'.$overviewFile.'".');
 			if ($html = $this->getHTMLContents($overviewFile)) {
 				$this->_data = $phpdoctor->processDocComment('/** '.$html.' */', $this->_root);
 				$this->mergeData();

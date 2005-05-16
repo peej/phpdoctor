@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.9 2005/05/15 15:50:52 peejeh Exp $
+// $Id: functionWriter.php,v 1.10 2005/05/16 19:21:11 peejeh Exp $
 
 /** This generates the HTML API documentation for each global function.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class FunctionWriter extends HTMLWriter
 {
@@ -84,21 +84,19 @@ class FunctionWriter extends HTMLWriter
 				}
 				echo "</table>\n\n";
 
-				echo '<table id="detail_function" class="detail">', "\n";
-				echo '<tr><th colspan="2" class="title">Function Detail</th></tr>', "\n";
-				echo "</table>\n";
+				echo '<h2 id="detail_function">Function Detail</h2>', "\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
-					echo '<h2 id="', $function->name(),'">', $function->name(), "</h2>\n";
-					echo '<code>', $function->modifiers(), ' ', $function->returnTypeAsString(), ' <strong>';
+					echo '<h3 id="', $function->name(),'">', $function->name(), "</h3>\n";
+					echo '<code class="signature">', $function->modifiers(), ' ', $function->returnTypeAsString(), ' <strong>';
 					echo $function->name(), '</strong>', $function->flatSignature();
 					echo "</code>\n";
+                    echo '<div class="details">', "\n";
 					if ($textTag) {
-						echo '<div class="details">', "\n";
 						echo $this->_processInlineTags($textTag), "\n";
-						echo "</div>\n\n";
 					}
 					$this->_processTags($function->tags());
+                    echo "</div>\n\n";
 					echo "<hr>\n\n";
 				}
 			}

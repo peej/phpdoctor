@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.13 2005/05/14 20:49:03 peejeh Exp $
+// $Id: phpDoctor.php,v 1.14 2005/05/16 19:21:11 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 class PHPDoctor
 {
@@ -62,7 +62,7 @@ class PHPDoctor
 	 *
 	 * @var str
 	 */
-	var $_version = '2';
+	var $_version = '2 alpha';
 
 	/** The path PHPDoctor is running from.
 	 *

@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageWriter.php,v 1.12 2005/05/15 17:21:34 peejeh Exp $
+// $Id: packageWriter.php,v 1.13 2005/05/16 19:21:11 peejeh Exp $
 
 /** This generates the package-summary.html files that list the interfaces and
  * classes for a given package.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 class PackageWriter extends HTMLWriter
 {
@@ -37,7 +37,7 @@ class PackageWriter extends HTMLWriter
     {
 	
 		parent::HTMLWriter($doclet);
-		
+        
 		$rootDoc =& $this->_doclet->rootDoc();
 		$phpdoctor =& $this->_doclet->phpdoctor();
 		
@@ -52,6 +52,8 @@ class PackageWriter extends HTMLWriter
 			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 
+            $this->_id = 'tree';
+            
 			$tree = array();
 			$classes =& $rootDoc->classes();
 			if ($classes) {
@@ -71,6 +73,8 @@ class PackageWriter extends HTMLWriter
 
 			$this->_write('overview-tree.html', 'Overview', TRUE);
 		}
+        
+        $this->_id = 'package';
 
         $packages =& $rootDoc->packages();
         asort($packages);
@@ -86,7 +90,7 @@ class PackageWriter extends HTMLWriter
 			if ($displayTree) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
 			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
-			
+            
 			ob_start();
 			
 			echo "<hr>\n\n";
@@ -197,6 +201,8 @@ class PackageWriter extends HTMLWriter
 				$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 				$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
 
+                $this->_id = 'tree';
+                
 				$tree = array();
 				$classes =& $package->ordinaryClasses();
 				if ($classes) {

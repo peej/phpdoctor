@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: globalWriter.php,v 1.9 2005/05/15 15:50:52 peejeh Exp $
+// $Id: globalWriter.php,v 1.10 2005/05/16 19:21:11 peejeh Exp $
 
 /** This generates the HTML API documentation for each global variable.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class GlobalWriter extends HTMLWriter
 {
@@ -85,22 +85,20 @@ class GlobalWriter extends HTMLWriter
 				}
 				echo "</table>\n\n";
 
-				echo '<table id="detail_global" class="detail">', "\n";
-				echo '<tr><th colspan="2" class="title">Global Detail</th></tr>', "\n";
-				echo "</table>\n";
+				echo '<h2 id="detail_global">Global Detail</h2>', "\n";
 				foreach($globals as $global) {
 					$textTag =& $global->tags('@text');
 					$type =& $global->type();
-					echo '<h2 id="', $global->name(),'">', $global->name(), "</h2>\n";
-					echo '<code>', $global->modifiers(), ' ', $global->typeAsString(), ' <strong>';
+					echo '<h3 id="', $global->name(),'">', $global->name(), "</h3>\n";
+					echo '<code class="signature">', $global->modifiers(), ' ', $global->typeAsString(), ' <strong>';
 					echo $global->name(), '</strong>';
 					if ($global->value()) echo ' = ', $global->value();
 					echo "</code>\n";
+                    echo '<div class="details">', "\n";
 					if ($textTag) {
-						echo '<div class="details">', "\n";
 						echo $this->_processInlineTags($textTag), "\n";
-						echo "</div>\n\n";
 					}
+                    echo "</div>\n\n";
 					$this->_processTags($global->tags());
 					echo "<hr>\n\n";
 				}

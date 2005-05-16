@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.10 2005/05/15 15:50:52 peejeh Exp $
+// $Id: htmlWriter.php,v 1.11 2005/05/16 19:21:11 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class HTMLWriter
 {
@@ -147,50 +147,45 @@ class HTMLWriter
 	 */
 	function _nav($path)
     {
-		$output = '<table class="header">'."\n";
-		$output .= "<tr>\n";
-		$output .= '<td class="header">';
+		$output = '<div class="header">'."\n";
+		$output .= '<h1>'.$this->_doclet->getHeader()."</h1>\n";
 		if ($this->_sections) {
+            $output .= "<ul>\n";
 			foreach ($this->_sections as $section) {
 				if (isset($section['selected']) && $section['selected']) {
-					$output .= '<span class="location">'.$section['title'].'</span> &nbsp; ';
+					$output .= '<li class="active">'.$section['title']."</li>\n";
 				} else {
 					if (isset($section['url'])) {
-						$output .= '<a href="'.str_repeat('../', $this->_depth).$section['url'].'">'.$section['title'].'</a> &nbsp; ';
+						$output .= '<li><a href="'.str_repeat('../', $this->_depth).$section['url'].'">'.$section['title']."</a></li>\n";
 					} else {
-						$output .= $section['title'].' &nbsp; ';
+						$output .= '<li>'.$section['title'].'</li>';
 					}
 				}
 			}
+            $output .= "</ul>\n";
 		}
-		$output .= '</td><td class="short_title">'.$this->_doclet->getHeader().'</td>';
-		$output .= "</tr>\n";
-		$output .= "</table>\n\n";
+		$output .= "</div>\n\n";
 
-		$output .= '<table class="small_links">'."\n";
-		$output .= "<tr>\n";
-		$output .= "<td>\n";
-		$output .= '<a href="'.str_repeat('../', $this->_depth).'index.html" target="_top">FRAMES</a>'."\n";
-		$output .= '<a href="'.str_repeat('../', $this->_depth).$path.'" target="_top">NO FRAMES</a>'."\n";
-		$output .= "</td>\n";
-		$output .= "</tr>\n";
+		$output .= '<div class="small_links">'."\n";
+		$output .= '<a href="'.str_repeat('../', $this->_depth).'index.html" target="_top">Frames</a>'."\n";
+		$output .= '<a href="'.str_repeat('../', $this->_depth).$path.'" target="_top">No frames</a>'."\n";
+		$output .= "</div>\n";
 		if (get_class($this) == 'classwriter') {
-			$output .= "<tr>\n";
-			$output .= '<td>SUMMARY: &nbsp;<a href="#summary_field">FIELD</a> | <a href="#summary_method">METHOD</a> | <a href="#summary_constr">CONSTR</a></td>'."\n";
-			$output .= '<td>DETAIL: &nbsp;<a href="#detail_field">FIELD</a> | <a href="#detail_method">METHOD</a> | <a href="#summary_constr">CONSTR</a></td>'."\n";
-			$output .= "</tr>\n";
+			$output .= '<div class="small_links">'."\n";
+			$output .= 'Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>'."\n";
+			$output .= 'Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>'."\n";
+			$output .= "</div>\n";
 		} elseif (get_class($this) == 'functionwriter') {
-			$output .= "<tr>\n";
-			$output .= '<td>SUMMARY: &nbsp;<a href="#summary_function">FUNCTION</a></td>'."\n";
-			$output .= '<td>DETAIL: &nbsp;<a href="#detail_function">FUNCTION</a></td>'."\n";
-			$output .= "</tr>\n";
+			$output .= '<div class="small_links">'."\n";
+			$output .= 'Summary: <a href="#summary_function">Function</a>'."\n";
+			$output .= 'Detail: <a href="#detail_function">Function</a>'."\n";
+			$output .= "</div>\n";
 		} elseif (get_class($this) == 'globalwriter') {
-			$output .= "<tr>\n";
-			$output .= '<td>SUMMARY: &nbsp;<a href="#summary_global">GLOBAL</a></td>'."\n";
-			$output .= '<td>DETAIL: &nbsp;<a href="#detail_global">GLOBAL</a></td>'."\n";
-			$output .= "</tr>\n";
+			$output .= '<div class="small_links">'."\n";
+			$output .= 'Summary: <a href="#summary_global">Global</a>'."\n";
+			$output .= 'Detail: <a href="#detail_global">Global</a>'."\n";
+			$output .= "</div>\n";
 		}
-		$output .= "</table>\n\n";
 
 		return $output;
 	}
