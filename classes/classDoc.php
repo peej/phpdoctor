@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classDoc.php,v 1.7 2005/05/14 20:49:03 peejeh Exp $
+// $Id: classDoc.php,v 1.8 2005/05/18 19:21:01 peejeh Exp $
 
 /** Represents a PHP class and provides access to information about the class,
  * the class' comment and tags, and the members of the class. A classDoc only
@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * type (which can be converted to classDoc, if possible).
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class ClassDoc extends ProgramElementDoc
 {
@@ -91,12 +91,9 @@ class ClassDoc extends ProgramElementDoc
 	 */
 	function addField(&$field)
     {
-        if (isset($this->_fields[$field->name()])) {
-            $phpdoctor =& $this->_root->phpdoctor();
-            echo "\n";
-            $phpdoctor->warning('Found field '.$field->name().' again, overwriting previous version');
+        if (!isset($this->_fields[$field->name()])) {
+            $this->_fields[$field->name()] =& $field;
         }
-		$this->_fields[$field->name()] =& $field;
 	}
 
 	/** Add a constructor to this class.
