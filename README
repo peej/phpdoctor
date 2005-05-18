@@ -86,6 +86,9 @@ CONFIGURATION
 
 	* files - Names of files to parse. This can be a single filename, or a
 		comma separated list of filenames. Wildcards are allowed.
+    * ignore - Names of files or directories to ignore. This can be a single
+        filename, or a comma separated list of filenames. Wildcards are NOT
+        allowed.
 	* source_path - The directory to look for files in, if not used the
 		PHPDoctor will look in the current directory (the directory it
 		is run from).
