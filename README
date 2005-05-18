@@ -3,7 +3,7 @@ NAME
 	Peej's Quick & Dirty PHPDoc Clone
 
 VERSION
-	2
+	2 RC1
 
 DESCRIPTION
 	PHPDoctor is a Javadoc style comment parser for PHP, written with an
