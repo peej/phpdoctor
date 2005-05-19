@@ -180,6 +180,10 @@ table.inherit th {
     font-size: 120%;
 }
 
+p.signature, div.comment {
+    margin: 10px 0;
+}
+
 code.signature {
     display: block;
     margin: 10px 0;

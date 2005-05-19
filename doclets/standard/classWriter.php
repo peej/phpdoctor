@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.13 2005/05/16 19:21:11 peejeh Exp $
+// $Id: classWriter.php,v 1.14 2005/05/19 21:15:28 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -91,13 +91,13 @@ class ClassWriter extends HTMLWriter
 					
 					echo "<hr>\n\n";
 
-					echo '<p>', $class->modifiers(), ' class <strong>', $class->name(), '</strong>';
+					echo '<p class="signature">', $class->modifiers(), ' class <strong>', $class->name(), '</strong>';
 					if ($class->superclass()) {
 						$superclass =& $rootDoc->classNamed($class->superclass());
 						if ($superclass) {
-							echo '<br>extends <a href="', str_repeat('../', $this->_depth), $superclass->asPath(), '">', $superclass->name(), "</a></p>\n\n";
+							echo '<br>extends <a href="', str_repeat('../', $this->_depth), $superclass->asPath(), '">', $superclass->name(), "</a>\n\n";
 						} else {
-							echo '<br>extends ', $class->superclass(), "</p>\n\n";
+							echo '<br>extends ', $class->superclass(), "\n\n";
 						}
 					}
 					echo "</p>\n\n";
