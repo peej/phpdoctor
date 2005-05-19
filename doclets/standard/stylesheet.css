@@ -31,18 +31,23 @@ table, th, td {
 }
 
 th {
-    padding: 2px;
+    padding: 2px 4px;
     background-color: #ccf;
     text-align: left;
     font-size: 140%;
 }
 
 td {
-    padding: 2px;
+    padding: 2px 4px;
+}
+
+td p {
+    padding: 0;
+    margin: 0;
 }
 
 hr, p, dl, ul, ol, h1, h2, h3, h4, h5, h6 {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 dt {
@@ -182,6 +187,20 @@ code.signature {
 
 div.details {
     margin: 10px 0 10px 20px;
+}
+
+td.type {
+    text-align: right;
+    vertical-align: top;
+    font-family: monospace;
+}
+
+td p.name {
+    font-family: monospace;
+}
+
+td p.description {
+    margin: 2px 0 0 20px;
 }
 
 /* tree */
