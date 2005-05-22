@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.14 2005/05/16 19:21:11 peejeh Exp $
+// $Id: phpDoctor.php,v 1.15 2005/05/22 20:33:46 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 class PHPDoctor
 {
@@ -642,7 +642,7 @@ class PHPDoctor
 							} elseif (get_class($ce) == 'classdoc' || get_class($ce) == 'methoddoc') { // class method, add to class
 								$method->set('package', $ce->packageName()); // set package
 								if (substr($method->name(), 0, 1) == '_') $method->makePrivate();
-								if ($method->name() == '__constructor' || $method->name() == $ce->name()) { // constructor
+								if ($method->name() == '__constructor' || strtolower($method->name()) == strtolower($ce->name())) { // constructor
 									$this->verbose(' is a constructor of '.get_class($ce).' '.$ce->name());
 									$ce->addConstructor($method);
 								} else {

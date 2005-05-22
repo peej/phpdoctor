@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: rootDoc.php,v 1.8 2005/05/08 21:53:30 peejeh Exp $
+// $Id: rootDoc.php,v 1.9 2005/05/22 20:33:46 peejeh Exp $
 
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class RootDoc extends Doc
 {
@@ -111,7 +111,7 @@ class RootDoc extends Doc
 	 */
 	function &classes()
     {
-		$classes = NULL;
+		$classes = array();
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
 			$packageClasses =& $this->_packages[$name]->allClasses();
@@ -121,7 +121,7 @@ class RootDoc extends Doc
 				}
 			}
 		}
-		if ($classes != NULL) ksort($classes);
+		ksort($classes);
 		return $classes;
 	}
 
@@ -131,7 +131,7 @@ class RootDoc extends Doc
 	 */
 	function &functions()
     {
-		$functions = NULL;
+		$functions = array();
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
 			$packageFunctions =& $this->_packages[$name]->functions();
@@ -141,7 +141,6 @@ class RootDoc extends Doc
 				}
 			}
 		}
-		if ($functions != NULL) ksort($functions);
 		return $functions;
 	}
 
@@ -151,7 +150,7 @@ class RootDoc extends Doc
 	 */
 	function &globals()
     {
-		$globals = NULL;
+		$globals = array();
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
 			$packageGlobals =& $this->_packages[$name]->globals();
@@ -161,7 +160,7 @@ class RootDoc extends Doc
 				}
 			}
 		}
-		if ($globals != NULL) ksort($globals);
+		ksort($globals);
 		return $globals;
 	}
 	
