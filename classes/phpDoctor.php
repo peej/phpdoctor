@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.15 2005/05/22 20:33:46 peejeh Exp $
+// $Id: phpDoctor.php,v 1.16 2005/05/24 22:10:27 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 class PHPDoctor
 {
@@ -292,17 +292,23 @@ class PHPDoctor
 		$dir = $this->fixPath($dir);
 
 		foreach ($files as $filename) {
-            if (!in_array(basename($filename), $this->_ignore)) {
-                $filename = $this->makeAbsolutePath(trim($filename), $dir);
-                $globResults = glob(str_replace('\\', '/', $filename)); // switch slashes since old versions of glob need forward slashes
-                if ($globResults) {
-                    foreach ($globResults as $filename) {
-                        $list[] = realpath($filename);
+            $filename = $this->makeAbsolutePath(trim($filename), $dir);
+            $globResults = glob($filename); // switch slashes since old versions of glob need forward slashes
+            if ($globResults) {
+                foreach ($globResults as $filepath) {
+                    $okay = TRUE;
+                    foreach ($this->_ignore as $ignore) {
+                        if (strstr($filepath, trim($ignore))) {
+                            $okay = FALSE;
+                        }
                     }
-                } elseif (!$this->_subdirs) {
-                    $this->error('Could not find file "'.$filename.'"');
-                    exit;
+                    if ($okay) {
+                        $list[] = realpath($filepath);
+                    }
                 }
+            } elseif (!$this->_subdirs) {
+                $this->error('Could not find file "'.$filename.'"');
+                exit;
             }
 		}
 		
@@ -310,7 +316,13 @@ class PHPDoctor
 			$globResults = glob($dir.'*', GLOB_ONLYDIR); // get subdirs
 			if ($globResults) {
 				foreach ($globResults as $dirName) {
-					if ((GLOB_ONLYDIR || is_dir($dirName)) && !in_array(basename($dirName), $this->_ignore)) { // handle missing only dir support
+                    $okay = TRUE;
+                    foreach ($this->_ignore as $ignore) {
+                        if (strstr($dirName, trim($ignore))) {
+                            $okay = FALSE;
+                        }
+                    }
+					if ($okay && (GLOB_ONLYDIR || is_dir($dirName))) { // handle missing only dir support
 						$list = array_merge($list, $this->_buildFileList($files, $this->makeAbsolutePath($dirName, $this->_path)));
 					}
 				}
@@ -393,6 +405,7 @@ class PHPDoctor
 			substr($path, 0, 2) == '\\\\' || // windows network location
 			preg_match('|^[a-z]+://|', $path) // url
 		) {
+            //var_dump($path);
 			return $path;
 		} else {
 			return str_replace('./', '', $this->fixPath($prefix).$path);
@@ -407,7 +420,7 @@ class PHPDoctor
 	 */
 	function fixPath($path)
     {
-        if (substr($path, -1, 1) != '/') {
+        if (substr($path, -1, 1) != '/' && substr($path, -1, 1) != '\\') {
 			return $path.'/';
 		} else {
 			return $path;

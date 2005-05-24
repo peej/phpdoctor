@@ -1,4 +1,7 @@
 Version 2
+    Fixed ignore command so it actually works.
+    Fixed numerous small CSS problems.
+Version 2 RC1
     Total re-write using OO following a similar design to Javadoc.
     Uses doclet classes to control output.
 Version 1.5
