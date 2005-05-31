@@ -1,6 +1,8 @@
 Version 2
     Fixed ignore command so it actually works.
-    Fixed numerous small CSS problems.
+    Fixed constructor case bug, PHP4 style constructors were not being recognised as such if the method name was a different case to the class name.
+    Fixed numerous small CSS problems in standard doclet.
+    Fixed case problem in links in package frame writer in standard doclet.
 Version 2 RC1
     Total re-write using OO following a similar design to Javadoc.
     Uses doclet classes to control output.
