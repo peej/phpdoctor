@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageFrameWriter.php,v 1.7 2005/05/31 20:42:29 peejeh Exp $
+// $Id: packageFrameWriter.php,v 1.8 2005/06/02 20:49:08 peejeh Exp $
 
 /** This generates the package-frame.html file that lists the interfaces and
  * classes in a given package for displaying in the lower-left frame of the
  * frame-formatted default output.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class PackageFrameWriter extends HTMLWriter
 {
@@ -76,7 +76,7 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<h2>Classes</h2>\n";
 			echo "<ul>\n";
 			foreach($classes as $name => $class) {
-				echo '<li><a href="../', $classes[$name]->asPath(), '" target="main">', $classes[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', str_repeat('../', $package->depth() + 1), $classes[$name]->asPath(), '" target="main">', $classes[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
@@ -87,7 +87,7 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<h2>Interfaces</h2>\n";
 			echo "<ul>\n";
 			foreach($interfaces as $name => $interface) {
-				echo '<li><a href="../', $interfaces[$name]->asPath(), '" target="main">', $interfaces[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', str_repeat('../', $package->depth() + 1), $interfaces[$name]->asPath(), '" target="main">', $interfaces[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
@@ -98,7 +98,7 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<h2>Exceptions</h2>\n";
 			echo "<ul>\n";
 			foreach($exceptions as $name => $exception) {
-				echo '<li><a href="../', $exceptions[$name]->asPath(), '" target="main">', $exceptions[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', str_repeat('../', $package->depth() + 1), $exceptions[$name]->asPath(), '" target="main">', $exceptions[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
@@ -109,7 +109,7 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<h2>Functions</h2>\n";
 			echo "<ul>\n";
 			foreach($functions as $name => $function) {
-				echo '<li><a href="../package-functions.html#', $functions[$name]->name(), '" target="main">', $functions[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', str_repeat('../', $package->depth() + 1), 'package-functions.html#', $functions[$name]->name(), '" target="main">', $functions[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
@@ -120,7 +120,7 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<h2>Globals</h2>\n";
 			echo "<ul>\n";
 			foreach($globals as $name => $global) {
-				echo '<li><a href="../package-globals.html#', $globals[$name]->name(), '" target="main">', $globals[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', str_repeat('../', $package->depth() + 1), 'package-globals.html#', $globals[$name]->name(), '" target="main">', $globals[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
