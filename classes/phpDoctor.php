@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.17 2005/06/05 08:23:26 peejeh Exp $
+// $Id: phpDoctor.php,v 1.18 2005/06/05 16:54:19 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 class PHPDoctor
 {
@@ -62,7 +62,7 @@ class PHPDoctor
 	 *
 	 * @var str
 	 */
-	var $_version = '2 alpha';
+	var $_version = '2RC2';
 
 	/** The path PHPDoctor is running from.
 	 *
@@ -910,10 +910,10 @@ class PHPDoctor
 		}
         
         // add parent data to child elements
+        $this->message('Merging superclass data');
         $this->_mergeSuperClassData($rootDoc);
 		
 		return $rootDoc;
-	
 	}
 
 	/** Loads and runs the doclet.

@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classDoc.php,v 1.9 2005/06/05 08:23:26 peejeh Exp $
+// $Id: classDoc.php,v 1.10 2005/06/05 16:54:19 peejeh Exp $
 
 /** Represents a PHP class and provides access to information about the class,
  * the class' comment and tags, and the members of the class. A classDoc only
@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * type (which can be converted to classDoc, if possible).
  *
  * @package PHPDoctor
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class ClassDoc extends ProgramElementDoc
 {
@@ -291,7 +291,7 @@ class ClassDoc extends ProgramElementDoc
   
         if (isset($parent)) {
             $phpdoctor = $this->_root->phpdoctor();
-           
+
 			// merge class tags array
             $tags =& $parent->tags();
 			if ($tags) {
@@ -325,7 +325,7 @@ class ClassDoc extends ProgramElementDoc
                     if ($tags) {
                         foreach ($tags as $tagName => $tag) {
                             if (!isset($methods[$name]->_tags[$tagName])) {
-                                $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with tag '.$tagName.' from parent '.$parentMethod->name());
+                                $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with tag '.$tagName.' from parent '.$parent->name().':'.$parentMethod->name());
                                 if (is_array($tag)) {
                                     foreach ($tags[$tagName] as $key => $tag) {
                                         $methods[$name]->_tags[$tagName][$key] =& $tags[$tagName][$key];
@@ -344,7 +344,7 @@ class ClassDoc extends ProgramElementDoc
                             $type =& $methods[$name]->_parameters[$paramName]->type();
                         }
                         if (!isset($methods[$name]->_parameters[$paramName]) || $type->typeName() == 'mixed') {
-                            $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with parameter '.$paramName.' from parent '.$parentMethod->name());
+                            $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with parameter '.$paramName.' from parent '.$parent->name().':'.$parentMethod->name());
                             $paramType =& $param->type();
                             $methods[$name]->_parameters[$paramName] =& new fieldDoc($paramName, $methods[$name], $this->_root);
                             $methods[$name]->_parameters[$paramName]->set('type', new type($paramType->typeName(), $this->_root));
@@ -352,13 +352,13 @@ class ClassDoc extends ProgramElementDoc
                     }
                     // method return type
                     if ($parentMethod->returnType() && $methods[$name]->_returnType->typeName() == 'void') {
-                        $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with return type from parent '.$parentMethod->name());
+                        $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with return type from parent '.$parent->name().':'.$parentMethod->name());
                         $methods[$name]->_returnType = $parentMethod->returnType();
                     }
                     // method thrown exceptions
                     foreach($parentMethod->thrownExceptions() as $exceptionName => $exception) {
                         if (!isset($methods[$name]->_throws[$exceptionName])) {
-                            $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with exception '.$exceptionName.' from parent '.$parentMethod->name());
+                            $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with exception '.$exceptionName.' from parent '.$parent->name().':'.$parentMethod->name());
                             $methods[$name]->_throws[$exceptionName] =& $exception;
                         }
                     }
