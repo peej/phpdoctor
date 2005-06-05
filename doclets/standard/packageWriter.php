@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageWriter.php,v 1.13 2005/05/16 19:21:11 peejeh Exp $
+// $Id: packageWriter.php,v 1.14 2005/06/05 08:23:26 peejeh Exp $
 
 /** This generates the package-summary.html files that list the interfaces and
  * classes for a given package.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 class PackageWriter extends HTMLWriter
 {
@@ -250,7 +250,7 @@ class PackageWriter extends HTMLWriter
 	 * Build the class tree branch for the given element
 	 *
 	 * @param ClassDoc[] tree
-	 * @param ClassDoc parent
+	 * @param str parent
 	 */
 	function _displayTree($tree, $parent = NULL)
     {

@@ -3,6 +3,7 @@ Version 2
     Fixed constructor case bug, PHP4 style constructors were not being recognised as such if the method name was a different case to the class name.
     Fixed numerous small CSS problems in standard doclet.
     Fixed case problem in links in package frame writer in standard doclet.
+    Added merging of superclass description into class for class description and overrided methods. This is added as a separate pass of the class heirarchy since all class data must be collected before we can merge.
 Version 2 RC1
     Total re-write using OO following a similar design to Javadoc.
     Uses doclet classes to control output.

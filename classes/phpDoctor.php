@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.16 2005/05/24 22:10:27 peejeh Exp $
+// $Id: phpDoctor.php,v 1.17 2005/06/05 08:23:26 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 class PHPDoctor
 {
@@ -500,7 +500,7 @@ class PHPDoctor
 				
 				$tokens = token_get_all($fileString);
 
-				echo 'Parsing tokens';
+				if (!$this->_verbose) echo 'Parsing tokens';
 
 				/* This array holds data gathered before the type of element is
 				discovered and an object is created for it, including doc comment
@@ -901,14 +901,16 @@ class PHPDoctor
                         $counter = 0;
                     }
 				}
-                echo "\n";
-
+                if (!$this->_verbose) echo "\n";
 
 			} else {
 				$this->error('Could not read file "'.$filename.'"');
 				exit;
 			}
 		}
+        
+        // add parent data to child elements
+        $this->_mergeSuperClassData($rootDoc);
 		
 		return $rootDoc;
 	
@@ -931,6 +933,21 @@ class PHPDoctor
 		}
 		$this->message('Done ('.round($this->_getTime() - $this->_startTime, 2).' seconds)');
 	}
+    
+    /**
+     * @param rootDoc rootDoc
+     * @param str parent
+     */
+    function _mergeSuperClassData(&$rootDoc, $parent = NULL)
+    {
+        $classes =& $rootDoc->classes();
+        foreach ($classes as $name => $class) {
+            if ($classes[$name]->superclass() == $parent) {
+                $classes[$name]->mergeSuperClassData();
+                $this->_mergeSuperClassData($rootDoc, $classes[$name]->name());
+            }
+        }
+    }
 
 	/**
 	 * Recursively merge two arrays into a single array. This differs

@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classDoc.php,v 1.8 2005/05/18 19:21:01 peejeh Exp $
+// $Id: classDoc.php,v 1.9 2005/06/05 08:23:26 peejeh Exp $
 
 /** Represents a PHP class and provides access to information about the class,
  * the class' comment and tags, and the members of the class. A classDoc only
@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * type (which can be converted to classDoc, if possible).
  *
  * @package PHPDoctor
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class ClassDoc extends ProgramElementDoc
 {
@@ -142,15 +142,39 @@ class ClassDoc extends ProgramElementDoc
 		return $this->_fields;
 	}
 
+	/** Return a field in this class.
+	 *
+	 * @return FieldDoc
+	 */
+	function &fieldNamed($fieldName)
+    {
+        if (isset($this->_fields[$fieldName])) {
+            return $this->_fields[$fieldName];
+        }
+        return NULL;
+	}
+    
 	/** Return the methods in this class.
 	 *
 	 * @return MethodDoc[]
 	 */
-	function &methods()
+	function &methods($methodName = NULL)
     {
 		return $this->_methods;
 	}
 
+	/** Return a method in this class.
+	 *
+	 * @return MethodDoc
+	 */
+	function &methodNamed($methodName)
+    {
+        if (isset($this->_methods[$methodName])) {
+            return $this->_methods[$methodName];
+        }
+        return NULL;
+	}
+    
 	/** Return interfaces implemented by this class or interfaces extended by this interface.
 	 *
 	 * @return ClassDoc[]
@@ -159,7 +183,19 @@ class ClassDoc extends ProgramElementDoc
     {
 		return $this->_interfaces;
 	}
-	
+
+	/** Return an interface in this class.
+	 *
+	 * @return ClassDoc
+	 */
+	function &interfaceNamed($interfaceName)
+    {
+        if (isset($this->_interfaces[$interfaceName])) {
+            return $this->_interfaces[$interfaceName];
+        }
+        return NULL;
+	}
+    
 	/** Return true if this class is abstract.
 	 *
 	 * @return bool
@@ -235,6 +271,102 @@ class ClassDoc extends ProgramElementDoc
 			return FALSE;
 		}
 	}
+    
+
+    /**
+     * Merge the details of the superclass with this class.
+     * @param str superClassName
+     */
+	function mergeSuperClassData($superClassName = NULL)
+    {
+        if (!$superClassName) {
+            $superClassName = $this->superclass();
+        }
+        if ($superClassName) {
+           $parent =& $this->_root->classNamed($superClassName);
+           if ($parent->superclass()) { // merge parents superclass data first by recursing
+               $this->mergeSuperClassData($parent->superclass());
+           }
+        }
+  
+        if (isset($parent)) {
+            $phpdoctor = $this->_root->phpdoctor();
+           
+			// merge class tags array
+            $tags =& $parent->tags();
+			if ($tags) {
+				foreach ($tags as $name => $tag) {
+                    if (!isset($this->_tags[$name])) {
+                        $phpdoctor->verbose('> Merging class '.$this->name().' with tags from parent '.$parent->name());
+                        if (is_array($tag)) {
+                            foreach ($tags[$name] as $key => $tag) {
+                                $this->_tags[$name][$key] =& $tags[$name][$key];
+                                $this->_tags[$name][$key]->setParent($this);
+                            }
+                        } else {
+                            $this->_tags[$name] =& $tags[$name];
+                            $this->_tags[$name]->setParent($this);
+                        }
+                    }
+				}
+			}
+            
+            // merge method data
+            $methods =& $this->methods();
+            $constructor =& $this->constructor();
+            if (is_object($constructor)) {
+                array_merge(array($constructor->name() => $constructor), $methods);
+            }
+            foreach ($methods as $name => $method) {
+                $parentMethod =& $parent->methodNamed($name);
+                if ($parentMethod) {
+                    // tags
+                    $tags =& $parentMethod->tags();
+                    if ($tags) {
+                        foreach ($tags as $tagName => $tag) {
+                            if (!isset($methods[$name]->_tags[$tagName])) {
+                                $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with tag '.$tagName.' from parent '.$parentMethod->name());
+                                if (is_array($tag)) {
+                                    foreach ($tags[$tagName] as $key => $tag) {
+                                        $methods[$name]->_tags[$tagName][$key] =& $tags[$tagName][$key];
+                                        $methods[$name]->_tags[$tagName][$key]->setParent($this);
+                                    }
+                                } else {
+                                    $methods[$name]->_tags[$tagName] =& $tags[$tagName];
+                                    $methods[$name]->_tags[$tagName]->setParent($this);
+                                }
+                            }
+                        }
+                    }
+                    // method parameters
+                    foreach($parentMethod->parameters() as $paramName => $param) {
+                        if (isset($methods[$name]->_parameters[$paramName])) {
+                            $type =& $methods[$name]->_parameters[$paramName]->type();
+                        }
+                        if (!isset($methods[$name]->_parameters[$paramName]) || $type->typeName() == 'mixed') {
+                            $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with parameter '.$paramName.' from parent '.$parentMethod->name());
+                            $paramType =& $param->type();
+                            $methods[$name]->_parameters[$paramName] =& new fieldDoc($paramName, $methods[$name], $this->_root);
+                            $methods[$name]->_parameters[$paramName]->set('type', new type($paramType->typeName(), $this->_root));
+                        }
+                    }
+                    // method return type
+                    if ($parentMethod->returnType() && $methods[$name]->_returnType->typeName() == 'void') {
+                        $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with return type from parent '.$parentMethod->name());
+                        $methods[$name]->_returnType = $parentMethod->returnType();
+                    }
+                    // method thrown exceptions
+                    foreach($parentMethod->thrownExceptions() as $exceptionName => $exception) {
+                        if (!isset($methods[$name]->_throws[$exceptionName])) {
+                            $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with exception '.$exceptionName.' from parent '.$parentMethod->name());
+                            $methods[$name]->_throws[$exceptionName] =& $exception;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
 
 }
 
