@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: indexWriter.php,v 1.3 2005/05/15 15:50:52 peejeh Exp $
+// $Id: indexWriter.php,v 1.4 2005/06/28 20:25:51 peejeh Exp $
 
 /** This generates the element index.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 class IndexWriter extends HTMLWriter
 {
@@ -86,13 +86,13 @@ class IndexWriter extends HTMLWriter
                     echo "<dl>\n";
                 }
                 $parent =& $element->containingClass();
-                if ($parent && get_class($parent) != 'rootdoc') {
+                if ($parent && strtolower(get_class($parent)) != 'rootdoc') {
                     $in = 'class <a href="'.$parent->asPath().'">'.$parent->qualifiedName().'</a>';
                 } else {
                     $package =& $element->containingPackage();
                     $in = 'package <a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a>';
                 }
-                switch (get_class($element)) {
+                switch (strtolower(get_class($element))) {
                 case 'classdoc':
                     if ($element->isOrdinaryClass()) {
                         echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Class in ', $in, "</dt>\n";

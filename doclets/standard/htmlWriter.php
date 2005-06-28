@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.11 2005/05/16 19:21:11 peejeh Exp $
+// $Id: htmlWriter.php,v 1.12 2005/06/28 20:25:51 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class HTMLWriter
 {
@@ -170,17 +170,18 @@ class HTMLWriter
 		$output .= '<a href="'.str_repeat('../', $this->_depth).'index.html" target="_top">Frames</a>'."\n";
 		$output .= '<a href="'.str_repeat('../', $this->_depth).$path.'" target="_top">No frames</a>'."\n";
 		$output .= "</div>\n";
-		if (get_class($this) == 'classwriter') {
+        $thisClass = strtolower(get_class($this));
+		if ($thisClass == 'classwriter') {
 			$output .= '<div class="small_links">'."\n";
 			$output .= 'Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>'."\n";
 			$output .= 'Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>'."\n";
 			$output .= "</div>\n";
-		} elseif (get_class($this) == 'functionwriter') {
+		} elseif ($thisClass == 'functionwriter') {
 			$output .= '<div class="small_links">'."\n";
 			$output .= 'Summary: <a href="#summary_function">Function</a>'."\n";
 			$output .= 'Detail: <a href="#detail_function">Function</a>'."\n";
 			$output .= "</div>\n";
-		} elseif (get_class($this) == 'globalwriter') {
+		} elseif ($thisClass == 'globalwriter') {
 			$output .= '<div class="small_links">'."\n";
 			$output .= 'Summary: <a href="#summary_global">Global</a>'."\n";
 			$output .= 'Detail: <a href="#detail_global">Global</a>'."\n";

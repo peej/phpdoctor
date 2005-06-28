@@ -4,6 +4,8 @@ Version 2
     Fixed numerous small CSS problems in standard doclet.
     Fixed case problem in links in package frame writer in standard doclet.
     Added merging of superclass description into class for class description and overrided methods. This is added as a separate pass of the class heirarchy since all class data must be collected before we can merge.
+    Fixed recursive references error in PHP5 for asort in classWriter.php by changing asort for ksort (found by Andrew McMurry <amcmurry@chip.org>)
+    Fixed get_class() case problem in PHP5 by using strtolower() with all instances of get_class() (found by Andrew McMurry <amcmurry@chip.org>)
 Version 2 RC1
     Total re-write using OO following a similar design to Javadoc.
     Uses doclet classes to control output.

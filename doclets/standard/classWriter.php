@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.14 2005/05/19 21:15:28 peejeh Exp $
+// $Id: classWriter.php,v 1.15 2005/06/28 20:25:51 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -44,7 +44,7 @@ class ClassWriter extends HTMLWriter
 		$phpdoctor =& $this->_doclet->phpdoctor();
 		
 		$packages =& $rootDoc->packages();
-        asort($packages);
+        ksort($packages);
 
 		foreach ($packages as $packageName => $package) {
 
@@ -61,7 +61,7 @@ class ClassWriter extends HTMLWriter
 			$classes =& $package->ordinaryClasses();
 			
 			if ($classes) {
-                asort($classes);
+                ksort($classes);
 				foreach ($classes as $name => $class) {
 				
 					ob_start();
@@ -112,11 +112,11 @@ class ClassWriter extends HTMLWriter
 					echo "<hr>\n\n";
 
 					$fields =& $class->fields();
-                    asort($fields);
+                    ksort($fields);
 					$constructors =& $class->constructor();
-                    asort($constructors);
+                    ksort($constructors);
 					$methods =& $class->methods();
-                    asort($methods);
+                    ksort($methods);
 
 					if ($fields) {
 						echo '<table id="summary_field">', "\n";
@@ -304,7 +304,7 @@ class ClassWriter extends HTMLWriter
     {
 		$fields =& $element->fields();
 		if ($fields) {
-            asort($fields);
+            ksort($fields);
 			$num = count($fields); $foo = 0;
 			echo '<table class="inherit">', "\n";
 			echo '<tr><th colspan="2">Fields inherited from ', $element->qualifiedName(), "</th></tr>\n";
@@ -337,7 +337,7 @@ class ClassWriter extends HTMLWriter
     {
 		$methods =& $element->methods();
 		if ($methods) {
-            asort($methods);
+            ksort($methods);
 			$num = count($methods); $foo = 0;
 			echo '<table class="inherit">', "\n";
 			echo '<tr><th colspan="2">Methods inherited from ', $element->qualifiedName(), "</th></tr>\n";

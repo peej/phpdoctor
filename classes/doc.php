@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: doc.php,v 1.9 2005/05/14 20:49:03 peejeh Exp $
+// $Id: doc.php,v 1.10 2005/06/28 20:25:51 peejeh Exp $
 
 /** Abstract base class of all Doc classes. Doc item's are representations of
  * PHP language constructs (class, package, method,...) which have comments
  * and have been processed by this run of PHPDoctor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @abstract
  */
 class Doc {
@@ -267,7 +267,7 @@ class Doc {
 			}
 			// merge tags array
 			if (isset($this->_data['tags']) && is_array($this->_data['tags'])) {
-				$thisClass = get_class($this);
+				$thisClass = strtolower(get_class($this));
 				foreach ($this->_data['tags'] as $name => $tag) {
 					if (is_array($tag)) {
 						foreach ($this->_data['tags'][$name] as $key => $tag) {

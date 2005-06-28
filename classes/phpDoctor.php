@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.18 2005/06/05 16:54:19 peejeh Exp $
+// $Id: phpDoctor.php,v 1.19 2005/06/28 20:25:51 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 class PHPDoctor
 {
@@ -643,7 +643,8 @@ class PHPDoctor
 								$method->set('docComment', $currentData['docComment']); // set doc comment
 							}
 							$method->set('data', $currentData); // set data
-							if (get_class($ce) == 'rootdoc') { // global function, add to package
+                            $ceClass = strtolower(get_class($ce));
+							if ($ceClass == 'rootdoc') { // global function, add to package
 								$this->verbose(' is a global function');
 								if (isset($currentData['package']) && $currentData['package'] != NULL) { // set package
 									$method->set('package', $currentData['package']);
@@ -652,7 +653,7 @@ class PHPDoctor
 								}
 								$parentPackage =& $rootDoc->packageNamed($method->packageName(), TRUE); // get parent package
 								$parentPackage->addFunction($method); // add method to package
-							} elseif (get_class($ce) == 'classdoc' || get_class($ce) == 'methoddoc') { // class method, add to class
+							} elseif ($ceClass == 'classdoc' || $ceClass == 'methoddoc') { // class method, add to class
 								$method->set('package', $ce->packageName()); // set package
 								if (substr($method->name(), 0, 1) == '_') $method->makePrivate();
 								if ($method->name() == '__constructor' || strtolower($method->name()) == strtolower($ce->name())) { // constructor
@@ -738,7 +739,7 @@ class PHPDoctor
 								$currentData = array(); // empty data store
 
 							// function parameter
-							} elseif (get_class($ce) == 'methoddoc' && $ce->inBody == 0) {
+							} elseif (strtolower(get_class($ce)) == 'methoddoc' && $ce->inBody == 0) {
 								do {
 									$key++;
 									if ($tokens[$key] == ',' || $tokens[$key] == ')') {
@@ -766,7 +767,7 @@ class PHPDoctor
 
 						case T_VARIABLE:
 							// read global variable
-							if (get_class($ce) == 'rootdoc') { // global var, add to package
+							if (strtolower(get_class($ce)) == 'rootdoc') { // global var, add to package
 								$global =& new fieldDoc($tokens[$key][1], $ce, $rootDoc); // create constant object
 								$this->verbose('Found '.get_class($global).': global variable '.$global->name());
 								if (isset($tokens[$key - 1][0]) && isset($tokens[$key - 2][0]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
