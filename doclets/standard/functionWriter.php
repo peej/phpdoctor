@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.10 2005/05/16 19:21:11 peejeh Exp $
+// $Id: functionWriter.php,v 1.11 2005/12/18 11:20:00 peejeh Exp $
 
 /** This generates the HTML API documentation for each global function.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class FunctionWriter extends HTMLWriter
 {
@@ -75,7 +75,7 @@ class FunctionWriter extends HTMLWriter
 					echo "<tr>\n";
 					echo '<td class="type">', $function->modifiers(FALSE), ' ', $function->returnTypeAsString(), "</td>\n";
 					echo '<td class="description">';
-					echo '<p class="name"><a href="#', $function->name(), '">', $function->name(), '</a>', $function->flatSignature(), '</p>';
+					echo '<p class="name"><a href="#', $function->name(), '()">', $function->name(), '</a>', $function->flatSignature(), '</p>';
 					if ($textTag) {
 						echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
 					}
@@ -87,7 +87,7 @@ class FunctionWriter extends HTMLWriter
 				echo '<h2 id="detail_function">Function Detail</h2>', "\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
-					echo '<h3 id="', $function->name(),'">', $function->name(), "</h3>\n";
+					echo '<h3 id="', $function->name(),'()">', $function->name(), "</h3>\n";
 					echo '<code class="signature">', $function->modifiers(), ' ', $function->returnTypeAsString(), ' <strong>';
 					echo $function->name(), '</strong>', $function->flatSignature();
 					echo "</code>\n";

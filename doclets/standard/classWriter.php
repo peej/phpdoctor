@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.15 2005/06/28 20:25:51 peejeh Exp $
+// $Id: classWriter.php,v 1.16 2005/12/18 11:20:00 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -152,7 +152,7 @@ class ClassWriter extends HTMLWriter
 							$textTag =& $constructor->tags('@text');
 							echo "<tr>\n";
 							echo '<td class="description">';
-							echo '<p class="name"><a href="#', $constructor->name(), '">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
+							echo '<p class="name"><a href="#', $constructor->name(), '()">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
 							if ($textTag) {
 								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
 							}
@@ -170,7 +170,7 @@ class ClassWriter extends HTMLWriter
 							echo "<tr>\n";
 							echo '<td class="type">', $method->modifiers(FALSE), ' ', $method->returnTypeAsString(), "</td>\n";
 							echo '<td class="description">';
-							echo '<p class="name"><a href="#', $method->name(), '">', $method->name(), '</a>', $method->flatSignature(), '</p>';
+							echo '<p class="name"><a href="#', $method->name(), '()">', $method->name(), '</a>', $method->flatSignature(), '</p>';
 							if ($textTag) {
 								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
 							}
@@ -212,7 +212,7 @@ class ClassWriter extends HTMLWriter
 						echo '<h2 id="detail_constr">Constructor Detail</h2>', "\n";
 						foreach($constructors as $constructor) {
 							$textTag =& $constructor->tags('@text');
-							echo '<h3 id="', $constructor->name(),'">', $constructor->name(), "</h3>\n";
+							echo '<h3 id="', $constructor->name(),'()">', $constructor->name(), "</h3>\n";
 							echo '<code class="signature">public <strong>';
 							echo $constructor->name(), '</strong>', $constructor->flatSignature();
 							echo "</code>\n";
@@ -230,7 +230,7 @@ class ClassWriter extends HTMLWriter
 						echo '<h2 id="detail_method">Method Detail</h2>', "\n";
 						foreach($methods as $method) {
 							$textTag =& $method->tags('@text');
-							echo '<h3 id="', $method->name(),'">', $method->name(), "</h3>\n";
+							echo '<h3 id="', $method->name(),'()">', $method->name(), "</h3>\n";
 							echo '<code class="signature">', $method->modifiers(), ' ', $method->returnTypeAsString(), ' <strong>';
 							echo $method->name(), '</strong>', $method->flatSignature();
 							echo "</code>\n";

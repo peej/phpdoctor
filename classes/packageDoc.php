@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageDoc.php,v 1.9 2005/05/16 19:21:11 peejeh Exp $
+// $Id: packageDoc.php,v 1.10 2005/12/18 11:20:00 peejeh Exp $
 
 /** Represents a PHP package. Provides access to information about the package,
  * the package's comment and tags, and the classes in the package.
  *
  * @package PHPDoctor
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class PackageDoc extends Doc
 {
@@ -61,8 +61,9 @@ class PackageDoc extends Doc
 		
 		// parse overview file
 		$packageCommentDir = $phpdoctor->getOption('packageCommentDir');
-		if (isset($packageCommentDir) && is_file($packageCommentDir.$this->_name.'.html')) {
-			$overviewFile = $packageCommentDir.$this->_name.'.html';
+        $packageCommentFilename = strtolower(str_replace('/', '.', $this->_name)).'.html';
+		if (isset($packageCommentDir) && is_file($packageCommentDir.$packageCommentFilename)) {
+			$overviewFile = $packageCommentDir.$packageCommentFilename;
 		} else {
 			$pos = strrpos(str_replace('\\', '/', $phpdoctor->_currentFilename), '/');
 			if ($pos !== FALSE) {
