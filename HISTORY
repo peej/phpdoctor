@@ -7,6 +7,7 @@ Version 2
     Fixed recursive references error in PHP5 for asort in classWriter.php by changing asort for ksort (found by Andrew McMurry <amcmurry@chip.org>)
     Fixed get_class() case problem in PHP5 by using strtolower() with all instances of get_class() (found by Andrew McMurry <amcmurry@chip.org>)
     Fixed/changed package comment files in "package_comment_dir" to be of the filename format <packageName>.<className>.html
+    Fixed bugs in #1306941
 Version 2 RC1
     Total re-write using OO following a similar design to Javadoc.
     Uses doclet classes to control output.

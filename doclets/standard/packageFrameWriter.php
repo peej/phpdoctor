@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageFrameWriter.php,v 1.8 2005/06/02 20:49:08 peejeh Exp $
+// $Id: packageFrameWriter.php,v 1.9 2006/01/27 22:31:32 peejeh Exp $
 
 /** This generates the package-frame.html file that lists the interfaces and
  * classes in a given package for displaying in the lower-left frame of the
  * frame-formatted default output.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class PackageFrameWriter extends HTMLWriter
 {
@@ -71,7 +71,7 @@ class PackageFrameWriter extends HTMLWriter
 		echo '<h1><a href="package-summary.html" target="main">', $package->name(), "</a></h1>\n\n";
 
 		$classes =& $package->ordinaryClasses();
-		if ($classes) {
+		if ($classes && is_array($classes)) {
             asort($classes);
 			echo "<h2>Classes</h2>\n";
 			echo "<ul>\n";
@@ -82,7 +82,7 @@ class PackageFrameWriter extends HTMLWriter
 		}
 
 		$interfaces =& $package->interfaces();
-		if ($interfaces) {
+		if ($interfaces && is_array($interfaces)) {
             asort($interface);
 			echo "<h2>Interfaces</h2>\n";
 			echo "<ul>\n";
@@ -93,7 +93,7 @@ class PackageFrameWriter extends HTMLWriter
 		}
 
 		$exceptions =& $package->exceptions();
-		if ($exceptions) {
+		if ($exceptions && is_array($exceptions)) {
             asort($exceptions);
 			echo "<h2>Exceptions</h2>\n";
 			echo "<ul>\n";
@@ -104,7 +104,7 @@ class PackageFrameWriter extends HTMLWriter
 		}
 
 		$functions =& $package->functions();
-		if ($functions) {
+		if ($functions && is_array($functions)) {
             asort($functions);
 			echo "<h2>Functions</h2>\n";
 			echo "<ul>\n";
@@ -115,7 +115,7 @@ class PackageFrameWriter extends HTMLWriter
 		}
 
 		$globals =& $package->globals();
-		if ($globals) {
+		if ($globals && is_array($globals)) {
             asort($globals);
 			echo "<h2>Globals</h2>\n";
 			echo "<ul>\n";

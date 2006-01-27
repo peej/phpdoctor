@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageDoc.php,v 1.10 2005/12/18 11:20:00 peejeh Exp $
+// $Id: packageDoc.php,v 1.11 2006/01/27 22:31:32 peejeh Exp $
 
 /** Represents a PHP package. Provides access to information about the package,
  * the package's comment and tags, and the classes in the package.
  *
  * @package PHPDoctor
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class PackageDoc extends Doc
 {
@@ -224,7 +224,8 @@ class PackageDoc extends Doc
 		if (isset($this->_classes[$className])) {
 			return $this->_classes[$className];
 		} else {
-			return NULL;
+            $null = NULL;
+			return $null;
 		}
 	}
 

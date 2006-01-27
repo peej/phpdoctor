@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.19 2005/06/28 20:25:51 peejeh Exp $
+// $Id: phpDoctor.php,v 1.20 2006/01/27 22:31:32 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 class PHPDoctor
 {
@@ -587,7 +587,10 @@ class PHPDoctor
 						// get implements clause
 							while($tokens[++$key] != '{') {
 								if ($tokens[$key][0] == T_STRING) {
-									$ce->set('interfaces', $tokens[$key][1]);
+                                    $interface =& $rootDoc->classNamed($tokens[$key][1]);
+                                    if ($interface) {
+                                        $ce->set('interfaces', $interface);
+                                    }
 								}
 							}
 							break;
@@ -1131,7 +1134,7 @@ class PHPDoctor
 			return FALSE;
 		} elseif ($this->_private) {
 			return TRUE;
-		} elseif ($this->_protected && ($element->isPublic() || $element->isProtected)) {
+		} elseif ($this->_protected && ($element->isPublic() || $element->isProtected())) {
 			return TRUE;
 		} elseif ($this->_public && $element->isPublic()) {
 			return TRUE;
