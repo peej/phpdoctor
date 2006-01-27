@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: seeTag.php,v 1.10 2005/05/12 21:25:09 peejeh Exp $
+// $Id: seeTag.php,v 1.11 2006/01/27 22:57:00 peejeh Exp $
 
 /** Represents a see tag.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class SeeTag extends Tag
 {
@@ -82,6 +82,8 @@ class SeeTag extends Tag
 			$package =& $this->_parent->containingPackage();
 			$path = str_repeat('../', $package->depth() + 1).$element->asPath();
 			return '<a href="'.$path.'">'.$link.'</a>';
+        } elseif (substr($this->_link, 0, 7) == 'http://') {
+            return '<a href="'.$this->_link.'">'.$link.'</a>';
 		} else {
 			return $link;
 		}
