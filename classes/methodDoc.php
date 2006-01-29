@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: methodDoc.php,v 1.10 2006/01/27 22:31:32 peejeh Exp $
+// $Id: methodDoc.php,v 1.11 2006/01/29 10:35:28 peejeh Exp $
 
 /** Represents a PHP function or method (member function).
  *
  * @package PHPDoctor
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class MethodDoc extends ExecutableDoc
 {
@@ -108,11 +108,7 @@ class MethodDoc extends ExecutableDoc
 	 */
 	function isMethod()
     {
-		if (strtolower(get_class($this->_parent)) == 'rootdoc' && $this->containingClass()) {
-			return FALSE;
-		} else {
-			return TRUE;
-		}
+		return !$this->isFunction();
 	}
 
 	/** Return true if this class is abstract.
