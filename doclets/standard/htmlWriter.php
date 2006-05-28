@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.12 2005/06/28 20:25:51 peejeh Exp $
+// $Id: htmlWriter.php,v 1.13 2006/05/28 17:37:51 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 class HTMLWriter
 {
@@ -273,7 +273,7 @@ class HTMLWriter
 	/** Convert inline tags into a string for outputting.
 	 *
 	 * @param Tag tag The text tag to process
-	 * @param bool first process first line of tag only
+	 * @param bool first Process first line of tag only
 	 * @return str The string representation of the elements doc tags
 	 */
 	function _processInlineTags(&$tag, $first = FALSE)
@@ -288,7 +288,7 @@ class HTMLWriter
 			if ($tags) {
 				foreach ($tags as $aTag) {
 					if ($aTag) {
-						$description .= $aTag->text().' ';
+                        $description .= '<p>'.str_replace("\n\n", '</p><p>', $aTag->text()).'</p>';
 					}
 				}
 			}
