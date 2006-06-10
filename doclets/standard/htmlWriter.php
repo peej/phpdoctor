@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.13 2006/05/28 17:37:51 peejeh Exp $
+// $Id: htmlWriter.php,v 1.14 2006/06/10 19:06:54 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 class HTMLWriter
 {
@@ -295,7 +295,7 @@ class HTMLWriter
             if ($first) {
                 $description = $this->_stripBlockTags($description);
             }
-			return substr($description, 0, -1);
+			return $description;
 		}
 		return NULL;
 	}
