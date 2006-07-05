@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: seeTag.php,v 1.11 2006/01/27 22:57:00 peejeh Exp $
+// $Id: seeTag.php,v 1.12 2006/07/05 21:38:27 peejeh Exp $
 
 /** Represents a see tag.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class SeeTag extends Tag
 {
@@ -96,6 +96,7 @@ class SeeTag extends Tag
 	 */
 	function &_resolveLink()
     {
+        $return = NULL;
 		$labelRegex = '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*';
 		if (preg_match('/^(([a-zA-Z0-9_\x7f-\xff .-]+)\.)?(('.$labelRegex.')#)?('.$labelRegex.')$/', $this->_link, $matches)) {
 			$packageName = $matches[2];
@@ -278,10 +279,9 @@ class SeeTag extends Tag
 					}
 				}
 			}
-			return $element;
-		} else {
-			return NULL;
+			$return =& $element;
 		}
+        return $return;
 	}
 	
 	/** Return true if this Taglet is used in constructor documentation.

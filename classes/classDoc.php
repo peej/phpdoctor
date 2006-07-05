@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classDoc.php,v 1.10 2005/06/05 16:54:19 peejeh Exp $
+// $Id: classDoc.php,v 1.11 2006/07/05 21:38:27 peejeh Exp $
 
 /** Represents a PHP class and provides access to information about the class,
  * the class' comment and tags, and the members of the class. A classDoc only
@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * type (which can be converted to classDoc, if possible).
  *
  * @package PHPDoctor
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class ClassDoc extends ProgramElementDoc
 {
@@ -148,10 +148,11 @@ class ClassDoc extends ProgramElementDoc
 	 */
 	function &fieldNamed($fieldName)
     {
+        $return = NULL;
         if (isset($this->_fields[$fieldName])) {
-            return $this->_fields[$fieldName];
+            $return =& $this->_fields[$fieldName];
         }
-        return NULL;
+        return $return;
 	}
     
 	/** Return the methods in this class.
@@ -169,10 +170,11 @@ class ClassDoc extends ProgramElementDoc
 	 */
 	function &methodNamed($methodName)
     {
+        $return = NULL;
         if (isset($this->_methods[$methodName])) {
-            return $this->_methods[$methodName];
+            $return =& $this->_methods[$methodName];
         }
-        return NULL;
+        return $return;
 	}
     
 	/** Return interfaces implemented by this class or interfaces extended by this interface.
@@ -190,10 +192,11 @@ class ClassDoc extends ProgramElementDoc
 	 */
 	function &interfaceNamed($interfaceName)
     {
+        $return = NULL;
         if (isset($this->_interfaces[$interfaceName])) {
-            return $this->_interfaces[$interfaceName];
+            $return =& $this->_interfaces[$interfaceName];
         }
-        return NULL;
+        return $return;
 	}
     
 	/** Return true if this class is abstract.
@@ -315,7 +318,7 @@ class ClassDoc extends ProgramElementDoc
             $methods =& $this->methods();
             $constructor =& $this->constructor();
             if (is_object($constructor)) {
-                array_merge(array($constructor->name() => $constructor), $methods);
+                $methods = array_merge(array($constructor->name() => $constructor), $methods);
             }
             foreach ($methods as $name => $method) {
                 $parentMethod =& $parent->methodNamed($name);

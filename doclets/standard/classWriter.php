@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.16 2005/12/18 11:20:00 peejeh Exp $
+// $Id: classWriter.php,v 1.17 2006/07/05 21:38:27 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -269,6 +269,7 @@ class ClassWriter extends HTMLWriter
 			$start = FALSE;
 		}
 		$output = '';
+        $undefinedClass = FALSE;
 		if ($class->superclass()) {
 			$superclass =& $rootDoc->classNamed($class->superclass());
 			if ($superclass) {
@@ -279,9 +280,11 @@ class ClassWriter extends HTMLWriter
 				$output .= $class->superclass().'<br>';
 				$output .= str_repeat('     ', $depth).'  |<br>';
 				$output .= str_repeat('     ', $depth).'  +--';
+                $depth++;
+				$undefinedClass = TRUE;
 			}
 		}
-		if ($depth > 0) {
+		if ($depth > 0 && !$undefinedClass) {
 			$output .= str_repeat('     ', $depth - 1).'  |<br>';
 			$output .= str_repeat('     ', $depth - 1).'  +--';
 		}

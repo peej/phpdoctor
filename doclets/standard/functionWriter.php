@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.11 2005/12/18 11:20:00 peejeh Exp $
+// $Id: functionWriter.php,v 1.12 2006/07/05 21:38:27 peejeh Exp $
 
 /** This generates the HTML API documentation for each global function.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class FunctionWriter extends HTMLWriter
 {
@@ -42,7 +42,7 @@ class FunctionWriter extends HTMLWriter
 		$rootDoc =& $this->_doclet->rootDoc();
         
         $packages =& $rootDoc->packages();
-        asort($packages);
+        ksort($packages);
 
 		foreach($packages as $packageName => $package) {
 
@@ -67,7 +67,7 @@ class FunctionWriter extends HTMLWriter
 			$functions =& $package->functions();
 				
 			if ($functions) {
-                asort($functions);
+                ksort($functions);
 				echo '<table id="summary_function" class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
 				foreach($functions as $function) {

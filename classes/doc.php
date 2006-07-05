@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: doc.php,v 1.10 2005/06/28 20:25:51 peejeh Exp $
+// $Id: doc.php,v 1.11 2006/07/05 21:38:27 peejeh Exp $
 
 /** Abstract base class of all Doc classes. Doc item's are representations of
  * PHP language constructs (class, package, method,...) which have comments
  * and have been processed by this run of PHPDoctor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @abstract
  */
 class Doc {
@@ -132,12 +132,13 @@ class Doc {
 	 */
 	function &tags($tagName = NULL)
     {
+        $return = NULL;
 		if ($tagName == NULL) {
-			return $this->_tags;
+			$return =& $this->_tags;
 		} elseif (isset($this->_tags[$tagName])) {
-			return $this->_tags[$tagName];
+			$return =& $this->_tags[$tagName];
 		}
-		return NULL;
+		return $return;
 	}
     
 	/** Set a tag.

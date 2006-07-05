@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: globalWriter.php,v 1.10 2005/05/16 19:21:11 peejeh Exp $
+// $Id: globalWriter.php,v 1.11 2006/07/05 21:38:27 peejeh Exp $
 
 /** This generates the HTML API documentation for each global variable.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class GlobalWriter extends HTMLWriter
 {
@@ -42,7 +42,7 @@ class GlobalWriter extends HTMLWriter
 		$rootDoc =& $this->_doclet->rootDoc();
         
         $packages =& $rootDoc->packages();
-        asort($packages);
+        ksort($packages);
 
 		foreach($packages as $packageName => $package) {
 
@@ -67,7 +67,7 @@ class GlobalWriter extends HTMLWriter
 			$globals =& $package->globals();
 				
 			if ($globals) {
-                asort($globals);
+                ksort($globals);
 				echo '<table id="summary_global" class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>', "\n";
 				foreach($globals as $global) {

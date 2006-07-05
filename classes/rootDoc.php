@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: rootDoc.php,v 1.9 2005/05/22 20:33:46 peejeh Exp $
+// $Id: rootDoc.php,v 1.10 2006/07/05 21:38:27 peejeh Exp $
 
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class RootDoc extends Doc
 {
@@ -174,15 +174,15 @@ class RootDoc extends Doc
 	 */
 	function &packageNamed($name, $create = FALSE)
     {
+        $return = NULL;
 		if (isset($this->_packages[$name])) {
-			return $this->_packages[$name];
+			$return =& $this->_packages[$name];
 		} elseif ($create) {
 			$newPackage =& new packageDoc($name, $this);
 			$this->addPackage($newPackage);
-			return $newPackage;
-		} else {
-			return NULL;
+			$return =& $newPackage;
 		}
+        return $return;
 	}
 
 	/** Return a reference to a classDoc for the specified class/interface name

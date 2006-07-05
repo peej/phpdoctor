@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: tag.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
+// $Id: tag.php,v 1.8 2006/07/05 21:38:27 peejeh Exp $
 
 /** Represents a documentation tag, e.g. @since, @author, @version. Given a tag
  * (e.g. "@since 1.2"), holds tag name (e.g. "@since") and tag text (e.g.
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * by subclasses.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class Tag
 {
@@ -158,6 +158,7 @@ class Tag
 	 */
 	function &_getInlineTags($text)
     {
+        $return = NULL;
 		$tagStrings = preg_split('/{(@.+)}/sU', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
 		if ($tagStrings) {
 			$inlineTags = NULL;
@@ -181,9 +182,9 @@ class Tag
 				$inlineTag->setParent($this->_parent);
 				$inlineTags[] = $inlineTag;
 			}
-			return $inlineTags;
+			$return =& $inlineTags;
 		}
-		return NULL;
+		return $return;
 	}
 
 	/** Return true if this Taglet is used in constructor documentation.

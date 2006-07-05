@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageWriter.php,v 1.14 2005/06/05 08:23:26 peejeh Exp $
+// $Id: packageWriter.php,v 1.15 2006/07/05 21:38:28 peejeh Exp $
 
 /** This generates the package-summary.html files that list the interfaces and
  * classes for a given package.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 class PackageWriter extends HTMLWriter
 {
@@ -77,7 +77,7 @@ class PackageWriter extends HTMLWriter
         $this->_id = 'package';
 
         $packages =& $rootDoc->packages();
-        asort($packages);
+        ksort($packages);
         
 		foreach($packages as $packageName => $package) {
 		
@@ -105,7 +105,7 @@ class PackageWriter extends HTMLWriter
 
 			$classes =& $package->ordinaryClasses();
 			if ($classes) {
-                asort($classes);
+                ksort($classes);
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Class Summary</th></tr>', "\n";
 				foreach($classes as $name => $class) {
@@ -120,7 +120,7 @@ class PackageWriter extends HTMLWriter
 
 			$interfaces =& $package->interfaces();
 			if ($interfaces) {
-                asort($interfaces);
+                ksort($interfaces);
 				echo '<table class="title">'."\n";
 				echo '<tr><th colspan="2" class="title">Interface Summary</th></tr>'."\n";
 				foreach($interfaces as $name => $interface) {
@@ -135,7 +135,7 @@ class PackageWriter extends HTMLWriter
 
 			$exceptions =& $package->exceptions();
 			if ($exceptions) {
-                asort($exceptions);
+                ksort($exceptions);
 				echo '<table class="title">'."\n";
 				echo '<tr><th colspan="2" class="title">Exception Summary</th></tr>'."\n";
 				foreach($exceptions as $name => $exception) {
@@ -150,7 +150,7 @@ class PackageWriter extends HTMLWriter
 			
 			$functions =& $package->functions();
 			if ($functions) {
-                asort($functions);
+                ksort($functions);
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
 				foreach($functions as $name => $function) {
@@ -165,7 +165,7 @@ class PackageWriter extends HTMLWriter
 			
 			$globals =& $package->globals();
 			if ($globals) {
-                asort($globals);
+                ksort($globals);
 				echo '<table class="title">', "\n";
 				echo '<tr><th colspan="2" class="title">Global Summary</th></tr>', "\n";
 				foreach($globals as $name => $global) {
@@ -206,7 +206,7 @@ class PackageWriter extends HTMLWriter
 				$tree = array();
 				$classes =& $package->ordinaryClasses();
 				if ($classes) {
-                    asort($classes);
+                    ksort($classes);
 					foreach ($classes as $class) {
 						$this->_buildTree($tree, $class);
 					}

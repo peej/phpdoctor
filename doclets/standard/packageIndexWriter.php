@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageIndexWriter.php,v 1.11 2005/05/15 15:50:52 peejeh Exp $
+// $Id: packageIndexWriter.php,v 1.12 2006/07/05 21:38:28 peejeh Exp $
 
 /** This class generates the overview-summary.html file that lists all parsed
  * packages.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class PackageIndexWriter extends HTMLWriter
 {
@@ -68,7 +68,7 @@ class PackageIndexWriter extends HTMLWriter
 		echo '<table class="title">'."\n";
 		echo '<tr><th colspan="2" class="title">Packages</th></tr>'."\n";
         $packages =& $rootDoc->packages();
-        asort($packages);
+        ksort($packages);
 		foreach($packages as $name => $package) {
 			$textTag =& $package->tags('@text');
 			echo '<tr><td class="name"><a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a></td>';

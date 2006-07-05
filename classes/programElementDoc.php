@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: programElementDoc.php,v 1.12 2005/12/18 11:42:50 peejeh Exp $
+// $Id: programElementDoc.php,v 1.13 2006/07/05 21:38:27 peejeh Exp $
 
 /** Represents a PHP program element: global, function, class, interface,
  * field, constructor, or method. This is an abstract class dealing with
  * information common to these elements.
  *
  * @package PHPDoctor
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @abstract
  */
 class ProgramElementDoc extends Doc
@@ -86,10 +86,11 @@ class ProgramElementDoc extends Doc
 	 */
 	function &containingClass()
     {
+        $return = NULL;
         if (strtolower(get_class($this->_parent)) == 'classdoc') {
-            return $this->_parent;
+            $return =& $this->_parent;
         }
-        return NULL;
+        return $return;
 	}
 
 	/** Get the package that this program element is contained in.

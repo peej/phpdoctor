@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: indexWriter.php,v 1.4 2005/06/28 20:25:51 peejeh Exp $
+// $Id: indexWriter.php,v 1.5 2006/07/05 21:38:27 peejeh Exp $
 
 /** This generates the element index.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 class IndexWriter extends HTMLWriter
 {
@@ -38,9 +38,9 @@ class IndexWriter extends HTMLWriter
 		parent::HTMLWriter($doclet);
 		
 		//$this->_id = 'definition';
-
+        
 		$rootDoc =& $this->_doclet->rootDoc();
-
+        
         $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
         $this->_sections[1] = array('title' => 'Package');
         $this->_sections[2] = array('title' => 'Class');
@@ -50,18 +50,25 @@ class IndexWriter extends HTMLWriter
         $this->_sections[6] = array('title' => 'Index', 'selected' => TRUE);
         
         $classes =& $rootDoc->classes();
+        if($classes == NULL) $classes = array();
+        
         $methods = array();
         foreach ($classes as $class) {
             $methods = array_merge($methods, $class->methods());
         }
+        if($methods == NULL) $methods = array();
+        
         $functions =& $rootDoc->functions();
+        if($functions == NULL) $functions = array();
+        
         $globals =& $rootDoc->globals();
+        if($globals == NULL) $globals = array();
         
         $elements = array_merge($classes, $methods, $functions, $globals);
         uasort($elements, array($this, 'compareElements'));
-
+        
         ob_start();
-
+        
         $letter = 64;
         foreach ($elements as $name => $element) {
             $firstChar = strtoupper(substr($element->name(), 0, 1));
