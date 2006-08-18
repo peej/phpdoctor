@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: tag.php,v 1.8 2006/07/05 21:38:27 peejeh Exp $
+// $Id: tag.php,v 1.9 2006/08/18 18:19:43 peejeh Exp $
 
 /** Represents a documentation tag, e.g. @since, @author, @version. Given a tag
  * (e.g. "@since 1.2"), holds tag name (e.g. "@since") and tag text (e.g.
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * by subclasses.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class Tag
 {
@@ -146,7 +146,8 @@ class Tag
 		if (preg_match('/^(.+)\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)/sU', $this->text(), $matches)) {
 			return $this->_getInlineTags($matches[1].'.'.$matches[2]);
 		} else {
-			return array(&$this);
+			$return = array(&$this);
+            return $return;
 		}
 	}
 	

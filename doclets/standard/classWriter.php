@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.17 2006/07/05 21:38:27 peejeh Exp $
+// $Id: classWriter.php,v 1.18 2006/08/18 18:19:43 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -73,7 +73,7 @@ class ClassWriter extends HTMLWriter
 					echo '<h1>Class ', $class->name(), "</h1>\n\n";
 
 					echo '<pre class="tree">';
-					$result =& $this->_buildTree($rootDoc, $classes[$name]);
+					$result = $this->_buildTree($rootDoc, $classes[$name]);
 					echo $result[0];
 					echo "</pre>\n\n";
 				

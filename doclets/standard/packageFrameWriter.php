@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageFrameWriter.php,v 1.10 2006/07/05 21:38:28 peejeh Exp $
+// $Id: packageFrameWriter.php,v 1.11 2006/08/18 18:19:43 peejeh Exp $
 
 /** This generates the package-frame.html file that lists the interfaces and
  * classes in a given package for displaying in the lower-left frame of the
  * frame-formatted default output.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class PackageFrameWriter extends HTMLWriter
 {
@@ -109,7 +109,7 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<h2>Functions</h2>\n";
 			echo "<ul>\n";
 			foreach($functions as $name => $function) {
-				echo '<li><a href="', str_repeat('../', $package->depth() + 1), 'package-functions.html#', $functions[$name]->name(), '" target="main">', $functions[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', str_repeat('../', $package->depth() + 1), $functions[$name]->asPath(), '" target="main">', $functions[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
@@ -120,14 +120,14 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<h2>Globals</h2>\n";
 			echo "<ul>\n";
 			foreach($globals as $name => $global) {
-				echo '<li><a href="', str_repeat('../', $package->depth() + 1), 'package-globals.html#', $globals[$name]->name(), '" target="main">', $globals[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', str_repeat('../', $package->depth() + 1), $globals[$name]->asPath(), '" target="main">', $globals[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
 
 		echo '</body>', "\n\n";
 
-		$output =& ob_get_contents();
+		$output = ob_get_contents();
 		ob_end_clean();
 		
 		return $output;
@@ -168,7 +168,7 @@ class PackageFrameWriter extends HTMLWriter
 			echo "<ul>\n";
 			foreach($functions as $name => $function) {
 				$package =& $functions[$name]->containingPackage();
-				echo '<li><a href="', $package->asPath(), '/package-functions.html#', $functions[$name]->name(), '" target="main">', $functions[$name]->name(), "</a></li>\n";
+				echo '<li><a href="', $package->asPath(), '/package-functions.html#', $functions[$name]->name(), '()" target="main">', $functions[$name]->name(), "</a></li>\n";
 			}
 			echo "</ul>\n\n";
 		}
@@ -187,7 +187,7 @@ class PackageFrameWriter extends HTMLWriter
 		
 		echo '</body>', "\n\n";
 
-		$output =& ob_get_contents();
+		$output = ob_get_contents();
 		ob_end_clean();
 		
 		return $output;
@@ -196,3 +196,4 @@ class PackageFrameWriter extends HTMLWriter
 }
 
 ?>
+
