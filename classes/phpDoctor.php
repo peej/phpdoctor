@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.21 2006/07/05 21:38:27 peejeh Exp $
+// $Id: phpDoctor.php,v 1.22 2006/09/19 19:00:01 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.22 $
  */
 class PHPDoctor
 {
@@ -661,6 +661,8 @@ class PHPDoctor
 								if (substr($method->name(), 0, 1) == '_') $method->makePrivate();
 								if ($method->name() == '__construct' || strtolower($method->name()) == strtolower($ce->name())) { // constructor
 									$this->verbose(' is a constructor of '.get_class($ce).' '.$ce->name());
+                                    // Will Gilbert (gilbert@informagen.com) - Write out the constuctor as the class's name rather than '__construct'
+                                    if ($method->name() == '__construct') $method->set("name", $ce->name()); 
 									$ce->addConstructor($method);
 								} else {
 									$this->verbose(' is a method of '.get_class($ce).' '.$ce->name());
