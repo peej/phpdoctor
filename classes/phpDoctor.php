@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.22 2006/09/19 19:00:01 peejeh Exp $
+// $Id: phpDoctor.php,v 1.23 2006/12/16 20:58:15 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 class PHPDoctor
 {
@@ -658,13 +658,13 @@ class PHPDoctor
 								$parentPackage->addFunction($method); // add method to package
 							} elseif ($ceClass == 'classdoc' || $ceClass == 'methoddoc') { // class method, add to class
 								$method->set('package', $ce->packageName()); // set package
-								if (substr($method->name(), 0, 1) == '_') $method->makePrivate();
 								if ($method->name() == '__construct' || strtolower($method->name()) == strtolower($ce->name())) { // constructor
 									$this->verbose(' is a constructor of '.get_class($ce).' '.$ce->name());
                                     // Will Gilbert (gilbert@informagen.com) - Write out the constuctor as the class's name rather than '__construct'
                                     if ($method->name() == '__construct') $method->set("name", $ce->name()); 
 									$ce->addConstructor($method);
 								} else {
+									if ($this->_hasPrivateName($method->name())) $method->makePrivate();
 									$this->verbose(' is a method of '.get_class($ce).' '.$ce->name());
 									if ($this->_includeElements($method)) {
 										$ce->addMethod($method);
@@ -719,7 +719,7 @@ class PHPDoctor
 									} elseif ($tokens[$key] == ',' || $tokens[$key] == ';') {
 										$const =& new fieldDoc($this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING)), $ce, $rootDoc); // create field object
 										$this->verbose('Found '.get_class($const).': '.$const->name());
-										if (substr($const->name(), 0, 1) == '_') $const->makePrivate();
+										if ($this->_hasPrivateName($const->name())) $const->makePrivate();
 										$const->set('final', TRUE);
 										if (isset($value)) $const->set('value', trim($value)); // set value
 										if (isset($currentData['docComment'])) { // set doc comment
@@ -822,7 +822,7 @@ class PHPDoctor
 									} elseif ($tokens[$key] == ',' || $tokens[$key] == ';') {
 										$field =& new fieldDoc($this->_getPrev($tokens, $key, T_VARIABLE), $ce, $rootDoc); // create field object
 										$this->verbose('Found '.get_class($field).': '.$field->name());
-										if (substr($field->name(), 0, 1) == '_') $field->makePrivate();
+										if ($this->_hasPrivateName($field->name())) $field->makePrivate();
 										if (isset($value)) $field->set('value', trim($value)); // set value
 										if (isset($currentData['docComment'])) { // set doc comment
 											$field->set('docComment', $currentData['docComment']);
@@ -1143,8 +1143,18 @@ class PHPDoctor
 		}
 		return FALSE;
 	}
-
-
+	
+	/**
+	 * Does the given element name conform to the format that is used for private
+	 * elements?
+	 *
+	 * @param str name The name to check
+	 * @return bool
+	 */
+	function _hasPrivateName($name)
+	{
+		return substr($name, 0, 1) == '_';
+	}
 }
 
 ?>

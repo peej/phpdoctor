@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: programElementDoc.php,v 1.13 2006/07/05 21:38:27 peejeh Exp $
+// $Id: programElementDoc.php,v 1.14 2006/12/16 20:58:15 peejeh Exp $
 
 /** Represents a PHP program element: global, function, class, interface,
  * field, constructor, or method. This is an abstract class dealing with
  * information common to these elements.
  *
  * @package PHPDoctor
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @abstract
  */
 class ProgramElementDoc extends Doc
@@ -203,7 +203,7 @@ modifiers() would return:
     {
 		return $this->_final;
 	}
-
+	
 	/** Return true if this program element is static.
 	 *
 	 * @return bool
@@ -223,10 +223,18 @@ modifiers() would return:
 			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html');
 		} elseif ($this->isField()) {
 			$class =& $this->containingClass();
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name;
+			if ($class) {
+				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name;
+			} else {
+				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#').$this->_name;
+			}
 		} elseif ($this->isConstructor() || $this->isMethod()) {
 			$class =& $this->containingClass();
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name.'()';
+			if ($class) {
+				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name.'()';
+			} else {
+				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#').$this->_name.'()';
+			}
 		} elseif ($this->isGlobal()) {
 			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#').$this->_name;
 		} elseif ($this->isFunction()) {
