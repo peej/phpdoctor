@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.23 2006/12/16 20:58:15 peejeh Exp $
+// $Id: phpDoctor.php,v 1.24 2006/12/16 21:31:17 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 class PHPDoctor
 {
@@ -1034,9 +1034,9 @@ class PHPDoctor
 		
 		$explodedComment = preg_split('/[\n|\r][ \r\n\t\/]*\*[ \t]*@/', "\n".$comment);
 		
-		$text = trim(array_shift($explodedComment), "\r\n \t/*");
-		if ($text != '') {
-			$data['tags']['@text'] = $this->createTag('@text', $text, $data, $root);
+		preg_match_all('/^[ \t\/*]*\* ?(.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches);
+		if (isset($matches[1])) {
+			$data['tags']['@text'] = $this->createTag('@text', join("\n", $matches[1]), $data, $root);
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags

@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: tag.php,v 1.9 2006/08/18 18:19:43 peejeh Exp $
+// $Id: tag.php,v 1.10 2006/12/16 21:31:17 peejeh Exp $
 
 /** Represents a documentation tag, e.g. @since, @author, @version. Given a tag
  * (e.g. "@since 1.2"), holds tag name (e.g. "@since") and tag text (e.g.
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * by subclasses.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class Tag
 {
@@ -68,7 +68,8 @@ class Tag
 		$this->_root =& $root;
 		$processedText = '';
 		foreach(explode("\n", $text) as $line) {
-			$processedText .= trim($line, " \n\r\t\0\x0B*/")."\n";
+			//$processedText .= trim($line, " \n\r\t\0\x0B*/")."\n";
+			$processedText .= $line."\n"; // keep formatting
 		}
 		$this->_text = substr($processedText, 0, -1);
 	}
