@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: rootDoc.php,v 1.10 2006/07/05 21:38:27 peejeh Exp $
+// $Id: rootDoc.php,v 1.11 2006/12/16 19:10:21 peejeh Exp $
 
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class RootDoc extends Doc
 {
@@ -114,7 +114,7 @@ class RootDoc extends Doc
 		$classes = array();
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
-			$packageClasses =& $this->_packages[$name]->allClasses();
+			$packageClasses = $this->_packages[$name]->allClasses(); // not by reference so as not to move the internal array pointer
 			if ($packageClasses) {
 				foreach ($packageClasses as $key => $pack) {
 					$classes[$name.'.'.$key] =& $packageClasses[$key];
@@ -134,7 +134,7 @@ class RootDoc extends Doc
 		$functions = array();
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
-			$packageFunctions =& $this->_packages[$name]->functions();
+			$packageFunctions = $this->_packages[$name]->functions(); // not by reference so as not to move the internal array pointer
 			if ($packageFunctions) {
 				foreach ($packageFunctions as $key => $pack) {
 					$functions[$name.'.'.$key] =& $packageFunctions[$key];
@@ -153,7 +153,7 @@ class RootDoc extends Doc
 		$globals = array();
 		$packages = $this->packages(); // not by reference so as not to move the internal array pointer
 		foreach ($packages as $name => $package) {
-			$packageGlobals =& $this->_packages[$name]->globals();
+			$packageGlobals = $this->_packages[$name]->globals(); // not by reference so as not to move the internal array pointer
 			if ($packageGlobals) {
 				foreach ($packageGlobals as $key => $pack) {
 					$globals[$name.'.'.$key] =& $packageGlobals[$key];

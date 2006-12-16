@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.18 2006/08/18 18:19:43 peejeh Exp $
+// $Id: classWriter.php,v 1.19 2006/12/16 19:10:31 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -55,28 +55,32 @@ class ClassWriter extends HTMLWriter
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
 			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
 			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
-		
+			
 			$this->_depth = $package->depth() + 1;
-
-			$classes =& $package->ordinaryClasses();
+			
+			$classes =& $package->allClasses();
 			
 			if ($classes) {
                 ksort($classes);
 				foreach ($classes as $name => $class) {
-				
+					
 					ob_start();
 					
 					echo "<hr>\n\n";
 					
 					echo '<div class="qualifiedName">', $class->qualifiedName(), "</div>\n\n";
 					
-					echo '<h1>Class ', $class->name(), "</h1>\n\n";
-
+					if ($class->isInterface()) {
+						echo '<h1>Interface ', $class->name(), "</h1>\n\n";
+					} else {
+						echo '<h1>Class ', $class->name(), "</h1>\n\n";
+					}
+					
 					echo '<pre class="tree">';
 					$result = $this->_buildTree($rootDoc, $classes[$name]);
 					echo $result[0];
 					echo "</pre>\n\n";
-				
+					
 					$implements =& $class->interfaces();
 					if (count($implements) > 0) {
 						echo "<dl>\n";
@@ -90,8 +94,12 @@ class ClassWriter extends HTMLWriter
 					}
 					
 					echo "<hr>\n\n";
-
-					echo '<p class="signature">', $class->modifiers(), ' class <strong>', $class->name(), '</strong>';
+					
+					if ($class->isInterface()) {
+						echo '<p class="signature">', $class->modifiers(), ' interface <strong>', $class->name(), '</strong>';
+					} else {
+						echo '<p class="signature">', $class->modifiers(), ' class <strong>', $class->name(), '</strong>';
+					}
 					if ($class->superclass()) {
 						$superclass =& $rootDoc->classNamed($class->superclass());
 						if ($superclass) {
