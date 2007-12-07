@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.27 2007/12/07 12:44:30 peejeh Exp $
+// $Id: phpDoctor.php,v 1.28 2007/12/07 16:19:36 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 class PHPDoctor
 {
@@ -684,7 +684,7 @@ class PHPDoctor
 								$const->set('final', TRUE); // is constant
 								$value = '';
 								$key = $key + 4;
-								while($tokens[$key] != ';') {
+								while(isset($tokens[$key]) && $tokens[$key] != ';') {
 									if (is_array($tokens[$key])) {
 										$value .= $tokens[$key][1];
 									} else {
@@ -715,15 +715,19 @@ class PHPDoctor
 								do {
 									$key++;
 									if ($tokens[$key] == '=') {
+										$name = $this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING));
 										$value = '';
-									} elseif(isset($value) && $tokens[$key] != ';') { // set value
+									} elseif(isset($value) && $tokens[$key] != ',' && $tokens[$key] != ';') { // set value
 										if (is_array($tokens[$key])) {
 											$value .= $tokens[$key][1];
 										} else {
 											$value .= $tokens[$key];
 										}
 									} elseif ($tokens[$key] == ',' || $tokens[$key] == ';') {
-										$const =& new fieldDoc($this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING)), $ce, $rootDoc); // create field object
+										if (!isset($name)) {
+											$name = $this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING));
+										}
+										$const =& new fieldDoc($name, $ce, $rootDoc); // create field object
 										$this->verbose('Found '.get_class($const).': '.$const->name());
 										if ($this->_hasPrivateName($const->name())) $const->makePrivate();
 										$const->set('final', TRUE);
@@ -744,9 +748,10 @@ class PHPDoctor
 										if ($this->_includeElements($const)) {
 											$ce->addField($const);
 										}
+										unset($name);
 										unset($value);
 									}
-								} while($tokens[$key] != ';');
+								} while(isset($tokens[$key]) && $tokens[$key] != ';');
 								$currentData = array(); // empty data store
 
 							// function parameter
@@ -771,7 +776,7 @@ class PHPDoctor
 											$param->set('value', $tokens[$key][1]);
 										}
 									}
-								} while($tokens[$key] != ')');
+								} while(isset($tokens[$key]) && $tokens[$key] != ')');
 								$currentData = array(); // empty data store
 							}
 							break;
@@ -824,15 +829,25 @@ class PHPDoctor
 								do {
 									$key++;
 									if ($tokens[$key] == '=') { // start value
+										$name = $this->_getPrev($tokens, $key, T_VARIABLE);
 										$value = '';
-									} elseif(isset($value) && $tokens[$key] != ';') { // set value
+										$bracketCount = 0;
+									} elseif (isset($value) && ($tokens[$key] != ',' || $bracketCount > 0) && $tokens[$key] != ';') { // set value
+										if ($tokens[$key] == '(') {
+											$bracketCount++;
+										} elseif ($tokens[$key] == ')') {
+											$bracketCount--;
+										}
 										if (is_array($tokens[$key])) {
 											$value .= $tokens[$key][1];
 										} else {
 											$value .= $tokens[$key];
 										}
 									} elseif ($tokens[$key] == ',' || $tokens[$key] == ';') {
-										$field =& new fieldDoc($this->_getPrev($tokens, $key, T_VARIABLE), $ce, $rootDoc); // create field object
+										if (!isset($name)) {
+											$name = $this->_getPrev($tokens, $key, T_VARIABLE);
+										}
+										$field =& new fieldDoc($name, $ce, $rootDoc); // create field object
 										$this->verbose('Found '.get_class($field).': '.$field->name());
 										if ($this->_hasPrivateName($field->name())) $field->makePrivate();
 										if (isset($value)) { // set value
@@ -852,9 +867,10 @@ class PHPDoctor
 										if ($this->_includeElements($field)) {
 											$ce->addField($field);
 										}
+										unset($name);
 										unset($value);
 									}
-								} while($tokens[$key] != ';');
+								} while(isset($tokens[$key]) && $tokens[$key] != ';');
 								$currentData = array(); // empty data store
 
 							}
