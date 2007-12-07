@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.25 2007/12/07 08:39:16 peejeh Exp $
+// $Id: phpDoctor.php,v 1.26 2007/12/07 11:34:02 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 class PHPDoctor
 {
@@ -817,13 +817,25 @@ class PHPDoctor
 							) {
 								do {
 									$key++;
-									if ($tokens[$key] == '=') {
+									if ($tokens[$key] == '=') { // start value
 										$value = '';
+									} elseif(isset($value) && $tokens[$key] != ';') { // set value
+										if (is_array($tokens[$key])) {
+											$value .= $tokens[$key][1];
+										} else {
+											$value .= $tokens[$key];
+										}
 									} elseif ($tokens[$key] == ',' || $tokens[$key] == ';') {
 										$field =& new fieldDoc($this->_getPrev($tokens, $key, T_VARIABLE), $ce, $rootDoc); // create field object
 										$this->verbose('Found '.get_class($field).': '.$field->name());
 										if ($this->_hasPrivateName($field->name())) $field->makePrivate();
-										if (isset($value)) $field->set('value', trim($value)); // set value
+										if (isset($value)) { // set value
+											$value = trim($value);
+											if (strlen($value) > 30 && substr($value, 0, 5) == 'array') {
+												$value = 'array(...)';
+											}
+											$field->set('value', $value);
+										}
 										if (isset($currentData['docComment'])) { // set doc comment
 											$field->set('docComment', $currentData['docComment']);
 										}
@@ -835,12 +847,6 @@ class PHPDoctor
 											$ce->addField($field);
 										}
 										unset($value);
-									} elseif(isset($value)) { // set value
-										if (is_array($tokens[$key])) {
-											$value .= $tokens[$key][1];
-										} else {
-											$value .= $tokens[$key];
-										}
 									}
 								} while($tokens[$key] != ';');
 								$currentData = array(); // empty data store
