@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: debug.php,v 1.6 2005/05/12 21:25:09 peejeh Exp $
+// $Id: debug.php,v 1.7 2007/12/07 12:44:30 peejeh Exp $
 
 /** The debugging doclet. This doclet outputs all the parsed data in a format
  * suitable for debugging PHPDoctor.
  *
  * @package PHPDoctor.Doclets.Debug
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 class Debug
 {
@@ -164,7 +164,7 @@ class Debug
 				if ($interfaces) {
 					echo ' implements ';
 					foreach($interfaces as $interface) {
-						echo $interface, ' ';
+						echo $interface->name(), ' ';
 					}
 				}
 				echo "\n";
