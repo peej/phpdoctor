@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: rootDoc.php,v 1.11 2006/12/16 19:10:21 peejeh Exp $
+// $Id: rootDoc.php,v 1.12 2007/12/08 12:26:18 peejeh Exp $
 
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class RootDoc extends Doc
 {

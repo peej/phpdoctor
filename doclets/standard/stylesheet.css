@@ -153,6 +153,11 @@ div.qualifiedName {
     margin: 10px 0 0;
 }
 
+div.location {
+    font-size: 80%;
+	float: right;
+}
+
 #definition h1 {
     margin: 0 0 10px;
     font-family: "Times New Roman", Times, serif;

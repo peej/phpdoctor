@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: methodDoc.php,v 1.11 2006/01/29 10:35:28 peejeh Exp $
+// $Id: methodDoc.php,v 1.12 2007/12/08 12:26:18 peejeh Exp $
 
 /** Represents a PHP function or method (member function).
  *
  * @package PHPDoctor
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 class MethodDoc extends ExecutableDoc
 {
@@ -45,13 +45,17 @@ class MethodDoc extends ExecutableDoc
 	 * @param str name Name of this element
 	 * @param ClassDoc|MethodDoc parent The parent of this element
 	 * @param RootDoc root The root element
+	 * @param str filename The filename of the source file this element is in
+	 * @param int lineNumber The line number of the source file this element is at
 	 */
-	function methodDoc($name, &$parent, &$root)
+	function methodDoc($name, &$parent, &$root, $filename, $lineNumber)
     {
 		$this->_name = $name;
 		$this->_parent =& $parent; // set reference to parent
 		$this->_root =& $root; // set reference to root
 		$this->_returnType =& new type('void', $root);
+		$this->_filename = $filename;
+		$this->_lineNumber = $lineNumber;
 	}
 
 	/** Add a parameter to this method.

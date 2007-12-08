@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: fieldDoc.php,v 1.9 2005/06/28 20:25:51 peejeh Exp $
+// $Id: fieldDoc.php,v 1.10 2007/12/08 12:26:18 peejeh Exp $
 
 /** Represents a PHP variable, constant or member variable (field).
  *
  * @package PHPDoctor
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class FieldDoc extends ProgramElementDoc
 {
@@ -45,13 +45,17 @@ class FieldDoc extends ProgramElementDoc
 	 * @param str name Name of this element
 	 * @param ClassDoc|MethodDoc parent The parent of this element
 	 * @param RootDoc root The root element
+	 * @param str filename The filename of the source file this element is in
+	 * @param int lineNumber The line number of the source file this element is at
 	 */
-	function fieldDoc($name, &$parent, &$root)
+	function fieldDoc($name, &$parent, &$root, $filename = NULL, $lineNumber = NULL)
     {
 		$this->_name = trim($name, '$\'"');
 		$this->_parent =& $parent; // set reference to parent
 		$this->_root =& $root; // set reference to root
 		$this->_type =& new type('mixed', $root);
+		$this->_filename = $filename;
+		$this->_lineNumber = $lineNumber;
 	}
 
 	/** Get type of this variable.

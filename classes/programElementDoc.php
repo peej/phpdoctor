@@ -18,14 +18,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: programElementDoc.php,v 1.14 2006/12/16 20:58:15 peejeh Exp $
+// $Id: programElementDoc.php,v 1.15 2007/12/08 12:26:18 peejeh Exp $
 
 /** Represents a PHP program element: global, function, class, interface,
  * field, constructor, or method. This is an abstract class dealing with
  * information common to these elements.
  *
  * @package PHPDoctor
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  * @abstract
  */
 class ProgramElementDoc extends Doc
@@ -60,7 +60,19 @@ class ProgramElementDoc extends Doc
 	 * @var bool
 	 */
 	var $_static = FALSE;
-
+	
+	/** Which source file is this element in
+	 *
+	 * @var str
+	 */
+	var $_filename = NULL;
+	
+	/** The line in the source file this element can be found at
+	 *
+	 * @var int
+	 */
+	var $_lineNumber = NULL;
+	
 	/** Set element to have public access */
 	function makePublic()
     {
@@ -211,6 +223,16 @@ modifiers() would return:
 	function isStatic()
     {
 		return $this->_static;
+	}
+	
+	/** Get the source location of this element
+	 *
+	 * @return str
+	 */
+	function location()
+	{
+		$phpdoctor = $this->_root->phpdoctor();
+		return substr($this->_filename, strlen($phpdoctor->sourcePath())).' at line '.$this->_lineNumber;
 	}
     
 	/** Return the element path.

@@ -17,7 +17,7 @@ class TestPHP5 extends UnitTestCase
 		$results = ob_get_contents();
 		ob_end_clean();
 		
-		//var_dump($results);
+		var_dump($results);
 		
 		$this->assertTrue(strpos($results, 'public interface anInterface'));
 		$this->assertTrue(strpos($results, 'public final mixed aConst'));

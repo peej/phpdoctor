@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: debug.php,v 1.7 2007/12/07 12:44:30 peejeh Exp $
+// $Id: debug.php,v 1.8 2007/12/08 12:26:18 peejeh Exp $
 
 /** The debugging doclet. This doclet outputs all the parsed data in a format
  * suitable for debugging PHPDoctor.
  *
  * @package PHPDoctor.Doclets.Debug
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 class Debug
 {
@@ -83,6 +83,7 @@ class Debug
 				if ($field->value()) {
 					echo ' = ', $field->value();
 				}
+				echo ' [', $field->location(), ']';
 				echo "\n";
 			}
 		}
@@ -105,7 +106,9 @@ class Debug
 				} else {
 					echo 'void ';
 				}
-				echo $method->name(), $method->flatSignature(), "\n";
+				echo $method->name(), $method->flatSignature();
+				echo ' [', $method->location(), ']';
+				echo "\n";
 				$this->fieldDoc($method->parameters());
 				$this->methodDoc($method->functions());
 				$exceptions =& $method->thrownExceptions();
@@ -134,7 +137,9 @@ class Debug
 		if ($constructors) {
 			foreach ($constructors as $constructor) {
 				echo $this->showDepth(), $constructor->modifiers();
-				echo $constructor->name(), $constructor->flatSignature(), "\n";
+				echo $constructor->name(), $constructor->flatSignature();
+				echo ' [', $constructor->location(), ']';
+				echo "\n";
 				$this->fieldDoc($constructor->parameters());
 			}
 		}
@@ -167,6 +172,7 @@ class Debug
 						echo $interface->name(), ' ';
 					}
 				}
+				echo ' [', $class->location(), ']';
 				echo "\n";
 				$this->fieldDoc($class->fields(), TRUE);
 				$this->constructorDoc($class->constructor());

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @package PHPDoctor.Tests.Data
+ */
 interface anInterface {
 	
 	const aConst = 0;
@@ -20,15 +23,20 @@ interface anInterface {
 }
 
 /**
+ * @package PHPDoctor.Tests.Data
  * @access private
  */
 interface aPrivateInterface {}
 
 /**
  * @access protected
+ * @package PHPDoctor.Tests.Data
  */
 interface aProtectedInterface {}
 
+/**
+ * @package PHPDoctor.Tests.Data
+ */
 class aClass implements anInterface {
 	
 	var $aVar;
@@ -50,6 +58,8 @@ class aClass implements anInterface {
 	
 	var $anArrayVar = array(4, 5, 6);
 	
+	function aClass() {}
+	
 	function aFunction() {
 		/**
 		 * @var int
@@ -69,6 +79,9 @@ class aClass implements anInterface {
 	
 }
 
+/**
+ * @package PHPDoctor.Tests.Data
+ */
 class childClass extends aClass {}
 
 ?>

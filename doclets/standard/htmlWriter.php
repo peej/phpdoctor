@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.14 2006/06/10 19:06:54 peejeh Exp $
+// $Id: htmlWriter.php,v 1.15 2007/12/08 12:26:18 peejeh Exp $
 
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 class HTMLWriter
 {
@@ -288,7 +288,12 @@ class HTMLWriter
 			if ($tags) {
 				foreach ($tags as $aTag) {
 					if ($aTag) {
-                        $description .= '<p>'.str_replace("\n\n", '</p><p>', $aTag->text()).'</p>';
+						$tagText = $aTag->text();
+						if (strpos($tagText, '<p>') !== FALSE) {
+							$description .= $tagText;
+						} else {
+							$description .= '<p>'.str_replace("\n\n", '</p><p>', $tagText).'</p>';
+						}
 					}
 				}
 			}

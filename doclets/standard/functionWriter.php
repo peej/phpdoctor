@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.12 2006/07/05 21:38:27 peejeh Exp $
+// $Id: functionWriter.php,v 1.13 2007/12/08 12:26:18 peejeh Exp $
 
 /** This generates the HTML API documentation for each global function.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 class FunctionWriter extends HTMLWriter
 {
@@ -87,6 +87,7 @@ class FunctionWriter extends HTMLWriter
 				echo '<h2 id="detail_function">Function Detail</h2>', "\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
+					echo '<div class="location">', $function->location(), "</div>\n";
 					echo '<h3 id="', $function->name(),'()">', $function->name(), "</h3>\n";
 					echo '<code class="signature">', $function->modifiers(), ' ', $function->returnTypeAsString(), ' <strong>';
 					echo $function->name(), '</strong>', $function->flatSignature();
