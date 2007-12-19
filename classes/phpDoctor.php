@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.29 2007/12/08 12:26:18 peejeh Exp $
+// $Id: phpDoctor.php,v 1.30 2007/12/19 22:28:58 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  */
 class PHPDoctor
 {
@@ -308,7 +308,6 @@ class PHPDoctor
 				}
 			} elseif (!$this->_subdirs) {
 				$this->error('Could not find file "'.$filename.'"');
-				exit;
 			}
 		}
 		
@@ -1084,35 +1083,37 @@ class PHPDoctor
 				$name = $tag;
 				$text = NULL;
 			}
-			switch ($name) {
-			case 'package': // place current element in package
-				$data['package'] = $text;
-				break;
-			case 'var': // set variable type
-				$data['type'] = $text;
-				break;
-			case 'access': // set access permission
-				$data['access'] = $text;
-				break;
-			case 'final': // element is final
-				$data['final'] = TRUE;
-				break;
-			case 'abstract': // element is abstract
-				$data['abstract'] = TRUE;
-				break;
-			case 'static': // element is static
-				$data['static'] = TRUE;
-				break;
-			default: //create tag
-				$name = '@'.$name;
-				if (isset($data['tags'][$name])) {
-					if (is_array($data['tags'][$name])) {
-						$data['tags'][$name][] = $this->createTag($name, $text, $data, $root);
+			if ($name) {
+				switch ($name) {
+				case 'package': // place current element in package
+					$data['package'] = $text;
+					break;
+				case 'var': // set variable type
+					$data['type'] = $text;
+					break;
+				case 'access': // set access permission
+					$data['access'] = $text;
+					break;
+				case 'final': // element is final
+					$data['final'] = TRUE;
+					break;
+				case 'abstract': // element is abstract
+					$data['abstract'] = TRUE;
+					break;
+				case 'static': // element is static
+					$data['static'] = TRUE;
+					break;
+				default: //create tag
+					$name = '@'.$name;
+					if (isset($data['tags'][$name])) {
+						if (is_array($data['tags'][$name])) {
+							$data['tags'][$name][] = $this->createTag($name, $text, $data, $root);
+						} else {
+							$data['tags'][$name] = array($data['tags'][$name], $this->createTag($name, $text, $data, $root));
+						}
 					} else {
-						$data['tags'][$name] = array($data['tags'][$name], $this->createTag($name, $text, $data, $root));
+						$data['tags'][$name] =& $this->createTag($name, $text, $data, $root);
 					}
-				} else {
-					$data['tags'][$name] =& $this->createTag($name, $text, $data, $root);
 				}
 			}
 		}
