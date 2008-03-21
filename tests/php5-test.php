@@ -1,7 +1,13 @@
 <?php
 
 /**
+ * This is some text and a link {@link aPrivateInterface} somewhere else.
+ *
+ * Another line
+ *
  * @package PHPDoctor.Tests.Data
+ * @see aPrivateInterface Something else
+ * @todo More stuff
  */
 interface anInterface {
 	
