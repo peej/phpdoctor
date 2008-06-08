@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: tag.php,v 1.10 2006/12/16 21:31:17 peejeh Exp $
+// $Id: tag.php,v 1.11 2008/06/08 10:08:35 peejeh Exp $
 
 /** Represents a documentation tag, e.g. @since, @author, @version. Given a tag
  * (e.g. "@since 1.2"), holds tag name (e.g. "@since") and tag text (e.g.
@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * by subclasses.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class Tag
 {
@@ -66,12 +66,12 @@ class Tag
     {
 		$this->_name = $name;
 		$this->_root =& $root;
-		$processedText = '';
-		foreach(explode("\n", $text) as $line) {
-			//$processedText .= trim($line, " \n\r\t\0\x0B*/")."\n";
-			$processedText .= $line."\n"; // keep formatting
-		}
-		$this->_text = substr($processedText, 0, -1);
+		$processedLines = array();
+		foreach (explode("\n", $text) as $line) {
+			//$processedLines[] = trim($line, " \n\r\t\0\x0B*/");
+			$processedLines[] = $line; // keep formatting
+ 		}
+		$this->_text = implode("\n", $processedLines);
 	}
 
 	/** Get name of this tag.
@@ -138,18 +138,39 @@ class Tag
 	 * at closing of a HTML block element (<p> <h1> <h2> <h3> <h4> <h5> <h6> <hr>
 	 * <pre>).
 	 *
+	 * If PEAR compatibility mode is on, the first double line break also ends
+	 * the first sentence. PEAR documentation advocates ommiting the period from
+	 * the first sentence.
+	 *
 	 * @return Tag[] An array of Tags representing the first sentence of the
 	 * comment
 	 * @todo This method does not act as described but should be altered to do so
 	 */
 	function &firstSentenceTags()
     {
-		if (preg_match('/^(.+)\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)/sU', $this->text(), $matches)) {
-			return $this->_getInlineTags($matches[1].'.'.$matches[2]);
+		$phpdoctor = $this->_root->phpdoctor();
+		$matches = array();
+		
+		if ($phpdoctor->getOption('pearCompat')) {
+			$expression = '/^(.+)(?:\n\n|\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr))/sU';
+			if (preg_match($expression, $this->text(), $matches)) {
+				if (isset($matches[2])) {
+					$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
+				} else {
+					$return =& $this->_getInlineTags($matches[1].'.');
+				}
+			} else {
+				$return =& $this->_getInlineTags($this->text().'.');
+			}
 		} else {
-			$return = array(&$this);
-            return $return;
+			$expression = '/^(.+)\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)/sU';
+			if (preg_match($expression, $this->text(), $matches)) {
+				$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
+			} else {
+				$return = array(&$this);
+			}
 		}
+		return $return;
 	}
 	
 	/**

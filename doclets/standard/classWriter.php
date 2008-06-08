@@ -18,13 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.20 2007/12/08 12:26:18 peejeh Exp $
+// $Id: classWriter.php,v 1.21 2008/06/08 10:08:35 peejeh Exp $
 
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
  * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 class ClassWriter extends HTMLWriter
 {
@@ -281,7 +281,7 @@ class ClassWriter extends HTMLWriter
 			$start = FALSE;
 		}
 		$output = '';
-        $undefinedClass = FALSE;
+		$undefinedClass = FALSE;
 		if ($class->superclass()) {
 			$superclass =& $rootDoc->classNamed($class->superclass());
 			if ($superclass) {
@@ -290,18 +290,16 @@ class ClassWriter extends HTMLWriter
 				$depth = ++$result[1];
 			} else {
 				$output .= $class->superclass().'<br>';
-				$output .= str_repeat('     ', $depth).'  |<br>';
-				$output .= str_repeat('     ', $depth).'  +--';
-                $depth++;
+				$output .= str_repeat('   ', $depth).' └─';
+				$depth++;
 				$undefinedClass = TRUE;
 			}
 		}
 		if ($depth > 0 && !$undefinedClass) {
-			$output .= str_repeat('     ', $depth - 1).'  |<br>';
-			$output .= str_repeat('     ', $depth - 1).'  +--';
+			$output .= str_repeat('   ', $depth).' └─';
 		}
 		if ($start) {
-			$output .= '<strong>'.$class->name().'</strong><br />';			
+			$output .= '<strong>'.$class->name().'</strong><br />';
 		} else {
 			$output .= '<a href="'.str_repeat('../', $this->_depth).$class->asPath().'">'.$class->name().'</a><br>';
 		}

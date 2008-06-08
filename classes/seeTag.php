@@ -18,12 +18,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: seeTag.php,v 1.12 2006/07/05 21:38:27 peejeh Exp $
+// $Id: seeTag.php,v 1.13 2008/06/08 10:08:35 peejeh Exp $
 
 /** Represents a see tag.
  *
  * @package PHPDoctor.Tags
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 class SeeTag extends Tag
 {
@@ -82,8 +82,8 @@ class SeeTag extends Tag
 			$package =& $this->_parent->containingPackage();
 			$path = str_repeat('../', $package->depth() + 1).$element->asPath();
 			return '<a href="'.$path.'">'.$link.'</a>';
-        } elseif (substr($this->_link, 0, 7) == 'http://') {
-            return '<a href="'.$this->_link.'">'.$link.'</a>';
+		} elseif (preg_match('/^(https?|ftp):\/\//', $this->_link) === 1) {
+			return '<a href="'.$this->_link.'">'.$link.'</a>';
 		} else {
 			return $link;
 		}
@@ -96,12 +96,28 @@ class SeeTag extends Tag
 	 */
 	function &_resolveLink()
     {
+		$phpdoctor = $this->_root->phpdoctor();
+		$pearCompat = $phpdoctor->getOption('pearCompat');
+		$matches = array();
         $return = NULL;
+		$packageRegex = '[a-zA-Z0-9_\x7f-\xff .-]+';
 		$labelRegex = '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*';
-		if (preg_match('/^(([a-zA-Z0-9_\x7f-\xff .-]+)\.)?(('.$labelRegex.')#)?('.$labelRegex.')$/', $this->_link, $matches)) {
-			$packageName = $matches[2];
-			$className = $matches[4];
-			$elementName = $matches[5];
+		if ($pearCompat) {
+			$regex = '/^(?:('.$packageRegex.')::('.$labelRegex.')::|('.$labelRegex.')::)?(?:('.$labelRegex.')\(\)|\$('.$labelRegex.'))$/';
+		} else {
+			$regex = '/^(?:('.$packageRegex.')\.)?(?:('.$labelRegex.')#)?('.$labelRegex.')$/';
+		}
+		if (preg_match($regex, $this->_link, $matches)) {
+			if ($pearCompat) {
+				$packageName = $matches[1];
+				$className = ($matches[2]) ? $matches[2] : $matches[3];
+				$elementName = ($matches[4]) ? $matches[4] : $matches[5];
+			} else {
+				$packageName = $matches[1];
+				$className = $matches[2];
+				$elementName = $matches[3];
+			}
+			
 			if ($packageName) { // get package
 				$package =& $this->_root->packageNamed($packageName);
 			}

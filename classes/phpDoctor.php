@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpDoctor.php,v 1.30 2007/12/19 22:28:58 peejeh Exp $
+// $Id: phpDoctor.php,v 1.31 2008/06/08 10:08:35 peejeh Exp $
 
 /** Undefined internal constants so we don't throw undefined constant errors later on */
 if (!defined('T_DOC_COMMENT')) define('T_DOC_COMMENT',0);
@@ -53,7 +53,7 @@ require('classes/tag.php');
  * output.
  *
  * @package PHPDoctor
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  */
 class PHPDoctor
 {
@@ -201,6 +201,12 @@ class PHPDoctor
 	 * @var str
 	 */
 	var $_currentFilename = NULL;
+
+	/** Whether or not to use PEAR compatibility mode for first sentence tags.
+	 *
+	 * @var boolean
+	 */
+	var $_pearCompat = FALSE;
 	
 	/** Constructor
 	 *
@@ -276,7 +282,8 @@ class PHPDoctor
 
 		if (isset($this->_options['doclet'])) $this->_doclet = $this->_options['doclet'];
 		if (isset($this->_options['doclet_path'])) $this->_docletPath = $this->_options['doclet_path'];
-	
+
+		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
 	}
 	
 	/**
@@ -1069,7 +1076,7 @@ class PHPDoctor
 		
 		preg_match_all('/^[ \t\/*]*\** ?(.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches);
 		if (isset($matches[1])) {
-			$data['tags']['@text'] = $this->createTag('@text', join("\n", $matches[1]), $data, $root);
+			$data['tags']['@text'] = $this->createTag('@text', trim(implode("\n", $matches[1]), " \n\r\t\0\x0B*/"), $data, $root);
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags
@@ -1078,7 +1085,7 @@ class PHPDoctor
 			$pos = strpos($tag, ' ');
 			if ($pos !== FALSE) {
 				$name = trim(substr($tag, 0, $pos));
-				$text = trim(substr($tag, $pos + 1), "\n\r \t");
+				$text = trim(substr($tag, $pos + 1), "\n\r \t\0\x0B");
 			} else {
 				$name = $tag;
 				$text = NULL;
