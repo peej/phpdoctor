@@ -1,112 +1,85 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title>peej/phpdoctor @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #b79985;
-		  font-family: "helvetica"; 
-  		color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #48667a; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #48667a; }
-    h3 { text-align: center; color: #48667a; }
-    a { color: #48667a; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
-</head>
-
-<body>
-  <a href="http://github.com/peej/phpdoctor"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-  
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/peej/phpdoctor/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/peej/phpdoctor/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-      
-    <h1><a href="http://github.com/peej/phpdoctor">phpdoctor</a> 
-      <span class="small">by <a href="http://github.com/peej">peej</a></small></h1>
-
-    <div class="description">
-      PHPDoctor is an attempt to create a simpler and faster PHPDoc (Javadoc style comment parser for PHP) that produces standards compliant HTML.
-    </div>
-
-    <p>It is designed with an emphasis on speed and simplicity, meaning it is not as fully featured as the PEAR PHPDoc program, but is simple to configure, use, and extend, and should be able to generate API documentation from your existing un-edited PHP code in only a few minutes.
-
-    * Fast running speed, uses PHP 4.3 tokeniser function to take advantage of PHPs internal parsing functionality.
-    * Parsing of any PHP file, with multiple classes and functions in the same file.
-    * Simple output template layer, allowing easy changing of the output format by copying and editing of a few simple PHP template files.
-    * Simple to install and use, instant results.
-    * Will generates API documentation bare bones without Javadoc comments present.
-    * Works with both OO and procedural code, also documents global variables and constants.
-    * Supports PHP5 enhanced syntax, including interfaces.
-    * Minimal changes to Sun's Javadoc specification.
-    * Changes to tags compatible with other PHPDoc programs.
-    * Did I say it was fast?</p><h2>Dependencies</h2>
-<p>PHP 4.3.0+ is required due to use of the PHP tokenizer extension. The tokenizer is built into PHP 4.3.0 by default, PHPDoctor may work with older versions of PHP with the tokenizer extension enabled but it has not been tested and you are recommended to upgrade to 4.3.0+ for using this program.</p>
-<h2>License</h2>
-<p>Copyright 2004 by Paul James.
-paul at peej.co.uk
-http://www.peej.co.uk/
-
-This program is free software; you can redistribute it and/or modify it
-under the terms of the GNU General Public License as published by the Free
-Software Foundation; either version 2 of the License, or (at your option)
-any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-more details.
-
-You should have received a copy of the GNU General Public License along
-with this program (COPYING); if not, go to http://www.fsf.org/ or write
-to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.</p>
-<h2>Authors</h2>
-<p>Paul James (paul@peej.co.uk)</p>
-<h2>Contact</h2>
-<p>Paul James (paul@peej.co.uk)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/peej/phpdoctor/zipball/master">zip</a> or
-      <a href="http://github.com/peej/phpdoctor/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/peej/phpdoctor</pre>
-    </p>
-      
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/peej/phpdoctor">peej/phpdoctor</a>
-    </div>
-    
-  </div>
-
-  
-</body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <title>PHPDoctor: The PHP API Documentation Creator</title>
+		<meta name="Description" content="Javadoc style comment parser for PHP (PHPDoc), automatically generate API documentation from your PHP code.">
+        <link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+    </head>
+    <body>
+        <a href="http://github.com/peej/phpdoctor"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub" /></a>
+        
+        <h1><img src="title.png" alt="PHPDoctor - The PHP API Documentation Creator"></h1>
+		<div id="content">
+			<h2 id="description"><a href="#description">Description</a></h2>
+			<div>
+				<a href="http://sourceforge.net/project/screenshots.php?group_id=88756" title="View a bigger picture"><img src="http://sourceforge.net/dbimage.php?id=28379" alt="API output screenshot"></a>
+				<p>PHPDoctor is an attempt to create a <strong>simpler</strong> and <strong>faster</strong> PHPDoc (Javadoc style comment parser for PHP) that produces <strong>standards compliant HTML</strong>.</p>
+				<p>It is designed with an emphasis on speed and simplicity, meaning it is not as fully featured as <a href="http://pear.php.net/package/PhpDocumentor">the PEAR PHPDoc program</a>, but is simple to configure, use, and extend, and should be able to generate API documentation from your existing un-edited PHP code in only a few minutes.</p>
+				<p>We are looking for people to help test the latest release candidate by running it against as much PHP code as possible. <a href="more.html#contribute">Read this if you want to help</a>.</p>
+			</div>
+			
+			<h2 id="download"><a href="#download">Download</a></h2>
+			<div>
+                <ul class="downloads">
+                    <li><a href="http://github.com/peej/phpdoctor/tarball/master"><img src="http://github.com/images/modules/download/tar.png"></a></li>
+                    <li><a href="http://github.com/peej/phpdoctor/zipball/master"><img src="http://github.com/images/modules/download/zip.png"></a></li>
+                </ul>
+				<p>Download the latest version of PHPDoctor as a <a href="http://github.com/peej/phpdoctor/zipball/master">zip</a> or a <a href="http://github.com/peej/phpdoctor/tarball/master">tar</a>.</p>
+                <p>You can also clone the project with Git by running:</p>
+                <pre>git clone git://github.com/peej/phpdoctor</pre>
+				<p>Once you're ready, read <a href="more.html#usage">the installation instructions</a>.</p>
+			</div>
+			
+			<h2 id="requirements"><a href="#requirements">Requirements</a></h2>
+			<div>
+				<p><strong>PHP 4.3.0+</strong> is required due to use of the PHP tokenizer extension. The tokenizer is built into PHP 4.3.0 by default, PHPDoctor may work with older versions of PHP with the tokenizer extension enabled but it has not been tested and you are recommended to upgrade to 4.3.0+ for using this program.</p>
+			</div>
+			
+			<h2 id="features"><a href="#features">Features</a></h2>
+			<div>
+				<ul>
+					<li>Fast running speed, uses PHP 4.3 tokeniser function to take advantage of PHPs internal parsing functionality.</li>
+					<li>Parsing of any PHP file, with multiple classes and functions in the same file.</li>
+					<li>Simple output template layer, allowing easy changing of the output format by copying and editing of a few simple PHP template files.</li>
+					<li>Simple to install and use, instant results.</li>
+					<li>Will generates API documentation bare bones without Javadoc comments present.</li>
+					<li>Works with both OO and procedural code, also documents global variables and constants.</li>
+					<li>Supports PHP5 enhanced syntax, including interfaces.</li>
+					<li>Minimal changes to Sun's Javadoc specification.</li>
+					<li>Changes to tags compatible with other PHPDoc programs.</li>
+					<li>Did I say it was fast?</li>
+				</ul>
+			</div>
+			
+			<h2 id="examples"><a href="#examples">Examples</a></h2>
+			<div>
+				<p>Below are two examples of PHPDoctor generated API documentation. The first is documentation of PHPDoctor itself, the second of the popular Smarty templating engine.</p>
+				<ul>
+					<li><a href="/examples/phpdoctor/">PHPDoctor API documentation</a></li>
+					<li><a href="/examples/smarty/">Smarty API documentation</a></li>
+				</ul>
+				<p>You can generate the PHPDoctor documentation for yourself, simply run PHPDoctor with the default.ini config file supplied in the archive.</p>
+			</div>
+			
+			<h2 id="more"><a href="#more">More</a></h2>
+			<div>
+				<ul>
+					<li><a href="http://github.com/peej/phpdoctor/">Github project page</a></li>
+					<li><a href="more.html#faq">Frequently asked questions</a></li>
+					<li><a href="more.html#usage">Installation and usage</a></li>
+					<li><a href="more.html#configuration">Configuration directives</a></li>
+					<li><a href="more.html#doc-comments">Doc comments</a></li>
+					<li><a href="more.html#contribute">Contribute</a></li>
+					<li><a href="more.html#license">Copyright and license</a></li>
+				</ul>
+			</div>
+				
+		</div>
+		
+		<div id="footer">
+            <p>Last modified January 11, 2009</p>
+        </div>
+    </body>
 </html>

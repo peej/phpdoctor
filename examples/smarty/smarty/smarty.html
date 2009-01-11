@@ -1,0 +1,1363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
+<meta name="when" content="Sat, 08 Dec 2007 12:05:27 +0000">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>Smarty (Smarty)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../smarty/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../smarty/package-tree.html">Tree</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../smarty/smarty.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">Smarty.Smarty</div>
+<div class="location">/Smarty.class.php at line 64</div>
+
+<h1>Class Smarty</h1>
+
+<pre class="tree"><strong>Smarty</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>Smarty</strong></p>
+
+<div class="comment" id="overview_description"><p>
+</p></div>
+
+<hr>
+
+<table id="summary_field">
+<tr><th colspan="2">Field Summary</th></tr>
+<tr>
+<td class="type"> array array of filter names</td>
+<td class="description"><p class="name"><a href="#autoload_filters">$autoload_filters</a></p><p class="description">This indicates which filters are automatically loaded into Smarty.
+</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#cache_dir">$cache_dir</a></p><p class="description">The name of the directory for cache files.
+</p></td>
+</tr>
+<tr>
+<td class="type"> null|string function name</td>
+<td class="description"><p class="name"><a href="#cache_handler_func">$cache_handler_func</a></p><p class="description">The function used for cache file handling. </p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#cache_lifetime">$cache_lifetime</a></p><p class="description">This is the number of seconds cached content will persist.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#cache_modified_check">$cache_modified_check</a></p><p class="description">Only used when $caching is enabled. </p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#caching">$caching</a></p><p class="description">This enables template caching.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#compile_check">$compile_check</a></p><p class="description">This tells Smarty whether to check for recompiling or not. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#compile_dir">$compile_dir</a></p><p class="description">The directory where compiled templates are located.
+</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#compile_id">$compile_id</a></p><p class="description">Set this if you want different sets of compiled files for the same
+templates. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#compiler_class">$compiler_class</a></p><p class="description">The class used for compiling templates.
+</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#compiler_file">$compiler_file</a></p><p class="description">The file that contains the compiler class. </p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#config_booleanize">$config_booleanize</a></p><p class="description">This tells whether or not to automatically booleanize config file variables.
+</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#config_class">$config_class</a></p><p class="description">The class used to load config vars.
+</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#config_dir">$config_dir</a></p><p class="description">The directory where config files are located.
+</p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#config_fix_newlines">$config_fix_newlines</a></p><p class="description">This tells whether or not automatically fix newlines in config files.
+</p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#config_overwrite">$config_overwrite</a></p><p class="description">This tells if config file vars of the same name overwrite each other or not.
+</p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#config_read_hidden">$config_read_hidden</a></p><p class="description">This tells whether hidden sections [.foobar] are readable from the
+tempalates or not. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#debug_tpl">$debug_tpl</a></p><p class="description">This is the path to the debug console template. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#debugging">$debugging</a></p><p class="description">If debugging is enabled, a debug console window will display
+when the page loads (make sure your browser allows unrequested
+popup windows)
+</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#debugging_ctrl">$debugging_ctrl</a></p><p class="description">This determines if debugging is enable-able from the browser.
+</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#default_modifiers">$default_modifiers</a></p><p class="description">This is a list of the modifiers to apply to all template variables.
+</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#default_resource_type">$default_resource_type</a></p><p class="description">This is the resource type to be used when not specified
+at the beginning of the resource path. </p></td>
+</tr>
+<tr>
+<td class="type"> string function name</td>
+<td class="description"><p class="name"><a href="#default_template_handler_func">$default_template_handler_func</a></p><p class="description">If a template cannot be found, this PHP function will be executed.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#error_reporting">$error_reporting</a></p><p class="description">When set, smarty does uses this value as error_reporting-level.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#force_compile">$force_compile</a></p><p class="description">This forces templates to compile every time. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#left_delimiter">$left_delimiter</a></p><p class="description">The left delimiter used for the template tags.
+</p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#php_handling">$php_handling</a></p><p class="description">This determines how Smarty handles "</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#plugins_dir">$plugins_dir</a></p><p class="description">An array of directories searched for plugins.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#request_use_auto_globals">$request_use_auto_globals</a></p><p class="description">Indicates wether $HTTP_*_VARS[] (request_use_auto_globals=false)
+are uses as request-vars or $_*[]-vars. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#request_vars_order">$request_vars_order</a></p><p class="description">The order in which request variables are registered, similar to
+variables_order in php.ini E = Environment, G = GET, P = POST,
+C = Cookies, S = Server
+</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#right_delimiter">$right_delimiter</a></p><p class="description">The right delimiter used for the template tags.
+</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#secure_dir">$secure_dir</a></p><p class="description">This is the list of template directories that are considered secure. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#security">$security</a></p><p class="description">This enables template security. </p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#security_settings">$security_settings</a></p><p class="description">These are the security settings for Smarty. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#template_dir">$template_dir</a></p><p class="description">The name of the directory where templates are located.
+</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#trusted_dir">$trusted_dir</a></p><p class="description">This is an array of directories where trusted php scripts reside.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#use_sub_dirs">$use_sub_dirs</a></p><p class="description">This tells Smarty whether or not to use sub dirs in the cache/ and
+templates_c/ directories. </p></td>
+</tr>
+</table>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#Smarty()">Smarty</a>()</p><p class="description">The class constructor.
+</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#append()">append</a>(array|string tpl_var, mixed value, mixed merge)</p><p class="description">appends values to template variables
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#append_by_ref()">append_by_ref</a>(string tpl_var, mixed value, mixed merge)</p><p class="description">appends values to template variables by reference
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#assign()">assign</a>(array|string tpl_var, mixed value)</p><p class="description">assigns values to template variables
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#assign_by_ref()">assign_by_ref</a>(string tpl_var, mixed value)</p><p class="description">assigns values to template variables by reference
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#clear_all_assign()">clear_all_assign</a>()</p><p class="description">clear all the assigned template variables.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#clear_all_cache()">clear_all_cache</a>(string exp_time)</p><p class="description">clear the entire contents of cache (all templates)
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#clear_assign()">clear_assign</a>(string tpl_var)</p><p class="description">clear the given assigned template variable.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#clear_cache()">clear_cache</a>(string tpl_file, string cache_id, string compile_id, string exp_time)</p><p class="description">clear cached content for the given template and cache id
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#clear_compiled_tpl()">clear_compiled_tpl</a>(string tpl_file, string compile_id, string exp_time)</p><p class="description">clears compiled version of specified template resource,
+or all compiled template files if one is not specified.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#clear_config()">clear_config</a>(string var)</p><p class="description">clear configuration values
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#config_load()">config_load</a>(string file, string section, string scope)</p><p class="description">load configuration values
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#display()">display</a>(string resource_name, string cache_id, string compile_id)</p><p class="description">executes & displays the template results
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#fetch()">fetch</a>(string resource_name, string cache_id, string compile_id, boolean display)</p><p class="description">executes & returns or displays the template results
+</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#get_config_vars()">get_config_vars</a>(string name, string type)</p><p class="description">Returns an array containing config variables
+</p></td>
+</tr>
+<tr>
+<td class="type"> object</td>
+<td class="description"><p class="name"><a href="#get_registered_object()">get_registered_object</a>(string name)</p><p class="description">return a reference to a registered object
+</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#get_template_vars()">get_template_vars</a>(string name, string type)</p><p class="description">Returns an array containing template variables
+</p></td>
+</tr>
+<tr>
+<td class="type"> string|false</td>
+<td class="description"><p class="name"><a href="#is_cached()">is_cached</a>(string tpl_file, string cache_id, string compile_id)</p><p class="description">test to see if valid cache exists for this template
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#load_filter()">load_filter</a>(string type, string name)</p><p class="description">load a filter of specified type and name
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_block()">register_block</a>(string block, string block_impl, mixed cacheable, mixed cache_attrs)</p><p class="description">Registers block function to be used in templates
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_compiler_function()">register_compiler_function</a>(string function, string function_impl, mixed cacheable)</p><p class="description">Registers compiler function
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_function()">register_function</a>(string function, string function_impl, mixed cacheable, mixed cache_attrs)</p><p class="description">Registers custom function to be used in templates
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_modifier()">register_modifier</a>(string modifier, string modifier_impl)</p><p class="description">Registers modifier to be used in templates
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_object()">register_object</a>(string object, mixed object_impl, null|array allowed, mixed block_methods, object &$object_impl, boolean smarty_args, null|array block_functs)</p><p class="description">Registers object to be used in templates
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_outputfilter()">register_outputfilter</a>(string function)</p><p class="description">Registers an output filter function to apply
+to a template output
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_postfilter()">register_postfilter</a>(string function)</p><p class="description">Registers a postfilter function to apply
+to a compiled template after compilation
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_prefilter()">register_prefilter</a>(string function)</p><p class="description">Registers a prefilter function to apply
+to a template before compiling
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#register_resource()">register_resource</a>(string type, array functions)</p><p class="description">Registers a resource to fetch a template
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#template_exists()">template_exists</a>(string tpl_file)</p><p class="description">Checks whether requested template exists.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#trigger_error()">trigger_error</a>(string error_msg, integer error_type)</p><p class="description">trigger Smarty error
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_block()">unregister_block</a>(string block)</p><p class="description">Unregisters block function
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_compiler_function()">unregister_compiler_function</a>(string function)</p><p class="description">Unregisters compiler function
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_function()">unregister_function</a>(string function)</p><p class="description">Unregisters custom function
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_modifier()">unregister_modifier</a>(string modifier)</p><p class="description">Unregisters modifier
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_object()">unregister_object</a>(string object)</p><p class="description">Unregisters object
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_outputfilter()">unregister_outputfilter</a>(string function)</p><p class="description">Unregisters an outputfilter function
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_postfilter()">unregister_postfilter</a>(string function)</p><p class="description">Unregisters a postfilter function
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_prefilter()">unregister_prefilter</a>(string function)</p><p class="description">Unregisters a prefilter function
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unregister_resource()">unregister_resource</a>(string type)</p><p class="description">Unregisters a resource
+</p></td>
+</tr>
+</table>
+
+<h2 id="detail_field">Field Detail</h2>
+<div class="location">/Smarty.class.php at line 338</div>
+<h3 id="autoload_filters">autoload_filters</h3>
+<code class="signature">public  array array of filter names <strong>$autoload_filters</strong> = array()</code>
+<div class="details">
+<p></p><p>This indicates which filters are automatically loaded into Smarty.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 167</div>
+<h3 id="cache_dir">cache_dir</h3>
+<code class="signature">public  string <strong>$cache_dir</strong> = 'cache'</code>
+<div class="details">
+<p></p><p>The name of the directory for cache files.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 331</div>
+<h3 id="cache_handler_func">cache_handler_func</h3>
+<code class="signature">public  null|string function name <strong>$cache_handler_func</strong> = null</code>
+<div class="details">
+<p></p><p>The function used for cache file handling. If not set, built-in caching is used.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 178</div>
+<h3 id="cache_lifetime">cache_lifetime</h3>
+<code class="signature">public  integer <strong>$cache_lifetime</strong> = 3600</code>
+<div class="details">
+<p></p><p>This is the number of seconds cached content will persist.
+<ul>
+<li>0 = always regenerate cache</li>
+<li>-1 = never expires</li>
+</ul>
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 188</div>
+<h3 id="cache_modified_check">cache_modified_check</h3>
+<code class="signature">public  boolean <strong>$cache_modified_check</strong> = false</code>
+<div class="details">
+<p></p><p>Only used when $caching is enabled. If true, then If-Modified-Since headers
+are respected with cached content, and appropriate HTTP headers are sent.
+This way repeated hits to a cached page do not send the entire page to the
+client every time.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 160</div>
+<h3 id="caching">caching</h3>
+<code class="signature">public  integer <strong>$caching</strong></code>
+<div class="details">
+<p></p><p>This enables template caching.
+<ul>
+<li>0 = no caching</li>
+<li>1 = use class cache_lifetime value</li>
+<li>2 = use cache_lifetime in cache file</li>
+</ul></p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 141</div>
+<h3 id="compile_check">compile_check</h3>
+<code class="signature">public  boolean <strong>$compile_check</strong> = true</code>
+<div class="details">
+<p></p><p>This tells Smarty whether to check for recompiling or not. Recompiling
+does not need to happen unless a template or config file is changed.
+Typically you enable this during development, and disable for
+production.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 82</div>
+<h3 id="compile_dir">compile_dir</h3>
+<code class="signature">public  string <strong>$compile_dir</strong> = 'templates_c'</code>
+<div class="details">
+<p></p><p>The directory where compiled templates are located.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 291</div>
+<h3 id="compile_id">compile_id</h3>
+<code class="signature">public  string <strong>$compile_id</strong> = null</code>
+<div class="details">
+<p></p><p>Set this if you want different sets of compiled files for the same
+templates. This is useful for things like different languages.
+Instead of creating separate sets of templates per language, you
+set different compile_ids like 'en' and 'de'.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 392</div>
+<h3 id="compiler_class">compiler_class</h3>
+<code class="signature">public  string <strong>$compiler_class</strong> = 'Smarty_Compiler'</code>
+<div class="details">
+<p></p><p>The class used for compiling templates.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 385</div>
+<h3 id="compiler_file">compiler_file</h3>
+<code class="signature">public  string <strong>$compiler_file</strong> = 'Smarty_Compiler.class.php'</code>
+<div class="details">
+<p></p><p>The file that contains the compiler class. This can a full
+pathname, or relative to the php_include path.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 354</div>
+<h3 id="config_booleanize">config_booleanize</h3>
+<code class="signature">public  mixed <strong>$config_booleanize</strong> = true</code>
+<div class="details">
+<p></p><p>This tells whether or not to automatically booleanize config file variables.
+If enabled, then the strings "on", "true", and "yes" are treated as boolean
+true, and "off", "false" and "no" are treated as boolean false.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 399</div>
+<h3 id="config_class">config_class</h3>
+<code class="signature">public  string <strong>$config_class</strong> = 'Config_File'</code>
+<div class="details">
+<p></p><p>The class used to load config vars.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 89</div>
+<h3 id="config_dir">config_dir</h3>
+<code class="signature">public  string <strong>$config_dir</strong> = 'configs'</code>
+<div class="details">
+<p></p><p>The directory where config files are located.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 368</div>
+<h3 id="config_fix_newlines">config_fix_newlines</h3>
+<code class="signature">public  mixed <strong>$config_fix_newlines</strong> = true</code>
+<div class="details">
+<p></p><p>This tells whether or not automatically fix newlines in config files.
+It basically converts \r (mac) or \r\n (dos) to \n
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 347</div>
+<h3 id="config_overwrite">config_overwrite</h3>
+<code class="signature">public  mixed <strong>$config_overwrite</strong> = true</code>
+<div class="details">
+<p></p><p>This tells if config file vars of the same name overwrite each other or not.
+if disabled, same name variables are accumulated in an array.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 362</div>
+<h3 id="config_read_hidden">config_read_hidden</h3>
+<code class="signature">public  mixed <strong>$config_read_hidden</strong> = false</code>
+<div class="details">
+<p></p><p>This tells whether hidden sections [.foobar] are readable from the
+tempalates or not. Normally you would never allow this since that is
+the point behind hidden sections: the application can access them, but
+the templates cannot.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 120</div>
+<h3 id="debug_tpl">debug_tpl</h3>
+<code class="signature">public  string <strong>$debug_tpl</strong> = ''</code>
+<div class="details">
+<p></p><p>This is the path to the debug console template. If not set,
+the default one will be used.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 105</div>
+<h3 id="debugging">debugging</h3>
+<code class="signature">public  boolean <strong>$debugging</strong> = false</code>
+<div class="details">
+<p></p><p>If debugging is enabled, a debug console window will display
+when the page loads (make sure your browser allows unrequested
+popup windows)
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 131</div>
+<h3 id="debugging_ctrl">debugging_ctrl</h3>
+<code class="signature">public  string <strong>$debugging_ctrl</strong> = 'NONE'</code>
+<div class="details">
+<p></p><p>This determines if debugging is enable-able from the browser.
+<ul>
+<li>NONE => no debugging control allowed</li>
+<li>URL => enable debugging when SMARTY_DEBUG is found in the URL.</li>
+</ul></p><dl>
+<dt>See Also:</dt>
+<dd><code><a href="http://www.foo.dom/index.php?SMARTY_DEBUG">http://www.foo.dom/index.php?SMARTY_DEBUG</a></code></dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 310</div>
+<h3 id="default_modifiers">default_modifiers</h3>
+<code class="signature">public  array <strong>$default_modifiers</strong> = array()</code>
+<div class="details">
+<p></p><p>This is a list of the modifiers to apply to all template variables.
+Put each modifier in a separate array element in the order you want
+them applied. example: <code>array('escape:"htmlall"');</code>
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 324</div>
+<h3 id="default_resource_type">default_resource_type</h3>
+<code class="signature">public  array <strong>$default_resource_type</strong> = 'file'</code>
+<div class="details">
+<p></p><p>This is the resource type to be used when not specified
+at the beginning of the resource path. examples:
+$smarty->display('file:index.tpl');
+$smarty->display('db:index.tpl');
+$smarty->display('index.tpl'); // will use default resource type
+{include file="file:index.tpl"}
+{include file="db:index.tpl"}
+{include file="index.tpl"} {* will use default resource type *}
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 377</div>
+<h3 id="default_template_handler_func">default_template_handler_func</h3>
+<code class="signature">public  string function name <strong>$default_template_handler_func</strong> = ''</code>
+<div class="details">
+<p></p><p>If a template cannot be found, this PHP function will be executed.
+Useful for creating templates on-the-fly or other special action.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 112</div>
+<h3 id="error_reporting">error_reporting</h3>
+<code class="signature">public  boolean <strong>$error_reporting</strong> = null</code>
+<div class="details">
+<p></p><p>When set, smarty does uses this value as error_reporting-level.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 149</div>
+<h3 id="force_compile">force_compile</h3>
+<code class="signature">public  boolean <strong>$force_compile</strong> = false</code>
+<div class="details">
+<p></p><p>This forces templates to compile every time. Useful for development
+or debugging.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 255</div>
+<h3 id="left_delimiter">left_delimiter</h3>
+<code class="signature">public  string <strong>$left_delimiter</strong> = '{'</code>
+<div class="details">
+<p></p><p>The left delimiter used for the template tags.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 202</div>
+<h3 id="php_handling">php_handling</h3>
+<code class="signature">public  integer <strong>$php_handling</strong> = SMARTY_PHP_PASSTHRU</code>
+<div class="details">
+<p></p><p>This determines how Smarty handles "<?php ... ?>" tags in templates.
+possible values:
+<ul>
+<li>SMARTY_PHP_PASSTHRU -> print tags as plain text</li>
+<li>SMARTY_PHP_QUOTE    -> escape tags as entities</li>
+<li>SMARTY_PHP_REMOVE   -> remove php tags</li>
+<li>SMARTY_PHP_ALLOW    -> execute php tags</li>
+</ul>
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 96</div>
+<h3 id="plugins_dir">plugins_dir</h3>
+<code class="signature">public  array <strong>$plugins_dir</strong> = array('plugins')</code>
+<div class="details">
+<p></p><p>An array of directories searched for plugins.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 281</div>
+<h3 id="request_use_auto_globals">request_use_auto_globals</h3>
+<code class="signature">public  boolean <strong>$request_use_auto_globals</strong> = true</code>
+<div class="details">
+<p></p><p>Indicates wether $HTTP_*_VARS[] (request_use_auto_globals=false)
+are uses as request-vars or $_*[]-vars. note: if
+request_use_auto_globals is true, then $request_vars_order has
+no effect, but the php-ini-value "gpc_order"
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 271</div>
+<h3 id="request_vars_order">request_vars_order</h3>
+<code class="signature">public  string <strong>$request_vars_order</strong> = 'EGPCS'</code>
+<div class="details">
+<p></p><p>The order in which request variables are registered, similar to
+variables_order in php.ini E = Environment, G = GET, P = POST,
+C = Cookies, S = Server
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 262</div>
+<h3 id="right_delimiter">right_delimiter</h3>
+<code class="signature">public  string <strong>$right_delimiter</strong> = '}'</code>
+<div class="details">
+<p></p><p>The right delimiter used for the template tags.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 221</div>
+<h3 id="secure_dir">secure_dir</h3>
+<code class="signature">public  array <strong>$secure_dir</strong> = array()</code>
+<div class="details">
+<p></p><p>This is the list of template directories that are considered secure. This
+is used only if </p><p><code>$security</code></p><p> is enabled. One directory per array
+element.  </p><p><code>$template_dir</code></p><p> is in this list implicitly.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 212</div>
+<h3 id="security">security</h3>
+<code class="signature">public  boolean <strong>$security</strong> = false</code>
+<div class="details">
+<p></p><p>This enables template security. When enabled, many things are restricted
+in the templates that normally would go unchecked. This is useful when
+untrusted parties are editing templates and you want a reasonable level
+of security. (no direct execution of PHP in templates for example)
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 229</div>
+<h3 id="security_settings">security_settings</h3>
+<code class="signature">public  array <strong>$security_settings</strong> = array(...)</code>
+<div class="details">
+<p></p><p>These are the security settings for Smarty. They are used only when
+</p><p><code>$security</code></p><p> is enabled.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 75</div>
+<h3 id="template_dir">template_dir</h3>
+<code class="signature">public  string <strong>$template_dir</strong> = 'templates'</code>
+<div class="details">
+<p></p><p>The name of the directory where templates are located.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 248</div>
+<h3 id="trusted_dir">trusted_dir</h3>
+<code class="signature">public  array <strong>$trusted_dir</strong> = array()</code>
+<div class="details">
+<p></p><p>This is an array of directories where trusted php scripts reside.
+</p><p><code>$security</code></p><p> is disabled during their inclusion/execution.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 301</div>
+<h3 id="use_sub_dirs">use_sub_dirs</h3>
+<code class="signature">public  boolean <strong>$use_sub_dirs</strong> = false</code>
+<div class="details">
+<p></p><p>This tells Smarty whether or not to use sub dirs in the cache/ and
+templates_c/ directories. sub directories better organized, but
+may not work well with PHP safe mode enabled.
+</p></div>
+
+<hr>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<div class="location">/Smarty.class.php at line 568</div>
+<h3 id="Smarty()">Smarty</h3>
+<code class="signature">public <strong>Smarty</strong>()</code>
+<div class="details">
+<p></p><p>The class constructor.
+</p></div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<div class="location">/Smarty.class.php at line 612</div>
+<h3 id="append()">append</h3>
+<code class="signature">public  void <strong>append</strong>(array|string tpl_var, mixed value, mixed merge)</code>
+<div class="details">
+<p></p><p>appends values to template variables
+</p><dl>
+<dt>Parameters:</dt>
+<dd>tpl_var - the template variable name(s)</dd>
+<dd>value - the value to append</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 652</div>
+<h3 id="append_by_ref()">append_by_ref</h3>
+<code class="signature">public  void <strong>append_by_ref</strong>(string tpl_var, mixed value, mixed merge)</code>
+<div class="details">
+<p></p><p>appends values to template variables by reference
+</p><dl>
+<dt>Parameters:</dt>
+<dd>tpl_var - the template variable name</dd>
+<dd>value - the referenced value to append</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 580</div>
+<h3 id="assign()">assign</h3>
+<code class="signature">public  void <strong>assign</strong>(array|string tpl_var, mixed value)</code>
+<div class="details">
+<p></p><p>assigns values to template variables
+</p><dl>
+<dt>Parameters:</dt>
+<dd>tpl_var - the template variable name(s)</dd>
+<dd>value - the value to assign</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 600</div>
+<h3 id="assign_by_ref()">assign_by_ref</h3>
+<code class="signature">public  void <strong>assign_by_ref</strong>(string tpl_var, mixed value)</code>
+<div class="details">
+<p></p><p>assigns values to template variables by reference
+</p><dl>
+<dt>Parameters:</dt>
+<dd>tpl_var - the template variable name</dd>
+<dd>value - the referenced value to assign</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1006</div>
+<h3 id="clear_all_assign()">clear_all_assign</h3>
+<code class="signature">public  void <strong>clear_all_assign</strong>()</code>
+<div class="details">
+<p></p><p>clear all the assigned template variables.</p><p></p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 970</div>
+<h3 id="clear_all_cache()">clear_all_cache</h3>
+<code class="signature">public  boolean <strong>clear_all_cache</strong>(string exp_time)</code>
+<div class="details">
+<p></p><p>clear the entire contents of cache (all templates)
+</p><dl>
+<dt>Parameters:</dt>
+<dd>exp_time - expire time</dd>
+<dt>Returns:</dt>
+<dd>results of {@link smarty_core_rm_auto()}</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 674</div>
+<h3 id="clear_assign()">clear_assign</h3>
+<code class="signature">public  void <strong>clear_assign</strong>(string tpl_var)</code>
+<div class="details">
+<p></p><p>clear the given assigned template variable.
+</p><dl>
+<dt>Parameters:</dt>
+<dd>tpl_var - the template variable to clear</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 938</div>
+<h3 id="clear_cache()">clear_cache</h3>
+<code class="signature">public  boolean <strong>clear_cache</strong>(string tpl_file, string cache_id, string compile_id, string exp_time)</code>
+<div class="details">
+<p></p><p>clear cached content for the given template and cache id
+</p><dl>
+<dt>Parameters:</dt>
+<dd>tpl_file - name of template file</dd>
+<dd>cache_id - name of cache_id</dd>
+<dd>compile_id - name of compile_id</dd>
+<dd>exp_time - expiration time</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1021</div>
+<h3 id="clear_compiled_tpl()">clear_compiled_tpl</h3>
+<code class="signature">public  boolean <strong>clear_compiled_tpl</strong>(string tpl_file, string compile_id, string exp_time)</code>
+<div class="details">
+<p></p><p>clears compiled version of specified template resource,
+or all compiled template files if one is not specified.
+This function is for advanced use only, not normally needed.
+</p><dl>
+<dt>Returns:</dt>
+<dd>results of {@link smarty_core_rm_auto()}</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1348</div>
+<h3 id="clear_config()">clear_config</h3>
+<code class="signature">public  void <strong>clear_config</strong>(string var)</code>
+<div class="details">
+<p></p><p>clear configuration values
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1321</div>
+<h3 id="config_load()">config_load</h3>
+<code class="signature">public  void <strong>config_load</strong>(string file, string section, string scope)</code>
+<div class="details">
+<p></p><p>load configuration values
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1106</div>
+<h3 id="display()">display</h3>
+<code class="signature">public  void <strong>display</strong>(string resource_name, string cache_id, string compile_id)</code>
+<div class="details">
+<p></p><p>executes & displays the template results
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1119</div>
+<h3 id="fetch()">fetch</h3>
+<code class="signature">public  void <strong>fetch</strong>(string resource_name, string cache_id, string compile_id, boolean display)</code>
+<div class="details">
+<p></p><p>executes & returns or displays the template results
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1074</div>
+<h3 id="get_config_vars()">get_config_vars</h3>
+<code class="signature">public  array <strong>get_config_vars</strong>(string name, string type)</code>
+<div class="details">
+<p></p><p>Returns an array containing config variables
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1333</div>
+<h3 id="get_registered_object()">get_registered_object</h3>
+<code class="signature">public  object <strong>get_registered_object</strong>(string name)</code>
+<div class="details">
+<p></p><p>return a reference to a registered object
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1054</div>
+<h3 id="get_template_vars()">get_template_vars</h3>
+<code class="signature">public  array <strong>get_template_vars</strong>(string name, string type)</code>
+<div class="details">
+<p></p><p>Returns an array containing template variables
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 984</div>
+<h3 id="is_cached()">is_cached</h3>
+<code class="signature">public  string|false <strong>is_cached</strong>(string tpl_file, string cache_id, string compile_id)</code>
+<div class="details">
+<p></p><p>test to see if valid cache exists for this template
+</p><dl>
+<dt>Parameters:</dt>
+<dd>tpl_file - name of template file</dd>
+<dd></dd>
+<dd></dd>
+<dt>Returns:</dt>
+<dd>results of {@link _read_cache_file()}</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 912</div>
+<h3 id="load_filter()">load_filter</h3>
+<code class="signature">public  void <strong>load_filter</strong>(string type, string name)</code>
+<div class="details">
+<p></p><p>load a filter of specified type and name
+</p><dl>
+<dt>Parameters:</dt>
+<dd>type - filter type</dd>
+<dd>name - filter name</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 741</div>
+<h3 id="register_block()">register_block</h3>
+<code class="signature">public  void <strong>register_block</strong>(string block, string block_impl, mixed cacheable, mixed cache_attrs)</code>
+<div class="details">
+<p></p><p>Registers block function to be used in templates
+</p><dl>
+<dt>Parameters:</dt>
+<dd>block - name of template block</dd>
+<dd>block_impl - PHP function to register</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 763</div>
+<h3 id="register_compiler_function()">register_compiler_function</h3>
+<code class="signature">public  void <strong>register_compiler_function</strong>(string function, string function_impl, mixed cacheable)</code>
+<div class="details">
+<p></p><p>Registers compiler function
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of template function</dd>
+<dd>function_impl - name of PHP function to register</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 690</div>
+<h3 id="register_function()">register_function</h3>
+<code class="signature">public  void <strong>register_function</strong>(string function, string function_impl, mixed cacheable, mixed cache_attrs)</code>
+<div class="details">
+<p></p><p>Registers custom function to be used in templates
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - the name of the template function</dd>
+<dd>function_impl - the name of the PHP function to register</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 785</div>
+<h3 id="register_modifier()">register_modifier</h3>
+<code class="signature">public  void <strong>register_modifier</strong>(string modifier, string modifier_impl)</code>
+<div class="details">
+<p></p><p>Registers modifier to be used in templates
+</p><dl>
+<dt>Parameters:</dt>
+<dd>modifier - name of template modifier</dd>
+<dd>modifier_impl - name of PHP function to register</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 716</div>
+<h3 id="register_object()">register_object</h3>
+<code class="signature">public  void <strong>register_object</strong>(string object, mixed object_impl, null|array allowed, mixed block_methods, object &$object_impl, boolean smarty_args, null|array block_functs)</code>
+<div class="details">
+<p></p><p>Registers object to be used in templates
+</p><dl>
+<dt>Parameters:</dt>
+<dd>object - name of template object</dd>
+<dd>&$object_impl - the referenced PHP object to register</dd>
+<dd>allowed - list of allowed methods (empty = all)</dd>
+<dd>smarty_args - smarty argument format, else traditional</dd>
+<dd>block_functs - list of methods that are block format</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 889</div>
+<h3 id="register_outputfilter()">register_outputfilter</h3>
+<code class="signature">public  void <strong>register_outputfilter</strong>(string function)</code>
+<div class="details">
+<p></p><p>Registers an output filter function to apply
+to a template output
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of PHP function</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 866</div>
+<h3 id="register_postfilter()">register_postfilter</h3>
+<code class="signature">public  void <strong>register_postfilter</strong>(string function)</code>
+<div class="details">
+<p></p><p>Registers a postfilter function to apply
+to a compiled template after compilation
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of PHP function to register</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 843</div>
+<h3 id="register_prefilter()">register_prefilter</h3>
+<code class="signature">public  void <strong>register_prefilter</strong>(string function)</code>
+<div class="details">
+<p></p><p>Registers a prefilter function to apply
+to a template before compiling
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of PHP function to register</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 807</div>
+<h3 id="register_resource()">register_resource</h3>
+<code class="signature">public  void <strong>register_resource</strong>(string type, array functions)</code>
+<div class="details">
+<p></p><p>Registers a resource to fetch a template
+</p><dl>
+<dt>Parameters:</dt>
+<dd>type - name of resource</dd>
+<dd>functions - array of functions to handle resource</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1041</div>
+<h3 id="template_exists()">template_exists</h3>
+<code class="signature">public  boolean <strong>template_exists</strong>(string tpl_file)</code>
+<div class="details">
+<p></p><p>Checks whether requested template exists.
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 1093</div>
+<h3 id="trigger_error()">trigger_error</h3>
+<code class="signature">public  void <strong>trigger_error</strong>(string error_msg, integer error_type)</code>
+<div class="details">
+<p></p><p>trigger Smarty error
+</p></div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 752</div>
+<h3 id="unregister_block()">unregister_block</h3>
+<code class="signature">public  void <strong>unregister_block</strong>(string block)</code>
+<div class="details">
+<p></p><p>Unregisters block function
+</p><dl>
+<dt>Parameters:</dt>
+<dd>block - name of template function</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 774</div>
+<h3 id="unregister_compiler_function()">unregister_compiler_function</h3>
+<code class="signature">public  void <strong>unregister_compiler_function</strong>(string function)</code>
+<div class="details">
+<p></p><p>Unregisters compiler function
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of template function</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 702</div>
+<h3 id="unregister_function()">unregister_function</h3>
+<code class="signature">public  void <strong>unregister_function</strong>(string function)</code>
+<div class="details">
+<p></p><p>Unregisters custom function
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of template function</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 796</div>
+<h3 id="unregister_modifier()">unregister_modifier</h3>
+<code class="signature">public  void <strong>unregister_modifier</strong>(string modifier)</code>
+<div class="details">
+<p></p><p>Unregisters modifier
+</p><dl>
+<dt>Parameters:</dt>
+<dd>modifier - name of template modifier</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 729</div>
+<h3 id="unregister_object()">unregister_object</h3>
+<code class="signature">public  void <strong>unregister_object</strong>(string object)</code>
+<div class="details">
+<p></p><p>Unregisters object
+</p><dl>
+<dt>Parameters:</dt>
+<dd>object - name of template object</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 901</div>
+<h3 id="unregister_outputfilter()">unregister_outputfilter</h3>
+<code class="signature">public  void <strong>unregister_outputfilter</strong>(string function)</code>
+<div class="details">
+<p></p><p>Unregisters an outputfilter function
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of PHP function</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 878</div>
+<h3 id="unregister_postfilter()">unregister_postfilter</h3>
+<code class="signature">public  void <strong>unregister_postfilter</strong>(string function)</code>
+<div class="details">
+<p></p><p>Unregisters a postfilter function
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of PHP function</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 855</div>
+<h3 id="unregister_prefilter()">unregister_prefilter</h3>
+<code class="signature">public  void <strong>unregister_prefilter</strong>(string function)</code>
+<div class="details">
+<p></p><p>Unregisters a prefilter function
+</p><dl>
+<dt>Parameters:</dt>
+<dd>function - name of PHP function</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="location">/Smarty.class.php at line 832</div>
+<h3 id="unregister_resource()">unregister_resource</h3>
+<code class="signature">public  void <strong>unregister_resource</strong>(string type)</code>
+<div class="details">
+<p></p><p>Unregisters a resource
+</p><dl>
+<dt>Parameters:</dt>
+<dd>type - name of resource</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../smarty/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../smarty/package-tree.html">Tree</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../smarty/smarty.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

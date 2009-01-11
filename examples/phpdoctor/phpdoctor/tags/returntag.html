@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
+<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>ReturnTag (PHPDoctor)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li><a href="../../phpdoctor/tags/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../../phpdoctor/tags/package-tree.html">Tree</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../phpdoctor/tags/returntag.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">PHPDoctor.Tags.ReturnTag</div>
+<div class="location">/classes/returnTag.php at line 28</div>
+
+<h1>Class ReturnTag</h1>
+
+<pre class="tree"><a href="../../phpdoctor/tags/tag.html">Tag</a><br>  |<br>  +--<strong>ReturnTag</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>ReturnTag</strong><br>extends <a href="../../phpdoctor/tags/tag.html">Tag</a>
+
+</p>
+
+<div class="comment" id="overview_description"><p>
+Represents a return tag.
+</p></div>
+
+<dl>
+<dt>Version:</dt>
+<dd>$Revision: 1.7 $</dd>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#returnTag()">returnTag</a>(str text, str data, <a href="../../phpdoctor/rootdoc.html">RootDoc</a> root)</p><p class="description">Constructor
+</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#displayEmpty()">displayEmpty</a>()</p><p class="description">
+Return true if this Taglet should be outputted even if it has no text content.
+</p></td>
+</tr>
+<tr>
+<td class="type"> str</td>
+<td class="description"><p class="name"><a href="#displayName()">displayName</a>()</p><p class="description">
+Get display name of this tag.
+</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#inConstructor()">inConstructor</a>()</p><p class="description">
+Return true if this Taglet is used in constructor documentation.
+</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#inField()">inField</a>()</p><p class="description">
+Return true if this Taglet is used in field documentation.
+</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#inMethod()">inMethod</a>()</p><p class="description">
+Return true if this Taglet is used in method documentation.
+</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#inOverview()">inOverview</a>()</p><p class="description">
+Return true if this Taglet is used in overview documentation.
+</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#inPackage()">inPackage</a>()</p><p class="description">
+Return true if this Taglet is used in package documentation.
+</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#inType()">inType</a>()</p><p class="description">
+Return true if this Taglet is used in class or interface documentation.
+</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#isInlineTag()">isInlineTag</a>()</p><p class="description">
+Return true if this Taglet is an inline tag.
+</p></td>
+</tr>
+</table>
+
+<table class="inherit">
+<tr><th colspan="2">Methods inherited from PHPDoctor.Tags.Tag</th></tr>
+<tr><td><a href="../../phpdoctor/tags/tag.html#displayEmpty()">displayEmpty</a>, <a href="../../phpdoctor/tags/tag.html#displayName()">displayName</a>, <a href="../../phpdoctor/tags/tag.html#firstSentenceTags()">firstSentenceTags</a>, <a href="../../phpdoctor/tags/tag.html#inConstructor()">inConstructor</a>, <a href="../../phpdoctor/tags/tag.html#inField()">inField</a>, <a href="../../phpdoctor/tags/tag.html#inMethod()">inMethod</a>, <a href="../../phpdoctor/tags/tag.html#inOverview()">inOverview</a>, <a href="../../phpdoctor/tags/tag.html#inPackage()">inPackage</a>, <a href="../../phpdoctor/tags/tag.html#inType()">inType</a>, <a href="../../phpdoctor/tags/tag.html#inlineTags()">inlineTags</a>, <a href="../../phpdoctor/tags/tag.html#isInlineTag()">isInlineTag</a>, <a href="../../phpdoctor/tags/tag.html#name()">name</a>, <a href="../../phpdoctor/tags/tag.html#setParent()">setParent</a>, <a href="../../phpdoctor/tags/tag.html#text()">text</a></td></tr></table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<div class="location">/classes/returnTag.php at line 38</div>
+<h3 id="returnTag()">returnTag</h3>
+<code class="signature">public <strong>returnTag</strong>(str text, str data, <a href="../../phpdoctor/rootdoc.html">RootDoc</a> root)</code>
+<div class="details">
+<p></p><p>Constructor
+</p><dl>
+<dt>Parameters:</dt>
+<dd>text - The contents of the tag</dd>
+<dd>data - Reference to doc comment data array</dd>
+<dd>root - The root object</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<div class="location">/classes/returnTag.php at line 121</div>
+<h3 id="displayEmpty()">displayEmpty</h3>
+<code class="signature">public  bool <strong>displayEmpty</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet should be outputted even if it has no text content.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 49</div>
+<h3 id="displayName()">displayName</h3>
+<code class="signature">public  str <strong>displayName</strong>()</code>
+<div class="details">
+<p>
+Get display name of this tag.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 58</div>
+<h3 id="inConstructor()">inConstructor</h3>
+<code class="signature">public  bool <strong>inConstructor</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet is used in constructor documentation.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 67</div>
+<h3 id="inField()">inField</h3>
+<code class="signature">public  bool <strong>inField</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet is used in field documentation.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 76</div>
+<h3 id="inMethod()">inMethod</h3>
+<code class="signature">public  bool <strong>inMethod</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet is used in method documentation.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 85</div>
+<h3 id="inOverview()">inOverview</h3>
+<code class="signature">public  bool <strong>inOverview</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet is used in overview documentation.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 94</div>
+<h3 id="inPackage()">inPackage</h3>
+<code class="signature">public  bool <strong>inPackage</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet is used in package documentation.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 103</div>
+<h3 id="inType()">inType</h3>
+<code class="signature">public  bool <strong>inType</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet is used in class or interface documentation.
+</p></div>
+
+<hr>
+
+<div class="location">/classes/returnTag.php at line 112</div>
+<h3 id="isInlineTag()">isInlineTag</h3>
+<code class="signature">public  bool <strong>isInlineTag</strong>()</code>
+<div class="details">
+<p>
+Return true if this Taglet is an inline tag.
+</p></div>
+
+<hr>
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li><a href="../../phpdoctor/tags/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../../phpdoctor/tags/package-tree.html">Tree</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../phpdoctor/tags/returntag.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

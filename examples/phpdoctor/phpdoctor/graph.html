@@ -1,0 +1,1939 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
+<meta name="when" content="Fri, 07 Dec 2007 22:54:07 +0000">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>Graph (PHPDoctor)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../phpdoctor/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../phpdoctor/graph.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">PHPDoctor.Graph</div>
+
+<h1>Class Graph</h1>
+
+<pre class="tree"><strong>Graph</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>Graph</strong></p>
+
+<hr>
+
+<table id="summary_field">
+<tr><th colspan="2">Field Summary</th></tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#axtype">$axtype</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_cflag">$background_cflag</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_cflag_mix">$background_cflag_mix</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_cflag_type">$background_cflag_type</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_image">$background_image</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_image_bright">$background_image_bright</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_image_contr">$background_image_contr</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_image_format">$background_image_format</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_image_mix">$background_image_mix</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_image_sat">$background_image_sat</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#background_image_type">$background_image_type</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#bands">$bands</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#bkg_gradfrom">$bkg_gradfrom</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#bkg_gradstyle">$bkg_gradstyle</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#bkg_gradto">$bkg_gradto</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#bkg_gradtype">$bkg_gradtype</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#box_color">$box_color</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#box_weight">$box_weight</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#boxed">$boxed</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#cache">$cache</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#cache_name">$cache_name</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#csimcachename">$csimcachename</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#csimcachetimeout">$csimcachetimeout</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#csimcolor">$csimcolor</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#doframe">$doframe</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#doshadow">$doshadow</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#footer">$footer</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#frame_color">$frame_color</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#frame_weight">$frame_weight</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#framebevel">$framebevel</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#framebevelborder">$framebevelborder</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#framebevelbordercolor">$framebevelbordercolor</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#framebevelcolor1">$framebevelcolor1</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#framebevelcolor2">$framebevelcolor2</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#framebeveldepth">$framebeveldepth</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#grid_depth">$grid_depth</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iAxisStyle">$iAxisStyle</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iCSIMdisplay">$iCSIMdisplay</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iDoClipping">$iDoClipping</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iHasStroked">$iHasStroked</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iIcons">$iIcons</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTrans">$iImgTrans</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransBorder">$iImgTransBorder</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransDirection">$iImgTransDirection</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransFillColor">$iImgTransFillColor</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransHighQ">$iImgTransHighQ</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransHorizon">$iImgTransHorizon</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransHorizonPos">$iImgTransHorizonPos</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransMinSize">$iImgTransMinSize</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#iImgTransSkewDist">$iImgTransSkewDist</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#image_bright">$image_bright</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#image_contr">$image_contr</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#image_sat">$image_sat</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#img">$img</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#inline">$inline</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#lines">$lines</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#margin_color">$margin_color</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#plotarea_color">$plotarea_color</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#plots">$plots</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#shadow_color">$shadow_color</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#shadow_width">$shadow_width</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#showcsim">$showcsim</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#subsubtitle">$subsubtitle</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#subtitle">$subtitle</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#tabtitle">$tabtitle</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#text_scale_abscenteroff">$text_scale_abscenteroff</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#text_scale_off">$text_scale_off</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#texts">$texts</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#title">$title</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebackground">$titlebackground</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebackground_bevelheight">$titlebackground_bevelheight</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebackground_color">$titlebackground_color</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebackground_framecolor">$titlebackground_framecolor</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebackground_framestyle">$titlebackground_framestyle</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebackground_frameweight">$titlebackground_frameweight</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebackground_style">$titlebackground_style</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebkg_fillstyle">$titlebkg_fillstyle</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebkg_scolor1">$titlebkg_scolor1</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#titlebkg_scolor2">$titlebkg_scolor2</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#xaxis">$xaxis</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#xgrid">$xgrid</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#xscale">$xscale</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#xtick_factor">$xtick_factor</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2axis">$y2axis</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2bands">$y2bands</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2grid">$y2grid</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2lines">$y2lines</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2orderback">$y2orderback</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2plots">$y2plots</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2scale">$y2scale</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#y2texts">$y2texts</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#yaxis">$yaxis</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#ygrid">$ygrid</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#ynaxis">$ynaxis</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#ynplots">$ynplots</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#ynscale">$ynscale</a></p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#yscale">$yscale</a></p></td>
+</tr>
+</table>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#Graph()">Graph</a>(mixed aWidth, mixed aHeight, mixed aCachedName, mixed aTimeOut, mixed aInline)</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#Add()">Add</a>(mixed aPlot)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AddBand()">AddBand</a>(mixed aBand, mixed aToY2)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AddIcon()">AddIcon</a>(mixed aIcon)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AddLine()">AddLine</a>(mixed aLine, mixed aToY2)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AddTable()">AddTable</a>(mixed aTable)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AddText()">AddText</a>(mixed aTxt, mixed aToY2)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AddY()">AddY</a>(mixed aN, mixed aPlot)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AddY2()">AddY2</a>(mixed aPlot)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AdjBackgroundImage()">AdjBackgroundImage</a>(mixed aBright, mixed aContr, mixed aSat)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AdjImage()">AdjImage</a>(mixed aBright, mixed aContr, mixed aSat)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AdjustMarginsForTitles()">AdjustMarginsForTitles</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#AdjustSaturationBrightnessContrast()">AdjustSaturationBrightnessContrast</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#CheckCSIMCache()">CheckCSIMCache</a>(mixed aCacheName, mixed aTimeOut)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#DisplayClientSideaImageMapAreas()">DisplayClientSideaImageMapAreas</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#FillMarginArea()">FillMarginArea</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#FillPlotArea()">FillPlotArea</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetCSIMareas()">GetCSIMareas</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetHTMLImageMap()">GetHTMLImageMap</a>(mixed aMapName)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetLinesXMinMax()">GetLinesXMinMax</a>(mixed aLines)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetLinesYMinMax()">GetLinesYMinMax</a>(mixed aLines)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetPlotsYMinMax()">GetPlotsYMinMax</a>(mixed aPlots)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetTextsXMinMax()">GetTextsXMinMax</a>(mixed aY2)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetTextsYMinMax()">GetTextsYMinMax</a>(mixed aY2)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#GetXMinMax()">GetXMinMax</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#LoadBkgImage()">LoadBkgImage</a>(mixed aImgFormat, mixed aFile, mixed aImgStr)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#Set3DPerspective()">Set3DPerspective</a>(mixed aDir, mixed aHorizon, mixed aSkewDist, mixed aQuality, mixed aFillColor, mixed aBorder, mixed aMinSize, mixed aHorizonPos)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#Set90AndMargin()">Set90AndMargin</a>(mixed lm, mixed rm, mixed tm, mixed bm)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetAlphaBlending()">SetAlphaBlending</a>(mixed aFlg)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetAngle()">SetAngle</a>(mixed aAngle)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetAxisLabelBackground()">SetAxisLabelBackground</a>(mixed aType, mixed aXFColor, mixed aXColor, mixed aYFColor, mixed aYColor)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetAxisStyle()">SetAxisStyle</a>(mixed aStyle)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetBackgroundCFlag()">SetBackgroundCFlag</a>(mixed aName, mixed aBgType, mixed aMix)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetBackgroundCountryFlag()">SetBackgroundCountryFlag</a>(mixed aName, mixed aBgType, mixed aMix)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetBackgroundGradient()">SetBackgroundGradient</a>(mixed aFrom, mixed aTo, mixed aGradType, mixed aStyle)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetBackgroundImage()">SetBackgroundImage</a>(mixed aFileName, mixed aBgType, mixed aImgFormat)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetBackgroundImageMix()">SetBackgroundImageMix</a>(mixed aMix)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetBox()">SetBox</a>(mixed aDrawPlotFrame, mixed aPlotFrameColor)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetClipping()">SetClipping</a>(mixed aFlg)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetColor()">SetColor</a>(mixed aColor)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetFrame()">SetFrame</a>(mixed aDrawImgFrame, mixed aImgFrameColor)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetFrameBevel()">SetFrameBevel</a>(mixed aDepth, mixed aBorder, mixed aBorderColor, mixed aColor1, mixed aColor2, mixed aFlg)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetGridDepth()">SetGridDepth</a>(mixed aDepth)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetIconDepth()">SetIconDepth</a>(mixed aDepth)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetImgFormat()">SetImgFormat</a>(mixed aFormat, mixed aQuality)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetMargin()">SetMargin</a>(mixed lm, mixed rm, mixed tm, mixed bm)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetMarginColor()">SetMarginColor</a>(mixed aColor)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetScale()">SetScale</a>(mixed aAxisType, mixed aYMin, mixed aYMax, mixed aXMin, mixed aXMax)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetShadow()">SetShadow</a>(mixed aShowShadow, mixed aShadowWidth, mixed aShadowColor)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetTextScaleAbsCenterOff()">SetTextScaleAbsCenterOff</a>(mixed aOff)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetTextScaleOff()">SetTextScaleOff</a>(mixed aOff)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetTickDensity()">SetTickDensity</a>(mixed aYDensity, mixed aXDensity)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetTitleBackground()">SetTitleBackground</a>(mixed aBackColor, mixed aStyle, mixed aFrameStyle, mixed aFrameColor, mixed aFrameWeight, mixed aBevelHeight, mixed aEnable)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetTitleBackgroundFillStyle()">SetTitleBackgroundFillStyle</a>(mixed aStyle, mixed aColor1, mixed aColor2)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetY2OrderBack()">SetY2OrderBack</a>(mixed aBack)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetY2Scale()">SetY2Scale</a>(mixed aAxisType, mixed aY2Min, mixed aY2Max)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetYDeltaDist()">SetYDeltaDist</a>(mixed aDist)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#SetYScale()">SetYScale</a>(mixed aN, mixed aAxisType, mixed aYMin, mixed aYMax)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#Stroke()">Stroke</a>(mixed aStrokeFileName)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeAxis()">StrokeAxis</a>(mixed aStrokeLabels)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeAxisLabelBackground()">StrokeAxisLabelBackground</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeBackgroundGrad()">StrokeBackgroundGrad</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeCSIM()">StrokeCSIM</a>(mixed aScriptName, mixed aCSIMName, mixed aBorder)</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeFrame()">StrokeFrame</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeFrameBackground()">StrokeFrameBackground</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeIcons()">StrokeIcons</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokePlotArea()">StrokePlotArea</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokePlotBox()">StrokePlotBox</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeTables()">StrokeTables</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeTexts()">StrokeTexts</a>()</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#StrokeTitles()">StrokeTitles</a>()</p></td>
+</tr>
+</table>
+
+<h2 id="detail_field">Field Detail</h2>
+<h3 id="axtype">axtype</h3>
+<code class="signature">public  mixed <strong>$axtype</strong> = "linlin"</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_cflag">background_cflag</h3>
+<code class="signature">public  mixed <strong>$background_cflag</strong> = ''</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_cflag_mix">background_cflag_mix</h3>
+<code class="signature">public  mixed <strong>$background_cflag_mix</strong> = 100</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_cflag_type">background_cflag_type</h3>
+<code class="signature">public  mixed <strong>$background_cflag_type</strong> = BGIMG_FILLPLOT</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_image">background_image</h3>
+<code class="signature">public  mixed <strong>$background_image</strong> = ""</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_image_bright">background_image_bright</h3>
+<code class="signature">public  mixed <strong>$background_image_bright</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_image_contr">background_image_contr</h3>
+<code class="signature">public  mixed <strong>$background_image_contr</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_image_format">background_image_format</h3>
+<code class="signature">public  mixed <strong>$background_image_format</strong> = "png"</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_image_mix">background_image_mix</h3>
+<code class="signature">public  mixed <strong>$background_image_mix</strong> = 100</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_image_sat">background_image_sat</h3>
+<code class="signature">public  mixed <strong>$background_image_sat</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="background_image_type">background_image_type</h3>
+<code class="signature">public  mixed <strong>$background_image_type</strong> = -1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="bands">bands</h3>
+<code class="signature">public  mixed <strong>$bands</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="bkg_gradfrom">bkg_gradfrom</h3>
+<code class="signature">public  mixed <strong>$bkg_gradfrom</strong> = 'navy'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="bkg_gradstyle">bkg_gradstyle</h3>
+<code class="signature">public  mixed <strong>$bkg_gradstyle</strong> = BGRAD_MARGIN</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="bkg_gradto">bkg_gradto</h3>
+<code class="signature">public  mixed <strong>$bkg_gradto</strong> = 'silver'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="bkg_gradtype">bkg_gradtype</h3>
+<code class="signature">public  mixed <strong>$bkg_gradtype</strong> = -1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="box_color">box_color</h3>
+<code class="signature">public  mixed <strong>$box_color</strong> = array(0,0,0)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="box_weight">box_weight</h3>
+<code class="signature">public  mixed <strong>$box_weight</strong> = 1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="boxed">boxed</h3>
+<code class="signature">public  mixed <strong>$boxed</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="cache">cache</h3>
+<code class="signature">public  mixed <strong>$cache</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="cache_name">cache_name</h3>
+<code class="signature">public  mixed <strong>$cache_name</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="csimcachename">csimcachename</h3>
+<code class="signature">public  mixed <strong>$csimcachename</strong> = ''</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="csimcachetimeout">csimcachetimeout</h3>
+<code class="signature">public  mixed <strong>$csimcachetimeout</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="csimcolor">csimcolor</h3>
+<code class="signature">public  mixed <strong>$csimcolor</strong> = "red"</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="doframe">doframe</h3>
+<code class="signature">public  mixed <strong>$doframe</strong> = true</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="doshadow">doshadow</h3>
+<code class="signature">public  mixed <strong>$doshadow</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="footer">footer</h3>
+<code class="signature">public  mixed <strong>$footer</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="frame_color">frame_color</h3>
+<code class="signature">public  mixed <strong>$frame_color</strong> = array(0,0,0)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="frame_weight">frame_weight</h3>
+<code class="signature">public  mixed <strong>$frame_weight</strong> = 1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="framebevel">framebevel</h3>
+<code class="signature">public  mixed <strong>$framebevel</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="framebevelborder">framebevelborder</h3>
+<code class="signature">public  mixed <strong>$framebevelborder</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="framebevelbordercolor">framebevelbordercolor</h3>
+<code class="signature">public  mixed <strong>$framebevelbordercolor</strong> = 'black'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="framebevelcolor1">framebevelcolor1</h3>
+<code class="signature">public  mixed <strong>$framebevelcolor1</strong> = 'white@0.4'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="framebevelcolor2">framebevelcolor2</h3>
+<code class="signature">public  mixed <strong>$framebevelcolor2</strong> = 'black@0.4'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="framebeveldepth">framebeveldepth</h3>
+<code class="signature">public  mixed <strong>$framebeveldepth</strong> = 2</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="grid_depth">grid_depth</h3>
+<code class="signature">public  mixed <strong>$grid_depth</strong> = DEPTH_BACK</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iAxisStyle">iAxisStyle</h3>
+<code class="signature">public  mixed <strong>$iAxisStyle</strong> = AXSTYLE_SIMPLE</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iCSIMdisplay">iCSIMdisplay</h3>
+<code class="signature">public  mixed <strong>$iCSIMdisplay</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iDoClipping">iDoClipping</h3>
+<code class="signature">public  mixed <strong>$iDoClipping</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iHasStroked">iHasStroked</h3>
+<code class="signature">public  mixed <strong>$iHasStroked</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iIcons">iIcons</h3>
+<code class="signature">public  mixed <strong>$iIcons</strong> = array()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTrans">iImgTrans</h3>
+<code class="signature">public  mixed <strong>$iImgTrans</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransBorder">iImgTransBorder</h3>
+<code class="signature">public  mixed <strong>$iImgTransBorder</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransDirection">iImgTransDirection</h3>
+<code class="signature">public  mixed <strong>$iImgTransDirection</strong> = 1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransFillColor">iImgTransFillColor</h3>
+<code class="signature">public  mixed <strong>$iImgTransFillColor</strong> = 'white'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransHighQ">iImgTransHighQ</h3>
+<code class="signature">public  mixed <strong>$iImgTransHighQ</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransHorizon">iImgTransHorizon</h3>
+<code class="signature">public  mixed <strong>$iImgTransHorizon</strong> = 100</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransHorizonPos">iImgTransHorizonPos</h3>
+<code class="signature">public  mixed <strong>$iImgTransHorizonPos</strong> = 0.5</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransMinSize">iImgTransMinSize</h3>
+<code class="signature">public  mixed <strong>$iImgTransMinSize</strong> = true</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="iImgTransSkewDist">iImgTransSkewDist</h3>
+<code class="signature">public  mixed <strong>$iImgTransSkewDist</strong> = 150</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="image_bright">image_bright</h3>
+<code class="signature">public  mixed <strong>$image_bright</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="image_contr">image_contr</h3>
+<code class="signature">public  mixed <strong>$image_contr</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="image_sat">image_sat</h3>
+<code class="signature">public  mixed <strong>$image_sat</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="img">img</h3>
+<code class="signature">public  mixed <strong>$img</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="inline">inline</h3>
+<code class="signature">public  mixed <strong>$inline</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="lines">lines</h3>
+<code class="signature">public  mixed <strong>$lines</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="margin_color">margin_color</h3>
+<code class="signature">public  mixed <strong>$margin_color</strong> = array(200,200,200)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="plotarea_color">plotarea_color</h3>
+<code class="signature">public  mixed <strong>$plotarea_color</strong> = array(255,255,255)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="plots">plots</h3>
+<code class="signature">public  mixed <strong>$plots</strong> = array()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="shadow_color">shadow_color</h3>
+<code class="signature">public  mixed <strong>$shadow_color</strong> = array(102,102,102)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="shadow_width">shadow_width</h3>
+<code class="signature">public  mixed <strong>$shadow_width</strong> = 4</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="showcsim">showcsim</h3>
+<code class="signature">public  mixed <strong>$showcsim</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="subsubtitle">subsubtitle</h3>
+<code class="signature">public  mixed <strong>$subsubtitle</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="subtitle">subtitle</h3>
+<code class="signature">public  mixed <strong>$subtitle</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="tabtitle">tabtitle</h3>
+<code class="signature">public  mixed <strong>$tabtitle</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="text_scale_abscenteroff">text_scale_abscenteroff</h3>
+<code class="signature">public  mixed <strong>$text_scale_abscenteroff</strong> = -1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="text_scale_off">text_scale_off</h3>
+<code class="signature">public  mixed <strong>$text_scale_off</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="texts">texts</h3>
+<code class="signature">public  mixed <strong>$texts</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="title">title</h3>
+<code class="signature">public  mixed <strong>$title</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebackground">titlebackground</h3>
+<code class="signature">public  mixed <strong>$titlebackground</strong> = false</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebackground_bevelheight">titlebackground_bevelheight</h3>
+<code class="signature">public  mixed <strong>$titlebackground_bevelheight</strong> = 3</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebackground_color">titlebackground_color</h3>
+<code class="signature">public  mixed <strong>$titlebackground_color</strong> = 'lightblue'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebackground_framecolor">titlebackground_framecolor</h3>
+<code class="signature">public  mixed <strong>$titlebackground_framecolor</strong> = 'blue'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebackground_framestyle">titlebackground_framestyle</h3>
+<code class="signature">public  mixed <strong>$titlebackground_framestyle</strong> = 2</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebackground_frameweight">titlebackground_frameweight</h3>
+<code class="signature">public  mixed <strong>$titlebackground_frameweight</strong> = 1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebackground_style">titlebackground_style</h3>
+<code class="signature">public  mixed <strong>$titlebackground_style</strong> = 1</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebkg_fillstyle">titlebkg_fillstyle</h3>
+<code class="signature">public  mixed <strong>$titlebkg_fillstyle</strong> = TITLEBKG_FILLSTYLE_SOLID</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebkg_scolor1">titlebkg_scolor1</h3>
+<code class="signature">public  mixed <strong>$titlebkg_scolor1</strong> = 'black'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="titlebkg_scolor2">titlebkg_scolor2</h3>
+<code class="signature">public  mixed <strong>$titlebkg_scolor2</strong> = 'white'</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="xaxis">xaxis</h3>
+<code class="signature">public  mixed <strong>$xaxis</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="xgrid">xgrid</h3>
+<code class="signature">public  mixed <strong>$xgrid</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="xscale">xscale</h3>
+<code class="signature">public  mixed <strong>$xscale</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="xtick_factor">xtick_factor</h3>
+<code class="signature">public  mixed <strong>$xtick_factor</strong></code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2axis">y2axis</h3>
+<code class="signature">public  mixed <strong>$y2axis</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2bands">y2bands</h3>
+<code class="signature">public  mixed <strong>$y2bands</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2grid">y2grid</h3>
+<code class="signature">public  mixed <strong>$y2grid</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2lines">y2lines</h3>
+<code class="signature">public  mixed <strong>$y2lines</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2orderback">y2orderback</h3>
+<code class="signature">public  mixed <strong>$y2orderback</strong> = true</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2plots">y2plots</h3>
+<code class="signature">public  mixed <strong>$y2plots</strong> = array()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2scale">y2scale</h3>
+<code class="signature">public  mixed <strong>$y2scale</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="y2texts">y2texts</h3>
+<code class="signature">public  mixed <strong>$y2texts</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="yaxis">yaxis</h3>
+<code class="signature">public  mixed <strong>$yaxis</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="ygrid">ygrid</h3>
+<code class="signature">public  mixed <strong>$ygrid</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="ynaxis">ynaxis</h3>
+<code class="signature">public  mixed <strong>$ynaxis</strong> = array()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="ynplots">ynplots</h3>
+<code class="signature">public  mixed <strong>$ynplots</strong> = array()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="ynscale">ynscale</h3>
+<code class="signature">public  mixed <strong>$ynscale</strong> = array()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="yscale">yscale</h3>
+<code class="signature">public  mixed <strong>$yscale</strong> = null</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<h3 id="Graph()">Graph</h3>
+<code class="signature">public <strong>Graph</strong>(mixed aWidth, mixed aHeight, mixed aCachedName, mixed aTimeOut, mixed aInline)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<h3 id="Add()">Add</h3>
+<code class="signature">public  void <strong>Add</strong>(mixed aPlot)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AddBand()">AddBand</h3>
+<code class="signature">public  void <strong>AddBand</strong>(mixed aBand, mixed aToY2)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AddIcon()">AddIcon</h3>
+<code class="signature">public  void <strong>AddIcon</strong>(mixed aIcon)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AddLine()">AddLine</h3>
+<code class="signature">public  void <strong>AddLine</strong>(mixed aLine, mixed aToY2)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AddTable()">AddTable</h3>
+<code class="signature">public  void <strong>AddTable</strong>(mixed aTable)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AddText()">AddText</h3>
+<code class="signature">public  void <strong>AddText</strong>(mixed aTxt, mixed aToY2)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AddY()">AddY</h3>
+<code class="signature">public  void <strong>AddY</strong>(mixed aN, mixed aPlot)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AddY2()">AddY2</h3>
+<code class="signature">public  void <strong>AddY2</strong>(mixed aPlot)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AdjBackgroundImage()">AdjBackgroundImage</h3>
+<code class="signature">public  void <strong>AdjBackgroundImage</strong>(mixed aBright, mixed aContr, mixed aSat)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AdjImage()">AdjImage</h3>
+<code class="signature">public  void <strong>AdjImage</strong>(mixed aBright, mixed aContr, mixed aSat)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AdjustMarginsForTitles()">AdjustMarginsForTitles</h3>
+<code class="signature">public  void <strong>AdjustMarginsForTitles</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="AdjustSaturationBrightnessContrast()">AdjustSaturationBrightnessContrast</h3>
+<code class="signature">public  void <strong>AdjustSaturationBrightnessContrast</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="CheckCSIMCache()">CheckCSIMCache</h3>
+<code class="signature">public  void <strong>CheckCSIMCache</strong>(mixed aCacheName, mixed aTimeOut)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="DisplayClientSideaImageMapAreas()">DisplayClientSideaImageMapAreas</h3>
+<code class="signature">public  void <strong>DisplayClientSideaImageMapAreas</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="FillMarginArea()">FillMarginArea</h3>
+<code class="signature">public  void <strong>FillMarginArea</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="FillPlotArea()">FillPlotArea</h3>
+<code class="signature">public  void <strong>FillPlotArea</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetCSIMareas()">GetCSIMareas</h3>
+<code class="signature">public  void <strong>GetCSIMareas</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetHTMLImageMap()">GetHTMLImageMap</h3>
+<code class="signature">public  void <strong>GetHTMLImageMap</strong>(mixed aMapName)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetLinesXMinMax()">GetLinesXMinMax</h3>
+<code class="signature">public  void <strong>GetLinesXMinMax</strong>(mixed aLines)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetLinesYMinMax()">GetLinesYMinMax</h3>
+<code class="signature">public  void <strong>GetLinesYMinMax</strong>(mixed aLines)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetPlotsYMinMax()">GetPlotsYMinMax</h3>
+<code class="signature">public  void <strong>GetPlotsYMinMax</strong>(mixed aPlots)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetTextsXMinMax()">GetTextsXMinMax</h3>
+<code class="signature">public  void <strong>GetTextsXMinMax</strong>(mixed aY2)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetTextsYMinMax()">GetTextsYMinMax</h3>
+<code class="signature">public  void <strong>GetTextsYMinMax</strong>(mixed aY2)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="GetXMinMax()">GetXMinMax</h3>
+<code class="signature">public  void <strong>GetXMinMax</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="LoadBkgImage()">LoadBkgImage</h3>
+<code class="signature">public  void <strong>LoadBkgImage</strong>(mixed aImgFormat, mixed aFile, mixed aImgStr)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="Set3DPerspective()">Set3DPerspective</h3>
+<code class="signature">public  void <strong>Set3DPerspective</strong>(mixed aDir, mixed aHorizon, mixed aSkewDist, mixed aQuality, mixed aFillColor, mixed aBorder, mixed aMinSize, mixed aHorizonPos)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="Set90AndMargin()">Set90AndMargin</h3>
+<code class="signature">public  void <strong>Set90AndMargin</strong>(mixed lm, mixed rm, mixed tm, mixed bm)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetAlphaBlending()">SetAlphaBlending</h3>
+<code class="signature">public  void <strong>SetAlphaBlending</strong>(mixed aFlg)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetAngle()">SetAngle</h3>
+<code class="signature">public  void <strong>SetAngle</strong>(mixed aAngle)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetAxisLabelBackground()">SetAxisLabelBackground</h3>
+<code class="signature">public  void <strong>SetAxisLabelBackground</strong>(mixed aType, mixed aXFColor, mixed aXColor, mixed aYFColor, mixed aYColor)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetAxisStyle()">SetAxisStyle</h3>
+<code class="signature">public  void <strong>SetAxisStyle</strong>(mixed aStyle)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetBackgroundCFlag()">SetBackgroundCFlag</h3>
+<code class="signature">public  void <strong>SetBackgroundCFlag</strong>(mixed aName, mixed aBgType, mixed aMix)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetBackgroundCountryFlag()">SetBackgroundCountryFlag</h3>
+<code class="signature">public  void <strong>SetBackgroundCountryFlag</strong>(mixed aName, mixed aBgType, mixed aMix)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetBackgroundGradient()">SetBackgroundGradient</h3>
+<code class="signature">public  void <strong>SetBackgroundGradient</strong>(mixed aFrom, mixed aTo, mixed aGradType, mixed aStyle)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetBackgroundImage()">SetBackgroundImage</h3>
+<code class="signature">public  void <strong>SetBackgroundImage</strong>(mixed aFileName, mixed aBgType, mixed aImgFormat)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetBackgroundImageMix()">SetBackgroundImageMix</h3>
+<code class="signature">public  void <strong>SetBackgroundImageMix</strong>(mixed aMix)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetBox()">SetBox</h3>
+<code class="signature">public  void <strong>SetBox</strong>(mixed aDrawPlotFrame, mixed aPlotFrameColor)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetClipping()">SetClipping</h3>
+<code class="signature">public  void <strong>SetClipping</strong>(mixed aFlg)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetColor()">SetColor</h3>
+<code class="signature">public  void <strong>SetColor</strong>(mixed aColor)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetFrame()">SetFrame</h3>
+<code class="signature">public  void <strong>SetFrame</strong>(mixed aDrawImgFrame, mixed aImgFrameColor)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetFrameBevel()">SetFrameBevel</h3>
+<code class="signature">public  void <strong>SetFrameBevel</strong>(mixed aDepth, mixed aBorder, mixed aBorderColor, mixed aColor1, mixed aColor2, mixed aFlg)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetGridDepth()">SetGridDepth</h3>
+<code class="signature">public  void <strong>SetGridDepth</strong>(mixed aDepth)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetIconDepth()">SetIconDepth</h3>
+<code class="signature">public  void <strong>SetIconDepth</strong>(mixed aDepth)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetImgFormat()">SetImgFormat</h3>
+<code class="signature">public  void <strong>SetImgFormat</strong>(mixed aFormat, mixed aQuality)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetMargin()">SetMargin</h3>
+<code class="signature">public  void <strong>SetMargin</strong>(mixed lm, mixed rm, mixed tm, mixed bm)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetMarginColor()">SetMarginColor</h3>
+<code class="signature">public  void <strong>SetMarginColor</strong>(mixed aColor)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetScale()">SetScale</h3>
+<code class="signature">public  void <strong>SetScale</strong>(mixed aAxisType, mixed aYMin, mixed aYMax, mixed aXMin, mixed aXMax)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetShadow()">SetShadow</h3>
+<code class="signature">public  void <strong>SetShadow</strong>(mixed aShowShadow, mixed aShadowWidth, mixed aShadowColor)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetTextScaleAbsCenterOff()">SetTextScaleAbsCenterOff</h3>
+<code class="signature">public  void <strong>SetTextScaleAbsCenterOff</strong>(mixed aOff)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetTextScaleOff()">SetTextScaleOff</h3>
+<code class="signature">public  void <strong>SetTextScaleOff</strong>(mixed aOff)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetTickDensity()">SetTickDensity</h3>
+<code class="signature">public  void <strong>SetTickDensity</strong>(mixed aYDensity, mixed aXDensity)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetTitleBackground()">SetTitleBackground</h3>
+<code class="signature">public  void <strong>SetTitleBackground</strong>(mixed aBackColor, mixed aStyle, mixed aFrameStyle, mixed aFrameColor, mixed aFrameWeight, mixed aBevelHeight, mixed aEnable)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetTitleBackgroundFillStyle()">SetTitleBackgroundFillStyle</h3>
+<code class="signature">public  void <strong>SetTitleBackgroundFillStyle</strong>(mixed aStyle, mixed aColor1, mixed aColor2)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetY2OrderBack()">SetY2OrderBack</h3>
+<code class="signature">public  void <strong>SetY2OrderBack</strong>(mixed aBack)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetY2Scale()">SetY2Scale</h3>
+<code class="signature">public  void <strong>SetY2Scale</strong>(mixed aAxisType, mixed aY2Min, mixed aY2Max)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetYDeltaDist()">SetYDeltaDist</h3>
+<code class="signature">public  void <strong>SetYDeltaDist</strong>(mixed aDist)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="SetYScale()">SetYScale</h3>
+<code class="signature">public  void <strong>SetYScale</strong>(mixed aN, mixed aAxisType, mixed aYMin, mixed aYMax)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="Stroke()">Stroke</h3>
+<code class="signature">public  void <strong>Stroke</strong>(mixed aStrokeFileName)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeAxis()">StrokeAxis</h3>
+<code class="signature">public  void <strong>StrokeAxis</strong>(mixed aStrokeLabels)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeAxisLabelBackground()">StrokeAxisLabelBackground</h3>
+<code class="signature">public  void <strong>StrokeAxisLabelBackground</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeBackgroundGrad()">StrokeBackgroundGrad</h3>
+<code class="signature">public  void <strong>StrokeBackgroundGrad</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeCSIM()">StrokeCSIM</h3>
+<code class="signature">public  void <strong>StrokeCSIM</strong>(mixed aScriptName, mixed aCSIMName, mixed aBorder)</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeFrame()">StrokeFrame</h3>
+<code class="signature">public  void <strong>StrokeFrame</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeFrameBackground()">StrokeFrameBackground</h3>
+<code class="signature">public  void <strong>StrokeFrameBackground</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeIcons()">StrokeIcons</h3>
+<code class="signature">public  void <strong>StrokeIcons</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokePlotArea()">StrokePlotArea</h3>
+<code class="signature">public  void <strong>StrokePlotArea</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokePlotBox()">StrokePlotBox</h3>
+<code class="signature">public  void <strong>StrokePlotBox</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeTables()">StrokeTables</h3>
+<code class="signature">public  void <strong>StrokeTables</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeTexts()">StrokeTexts</h3>
+<code class="signature">public  void <strong>StrokeTexts</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<h3 id="StrokeTitles()">StrokeTitles</h3>
+<code class="signature">public  void <strong>StrokeTitles</strong>()</code>
+<div class="details">
+</div>
+
+<hr>
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../phpdoctor/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../phpdoctor/graph.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

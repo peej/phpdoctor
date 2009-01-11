@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <title>PHPDoctor: The PHP API Documentation Creator</title>
+		<meta name="Description" content="Javadoc style comment parser for PHP (PHPDoc), automatically generate API documentation from your PHP code.">
+        <link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+    </head>
+    <body class="more">
+        <a href="http://github.com/peej/phpdoctor"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub" /></a>
+        
+        <h1><a href="/"><img src="title.png" alt="PHPDoctor - The PHP API Documentation Creator"></a></h1>
+		<div id="content">
+			<h2 id="faq"><a href="#faq">Frequently Asked Questions</a></h2>
+			<div>
+				<dl>
+					<dt>Q: Why do we need another Javadoc clone for PHP?</dt>
+					<dd>A: I wrote PHPDoctor because I couldn't find a Javadoc clone for PHP that was small and simple and worked out of
+					the box without having to spend hours reading documentation and tweaking my PHP code. The PHP tokenizer extension has
+					made creating PHPDoc programs really easy since PHP can now do the hard work for you.</dd>
+					<dt>Q: Why is phpdoctor different from other PHPdoc programs?</dt>
+					<dd>A: PHPDoctor is very small and easy to use, even the templating layer it uses for output generation is small and
+					simple to understand. PHPDoctor has a very small learning curve, most people should be able to generate API documentation
+					in only a few minutes.</dd>
+					<dt>Q: Tell me more about how PHPDoctor works</dt>
+					<dd>A: PHPDoctor uses the PHP tokenizer extension, this means that it lets PHP do the parsing of your source code.
+					PHPDoctor just takes the tokens PHP parses out, turns them into an object hierarchy and finally into your API
+					documentation. This means it will work for any PHP code, no exceptions, it also makes it very fast. The down side of
+					this is that it needs PHP 4.3 or above to work.</dd>
+				</dl>
+			</div>
+			
+			<h2 id="usage"><a href="#usage">Installation and Usage</a></h2>
+			<div>
+				<p>Unzip the archive somewhere, copy and edit the default config file and then run phpdoc.php with your CLI version of PHP (the CGI version may also work from the commandline):</p>
+				<pre>php phpdoc.php myconfig.ini</pre>
+				<p>To get PHPDoctor to work, you first need to write a configuration file for the code you want to parse. Copy and edit
+				the default config file, it is commented and pretty straight forward to understand.</p>
+			</div>
+			
+			<h2 id="configuration"><a href="#configuration">Configuration Directives</a></h2>
+			<div>
+				<p>PHPDoctor supports a number of configuration directives:</p>
+				<dl>
+					<dt>files</dt><dd>Names of files to parse. This can be a single filename, or a comma separated list of filenames. Wildcards are allowed.</dd>
+					<dt>ignore</dt><dd>Names of files or directories to ignore. This can be a single filename, or a comma separated list of filenames. Wildcards are NOT allowed.</dd>
+					<dt>source_path</dt><dd>The directory to look for files in, if not used the PHPDoctor will look in the current directory (the directory it is run from).</dd>
+					<dt>subdirs</dt><dd>If you do not want PHPDoctor to look in each sub directory for files uncomment this line.</dd>
+					<dt>quiet</dt><dd>Set how loud PHPDoctor is as it runs. Quiet mode suppresses all output other than warnings and errors.</dd>
+					<dt>verbose</dt><dd>Set how loud PHPDoctor is as it runs. Verbose mode outputs additional messages during execution.</dd>
+					<dt>doclet</dt><dd>Select the doclet to use for generating output.</dd>
+					<dt>doclet_path</dt><dd>The directory to find the doclet in. Doclets are expected to be in a directory named after themselves at the location given.</dd>
+					<dt>taglet_path</dt><dd>The directory to find taglets in. Taglets allow you to make PHPDoctor handle new tags and to alter the behavour of existing tags and their output.</dd>
+					<dt>default_package</dt><dd>If the code you are parsing does not use package tags or not all elements have package tags, use this setting to place unbound elements into a particular package.</dd>
+					<dt>overview</dt><dd>Specifies the name of a HTML file containing text for the overview documentation to be placed on the overview page. The path is relative to "source_path" unless an absolute path is given.</dd>
+					<dt>package_comment_dir</dt><dd>Package comments will be looked for in a file named package.html in the same directory as the first source file parsed in that package or in the directory given below. If package comments are placed in the directory given below then they should be named ".html".</dd>
+					<dt>globals</dt><dd>Parse out global variables.</dd>
+					<dt>constants</dt><dd>Parse out global constants.</dd>
+					<dt>private</dt><dd>Generate documentation for all class members</dd>
+					<dt>protected</dt><dd>Generate documentation for public and protected class members</dd>
+					<dt>public</dt><dd>Generate documentation for only public class members</dd>
+					<dt>d</dt><dd>The directory to place generated documentation in. If the given path is relative to it will be relative to "source_path".</dd>
+					<dt>windowtitle</dt><dd>Specifies the title to be placed in the HTML</dd>
+					<dt>doctitle</dt><dd>Specifies the title to be placed near the top of the overview summary file.</dd>
+					<dt>header</dt><dd>Specifies the header text to be placed at the top of each output file. The header will be placed to the right of the upper navigation bar.</dd>
+					<dt>footer</dt><dd>Specifies the footer text to be placed at the bottom of each output file. The footer will be placed to the right of the lower navigation bar.</dd>
+					<dt>bottom</dt><dd>Specifies the text to be placed at the bottom of each output file. The text will be placed at the bottom of the page, below the lower navigation bar.</dd>
+					<dt>tree</dt><dd>Create a class tree</dd>
+				</dl>
+			</div>
+			
+			<h2 id="doc-comments"><a href="#doc-comments">Doc Comments</a></h2>
+			<div>
+				<p>A full description of the format of doc comments can be found on the Sun Javadoc web site. Doc comments look like this:</p>
+				<pre>/**
+ * This is the typical format of a simple documentation comment
+ * that spans two lines.
+ */</pre>
+ 				<p>Note the extra asterisk after the opening comment line.</p>
+				<p>PHPDoctor supports most of the Javadoc tags defined by Sun. The following tags are supported:</p>
+				<ul>
+					<li><strong>@abstract</strong></li>
+					<li><strong>@access</strong> access-type</li>
+					<li><strong>@author</strong> name-text</li>
+					<li><strong>@deprecated</strong> deprecated-text</li>
+					<li><strong>@final</strong></li>
+					<li>{<strong>@link</strong> package.class#member label}</li>
+					<li>{<strong>@linkplain</strong> package.class#member label}</li>
+					<li><strong>@package</strong> package-name</li>
+					<li><strong>@param</strong> parameter-type parameter-name description</li>
+					<li><strong>@return</strong> return-type description</li>
+					<li><strong>@see</strong> package.class#member</li>
+					<li><strong>@since</strong> since-text</li>
+					<li><strong>@static</strong></li>
+					<li><strong>@var</strong> var-type</li>
+					<li><strong>@version</strong> version-text</li>
+				</ul>
+				<p>Some Javadoc tags are not relevant to PHP and so are ignored, others are added or slightly changed due to PHPs loose typing:</p>
+				<ul>
+					<li><strong>@abstract</strong> is a new tag defining a class or method as abstract.</li>
+					<li><strong>@access</strong> is a new tag and is valid within field and method doc comments. The first word after the tag should denote the access type of the field or method.</li>
+					<li><strong>@final</strong> is a new tag defining a class or method as final.</li>
+					<li><strong>@package</strong> is a new tag that places an item into a specific package and is valid within any doc comment of a top level item.</li>
+					<li><strong>@param</strong> has a parameter-type value added as the first word after the tag. This value should denote the data type of the parameter.</li>
+					<li><strong>@return</strong> has a return-type value added as the first word after the tag. This value should denote the methods or functions return data type.</li>
+					<li><strong>@static</strong> is a new tag defining a class, method or member variable as static.</li>
+					<li><strong>@var</strong> is a new tag and is valid within field doc comments. The first word after the tag should denote the data type of the field.</li>
+					<li><strong>@type</strong> is a synonym for <strong>@var</strong>.</li>
+				</ul>
+			</div>
+			
+			<h2 id="contribute"><a href="#contribute">Contribute</a></h2>
+			<div>
+				<p>If you find PHPDoctor useful, have found a bug, or want to request a feature, please get in touch either via e-mail or through our <a href="http://github.com/peej">Github</a>.</p>
+				<p>The only way to make PHPDoctor a better product is to test it against more and more PHP code. We think PHPDoctor is pretty good at doing its job, it works against all the libraries we've tried it on, but then again you might write something wierd that causes it to barf, so let us know how it faired against your code.</p>
+				<h3>Access to Git</h3>
+				<p>If your hunting bugs, grab the latest version <a href="http://phpdoctor.cvs.sourceforge.net/phpdoctor">from Github</a> of directly via Git:</p>
+				<pre>git clone git://github.com/peej/phpdoctor</pre>
+			</div>
+			
+			<h2 id="license"><a href="#license">Copyright and License</a></h2>
+			<div>
+				<p>The information below applies to everything in the distribution, except where noted.</p>
+				<pre>Copyright 2004 by Paul James.
+paul at peej.co.uk
+http://www.peej.co.uk/
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License along
+with this program (COPYING); if not, go to http://www.fsf.org/ or write
+to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.</pre>
+			</div>
+		</div>
+		
+		<div id="footer">
+			<a href="/" class="back">&laquo; Back home</a>
+            <p>Last modified January 11, 2009</p>
+        </div>
+    </body>
+</html>

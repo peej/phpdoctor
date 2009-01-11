@@ -1,0 +1,139 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Verdana, "Trebuchet MS", Arial, Helvetica;
+	font-size: 80%;
+	color: #333;
+    background: #f4f4e9 url(bg.jpg) no-repeat top center;
+	line-height: 1.4em;
+}
+
+a {
+	color: #000;
+}
+
+h2, h3, p, ul, ol, pre {
+	margin: 10px;
+}
+
+li {
+	margin: 5px 10px 5px 20px;
+}
+
+dt {
+	margin: 10px 10px 5px;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+dd {
+	margin: 5px 10px 5px 20px;
+}
+
+pre {
+	background-color: #f4f4e9;
+	padding: 4px 10px;
+}
+
+strong {
+	color: #800;
+	font-weight: normal;
+}
+
+#header, #content, #footer {
+	width: 500px;
+	margin: 0 auto;
+}
+
+h1 {
+	margin: 0;
+	text-align: center;
+}
+
+h1 img {
+	border: none;
+}
+
+h2 {
+	margin: 0;
+	font-size: 120%;
+}
+
+h2 a {
+	display: block;
+	padding: 4px 10px;
+	color: #000;
+	text-decoration: none;
+	background-color: #d7d68a;
+	border-bottom: 1px solid #bdbc79;
+	letter-spacing: 0.1em;
+}
+
+body.more h2 a {
+	background-color: #8ad7d6;
+	border-bottom: 1px solid #79bdbc;
+}
+
+#content h2 a.active {
+	background-color: #800;
+	color: #fff;
+	border-bottom: 1px solid #c00;
+}
+
+h3 {
+	color: #333;
+	font-size: 110%;
+}
+
+#content div {
+	border: 1px solid #fff;
+	background-color: #fff;
+}
+
+#content div img {
+	float: right;
+	width: 100px;
+	height: 70px;
+	margin: 10px;
+	border: 1px solid #007200;
+}
+
+#footer p {
+	margin: 0 0 10px;
+	padding: 4px 0;
+	border-top: 1px solid #bdbc79;
+	text-align: right;
+	font-size: 90%;
+	color: #666;
+}
+
+body.more #footer p {
+	border-top: 1px solid #79bdbc;
+}
+
+a.back {
+	display: block;
+	padding: 2px 10px;
+	background-color: #bdbc79;
+	color: #fff;
+	text-decoration: none;
+}
+
+body.more a.back {
+	background-color: #79bdbc;
+}
+
+#content ul.downloads {
+    list-style: none;
+}
+
+#content ul.downloads li img {
+    float: right;
+	border: none;
+    width: auto;
+    height: 60px;
+    margin: 0;
+}

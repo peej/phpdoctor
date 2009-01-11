@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
+<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+
+<link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+<link rel="start" href="../../../overview-summary.html">
+
+<title>Debug (PHPDoctor)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../../overview-summary.html">Overview</a></li>
+<li><a href="../../../phpdoctor/doclets/debug/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../../../phpdoctor/doclets/debug/package-tree.html">Tree</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../../index.html" target="_top">Frames</a>
+<a href="../../../phpdoctor/doclets/debug/debug.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">PHPDoctor.Doclets.Debug.Debug</div>
+<div class="location">/doclets/debug/debug.php at line 29</div>
+
+<h1>Class Debug</h1>
+
+<pre class="tree"><strong>Debug</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>Debug</strong></p>
+
+<div class="comment" id="overview_description"><p>
+The debugging doclet. This doclet outputs all the parsed data in a format
+suitable for debugging PHPDoctor.
+</p></div>
+
+<dl>
+<dt>Version:</dt>
+<dd>$Revision: 1.7 $</dd>
+</dl>
+<hr>
+
+<table id="summary_field">
+<tr><th colspan="2">Field Summary</th></tr>
+<tr>
+<td class="type"> int</td>
+<td class="description"><p class="name"><a href="#depth">$depth</a></p><p class="description">
+The depth of processing through the element hierarchy.
+</p></td>
+</tr>
+</table>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#debug()">debug</a>(<a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc)</p><p class="description">
+Doclet constructor.
+</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#classDoc()">classDoc</a>(<a href="../../../phpdoctor/classdoc.html">ClassDoc</a> classes)</p><p class="description">
+Output classDoc
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#constructorDoc()">constructorDoc</a>(<a href="../../../phpdoctor/constructordoc.html">ConstructorDoc</a> constructors)</p><p class="description">
+Output constructorDoc
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#fieldDoc()">fieldDoc</a>(<a href="../../../phpdoctor/fielddoc.html">FieldDoc</a> fields, mixed showAccess)</p><p class="description">
+Output fieldDoc
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#methodDoc()">methodDoc</a>(<a href="../../../phpdoctor/methoddoc.html">MethodDoc</a> methods)</p><p class="description">
+Output methodDoc
+</p></td>
+</tr>
+<tr>
+<td class="type"> str</td>
+<td class="description"><p class="name"><a href="#showDepth()">showDepth</a>()</p><p class="description">
+Return the depth indicator string
+</p></td>
+</tr>
+</table>
+
+<h2 id="detail_field">Field Detail</h2>
+<div class="location">/doclets/debug/debug.php at line 36</div>
+<h3 id="depth">depth</h3>
+<code class="signature">public  int <strong>$depth</strong> = 1</code>
+<div class="details">
+<p>
+The depth of processing through the element hierarchy.
+</p></div>
+
+<hr>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<div class="location">/doclets/debug/debug.php at line 42</div>
+<h3 id="debug()">debug</h3>
+<code class="signature">public <strong>debug</strong>(<a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc)</code>
+<div class="details">
+<p>
+Doclet constructor.
+</p></div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<div class="location">/doclets/debug/debug.php at line 153</div>
+<h3 id="classDoc()">classDoc</h3>
+<code class="signature">public  void <strong>classDoc</strong>(<a href="../../../phpdoctor/classdoc.html">ClassDoc</a> classes)</code>
+<div class="details">
+<p>
+Output classDoc
+</p></div>
+
+<hr>
+
+<div class="location">/doclets/debug/debug.php at line 134</div>
+<h3 id="constructorDoc()">constructorDoc</h3>
+<code class="signature">public  void <strong>constructorDoc</strong>(<a href="../../../phpdoctor/constructordoc.html">ConstructorDoc</a> constructors)</code>
+<div class="details">
+<p>
+Output constructorDoc
+</p></div>
+
+<hr>
+
+<div class="location">/doclets/debug/debug.php at line 71</div>
+<h3 id="fieldDoc()">fieldDoc</h3>
+<code class="signature">public  void <strong>fieldDoc</strong>(<a href="../../../phpdoctor/fielddoc.html">FieldDoc</a> fields, mixed showAccess)</code>
+<div class="details">
+<p>
+Output fieldDoc
+</p></div>
+
+<hr>
+
+<div class="location">/doclets/debug/debug.php at line 97</div>
+<h3 id="methodDoc()">methodDoc</h3>
+<code class="signature">public  void <strong>methodDoc</strong>(<a href="../../../phpdoctor/methoddoc.html">MethodDoc</a> methods)</code>
+<div class="details">
+<p>
+Output methodDoc
+</p></div>
+
+<hr>
+
+<div class="location">/doclets/debug/debug.php at line 62</div>
+<h3 id="showDepth()">showDepth</h3>
+<code class="signature">public  str <strong>showDepth</strong>()</code>
+<div class="details">
+<p>
+Return the depth indicator string
+</p></div>
+
+<hr>
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../../overview-summary.html">Overview</a></li>
+<li><a href="../../../phpdoctor/doclets/debug/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../../../phpdoctor/doclets/debug/package-tree.html">Tree</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../../index.html" target="_top">Frames</a>
+<a href="../../../phpdoctor/doclets/debug/debug.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>
