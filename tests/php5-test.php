@@ -90,4 +90,13 @@ class aClass implements anInterface {
  */
 class childClass extends aClass {}
 
+/**
+ * @package PHPDoctor.Tests.Data
+ */
+class anotherClassWithSameMemberAsAnotherClass {
+    var $aVarWithValue = 2;
+    function aFunction() {
+	}
+}
+
 ?>
