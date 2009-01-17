@@ -1066,7 +1066,7 @@ class PHPDoctor
 	function processDocComment($comment, &$root)
     {
 		if (substr(trim($comment), 0, 3) != '/**') return FALSE; // not doc comment, abort
-
+        
 		$data = array(
 			'docComment' => $comment,
 			'tags' => array()
@@ -1080,7 +1080,10 @@ class PHPDoctor
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags
-			$tag = trim($tag, "\n\r \t/*"); // strip whitespace and asterix's from beginning
+            // strip whitespace, newlines and asterisks
+            $tag = preg_replace('/(^[\s\n\r\*]+|\s*\*\/$)/m', ' ', $tag);
+            $tag = preg_replace('/[\r\n]+/', '', $tag);
+            $tag = trim($tag);
 			
 			$pos = strpos($tag, ' ');
 			if ($pos !== FALSE) {

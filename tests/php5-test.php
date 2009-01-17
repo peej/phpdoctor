@@ -95,7 +95,17 @@ class childClass extends aClass {}
  */
 class anotherClassWithSameMemberAsAnotherClass {
     var $aVarWithValue = 2;
-    function aFunction() {
+    
+    /**
+     * This is a
+     * multi-line description
+     * @param str foo This
+                      is
+     **               foo
+     * @return str And a multi-line
+     *             tag description
+     */
+    function aFunction($foo) {
 	}
 }
 
