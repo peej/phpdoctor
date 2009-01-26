@@ -648,7 +648,7 @@ class PHPDoctor
 							case T_CONST:
 								$currentData['var'] = 'const';
 								break;
-	
+                                
 							case T_FUNCTION:
 							// read function
 								$method =& new methodDoc($this->_getNext($tokens, $key, T_STRING), $ce, $rootDoc, $filename, $lineNumber); // create method object
@@ -660,13 +660,16 @@ class PHPDoctor
 								$ceClass = strtolower(get_class($ce));
 								if ($ceClass == 'rootdoc') { // global function, add to package
 									$this->verbose(' is a global function');
+                                    if (isset($currentData['access']) && $currentData['access'] == 'private') $method->makePrivate();
 									if (isset($currentData['package']) && $currentData['package'] != NULL) { // set package
 										$method->set('package', $currentData['package']);
 									} else {
 										$method->set('package', $currentPackage);
 									}
 									$parentPackage =& $rootDoc->packageNamed($method->packageName(), TRUE); // get parent package
-									$parentPackage->addFunction($method); // add method to package
+                                    if ($this->_includeElements($method)) {
+                                        $parentPackage->addFunction($method); // add method to package
+                                    }
 								} elseif ($ceClass == 'classdoc' || $ceClass == 'methoddoc') { // class method, add to class
 									$method->set('package', $ce->packageName()); // set package
 									if ($method->name() == '__construct' || strtolower($method->name()) == strtolower($ce->name())) { // constructor
@@ -676,6 +679,7 @@ class PHPDoctor
 										$ce->addConstructor($method);
 									} else {
 										if ($this->_hasPrivateName($method->name())) $method->makePrivate();
+                                        if (isset($currentData['access']) && $currentData['access'] == 'private') $method->makePrivate();
 										$this->verbose(' is a method of '.get_class($ce).' '.$ce->name());
 										if ($this->_includeElements($method)) {
 											$ce->addMethod($method);
@@ -1202,6 +1206,8 @@ class PHPDoctor
 			return FALSE;
 		} elseif ($element->isGlobal() && $element->isFinal() && !$this->_constants) {
 			return FALSE;
+        } elseif (!$this->_private && $element->isPrivate()) {
+            return FALSE;
 		} elseif ($this->_private) {
 			return TRUE;
 		} elseif ($this->_protected && ($element->isPublic() || $element->isProtected())) {
