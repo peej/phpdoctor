@@ -689,21 +689,36 @@ class PHPDoctor
 	
 							case T_STRING:
 							// read global constant
-								if ($token[1] == 'define' && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
-									$const =& new fieldDoc($tokens[$key + 2][1], $ce, $rootDoc, $filename, $lineNumber); // create constant object
+                                if ($token[1] == 'define') {// && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
+									$const =& new fieldDoc($this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING), $ce, $rootDoc, $filename, $lineNumber); // create constant object
 									$this->verbose('Found '.get_class($const).': global constant '.$const->name());
 									$const->set('final', TRUE); // is constant
 									$value = '';
-									$key = $key + 4;
-									while(isset($tokens[$key]) && $tokens[$key] != ';') {
-										if (is_array($tokens[$key])) {
+                                    do {
+										$key++;
+                                    } while(isset($tokens[$key]) && $tokens[$key] != ',');
+                                    $key++;
+									while(isset($tokens[$key]) && $tokens[$key] != ')') {
+                                        if (is_array($tokens[$key])) {
 											$value .= $tokens[$key][1];
 										} else {
 											$value .= $tokens[$key];
 										}
 										$key++;
-									}
-									$const->set('value', substr(trim($value), 0, -1));
+                                    }
+                                    $value = trim($value);
+                                    if (substr($value, 0, 5) == 'array') {
+                                        $value = 'array(...)';
+                                    }
+									$const->set('value', $value);
+                                    if (is_numeric($value)) {
+                                        $const->set('type', new type('int', $rootDoc));
+                                    } elseif (
+                                        substr($value, 0, 1) == '"' && substr($value, -1, 1) == '"' ||
+                                        substr($value, 0, 1) == "'" && substr($value, -1, 1) == "'"
+                                    ) {
+                                        $const->set('type', new type('str', $rootDoc));
+                                    }
 									unset($value);
 									if (isset($currentData['docComment'])) { // set doc comment
 										$const->set('docComment', $currentData['docComment']);
@@ -748,6 +763,14 @@ class PHPDoctor
 													$value = 'array(...)';
 												}
 												$const->set('value', $value);
+                                                if (is_numeric($value)) {
+                                                    $const->set('type', new type('int', $rootDoc));
+                                                } elseif (
+                                                    substr($value, 0, 1) == '"' && substr($value, -1, 1) == '"' ||
+                                                    substr($value, 0, 1) == "'" && substr($value, -1, 1) == "'"
+                                                ) {
+                                                    $const->set('type', new type('str', $rootDoc));
+                                                }
 											}
 											if (isset($currentData['docComment'])) { // set doc comment
 												$const->set('docComment', $currentData['docComment']);

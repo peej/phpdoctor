@@ -11,7 +11,7 @@
  */
 interface anInterface {
 	
-	const aConst = 0;
+	const aConst = 'const';
 	
 	/**
 	 * @var int
@@ -61,6 +61,8 @@ class aClass implements anInterface {
 	var $multipleVars1 = 1, $multipleVars2, $multipleVars3 = 3;
 	
 	var $aVarWithValue = 1;
+    
+    var $aVarWithStringValue = "one";
 	
 	var $anArrayVar = array(4, 5, 6);
 	
@@ -108,5 +110,10 @@ class anotherClassWithSameMemberAsAnotherClass {
     function aFunction($foo) {
 	}
 }
+
+define('CONSTANT', 1);
+define( 'CONSTANT2' , 2 );
+define(  'CONSTANT3'  ,  'three'  );
+define(  'CONSTANT4'  ,  array('woo', 'yay')  );
 
 ?>

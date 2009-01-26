@@ -20,12 +20,12 @@ class TestPHP5 extends UnitTestCase
 		var_dump($results);
 		
 		$this->assertTrue(strpos($results, 'public interface anInterface'));
-		$this->assertTrue(strpos($results, 'public final mixed aConst'));
+		$this->assertTrue(strpos($results, 'public final str aConst = \'const\''));
 		$this->assertTrue(strpos($results, 'public final int anIntConst'));
 		$this->assertTrue(strpos($results, 'private final int aPrivateIntConst'));
-		$this->assertTrue(strpos($results, 'public final mixed multipleConsts1 = 1'));
-		$this->assertTrue(strpos($results, 'public final mixed multipleConsts2 = 2'));
-		$this->assertTrue(strpos($results, 'public final mixed multipleConsts3 = 3'));
+		$this->assertTrue(strpos($results, 'public final int multipleConsts1 = 1'));
+		$this->assertTrue(strpos($results, 'public final int multipleConsts2 = 2'));
+		$this->assertTrue(strpos($results, 'public final int multipleConsts3 = 3'));
 		
 		$this->assertTrue(strpos($results, 'private interface aPrivateInterface'));
 		$this->assertTrue(strpos($results, 'protected interface aProtectedInterface'));
@@ -51,6 +51,10 @@ class TestPHP5 extends UnitTestCase
 		$this->assertTrue(strpos($results, 'final int THREE = 3'));
 		
 		$this->assertTrue(strpos($results, 'public class childClass extends aClass'));
+        
+        $this->assertTrue(strpos($results, 'final int CONSTANT = 1'));
+        $this->assertTrue(strpos($results, 'final int CONSTANT2 = 2'));
+        $this->assertTrue(strpos($results, 'final str CONSTANT3 = \'three\''));
 		
 	}
 
