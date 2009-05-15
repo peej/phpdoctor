@@ -32,6 +32,7 @@ if (!isset($argv[0])) {
 }
 
 // include PHPDoctor class
+set_include_path(get_include_path() . PATH_SEPARATOR . dirname($argv[0]));
 require('classes'.DIRECTORY_SEPARATOR.'phpDoctor.php');
 
 // get name of config file to use

@@ -240,7 +240,7 @@ class PHPDoctor
 		}
 		if (isset($this->_options['quiet'])) $this->_quiet = $this->_options['quiet'];
 				
-		if (isset($this->_options['source_path'])) $this->_sourcePath = $this->fixPath($this->makeAbsolutePath($this->_options['source_path'], $this->_path));
+		if (isset($this->_options['source_path'])) $this->_sourcePath = $this->fixPath($this->makeAbsolutePath($this->_options['source_path'], getcwd()));
 		if (isset($this->_options['subdirs'])) $this->_subdirs = $this->_options['subdirs'];
 		if (isset($this->_options['files'])) {
 			$files = explode(',', $this->_options['files']);
@@ -282,6 +282,7 @@ class PHPDoctor
 
 		if (isset($this->_options['doclet'])) $this->_doclet = $this->_options['doclet'];
 		if (isset($this->_options['doclet_path'])) $this->_docletPath = $this->_options['doclet_path'];
+		else $this->_docletPath = $this->_path.DIRECTORY_SEPARATOR.$this->_docletPath;
 
 		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
 	}
