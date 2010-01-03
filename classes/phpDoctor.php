@@ -219,8 +219,8 @@ class PHPDoctor
 		$this->_startTime = $this->_getTime();
 	
 		// set the path
-		$this->_path = $this->fixPath(dirname($_SERVER['argv'][0]));
-	
+		$this->_path = dirname(dirname(__FILE__));
+		
 		// read config file
 		if (is_file($config)) {
 			$this->_options = @parse_ini_file($config);
@@ -412,7 +412,6 @@ class PHPDoctor
 			substr($path, 0, 2) == '\\\\' || // windows network location
 			preg_match('|^[a-z]+://|', $path) // url
 		) {
-            //var_dump($path);
 			return $path;
 		} else {
 			return str_replace('./', '', $this->fixPath($prefix).$path);
@@ -440,7 +439,8 @@ class PHPDoctor
 	 */
 	function docletPath()
     {
-		return $this->makeAbsolutePath($this->fixPath($this->_docletPath).$this->fixPath($this->_doclet), $this->_path);
+		//return $this->makeAbsolutePath($this->fixPath($this->_docletPath).$this->fixPath($this->_doclet), $this->_path);
+		return realpath($this->fixPath($this->_docletPath).$this->fixPath($this->_doclet)).'/';
 	}
 
 	/** Return the source path.
@@ -1174,13 +1174,13 @@ class PHPDoctor
     {
 		$class = substr($name, 1);
 		if ($class) {
-			$tagletFile = $this->fixPath($this->_tagletPath).substr($name, 1).'.php';
+			$tagletFile = $this->makeAbsolutePath($this->fixPath($this->_tagletPath).substr($name, 1).'.php', $this->_path);
 			if (is_file($tagletFile)) { // load taglet for this tag
 				if (!class_exists($class)) require_once($tagletFile);
 				$tag =& new $class($name, $text, $root);
 				return $tag;
 			} else {
-				$tagFile = 'classes/'.$class.'Tag.php';
+			    $tagFile = $this->makeAbsolutePath('classes/'.$class.'Tag.php', $this->_path);
 				if (is_file($tagFile)) { // load class for this tag
 					$class .= 'Tag';
 					if (!class_exists($class)) require_once($tagFile);
