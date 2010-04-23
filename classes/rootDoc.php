@@ -42,6 +42,12 @@ class RootDoc extends Doc
 	 * @var packageDoc[]
 	 */
 	var $_packages = array();
+	
+	/** The parsed contents of the source files
+	 *
+	 * @var str[]
+	 */
+	var $_sources = array();
 
 	/** Constructor
 	 *
@@ -77,7 +83,17 @@ class RootDoc extends Doc
     {
 		$this->_packages[$package->name()] =& $package;
 	}
-
+	
+	/** Add a source file to this root.
+	 *
+	 * @param str filename
+	 * @param str source
+	 */
+	function addSource($filename, $source)
+    {
+		$this->_sources[substr($filename, strlen($this->_phpdoctor->sourcePath()) + 1)] =& $source;
+	}
+	
 	/** Return a reference to the PHPDoctor application object.
 	 *
 	 * @return PHPDoctor.
@@ -103,6 +119,15 @@ class RootDoc extends Doc
 	function &packages()
     {
 		return $this->_packages;
+	}
+	
+	/** Return a reference to the source files to be documented.
+	 *
+	 * @return str[]
+	 */
+	function &sources()
+	{
+	    return $this->_sources;
 	}
 
 	/** Return a reference to the classes and interfaces to be documented.

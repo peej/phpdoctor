@@ -201,12 +201,6 @@ class PHPDoctor
 	 * @var str
 	 */
 	var $_currentFilename = NULL;
-
-	/** Whether or not to use PEAR compatibility mode for first sentence tags.
-	 *
-	 * @var boolean
-	 */
-	var $_pearCompat = FALSE;
 	
 	/** Constructor
 	 *
@@ -283,8 +277,7 @@ class PHPDoctor
 		if (isset($this->_options['doclet'])) $this->_doclet = $this->_options['doclet'];
 		if (isset($this->_options['doclet_path'])) $this->_docletPath = $this->_options['doclet_path'];
 		else $this->_docletPath = $this->_path.DIRECTORY_SEPARATOR.$this->_docletPath;
-
-		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
+		
 	}
 	
 	/**
@@ -975,7 +968,9 @@ class PHPDoctor
 						}
 					}
 					if (!$this->_verbose) echo "\n";
-	
+					
+                    $rootDoc->addSource($filename, $fileString);
+					
 				} else {
 					$this->error('Could not read file "'.$filename.'"');
 					exit;

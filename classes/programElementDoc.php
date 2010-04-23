@@ -231,8 +231,18 @@ modifiers() would return:
 	 */
 	function location()
 	{
+		return $this->sourceFilename().' at line '.$this->sourceLine();
+	}
+	
+	function sourceFilename()
+	{
 		$phpdoctor = $this->_root->phpdoctor();
-		return substr($this->_filename, strlen($phpdoctor->sourcePath())).' at line '.$this->_lineNumber;
+	    return substr($this->_filename, strlen($phpdoctor->sourcePath()) + 1);
+	}
+	
+	function sourceLine()
+	{
+	    return $this->_lineNumber;
 	}
     
 	/** Return the element path.
