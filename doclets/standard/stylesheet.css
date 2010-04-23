@@ -153,7 +153,9 @@ div.qualifiedName {
     margin: 10px 0 0;
 }
 
-div.location {
+div.location,
+a.location {
+    display: block;
     font-size: 80%;
 	float: right;
 }

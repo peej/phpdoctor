@@ -87,7 +87,7 @@ class FunctionWriter extends HTMLWriter
 				echo '<h2 id="detail_function">Function Detail</h2>', "\n";
 				foreach($functions as $function) {
 					$textTag =& $function->tags('@text');
-					echo '<div class="location">', $function->location(), "</div>\n";
+					$this->_sourceLocation($function);
 					echo '<h3 id="', $function->name(),'()">', $function->name(), "</h3>\n";
 					echo '<code class="signature">', $function->modifiers(), ' ', $function->returnTypeAsString(), ' <strong>';
 					echo $function->name(), '</strong>', $function->flatSignature();

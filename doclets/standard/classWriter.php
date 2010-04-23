@@ -69,7 +69,7 @@ class ClassWriter extends HTMLWriter
 					echo "<hr>\n\n";
 					
 					echo '<div class="qualifiedName">', $class->qualifiedName(), "</div>\n";
-					echo '<div class="location">', $class->location(), "</div>\n\n";
+					$this->_sourceLocation($class);
 					
 					if ($class->isInterface()) {
 						echo '<h1>Interface ', $class->name(), "</h1>\n\n";
@@ -201,7 +201,7 @@ class ClassWriter extends HTMLWriter
 						foreach($fields as $field) {
 							$textTag =& $field->tags('@text');
 							$type =& $field->type();
-							echo '<div class="location">', $field->location(), "</div>\n";
+							$this->_sourceLocation($field);
 							echo '<h3 id="', $field->name(),'">', $field->name(), "</h3>\n";
 							echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
 							if (!$field->constantValue()) echo '$';
@@ -222,7 +222,7 @@ class ClassWriter extends HTMLWriter
 						echo '<h2 id="detail_constr">Constructor Detail</h2>', "\n";
 						foreach($constructors as $constructor) {
 							$textTag =& $constructor->tags('@text');
-							echo '<div class="location">', $constructor->location(), "</div>\n";
+							$this->_sourceLocation($constructor);
 							echo '<h3 id="', $constructor->name(),'()">', $constructor->name(), "</h3>\n";
 							echo '<code class="signature">public <strong>';
 							echo $constructor->name(), '</strong>', $constructor->flatSignature();
@@ -241,7 +241,7 @@ class ClassWriter extends HTMLWriter
 						echo '<h2 id="detail_method">Method Detail</h2>', "\n";
 						foreach($methods as $method) {
 							$textTag =& $method->tags('@text');
-							echo '<div class="location">', $method->location(), "</div>\n";
+							$this->_sourceLocation($method);
 							echo '<h3 id="', $method->name(),'()">', $method->name(), "</h3>\n";
 							echo '<code class="signature">', $method->modifiers(), ' ', $method->returnTypeAsString(), ' <strong>';
 							echo $method->name(), '</strong>', $method->flatSignature();
@@ -258,7 +258,7 @@ class ClassWriter extends HTMLWriter
 
 					$this->_output = ob_get_contents();
 					ob_end_clean();
-			
+					
 					$this->_write($package->asPath().'/'.strtolower($class->name()).'.html', $class->name(), TRUE);
 				}
 			}

@@ -89,7 +89,7 @@ class GlobalWriter extends HTMLWriter
 				foreach($globals as $global) {
 					$textTag =& $global->tags('@text');
 					$type =& $global->type();
-					echo '<div class="location">', $global->location(), "</div>\n";
+					$this->_sourceLocation($global);
 					echo '<h3 id="', $global->name(),'">', $global->name(), "</h3>\n";
 					echo '<code class="signature">', $global->modifiers(), ' ', $global->typeAsString(), ' <strong>';
 					echo $global->name(), '</strong>';

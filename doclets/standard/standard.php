@@ -32,6 +32,7 @@ require('functionWriter.php');
 require('globalWriter.php');
 require('indexWriter.php');
 require('deprecatedWriter.php');
+require('sourceWriter.php');
 
 /** The standard doclet. This doclet generates HTML output similar to that
  * produced by the Javadoc standard doclet.
@@ -94,6 +95,13 @@ class Standard
 	 * @var str
 	 */
 	var $_tree = TRUE;
+	
+	/** Whether or not to parse the code with GeSHi and include the formatted files
+	 * in the documentation.
+	 *
+	 * @var boolean
+	 */
+	var $_includeSource = TRUE;
 
 	/** Doclet constructor.
 	 *
@@ -131,6 +139,15 @@ class Standard
 
 		if (isset($options['tree'])) $this->_tree = $options['tree'];
 		
+		if (isset($options['include_source'])) $this->_includeSource = $options['include_source'];
+        if ($this->_includeSource) {
+            @include_once 'geshi/geshi.php';
+            if (!class_exists('GeSHi')) {
+                $phpdoctor->warning('Could not find GeSHi in "geshi/geshi.php", turning off including of source');
+                $this->_includeSource = FALSE;
+            }
+		}
+		
 		// write frame
 		$frameOutputWriter =& new frameOutputWriter($this);
 
@@ -160,6 +177,11 @@ class Standard
         
 		// write deprecated index
 		$deprecatedWriter =& new deprecatedWriter($this);
+		
+		// write source files
+		if ($this->_includeSource) {
+            $sourceWriter =& new sourceWriter($this);
+		}
 		
 		// copy stylesheet
 		$phpdoctor->message('Copying stylesheet');
@@ -263,5 +285,13 @@ class Standard
 		return $phpdoctor->version();
 	}
 	
+	/** Should we be outputting the source code?
+	 *
+	 * @return bool
+	 */
+	function includeSource()
+	{
+	    return $this->_includeSource;
+	}
 }
 ?>
