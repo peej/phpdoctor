@@ -17,43 +17,43 @@ class TestPHP5 extends UnitTestCase
 		$results = ob_get_contents();
 		ob_end_clean();
 		
-		$this->assertTrue(strpos($results, 'public interface anInterface'));
-		$this->assertTrue(strpos($results, 'public final str aConst = \'const\''));
-		$this->assertTrue(strpos($results, 'public final int anIntConst'));
-		$this->assertTrue(strpos($results, 'private final int aPrivateIntConst'));
-		$this->assertTrue(strpos($results, 'public final int multipleConsts1 = 1'));
-		$this->assertTrue(strpos($results, 'public final int multipleConsts2 = 2'));
-		$this->assertTrue(strpos($results, 'public final int multipleConsts3 = 3'));
+		$this->assertTrue(strpos($results, 'public interface PHPDoctor.Tests.Data\\anInterface'));
+		$this->assertTrue(strpos($results, 'public final str PHPDoctor.Tests.Data\\aConst = \'const\''));
+		$this->assertTrue(strpos($results, 'public final int PHPDoctor.Tests.Data\\anIntConst'));
+		$this->assertTrue(strpos($results, 'private final int PHPDoctor.Tests.Data\\aPrivateIntConst'));
+		$this->assertTrue(strpos($results, 'public final int PHPDoctor.Tests.Data\\multipleConsts1 = 1'));
+		$this->assertTrue(strpos($results, 'public final int PHPDoctor.Tests.Data\\multipleConsts2 = 2'));
+		$this->assertTrue(strpos($results, 'public final int PHPDoctor.Tests.Data\\multipleConsts3 = 3'));
 		
-		$this->assertTrue(strpos($results, 'private interface aPrivateInterface'));
-		$this->assertTrue(strpos($results, 'protected interface aProtectedInterface'));
+		$this->assertTrue(strpos($results, 'private interface PHPDoctor.Tests.FileLevel\\aPrivateInterface'));
+		$this->assertTrue(strpos($results, 'protected interface PHPDoctor.Tests.Data\\aProtectedInterface'));
 		
-		$this->assertTrue(strpos($results, 'public class aClass implements anInterface'));
-		$this->assertTrue(strpos($results, 'public mixed $aVar'));
-		$this->assertTrue(strpos($results, 'public int $anIntVar'));
-		$this->assertTrue(strpos($results, 'private int $aPrivateIntVar'));
-		$this->assertTrue(strpos($results, 'public mixed $multipleVars1 = 1'));
-		$this->assertTrue(strpos($results, 'public mixed $multipleVars2'));
-		$this->assertTrue(strpos($results, 'public mixed $multipleVars3 = 3'));
-		$this->assertTrue(strpos($results, 'public mixed $aVarWithValue = 1'));
-		$this->assertTrue(strpos($results, 'public mixed $anArrayVar = array(4, 5, 6)'));
+		$this->assertTrue(strpos($results, 'public class PHPDoctor.Tests.Data\\aClass implements PHPDoctor.Tests.Data\\anInterface'));
+		$this->assertTrue(strpos($results, 'public mixed PHPDoctor.Tests.Data\\$aVar'));
+		$this->assertTrue(strpos($results, 'public int PHPDoctor.Tests.Data\\$anIntVar'));
+		$this->assertTrue(strpos($results, 'private int PHPDoctor.Tests.Data\\$aPrivateIntVar'));
+		$this->assertTrue(strpos($results, 'public mixed PHPDoctor.Tests.Data\\$multipleVars1 = 1'));
+		$this->assertTrue(strpos($results, 'public mixed PHPDoctor.Tests.Data\\$multipleVars2'));
+		$this->assertTrue(strpos($results, 'public mixed PHPDoctor.Tests.Data\\$multipleVars3 = 3'));
+		$this->assertTrue(strpos($results, 'public mixed PHPDoctor.Tests.Data\\$aVarWithValue = 1'));
+		$this->assertTrue(strpos($results, 'public mixed PHPDoctor.Tests.Data\\$anArrayVar = array(4, 5, 6)'));
 		
-		$this->assertTrue(strpos($results, 'public void aFunction()'));
-		$this->assertTrue(strpos($results, 'public void aFunctionWithParams(mixed one, mixed two)'));
-		$this->assertTrue(strpos($results, 'mixed $one'));
-		$this->assertTrue(strpos($results, 'mixed $two'));
-		$this->assertTrue(strpos($results, 'private bool aPrivateFunctionWithParams(str one, int two)'));
-		$this->assertTrue(strpos($results, 'str $one'));
-		$this->assertTrue(strpos($results, 'int $two'));
+		$this->assertTrue(strpos($results, 'public void PHPDoctor.Tests.Data\\aFunction()'));
+		$this->assertTrue(strpos($results, 'public void PHPDoctor.Tests.Data\\aFunctionWithParams(mixed one, mixed two)'));
+		$this->assertTrue(strpos($results, 'mixed PHPDoctor.Tests.Data\\$one'));
+		$this->assertTrue(strpos($results, 'mixed PHPDoctor.Tests.Data\\$two'));
+		$this->assertTrue(strpos($results, 'private bool PHPDoctor.Tests.Data\\aPrivateFunctionWithParams(str one, int two)'));
+		$this->assertTrue(strpos($results, 'str PHPDoctor.Tests.Data\\$one'));
+		$this->assertTrue(strpos($results, 'int PHPDoctor.Tests.Data\\$two'));
 		
-		$this->assertTrue(strpos($results, 'final int THREE = 3'));
+		$this->assertTrue(strpos($results, 'final int PHPDoctor.Tests.FileLevel\\THREE = 3'));
 		
-		$this->assertTrue(strpos($results, 'public class childClass extends aClass'));
+		$this->assertTrue(strpos($results, 'public class PHPDoctor.Tests.Data\\childClass extends PHPDoctor.Tests.Data\\aClass'));
         
-        $this->assertTrue(strpos($results, 'final int CONSTANT = 1'));
-        $this->assertTrue(strpos($results, 'final int CONSTANT2 = 2'));
-        $this->assertTrue(strpos($results, 'final str CONSTANT3 = \'three\''));
-		
+        $this->assertTrue(strpos($results, 'final int PHPDoctor.Tests.FileLevel\\CONSTANT = 1'));
+        $this->assertTrue(strpos($results, 'final int PHPDoctor.Tests.FileLevel\\CONSTANT2 = 2'));
+        $this->assertTrue(strpos($results, 'final str PHPDoctor.Tests.FileLevel\\CONSTANT3 = \'three\''));
+        
 	}
 
 }

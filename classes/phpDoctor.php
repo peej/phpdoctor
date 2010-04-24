@@ -32,6 +32,8 @@ if (!defined('T_INTERFACE')) define('T_INTERFACE', 0);
 if (!defined('T_IMPLEMENTS')) define('T_IMPLEMENTS', 0);
 if (!defined('T_CONST')) define('T_CONST', 0);
 if (!defined('T_THROW')) define('T_THROW', 0);
+if (!defined('T_NS_C')) define('T_NS_C', 0);
+if (!defined('T_USE')) define('T_USE', 0);
 if (!defined('GLOB_ONLYDIR')) define('GLOB_ONLYDIR', FALSE);
 
 // load classes
@@ -510,6 +512,8 @@ class PHPDoctor
 					$currentData = array();
 					
 					$currentPackage = $this->_defaultPackage; // the current package
+					$defaultPackage = $currentPackage;
+					
 					$currentElement = array(); // stack of element family, current at top of stack
 					$ce =& $rootDoc; // reference to element at top of stack
 					
@@ -518,18 +522,37 @@ class PHPDoctor
 					
 					$counter = 0;
 					$lineNumber = 1;
+					$commentNumber = 0;
 					
 					foreach ($tokens as $key => $token) {
 						if (!$in_parsed_string && is_array($token)) {
 							
 							$lineNumber += substr_count($token[1], "\n");
 							
+							if ($commentNumber == 1 && (
+							    $token[0] == T_CLASS ||
+							    $token[0] == T_INTERFACE ||
+							    $token[0] == T_FUNCTION ||
+							    $token[0] == T_VARIABLE
+                            )) { // we have a code block after the 1st comment, so it is not a file level comment
+							    $defaultPackage = $this->_defaultPackage;
+							}
+							
 							switch ($token[0]) {
 							
 							case T_COMMENT: // read comment
 							case T_ML_COMMENT: // and multiline comment (deprecated in newer versions)
 							case T_DOC_COMMENT: // and catch PHP5 doc comment token too
-								$currentData = $this->processDocComment($token[1], $rootDoc);
+								$currentData = array_merge($currentData, $this->processDocComment($token[1], $rootDoc));
+								if ($currentData) {
+								    $commentNumber++;
+                                    if (
+                                        $commentNumber == 1 &&
+                                        isset($currentData['package'])
+                                    ) { // store 1st comment incase it is a file level comment
+                                        $defaultPackage = $currentData['package'];
+                                    }
+                                }
 								break;
 							
 							case T_CLASS:
@@ -541,10 +564,10 @@ class PHPDoctor
 								}
 								$class->set('data', $currentData); // set data
 								if (isset($currentData['package']) && $currentData['package'] != NULL) { // set package
-									$class->set('package', $currentData['package']);
-								} else {
-									$class->set('package', $currentPackage);
+									$currentPackage = $currentData['package'];
 								}
+                                $class->set('package', $currentPackage);
+                                
 								$parentPackage =& $rootDoc->packageNamed($class->packageName(), TRUE); // get parent package
 								$parentPackage->addClass($class); // add class to package
 								$class->setByRef('parent', $parentPackage); // set parent reference
@@ -565,10 +588,10 @@ class PHPDoctor
 								$interface->set('data', $currentData); // set data
 								$interface->set('interface', TRUE); // this element is an interface
 								if (isset($currentData['package']) && $currentData['package'] != NULL) { // set package
-									$interface->set('package', $currentData['package']);
-								} else {
-									$interface->set('package', $currentPackage);
+									$currentPackage = $currentData['package'];
 								}
+                                $interface->set('package', $currentPackage);
+                                
 								$parentPackage =& $rootDoc->packageNamed($interface->packageName(), TRUE); // get parent package
 								$parentPackage->addClass($interface); // add class to package
 								$interface->setByRef('parent', $parentPackage); // set parent reference
@@ -938,6 +961,7 @@ class PHPDoctor
 												unset($ce);
 												$ce =& $rootDoc;
 											}
+											$currentPackage = $defaultPackage;
 										}
 									}
 								}

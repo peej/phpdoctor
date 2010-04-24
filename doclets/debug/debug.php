@@ -33,7 +33,7 @@ class Debug
 	 *
 	 * @var int
 	 */
-	var $depth = 1;
+	var $depth = 0;
 
 	/** Doclet constructor.
 	 *
@@ -42,9 +42,8 @@ class Debug
 	function debug(&$rootDoc)
     {
 	
-		echo "Root\n";
 		foreach ($rootDoc->packages() as $package) {
-			echo '|- ', $package->name(), "\n";
+			echo '- Namespace ', $package->name(), "\n";
 			$this->fieldDoc($package->globals());
 			$this->methodDoc($package->functions());
 			$this->classDoc($package->allClasses());
@@ -76,9 +75,9 @@ class Debug
 				$type = $field->type();
 				echo $this->showDepth(), $field->modifiers($showAccess), $type->toString(), ' ';
 				if ($field->isFinal()) {
-					echo $field->name();
+					echo $field->packageName(), '\\', $field->name();
 				} else {
-					echo '$', $field->name();
+					echo $field->packageName(), '\\$', $field->name();
 				}
 				if ($field->value()) {
 					echo ' = ', $field->value();
@@ -106,7 +105,7 @@ class Debug
 				} else {
 					echo 'void ';
 				}
-				echo $method->name(), $method->flatSignature();
+				echo $method->packageName(), '\\', $method->name(), $method->flatSignature();
 				echo ' [', $method->location(), ']';
 				echo "\n";
 				$this->fieldDoc($method->parameters());
@@ -116,7 +115,7 @@ class Debug
 					foreach ($exceptions as $exception) {
 						echo str_repeat('|', $this->depth + 1), '- throws ';
 						if (is_object($exception)) {
-							echo $exception->name(), "\n";
+							echo $exception->packageName(), '\\', $exception->name(), "\n";
 						} else {
 							echo $exception, "\n";
 						}
@@ -137,7 +136,7 @@ class Debug
 		if ($constructors) {
 			foreach ($constructors as $constructor) {
 				echo $this->showDepth(), $constructor->modifiers();
-				echo $constructor->name(), $constructor->flatSignature();
+				echo $constructor->packageName(), '\\', $constructor->name(), $constructor->flatSignature();
 				echo ' [', $constructor->location(), ']';
 				echo "\n";
 				$this->fieldDoc($constructor->parameters());
@@ -161,15 +160,20 @@ class Debug
 				} else {
 					echo 'class ';
 				}
-				echo $class->name();
+				echo $class->packageName(), '\\', $class->name();
 				if ($class->superclass()) {
-					echo ' extends ', $class->superclass();
+				    if (isset($classes[$class->superclass()])) {
+				        $superclass = $classes[$class->superclass()];
+				        echo ' extends ', $superclass->packageName(), '\\', $superclass->name();
+				    } else {
+				        echo ' extends ', $class->superclass();
+				    }
 				}
 				$interfaces =& $class->interfaces();
 				if ($interfaces) {
 					echo ' implements ';
 					foreach($interfaces as $interface) {
-						echo $interface->name(), ' ';
+						echo $interface->packageName(), '\\', $interface->name(), ' ';
 					}
 				}
 				echo ' [', $class->location(), ']';
