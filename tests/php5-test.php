@@ -1,4 +1,9 @@
 <?php
+/**
+ * File level comment
+ *
+ * @package PHPDoctor.Tests.FileLevel
+ */
 
 /**
  * This is some text and a link {@link aPrivateInterface} somewhere else.
@@ -29,7 +34,6 @@ interface anInterface {
 }
 
 /**
- * @package PHPDoctor.Tests.Data
  * @access private
  */
 interface aPrivateInterface {}
