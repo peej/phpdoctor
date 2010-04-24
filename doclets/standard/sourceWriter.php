@@ -58,7 +58,7 @@ class SourceWriter extends HTMLWriter
         echo '<h1>Source Files</h1>';
         
         echo "<ul>\n";
-        foreach ($sources as $filename => $source) {
+        foreach ($sources as $filename => $data) {
             echo '<li><a href="source/', strtolower($filename), '.html">', $filename, '</a></li>';
         }
         echo "</ul>\n";
@@ -71,7 +71,7 @@ class SourceWriter extends HTMLWriter
         
 		$this->_id = 'file';
 		
-		foreach ($sources as $filename => $source) {
+		foreach ($sources as $filename => $data) {
 		    
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
 			$this->_sections[1] = array('title' => 'Package');
@@ -85,16 +85,21 @@ class SourceWriter extends HTMLWriter
             $this->_depth = substr_count($filename, '/') + 1;
             
             if (class_exists('GeSHi')) {
-                $geshi = new GeSHi($source, 'php');
+                $geshi = new GeSHi($data[0], 'php');
                 $source = $geshi->parse_code();
             } else {
-                $source = '<pre>'.$source.'</pre>';
+                $source = '<pre>'.$data[0].'</pre>';
             }
             
             ob_start();
             
             echo "<hr>\n\n";
             echo '<h1>'.$filename."</h1>\n";
+            
+            if (isset($data[1]['tags']['@text'])) {
+                echo '<div class="comment" id="overview_description">', $this->_processInlineTags($data[1]['tags']['@text']), "</div>\n\n";
+            }
+            
             echo "<hr>\n\n";
             
             foreach (explode("\n", $source) as $index => $line) {

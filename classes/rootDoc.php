@@ -85,10 +85,13 @@ class RootDoc extends Doc
 	 *
 	 * @param str filename
 	 * @param str source
+	 * @param str[] fileData
 	 */
-	function addSource($filename, $source)
+	function addSource($filename, $source, $fileData)
     {
-		$this->_sources[substr($filename, strlen($this->_phpdoctor->sourcePath()) + 1)] =& $source;
+		$this->_sources[substr($filename, strlen($this->_phpdoctor->sourcePath()) + 1)] = array(
+		    $source, $fileData
+        );
 	}
 	
 	/** Return a reference to the PHPDoctor application object.

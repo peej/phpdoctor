@@ -510,6 +510,7 @@ class PHPDoctor
 					
 					$currentPackage = $this->_defaultPackage; // the current package
 					$defaultPackage = $currentPackage;
+					$fileData = array();
 					
 					$currentElement = array(); // stack of element family, current at top of stack
 					$ce =& $rootDoc; // reference to element at top of stack
@@ -543,11 +544,11 @@ class PHPDoctor
 								$currentData = array_merge($currentData, $this->processDocComment($token[1], $rootDoc));
 								if ($currentData) {
 								    $commentNumber++;
-                                    if (
-                                        $commentNumber == 1 &&
-                                        isset($currentData['package'])
-                                    ) { // store 1st comment incase it is a file level comment
-                                        $defaultPackage = $currentData['package'];
+                                    if ($commentNumber == 1) {
+                                        if (isset($currentData['package'])) { // store 1st comment incase it is a file level comment
+                                            $defaultPackage = $currentData['package'];
+                                        }
+                                        $fileData = $currentData;
                                     }
                                 }
 								break;
@@ -1002,7 +1003,7 @@ class PHPDoctor
 					}
 					if (!$this->_verbose) echo "\n";
 					
-                    $rootDoc->addSource($filename, $fileString);
+                    $rootDoc->addSource($filename, $fileString, $fileData);
 					
 				} else {
 					$this->error('Could not read file "'.$filename.'"');
