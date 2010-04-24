@@ -143,8 +143,7 @@ class Standard
         if ($this->_includeSource) {
             @include_once 'geshi/geshi.php';
             if (!class_exists('GeSHi')) {
-                $phpdoctor->warning('Could not find GeSHi in "geshi/geshi.php", turning off including of source');
-                $this->_includeSource = FALSE;
+                $phpdoctor->warning('Could not find GeSHi in "geshi/geshi.php", not pretty printing source');
             }
 		}
 		

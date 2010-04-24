@@ -46,8 +46,9 @@ class DeprecatedWriter extends HTMLWriter
         $this->_sections[2] = array('title' => 'Class');
         //$this->_sections[3] = array('title' => 'Use');
         $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-        $this->_sections[5] = array('title' => 'Deprecated', 'selected' => TRUE);
-        $this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
+        if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
+        $this->_sections[6] = array('title' => 'Deprecated', 'selected' => TRUE);
+        $this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
         
         $deprecatedClasses = array();
         $classes =& $rootDoc->classes();
@@ -96,6 +97,8 @@ class DeprecatedWriter extends HTMLWriter
         }
         
         ob_start();
+        
+        echo "<hr>\n\n";
         
         echo '<h1>Deprecated API</h1>';
 

@@ -49,8 +49,9 @@ class PackageWriter extends HTMLWriter
 			$this->_sections[2] = array('title' => 'Class');
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'selected' => TRUE);
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
+			if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
+			$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
 
             $this->_id = 'tree';
             
@@ -63,9 +64,10 @@ class PackageWriter extends HTMLWriter
 			}
 
 			ob_start();
-
+			
+			echo "<hr>\n\n";
 			echo '<h1>Class Hierarchy</h1>';
-
+			
 			$this->_displayTree($tree);
 
 			$this->_output = ob_get_contents();
@@ -88,8 +90,9 @@ class PackageWriter extends HTMLWriter
 			$this->_sections[2] = array('title' => 'Class');
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($displayTree) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
+			if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
+			$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
             
 			ob_start();
 			
@@ -213,7 +216,9 @@ class PackageWriter extends HTMLWriter
 				}
 
 				ob_start();
-
+				
+                echo "<hr>\n\n";
+                
 				echo '<h1>Class Hierarchy for Package ', $package->name(),'</h1>';
 
 				$this->_displayTree($tree);

@@ -41,8 +41,39 @@ class SourceWriter extends HTMLWriter
 		$rootDoc =& $this->_doclet->rootDoc();
 		$phpdoctor =& $this->_doclet->phpdoctor();
 		
+        $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
+        $this->_sections[1] = array('title' => 'Package');
+        $this->_sections[2] = array('title' => 'Class');
+        //$this->_sections[3] = array('title' => 'Use');
+        if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
+        $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html', 'selected' => TRUE);
+        $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+        $this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
+        
 		$sources =& $rootDoc->sources();
         
+        $this->_id = 'files';
+        
+        ob_start();
+        
+        echo "<hr>\n\n";
+        
+        echo '<h1>Source Files</h1>';
+        
+        echo "<ul>\n";
+        foreach ($sources as $filename => $source) {
+            echo '<li><a href="source/', strtolower($filename), '.html">', $filename, '</a></li>';
+        }
+        echo "</ul>\n";
+        
+        $this->_output = ob_get_contents();
+        ob_end_clean();
+        
+        $this->_write('overview-files.html', 'Overview', TRUE);
+    	
+        
+		$this->_id = 'file';
+		
 		foreach ($sources as $filename => $source) {
 		    
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
@@ -50,17 +81,31 @@ class SourceWriter extends HTMLWriter
 			$this->_sections[2] = array('title' => 'Class');
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree');
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
+			$this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
+			$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
 			
             $this->_depth = substr_count($filename, '/') + 1;
             
-            $geshi = new GeSHi($source, 'php');
-            $parsed = $geshi->parse_code();
-            $this->_output = '';
-            foreach (explode("\n", $parsed) as $index => $line) {
-                $this->_output .= '<a name="line'.($index + 1).'"></a>'.$line."\n";
+            if (class_exists('GeSHi')) {
+                $geshi = new GeSHi($source, 'php');
+                $source = $geshi->parse_code();
+            } else {
+                $source = '<pre>'.$source.'</pre>';
             }
+            
+            ob_start();
+            
+            echo "<hr>\n\n";
+            echo '<h1>'.$filename."</h1>\n";
+            echo "<hr>\n\n";
+            
+            foreach (explode("\n", $source) as $index => $line) {
+                echo '<a name="line'.($index + 1).'"></a>'.$line."\n";
+            }
+            
+            $this->_output = ob_get_contents();
+            ob_end_clean();
             
             $this->_write('source/'.strtolower($filename).'.html', $filename, TRUE);
             

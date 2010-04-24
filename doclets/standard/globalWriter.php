@@ -51,8 +51,9 @@ class GlobalWriter extends HTMLWriter
 			$this->_sections[2] = array('title' => 'Global', 'selected' => TRUE);
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-			$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
+			if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
+			$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+			$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
 		
 			$this->_depth = $package->depth() + 1;
 
