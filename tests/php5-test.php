@@ -97,7 +97,7 @@ class aClass implements anInterface {
 class childClass extends aClass {}
 
 /**
- * @package PHPDoctor.Tests.Data
+ * @namespace PHPDoctor.Tests.Data
  */
 class anotherClassWithSameMemberAsAnotherClass {
     var $aVarWithValue = 2;
@@ -118,6 +118,5 @@ class anotherClassWithSameMemberAsAnotherClass {
 define('CONSTANT', 1);
 define( 'CONSTANT2' , 2 );
 define(  'CONSTANT3'  ,  'three'  );
-define(  'CONSTANT4'  ,  array('woo', 'yay')  );
 
 ?>
