@@ -1124,7 +1124,7 @@ class PHPDoctor
 	 */
 	function processDocComment($comment, &$root)
     {
-		if (substr(trim($comment), 0, 3) != '/**') return FALSE; // not doc comment, abort
+		if (substr(trim($comment), 0, 3) != '/**') return array(); // not doc comment, abort
         
 		$data = array(
 			'docComment' => $comment,
