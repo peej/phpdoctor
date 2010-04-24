@@ -666,6 +666,18 @@ class PHPDoctor
 								$currentData['var'] = 'const';
 								break;
                                 
+							case T_NAMESPACE:
+                            case T_NS_C:
+                                $namespace = '';
+                                while ($tokens[++$key] != ';') {
+                                    if ($tokens[$key][0] == T_STRING) {
+                                        if ($namespace != '') $namespace .= '\\';
+                                        $namespace .= $tokens[$key][1];
+                                    }
+                                }
+                                $currentPackage = $namespace;
+                                break;
+								
 							case T_FUNCTION:
 							// read function
 								$method =& new methodDoc($this->_getNext($tokens, $key, T_STRING), $ce, $rootDoc, $filename, $lineNumber); // create method object
@@ -1143,6 +1155,7 @@ class PHPDoctor
 			if ($name) {
 				switch ($name) {
 				case 'package': // place current element in package
+                case 'namespace':
 					$data['package'] = $text;
 					break;
 				case 'var': // set variable type
