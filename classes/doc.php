@@ -18,14 +18,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: doc.php,v 1.11 2006/07/05 21:38:27 peejeh Exp $
-
 /** Abstract base class of all Doc classes. Doc item's are representations of
  * PHP language constructs (class, package, method,...) which have comments
  * and have been processed by this run of PHPDoctor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.11 $
  * @abstract
  */
 class Doc {

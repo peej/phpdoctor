@@ -18,14 +18,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: linkPlainTag.php,v 1.4 2005/05/08 21:53:30 peejeh Exp $
-
 require_once('seeTag.php');
 
 /** Represents an inline link tag.
  *
- * @package PHPDoctor.Tags
- * @version $Revision: 1.4 $
+ * @package PHPDoctor\Tags
  */
 class LinkPlainTag extends SeeTag
 {

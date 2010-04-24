@@ -2,7 +2,7 @@
 /**
  * File level comment
  *
- * @package PHPDoctor.Tests.FileLevel
+ * @package PHPDoctor\Tests\FileLevel
  */
 
 /**
@@ -10,7 +10,7 @@
  *
  * Another line
  *
- * @package PHPDoctor.Tests.Data
+ * @package PHPDoctor\Tests\Data
  * @see aPrivateInterface Something else
  * @todo More stuff
  */
@@ -40,12 +40,12 @@ interface aPrivateInterface {}
 
 /**
  * @access protected
- * @package PHPDoctor.Tests.Data
+ * @package PHPDoctor\Tests\Data
  */
 interface aProtectedInterface {}
 
 /**
- * @package PHPDoctor.Tests.Data
+ * @package PHPDoctor\Tests\Data
  */
 class aClass implements anInterface {
 	
@@ -92,12 +92,12 @@ class aClass implements anInterface {
 }
 
 /**
- * @package PHPDoctor.Tests.Data
+ * @package PHPDoctor\Tests\Data
  */
 class childClass extends aClass {}
 
 /**
- * @namespace PHPDoctor.Tests.Data
+ * @namespace PHPDoctor\Tests\Data
  */
 class anotherClassWithSameMemberAsAnotherClass {
     var $aVarWithValue = 2;

@@ -18,14 +18,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageFrameWriter.php,v 1.11 2006/08/18 18:19:43 peejeh Exp $
-
 /** This generates the package-frame.html file that lists the interfaces and
  * classes in a given package for displaying in the lower-left frame of the
  * frame-formatted default output.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.11 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class PackageFrameWriter extends HTMLWriter
 {

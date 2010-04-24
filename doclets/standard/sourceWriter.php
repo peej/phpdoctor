@@ -18,13 +18,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: classWriter.php,v 1.21 2008/06/08 10:08:35 peejeh Exp $
-
 /** This uses GeSHi to generate formatted source for each source file in the
  * parsed code.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.21 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class SourceWriter extends HTMLWriter
 {

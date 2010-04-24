@@ -18,12 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: paramTag.php,v 1.7 2005/05/15 17:21:34 peejeh Exp $
-
 /** Represents a parameter tag.
  *
- * @package PHPDoctor.Tags
- * @version $Revision: 1.7 $
+ * @package PHPDoctor\Tags
  */
 class ParamTag extends Tag
 {

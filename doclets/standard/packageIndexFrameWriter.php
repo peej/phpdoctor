@@ -18,14 +18,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageIndexFrameWriter.php,v 1.6 2006/07/05 21:38:28 peejeh Exp $
-
 /** This generates the overview-frame.html file used for displaying the list
  * of package links in the upper-left frame in the frame-formatted default
  * output.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.6 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class PackageIndexFrameWriter extends HTMLWriter
 {

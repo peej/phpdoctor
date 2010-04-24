@@ -18,12 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: returnTag.php,v 1.7 2005/05/08 21:53:30 peejeh Exp $
-
 /** Represents a return tag.
  *
- * @package PHPDoctor.Tags
- * @version $Revision: 1.7 $
+ * @package PHPDoctor\Tags
  */
 class ReturnTag extends Tag
 {

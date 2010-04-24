@@ -18,13 +18,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: frameOutputWriter.php,v 1.6 2005/05/10 22:40:04 peejeh Exp $
-
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.6 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class FrameOutputWriter extends HTMLWriter
 {

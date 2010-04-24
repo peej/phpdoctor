@@ -18,13 +18,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: debug.php,v 1.8 2007/12/08 12:26:18 peejeh Exp $
-
 /** The debugging doclet. This doclet outputs all the parsed data in a format
  * suitable for debugging PHPDoctor.
  *
- * @package PHPDoctor.Doclets.Debug
- * @version $Revision: 1.8 $
+ * @package PHPDoctor\Doclets\Debug
  */
 class Debug
 {

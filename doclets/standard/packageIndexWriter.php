@@ -18,13 +18,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: packageIndexWriter.php,v 1.12 2006/07/05 21:38:28 peejeh Exp $
-
 /** This class generates the overview-summary.html file that lists all parsed
  * packages.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.12 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class PackageIndexWriter extends HTMLWriter
 {

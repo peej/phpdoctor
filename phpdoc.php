@@ -19,8 +19,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: phpdoc.php,v 1.8 2007/12/07 08:39:16 peejeh Exp $
-
 // check we are running from the command line
 if (!isset($argv[0])) {
     die('This program must be run from the command line using the CLI version of PHP');

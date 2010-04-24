@@ -18,13 +18,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: htmlWriter.php,v 1.16 2008/03/21 18:00:17 peejeh Exp $
-
 /** This generates the index.html file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.16 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class HTMLWriter
 {

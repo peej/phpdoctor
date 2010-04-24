@@ -18,12 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: deprecatedWriter.php,v 1.2 2006/07/05 21:38:27 peejeh Exp $
-
 /** This generates the deprecated elements index.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.2 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class DeprecatedWriter extends HTMLWriter
 {

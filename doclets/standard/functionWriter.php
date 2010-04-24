@@ -18,12 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: functionWriter.php,v 1.13 2007/12/08 12:26:18 peejeh Exp $
-
 /** This generates the HTML API documentation for each global function.
  *
- * @package PHPDoctor.Doclets.Standard
- * @version $Revision: 1.13 $
+ * @package PHPDoctor\Doclets\Standard
  */
 class FunctionWriter extends HTMLWriter
 {

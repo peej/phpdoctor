@@ -18,12 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: executableDoc.php,v 1.7 2005/05/10 22:40:03 peejeh Exp $
-
 /** Represents a PHP function, method (member function) or constructor.
  *
  * @package PHPDoctor
- * @version $Revision: 1.7 $
  * @abstract
  */
 class ExecutableDoc extends ProgramElementDoc

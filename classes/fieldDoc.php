@@ -18,12 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// $Id: fieldDoc.php,v 1.10 2007/12/08 12:26:18 peejeh Exp $
-
 /** Represents a PHP variable, constant or member variable (field).
  *
  * @package PHPDoctor
- * @version $Revision: 1.10 $
  */
 class FieldDoc extends ProgramElementDoc
 {
