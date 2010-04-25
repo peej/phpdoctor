@@ -94,29 +94,21 @@ class SeeTag extends Tag
 	function &_resolveLink()
     {
 		$phpdoctor = $this->_root->phpdoctor();
-		$pearCompat = $phpdoctor->getOption('pearCompat');
 		$matches = array();
         $return = NULL;
-		$packageRegex = '[a-zA-Z0-9_\x7f-\xff .-]+';
+		$packageRegex = '[a-zA-Z0-9_\x7f-\xff .\\\\-]+';
 		$labelRegex = '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*';
-		if ($pearCompat) {
-			$regex = '/^(?:('.$packageRegex.')::('.$labelRegex.')::|('.$labelRegex.')::)?(?:('.$labelRegex.')\(\)|\$('.$labelRegex.'))$/';
-		} else {
-			$regex = '/^(?:('.$packageRegex.')\.)?(?:('.$labelRegex.')#)?('.$labelRegex.')$/';
-		}
+        $regex = '/^\\\\?(?:('.$packageRegex.')[.\\\\])?(?:('.$labelRegex.')(?:#|::))?\$?('.$labelRegex.')(?:\(\))?$/';
 		if (preg_match($regex, $this->_link, $matches)) {
-			if ($pearCompat) {
-				$packageName = $matches[1];
-				$className = ($matches[2]) ? $matches[2] : $matches[3];
-				$elementName = ($matches[4]) ? $matches[4] : $matches[5];
-			} else {
-				$packageName = $matches[1];
-				$className = $matches[2];
-				$elementName = $matches[3];
-			}
-			
+            $packageName = $matches[1];
+            $className = $matches[2];
+            $elementName = $matches[3];
+            
 			if ($packageName) { // get package
 				$package =& $this->_root->packageNamed($packageName);
+				if (!$package) {
+				    return $return;
+				}
 			}
 			if ($className) { // get class
 				if (isset($package)) {
@@ -134,7 +126,7 @@ class SeeTag extends Tag
                 }
 			}
 			if ($elementName) { // get element
-				if (isset($class)) { // from class
+                if (isset($class)) { // from class
 					$constructors =& $class->constructor();
 					if ($constructors) {
 						foreach($constructors as $key => $constructor) {
@@ -167,7 +159,7 @@ class SeeTag extends Tag
 						}
 					}
 				} elseif (isset($package)) { // from package
-					$classes =& $package->allClasses();
+				    $classes =& $package->allClasses();
 					foreach($classes as $key => $class) {
 						if ($class->name() == $elementName) {
 							$element =& $classes[$key];

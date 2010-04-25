@@ -6,7 +6,31 @@
  */
 
 /**
- * This is some text and a link {@link aPrivateInterface} somewhere else.
+ * This is some text.
+ *
+ * A link to a fully qualified class {@link PHPDoctor\Tests\FileLevel\aPrivateInterface} somewhere else.
+ *
+ * A link to a non-qualified class {@link aPrivateInterface} somewhere else.
+ *
+ * A link to a non-existant class {@link aNonExistantClass} somewhere else.
+ *
+ * A link to a class in a non-existant package {@link PHPDoctor\aPrivateInterface} somewhere else.
+ *
+ * A link to an element in a fully qualified class {@link PHPDoctor\Tests\Data\aClass#aVar} somewhere else.
+ *
+ * A link to an element in a fully qualified class {@link PHPDoctor\Tests\Data\aClass::aVar} (alternative syntax) somewhere else.
+ *
+ * A link to an element with $ in a fully qualified class {@link PHPDoctor\Tests\Data\aClass#$aVar} somewhere else.
+ *
+ * A link to a method in a fully qualified class {@link PHPDoctor\Tests\Data\aClass#aFunction} somewhere else.
+ *
+ * A link to a rooted fully qualified class {@link \PHPDoctor\Tests\Data\aClass} somewhere else.
+ *
+ * A link to a method with parenthesis in a fully qualified class {@link PHPDoctor\Tests\Data\aClass#aFunction()} somewhere else.
+ *
+ * A link to a website {@link http://www.google.com} somewhere else.
+ *
+ * A link to a website {@link http://www.google.com Google} with a name.
  *
  * Another line
  *
