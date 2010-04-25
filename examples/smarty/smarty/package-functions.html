@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:05:27 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:36:56 +0100">
 
 <link rel="stylesheet" type="text/css" href="../stylesheet.css">
 <link rel="start" href="../overview-summary.html">
@@ -20,7 +22,8 @@
 <li><a href="../overview-summary.html">Overview</a></li>
 <li><a href="../smarty/package-summary.html">Package</a></li>
 <li class="active">Function</li>
-<li><a href="../overview-tree.html">Tree</a></li>
+<li><a href="../smarty/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -43,14 +46,12 @@ Detail: <a href="#detail_function">Function</a>
 <table id="summary_function" class="title">
 <tr><th colspan="2" class="title">Function Summary</th></tr>
 <tr>
-<td class="type">private  0|-1|1</td>
-<td class="description"><p class="name"><a href="#_smarty_sort_length()">_smarty_sort_length</a>(string a, string b)</p><p class="description">compare to values by their string length
-</p></td>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#_smarty_regex_replace_check()">_smarty_regex_replace_check</a>(mixed search)</p></td>
 </tr>
 <tr>
 <td class="type"> string</td>
-<td class="description"><p class="name"><a href="#smarty_block_textformat()">smarty_block_textformat</a>(mixed params, mixed content, mixed smarty, array
- *, string contents, <a href="../smarty/smarty.html">Smarty</a> clever)</p><p class="description">Smarty {textformat}{/textformat} block pluginType:     block function
+<td class="description"><p class="name"><a href="#smarty_block_textformat()">smarty_block_textformat</a>(mixed params, mixed content, mixed smarty, array <pre>, string contents, <a href="../smarty/smarty.html">Smarty</a> clever)</p><p class="description">Smarty {textformat}{/textformat} block pluginType:     block function
 Name:     textformat
 Purpose:  format text a certain way with preset styles
 or custom wrap/indent settings</p></td>
@@ -63,8 +64,7 @@ Purpose:  assign a value to a template variable</p></td>
 </tr>
 <tr>
 <td class="type"> string|false</td>
-<td class="description"><p class="name"><a href="#smarty_core_assemble_plugin_filepath()">smarty_core_assemble_plugin_filepath</a>(mixed params, mixed smarty, string type, string name)</p><p class="description">assemble filepath of requested plugin
-</p></td>
+<td class="description"><p class="name"><a href="#smarty_core_assemble_plugin_filepath()">smarty_core_assemble_plugin_filepath</a>(mixed params, mixed smarty, string type, string name)</p><p class="description">assemble filepath of requested plugin</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
@@ -74,7 +74,7 @@ Purpose:  assign the $smarty interface variable</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_create_dir_structure()">smarty_core_create_dir_structure</a>(mixed params, mixed smarty)</p></td>
+<td class="description"><p class="name"><a href="#smarty_core_create_dir_structure()">smarty_core_create_dir_structure</a>(mixed params, mixed smarty, string dir)</p><p class="description">create full directory structure</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
@@ -83,8 +83,8 @@ Name:     display_debug_console
 Purpose:  display the javascript debug console window</p></td>
 </tr>
 <tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_get_include_path()">smarty_core_get_include_path</a>(mixed params, mixed smarty)</p></td>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#smarty_core_get_include_path()">smarty_core_get_include_path</a>(mixed params, mixed smarty, string file_path, string new_file_path)</p><p class="description">Get path to file from include_path</p></td>
 </tr>
 <tr>
 <td class="type"> double</td>
@@ -95,55 +95,55 @@ Purpose:  display the javascript debug console window</p></td>
 <td class="description"><p class="name"><a href="#smarty_core_get_php_resource()">smarty_core_get_php_resource</a>(mixed params, mixed smarty, string resource, string resource_type, $php_resource )</p><p class="description">Retrieves PHP script resourcesets $php_resource to the returned resource</p></td>
 </tr>
 <tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_is_secure()">smarty_core_is_secure</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_is_trusted()">smarty_core_is_trusted</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_load_plugins()">smarty_core_load_plugins</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_load_resource_plugin()">smarty_core_load_resource_plugin</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> string</td>
-<td class="description"><p class="name"><a href="#smarty_core_process_cached_inserts()">smarty_core_process_cached_inserts</a>(mixed params, mixed smarty, string results)</p><p class="description">Replace cached inserts with the actual results
-</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_read_cache_file()">smarty_core_read_cache_file</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_rm_auto()">smarty_core_rm_auto</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_rmdir()">smarty_core_rmdir</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> string</td>
-<td class="description"><p class="name"><a href="#smarty_core_run_insert_handler()">smarty_core_run_insert_handler</a>(mixed params, mixed smarty, array args)</p><p class="description">Handle insert tags
-</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_smarty_include_php()">smarty_core_smarty_include_php</a>(mixed params, mixed smarty)</p></td>
-</tr>
-<tr>
-<td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_core_write_cache_file()">smarty_core_write_cache_file</a>(mixed params, mixed smarty)</p></td>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#smarty_core_is_secure()">smarty_core_is_secure</a>(mixed params, mixed smarty, string resource_type, string resource_name)</p><p class="description">determines if a resource is secure or not.</p></td>
 </tr>
 <tr>
 <td class="type"> boolean</td>
-<td class="description"><p class="name"><a href="#smarty_core_write_file()">smarty_core_write_file</a>(mixed params, mixed smarty, string filename, string contents, boolean create_dirs)</p><p class="description">write out a file to disk
-</p></td>
+<td class="description"><p class="name"><a href="#smarty_core_is_trusted()">smarty_core_is_trusted</a>(mixed params, mixed smarty, string resource_type, string resource_name)</p><p class="description">determines if a resource is trusted or not</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#smarty_core_load_plugins()">smarty_core_load_plugins</a>(mixed params, mixed smarty, array plugins)</p><p class="description">Load requested plugins</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#smarty_core_load_resource_plugin()">smarty_core_load_resource_plugin</a>(mixed params, mixed smarty, string type)</p><p class="description">load a resource plugin</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#smarty_core_process_cached_inserts()">smarty_core_process_cached_inserts</a>(mixed params, mixed smarty, string results)</p><p class="description">Replace cached inserts with the actual results</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#smarty_core_read_cache_file()">smarty_core_read_cache_file</a>(mixed params, mixed smarty, string tpl_file, string cache_id, string compile_id, string results)</p><p class="description">read a cache file, determine if it needs to be
+regenerated or not</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#smarty_core_rm_auto()">smarty_core_rm_auto</a>(mixed params, mixed smarty, string auto_base, string auto_source, string auto_id, integer exp_time)</p><p class="description">delete an automagically created file by name and id</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#smarty_core_rmdir()">smarty_core_rmdir</a>(mixed params, mixed smarty, string dirname, integer level, integer exp_time)</p><p class="description">delete a dir recursively (level=0 -> keep root)
+WARNING: no tests, it will try to remove what you tell it!</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#smarty_core_run_insert_handler()">smarty_core_run_insert_handler</a>(mixed params, mixed smarty, array args)</p><p class="description">Handle insert tags</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#smarty_core_smarty_include_php()">smarty_core_smarty_include_php</a>(mixed params, mixed smarty, string smarty_file, string smarty_assign, boolean smarty_once, array smarty_include_vars)</p><p class="description">called for included php files within templates</p></td>
+</tr>
+<tr>
+<td class="type"> true|null</td>
+<td class="description"><p class="name"><a href="#smarty_core_write_cache_file()">smarty_core_write_cache_file</a>(mixed params, mixed smarty, string tpl_file, string cache_id, string compile_id, string results)</p><p class="description">Prepend the cache information to the cache file
+and write it</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#smarty_core_write_file()">smarty_core_write_file</a>(mixed params, mixed smarty, string filename, string contents, boolean create_dirs)</p><p class="description">write out a file to disk</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
@@ -153,8 +153,7 @@ Purpose:  assign debug info to the template</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#smarty_function_config_load()">smarty_function_config_load</a>(mixed params, mixed smarty, array Format:
-, <a href="../smarty/smarty.html">Smarty</a> )</p><p class="description">Smarty {config_load} function pluginType:     function
+<td class="description"><p class="name"><a href="#smarty_function_config_load()">smarty_function_config_load</a>(mixed params, mixed smarty, array Format:, <a href="../smarty/smarty.html">Smarty</a> )</p><p class="description">Smarty {config_load} function pluginType:     function
 Name:     config_load
 Purpose:  load config file vars</p></td>
 </tr>
@@ -561,38 +560,29 @@ up code and saving bandwidth. </p></td>
 </table>
 
 <h2 id="detail_function">Function Detail</h2>
-<div class="location">/Smarty_Compiler.class.php at line 2310</div>
-<h3 id="_smarty_sort_length()">_smarty_sort_length</h3>
-<code class="signature">private  0|-1|1 <strong>_smarty_sort_length</strong>(string a, string b)</code>
+<a href="../source/plugins/modifier.regex_replace.php.html#line35" class="location">plugins/modifier.regex_replace.php at line 35</a>
+
+<h3 id="_smarty_regex_replace_check()">_smarty_regex_replace_check</h3>
+<code class="signature">public  void <strong>_smarty_regex_replace_check</strong>(mixed search)</code>
 <div class="details">
-<p></p><p>compare to values by their string length
-</p>
 </div>
 
 <hr>
 
-<div class="location">/plugins/block.textformat.php at line 31</div>
+<a href="../source/plugins/block.textformat.php.html#line31" class="location">plugins/block.textformat.php at line 31</a>
+
 <h3 id="smarty_block_textformat()">smarty_block_textformat</h3>
-<code class="signature">public  string <strong>smarty_block_textformat</strong>(mixed params, mixed content, mixed smarty, array
- *, string contents, <a href="../smarty/smarty.html">Smarty</a> clever)</code>
+<code class="signature">public  string <strong>smarty_block_textformat</strong>(mixed params, mixed content, mixed smarty, array <pre>, string contents, <a href="../smarty/smarty.html">Smarty</a> clever)</code>
 <div class="details">
-<p></p><p>Smarty {textformat}{/textformat} block plugin</p><p>Type:     block function<br>
+<p>Smarty {textformat}{/textformat} block plugin</p><p>Type:     block function<br>
 Name:     textformat<br>
 Purpose:  format text a certain way with preset styles
 or custom wrap/indent settings<br></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.textformat.php">{textformat}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.textformat.php">{textformat} (Smarty online manual)</a></code></dd>
 <dt>Parameters:</dt>
-<dd>* - <pre>
- * Params: style: string (email)
- * indent: integer (0)
- * wrap: integer (80)
- * wrap_char string ("\n")
- * indent_char: string (" ")
- * wrap_boundary: boolean (true)
- * </pre></dd>
+<dd><pre> - Params: style: string (email) indent: integer (0) wrap: integer (80) wrap_char string ("\n") indent_char: string (" ") wrap_boundary: boolean (true) </pre></dd>
 <dd>contents - of the block</dd>
 <dd>clever - simulation of a method</dd>
 <dt>Author:</dt>
@@ -604,20 +594,19 @@ or custom wrap/indent settings<br></p>
 
 <hr>
 
-<div class="location">/plugins/compiler.assign.php at line 21</div>
+<a href="../source/plugins/compiler.assign.php.html#line21" class="location">plugins/compiler.assign.php at line 21</a>
+
 <h3 id="smarty_compiler_assign()">smarty_compiler_assign</h3>
 <code class="signature">public  void <strong>smarty_compiler_assign</strong>(mixed tag_attrs, mixed compiler, string containing, <a href="../smarty/smarty_compiler.html">Smarty_Compiler</a> )</code>
 <div class="details">
-<p></p><p>Smarty {assign} compiler function plugin</p><p>Type:     compiler function<br>
+<p>Smarty {assign} compiler function plugin</p><p>Type:     compiler function<br>
 Name:     assign<br>
 Purpose:  assign a value to a template variable</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.custom.functions.php#LANGUAGE.FUNCTION.ASSIGN">{assign}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.custom.functions.php#LANGUAGE.FUNCTION.ASSIGN">{assign} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com> (initial author)</dd>
-<dt>Auther:</dt>
 <dd>messju mohr <messju at lammfellpuschen dot de> (conversion to compiler function)</dd>
 <dt>Parameters:</dt>
 <dd>containing - var-attribute and value-attribute</dd>
@@ -627,21 +616,22 @@ Purpose:  assign a value to a template variable</p>
 
 <hr>
 
-<div class="location">/internals/core.assemble_plugin_filepath.php at line 15</div>
+<a href="../source/internals/core.assemble_plugin_filepath.php.html#line15" class="location">internals/core.assemble_plugin_filepath.php at line 15</a>
+
 <h3 id="smarty_core_assemble_plugin_filepath()">smarty_core_assemble_plugin_filepath</h3>
 <code class="signature">public  string|false <strong>smarty_core_assemble_plugin_filepath</strong>(mixed params, mixed smarty, string type, string name)</code>
 <div class="details">
-<p></p><p>assemble filepath of requested plugin
-</p>
+<p>assemble filepath of requested plugin</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.assign_smarty_interface.php at line 17</div>
+<a href="../source/internals/core.assign_smarty_interface.php.html#line17" class="location">internals/core.assign_smarty_interface.php at line 17</a>
+
 <h3 id="smarty_core_assign_smarty_interface()">smarty_core_assign_smarty_interface</h3>
 <code class="signature">public  void <strong>smarty_core_assign_smarty_interface</strong>(mixed params, mixed smarty, array Format:, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty assign_smarty_interface core plugin</p><p>Type:     core<br>
+<p>Smarty assign_smarty_interface core plugin</p><p>Type:     core<br>
 Name:     assign_smarty_interface<br>
 Purpose:  assign the $smarty interface variable</p>
 <dl>
@@ -653,19 +643,22 @@ Purpose:  assign the $smarty interface variable</p>
 
 <hr>
 
-<div class="location">/internals/core.create_dir_structure.php at line 16</div>
+<a href="../source/internals/core.create_dir_structure.php.html#line16" class="location">internals/core.create_dir_structure.php at line 16</a>
+
 <h3 id="smarty_core_create_dir_structure()">smarty_core_create_dir_structure</h3>
-<code class="signature">public  void <strong>smarty_core_create_dir_structure</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  void <strong>smarty_core_create_dir_structure</strong>(mixed params, mixed smarty, string dir)</code>
 <div class="details">
+<p>create full directory structure</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.display_debug_console.php at line 17</div>
+<a href="../source/internals/core.display_debug_console.php.html#line17" class="location">internals/core.display_debug_console.php at line 17</a>
+
 <h3 id="smarty_core_display_debug_console()">smarty_core_display_debug_console</h3>
 <code class="signature">public  void <strong>smarty_core_display_debug_console</strong>(mixed params, mixed smarty, array Format:, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty debug_console function plugin</p><p>Type:     core<br>
+<p>Smarty debug_console function plugin</p><p>Type:     core<br>
 Name:     display_debug_console<br>
 Purpose:  display the javascript debug console window</p>
 <dl>
@@ -677,205 +670,235 @@ Purpose:  display the javascript debug console window</p>
 
 <hr>
 
-<div class="location">/internals/core.get_include_path.php at line 19</div>
+<a href="../source/internals/core.get_include_path.php.html#line19" class="location">internals/core.get_include_path.php at line 19</a>
+
 <h3 id="smarty_core_get_include_path()">smarty_core_get_include_path</h3>
-<code class="signature">public  void <strong>smarty_core_get_include_path</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  boolean <strong>smarty_core_get_include_path</strong>(mixed params, mixed smarty, string file_path, string new_file_path)</code>
 <div class="details">
+<p>Get path to file from include_path</p>
+<dl>
+<dt>Staticvar:</dt>
+<dd>array|null</dd>
+</dl>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.get_microtime.php at line 12</div>
+<a href="../source/internals/core.get_microtime.php.html#line12" class="location">internals/core.get_microtime.php at line 12</a>
+
 <h3 id="smarty_core_get_microtime()">smarty_core_get_microtime</h3>
 <code class="signature">public  double <strong>smarty_core_get_microtime</strong>(mixed params, mixed smarty)</code>
 <div class="details">
-<p></p><p>Get seconds and microseconds</p>
+<p>Get seconds and microseconds</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.get_php_resource.php at line 18</div>
+<a href="../source/internals/core.get_php_resource.php.html#line18" class="location">internals/core.get_php_resource.php at line 18</a>
+
 <h3 id="smarty_core_get_php_resource()">smarty_core_get_php_resource</h3>
 <code class="signature">public  boolean <strong>smarty_core_get_php_resource</strong>(mixed params, mixed smarty, string resource, string resource_type, $php_resource )</code>
 <div class="details">
-<p></p><p>Retrieves PHP script resource</p><p>sets $php_resource to the returned resource</p>
+<p>Retrieves PHP script resource</p><p>sets $php_resource to the returned resource</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.is_secure.php at line 18</div>
+<a href="../source/internals/core.is_secure.php.html#line18" class="location">internals/core.is_secure.php at line 18</a>
+
 <h3 id="smarty_core_is_secure()">smarty_core_is_secure</h3>
-<code class="signature">public  void <strong>smarty_core_is_secure</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  boolean <strong>smarty_core_is_secure</strong>(mixed params, mixed smarty, string resource_type, string resource_name)</code>
 <div class="details">
+<p>determines if a resource is secure or not.</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.is_trusted.php at line 18</div>
+<a href="../source/internals/core.is_trusted.php.html#line18" class="location">internals/core.is_trusted.php at line 18</a>
+
 <h3 id="smarty_core_is_trusted()">smarty_core_is_trusted</h3>
-<code class="signature">public  void <strong>smarty_core_is_trusted</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  boolean <strong>smarty_core_is_trusted</strong>(mixed params, mixed smarty, string resource_type, string resource_name)</code>
 <div class="details">
+<p>determines if a resource is trusted or not</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.load_plugins.php at line 16</div>
+<a href="../source/internals/core.load_plugins.php.html#line16" class="location">internals/core.load_plugins.php at line 16</a>
+
 <h3 id="smarty_core_load_plugins()">smarty_core_load_plugins</h3>
-<code class="signature">public  void <strong>smarty_core_load_plugins</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  void <strong>smarty_core_load_plugins</strong>(mixed params, mixed smarty, array plugins)</code>
 <div class="details">
+<p>Load requested plugins</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.load_resource_plugin.php at line 16</div>
+<a href="../source/internals/core.load_resource_plugin.php.html#line16" class="location">internals/core.load_resource_plugin.php at line 16</a>
+
 <h3 id="smarty_core_load_resource_plugin()">smarty_core_load_resource_plugin</h3>
-<code class="signature">public  void <strong>smarty_core_load_resource_plugin</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  void <strong>smarty_core_load_resource_plugin</strong>(mixed params, mixed smarty, string type)</code>
 <div class="details">
+<p>load a resource plugin</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.process_cached_inserts.php at line 14</div>
+<a href="../source/internals/core.process_cached_inserts.php.html#line14" class="location">internals/core.process_cached_inserts.php at line 14</a>
+
 <h3 id="smarty_core_process_cached_inserts()">smarty_core_process_cached_inserts</h3>
 <code class="signature">public  string <strong>smarty_core_process_cached_inserts</strong>(mixed params, mixed smarty, string results)</code>
 <div class="details">
-<p></p><p>Replace cached inserts with the actual results
-</p>
+<p>Replace cached inserts with the actual results</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.read_cache_file.php at line 21</div>
+<a href="../source/internals/core.read_cache_file.php.html#line21" class="location">internals/core.read_cache_file.php at line 21</a>
+
 <h3 id="smarty_core_read_cache_file()">smarty_core_read_cache_file</h3>
-<code class="signature">public  void <strong>smarty_core_read_cache_file</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  boolean <strong>smarty_core_read_cache_file</strong>(mixed params, mixed smarty, string tpl_file, string cache_id, string compile_id, string results)</code>
 <div class="details">
+<p>read a cache file, determine if it needs to be
+regenerated or not</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.rm_auto.php at line 20</div>
+<a href="../source/internals/core.rm_auto.php.html#line20" class="location">internals/core.rm_auto.php at line 20</a>
+
 <h3 id="smarty_core_rm_auto()">smarty_core_rm_auto</h3>
-<code class="signature">public  void <strong>smarty_core_rm_auto</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  boolean <strong>smarty_core_rm_auto</strong>(mixed params, mixed smarty, string auto_base, string auto_source, string auto_id, integer exp_time)</code>
 <div class="details">
+<p>delete an automagically created file by name and id</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.rmdir.php at line 20</div>
+<a href="../source/internals/core.rmdir.php.html#line20" class="location">internals/core.rmdir.php at line 20</a>
+
 <h3 id="smarty_core_rmdir()">smarty_core_rmdir</h3>
-<code class="signature">public  void <strong>smarty_core_rmdir</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  boolean <strong>smarty_core_rmdir</strong>(mixed params, mixed smarty, string dirname, integer level, integer exp_time)</code>
 <div class="details">
+<p>delete a dir recursively (level=0 -> keep root)
+WARNING: no tests, it will try to remove what you tell it!</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.run_insert_handler.php at line 14</div>
+<a href="../source/internals/core.run_insert_handler.php.html#line14" class="location">internals/core.run_insert_handler.php at line 14</a>
+
 <h3 id="smarty_core_run_insert_handler()">smarty_core_run_insert_handler</h3>
 <code class="signature">public  string <strong>smarty_core_run_insert_handler</strong>(mixed params, mixed smarty, array args)</code>
 <div class="details">
-<p></p><p>Handle insert tags
-</p>
+<p>Handle insert tags</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.smarty_include_php.php at line 21</div>
+<a href="../source/internals/core.smarty_include_php.php.html#line21" class="location">internals/core.smarty_include_php.php at line 21</a>
+
 <h3 id="smarty_core_smarty_include_php()">smarty_core_smarty_include_php</h3>
-<code class="signature">public  void <strong>smarty_core_smarty_include_php</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  void <strong>smarty_core_smarty_include_php</strong>(mixed params, mixed smarty, string smarty_file, string smarty_assign, boolean smarty_once, array smarty_include_vars)</code>
 <div class="details">
+<p>called for included php files within templates</p>
+<dl>
+<dt>Parameters:</dt>
+<dd></dd>
+<dd>smarty_assign - variable to assign the included template's output into</dd>
+<dd>smarty_once - uses include_once if this is true</dd>
+<dd>smarty_include_vars - associative array of vars from {include file="blah" var=$var}</dd>
+</dl>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.write_cache_file.php at line 21</div>
+<a href="../source/internals/core.write_cache_file.php.html#line21" class="location">internals/core.write_cache_file.php at line 21</a>
+
 <h3 id="smarty_core_write_cache_file()">smarty_core_write_cache_file</h3>
-<code class="signature">public  void <strong>smarty_core_write_cache_file</strong>(mixed params, mixed smarty)</code>
+<code class="signature">public  true|null <strong>smarty_core_write_cache_file</strong>(mixed params, mixed smarty, string tpl_file, string cache_id, string compile_id, string results)</code>
 <div class="details">
+<p>Prepend the cache information to the cache file
+and write it</p>
 </div>
 
 <hr>
 
-<div class="location">/internals/core.write_file.php at line 16</div>
+<a href="../source/internals/core.write_file.php.html#line16" class="location">internals/core.write_file.php at line 16</a>
+
 <h3 id="smarty_core_write_file()">smarty_core_write_file</h3>
 <code class="signature">public  boolean <strong>smarty_core_write_file</strong>(mixed params, mixed smarty, string filename, string contents, boolean create_dirs)</code>
 <div class="details">
-<p></p><p>write out a file to disk
-</p>
+<p>write out a file to disk</p>
 </div>
 
 <hr>
 
-<div class="location">/plugins/function.assign_debug_info.php at line 19</div>
+<a href="../source/plugins/function.assign_debug_info.php.html#line19" class="location">plugins/function.assign_debug_info.php at line 19</a>
+
 <h3 id="smarty_function_assign_debug_info()">smarty_function_assign_debug_info</h3>
 <code class="signature">public  void <strong>smarty_function_assign_debug_info</strong>(mixed params, mixed smarty, array unused, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {assign_debug_info} function plugin</p><p>Type:     function<br>
+<p>Smarty {assign_debug_info} function plugin</p><p>Type:     function<br>
 Name:     assign_debug_info<br>
 Purpose:  assign debug info to the template<br></p>
 <dl>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Parameters:</dt>
-<dd>unused - in this plugin, this plugin uses {@link Smarty::$_config},
- * {@link Smarty::$_tpl_vars} and {@link Smarty::$_smarty_debug_info}</dd>
+<dd>unused - in this plugin, this plugin uses {@link Smarty::$_config}, {@link Smarty::$_tpl_vars} and {@link Smarty::$_smarty_debug_info}</dd>
 <dd></dd>
 </dl>
 </div>
 
 <hr>
 
-<div class="location">/plugins/function.config_load.php at line 27</div>
+<a href="../source/plugins/function.config_load.php.html#line27" class="location">plugins/function.config_load.php at line 27</a>
+
 <h3 id="smarty_function_config_load()">smarty_function_config_load</h3>
-<code class="signature">public  void <strong>smarty_function_config_load</strong>(mixed params, mixed smarty, array Format:
-, <a href="../smarty/smarty.html">Smarty</a> )</code>
+<code class="signature">public  void <strong>smarty_function_config_load</strong>(mixed params, mixed smarty, array Format:, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {config_load} function plugin</p><p>Type:     function<br>
+<p>Smarty {config_load} function plugin</p><p>Type:     function<br>
 Name:     config_load<br>
 Purpose:  load config file vars</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.config.load.php">{config_load}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.config.load.php">{config_load} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dd>messju mohr <messju at lammfellpuschen dot de> (added use of resources)</dd>
 <dt>Parameters:</dt>
-<dd>Format:
- - * <pre>
- * array('file' => required config file name,
- * 'section' => optional config file section to load
- * 'scope' => local/parent/global
- * 'global' => overrides scope, setting to parent if true)
- * </pre></dd>
+<dd>Format: - <pre> array('file' => required config file name, 'section' => optional config file section to load 'scope' => local/parent/global 'global' => overrides scope, setting to parent if true) </pre></dd>
 <dd></dd>
 </dl>
 </div>
 
 <hr>
 
-<div class="location">/plugins/function.counter.php at line 22</div>
+<a href="../source/plugins/function.counter.php.html#line22" class="location">plugins/function.counter.php at line 22</a>
+
 <h3 id="smarty_function_counter()">smarty_function_counter</h3>
 <code class="signature">public  string|null <strong>smarty_function_counter</strong>(mixed params, mixed smarty, array parameters, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {counter} function plugin</p><p>Type:     function<br>
+<p>Smarty {counter} function plugin</p><p>Type:     function<br>
 Name:     counter<br>
 Purpose:  print out a counter value</p>
 <dl>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.counter.php">{counter}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.counter.php">{counter} (Smarty online manual)</a></code></dd>
 </dl>
 </div>
 
 <hr>
 
-<div class="location">/plugins/function.cycle.php at line 44</div>
+<a href="../source/plugins/function.cycle.php.html#line44" class="location">plugins/function.cycle.php at line 44</a>
+
 <h3 id="smarty_function_cycle()">smarty_function_cycle</h3>
 <code class="signature">public  string|null <strong>smarty_function_cycle</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {cycle} function plugin</p><p>Type:     function<br>
+<p>Smarty {cycle} function plugin</p><p>Type:     function<br>
 Name:     cycle<br>
 Date:     May 3, 2002<br>
 Purpose:  cycle through given values<br>
@@ -897,8 +920,7 @@ printed.</p><p>Examples:<br>
 </pre></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.cycle.php">{cycle}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.cycle.php">{cycle} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dd>credit to Mark Priatel <mpriatel@rogers.com></dd>
@@ -911,18 +933,18 @@ printed.</p><p>Examples:<br>
 
 <hr>
 
-<div class="location">/plugins/function.debug.php at line 24</div>
+<a href="../source/plugins/function.debug.php.html#line24" class="location">plugins/function.debug.php at line 24</a>
+
 <h3 id="smarty_function_debug()">smarty_function_debug</h3>
 <code class="signature">public  string <strong>smarty_function_debug</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {debug} function plugin</p><p>Type:     function<br>
+<p>Smarty {debug} function plugin</p><p>Type:     function<br>
 Name:     debug<br>
 Date:     July 1, 2002<br>
 Purpose:  popup debug window</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.debug.php">{debug}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.debug.php">{debug} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Version:</dt>
@@ -934,11 +956,12 @@ Purpose:  popup debug window</p>
 
 <hr>
 
-<div class="location">/plugins/shared.escape_special_chars.php at line 19</div>
+<a href="../source/plugins/shared.escape_special_chars.php.html#line19" class="location">plugins/shared.escape_special_chars.php at line 19</a>
+
 <h3 id="smarty_function_escape_special_chars()">smarty_function_escape_special_chars</h3>
 <code class="signature">public  string <strong>smarty_function_escape_special_chars</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>escape_special_chars common function</p><p>Function: smarty_function_escape_special_chars<br>
+<p>escape_special_chars common function</p><p>Function: smarty_function_escape_special_chars<br>
 Purpose:  used by other smarty functions to escape
 special chars except for already escaped ones</p>
 <dl>
@@ -949,17 +972,17 @@ special chars except for already escaped ones</p>
 
 <hr>
 
-<div class="location">/plugins/function.eval.php at line 21</div>
+<a href="../source/plugins/function.eval.php.html#line21" class="location">plugins/function.eval.php at line 21</a>
+
 <h3 id="smarty_function_eval()">smarty_function_eval</h3>
 <code class="signature">public  void <strong>smarty_function_eval</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {eval} function plugin</p><p>Type:     function<br>
+<p>Smarty {eval} function plugin</p><p>Type:     function<br>
 Name:     eval<br>
 Purpose:  evaluate a template variable as a template<br></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.eval.php">{eval}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.eval.php">{eval} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -967,32 +990,32 @@ Purpose:  evaluate a template variable as a template<br></p>
 
 <hr>
 
-<div class="location">/plugins/function.fetch.php at line 23</div>
+<a href="../source/plugins/function.fetch.php.html#line23" class="location">plugins/function.fetch.php at line 23</a>
+
 <h3 id="smarty_function_fetch()">smarty_function_fetch</h3>
 <code class="signature">public  string|null <strong>smarty_function_fetch</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {fetch} plugin</p><p>Type:     function<br>
+<p>Smarty {fetch} plugin</p><p>Type:     function<br>
 Name:     fetch<br>
 Purpose:  fetch file, web or ftp data and display results</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.fetch.php">{fetch}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.fetch.php">{fetch} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Returns:</dt>
-<dd>if the assign parameter is passed, Smarty assigns the
- * result to a template variable</dd>
+<dd>if the assign parameter is passed, Smarty assigns the result to a template variable</dd>
 </dl>
 </div>
 
 <hr>
 
-<div class="location">/plugins/function.html_checkboxes.php at line 41</div>
+<a href="../source/plugins/function.html_checkboxes.php.html#line41" class="location">plugins/function.html_checkboxes.php at line 41</a>
+
 <h3 id="smarty_function_html_checkboxes()">smarty_function_html_checkboxes</h3>
 <code class="signature">public  string <strong>smarty_function_html_checkboxes</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {html_checkboxes} function plugin</p><p>File:       function.html_checkboxes.php<br>
+<p>Smarty {html_checkboxes} function plugin</p><p>File:       function.html_checkboxes.php<br>
 Type:       function<br>
 Name:       html_checkboxes<br>
 Date:       24.Feb.2003<br>
@@ -1013,8 +1036,7 @@ Examples:
 </pre></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.checkboxes.php">{html_checkboxes}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.checkboxes.php">{html_checkboxes} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Christopher Kvarme <christopher.kvarme@flashjab.com></dd>
 <dd>credits to Monte Ohrt <monte at ohrt dot com></dd>
@@ -1027,7 +1049,8 @@ Examples:
 
 <hr>
 
-<div class="location">/plugins/function.html_checkboxes.php at line 126</div>
+<a href="../source/plugins/function.html_checkboxes.php.html#line126" class="location">plugins/function.html_checkboxes.php at line 126</a>
+
 <h3 id="smarty_function_html_checkboxes_output()">smarty_function_html_checkboxes_output</h3>
 <code class="signature">public  void <strong>smarty_function_html_checkboxes_output</strong>(mixed name, mixed value, mixed output, mixed selected, mixed extra, mixed separator, mixed labels)</code>
 <div class="details">
@@ -1035,11 +1058,12 @@ Examples:
 
 <hr>
 
-<div class="location">/plugins/function.html_image.php at line 37</div>
+<a href="../source/plugins/function.html_image.php.html#line37" class="location">plugins/function.html_image.php at line 37</a>
+
 <h3 id="smarty_function_html_image()">smarty_function_html_image</h3>
 <code class="signature">public  string <strong>smarty_function_html_image</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {html_image} function plugin</p><p>Type:     function<br>
+<p>Smarty {html_image} function plugin</p><p>Type:     function<br>
 Name:     html_image<br>
 Date:     Feb 24, 2003<br>
 Purpose:  format HTML tags for the image<br>
@@ -1053,12 +1077,10 @@ is environment variable DOCUMENT_ROOT
 Output:   <img src="/images/masthead.gif" width=400 height=23></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.image.php">{html_image}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.image.php">{html_image} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
-<dd>credits to Duda <duda@big.hu> - wrote first image function
- *           in repository, helped with lots of functionality</dd>
+<dd>credits to Duda <duda@big.hu> - wrote first image function in repository, helped with lots of functionality</dd>
 <dt>Version:</dt>
 <dd>1.0</dd>
 <dt>Uses:</dt>
@@ -1068,11 +1090,12 @@ Output:   <img src="/images/masthead.gif" width=400 height=23></p>
 
 <hr>
 
-<div class="location">/plugins/function.html_options.php at line 30</div>
+<a href="../source/plugins/function.html_options.php.html#line30" class="location">plugins/function.html_options.php at line 30</a>
+
 <h3 id="smarty_function_html_options()">smarty_function_html_options</h3>
 <code class="signature">public  string <strong>smarty_function_html_options</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {html_options} function plugin</p><p>Type:     function<br>
+<p>Smarty {html_options} function plugin</p><p>Type:     function<br>
 Name:     html_options<br>
 Input:<br>
 - name       (optional) - string default "select"
@@ -1084,8 +1107,7 @@ Purpose:  Prints the list of <option> tags generated from
 the passed parameters</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.options.php">{html_image}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.options.php">{html_image} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Uses:</dt>
@@ -1095,7 +1117,8 @@ the passed parameters</p>
 
 <hr>
 
-<div class="location">/plugins/function.html_options.php at line 111</div>
+<a href="../source/plugins/function.html_options.php.html#line111" class="location">plugins/function.html_options.php at line 111</a>
+
 <h3 id="smarty_function_html_options_optgroup()">smarty_function_html_options_optgroup</h3>
 <code class="signature">public  void <strong>smarty_function_html_options_optgroup</strong>(mixed key, mixed values, mixed selected)</code>
 <div class="details">
@@ -1103,7 +1126,8 @@ the passed parameters</p>
 
 <hr>
 
-<div class="location">/plugins/function.html_options.php at line 98</div>
+<a href="../source/plugins/function.html_options.php.html#line98" class="location">plugins/function.html_options.php at line 98</a>
+
 <h3 id="smarty_function_html_options_optoutput()">smarty_function_html_options_optoutput</h3>
 <code class="signature">public  void <strong>smarty_function_html_options_optoutput</strong>(mixed key, mixed value, mixed selected)</code>
 <div class="details">
@@ -1111,11 +1135,12 @@ the passed parameters</p>
 
 <hr>
 
-<div class="location">/plugins/function.html_radios.php at line 41</div>
+<a href="../source/plugins/function.html_radios.php.html#line41" class="location">plugins/function.html_radios.php at line 41</a>
+
 <h3 id="smarty_function_html_radios()">smarty_function_html_radios</h3>
 <code class="signature">public  string <strong>smarty_function_html_radios</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {html_radios} function plugin</p><p>File:       function.html_radios.php<br>
+<p>Smarty {html_radios} function plugin</p><p>File:       function.html_radios.php<br>
 Type:       function<br>
 Name:       html_radios<br>
 Date:       24.Feb.2003<br>
@@ -1136,8 +1161,7 @@ Examples:
 </pre></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.radios.php">{html_radios}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.radios.php">{html_radios} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Christopher Kvarme <christopher.kvarme@flashjab.com></dd>
 <dd>credits to Monte Ohrt <monte at ohrt dot com></dd>
@@ -1150,7 +1174,8 @@ Examples:
 
 <hr>
 
-<div class="location">/plugins/function.html_radios.php at line 130</div>
+<a href="../source/plugins/function.html_radios.php.html#line130" class="location">plugins/function.html_radios.php at line 130</a>
+
 <h3 id="smarty_function_html_radios_output()">smarty_function_html_radios_output</h3>
 <code class="signature">public  void <strong>smarty_function_html_radios_output</strong>(mixed name, mixed value, mixed output, mixed selected, mixed extra, mixed separator, mixed labels, mixed label_ids)</code>
 <div class="details">
@@ -1158,11 +1183,12 @@ Examples:
 
 <hr>
 
-<div class="location">/plugins/function.html_select_date.php at line 38</div>
+<a href="../source/plugins/function.html_select_date.php.html#line38" class="location">plugins/function.html_select_date.php at line 38</a>
+
 <h3 id="smarty_function_html_select_date()">smarty_function_html_select_date</h3>
 <code class="signature">public  string <strong>smarty_function_html_select_date</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {html_select_date} plugin</p><p>Type:     function<br>
+<p>Smarty {html_select_date} plugin</p><p>Type:     function<br>
 Name:     html_select_date<br>
 Purpose:  Prints the dropdowns for date selection.</p><p>ChangeLog:<br>
 - 1.0 initial release
@@ -1180,8 +1206,7 @@ dropdown to include given date unless explicitly set (Monte)
 of 0000-00-00 dates (cybot, boots)</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.select.date.php">{html_select_date}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.select.date.php">{html_select_date} (Smarty online manual)</a></code></dd>
 <dt>Version:</dt>
 <dd>1.3.4</dd>
 <dt>Author:</dt>
@@ -1192,17 +1217,17 @@ of 0000-00-00 dates (cybot, boots)</p>
 
 <hr>
 
-<div class="location">/plugins/function.html_select_time.php at line 24</div>
+<a href="../source/plugins/function.html_select_time.php.html#line24" class="location">plugins/function.html_select_time.php at line 24</a>
+
 <h3 id="smarty_function_html_select_time()">smarty_function_html_select_time</h3>
 <code class="signature">public  string <strong>smarty_function_html_select_time</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {html_select_time} function plugin</p><p>Type:     function<br>
+<p>Smarty {html_select_time} function plugin</p><p>Type:     function<br>
 Name:     html_select_time<br>
 Purpose:  Prints the dropdowns for time selection</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.select.time.php">{html_select_time}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.select.time.php">{html_select_time} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Roberto Berto <roberto@berto.net></dd>
 <dt>Credits:</dt>
@@ -1214,11 +1239,12 @@ Purpose:  Prints the dropdowns for time selection</p>
 
 <hr>
 
-<div class="location">/plugins/function.html_table.php at line 49</div>
+<a href="../source/plugins/function.html_table.php.html#line49" class="location">plugins/function.html_table.php at line 49</a>
+
 <h3 id="smarty_function_html_table()">smarty_function_html_table</h3>
 <code class="signature">public  string <strong>smarty_function_html_table</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {html_table} function plugin</p><p>Type:     function<br>
+<p>Smarty {html_table} function plugin</p><p>Type:     function<br>
 Name:     html_table<br>
 Date:     Feb 17, 2003<br>
 Purpose:  make an html table from an array of data<br>
@@ -1251,14 +1277,14 @@ Examples:
 <dt>Version:</dt>
 <dd>1.1</dd>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.table.php">{html_table}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.html.table.php">{html_table} (Smarty online manual)</a></code></dd>
 </dl>
 </div>
 
 <hr>
 
-<div class="location">/plugins/function.html_table.php at line 164</div>
+<a href="../source/plugins/function.html_table.php.html#line164" class="location">plugins/function.html_table.php at line 164</a>
+
 <h3 id="smarty_function_html_table_cycle()">smarty_function_html_table_cycle</h3>
 <code class="signature">public  void <strong>smarty_function_html_table_cycle</strong>(mixed name, mixed var, mixed no)</code>
 <div class="details">
@@ -1266,11 +1292,12 @@ Examples:
 
 <hr>
 
-<div class="location">/plugins/function.mailto.php at line 50</div>
+<a href="../source/plugins/function.mailto.php.html#line50" class="location">plugins/function.mailto.php at line 50</a>
+
 <h3 id="smarty_function_mailto()">smarty_function_mailto</h3>
 <code class="signature">public  string <strong>smarty_function_mailto</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {mailto} function plugin</p><p>Type:     function<br>
+<p>Smarty {mailto} function plugin</p><p>Type:     function<br>
 Name:     mailto<br>
 Date:     May 21, 2002
 Purpose:  automate mailto address link creation, and optionally
@@ -1299,8 +1326,7 @@ hex : encode with hexidecimal (no javascript)
 </pre></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.mailto.php">{mailto}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.mailto.php">{mailto} (Smarty online manual)</a></code></dd>
 <dt>Version:</dt>
 <dd>1.2</dd>
 <dt>Author:</dt>
@@ -1311,17 +1337,17 @@ hex : encode with hexidecimal (no javascript)
 
 <hr>
 
-<div class="location">/plugins/function.math.php at line 22</div>
+<a href="../source/plugins/function.math.php.html#line22" class="location">plugins/function.math.php at line 22</a>
+
 <h3 id="smarty_function_math()">smarty_function_math</h3>
 <code class="signature">public  string <strong>smarty_function_math</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {math} function plugin</p><p>Type:     function<br>
+<p>Smarty {math} function plugin</p><p>Type:     function<br>
 Name:     math<br>
 Purpose:  handle math computations in template<br></p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.math.php">{math}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.math.php">{math} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1329,17 +1355,17 @@ Purpose:  handle math computations in template<br></p>
 
 <hr>
 
-<div class="location">/plugins/function.popup.php at line 22</div>
+<a href="../source/plugins/function.popup.php.html#line22" class="location">plugins/function.popup.php at line 22</a>
+
 <h3 id="smarty_function_popup()">smarty_function_popup</h3>
 <code class="signature">public  string <strong>smarty_function_popup</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {popup} function plugin</p><p>Type:     function<br>
+<p>Smarty {popup} function plugin</p><p>Type:     function<br>
 Name:     popup<br>
 Purpose:  make text pop up in windows via overlib</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.popup.php">{popup}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.popup.php">{popup} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1347,17 +1373,17 @@ Purpose:  make text pop up in windows via overlib</p>
 
 <hr>
 
-<div class="location">/plugins/function.popup_init.php at line 22</div>
+<a href="../source/plugins/function.popup_init.php.html#line22" class="location">plugins/function.popup_init.php at line 22</a>
+
 <h3 id="smarty_function_popup_init()">smarty_function_popup_init</h3>
 <code class="signature">public  string <strong>smarty_function_popup_init</strong>(mixed params, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty {popup_init} function plugin</p><p>Type:     function<br>
+<p>Smarty {popup_init} function plugin</p><p>Type:     function<br>
 Name:     popup_init<br>
 Purpose:  initialize overlib</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.function.popup.init.php">{popup_init}
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.function.popup.init.php">{popup_init} (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1365,11 +1391,12 @@ Purpose:  initialize overlib</p>
 
 <hr>
 
-<div class="location">/plugins/shared.make_timestamp.php at line 17</div>
+<a href="../source/plugins/shared.make_timestamp.php.html#line17" class="location">plugins/shared.make_timestamp.php at line 17</a>
+
 <h3 id="smarty_make_timestamp()">smarty_make_timestamp</h3>
 <code class="signature">public  string <strong>smarty_make_timestamp</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>Function: smarty_make_timestamp<br>
+<p>Function: smarty_make_timestamp<br>
 Purpose:  used by other smarty functions to make a timestamp
 from a string.</p>
 <dl>
@@ -1380,17 +1407,17 @@ from a string.</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.capitalize.php at line 21</div>
+<a href="../source/plugins/modifier.capitalize.php.html#line21" class="location">plugins/modifier.capitalize.php at line 21</a>
+
 <h3 id="smarty_modifier_capitalize()">smarty_modifier_capitalize</h3>
 <code class="signature">public  string <strong>smarty_modifier_capitalize</strong>(mixed string, mixed uc_digits, string )</code>
 <div class="details">
-<p></p><p>Smarty capitalize modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty capitalize modifier plugin</p><p>Type:     modifier<br>
 Name:     capitalize<br>
 Purpose:  capitalize words in the string</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifiers.php#LANGUAGE.MODIFIER.CAPITALIZE
-">* capitalize (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifiers.php#LANGUAGE.MODIFIER.CAPITALIZE">capitalize (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1398,7 +1425,8 @@ Purpose:  capitalize words in the string</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.capitalize.php at line 27</div>
+<a href="../source/plugins/modifier.capitalize.php.html#line27" class="location">plugins/modifier.capitalize.php at line 27</a>
+
 <h3 id="smarty_modifier_capitalize_ucfirst()">smarty_modifier_capitalize_ucfirst</h3>
 <code class="signature">public  void <strong>smarty_modifier_capitalize_ucfirst</strong>(mixed string, mixed uc_digits)</code>
 <div class="details">
@@ -1406,11 +1434,12 @@ Purpose:  capitalize words in the string</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.cat.php at line 26</div>
+<a href="../source/plugins/modifier.cat.php.html#line26" class="location">plugins/modifier.cat.php at line 26</a>
+
 <h3 id="smarty_modifier_cat()">smarty_modifier_cat</h3>
 <code class="signature">public  string <strong>smarty_modifier_cat</strong>(mixed string, mixed cat, string )</code>
 <div class="details">
-<p></p><p>Smarty cat modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty cat modifier plugin</p><p>Type:     modifier<br>
 Name:     cat<br>
 Date:     Feb 24, 2003
 Purpose:  catenate a value to a variable
@@ -1418,8 +1447,7 @@ Input:    string to catenate
 Example:  {$var|cat:"foo"}</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.cat.php">cat
- * (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.cat.php">cat (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Version:</dt>
@@ -1429,17 +1457,17 @@ Example:  {$var|cat:"foo"}</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.count_characters.php at line 22</div>
+<a href="../source/plugins/modifier.count_characters.php.html#line22" class="location">plugins/modifier.count_characters.php at line 22</a>
+
 <h3 id="smarty_modifier_count_characters()">smarty_modifier_count_characters</h3>
 <code class="signature">public  integer <strong>smarty_modifier_count_characters</strong>(mixed string, mixed include_spaces, string , boolean include)</code>
 <div class="details">
-<p></p><p>Smarty count_characters modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty count_characters modifier plugin</p><p>Type:     modifier<br>
 Name:     count_characteres<br>
 Purpose:  count the number of characters in a text</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.characters.php
-">* count_characters (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.characters.php">count_characters (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Parameters:</dt>
@@ -1450,17 +1478,17 @@ Purpose:  count the number of characters in a text</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.count_paragraphs.php at line 21</div>
+<a href="../source/plugins/modifier.count_paragraphs.php.html#line21" class="location">plugins/modifier.count_paragraphs.php at line 21</a>
+
 <h3 id="smarty_modifier_count_paragraphs()">smarty_modifier_count_paragraphs</h3>
 <code class="signature">public  integer <strong>smarty_modifier_count_paragraphs</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>Smarty count_paragraphs modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty count_paragraphs modifier plugin</p><p>Type:     modifier<br>
 Name:     count_paragraphs<br>
 Purpose:  count the number of paragraphs in a text</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.paragraphs.php
-">* count_paragraphs (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.paragraphs.php">count_paragraphs (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1468,17 +1496,17 @@ Purpose:  count the number of paragraphs in a text</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.count_sentences.php at line 21</div>
+<a href="../source/plugins/modifier.count_sentences.php.html#line21" class="location">plugins/modifier.count_sentences.php at line 21</a>
+
 <h3 id="smarty_modifier_count_sentences()">smarty_modifier_count_sentences</h3>
 <code class="signature">public  integer <strong>smarty_modifier_count_sentences</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>Smarty count_sentences modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty count_sentences modifier plugin</p><p>Type:     modifier<br>
 Name:     count_sentences
 Purpose:  count the number of sentences in a text</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.paragraphs.php
-">* count_sentences (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.paragraphs.php">count_sentences (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1486,17 +1514,17 @@ Purpose:  count the number of sentences in a text</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.count_words.php at line 21</div>
+<a href="../source/plugins/modifier.count_words.php.html#line21" class="location">plugins/modifier.count_words.php at line 21</a>
+
 <h3 id="smarty_modifier_count_words()">smarty_modifier_count_words</h3>
 <code class="signature">public  integer <strong>smarty_modifier_count_words</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>Smarty count_words modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty count_words modifier plugin</p><p>Type:     modifier<br>
 Name:     count_words<br>
 Purpose:  count the number of words in a text</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.words.php
-">* count_words (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.count.words.php">count_words (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1504,11 +1532,12 @@ Purpose:  count the number of words in a text</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.date_format.php at line 31</div>
+<a href="../source/plugins/modifier.date_format.php.html#line31" class="location">plugins/modifier.date_format.php at line 31</a>
+
 <h3 id="smarty_modifier_date_format()">smarty_modifier_date_format</h3>
 <code class="signature">public  string|void <strong>smarty_modifier_date_format</strong>(mixed string, mixed format, mixed default_date, string )</code>
 <div class="details">
-<p></p><p>Smarty date_format modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty date_format modifier plugin</p><p>Type:     modifier<br>
 Name:     date_format<br>
 Purpose:  format datestamps via strftime<br>
 Input:<br>
@@ -1517,8 +1546,7 @@ Input:<br>
 - default_date: default date if $string is empty</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.date.format.php
-">* date_format (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.date.format.php">date_format (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Uses:</dt>
@@ -1528,17 +1556,17 @@ Input:<br>
 
 <hr>
 
-<div class="location">/plugins/modifier.debug_print_var.php at line 23</div>
+<a href="../source/plugins/modifier.debug_print_var.php.html#line23" class="location">plugins/modifier.debug_print_var.php at line 23</a>
+
 <h3 id="smarty_modifier_debug_print_var()">smarty_modifier_debug_print_var</h3>
 <code class="signature">public  string <strong>smarty_modifier_debug_print_var</strong>(mixed var, mixed depth, mixed length, integer )</code>
 <div class="details">
-<p></p><p>Smarty debug_print_var modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty debug_print_var modifier plugin</p><p>Type:     modifier<br>
 Name:     debug_print_var<br>
 Purpose:  formats variable contents for display in the console</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.debug.print.var.php
-">* debug_print_var (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.debug.print.var.php">debug_print_var (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1546,17 +1574,17 @@ Purpose:  formats variable contents for display in the console</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.default.php at line 22</div>
+<a href="../source/plugins/modifier.default.php.html#line22" class="location">plugins/modifier.default.php at line 22</a>
+
 <h3 id="smarty_modifier_default()">smarty_modifier_default</h3>
 <code class="signature">public  string <strong>smarty_modifier_default</strong>(mixed string, mixed default, string )</code>
 <div class="details">
-<p></p><p>Smarty default modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty default modifier plugin</p><p>Type:     modifier<br>
 Name:     default<br>
 Purpose:  designate default value for empty variables</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.default.php
-">* default (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.default.php">default (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1564,17 +1592,17 @@ Purpose:  designate default value for empty variables</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.escape.php at line 22</div>
+<a href="../source/plugins/modifier.escape.php.html#line22" class="location">plugins/modifier.escape.php at line 22</a>
+
 <h3 id="smarty_modifier_escape()">smarty_modifier_escape</h3>
 <code class="signature">public  string <strong>smarty_modifier_escape</strong>(mixed string, mixed esc_type, mixed char_set, html|htmlall|url|quotes|hex|hexentity|javascript )</code>
 <div class="details">
-<p></p><p>Smarty escape modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty escape modifier plugin</p><p>Type:     modifier<br>
 Name:     escape<br>
 Purpose:  Escape the string according to escapement type</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.escape.php
-">* escape (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.escape.php">escape (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1582,17 +1610,17 @@ Purpose:  Escape the string according to escapement type</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.indent.php at line 23</div>
+<a href="../source/plugins/modifier.indent.php.html#line23" class="location">plugins/modifier.indent.php at line 23</a>
+
 <h3 id="smarty_modifier_indent()">smarty_modifier_indent</h3>
 <code class="signature">public  string <strong>smarty_modifier_indent</strong>(mixed string, mixed chars, mixed char, string )</code>
 <div class="details">
-<p></p><p>Smarty indent modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty indent modifier plugin</p><p>Type:     modifier<br>
 Name:     indent<br>
 Purpose:  indent lines of text</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.indent.php
-">* indent (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.indent.php">indent (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1600,17 +1628,17 @@ Purpose:  indent lines of text</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.lower.php at line 21</div>
+<a href="../source/plugins/modifier.lower.php.html#line21" class="location">plugins/modifier.lower.php at line 21</a>
+
 <h3 id="smarty_modifier_lower()">smarty_modifier_lower</h3>
 <code class="signature">public  string <strong>smarty_modifier_lower</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>Smarty lower modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty lower modifier plugin</p><p>Type:     modifier<br>
 Name:     lower<br>
 Purpose:  convert string to lowercase</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.lower.php
-">* lower (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.lower.php">lower (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1618,11 +1646,12 @@ Purpose:  convert string to lowercase</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.nl2br.php at line 28</div>
+<a href="../source/plugins/modifier.nl2br.php.html#line28" class="location">plugins/modifier.nl2br.php at line 28</a>
+
 <h3 id="smarty_modifier_nl2br()">smarty_modifier_nl2br</h3>
 <code class="signature">public  string <strong>smarty_modifier_nl2br</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>Smarty plugin</p><p>Type:     modifier<br>
+<p>Smarty plugin</p><p>Type:     modifier<br>
 Name:     nl2br<br>
 Date:     Feb 26, 2003
 Purpose:  convert \r\n, \r or \n to <<br>>
@@ -1633,8 +1662,7 @@ in replacement
 Example:  {$text|nl2br}</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.nl2br.php
-">* nl2br (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.nl2br.php">nl2br (Smarty online manual)</a></code></dd>
 <dt>Version:</dt>
 <dd>1.0</dd>
 <dt>Author:</dt>
@@ -1644,17 +1672,17 @@ Example:  {$text|nl2br}</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.regex_replace.php at line 23</div>
+<a href="../source/plugins/modifier.regex_replace.php.html#line23" class="location">plugins/modifier.regex_replace.php at line 23</a>
+
 <h3 id="smarty_modifier_regex_replace()">smarty_modifier_regex_replace</h3>
 <code class="signature">public  string <strong>smarty_modifier_regex_replace</strong>(mixed string, mixed search, mixed replace, string|array )</code>
 <div class="details">
-<p></p><p>Smarty regex_replace modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty regex_replace modifier plugin</p><p>Type:     modifier<br>
 Name:     regex_replace<br>
 Purpose:  regular expression search/replace</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.regex.replace.php
-">* regex_replace (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.regex.replace.php">regex_replace (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1662,17 +1690,17 @@ Purpose:  regular expression search/replace</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.replace.php at line 23</div>
+<a href="../source/plugins/modifier.replace.php.html#line23" class="location">plugins/modifier.replace.php at line 23</a>
+
 <h3 id="smarty_modifier_replace()">smarty_modifier_replace</h3>
 <code class="signature">public  string <strong>smarty_modifier_replace</strong>(mixed string, mixed search, mixed replace, string )</code>
 <div class="details">
-<p></p><p>Smarty replace modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty replace modifier plugin</p><p>Type:     modifier<br>
 Name:     replace<br>
 Purpose:  simple search/replace</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.replace.php
-">* replace (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.replace.php">replace (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1680,17 +1708,17 @@ Purpose:  simple search/replace</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.spacify.php at line 22</div>
+<a href="../source/plugins/modifier.spacify.php.html#line22" class="location">plugins/modifier.spacify.php at line 22</a>
+
 <h3 id="smarty_modifier_spacify()">smarty_modifier_spacify</h3>
 <code class="signature">public  string <strong>smarty_modifier_spacify</strong>(mixed string, mixed spacify_char, string )</code>
 <div class="details">
-<p></p><p>Smarty spacify modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty spacify modifier plugin</p><p>Type:     modifier<br>
 Name:     spacify<br>
 Purpose:  add spaces between characters in a string</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.spacify.php
-">* spacify (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.spacify.php">spacify (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1698,17 +1726,17 @@ Purpose:  add spaces between characters in a string</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.string_format.php at line 22</div>
+<a href="../source/plugins/modifier.string_format.php.html#line22" class="location">plugins/modifier.string_format.php at line 22</a>
+
 <h3 id="smarty_modifier_string_format()">smarty_modifier_string_format</h3>
 <code class="signature">public  string <strong>smarty_modifier_string_format</strong>(mixed string, mixed format, string )</code>
 <div class="details">
-<p></p><p>Smarty string_format modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty string_format modifier plugin</p><p>Type:     modifier<br>
 Name:     string_format<br>
 Purpose:  format strings via sprintf</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.string.format.php
-">* string_format (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.string.format.php">string_format (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1716,11 +1744,12 @@ Purpose:  format strings via sprintf</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.strip.php at line 26</div>
+<a href="../source/plugins/modifier.strip.php.html#line26" class="location">plugins/modifier.strip.php at line 26</a>
+
 <h3 id="smarty_modifier_strip()">smarty_modifier_strip</h3>
 <code class="signature">public  string <strong>smarty_modifier_strip</strong>(mixed text, mixed replace, string )</code>
 <div class="details">
-<p></p><p>Smarty strip modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty strip modifier plugin</p><p>Type:     modifier<br>
 Name:     strip<br>
 Purpose:  Replace all repeated spaces, newlines, tabs
 with a single space or supplied replacement string.<br>
@@ -1728,8 +1757,7 @@ Example:  {$var|strip} {$var|strip:"&nbsp;"}
 Date:     September 25th, 2002</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.strip.php
-">* strip (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.strip.php">strip (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 <dt>Version:</dt>
@@ -1739,17 +1767,17 @@ Date:     September 25th, 2002</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.strip_tags.php at line 22</div>
+<a href="../source/plugins/modifier.strip_tags.php.html#line22" class="location">plugins/modifier.strip_tags.php at line 22</a>
+
 <h3 id="smarty_modifier_strip_tags()">smarty_modifier_strip_tags</h3>
 <code class="signature">public  string <strong>smarty_modifier_strip_tags</strong>(mixed string, mixed replace_with_space, boolean )</code>
 <div class="details">
-<p></p><p>Smarty strip_tags modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty strip_tags modifier plugin</p><p>Type:     modifier<br>
 Name:     strip_tags<br>
 Purpose:  strip html tags from text</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.strip.tags.php
-">* strip_tags (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.strip.tags.php">strip_tags (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1757,19 +1785,19 @@ Purpose:  strip html tags from text</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.truncate.php at line 27</div>
+<a href="../source/plugins/modifier.truncate.php.html#line27" class="location">plugins/modifier.truncate.php at line 27</a>
+
 <h3 id="smarty_modifier_truncate()">smarty_modifier_truncate</h3>
 <code class="signature">public  string <strong>smarty_modifier_truncate</strong>(mixed string, mixed length, mixed etc, mixed break_words, mixed middle, boolean )</code>
 <div class="details">
-<p></p><p>Smarty truncate modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty truncate modifier plugin</p><p>Type:     modifier<br>
 Name:     truncate<br>
 Purpose:  Truncate a string to a certain length if necessary,
 optionally splitting in the middle of a word, and
 appending the $etc string or inserting $etc into the middle.</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.truncate.php
-">* truncate (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.truncate.php">truncate (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1777,17 +1805,17 @@ appending the $etc string or inserting $etc into the middle.</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.upper.php at line 21</div>
+<a href="../source/plugins/modifier.upper.php.html#line21" class="location">plugins/modifier.upper.php at line 21</a>
+
 <h3 id="smarty_modifier_upper()">smarty_modifier_upper</h3>
 <code class="signature">public  string <strong>smarty_modifier_upper</strong>(mixed string, string )</code>
 <div class="details">
-<p></p><p>Smarty upper modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty upper modifier plugin</p><p>Type:     modifier<br>
 Name:     upper<br>
 Purpose:  convert string to uppercase</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.upper.php
-">* upper (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.upper.php">upper (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1795,17 +1823,17 @@ Purpose:  convert string to uppercase</p>
 
 <hr>
 
-<div class="location">/plugins/modifier.wordwrap.php at line 24</div>
+<a href="../source/plugins/modifier.wordwrap.php.html#line24" class="location">plugins/modifier.wordwrap.php at line 24</a>
+
 <h3 id="smarty_modifier_wordwrap()">smarty_modifier_wordwrap</h3>
 <code class="signature">public  string <strong>smarty_modifier_wordwrap</strong>(mixed string, mixed length, mixed break, mixed cut, boolean )</code>
 <div class="details">
-<p></p><p>Smarty wordwrap modifier plugin</p><p>Type:     modifier<br>
+<p>Smarty wordwrap modifier plugin</p><p>Type:     modifier<br>
 Name:     wordwrap<br>
 Purpose:  wrap a string of text at a given length</p>
 <dl>
 <dt>See Also:</dt>
-<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.wordwrap.php
-">* wordwrap (Smarty online manual)</a></code></dd>
+<dd><code><a href="http://smarty.php.net/manual/en/language.modifier.wordwrap.php">wordwrap (Smarty online manual)</a></code></dd>
 <dt>Author:</dt>
 <dd>Monte Ohrt <monte at ohrt dot com></dd>
 </dl>
@@ -1813,11 +1841,12 @@ Purpose:  wrap a string of text at a given length</p>
 
 <hr>
 
-<div class="location">/plugins/outputfilter.trimwhitespace.php at line 28</div>
+<a href="../source/plugins/outputfilter.trimwhitespace.php.html#line28" class="location">plugins/outputfilter.trimwhitespace.php at line 28</a>
+
 <h3 id="smarty_outputfilter_trimwhitespace()">smarty_outputfilter_trimwhitespace</h3>
 <code class="signature">public  void <strong>smarty_outputfilter_trimwhitespace</strong>(mixed source, mixed smarty, <a href="../smarty/smarty.html">Smarty</a> )</code>
 <div class="details">
-<p></p><p>Smarty trimwhitespace outputfilter plugin</p><p>File:     outputfilter.trimwhitespace.php<br>
+<p>Smarty trimwhitespace outputfilter plugin</p><p>File:     outputfilter.trimwhitespace.php<br>
 Type:     outputfilter<br>
 Name:     trimwhitespace<br>
 Date:     Jan 25, 2003<br>
@@ -1839,7 +1868,8 @@ from application.</p>
 
 <hr>
 
-<div class="location">/plugins/outputfilter.trimwhitespace.php at line 64</div>
+<a href="../source/plugins/outputfilter.trimwhitespace.php.html#line64" class="location">plugins/outputfilter.trimwhitespace.php at line 64</a>
+
 <h3 id="smarty_outputfilter_trimwhitespace_replace()">smarty_outputfilter_trimwhitespace_replace</h3>
 <code class="signature">public  void <strong>smarty_outputfilter_trimwhitespace_replace</strong>(mixed search_str, mixed replace, mixed subject)</code>
 <div class="details">
@@ -1853,7 +1883,8 @@ from application.</p>
 <li><a href="../overview-summary.html">Overview</a></li>
 <li><a href="../smarty/package-summary.html">Package</a></li>
 <li class="active">Function</li>
-<li><a href="../overview-tree.html">Tree</a></li>
+<li><a href="../smarty/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -1869,7 +1900,7 @@ Detail: <a href="#detail_function">Function</a>
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

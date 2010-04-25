@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:49 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>classes/type.php (PHPDoctor)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/classes/type.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>classes/type.php</h1>
+<div class="comment" id="overview_description"><p>Represents a PHP variable type. Type can be a class or primitive data type.</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*
+<a name="line3"></a>PHPDoctor: The PHP Documentation Creator
+<a name="line4"></a>Copyright (C) 2004 Paul James &lt;paul@peej.co.uk&gt;
+<a name="line5"></a>&nbsp;
+<a name="line6"></a>This program is free software; you can redistribute it and/or modify
+<a name="line7"></a>it under the terms of the GNU General Public License as published by
+<a name="line8"></a>the Free Software Foundation; either version 2 of the License, or
+<a name="line9"></a>(at your option) any later version.
+<a name="line10"></a>&nbsp;
+<a name="line11"></a>This program is distributed in the hope that it will be useful,
+<a name="line12"></a>but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line13"></a>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line14"></a>GNU General Public License for more details.
+<a name="line15"></a>&nbsp;
+<a name="line16"></a>You should have received a copy of the GNU General Public License
+<a name="line17"></a>along with this program; if not, write to the Free Software
+<a name="line18"></a>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line19"></a>*/</span>
+<a name="line20"></a>&nbsp;
+<a name="line21"></a><span style="color: #009933; font-style: italic;">/** Represents a PHP variable type. Type can be a class or primitive data type.
+<a name="line22"></a> *
+<a name="line23"></a> * @package PHPDoctor
+<a name="line24"></a> */</span>
+<a name="line25"></a><span style="color: #000000; font-weight: bold;">class</span> Type
+<a name="line26"></a><span style="color: #009900;">&#123;</span>
+<a name="line27"></a>&nbsp;
+<a name="line28"></a>	<span style="color: #009933; font-style: italic;">/** The name of the type.
+<a name="line29"></a>	 *
+<a name="line30"></a>	 * @var str
+<a name="line31"></a>	 */</span>
+<a name="line32"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_name</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<a name="line33"></a>&nbsp;
+<a name="line34"></a>	<span style="color: #009933; font-style: italic;">/** The number of dimensions this type has.
+<a name="line35"></a>	 *
+<a name="line36"></a>	 * @var int
+<a name="line37"></a>	 */</span>
+<a name="line38"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_dimension</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+<a name="line39"></a>&nbsp;
+<a name="line40"></a>	<span style="color: #009933; font-style: italic;">/** Reference to the root element.
+<a name="line41"></a>	 *
+<a name="line42"></a>	 * @var rootDoc
+<a name="line43"></a>	 */</span>
+<a name="line44"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_root</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<a name="line45"></a>&nbsp;
+<a name="line46"></a>	<span style="color: #009933; font-style: italic;">/** Constructor
+<a name="line47"></a>     *
+<a name="line48"></a>     * @param str name The name of the variable type
+<a name="line49"></a>     * @param RootDoc root The RootDoc object to tie this type too
+<a name="line50"></a>	 */</span>
+<a name="line51"></a>	<span style="color: #000000; font-weight: bold;">function</span> type<span style="color: #009900;">&#40;</span><span style="color: #000088;">$name</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$root</span><span style="color: #009900;">&#41;</span>
+<a name="line52"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line53"></a>		<span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$name</span><span style="color: #339933;">,</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'[]'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line54"></a>			<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_dimension<span style="color: #339933;">++;</span>
+<a name="line55"></a>			<span style="color: #000088;">$name</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$name</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line56"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line57"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name <span style="color: #339933;">=</span> <span style="color: #000088;">$name</span><span style="color: #339933;">;</span>
+<a name="line58"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_root <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$root</span><span style="color: #339933;">;</span>
+<a name="line59"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line60"></a>&nbsp;
+<a name="line61"></a>	<span style="color: #009933; font-style: italic;">/** Get name of this type.
+<a name="line62"></a>	 *
+<a name="line63"></a>	 * @return str
+<a name="line64"></a>	 */</span>
+<a name="line65"></a>	<span style="color: #000000; font-weight: bold;">function</span> typeName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line66"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line67"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #339933;">;</span>
+<a name="line68"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line69"></a>&nbsp;
+<a name="line70"></a>	<span style="color: #009933; font-style: italic;">/** Return the type's dimension information, as a string.
+<a name="line71"></a>	 *
+<a name="line72"></a>	 * @return str
+<a name="line73"></a>	 */</span>
+<a name="line74"></a>	<span style="color: #000000; font-weight: bold;">function</span> dimension<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line75"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line76"></a>		<span style="color: #b1b100;">return</span> <a href="http://www.php.net/str_repeat"><span style="color: #990000;">str_repeat</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'[]'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_dimension<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line77"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line78"></a>&nbsp;
+<a name="line79"></a>	<span style="color: #009933; font-style: italic;">/** Get qualified name of this type.
+<a name="line80"></a>	 *
+<a name="line81"></a>	 * @return str
+<a name="line82"></a>     * @todo This method is still to be implemented
+<a name="line83"></a>	 */</span>
+<a name="line84"></a>	<span style="color: #000000; font-weight: bold;">function</span> qualifiedTypeName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line85"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line86"></a>        <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">typeName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line87"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line88"></a>&nbsp;
+<a name="line89"></a>	<span style="color: #009933; font-style: italic;">/** Returns a string representation of the type.
+<a name="line90"></a>	 *
+<a name="line91"></a>	 * @return str
+<a name="line92"></a>	 */</span>
+<a name="line93"></a>	<span style="color: #000000; font-weight: bold;">function</span> toString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line94"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line95"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #339933;">.</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">dimension</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line96"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line97"></a>&nbsp;
+<a name="line98"></a>	<span style="color: #009933; font-style: italic;">/** Return this type as a class.
+<a name="line99"></a>	 *
+<a name="line100"></a>	 * @return ClassDoc A classDoc if the type is a class, null if it is a primitive type.
+<a name="line101"></a>	 */</span>
+<a name="line102"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>asClassDoc<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line103"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line104"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_root<span style="color: #339933;">-&gt;</span><span style="color: #004000;">classNamed</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line105"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line106"></a>&nbsp;
+<a name="line107"></a><span style="color: #009900;">&#125;</span>
+<a name="line108"></a>&nbsp;
+<a name="line109"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line110"></a>&nbsp;</pre>
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/classes/type.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

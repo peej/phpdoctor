@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>SimpleUrl (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simpleurl.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\SimpleUrl</div>
+<a href="../source/url.php.html#line24" class="location">url.php at line 24</a>
+
+<h1>Class SimpleUrl</h1>
+
+<pre class="tree"><strong>SimpleUrl</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>SimpleUrl</strong></p>
+
+<div class="comment" id="overview_description"><p>URL parser to replace parse_url() PHP function which
+got broken in PHP 4.3.0. Adds some browser specific
+functionality such as expandomatics.
+Guesses a bit trying to separate the host from
+the path.</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>WebTester</dd>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#SimpleUrl()">SimpleUrl</a>(string url)</p><p class="description">Constructor. </p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#addRequestParameter()">addRequestParameter</a>(string key, string value)</p><p class="description">Adds an additional parameter to the request.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#addRequestParameters()">addRequestParameters</a>(hash/SimpleFormEncoding parameters)</p><p class="description">Adds additional parameters to the request.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#asString()">asString</a>()</p><p class="description">Renders the URL back into a string.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#clearRequest()">clearRequest</a>()</p><p class="description">Clears down all parameters.</p></td>
+</tr>
+<tr>
+<td class="type">static  string</td>
+<td class="description"><p class="name"><a href="#getAllTopLevelDomains()">getAllTopLevelDomains</a>()</p><p class="description">A pipe seperated list of all TLDs that result in two part
+domain names.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getBasePath()">getBasePath</a>()</p><p class="description">Gets the path to the page.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getEncodedRequest()">getEncodedRequest</a>()</p><p class="description">Accessor for current request parameters
+in URL string form</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getFragment()">getFragment</a>()</p><p class="description">Accessor for fragment at end of URL after the "#".</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getHost()">getHost</a>(string default)</p><p class="description">Accessor for hostname and port.</p></td>
+</tr>
+<tr>
+<td class="type"> Page</td>
+<td class="description"><p class="name"><a href="#getPage()">getPage</a>()</p><p class="description">Accessor for page if any. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getPassword()">getPassword</a>()</p><p class="description">Accessor for password.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getPath()">getPath</a>()</p><p class="description">Accessor for path.</p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#getPort()">getPort</a>()</p><p class="description">Accessor for port number.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getScheme()">getScheme</a>(string default)</p><p class="description">Accessor for protocol part.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#getTarget()">getTarget</a>()</p><p class="description">Gets the frame target if present. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getTld()">getTld</a>()</p><p class="description">Accessor for top level domain.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getUsername()">getUsername</a>()</p><p class="description">Accessor for user name.</p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#getX()">getX</a>()</p><p class="description">Accessor for horizontal image coordinate.</p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#getY()">getY</a>()</p><p class="description">Accessor for vertical image coordinate.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#makeAbsolute()">makeAbsolute</a>(string/SimpleUrl base)</p><p class="description">Replaces unknown sections to turn a relative
+URL into an absolute one. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#normalisePath()">normalisePath</a>(string path)</p><p class="description">Replaces . </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#setCoordinates()">setCoordinates</a>(integer x, integer y)</p><p class="description">Sets image coordinates. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#setTarget()">setTarget</a>(string frame)</p><p class="description">Attaches a frame target.</p></td>
+</tr>
+</table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/url.php.html#line40" class="location">url.php at line 40</a>
+
+<h3 id="SimpleUrl()">SimpleUrl</h3>
+<code class="signature">public <strong>SimpleUrl</strong>(string url)</code>
+<div class="details">
+<p>Constructor. Parses URL into sections.</p><dl>
+<dt>Parameters:</dt>
+<dd>url - Incoming URL.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/url.php.html#line333" class="location">url.php at line 333</a>
+
+<h3 id="addRequestParameter()">addRequestParameter</h3>
+<code class="signature">public  void <strong>addRequestParameter</strong>(string key, string value)</code>
+<div class="details">
+<p>Adds an additional parameter to the request.</p><dl>
+<dt>Parameters:</dt>
+<dd>key - Name of parameter.</dd>
+<dd>value - Value as string.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line343" class="location">url.php at line 343</a>
+
+<h3 id="addRequestParameters()">addRequestParameters</h3>
+<code class="signature">public  void <strong>addRequestParameters</strong>(hash/SimpleFormEncoding parameters)</code>
+<div class="details">
+<p>Adds additional parameters to the request.</p><dl>
+<dt>Parameters:</dt>
+<dd>parameters - Additional parameters.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line391" class="location">url.php at line 391</a>
+
+<h3 id="asString()">asString</h3>
+<code class="signature">public  string <strong>asString</strong>()</code>
+<div class="details">
+<p>Renders the URL back into a string.</p><dl>
+<dt>Returns:</dt>
+<dd>URL in canonical form.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line351" class="location">url.php at line 351</a>
+
+<h3 id="clearRequest()">clearRequest</h3>
+<code class="signature">public  void <strong>clearRequest</strong>()</code>
+<div class="details">
+<p>Clears down all parameters.</p></div>
+
+<hr>
+
+<a href="../source/url.php.html#line504" class="location">url.php at line 504</a>
+
+<h3 id="getAllTopLevelDomains()">getAllTopLevelDomains</h3>
+<code class="signature">public static  string <strong>getAllTopLevelDomains</strong>()</code>
+<div class="details">
+<p>A pipe seperated list of all TLDs that result in two part
+domain names.</p><dl>
+<dt>Returns:</dt>
+<dd>Pipe separated list.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line279" class="location">url.php at line 279</a>
+
+<h3 id="getBasePath()">getBasePath</h3>
+<code class="signature">public  string <strong>getBasePath</strong>()</code>
+<div class="details">
+<p>Gets the path to the page.</p><dl>
+<dt>Returns:</dt>
+<dd>Path less the page.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line319" class="location">url.php at line 319</a>
+
+<h3 id="getEncodedRequest()">getEncodedRequest</h3>
+<code class="signature">public  string <strong>getEncodedRequest</strong>()</code>
+<div class="details">
+<p>Accessor for current request parameters
+in URL string form</p><dl>
+<dt>Returns:</dt>
+<dd>Form is string "?a=1&b=2", etc.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line291" class="location">url.php at line 291</a>
+
+<h3 id="getFragment()">getFragment</h3>
+<code class="signature">public  string <strong>getFragment</strong>()</code>
+<div class="details">
+<p>Accessor for fragment at end of URL after the "#".</p><dl>
+<dt>Returns:</dt>
+<dd>Part after "#".</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line226" class="location">url.php at line 226</a>
+
+<h3 id="getHost()">getHost</h3>
+<code class="signature">public  string <strong>getHost</strong>(string default)</code>
+<div class="details">
+<p>Accessor for hostname and port.</p><dl>
+<dt>Parameters:</dt>
+<dd>default - Value to use if not present.</dd>
+<dt>Returns:</dt>
+<dd>Hostname only.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line267" class="location">url.php at line 267</a>
+
+<h3 id="getPage()">getPage</h3>
+<code class="signature">public  Page <strong>getPage</strong>()</code>
+<div class="details">
+<p>Accessor for page if any. This may be a
+directory name if ambiguious.</p><dl>
+<dt>Returns:</dt>
+<dd>name.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line216" class="location">url.php at line 216</a>
+
+<h3 id="getPassword()">getPassword</h3>
+<code class="signature">public  string <strong>getPassword</strong>()</code>
+<div class="details">
+<p>Accessor for password.</p><dl>
+<dt>Returns:</dt>
+<dd>Password preceding host.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line254" class="location">url.php at line 254</a>
+
+<h3 id="getPath()">getPath</h3>
+<code class="signature">public  string <strong>getPath</strong>()</code>
+<div class="details">
+<p>Accessor for path.</p><dl>
+<dt>Returns:</dt>
+<dd>Full path including leading slash if implied.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line245" class="location">url.php at line 245</a>
+
+<h3 id="getPort()">getPort</h3>
+<code class="signature">public  integer <strong>getPort</strong>()</code>
+<div class="details">
+<p>Accessor for port number.</p><dl>
+<dt>Returns:</dt>
+<dd>TCP/IP port number.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line198" class="location">url.php at line 198</a>
+
+<h3 id="getScheme()">getScheme</h3>
+<code class="signature">public  string <strong>getScheme</strong>(string default)</code>
+<div class="details">
+<p>Accessor for protocol part.</p><dl>
+<dt>Parameters:</dt>
+<dd>default - Value to use if not present.</dd>
+<dt>Returns:</dt>
+<dd>Scheme name, e.g "http".</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line373" class="location">url.php at line 373</a>
+
+<h3 id="getTarget()">getTarget</h3>
+<code class="signature">public  boolean/string <strong>getTarget</strong>()</code>
+<div class="details">
+<p>Gets the frame target if present. Although
+not strictly part of the URL specification it
+acts as similarily to the browser.</p><dl>
+<dt>Returns:</dt>
+<dd>Frame name or false if none.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line235" class="location">url.php at line 235</a>
+
+<h3 id="getTld()">getTld</h3>
+<code class="signature">public  string <strong>getTld</strong>()</code>
+<div class="details">
+<p>Accessor for top level domain.</p><dl>
+<dt>Returns:</dt>
+<dd>Last part of host.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line207" class="location">url.php at line 207</a>
+
+<h3 id="getUsername()">getUsername</h3>
+<code class="signature">public  string <strong>getUsername</strong>()</code>
+<div class="details">
+<p>Accessor for user name.</p><dl>
+<dt>Returns:</dt>
+<dd>Username preceding host.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line300" class="location">url.php at line 300</a>
+
+<h3 id="getX()">getX</h3>
+<code class="signature">public  integer <strong>getX</strong>()</code>
+<div class="details">
+<p>Accessor for horizontal image coordinate.</p><dl>
+<dt>Returns:</dt>
+<dd>X value.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line309" class="location">url.php at line 309</a>
+
+<h3 id="getY()">getY</h3>
+<code class="signature">public  integer <strong>getY</strong>()</code>
+<div class="details">
+<p>Accessor for vertical image coordinate.</p><dl>
+<dt>Returns:</dt>
+<dd>Y value.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line415" class="location">url.php at line 415</a>
+
+<h3 id="makeAbsolute()">makeAbsolute</h3>
+<code class="signature">public  void <strong>makeAbsolute</strong>(string/SimpleUrl base)</code>
+<div class="details">
+<p>Replaces unknown sections to turn a relative
+URL into an absolute one. The base URL can
+be either a string or a SimpleUrl object.</p><dl>
+<dt>Parameters:</dt>
+<dd>base - Base URL.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line492" class="location">url.php at line 492</a>
+
+<h3 id="normalisePath()">normalisePath</h3>
+<code class="signature">public  string <strong>normalisePath</strong>(string path)</code>
+<div class="details">
+<p>Replaces . and .. sections of the path.</p><dl>
+<dt>Parameters:</dt>
+<dd>path - Unoptimised path.</dd>
+<dt>Returns:</dt>
+<dd>Path with dots removed if possible.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line362" class="location">url.php at line 362</a>
+
+<h3 id="setCoordinates()">setCoordinates</h3>
+<code class="signature">public  void <strong>setCoordinates</strong>(integer x, integer y)</code>
+<div class="details">
+<p>Sets image coordinates. Set to flase to clear
+them.</p><dl>
+<dt>Parameters:</dt>
+<dd>x - Horizontal position.</dd>
+<dd>y - Vertical position.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/url.php.html#line382" class="location">url.php at line 382</a>
+
+<h3 id="setTarget()">setTarget</h3>
+<code class="signature">public  void <strong>setTarget</strong>(string frame)</code>
+<div class="details">
+<p>Attaches a frame target.</p><dl>
+<dt>Parameters:</dt>
+<dd>frame - Name of frame.</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simpleurl.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

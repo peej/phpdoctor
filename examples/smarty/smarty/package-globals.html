@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:05:27 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:36:56 +0100">
 
 <link rel="stylesheet" type="text/css" href="../stylesheet.css">
 <link rel="start" href="../overview-summary.html">
@@ -21,6 +23,7 @@
 <li><a href="../smarty/package-summary.html">Package</a></li>
 <li class="active">Global</li>
 <li><a href="../overview-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -44,8 +47,7 @@ Detail: <a href="#detail_global">Global</a>
 <tr><th colspan="2" class="title">Global Summary</th></tr>
 <tr>
 <td class="type">final  mixed</td>
-<td class="description"><p class="name"><a href="#DIR_SEP">DIR_SEP</a></p><p class="description">DIR_SEP isn't used anymore, but third party apps might
-</p></td>
+<td class="description"><p class="name"><a href="#DIR_SEP">DIR_SEP</a></p><p class="description">DIR_SEP isn't used anymore, but third party apps might</p></td>
 </tr>
 <tr>
 <td class="type">final  mixed</td>
@@ -57,40 +59,40 @@ Detail: <a href="#detail_global">Global</a>
 </p></td>
 </tr>
 <tr>
-<td class="type">final  mixed</td>
+<td class="type">final  int</td>
 <td class="description"><p class="name"><a href="#SMARTY_PHP_ALLOW">SMARTY_PHP_ALLOW</a></p></td>
 </tr>
 <tr>
-<td class="type">final  mixed</td>
+<td class="type">final  int</td>
 <td class="description"><p class="name"><a href="#SMARTY_PHP_PASSTHRU">SMARTY_PHP_PASSTHRU</a></p></td>
 </tr>
 <tr>
-<td class="type">final  mixed</td>
+<td class="type">final  int</td>
 <td class="description"><p class="name"><a href="#SMARTY_PHP_QUOTE">SMARTY_PHP_QUOTE</a></p></td>
 </tr>
 <tr>
-<td class="type">final  mixed</td>
+<td class="type">final  int</td>
 <td class="description"><p class="name"><a href="#SMARTY_PHP_REMOVE">SMARTY_PHP_REMOVE</a></p></td>
 </tr>
 <tr>
 <td class="type"> mixed</td>
-<td class="description"><p class="name"><a href="#smarty">smarty</a></p><p class="description">Include the {@link shared.make_timestamp.php} plugin
-</p></td>
+<td class="description"><p class="name"><a href="#smarty">smarty</a></p><p class="description">Include the {@link shared.make_timestamp.php} plugin</p></td>
 </tr>
 </table>
 
 <h2 id="detail_global">Global Detail</h2>
-<div class="location">/Smarty.class.php at line 39</div>
+<a href="../source/smarty.class.php.html#line39" class="location">Smarty.class.php at line 39</a>
+
 <h3 id="DIR_SEP">DIR_SEP</h3>
 <code class="signature">public final  mixed <strong>DIR_SEP</strong> = DIRECTORY_SEPARATOR</code>
 <div class="details">
-<p></p><p>DIR_SEP isn't used anymore, but third party apps might
-</p>
+<p>DIR_SEP isn't used anymore, but third party apps might</p>
 </div>
 
 <hr>
 
-<div class="location">/Smarty.class.php at line 53</div>
+<a href="../source/smarty.class.php.html#line53" class="location">Smarty.class.php at line 53</a>
+
 <h3 id="SMARTY_CORE_DIR">SMARTY_CORE_DIR</h3>
 <code class="signature">public final  mixed <strong>SMARTY_CORE_DIR</strong> = SMARTY_DIR . 'internals' . DIRECTORY_SEPARATOR</code>
 <div class="details">
@@ -98,56 +100,60 @@ Detail: <a href="#detail_global">Global</a>
 
 <hr>
 
-<div class="location">/Smarty.class.php at line 49</div>
+<a href="../source/smarty.class.php.html#line49" class="location">Smarty.class.php at line 49</a>
+
 <h3 id="SMARTY_DIR">SMARTY_DIR</h3>
-<code class="signature">public final  mixed <strong>SMARTY_DIR</strong> = dirname(__FILE__) . DIRECTORY_SEPARATOR</code>
+<code class="signature">public final  mixed <strong>SMARTY_DIR</strong> = dirname(__FILE__</code>
 <div class="details">
-<p></p><p>set SMARTY_DIR to absolute path to Smarty library files.
+<p>set SMARTY_DIR to absolute path to Smarty library files.
 if not defined, include_path will be used. Sets SMARTY_DIR only if user
-application has not already defined it.
-</p>
+application has not already defined it.</p>
 </div>
 
 <hr>
 
-<div class="location">/Smarty.class.php at line 59</div>
+<a href="../source/smarty.class.php.html#line59" class="location">Smarty.class.php at line 59</a>
+
 <h3 id="SMARTY_PHP_ALLOW">SMARTY_PHP_ALLOW</h3>
-<code class="signature">public final  mixed <strong>SMARTY_PHP_ALLOW</strong> = 3</code>
+<code class="signature">public final  int <strong>SMARTY_PHP_ALLOW</strong> = 3</code>
 <div class="details">
 </div>
 
 <hr>
 
-<div class="location">/Smarty.class.php at line 56</div>
+<a href="../source/smarty.class.php.html#line56" class="location">Smarty.class.php at line 56</a>
+
 <h3 id="SMARTY_PHP_PASSTHRU">SMARTY_PHP_PASSTHRU</h3>
-<code class="signature">public final  mixed <strong>SMARTY_PHP_PASSTHRU</strong></code>
+<code class="signature">public final  int <strong>SMARTY_PHP_PASSTHRU</strong></code>
 <div class="details">
 </div>
 
 <hr>
 
-<div class="location">/Smarty.class.php at line 57</div>
+<a href="../source/smarty.class.php.html#line57" class="location">Smarty.class.php at line 57</a>
+
 <h3 id="SMARTY_PHP_QUOTE">SMARTY_PHP_QUOTE</h3>
-<code class="signature">public final  mixed <strong>SMARTY_PHP_QUOTE</strong> = 1</code>
+<code class="signature">public final  int <strong>SMARTY_PHP_QUOTE</strong> = 1</code>
 <div class="details">
 </div>
 
 <hr>
 
-<div class="location">/Smarty.class.php at line 58</div>
+<a href="../source/smarty.class.php.html#line58" class="location">Smarty.class.php at line 58</a>
+
 <h3 id="SMARTY_PHP_REMOVE">SMARTY_PHP_REMOVE</h3>
-<code class="signature">public final  mixed <strong>SMARTY_PHP_REMOVE</strong> = 2</code>
+<code class="signature">public final  int <strong>SMARTY_PHP_REMOVE</strong> = 2</code>
 <div class="details">
 </div>
 
 <hr>
 
-<div class="location">/plugins/modifier.date_format.php at line 11</div>
+<a href="../source/plugins/modifier.date_format.php.html#line11" class="location">plugins/modifier.date_format.php at line 11</a>
+
 <h3 id="smarty">smarty</h3>
 <code class="signature">public  mixed <strong>smarty</strong></code>
 <div class="details">
-<p></p><p>Include the </p><p><code>shared.make_timestamp.php</code></p><p> plugin
-</p>
+<p>Include the <code>shared.make_timestamp.php</code> plugin</p>
 </div>
 
 <hr>
@@ -159,6 +165,7 @@ application has not already defined it.
 <li><a href="../smarty/package-summary.html">Package</a></li>
 <li class="active">Global</li>
 <li><a href="../overview-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -174,7 +181,7 @@ Detail: <a href="#detail_global">Global</a>
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

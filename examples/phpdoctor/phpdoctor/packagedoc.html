@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:46 +0100">
 
 <link rel="stylesheet" type="text/css" href="../stylesheet.css">
 <link rel="start" href="../overview-summary.html">
@@ -21,6 +23,7 @@
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -37,11 +40,11 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 <hr>
 
 <div class="qualifiedName">PHPDoctor.PackageDoc</div>
-<div class="location">/classes/packageDoc.php at line 29</div>
+<a href="../source/classes/packagedoc.php.html#line26" class="location">classes/packageDoc.php at line 26</a>
 
 <h1>Class PackageDoc</h1>
 
-<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>  |<br>  +--<strong>PackageDoc</strong><br /></pre>
+<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>    └─<strong>PackageDoc</strong><br /></pre>
 
 <hr>
 
@@ -49,15 +52,9 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 </p>
 
-<div class="comment" id="overview_description"><p>
-Represents a PHP package. Provides access to information about the package,
-the package's comment and tags, and the classes in the package.
-</p></div>
+<div class="comment" id="overview_description"><p>Represents a PHP package. Provides access to information about the package,
+the package's comment and tags, and the classes in the package.</p></div>
 
-<dl>
-<dt>Version:</dt>
-<dd>$Revision: 1.12 $</dd>
-</dl>
 <hr>
 
 <table class="inherit">
@@ -67,9 +64,7 @@ the package's comment and tags, and the classes in the package.
 <table id="summary_constr">
 <tr><th colspan="2">Constructor Summary</th></tr>
 <tr>
-<td class="description"><p class="name"><a href="#packageDoc()">packageDoc</a>(str name, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root)</p><p class="description">
-Constructor
-</p></td>
+<td class="description"><p class="name"><a href="#packageDoc()">packageDoc</a>(str name, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root)</p><p class="description">Constructor</p></td>
 </tr>
 </table>
 
@@ -77,75 +72,51 @@ Constructor
 <tr><th colspan="2">Method Summary</th></tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addClass()">addClass</a>(<a href="../phpdoctor/classdoc.html">ClassDoc</a> class)</p><p class="description">
-Add a class to this package.
-</p></td>
+<td class="description"><p class="name"><a href="#addClass()">addClass</a>(<a href="../phpdoctor/classdoc.html">ClassDoc</a> class)</p><p class="description">Add a class to this package.</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addFunction()">addFunction</a>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> function)</p><p class="description">
-Add a function to this package.
-</p></td>
+<td class="description"><p class="name"><a href="#addFunction()">addFunction</a>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> function)</p><p class="description">Add a function to this package.</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addGlobal()">addGlobal</a>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> global)</p><p class="description">
-Add a global to this package.
-</p></td>
+<td class="description"><p class="name"><a href="#addGlobal()">addGlobal</a>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> global)</p><p class="description">Add a global to this package.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc[]</a></td>
-<td class="description"><p class="name"><a href="#allClasses()">allClasses</a>()</p><p class="description">
-Get all included classes (including exceptions and interfaces).
-</p></td>
+<td class="description"><p class="name"><a href="#allClasses()">allClasses</a>()</p><p class="description">Get all included classes (including exceptions and interfaces).</p></td>
 </tr>
 <tr>
 <td class="type"> str</td>
-<td class="description"><p class="name"><a href="#asPath()">asPath</a>()</p><p class="description">
-Return the package path.
-</p></td>
+<td class="description"><p class="name"><a href="#asPath()">asPath</a>()</p><p class="description">Return the package path.</p></td>
 </tr>
 <tr>
 <td class="type"> int</td>
-<td class="description"><p class="name"><a href="#depth()">depth</a>()</p><p class="description">
-Calculate the depth of this package from the root.
-</p></td>
+<td class="description"><p class="name"><a href="#depth()">depth</a>()</p><p class="description">Calculate the depth of this package from the root.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc[]</a></td>
-<td class="description"><p class="name"><a href="#exceptions()">exceptions</a>()</p><p class="description">
-Get exceptions in this package.
-</p></td>
+<td class="description"><p class="name"><a href="#exceptions()">exceptions</a>()</p><p class="description">Get exceptions in this package.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc</a></td>
-<td class="description"><p class="name"><a href="#findClass()">findClass</a>(str className)</p><p class="description">
-Lookup for a class within this package.
-</p></td>
+<td class="description"><p class="name"><a href="#findClass()">findClass</a>(str className)</p><p class="description">Lookup for a class within this package.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/methoddoc.html">MethodDoc[]</a></td>
-<td class="description"><p class="name"><a href="#functions()">functions</a>()</p><p class="description">
-Get functions in this package.
-</p></td>
+<td class="description"><p class="name"><a href="#functions()">functions</a>()</p><p class="description">Get functions in this package.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/fielddoc.html">FieldDoc[]</a></td>
-<td class="description"><p class="name"><a href="#globals()">globals</a>()</p><p class="description">
-Get globals in this package.
-</p></td>
+<td class="description"><p class="name"><a href="#globals()">globals</a>()</p><p class="description">Get globals in this package.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc[]</a></td>
-<td class="description"><p class="name"><a href="#interfaces()">interfaces</a>()</p><p class="description">
-Get interfaces in this package.
-</p></td>
+<td class="description"><p class="name"><a href="#interfaces()">interfaces</a>()</p><p class="description">Get interfaces in this package.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc[]</a></td>
-<td class="description"><p class="name"><a href="#ordinaryClasses()">ordinaryClasses</a>()</p><p class="description">
-Get ordinary classes (excluding exceptions and interfaces) in this package.
-</p></td>
+<td class="description"><p class="name"><a href="#ordinaryClasses()">ordinaryClasses</a>()</p><p class="description">Get ordinary classes (excluding exceptions and interfaces) in this package.</p></td>
 </tr>
 </table>
 
@@ -154,54 +125,49 @@ Get ordinary classes (excluding exceptions and interfaces) in this package.
 <tr><td><a href="../phpdoctor/doc.html#getHTMLContents()">getHTMLContents</a>, <a href="../phpdoctor/doc.html#getRawCommentText()">getRawCommentText</a>, <a href="../phpdoctor/doc.html#isClass()">isClass</a>, <a href="../phpdoctor/doc.html#isConstructor()">isConstructor</a>, <a href="../phpdoctor/doc.html#isException()">isException</a>, <a href="../phpdoctor/doc.html#isField()">isField</a>, <a href="../phpdoctor/doc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/doc.html#isFunction()">isFunction</a>, <a href="../phpdoctor/doc.html#isGlobal()">isGlobal</a>, <a href="../phpdoctor/doc.html#isInterface()">isInterface</a>, <a href="../phpdoctor/doc.html#isMethod()">isMethod</a>, <a href="../phpdoctor/doc.html#isOrdinaryClass()">isOrdinaryClass</a>, <a href="../phpdoctor/doc.html#mergeData()">mergeData</a>, <a href="../phpdoctor/doc.html#name()">name</a>, <a href="../phpdoctor/doc.html#set()">set</a>, <a href="../phpdoctor/doc.html#setByRef()">setByRef</a>, <a href="../phpdoctor/doc.html#setTag()">setTag</a>, <a href="../phpdoctor/doc.html#tags()">tags</a></td></tr></table>
 
 <h2 id="detail_constr">Constructor Detail</h2>
-<div class="location">/classes/packageDoc.php at line 55</div>
+<a href="../source/classes/packagedoc.php.html#line52" class="location">classes/packageDoc.php at line 52</a>
+
 <h3 id="packageDoc()">packageDoc</h3>
 <code class="signature">public <strong>packageDoc</strong>(str name, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root)</code>
 <div class="details">
-<p>
-Constructor
-</p></div>
+<p>Constructor</p></div>
 
 <hr>
 
 <h2 id="detail_method">Method Detail</h2>
-<div class="location">/classes/packageDoc.php at line 110</div>
+<a href="../source/classes/packagedoc.php.html#line107" class="location">classes/packageDoc.php at line 107</a>
+
 <h3 id="addClass()">addClass</h3>
 <code class="signature">public  void <strong>addClass</strong>(<a href="../phpdoctor/classdoc.html">ClassDoc</a> class)</code>
 <div class="details">
-<p>
-Add a class to this package.
-</p></div>
+<p>Add a class to this package.</p></div>
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 135</div>
+<a href="../source/classes/packagedoc.php.html#line132" class="location">classes/packageDoc.php at line 132</a>
+
 <h3 id="addFunction()">addFunction</h3>
 <code class="signature">public  void <strong>addFunction</strong>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> function)</code>
 <div class="details">
-<p>
-Add a function to this package.
-</p></div>
+<p>Add a function to this package.</p></div>
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 124</div>
+<a href="../source/classes/packagedoc.php.html#line121" class="location">classes/packageDoc.php at line 121</a>
+
 <h3 id="addGlobal()">addGlobal</h3>
 <code class="signature">public  void <strong>addGlobal</strong>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> global)</code>
 <div class="details">
-<p>
-Add a global to this package.
-</p></div>
+<p>Add a global to this package.</p></div>
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 149</div>
+<a href="../source/classes/packagedoc.php.html#line146" class="location">classes/packageDoc.php at line 146</a>
+
 <h3 id="allClasses()">allClasses</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc[]</a> <strong>allClasses</strong>()</code>
 <div class="details">
-<p>
-Get all included classes (including exceptions and interfaces).
-</p><dl>
+<p>Get all included classes (including exceptions and interfaces).</p><dl>
 <dt>Returns:</dt>
 <dd>An array of classes</dd>
 </dl>
@@ -209,33 +175,30 @@ Get all included classes (including exceptions and interfaces).
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 89</div>
+<a href="../source/classes/packagedoc.php.html#line86" class="location">classes/packageDoc.php at line 86</a>
+
 <h3 id="asPath()">asPath</h3>
 <code class="signature">public  str <strong>asPath</strong>()</code>
 <div class="details">
-<p>
-Return the package path.
-</p></div>
+<p>Return the package path.</p></div>
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 98</div>
+<a href="../source/classes/packagedoc.php.html#line95" class="location">classes/packageDoc.php at line 95</a>
+
 <h3 id="depth()">depth</h3>
 <code class="signature">public  int <strong>depth</strong>()</code>
 <div class="details">
-<p>
-Calculate the depth of this package from the root.
-</p></div>
+<p>Calculate the depth of this package from the root.</p></div>
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 158</div>
+<a href="../source/classes/packagedoc.php.html#line155" class="location">classes/packageDoc.php at line 155</a>
+
 <h3 id="exceptions()">exceptions</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc[]</a> <strong>exceptions</strong>()</code>
 <div class="details">
-<p>
-Get exceptions in this package.
-</p><dl>
+<p>Get exceptions in this package.</p><dl>
 <dt>Returns:</dt>
 <dd>An array of exceptions</dd>
 </dl>
@@ -243,13 +206,12 @@ Get exceptions in this package.
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 222</div>
+<a href="../source/classes/packagedoc.php.html#line219" class="location">classes/packageDoc.php at line 219</a>
+
 <h3 id="findClass()">findClass</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc</a> <strong>findClass</strong>(str className)</code>
 <div class="details">
-<p>
-Lookup for a class within this package.
-</p><dl>
+<p>Lookup for a class within this package.</p><dl>
 <dt>Parameters:</dt>
 <dd>className - Name of the class to lookup</dd>
 <dt>Returns:</dt>
@@ -259,13 +221,12 @@ Lookup for a class within this package.
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 212</div>
+<a href="../source/classes/packagedoc.php.html#line209" class="location">classes/packageDoc.php at line 209</a>
+
 <h3 id="functions()">functions</h3>
 <code class="signature">public  <a href="../phpdoctor/methoddoc.html">MethodDoc[]</a> <strong>functions</strong>()</code>
 <div class="details">
-<p>
-Get functions in this package.
-</p><dl>
+<p>Get functions in this package.</p><dl>
 <dt>Returns:</dt>
 <dd>An array of functions</dd>
 </dl>
@@ -273,13 +234,12 @@ Get functions in this package.
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 203</div>
+<a href="../source/classes/packagedoc.php.html#line200" class="location">classes/packageDoc.php at line 200</a>
+
 <h3 id="globals()">globals</h3>
 <code class="signature">public  <a href="../phpdoctor/fielddoc.html">FieldDoc[]</a> <strong>globals</strong>()</code>
 <div class="details">
-<p>
-Get globals in this package.
-</p><dl>
+<p>Get globals in this package.</p><dl>
 <dt>Returns:</dt>
 <dd>An array of globals</dd>
 </dl>
@@ -287,13 +247,12 @@ Get globals in this package.
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 173</div>
+<a href="../source/classes/packagedoc.php.html#line170" class="location">classes/packageDoc.php at line 170</a>
+
 <h3 id="interfaces()">interfaces</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc[]</a> <strong>interfaces</strong>()</code>
 <div class="details">
-<p>
-Get interfaces in this package.
-</p><dl>
+<p>Get interfaces in this package.</p><dl>
 <dt>Returns:</dt>
 <dd>An array of interfaces</dd>
 </dl>
@@ -301,13 +260,12 @@ Get interfaces in this package.
 
 <hr>
 
-<div class="location">/classes/packageDoc.php at line 188</div>
+<a href="../source/classes/packagedoc.php.html#line185" class="location">classes/packageDoc.php at line 185</a>
+
 <h3 id="ordinaryClasses()">ordinaryClasses</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc[]</a> <strong>ordinaryClasses</strong>()</code>
 <div class="details">
-<p>
-Get ordinary classes (excluding exceptions and interfaces) in this package.
-</p><dl>
+<p>Get ordinary classes (excluding exceptions and interfaces) in this package.</p><dl>
 <dt>Returns:</dt>
 <dd>An array of classes</dd>
 </dl>
@@ -322,6 +280,7 @@ Get ordinary classes (excluding exceptions and interfaces) in this package.
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -337,7 +296,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

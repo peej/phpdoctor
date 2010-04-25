@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>SimpleSaxParser (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplesaxparser.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\SimpleSaxParser</div>
+<a href="../source/parser.php.html#line448" class="location">parser.php at line 448</a>
+
+<h1>Class SimpleSaxParser</h1>
+
+<pre class="tree"><strong>SimpleSaxParser</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>SimpleSaxParser</strong></p>
+
+<div class="comment" id="overview_description"><p>Converts HTML tokens into selected SAX events.</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>WebTester</dd>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#SimpleSaxParser()">SimpleSaxParser</a>(<a href="../simpletest/simplesaxlistener.html">SimpleSaxListener</a> listener)</p><p class="description">Sets the listener.</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#acceptAttributeToken()">acceptAttributeToken</a>(string token, integer event)</p><p class="description">Part of the tag data.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#acceptEndToken()">acceptEndToken</a>(string token, integer event)</p><p class="description">Accepts a token from the end tag mode.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#acceptEntityToken()">acceptEntityToken</a>(string token, integer event)</p><p class="description">A character entity.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#acceptStartToken()">acceptStartToken</a>(string token, integer event)</p><p class="description">Accepts a token from the tag mode. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#acceptTextToken()">acceptTextToken</a>(string token, integer event)</p><p class="description">Character data between tags regarded as
+important.</p></td>
+</tr>
+<tr>
+<td class="type">static  <a href="../simpletest/simplelexer.html">SimpleLexer</a></td>
+<td class="description"><p class="name"><a href="#createLexer()">createLexer</a>(<a href="../simpletest/simplesaxparser.html">SimpleSaxParser</a> parser)</p><p class="description">Sets up the matching lexer. </p></td>
+</tr>
+<tr>
+<td class="type">static  string</td>
+<td class="description"><p class="name"><a href="#decodeHtml()">decodeHtml</a>(string html)</p><p class="description">Decodes any HTML entities.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#ignore()">ignore</a>(string token, integer event)</p><p class="description">Incoming data to be ignored.</p></td>
+</tr>
+<tr>
+<td class="type">static  string</td>
+<td class="description"><p class="name"><a href="#normalise()">normalise</a>(string html)</p><p class="description">Turns HTML into text browser visible text. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#parse()">parse</a>(string raw)</p><p class="description">Runs the content through the lexer which
+should call back to the acceptors.</p></td>
+</tr>
+</table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/parser.php.html#line460" class="location">parser.php at line 460</a>
+
+<h3 id="SimpleSaxParser()">SimpleSaxParser</h3>
+<code class="signature">public <strong>SimpleSaxParser</strong>(<a href="../simpletest/simplesaxlistener.html">SimpleSaxListener</a> listener)</code>
+<div class="details">
+<p>Sets the listener.</p><dl>
+<dt>Parameters:</dt>
+<dd>listener - SAX event handler.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/parser.php.html#line625" class="location">parser.php at line 625</a>
+
+<h3 id="acceptAttributeToken()">acceptAttributeToken</h3>
+<code class="signature">public  boolean <strong>acceptAttributeToken</strong>(string token, integer event)</code>
+<div class="details">
+<p>Part of the tag data.</p><dl>
+<dt>Parameters:</dt>
+<dd>token - Incoming characters.</dd>
+<dd>event - Lexer event type.</dd>
+<dt>Returns:</dt>
+<dd>False if parse error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line611" class="location">parser.php at line 611</a>
+
+<h3 id="acceptEndToken()">acceptEndToken</h3>
+<code class="signature">public  boolean <strong>acceptEndToken</strong>(string token, integer event)</code>
+<div class="details">
+<p>Accepts a token from the end tag mode.
+The element name is converted to lower case.</p><dl>
+<dt>Parameters:</dt>
+<dd>token - Incoming characters.</dd>
+<dd>event - Lexer event type.</dd>
+<dt>Returns:</dt>
+<dd>False if parse error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line644" class="location">parser.php at line 644</a>
+
+<h3 id="acceptEntityToken()">acceptEntityToken</h3>
+<code class="signature">public  boolean <strong>acceptEntityToken</strong>(string token, integer event)</code>
+<div class="details">
+<p>A character entity.</p><dl>
+<dt>Parameters:</dt>
+<dd>token - Incoming characters.</dd>
+<dd>event - Lexer event type.</dd>
+<dt>Returns:</dt>
+<dd>False if parse error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line583" class="location">parser.php at line 583</a>
+
+<h3 id="acceptStartToken()">acceptStartToken</h3>
+<code class="signature">public  boolean <strong>acceptStartToken</strong>(string token, integer event)</code>
+<div class="details">
+<p>Accepts a token from the tag mode. If the
+starting element completes then the element
+is dispatched and the current attributes
+set back to empty. The element or attribute
+name is converted to lower case.</p><dl>
+<dt>Parameters:</dt>
+<dd>token - Incoming characters.</dd>
+<dd>event - Lexer event type.</dd>
+<dt>Returns:</dt>
+<dd>False if parse error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line655" class="location">parser.php at line 655</a>
+
+<h3 id="acceptTextToken()">acceptTextToken</h3>
+<code class="signature">public  boolean <strong>acceptTextToken</strong>(string token, integer event)</code>
+<div class="details">
+<p>Character data between tags regarded as
+important.</p><dl>
+<dt>Parameters:</dt>
+<dd>token - Incoming characters.</dd>
+<dd>event - Lexer event type.</dd>
+<dt>Returns:</dt>
+<dd>False if parse error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line486" class="location">parser.php at line 486</a>
+
+<h3 id="createLexer()">createLexer</h3>
+<code class="signature">public static  <a href="../simpletest/simplelexer.html">SimpleLexer</a> <strong>createLexer</strong>(<a href="../simpletest/simplesaxparser.html">SimpleSaxParser</a> parser)</code>
+<div class="details">
+<p>Sets up the matching lexer. Starts in 'text' mode.</p><dl>
+<dt>Parameters:</dt>
+<dd>parser - Event generator, usually $self.</dd>
+<dt>Returns:</dt>
+<dd>Lexer suitable for this parser.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line677" class="location">parser.php at line 677</a>
+
+<h3 id="decodeHtml()">decodeHtml</h3>
+<code class="signature">public static  string <strong>decodeHtml</strong>(string html)</code>
+<div class="details">
+<p>Decodes any HTML entities.</p><dl>
+<dt>Parameters:</dt>
+<dd>html - Incoming HTML.</dd>
+<dt>Returns:</dt>
+<dd>Outgoing plain text.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line666" class="location">parser.php at line 666</a>
+
+<h3 id="ignore()">ignore</h3>
+<code class="signature">public  boolean <strong>ignore</strong>(string token, integer event)</code>
+<div class="details">
+<p>Incoming data to be ignored.</p><dl>
+<dt>Parameters:</dt>
+<dd>token - Incoming characters.</dd>
+<dd>event - Lexer event type.</dd>
+<dt>Returns:</dt>
+<dd>False if parse error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line694" class="location">parser.php at line 694</a>
+
+<h3 id="normalise()">normalise</h3>
+<code class="signature">public static  string <strong>normalise</strong>(string html)</code>
+<div class="details">
+<p>Turns HTML into text browser visible text. Images
+are converted to their alt text and tags are supressed.
+Entities are converted to their visible representation.</p><dl>
+<dt>Parameters:</dt>
+<dd>html - HTML to convert.</dd>
+<dt>Returns:</dt>
+<dd>Plain text.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/parser.php.html#line475" class="location">parser.php at line 475</a>
+
+<h3 id="parse()">parse</h3>
+<code class="signature">public  boolean <strong>parse</strong>(string raw)</code>
+<div class="details">
+<p>Runs the content through the lexer which
+should call back to the acceptors.</p><dl>
+<dt>Parameters:</dt>
+<dd>raw - Page text to parse.</dd>
+<dt>Returns:</dt>
+<dd>False if parse error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplesaxparser.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

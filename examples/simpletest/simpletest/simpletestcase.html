@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>SimpleTestCase (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simpletestcase.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\SimpleTestCase</div>
+<a href="../source/simple_test.php.html#line32" class="location">simple_test.php at line 32</a>
+
+<h1>Class SimpleTestCase</h1>
+
+<pre class="tree"><strong>SimpleTestCase</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>SimpleTestCase</strong></p>
+
+<div class="comment" id="overview_description"><p>Basic test case. This is the smallest unit of a test
+suite. It searches for
+all methods that start with the the string "test" and
+runs them. Working test cases extend this class.</p></div>
+
+<dl>
+<dt>Package		SimpleTest.</dt>
+<dt>Subpackage	UnitTester.</dt>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#SimpleTestCase()">SimpleTestCase</a>(string label)</p><p class="description">Sets up the test with no display.</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertExpectation()">assertExpectation</a>(<a href="../simpletest/simpleexpectation.html">SimpleExpectation</a> expectation, mixed test_value, string message)</p><p class="description">Runs an expectation directly, for extending the
+tests with new expectation classes.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertFalse()">assertFalse</a>(boolean result, string message)</p><p class="description">Will be true on false and vice versa. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertTrue()">assertTrue</a>(boolean result, string message)</p><p class="description">Called from within the test methods to register
+passes and failures.</p></td>
+</tr>
+<tr>
+<td class="type"> <a href="../simpletest/simpleinvoker.html">SimpleInvoker</a></td>
+<td class="description"><p class="name"><a href="#createInvoker()">createInvoker</a>()</p><p class="description">Used to invoke the single tests.</p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#dump()">dump</a>(mixed variable, string message)</p><p class="description">Sends a formatted dump of a variable to the
+test suite for those emergency debugging
+situations.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#error()">error</a>(integer severity, string message, string file, integer line, hash globals)</p><p class="description">Formats a PHP error and dispatches it to the
+runner.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#fail()">fail</a>(string message)</p><p class="description">Sends a fail event with a message.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getAssertionLine()">getAssertionLine</a>(string format, array stack)</p><p class="description">Uses a stack trace to find the line of an assertion.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getLabel()">getLabel</a>()</p><p class="description">Accessor for the test name for subclasses.</p></td>
+</tr>
+<tr>
+<td class="type">static  integer</td>
+<td class="description"><p class="name"><a href="#getSize()">getSize</a>()</p><p class="description">Accessor for the number of subtests.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#pass()">pass</a>(string message)</p><p class="description">Sends a pass event with a message.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#run()">run</a>(<a href="../simpletest/simplereporter.html">SimpleReporter</a> reporter)</p><p class="description">Uses reflection to run every method within itself
+starting with the string "test" unless a method
+is specified.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#sendMessage()">sendMessage</a>(string message)</p><p class="description">Dispatches a text message straight to the
+test suite. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#setUp()">setUp</a>()</p><p class="description">Sets up unit test wide variables at the start
+of each test method. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#signal()">signal</a>(string type, mixed payload)</p><p class="description">Sends a user defined event to the test runner.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#swallowErrors()">swallowErrors</a>()</p><p class="description">Cancels any outstanding errors.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#tearDown()">tearDown</a>()</p><p class="description">Clears the data set in the setUp() method call.
+</p></td>
+</tr>
+</table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/simple_test.php.html#line42" class="location">simple_test.php at line 42</a>
+
+<h3 id="SimpleTestCase()">SimpleTestCase</h3>
+<code class="signature">public <strong>SimpleTestCase</strong>(string label)</code>
+<div class="details">
+<p>Sets up the test with no display.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - If no test name is given then the class name is used.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/simple_test.php.html#line174" class="location">simple_test.php at line 174</a>
+
+<h3 id="assertExpectation()">assertExpectation</h3>
+<code class="signature">public  boolean <strong>assertExpectation</strong>(<a href="../simpletest/simpleexpectation.html">SimpleExpectation</a> expectation, mixed test_value, string message)</code>
+<div class="details">
+<p>Runs an expectation directly, for extending the
+tests with new expectation classes.</p><dl>
+<dt>Parameters:</dt>
+<dd>expectation - Expectation subclass.</dd>
+<dd>test_value - Value to compare.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True on pass</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line212" class="location">simple_test.php at line 212</a>
+
+<h3 id="assertFalse()">assertFalse</h3>
+<code class="signature">public  boolean <strong>assertFalse</strong>(boolean result, string message)</code>
+<div class="details">
+<p>Will be true on false and vice versa. False
+is the PHP definition of false, so that null,
+empty strings, zero and an empty array all count
+as false.</p><dl>
+<dt>Parameters:</dt>
+<dd>result - Pass on false.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True on pass</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line189" class="location">simple_test.php at line 189</a>
+
+<h3 id="assertTrue()">assertTrue</h3>
+<code class="signature">public  boolean <strong>assertTrue</strong>(boolean result, string message)</code>
+<div class="details">
+<p>Called from within the test methods to register
+passes and failures.</p><dl>
+<dt>Parameters:</dt>
+<dd>result - Pass on true.</dd>
+<dd>message - Message to display describing the test state.</dd>
+<dt>Returns:</dt>
+<dd>True on pass</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line61" class="location">simple_test.php at line 61</a>
+
+<h3 id="createInvoker()">createInvoker</h3>
+<code class="signature">public  <a href="../simpletest/simpleinvoker.html">SimpleInvoker</a> <strong>createInvoker</strong>()</code>
+<div class="details">
+<p>Used to invoke the single tests.</p><dl>
+<dt>Returns:</dt>
+<dd>Individual test runner.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line245" class="location">simple_test.php at line 245</a>
+
+<h3 id="dump()">dump</h3>
+<code class="signature">public  mixed <strong>dump</strong>(mixed variable, string message)</code>
+<div class="details">
+<p>Sends a formatted dump of a variable to the
+test suite for those emergency debugging
+situations.</p><dl>
+<dt>Parameters:</dt>
+<dd>variable - Variable to display.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>The original variable.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line137" class="location">simple_test.php at line 137</a>
+
+<h3 id="error()">error</h3>
+<code class="signature">public  void <strong>error</strong>(integer severity, string message, string file, integer line, hash globals)</code>
+<div class="details">
+<p>Formats a PHP error and dispatches it to the
+runner.</p><dl>
+<dt>Parameters:</dt>
+<dd>severity - PHP error code.</dd>
+<dd>message - Text of error.</dd>
+<dd>file - File error occoured in.</dd>
+<dd>line - Line number of error.</dd>
+<dd>globals - PHP super global arrays.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line123" class="location">simple_test.php at line 123</a>
+
+<h3 id="fail()">fail</h3>
+<code class="signature">public  void <strong>fail</strong>(string message)</code>
+<div class="details">
+<p>Sends a fail event with a message.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Message to send.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line229" class="location">simple_test.php at line 229</a>
+
+<h3 id="getAssertionLine()">getAssertionLine</h3>
+<code class="signature">public  string <strong>getAssertionLine</strong>(string format, array stack)</code>
+<div class="details">
+<p>Uses a stack trace to find the line of an assertion.</p><dl>
+<dt>Parameters:</dt>
+<dd>format - String formatting.</dd>
+<dd>stack - Stack frames top most first. Only needed if not using the PHP backtrace function.</dd>
+<dt>Returns:</dt>
+<dd>Line number of first assert* method embedded in format string.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line52" class="location">simple_test.php at line 52</a>
+
+<h3 id="getLabel()">getLabel</h3>
+<code class="signature">public  string <strong>getLabel</strong>()</code>
+<div class="details">
+<p>Accessor for the test name for subclasses.</p><dl>
+<dt>Returns:</dt>
+<dd>Name of the test.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line270" class="location">simple_test.php at line 270</a>
+
+<h3 id="getSize()">getSize</h3>
+<code class="signature">public static  integer <strong>getSize</strong>()</code>
+<div class="details">
+<p>Accessor for the number of subtests.</p><dl>
+<dt>Returns:</dt>
+<dd>Number of test cases.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line114" class="location">simple_test.php at line 114</a>
+
+<h3 id="pass()">pass</h3>
+<code class="signature">public  void <strong>pass</strong>(string message)</code>
+<div class="details">
+<p>Sends a pass event with a message.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Message to send.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line84" class="location">simple_test.php at line 84</a>
+
+<h3 id="run()">run</h3>
+<code class="signature">public  void <strong>run</strong>(<a href="../simpletest/simplereporter.html">SimpleReporter</a> reporter)</code>
+<div class="details">
+<p>Uses reflection to run every method within itself
+starting with the string "test" unless a method
+is specified.</p><dl>
+<dt>Parameters:</dt>
+<dd>reporter - Current test reporter.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line260" class="location">simple_test.php at line 260</a>
+
+<h3 id="sendMessage()">sendMessage</h3>
+<code class="signature">public  void <strong>sendMessage</strong>(string message)</code>
+<div class="details">
+<p>Dispatches a text message straight to the
+test suite. Useful for status bar displays.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Message to show.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line98" class="location">simple_test.php at line 98</a>
+
+<h3 id="setUp()">setUp</h3>
+<code class="signature">public  void <strong>setUp</strong>()</code>
+<div class="details">
+<p>Sets up unit test wide variables at the start
+of each test method. To be overridden in
+actual user test cases.</p></div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line152" class="location">simple_test.php at line 152</a>
+
+<h3 id="signal()">signal</h3>
+<code class="signature">public  void <strong>signal</strong>(string type, mixed payload)</code>
+<div class="details">
+<p>Sends a user defined event to the test runner.
+This is for small scale extension where
+both the test case and either the runner or
+display are subclassed.</p><dl>
+<dt>Parameters:</dt>
+<dd>type - Type of event.</dd>
+<dd>payload - Object or message to deliver.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line160" class="location">simple_test.php at line 160</a>
+
+<h3 id="swallowErrors()">swallowErrors</h3>
+<code class="signature">public  void <strong>swallowErrors</strong>()</code>
+<div class="details">
+<p>Cancels any outstanding errors.</p></div>
+
+<hr>
+
+<a href="../source/simple_test.php.html#line106" class="location">simple_test.php at line 106</a>
+
+<h3 id="tearDown()">tearDown</h3>
+<code class="signature">public  void <strong>tearDown</strong>()</code>
+<div class="details">
+<p>Clears the data set in the setUp() method call.
+To be overridden by the user in actual user test cases.</p></div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simpletestcase.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:25:51 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>geshi (GeSHi)</title>
+
+</head>
+<body id="package" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li class="active">Package</li>
+<li>Class</li><li><a href="../geshi/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../geshi/package-summary.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>Package geshi</h1>
+
+<table class="title">
+<tr><th colspan="2" class="title">Class Summary</th></tr>
+<tr><td class="name"><a href="../geshi/geshi.html">GeSHi</a></td><td class="description">The GeSHi Class.
+</td></tr>
+</table>
+
+<table class="title">
+<tr><th colspan="2" class="title">Function Summary</th></tr>
+<tr><td class="name"><a href="package-functions.html#geshi_highlight">geshi_highlight</a></td><td class="description">Easy way to highlight stuff. </td></tr>
+<tr><td class="name"><a href="package-functions.html#stripos">stripos</a></td><td class="description"></td></tr>
+</table>
+
+<table class="title">
+<tr><th colspan="2" class="title">Global Summary</th></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ACTIVE">GESHI_ACTIVE</a></td><td class="description">Links in the source in the :active state</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_AFTER">GESHI_AFTER</a></td><td class="description">The key of the regex array defining what bracket group in a
+matched search to put after the replacement</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ALWAYS">GESHI_ALWAYS</a></td><td class="description">Strict mode always applies</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_BEFORE">GESHI_BEFORE</a></td><td class="description">The key of the regex array defining what bracket group in a
+matched search to put before the replacement</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_CAPS_LOWER">GESHI_CAPS_LOWER</a></td><td class="description">Leave keywords found as the case that they are</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_CAPS_NO_CHANGE">GESHI_CAPS_NO_CHANGE</a></td><td class="description">Lowercase keywords found</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_CAPS_UPPER">GESHI_CAPS_UPPER</a></td><td class="description">Uppercase keywords found</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_CLASS">GESHI_CLASS</a></td><td class="description">The key of the regex array defining a custom keyword to use
+for this regexp's html tag class</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_COMMENTS">GESHI_COMMENTS</a></td><td class="description">Used in language files to mark comments</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_END_IMPORTANT">GESHI_END_IMPORTANT</a></td><td class="description">The ender for important parts of the source</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ERROR_FILE_NOT_READABLE">GESHI_ERROR_FILE_NOT_READABLE</a></td><td class="description">GeSHi could not open a file for reading (generally a language file)</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ERROR_INVALID_HEADER_TYPE">GESHI_ERROR_INVALID_HEADER_TYPE</a></td><td class="description">The header type passed to {@link GeSHi->set_header_type()} was invalid</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ERROR_INVALID_LINE_NUMBER_TYPE">GESHI_ERROR_INVALID_LINE_NUMBER_TYPE</a></td><td class="description">The line number type passed to {@link GeSHi->enable_line_numbers()} was invalid</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ERROR_NO_INPUT">GESHI_ERROR_NO_INPUT</a></td><td class="description">No sourcecode to highlight was specified</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ERROR_NO_SUCH_LANG">GESHI_ERROR_NO_SUCH_LANG</a></td><td class="description">The language specified does not exist</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_FANCY_LINE_NUMBERS">GESHI_FANCY_LINE_NUMBERS</a></td><td class="description">Use fancy line numbers when building the result</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_HEADER_DIV">GESHI_HEADER_DIV</a></td><td class="description">Use a "div" to surround the source</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_HEADER_NONE">GESHI_HEADER_NONE</a></td><td class="description">Use nothing to surround the source</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_HEADER_PRE">GESHI_HEADER_PRE</a></td><td class="description">Use a "pre" to surround the source</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_HEADER_PRE_TABLE">GESHI_HEADER_PRE_TABLE</a></td><td class="description">Use a "table" to surround the source:
+$header
+$linenumbers$code>
+$footer
+this is essentially only a workaround for Firefox, see sf#1651996 or take a look at
+https://bugzilla.mozilla.org/show_bug.cgi?id=365805</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_HEADER_PRE_VALID">GESHI_HEADER_PRE_VALID</a></td><td class="description">Use a pre to wrap lines when line numbers are enabled or to wrap the whole code.</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_HOVER">GESHI_HOVER</a></td><td class="description">Links in the source in the :hover state</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_LANG_ROOT">GESHI_LANG_ROOT</a></td><td class="description">The language file directory for GeSHi
+@access private</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_LINK">GESHI_LINK</a></td><td class="description">Links in the source in the :link state</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_MAX_PCRE_LENGTH">GESHI_MAX_PCRE_LENGTH</a></td><td class="description">it's also important not to generate too long regular expressions
+be generous here... </td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_MAX_PCRE_SUBPATTERNS">GESHI_MAX_PCRE_SUBPATTERNS</a></td><td class="description">some old PHP / PCRE subpatterns only support up to xxx subpatterns in
+regular expressions. </td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_MAYBE">GESHI_MAYBE</a></td><td class="description">Strict mode *might* apply, and can be enabled or
+disabled by {@link GeSHi->enable_strict_mode()}</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_MODIFIERS">GESHI_MODIFIERS</a></td><td class="description">The key of the regex array defining any modifiers to the regular expression</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NORMAL_LINE_NUMBERS">GESHI_NORMAL_LINE_NUMBERS</a></td><td class="description">Use normal line numbers when building the result</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NO_LINE_NUMBERS">GESHI_NO_LINE_NUMBERS</a></td><td class="description">Use no line numbers when building the result</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_BIN_PREFIX_0B">GESHI_NUMBER_BIN_PREFIX_0B</a></td><td class="description">Number format to highlight binary numbers with a prefix 0b (C)</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_BIN_PREFIX_PERCENT">GESHI_NUMBER_BIN_PREFIX_PERCENT</a></td><td class="description">Number format to highlight binary numbers with a prefix %</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_BIN_SUFFIX">GESHI_NUMBER_BIN_SUFFIX</a></td><td class="description">Number format to highlight binary numbers with a suffix "b"</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_FLT_NONSCI">GESHI_NUMBER_FLT_NONSCI</a></td><td class="description">Number format to highlight floating-point numbers without support for scientific notation</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_FLT_NONSCI_F">GESHI_NUMBER_FLT_NONSCI_F</a></td><td class="description">Number format to highlight floating-point numbers without support for scientific notation</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_FLT_SCI_SHORT">GESHI_NUMBER_FLT_SCI_SHORT</a></td><td class="description">Number format to highlight floating-point numbers with support for scientific notation (E) and optional leading zero</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_FLT_SCI_ZERO">GESHI_NUMBER_FLT_SCI_ZERO</a></td><td class="description">Number format to highlight floating-point numbers with support for scientific notation (E) and required leading digit</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_HEX_PREFIX">GESHI_NUMBER_HEX_PREFIX</a></td><td class="description">Number format to highlight hex numbers with a prefix 0x</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_HEX_SUFFIX">GESHI_NUMBER_HEX_SUFFIX</a></td><td class="description">Number format to highlight hex numbers with a suffix of h</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_INT_BASIC">GESHI_NUMBER_INT_BASIC</a></td><td class="description">Basic number format for integers</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_INT_CSTYLE">GESHI_NUMBER_INT_CSTYLE</a></td><td class="description">Enhanced number format for integers like seen in C</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_OCT_PREFIX">GESHI_NUMBER_OCT_PREFIX</a></td><td class="description">Number format to highlight octal numbers with a leading zero</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_NUMBER_OCT_SUFFIX">GESHI_NUMBER_OCT_SUFFIX</a></td><td class="description">Number format to highlight octal numbers with a suffix of o</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_PHP_PRE_433">GESHI_PHP_PRE_433</a></td><td class="description">Used to work around missing PHP features</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_REPLACE">GESHI_REPLACE</a></td><td class="description">The key of the regex array defining what bracket group in a
+matched search to use as a replacement</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_ROOT">GESHI_ROOT</a></td><td class="description">The root directory for GeSHi</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_SEARCH">GESHI_SEARCH</a></td><td class="description">The key of the regex array defining what to search for</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_SECURITY_PARANOID">GESHI_SECURITY_PARANOID</a></td><td class="description">Tells GeSHi to be paranoid about security settings</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_START_IMPORTANT">GESHI_START_IMPORTANT</a></td><td class="description">The starter for important parts of the source</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_VERSION">GESHI_VERSION</a></td><td class="description">The version of this GeSHi file</td></tr>
+<tr><td class="name"><a href="package-globals.html#GESHI_VISITED">GESHI_VISITED</a></td><td class="description">Links in the source in the :visited state</td></tr>
+<tr><td class="name"><a href="package-globals.html#language_data">language_data</a></td><td class="description">abap.php
+--------
+Author: Andres Picazo (andres@andrespicazo.com)
+Contributors:
+- Sandra Rossi (sandra.rossi@gmail.com)
+- Jacob Laursen (jlu@kmd.dk)
+Copyright: (c) 2007 Andres Picazo
+Release Version: 1.0.8.3
+Date Started: 2004/06/04ABAP language file for GeSHi.
+</td></tr>
+</table>
+
+<hr>
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li class="active">Package</li>
+<li>Class</li><li><a href="../geshi/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../geshi/package-summary.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

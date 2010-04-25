@@ -1,0 +1,568 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:11 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>url.php (SimpleTest)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/url.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>url.php</h1>
+<div class="comment" id="overview_description"><p>base include file for SimpleTest</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a>     *	base include file for SimpleTest
+<a name="line4"></a>     *	@package	SimpleTest
+<a name="line5"></a>     *	@subpackage	WebTester
+<a name="line6"></a>     *	@version	$Id: url.php,v 1.22 2005/02/02 23:25:23 lastcraft Exp $
+<a name="line7"></a>     */</span>
+<a name="line8"></a>&nbsp;
+<a name="line9"></a>    <span style="color: #009933; font-style: italic;">/**#@+
+<a name="line10"></a>     *	include other SimpleTest class files
+<a name="line11"></a>     */</span>
+<a name="line12"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/encoding.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line13"></a>    <span style="color: #009933; font-style: italic;">/**#@-*/</span>
+<a name="line14"></a>&nbsp;
+<a name="line15"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line16"></a>     *    URL parser to replace parse_url() PHP function which
+<a name="line17"></a>     *    got broken in PHP 4.3.0. Adds some browser specific
+<a name="line18"></a>     *    functionality such as expandomatics.
+<a name="line19"></a>     *    Guesses a bit trying to separate the host from
+<a name="line20"></a>     *    the path.
+<a name="line21"></a>	 *    @package SimpleTest
+<a name="line22"></a>	 *    @subpackage WebTester
+<a name="line23"></a>     */</span>
+<a name="line24"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleUrl <span style="color: #009900;">&#123;</span>
+<a name="line25"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_scheme</span><span style="color: #339933;">;</span>
+<a name="line26"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_username</span><span style="color: #339933;">;</span>
+<a name="line27"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_password</span><span style="color: #339933;">;</span>
+<a name="line28"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_host</span><span style="color: #339933;">;</span>
+<a name="line29"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_port</span><span style="color: #339933;">;</span>
+<a name="line30"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_path</span><span style="color: #339933;">;</span>
+<a name="line31"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_request</span><span style="color: #339933;">;</span>
+<a name="line32"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_fragment</span><span style="color: #339933;">;</span>
+<a name="line33"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_target</span><span style="color: #339933;">;</span>
+<a name="line34"></a>&nbsp;
+<a name="line35"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line36"></a>         *    Constructor. Parses URL into sections.
+<a name="line37"></a>         *    @param string $url        Incoming URL.
+<a name="line38"></a>         *    @access public
+<a name="line39"></a>         */</span>
+<a name="line40"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleUrl<span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line41"></a>            <a href="http://www.php.net/list"><span style="color: #990000;">list</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span><span style="color: #339933;">,</span> <span style="color: #000088;">$y</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_chompCoordinates<span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line42"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scheme <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_chompScheme<span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line43"></a>            <a href="http://www.php.net/list"><span style="color: #990000;">list</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_username<span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_password<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_chompLogin<span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line44"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_host <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_chompHost<span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line45"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_port <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line46"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*?):(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_host<span style="color: #339933;">,</span> <span style="color: #000088;">$host_parts</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line47"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_host <span style="color: #339933;">=</span> <span style="color: #000088;">$host_parts</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line48"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_port <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>integer<span style="color: #009900;">&#41;</span><span style="color: #000088;">$host_parts</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line49"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line50"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_chompPath<span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line51"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_parseRequest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_chompRequest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line52"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #339933;">-&gt;</span><span style="color: #004000;">setCoordinates</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span><span style="color: #339933;">,</span> <span style="color: #000088;">$y</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line53"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_fragment <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/strncmp"><span style="color: #990000;">strncmp</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;#&quot;</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span> ? <a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line54"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_target <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line55"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line56"></a>&nbsp;
+<a name="line57"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line58"></a>         *    Extracts the X, Y coordinate pair from an image map.
+<a name="line59"></a>         *    @param string $url   URL so far. The coordinates will be
+<a name="line60"></a>         *                         removed.
+<a name="line61"></a>         *    @return array        X, Y as a pair of integers.
+<a name="line62"></a>         *    @access private
+<a name="line63"></a>         */</span>
+<a name="line64"></a>        <span style="color: #000000; font-weight: bold;">function</span> _chompCoordinates<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line65"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*)\?(\d+),(\d+)$/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line66"></a>                <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line67"></a>                <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>integer<span style="color: #009900;">&#41;</span><span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#40;</span>integer<span style="color: #009900;">&#41;</span><span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line68"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line69"></a>            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line70"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line71"></a>&nbsp;
+<a name="line72"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line73"></a>         *    Extracts the scheme part of an incoming URL.
+<a name="line74"></a>         *    @param string $url   URL so far. The scheme will be
+<a name="line75"></a>         *                         removed.
+<a name="line76"></a>         *    @return string       Scheme part or false.
+<a name="line77"></a>         *    @access private
+<a name="line78"></a>         */</span>
+<a name="line79"></a>        <span style="color: #000000; font-weight: bold;">function</span> _chompScheme<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line80"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*?):(\/\/)(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line81"></a>                <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line82"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line83"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line84"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line85"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line86"></a>&nbsp;
+<a name="line87"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line88"></a>         *    Extracts the username and password from the
+<a name="line89"></a>         *    incoming URL. The // prefix will be reattached
+<a name="line90"></a>         *    to the URL after the doublet is extracted.
+<a name="line91"></a>         *    @param string $url    URL so far. The username and
+<a name="line92"></a>         *                          password are removed.
+<a name="line93"></a>         *    @return array         Two item list of username and
+<a name="line94"></a>         *                          password. Will urldecode() them.
+<a name="line95"></a>         *    @access private
+<a name="line96"></a>         */</span>
+<a name="line97"></a>        <span style="color: #000000; font-weight: bold;">function</span> _chompLogin<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line98"></a>            <span style="color: #000088;">$prefix</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line99"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(\/\/)(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line100"></a>                <span style="color: #000088;">$prefix</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line101"></a>                <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line102"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line103"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*?)@(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line104"></a>                <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line105"></a>                <span style="color: #000088;">$parts</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/split"><span style="color: #990000;">split</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;:&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line106"></a>                <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line107"></a>                        <a href="http://www.php.net/urldecode"><span style="color: #990000;">urldecode</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$parts</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line108"></a>                        <a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$parts</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> ? <a href="http://www.php.net/urldecode"><span style="color: #990000;">urldecode</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$parts</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line109"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line110"></a>            <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$url</span><span style="color: #339933;">;</span>
+<a name="line111"></a>            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line112"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line113"></a>&nbsp;
+<a name="line114"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line115"></a>         *    Extracts the host part of an incoming URL.
+<a name="line116"></a>         *    Includes the port number part. Will extract
+<a name="line117"></a>         *    the host if it starts with // or it has
+<a name="line118"></a>         *    a top level domain or it has at least two
+<a name="line119"></a>         *    dots.
+<a name="line120"></a>         *    @param string $url    URL so far. The host will be
+<a name="line121"></a>         *                          removed.
+<a name="line122"></a>         *    @return string        Host part guess or false.
+<a name="line123"></a>         *    @access private
+<a name="line124"></a>         */</span>
+<a name="line125"></a>        <span style="color: #000000; font-weight: bold;">function</span> _chompHost<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line126"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(\/\/)(.*?)(\/.*|\?.*|#.*|$)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line127"></a>                <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line128"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line129"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line130"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*?)(\.\.\/|\.\/|\/|\?|#|$)(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line131"></a>                <span style="color: #000088;">$tlds</span> <span style="color: #339933;">=</span> SimpleUrl<span style="color: #339933;">::</span><span style="color: #004000;">getAllTopLevelDomains</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line132"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/[a-z0-9\-]+\.('</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$tlds</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">')/i'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line133"></a>                    <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line134"></a>                    <span style="color: #b1b100;">return</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line135"></a>                <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/[a-z0-9\-]+\.[a-z0-9\-]+\.[a-z0-9\-]+/i'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line136"></a>                    <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line137"></a>                    <span style="color: #b1b100;">return</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line138"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line139"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line140"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line141"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line142"></a>&nbsp;
+<a name="line143"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line144"></a>         *    Extracts the path information from the incoming
+<a name="line145"></a>         *    URL. Strips this path from the URL.
+<a name="line146"></a>         *    @param string $url     URL so far. The host will be
+<a name="line147"></a>         *                           removed.
+<a name="line148"></a>         *    @return string         Path part or '/'.
+<a name="line149"></a>         *    @access private
+<a name="line150"></a>         */</span>
+<a name="line151"></a>        <span style="color: #000000; font-weight: bold;">function</span> _chompPath<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line152"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*?)(\?|#|$)(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line153"></a>                <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line154"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span> ? <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">''</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line155"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line156"></a>            <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line157"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line158"></a>&nbsp;
+<a name="line159"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line160"></a>         *    Strips off the request data.
+<a name="line161"></a>         *    @param string $url  URL so far. The request will be
+<a name="line162"></a>         *                        removed.
+<a name="line163"></a>         *    @return string      Raw request part.
+<a name="line164"></a>         *    @access private
+<a name="line165"></a>         */</span>
+<a name="line166"></a>        <span style="color: #000000; font-weight: bold;">function</span> _chompRequest<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$url</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line167"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/\?(.*?)(#|$)(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$url</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line168"></a>                <span style="color: #000088;">$url</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line169"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line170"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line171"></a>            <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line172"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line173"></a>&nbsp;
+<a name="line174"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line175"></a>         *    Breaks the request down into an object.
+<a name="line176"></a>         *    @param string $raw           Raw request.
+<a name="line177"></a>         *    @return SimpleFormEncoding    Parsed data.
+<a name="line178"></a>         *    @access private
+<a name="line179"></a>         */</span>
+<a name="line180"></a>        <span style="color: #000000; font-weight: bold;">function</span> _parseRequest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$raw</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line181"></a>            <span style="color: #000088;">$request</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SimpleFormEncoding<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line182"></a>            <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/split"><span style="color: #990000;">split</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;&amp;&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$raw</span><span style="color: #009900;">&#41;</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$pair</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line183"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*?)=(.*)/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$pair</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line184"></a>                    <span style="color: #000088;">$request</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <a href="http://www.php.net/urldecode"><span style="color: #990000;">urldecode</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line185"></a>                <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$pair</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line186"></a>                    <span style="color: #000088;">$request</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$pair</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">''</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line187"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line188"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line189"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$request</span><span style="color: #339933;">;</span>
+<a name="line190"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line191"></a>&nbsp;
+<a name="line192"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line193"></a>         *    Accessor for protocol part.
+<a name="line194"></a>         *    @param string $default    Value to use if not present.
+<a name="line195"></a>         *    @return string            Scheme name, e.g &quot;http&quot;.
+<a name="line196"></a>         *    @access public
+<a name="line197"></a>         */</span>
+<a name="line198"></a>        <span style="color: #000000; font-weight: bold;">function</span> getScheme<span style="color: #009900;">&#40;</span><span style="color: #000088;">$default</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line199"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scheme ? <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scheme <span style="color: #339933;">:</span> <span style="color: #000088;">$default</span><span style="color: #339933;">;</span>
+<a name="line200"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line201"></a>&nbsp;
+<a name="line202"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line203"></a>         *    Accessor for user name.
+<a name="line204"></a>         *    @return string    Username preceding host.
+<a name="line205"></a>         *    @access public
+<a name="line206"></a>         */</span>
+<a name="line207"></a>        <span style="color: #000000; font-weight: bold;">function</span> getUsername<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line208"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_username<span style="color: #339933;">;</span>
+<a name="line209"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line210"></a>&nbsp;
+<a name="line211"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line212"></a>         *    Accessor for password.
+<a name="line213"></a>         *    @return string    Password preceding host.
+<a name="line214"></a>         *    @access public
+<a name="line215"></a>         */</span>
+<a name="line216"></a>        <span style="color: #000000; font-weight: bold;">function</span> getPassword<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line217"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_password<span style="color: #339933;">;</span>
+<a name="line218"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line219"></a>&nbsp;
+<a name="line220"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line221"></a>         *    Accessor for hostname and port.
+<a name="line222"></a>         *    @param string $default    Value to use if not present.
+<a name="line223"></a>         *    @return string            Hostname only.
+<a name="line224"></a>         *    @access public
+<a name="line225"></a>         */</span>
+<a name="line226"></a>        <span style="color: #000000; font-weight: bold;">function</span> getHost<span style="color: #009900;">&#40;</span><span style="color: #000088;">$default</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line227"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_host ? <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_host <span style="color: #339933;">:</span> <span style="color: #000088;">$default</span><span style="color: #339933;">;</span>
+<a name="line228"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line229"></a>&nbsp;
+<a name="line230"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line231"></a>         *    Accessor for top level domain.
+<a name="line232"></a>         *    @return string       Last part of host.
+<a name="line233"></a>         *    @access public
+<a name="line234"></a>         */</span>
+<a name="line235"></a>        <span style="color: #000000; font-weight: bold;">function</span> getTld<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line236"></a>            <span style="color: #000088;">$path_parts</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/pathinfo"><span style="color: #990000;">pathinfo</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line237"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$path_parts</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'extension'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #000088;">$path_parts</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'extension'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">:</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line238"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line239"></a>&nbsp;
+<a name="line240"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line241"></a>         *    Accessor for port number.
+<a name="line242"></a>         *    @return integer    TCP/IP port number.
+<a name="line243"></a>         *    @access public
+<a name="line244"></a>         */</span>
+<a name="line245"></a>        <span style="color: #000000; font-weight: bold;">function</span> getPort<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line246"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_port<span style="color: #339933;">;</span>
+<a name="line247"></a>        <span style="color: #009900;">&#125;</span>        
+<a name="line248"></a>&nbsp;
+<a name="line249"></a>       <span style="color: #009933; font-style: italic;">/**
+<a name="line250"></a>         *    Accessor for path.
+<a name="line251"></a>         *    @return string    Full path including leading slash if implied.
+<a name="line252"></a>         *    @access public
+<a name="line253"></a>         */</span>
+<a name="line254"></a>        <span style="color: #000000; font-weight: bold;">function</span> getPath<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line255"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path <span style="color: #339933;">&amp;&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_host<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line256"></a>                <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">;</span>
+<a name="line257"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line258"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #339933;">;</span>
+<a name="line259"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line260"></a>&nbsp;
+<a name="line261"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line262"></a>         *    Accessor for page if any. This may be a
+<a name="line263"></a>         *    directory name if ambiguious.
+<a name="line264"></a>         *    @return            Page name.
+<a name="line265"></a>         *    @access public
+<a name="line266"></a>         */</span>
+<a name="line267"></a>        <span style="color: #000000; font-weight: bold;">function</span> getPage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line268"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/([^\/]*?)$/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPath</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line269"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line270"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line271"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line272"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line273"></a>&nbsp;
+<a name="line274"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line275"></a>         *    Gets the path to the page.
+<a name="line276"></a>         *    @return string       Path less the page.
+<a name="line277"></a>         *    @access public
+<a name="line278"></a>         */</span>
+<a name="line279"></a>        <span style="color: #000000; font-weight: bold;">function</span> getBasePath<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line280"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/(.*\/)[^\/]*?$/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPath</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line281"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line282"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line283"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$matches</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line284"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line285"></a>&nbsp;
+<a name="line286"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line287"></a>         *    Accessor for fragment at end of URL after the &quot;#&quot;.
+<a name="line288"></a>         *    @return string    Part after &quot;#&quot;.
+<a name="line289"></a>         *    @access public
+<a name="line290"></a>         */</span>
+<a name="line291"></a>        <span style="color: #000000; font-weight: bold;">function</span> getFragment<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line292"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_fragment<span style="color: #339933;">;</span>
+<a name="line293"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line294"></a>&nbsp;
+<a name="line295"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line296"></a>         *    Accessor for horizontal image coordinate.
+<a name="line297"></a>         *    @return integer        X value.
+<a name="line298"></a>         *    @access public
+<a name="line299"></a>         */</span>
+<a name="line300"></a>        <span style="color: #000000; font-weight: bold;">function</span> getX<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line301"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #339933;">-&gt;</span><span style="color: #004000;">getX</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line302"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line303"></a>&nbsp;
+<a name="line304"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line305"></a>         *    Accessor for vertical image coordinate.
+<a name="line306"></a>         *    @return integer        Y value.
+<a name="line307"></a>         *    @access public
+<a name="line308"></a>         */</span>
+<a name="line309"></a>        <span style="color: #000000; font-weight: bold;">function</span> getY<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line310"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #339933;">-&gt;</span><span style="color: #004000;">getY</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line311"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line312"></a>&nbsp;
+<a name="line313"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line314"></a>         *    Accessor for current request parameters
+<a name="line315"></a>         *    in URL string form
+<a name="line316"></a>         *    @return string   Form is string &quot;?a=1&amp;b=2&quot;, etc.
+<a name="line317"></a>         *    @access public
+<a name="line318"></a>         */</span>
+<a name="line319"></a>        <span style="color: #000000; font-weight: bold;">function</span> getEncodedRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line320"></a>            <span style="color: #000088;">$encoded</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #339933;">-&gt;</span><span style="color: #004000;">asString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line321"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$encoded</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line322"></a>                <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'?'</span> <span style="color: #339933;">.</span> <a href="http://www.php.net/preg_replace"><span style="color: #990000;">preg_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/^\?/'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span> <span style="color: #000088;">$encoded</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line323"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line324"></a>            <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line325"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line326"></a>&nbsp;
+<a name="line327"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line328"></a>         *    Adds an additional parameter to the request.
+<a name="line329"></a>         *    @param string $key            Name of parameter.
+<a name="line330"></a>         *    @param string $value          Value as string.
+<a name="line331"></a>         *    @access public
+<a name="line332"></a>         */</span>
+<a name="line333"></a>        <span style="color: #000000; font-weight: bold;">function</span> addRequestParameter<span style="color: #009900;">&#40;</span><span style="color: #000088;">$key</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line334"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$key</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line335"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line336"></a>&nbsp;
+<a name="line337"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line338"></a>         *    Adds additional parameters to the request.
+<a name="line339"></a>         *    @param hash/SimpleFormEncoding $parameters   Additional
+<a name="line340"></a>         *                                                parameters.
+<a name="line341"></a>         *    @access public
+<a name="line342"></a>         */</span>
+<a name="line343"></a>        <span style="color: #000000; font-weight: bold;">function</span> addRequestParameters<span style="color: #009900;">&#40;</span><span style="color: #000088;">$parameters</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line344"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #339933;">-&gt;</span><span style="color: #004000;">merge</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$parameters</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line345"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line346"></a>&nbsp;
+<a name="line347"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line348"></a>         *    Clears down all parameters.
+<a name="line349"></a>         *    @access public
+<a name="line350"></a>         */</span>
+<a name="line351"></a>        <span style="color: #000000; font-weight: bold;">function</span> clearRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line352"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">&amp;new</span> SimpleFormEncoding<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line353"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line354"></a>&nbsp;
+<a name="line355"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line356"></a>         *    Sets image coordinates. Set to flase to clear
+<a name="line357"></a>         *    them.
+<a name="line358"></a>         *    @param integer $x    Horizontal position.
+<a name="line359"></a>         *    @param integer $y    Vertical position.
+<a name="line360"></a>         *    @access public
+<a name="line361"></a>         */</span>
+<a name="line362"></a>        <span style="color: #000000; font-weight: bold;">function</span> setCoordinates<span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span> <span style="color: #000088;">$y</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line363"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #339933;">-&gt;</span><span style="color: #004000;">setCoordinates</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span><span style="color: #339933;">,</span> <span style="color: #000088;">$y</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line364"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line365"></a>&nbsp;
+<a name="line366"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line367"></a>         *    Gets the frame target if present. Although
+<a name="line368"></a>         *    not strictly part of the URL specification it
+<a name="line369"></a>         *    acts as similarily to the browser.
+<a name="line370"></a>         *    @return boolean/string    Frame name or false if none.
+<a name="line371"></a>         *    @access public
+<a name="line372"></a>         */</span>
+<a name="line373"></a>        <span style="color: #000000; font-weight: bold;">function</span> getTarget<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line374"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_target<span style="color: #339933;">;</span>
+<a name="line375"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line376"></a>&nbsp;
+<a name="line377"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line378"></a>         *    Attaches a frame target.
+<a name="line379"></a>         *    @param string $frame        Name of frame.
+<a name="line380"></a>         *    @access public
+<a name="line381"></a>         */</span>
+<a name="line382"></a>        <span style="color: #000000; font-weight: bold;">function</span> setTarget<span style="color: #009900;">&#40;</span><span style="color: #000088;">$frame</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line383"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_target <span style="color: #339933;">=</span> <span style="color: #000088;">$frame</span><span style="color: #339933;">;</span>
+<a name="line384"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line385"></a>&nbsp;
+<a name="line386"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line387"></a>         *    Renders the URL back into a string.
+<a name="line388"></a>         *    @return string        URL in canonical form.
+<a name="line389"></a>         *    @access public
+<a name="line390"></a>         */</span>
+<a name="line391"></a>        <span style="color: #000000; font-weight: bold;">function</span> asString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line392"></a>            <span style="color: #000088;">$scheme</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$identity</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$host</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$path</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$encoded</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$fragment</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line393"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_username <span style="color: #339933;">&amp;&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_password<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line394"></a>                <span style="color: #000088;">$identity</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_username <span style="color: #339933;">.</span> <span style="color: #0000ff;">':'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_password <span style="color: #339933;">.</span> <span style="color: #0000ff;">'@'</span><span style="color: #339933;">;</span>
+<a name="line395"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line396"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line397"></a>                <span style="color: #000088;">$scheme</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getScheme</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getScheme</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">'http'</span><span style="color: #339933;">;</span>
+<a name="line398"></a>                <span style="color: #000088;">$host</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line399"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line400"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'/'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line401"></a>                <span style="color: #000088;">$path</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">normalisePath</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line402"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line403"></a>            <span style="color: #000088;">$encoded</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getEncodedRequest</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line404"></a>            <span style="color: #000088;">$fragment</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getFragment</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #0000ff;">'#'</span><span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getFragment</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line405"></a>            <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">&quot;<span style="color: #006699; font-weight: bold;">$scheme</span>://<span style="color: #006699; font-weight: bold;">$identity</span><span style="color: #006699; font-weight: bold;">$host</span><span style="color: #006699; font-weight: bold;">$path</span><span style="color: #006699; font-weight: bold;">$encoded</span><span style="color: #006699; font-weight: bold;">$fragment</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line406"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line407"></a>&nbsp;
+<a name="line408"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line409"></a>         *    Replaces unknown sections to turn a relative
+<a name="line410"></a>         *    URL into an absolute one. The base URL can
+<a name="line411"></a>         *    be either a string or a SimpleUrl object.
+<a name="line412"></a>         *    @param string/SimpleUrl $base       Base URL.
+<a name="line413"></a>         *    @access public
+<a name="line414"></a>         */</span>
+<a name="line415"></a>        <span style="color: #000000; font-weight: bold;">function</span> makeAbsolute<span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line416"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/is_object"><span style="color: #990000;">is_object</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line417"></a>                <span style="color: #000088;">$base</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SimpleUrl<span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line418"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line419"></a>            <span style="color: #000088;">$scheme</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getScheme</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getScheme</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #000088;">$base</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getScheme</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line420"></a>            <span style="color: #000088;">$host</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #000088;">$base</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line421"></a>            <span style="color: #000088;">$port</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_extractAbsolutePort<span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line422"></a>            <span style="color: #000088;">$path</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">normalisePath</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_extractAbsolutePath<span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line423"></a>            <span style="color: #000088;">$identity</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_getIdentity<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_getIdentity<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'@'</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line424"></a>            <span style="color: #000088;">$encoded</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getEncodedRequest</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line425"></a>            <span style="color: #000088;">$fragment</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getFragment</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #0000ff;">'#'</span><span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getFragment</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line426"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">new</span> SimpleUrl<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;<span style="color: #006699; font-weight: bold;">$scheme</span>://<span style="color: #006699; font-weight: bold;">$identity</span><span style="color: #006699; font-weight: bold;">$host</span><span style="color: #006699; font-weight: bold;">$port</span><span style="color: #006699; font-weight: bold;">$path</span><span style="color: #006699; font-weight: bold;">$encoded</span><span style="color: #006699; font-weight: bold;">$fragment</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line427"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line428"></a>&nbsp;
+<a name="line429"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line430"></a>         *    Extracts the port from the base URL if it's needed, but
+<a name="line431"></a>         *    not present, in the current URL.
+<a name="line432"></a>         *    @param string/SimpleUrl $base       Base URL.
+<a name="line433"></a>         *    @param string                       Absolute port number.
+<a name="line434"></a>         *    @access private
+<a name="line435"></a>         */</span>
+<a name="line436"></a>        <span style="color: #000000; font-weight: bold;">function</span> _extractAbsolutePort<span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line437"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line438"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPort</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #0000ff;">':'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPort</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">''</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line439"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line440"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPort</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #0000ff;">':'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$base</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPort</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">''</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line441"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line442"></a>&nbsp;
+<a name="line443"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line444"></a>         *    Replaces unknown sections of the path with base parts
+<a name="line445"></a>         *    to return a complete absolute one.
+<a name="line446"></a>         *    @param string/SimpleUrl $base       Base URL.
+<a name="line447"></a>         *    @param string                       Absolute path.
+<a name="line448"></a>         *    @access private
+<a name="line449"></a>         */</span>
+<a name="line450"></a>        <span style="color: #000000; font-weight: bold;">function</span> _extractAbsolutePath<span style="color: #009900;">&#40;</span><span style="color: #000088;">$base</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line451"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHost</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line452"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #339933;">;</span>
+<a name="line453"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line454"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_isRelativePath<span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line455"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #339933;">;</span>
+<a name="line456"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line457"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line458"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$base</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getBasePath</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_path<span style="color: #339933;">;</span>
+<a name="line459"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line460"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$base</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPath</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line461"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line462"></a>&nbsp;
+<a name="line463"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line464"></a>         *    Simple test to see if a path part is relative.
+<a name="line465"></a>         *    @param string $path        Path to test.
+<a name="line466"></a>         *    @return boolean            True if starts with a &quot;/&quot;.
+<a name="line467"></a>         *    @access private
+<a name="line468"></a>         */</span>
+<a name="line469"></a>        <span style="color: #000000; font-weight: bold;">function</span> _isRelativePath<span style="color: #009900;">&#40;</span><span style="color: #000088;">$path</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line470"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$path</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line471"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line472"></a>&nbsp;
+<a name="line473"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line474"></a>         *    Extracts the username and password for use in rendering
+<a name="line475"></a>         *    a URL.
+<a name="line476"></a>         *    @return string/boolean    Form of username:password@ or false.
+<a name="line477"></a>         *    @access private
+<a name="line478"></a>         */</span>
+<a name="line479"></a>        <span style="color: #000000; font-weight: bold;">function</span> _getIdentity<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line480"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_username <span style="color: #339933;">&amp;&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_password<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line481"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_username <span style="color: #339933;">.</span> <span style="color: #0000ff;">':'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_password<span style="color: #339933;">;</span>
+<a name="line482"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line483"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line484"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line485"></a>&nbsp;
+<a name="line486"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line487"></a>         *    Replaces . and .. sections of the path.
+<a name="line488"></a>         *    @param string $path    Unoptimised path.
+<a name="line489"></a>         *    @return string         Path with dots removed if possible.
+<a name="line490"></a>         *    @access public
+<a name="line491"></a>         */</span>
+<a name="line492"></a>        <span style="color: #000000; font-weight: bold;">function</span> normalisePath<span style="color: #009900;">&#40;</span><span style="color: #000088;">$path</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line493"></a>            <span style="color: #000088;">$path</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/preg_replace"><span style="color: #990000;">preg_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'|/[^/]+/\.\./|'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$path</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line494"></a>            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/preg_replace"><span style="color: #990000;">preg_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'|/\./|'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$path</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line495"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line496"></a>&nbsp;
+<a name="line497"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line498"></a>         *    A pipe seperated list of all TLDs that result in two part
+<a name="line499"></a>         *    domain names.
+<a name="line500"></a>         *    @return string        Pipe separated list.
+<a name="line501"></a>         *    @access public
+<a name="line502"></a>         *    @static
+<a name="line503"></a>         */</span>
+<a name="line504"></a>        <span style="color: #000000; font-weight: bold;">function</span> getAllTopLevelDomains<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line505"></a>            <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'com|edu|net|org|gov|mil|int|biz|info|name|pro|aero|coop|museum'</span><span style="color: #339933;">;</span>
+<a name="line506"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line507"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line508"></a><span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/url.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

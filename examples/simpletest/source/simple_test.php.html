@@ -1,0 +1,614 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:10 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>simple_test.php (SimpleTest)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/simple_test.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>simple_test.php</h1>
+<div class="comment" id="overview_description"><p>Base include file for SimpleTest</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a>     *	Base include file for SimpleTest
+<a name="line4"></a>     *	@package	SimpleTest
+<a name="line5"></a>     *	@subpackage	UnitTester
+<a name="line6"></a>     *	@version	$Id: simple_test.php,v 1.89 2005/02/18 19:25:05 lastcraft Exp $
+<a name="line7"></a>     */</span>
+<a name="line8"></a>&nbsp;
+<a name="line9"></a>    <span style="color: #009933; font-style: italic;">/**#@+
+<a name="line10"></a>     * Includes SimpleTest files and defined the root constant
+<a name="line11"></a>     * for dependent libraries.
+<a name="line12"></a>     */</span>
+<a name="line13"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/errors.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line14"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/options.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line15"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/runner.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line16"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/scorer.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line17"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/expectation.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line18"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/dumper.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line19"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/defined"><span style="color: #990000;">defined</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'SIMPLE_TEST'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line20"></a>        <a href="http://www.php.net/define"><span style="color: #990000;">define</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'SIMPLE_TEST'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line21"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line22"></a>    <span style="color: #009933; font-style: italic;">/**#@-*/</span>
+<a name="line23"></a>&nbsp;
+<a name="line24"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line25"></a>     *    Basic test case. This is the smallest unit of a test
+<a name="line26"></a>     *    suite. It searches for
+<a name="line27"></a>     *    all methods that start with the the string &quot;test&quot; and
+<a name="line28"></a>     *    runs them. Working test cases extend this class.
+<a name="line29"></a>	 *    @package		SimpleTest
+<a name="line30"></a>	 *    @subpackage	UnitTester
+<a name="line31"></a>     */</span>
+<a name="line32"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleTestCase <span style="color: #009900;">&#123;</span>
+<a name="line33"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_label</span><span style="color: #339933;">;</span>
+<a name="line34"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_runner</span><span style="color: #339933;">;</span>
+<a name="line35"></a>&nbsp;
+<a name="line36"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line37"></a>         *    Sets up the test with no display.
+<a name="line38"></a>         *    @param string $label    If no test name is given then
+<a name="line39"></a>         *                            the class name is used.
+<a name="line40"></a>         *    @access public
+<a name="line41"></a>         */</span>
+<a name="line42"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleTestCase<span style="color: #009900;">&#40;</span><span style="color: #000088;">$label</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line43"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_label <span style="color: #339933;">=</span> <span style="color: #000088;">$label</span> ? <span style="color: #000088;">$label</span> <span style="color: #339933;">:</span> <a href="http://www.php.net/get_class"><span style="color: #990000;">get_class</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line44"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line45"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line46"></a>&nbsp;
+<a name="line47"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line48"></a>         *    Accessor for the test name for subclasses.
+<a name="line49"></a>         *    @return string           Name of the test.
+<a name="line50"></a>         *    @access public
+<a name="line51"></a>         */</span>
+<a name="line52"></a>        <span style="color: #000000; font-weight: bold;">function</span> getLabel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line53"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_label<span style="color: #339933;">;</span>
+<a name="line54"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line55"></a>&nbsp;
+<a name="line56"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line57"></a>         *    Used to invoke the single tests.
+<a name="line58"></a>         *    @return SimpleInvoker        Individual test runner.
+<a name="line59"></a>         *    @access public
+<a name="line60"></a>         */</span>
+<a name="line61"></a>        <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>createInvoker<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line62"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">new</span> SimpleErrorTrappingInvoker<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> SimpleInvoker<span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line63"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line64"></a>&nbsp;
+<a name="line65"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line66"></a>         *    Can modify the incoming reporter so as to run
+<a name="line67"></a>         *    the tests differently. This version simply
+<a name="line68"></a>         *    passes it straight through.
+<a name="line69"></a>         *    @param SimpleReporter $reporter    Incoming observer.
+<a name="line70"></a>         *    @return SimpleReporter
+<a name="line71"></a>         *    @access protected
+<a name="line72"></a>         */</span>
+<a name="line73"></a>        <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>_createRunner<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line74"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">new</span> SimpleRunner<span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">,</span> <span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line75"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line76"></a>&nbsp;
+<a name="line77"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line78"></a>         *    Uses reflection to run every method within itself
+<a name="line79"></a>         *    starting with the string &quot;test&quot; unless a method
+<a name="line80"></a>         *    is specified.
+<a name="line81"></a>         *    @param SimpleReporter $reporter    Current test reporter.
+<a name="line82"></a>         *    @access public
+<a name="line83"></a>         */</span>
+<a name="line84"></a>        <span style="color: #000000; font-weight: bold;">function</span> run<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line85"></a>            <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintCaseStart</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line86"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_createRunner<span style="color: #009900;">&#40;</span><span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line87"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner<span style="color: #339933;">-&gt;</span><span style="color: #004000;">run</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line88"></a>            <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintCaseEnd</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line89"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getStatus</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line90"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line91"></a>&nbsp;
+<a name="line92"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line93"></a>         *    Sets up unit test wide variables at the start
+<a name="line94"></a>         *    of each test method. To be overridden in
+<a name="line95"></a>         *    actual user test cases.
+<a name="line96"></a>         *    @access public
+<a name="line97"></a>         */</span>
+<a name="line98"></a>        <span style="color: #000000; font-weight: bold;">function</span> setUp<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line99"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line100"></a>&nbsp;
+<a name="line101"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line102"></a>         *    Clears the data set in the setUp() method call.
+<a name="line103"></a>         *    To be overridden by the user in actual user test cases.
+<a name="line104"></a>         *    @access public
+<a name="line105"></a>         */</span>
+<a name="line106"></a>        <span style="color: #000000; font-weight: bold;">function</span> tearDown<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line107"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line108"></a>&nbsp;
+<a name="line109"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line110"></a>         *    Sends a pass event with a message.
+<a name="line111"></a>         *    @param string $message        Message to send.
+<a name="line112"></a>         *    @access public
+<a name="line113"></a>         */</span>
+<a name="line114"></a>        <span style="color: #000000; font-weight: bold;">function</span> pass<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Pass&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line115"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintPass</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getAssertionLine</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">' at line [%d]'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line116"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line117"></a>&nbsp;
+<a name="line118"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line119"></a>         *    Sends a fail event with a message.
+<a name="line120"></a>         *    @param string $message        Message to send.
+<a name="line121"></a>         *    @access public
+<a name="line122"></a>         */</span>
+<a name="line123"></a>        <span style="color: #000000; font-weight: bold;">function</span> fail<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Fail&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line124"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintFail</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getAssertionLine</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">' at line [%d]'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line125"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line126"></a>&nbsp;
+<a name="line127"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line128"></a>         *    Formats a PHP error and dispatches it to the
+<a name="line129"></a>         *    runner.
+<a name="line130"></a>         *    @param integer $severity  PHP error code.
+<a name="line131"></a>         *    @param string $message    Text of error.
+<a name="line132"></a>         *    @param string $file       File error occoured in.
+<a name="line133"></a>         *    @param integer $line      Line number of error.
+<a name="line134"></a>         *    @param hash $globals      PHP super global arrays.
+<a name="line135"></a>         *    @access public
+<a name="line136"></a>         */</span>
+<a name="line137"></a>        <span style="color: #000000; font-weight: bold;">function</span> error<span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$file</span><span style="color: #339933;">,</span> <span style="color: #000088;">$line</span><span style="color: #339933;">,</span> <span style="color: #000088;">$globals</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line138"></a>            <span style="color: #000088;">$severity</span> <span style="color: #339933;">=</span> SimpleErrorQueue<span style="color: #339933;">::</span><span style="color: #004000;">getSeverityAsString</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line139"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintError</span><span style="color: #009900;">&#40;</span>
+<a name="line140"></a>                    <span style="color: #0000ff;">&quot;Unexpected PHP error [<span style="color: #006699; font-weight: bold;">$message</span>] severity [<span style="color: #006699; font-weight: bold;">$severity</span>] in [<span style="color: #006699; font-weight: bold;">$file</span>] line [<span style="color: #006699; font-weight: bold;">$line</span>]&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line141"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line142"></a>&nbsp;
+<a name="line143"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line144"></a>         *    Sends a user defined event to the test runner.
+<a name="line145"></a>         *    This is for small scale extension where
+<a name="line146"></a>         *    both the test case and either the runner or
+<a name="line147"></a>         *    display are subclassed.
+<a name="line148"></a>         *    @param string $type       Type of event.
+<a name="line149"></a>         *    @param mixed $payload     Object or message to deliver.
+<a name="line150"></a>         *    @access public
+<a name="line151"></a>         */</span>
+<a name="line152"></a>        <span style="color: #000000; font-weight: bold;">function</span> signal<span style="color: #009900;">&#40;</span><span style="color: #000088;">$type</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$payload</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line153"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintSignal</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$type</span><span style="color: #339933;">,</span> <span style="color: #000088;">$payload</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line154"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line155"></a>&nbsp;
+<a name="line156"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line157"></a>         *    Cancels any outstanding errors.
+<a name="line158"></a>         *    @access public
+<a name="line159"></a>         */</span>
+<a name="line160"></a>        <span style="color: #000000; font-weight: bold;">function</span> swallowErrors<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line161"></a>            <span style="color: #000088;">$queue</span> <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span>SimpleErrorQueue<span style="color: #339933;">::</span><span style="color: #004000;">instance</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line162"></a>            <span style="color: #000088;">$queue</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">clear</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line163"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line164"></a>&nbsp;
+<a name="line165"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line166"></a>         *    Runs an expectation directly, for extending the
+<a name="line167"></a>         *    tests with new expectation classes.
+<a name="line168"></a>         *    @param SimpleExpectation $expectation  Expectation subclass.
+<a name="line169"></a>         *    @param mixed $test_value               Value to compare.
+<a name="line170"></a>         *    @param string $message                 Message to display.
+<a name="line171"></a>         *    @return boolean                        True on pass
+<a name="line172"></a>         *    @access public
+<a name="line173"></a>         */</span>
+<a name="line174"></a>        <span style="color: #000000; font-weight: bold;">function</span> assertExpectation<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$expectation</span><span style="color: #339933;">,</span> <span style="color: #000088;">$test_value</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'%s'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line175"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">assertTrue</span><span style="color: #009900;">&#40;</span>
+<a name="line176"></a>                    <span style="color: #000088;">$expectation</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">test</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_value</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line177"></a>                    <a href="http://www.php.net/sprintf"><span style="color: #990000;">sprintf</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$expectation</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">overlayMessage</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_value</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line178"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line179"></a>&nbsp;
+<a name="line180"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line181"></a>         *    Called from within the test methods to register
+<a name="line182"></a>         *    passes and failures.
+<a name="line183"></a>         *    @param boolean $result    Pass on true.
+<a name="line184"></a>         *    @param string $message    Message to display describing
+<a name="line185"></a>         *                              the test state.
+<a name="line186"></a>         *    @return boolean           True on pass
+<a name="line187"></a>         *    @access public
+<a name="line188"></a>         */</span>
+<a name="line189"></a>        <span style="color: #000000; font-weight: bold;">function</span> assertTrue<span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line190"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line191"></a>                <span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'True assertion got '</span> <span style="color: #339933;">.</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span> ? <span style="color: #0000ff;">'True'</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">'False'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line192"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line193"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line194"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">pass</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line195"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line196"></a>            <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line197"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fail</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line198"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line199"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line200"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line201"></a>&nbsp;
+<a name="line202"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line203"></a>         *    Will be true on false and vice versa. False
+<a name="line204"></a>         *    is the PHP definition of false, so that null,
+<a name="line205"></a>         *    empty strings, zero and an empty array all count
+<a name="line206"></a>         *    as false.
+<a name="line207"></a>         *    @param boolean $result    Pass on false.
+<a name="line208"></a>         *    @param string $message    Message to display.
+<a name="line209"></a>         *    @return boolean           True on pass
+<a name="line210"></a>         *    @access public
+<a name="line211"></a>         */</span>
+<a name="line212"></a>        <span style="color: #000000; font-weight: bold;">function</span> assertFalse<span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line213"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line214"></a>                <span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'False assertion got '</span> <span style="color: #339933;">.</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$result</span> ? <span style="color: #0000ff;">'True'</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">'False'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line215"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line216"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">assertTrue</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$result</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line217"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line218"></a>&nbsp;
+<a name="line219"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line220"></a>         *    Uses a stack trace to find the line of an assertion.
+<a name="line221"></a>         *    @param string $format    String formatting.
+<a name="line222"></a>         *    @param array $stack      Stack frames top most first. Only
+<a name="line223"></a>         *                             needed if not using the PHP
+<a name="line224"></a>         *                             backtrace function.
+<a name="line225"></a>         *    @return string           Line number of first assert*
+<a name="line226"></a>         *                             method embedded in format string.
+<a name="line227"></a>         *    @access public
+<a name="line228"></a>         */</span>
+<a name="line229"></a>        <span style="color: #000000; font-weight: bold;">function</span> getAssertionLine<span style="color: #009900;">&#40;</span><span style="color: #000088;">$format</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'%d'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$stack</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line230"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$stack</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line231"></a>                <span style="color: #000088;">$stack</span> <span style="color: #339933;">=</span> SimpleTestCompatibility<span style="color: #339933;">::</span><span style="color: #004000;">getStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line232"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line233"></a>            <span style="color: #b1b100;">return</span> SimpleDumper<span style="color: #339933;">::</span><span style="color: #004000;">getFormattedAssertionLine</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$stack</span><span style="color: #339933;">,</span> <span style="color: #000088;">$format</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line234"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line235"></a>&nbsp;
+<a name="line236"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line237"></a>         *    Sends a formatted dump of a variable to the
+<a name="line238"></a>         *    test suite for those emergency debugging
+<a name="line239"></a>         *    situations.
+<a name="line240"></a>         *    @param mixed $variable    Variable to display.
+<a name="line241"></a>         *    @param string $message    Message to display.
+<a name="line242"></a>         *    @return mixed             The original variable.
+<a name="line243"></a>         *    @access public
+<a name="line244"></a>         */</span>
+<a name="line245"></a>        <span style="color: #000000; font-weight: bold;">function</span> dump<span style="color: #009900;">&#40;</span><span style="color: #000088;">$variable</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line246"></a>            <span style="color: #000088;">$formatted</span> <span style="color: #339933;">=</span> SimpleDumper<span style="color: #339933;">::</span><span style="color: #004000;">dump</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$variable</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line247"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line248"></a>                <span style="color: #000088;">$formatted</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$message</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$formatted</span><span style="color: #339933;">;</span>
+<a name="line249"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line250"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintFormattedMessage</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$formatted</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line251"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$variable</span><span style="color: #339933;">;</span>
+<a name="line252"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line253"></a>&nbsp;
+<a name="line254"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line255"></a>         *    Dispatches a text message straight to the
+<a name="line256"></a>         *    test suite. Useful for status bar displays.
+<a name="line257"></a>         *    @param string $message        Message to show.
+<a name="line258"></a>         *    @access public
+<a name="line259"></a>         */</span>
+<a name="line260"></a>        <span style="color: #000000; font-weight: bold;">function</span> sendMessage<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line261"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_runner<span style="color: #339933;">-&gt;</span><span style="color: #004000;">PaintMessage</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line262"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line263"></a>&nbsp;
+<a name="line264"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line265"></a>         *    Accessor for the number of subtests.
+<a name="line266"></a>         *    @return integer           Number of test cases.
+<a name="line267"></a>         *    @access public
+<a name="line268"></a>         *    @static
+<a name="line269"></a>         */</span>
+<a name="line270"></a>        <span style="color: #000000; font-weight: bold;">function</span> getSize<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line271"></a>            <span style="color: #b1b100;">return</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+<a name="line272"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line273"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line274"></a>&nbsp;
+<a name="line275"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line276"></a>     *    This is a composite test class for combining
+<a name="line277"></a>     *    test cases and other RunnableTest classes into
+<a name="line278"></a>     *    a group test.
+<a name="line279"></a>	 *    @package		SimpleTest
+<a name="line280"></a>	 *    @subpackage	UnitTester
+<a name="line281"></a>     */</span>
+<a name="line282"></a>    <span style="color: #000000; font-weight: bold;">class</span> GroupTest <span style="color: #009900;">&#123;</span>
+<a name="line283"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_label</span><span style="color: #339933;">;</span>
+<a name="line284"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_test_cases</span><span style="color: #339933;">;</span>
+<a name="line285"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_old_track_errors</span><span style="color: #339933;">;</span>
+<a name="line286"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_xdebug_is_enabled</span><span style="color: #339933;">;</span>
+<a name="line287"></a>&nbsp;
+<a name="line288"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line289"></a>         *    Sets the name of the test suite.
+<a name="line290"></a>         *    @param string $label    Name sent at the start and end
+<a name="line291"></a>         *                            of the test.
+<a name="line292"></a>         *    @access public
+<a name="line293"></a>         */</span>
+<a name="line294"></a>        <span style="color: #000000; font-weight: bold;">function</span> GroupTest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$label</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line295"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_label <span style="color: #339933;">=</span> <span style="color: #000088;">$label</span><span style="color: #339933;">;</span>
+<a name="line296"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line297"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_old_track_errors <span style="color: #339933;">=</span> <a href="http://www.php.net/ini_get"><span style="color: #990000;">ini_get</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'track_errors'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line298"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_xdebug_is_enabled <span style="color: #339933;">=</span> <a href="http://www.php.net/function_exists"><span style="color: #990000;">function_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'xdebug_is_enabled'</span><span style="color: #009900;">&#41;</span> ?
+<a name="line299"></a>                    xdebug_is_enabled<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line300"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line301"></a>&nbsp;
+<a name="line302"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line303"></a>         *    Accessor for the test name for subclasses.
+<a name="line304"></a>         *    @return string           Name of the test.
+<a name="line305"></a>         *    @access public
+<a name="line306"></a>         */</span>
+<a name="line307"></a>        <span style="color: #000000; font-weight: bold;">function</span> getLabel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line308"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_label<span style="color: #339933;">;</span>
+<a name="line309"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line310"></a>&nbsp;
+<a name="line311"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line312"></a>         *    Adds a test into the suite. Can be either a group
+<a name="line313"></a>         *    test or some other unit test.
+<a name="line314"></a>         *    @param SimpleTestCase $test_case  Suite or individual test
+<a name="line315"></a>         *                                      case implementing the
+<a name="line316"></a>         *                                      runnable test interface.
+<a name="line317"></a>         *    @access public
+<a name="line318"></a>         */</span>
+<a name="line319"></a>        <span style="color: #000000; font-weight: bold;">function</span> addTestCase<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$test_case</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line320"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$test_case</span><span style="color: #339933;">;</span>
+<a name="line321"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line322"></a>&nbsp;
+<a name="line323"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line324"></a>         *    Adds a test into the suite by class name. The class will
+<a name="line325"></a>         *    be instantiated as needed.
+<a name="line326"></a>         *    @param SimpleTestCase $test_case  Suite or individual test
+<a name="line327"></a>         *                                      case implementing the
+<a name="line328"></a>         *                                      runnable test interface.
+<a name="line329"></a>         *    @access public
+<a name="line330"></a>         */</span>
+<a name="line331"></a>        <span style="color: #000000; font-weight: bold;">function</span> addTestClass<span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line332"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$class</span><span style="color: #339933;">;</span>
+<a name="line333"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line334"></a>&nbsp;
+<a name="line335"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line336"></a>         *    Builds a group test from a library of test cases.
+<a name="line337"></a>         *    The new group is composed into this one.
+<a name="line338"></a>         *    @param string $test_file        File name of library with
+<a name="line339"></a>         *                                    test case classes.
+<a name="line340"></a>         *    @access public
+<a name="line341"></a>         */</span>
+<a name="line342"></a>        <span style="color: #000000; font-weight: bold;">function</span> addTestFile<span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_file</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line343"></a>            <span style="color: #000088;">$existing_classes</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/get_declared_classes"><span style="color: #990000;">get_declared_classes</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line344"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$error</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_requireWithError<span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_file</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line345"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addTestCase</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> BadGroupTest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_file</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line346"></a>                <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line347"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line348"></a>            <span style="color: #000088;">$classes</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_selectRunnableTests<span style="color: #009900;">&#40;</span><span style="color: #000088;">$existing_classes</span><span style="color: #339933;">,</span> <a href="http://www.php.net/get_declared_classes"><span style="color: #990000;">get_declared_classes</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line349"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$classes</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line350"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addTestCase</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> BadGroupTest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_file</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'No new test cases'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line351"></a>                <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line352"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line353"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addTestCase</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_createGroupFromClasses<span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_file</span><span style="color: #339933;">,</span> <span style="color: #000088;">$classes</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line354"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line355"></a>&nbsp;
+<a name="line356"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line357"></a>         *    Requires a source file recording any syntax errors.
+<a name="line358"></a>         *    @param string $file        File name to require in.
+<a name="line359"></a>         *    @return string/boolean     An error message on failure or false
+<a name="line360"></a>         *                               if no errors.
+<a name="line361"></a>         *    @access private
+<a name="line362"></a>         */</span>
+<a name="line363"></a>        <span style="color: #000000; font-weight: bold;">function</span> _requireWithError<span style="color: #009900;">&#40;</span><span style="color: #000088;">$file</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line364"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_enableErrorReporting<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line365"></a>            <span style="color: #b1b100;">include</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$file</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line366"></a>            <span style="color: #000088;">$error</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$php_errormsg</span><span style="color: #009900;">&#41;</span> ? <span style="color: #000088;">$php_errormsg</span> <span style="color: #339933;">:</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line367"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_disableErrorReporting<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line368"></a>            <span style="color: #000088;">$self_inflicted</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line369"></a>                    <span style="color: #0000ff;">'Assigning the return value of new by reference is deprecated'</span><span style="color: #339933;">,</span>
+<a name="line370"></a>                    <span style="color: #0000ff;">'var: Deprecated. Please use the public/private/protected modifiers'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line371"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/in_array"><span style="color: #990000;">in_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$error</span><span style="color: #339933;">,</span> <span style="color: #000088;">$self_inflicted</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line372"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line373"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line374"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$error</span><span style="color: #339933;">;</span>
+<a name="line375"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line376"></a>&nbsp;
+<a name="line377"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line378"></a>         *    Sets up detection of parse errors. Note that XDebug
+<a name="line379"></a>         *    interferes with this and has to be disabled. This is
+<a name="line380"></a>         *    to make sure the correct error code is returned
+<a name="line381"></a>         *    from unattended scripts.
+<a name="line382"></a>         *    @access private
+<a name="line383"></a>         */</span>
+<a name="line384"></a>        <span style="color: #000000; font-weight: bold;">function</span> _enableErrorReporting<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line385"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_xdebug_is_enabled<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line386"></a>                xdebug_disable<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line387"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line388"></a>            <a href="http://www.php.net/ini_set"><span style="color: #990000;">ini_set</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'track_errors'</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line389"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line390"></a>&nbsp;
+<a name="line391"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line392"></a>         *    Resets detection of parse errors to their old values.
+<a name="line393"></a>         *    This is to make sure the correct error code is returned
+<a name="line394"></a>         *    from unattended scripts.
+<a name="line395"></a>         *    @access private
+<a name="line396"></a>         */</span>
+<a name="line397"></a>        <span style="color: #000000; font-weight: bold;">function</span> _disableErrorReporting<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line398"></a>            <a href="http://www.php.net/ini_set"><span style="color: #990000;">ini_set</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'track_errors'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_old_track_errors<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line399"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_xdebug_is_enabled<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line400"></a>                xdebug_enable<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line401"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line402"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line403"></a>&nbsp;
+<a name="line404"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line405"></a>         *    Calculates the incoming test cases from a before
+<a name="line406"></a>         *    and after list of loaded classes.
+<a name="line407"></a>         *    @param array $existing_classes   Classes before require().
+<a name="line408"></a>         *    @param array $new_classes        Classes after require().
+<a name="line409"></a>         *    @return array                    New classes which are test
+<a name="line410"></a>         *                                     cases that shouldn't be ignored.
+<a name="line411"></a>         *    @access private
+<a name="line412"></a>         */</span>
+<a name="line413"></a>        <span style="color: #000000; font-weight: bold;">function</span> _selectRunnableTests<span style="color: #009900;">&#40;</span><span style="color: #000088;">$existing_classes</span><span style="color: #339933;">,</span> <span style="color: #000088;">$new_classes</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line414"></a>            <span style="color: #000088;">$classes</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line415"></a>            <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$new_classes</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line416"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/in_array"><span style="color: #990000;">in_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #339933;">,</span> <span style="color: #000088;">$existing_classes</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line417"></a>                    <span style="color: #b1b100;">continue</span><span style="color: #339933;">;</span>
+<a name="line418"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line419"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_isTestCase<span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line420"></a>                    <span style="color: #b1b100;">continue</span><span style="color: #339933;">;</span>
+<a name="line421"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line422"></a>                <span style="color: #000088;">$classes</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$class</span><span style="color: #339933;">;</span>
+<a name="line423"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line424"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$classes</span><span style="color: #339933;">;</span>
+<a name="line425"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line426"></a>&nbsp;
+<a name="line427"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line428"></a>         *    Builds a group test from a class list.
+<a name="line429"></a>         *    @param string $title       Title of new group.
+<a name="line430"></a>         *    @param array $classes      Test classes.
+<a name="line431"></a>         *    @return GroupTest          Group loaded with the new
+<a name="line432"></a>         *                               test cases.
+<a name="line433"></a>         *    @access private
+<a name="line434"></a>         */</span>
+<a name="line435"></a>        <span style="color: #000000; font-weight: bold;">function</span> _createGroupFromClasses<span style="color: #009900;">&#40;</span><span style="color: #000088;">$title</span><span style="color: #339933;">,</span> <span style="color: #000088;">$classes</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line436"></a>            <span style="color: #000088;">$group</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> GroupTest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$title</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line437"></a>            <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$classes</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line438"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>SimpleTestOptions<span style="color: #339933;">::</span><span style="color: #004000;">isIgnored</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line439"></a>                    <span style="color: #b1b100;">continue</span><span style="color: #339933;">;</span>
+<a name="line440"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line441"></a>                <span style="color: #000088;">$group</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addTestClass</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line442"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line443"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$group</span><span style="color: #339933;">;</span>
+<a name="line444"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line445"></a>&nbsp;
+<a name="line446"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line447"></a>         *    Test to see if a class is derived from the
+<a name="line448"></a>         *    TestCase class.
+<a name="line449"></a>         *    @param string $class            Class name.
+<a name="line450"></a>         *    @access private
+<a name="line451"></a>         */</span>
+<a name="line452"></a>        <span style="color: #000000; font-weight: bold;">function</span> _isTestCase<span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line453"></a>            <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/get_parent_class"><span style="color: #990000;">get_parent_class</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line454"></a>                <span style="color: #000088;">$class</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtolower"><span style="color: #990000;">strtolower</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line455"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">&quot;simpletestcase&quot;</span> <span style="color: #339933;">||</span> <span style="color: #000088;">$class</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">&quot;grouptest&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line456"></a>                    <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line457"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line458"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line459"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line460"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line461"></a>&nbsp;
+<a name="line462"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line463"></a>         *    Invokes run() on all of the held test cases, instantiating
+<a name="line464"></a>         *    them if necessary.
+<a name="line465"></a>         *    @param SimpleReporter $reporter    Current test reporter.
+<a name="line466"></a>         *    @access public
+<a name="line467"></a>         */</span>
+<a name="line468"></a>        <span style="color: #000000; font-weight: bold;">function</span> run<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line469"></a>            <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintGroupStart</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line470"></a>            <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$i</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #000088;">$count</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span> <span style="color: #339933;">&lt;</span> <span style="color: #000088;">$count</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line471"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_string"><span style="color: #990000;">is_string</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases<span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line472"></a>                    <span style="color: #000088;">$class</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases<span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line473"></a>                    <span style="color: #000088;">$test</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">&amp;new</span> <span style="color: #000088;">$class</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line474"></a>                    <span style="color: #000088;">$test</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">run</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line475"></a>                <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line476"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases<span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">run</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line477"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line478"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line479"></a>            <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintGroupEnd</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line480"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getStatus</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line481"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line482"></a>&nbsp;
+<a name="line483"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line484"></a>         *    Number of contained test cases.
+<a name="line485"></a>         *    @return integer     Total count of cases in the group.
+<a name="line486"></a>         *    @access public
+<a name="line487"></a>         */</span>
+<a name="line488"></a>        <span style="color: #000000; font-weight: bold;">function</span> getSize<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line489"></a>            <span style="color: #000088;">$count</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+<a name="line490"></a>            <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_cases <span style="color: #b1b100;">as</span> <span style="color: #000088;">$case</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line491"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_string"><span style="color: #990000;">is_string</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$case</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line492"></a>                    <span style="color: #000088;">$count</span><span style="color: #339933;">++;</span>
+<a name="line493"></a>                <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line494"></a>                    <span style="color: #000088;">$count</span> <span style="color: #339933;">+=</span> <span style="color: #000088;">$case</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line495"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line496"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line497"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$count</span><span style="color: #339933;">;</span>
+<a name="line498"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line499"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line500"></a>&nbsp;
+<a name="line501"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line502"></a>     *    This is a failing group test for when a test suite hasn't
+<a name="line503"></a>     *    loaded properly.
+<a name="line504"></a>	 *    @package		SimpleTest
+<a name="line505"></a>	 *    @subpackage	UnitTester
+<a name="line506"></a>     */</span>
+<a name="line507"></a>    <span style="color: #000000; font-weight: bold;">class</span> BadGroupTest <span style="color: #009900;">&#123;</span>
+<a name="line508"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_label</span><span style="color: #339933;">;</span>
+<a name="line509"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_error</span><span style="color: #339933;">;</span>
+<a name="line510"></a>&nbsp;
+<a name="line511"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line512"></a>         *    Sets the name of the test suite and error message.
+<a name="line513"></a>         *    @param string $label    Name sent at the start and end
+<a name="line514"></a>         *                            of the test.
+<a name="line515"></a>         *    @access public
+<a name="line516"></a>         */</span>
+<a name="line517"></a>        <span style="color: #000000; font-weight: bold;">function</span> BadGroupTest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$label</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line518"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_label <span style="color: #339933;">=</span> <span style="color: #000088;">$label</span><span style="color: #339933;">;</span>
+<a name="line519"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_error <span style="color: #339933;">=</span> <span style="color: #000088;">$error</span><span style="color: #339933;">;</span>
+<a name="line520"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line521"></a>&nbsp;
+<a name="line522"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line523"></a>         *    Accessor for the test name for subclasses.
+<a name="line524"></a>         *    @return string           Name of the test.
+<a name="line525"></a>         *    @access public
+<a name="line526"></a>         */</span>
+<a name="line527"></a>        <span style="color: #000000; font-weight: bold;">function</span> getLabel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line528"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_label<span style="color: #339933;">;</span>
+<a name="line529"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line530"></a>&nbsp;
+<a name="line531"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line532"></a>         *    Sends a single error to the reporter.
+<a name="line533"></a>         *    @param SimpleReporter $reporter    Current test reporter.
+<a name="line534"></a>         *    @access public
+<a name="line535"></a>         */</span>
+<a name="line536"></a>        <span style="color: #000000; font-weight: bold;">function</span> run<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$reporter</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line537"></a>            <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintGroupStart</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line538"></a>            <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintFail</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'Bad GroupTest ['</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span>
+<a name="line539"></a>                    <span style="color: #0000ff;">'] with error ['</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_error <span style="color: #339933;">.</span> <span style="color: #0000ff;">']'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line540"></a>            <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintGroupEnd</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line541"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$reporter</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getStatus</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line542"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line543"></a>&nbsp;
+<a name="line544"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line545"></a>         *    Number of contained test cases. Always zero.
+<a name="line546"></a>         *    @return integer     Total count of cases in the group.
+<a name="line547"></a>         *    @access public
+<a name="line548"></a>         */</span>
+<a name="line549"></a>        <span style="color: #000000; font-weight: bold;">function</span> getSize<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line550"></a>            <span style="color: #b1b100;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+<a name="line551"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line552"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line553"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line554"></a>&nbsp;</pre>
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/simple_test.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

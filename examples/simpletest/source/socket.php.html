@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:10 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>socket.php (SimpleTest)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/socket.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>socket.php</h1>
+<div class="comment" id="overview_description"><p>base include file for SimpleTest</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a>     *	base include file for SimpleTest
+<a name="line4"></a>     *	@package	SimpleTest
+<a name="line5"></a>     *	@subpackage	MockObjects
+<a name="line6"></a>     *	@version	$Id: socket.php,v 1.23 2004/09/30 16:46:31 lastcraft Exp $
+<a name="line7"></a>     */</span>
+<a name="line8"></a>&nbsp;
+<a name="line9"></a>    <span style="color: #009933; font-style: italic;">/**#@+
+<a name="line10"></a>     * include SimpleTest files
+<a name="line11"></a>     */</span>
+<a name="line12"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/options.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line13"></a>    <span style="color: #009933; font-style: italic;">/**#@-*/</span>
+<a name="line14"></a>&nbsp;
+<a name="line15"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line16"></a>     *    Stashes an error for later. Useful for constructors
+<a name="line17"></a>     *    until PHP gets exceptions.
+<a name="line18"></a>	 *    @package SimpleTest
+<a name="line19"></a>	 *    @subpackage WebTester
+<a name="line20"></a>     */</span>
+<a name="line21"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleStickyError <span style="color: #009900;">&#123;</span>
+<a name="line22"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_error</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'Constructor not chained'</span><span style="color: #339933;">;</span>
+<a name="line23"></a>&nbsp;
+<a name="line24"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line25"></a>         *    Sets the error to empty.
+<a name="line26"></a>         *    @access public
+<a name="line27"></a>         */</span>
+<a name="line28"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleStickyError<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line29"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_clearError<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line30"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line31"></a>&nbsp;
+<a name="line32"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line33"></a>         *    Test for an outstanding error.
+<a name="line34"></a>         *    @return boolean           True if there is an error.
+<a name="line35"></a>         *    @access public
+<a name="line36"></a>         */</span>
+<a name="line37"></a>        <span style="color: #000000; font-weight: bold;">function</span> isError<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line38"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_error <span style="color: #339933;">!=</span> <span style="color: #0000ff;">''</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line39"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line40"></a>&nbsp;
+<a name="line41"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line42"></a>         *    Accessor for an outstanding error.
+<a name="line43"></a>         *    @return string     Empty string if no error otherwise
+<a name="line44"></a>         *                       the error message.
+<a name="line45"></a>         *    @access public
+<a name="line46"></a>         */</span>
+<a name="line47"></a>        <span style="color: #000000; font-weight: bold;">function</span> getError<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line48"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_error<span style="color: #339933;">;</span>
+<a name="line49"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line50"></a>&nbsp;
+<a name="line51"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line52"></a>         *    Sets the internal error.
+<a name="line53"></a>         *    @param string       Error message to stash.
+<a name="line54"></a>         *    @access protected
+<a name="line55"></a>         */</span>
+<a name="line56"></a>        <span style="color: #000000; font-weight: bold;">function</span> _setError<span style="color: #009900;">&#40;</span><span style="color: #000088;">$error</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line57"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_error <span style="color: #339933;">=</span> <span style="color: #000088;">$error</span><span style="color: #339933;">;</span>
+<a name="line58"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line59"></a>&nbsp;
+<a name="line60"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line61"></a>         *    Resets the error state to no error.
+<a name="line62"></a>         *    @access protected
+<a name="line63"></a>         */</span>
+<a name="line64"></a>        <span style="color: #000000; font-weight: bold;">function</span> _clearError<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line65"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_setError<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">''</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line66"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line67"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line68"></a>&nbsp;
+<a name="line69"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line70"></a>     *    Wrapper for TCP/IP socket.
+<a name="line71"></a>     *    @package SimpleTest
+<a name="line72"></a>     *    @subpackage WebTester
+<a name="line73"></a>     */</span>
+<a name="line74"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleSocket <span style="color: #000000; font-weight: bold;">extends</span> SimpleStickyError <span style="color: #009900;">&#123;</span>
+<a name="line75"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_handle</span><span style="color: #339933;">;</span>
+<a name="line76"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_is_open</span><span style="color: #339933;">;</span>
+<a name="line77"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_sent</span><span style="color: #339933;">;</span>
+<a name="line78"></a>&nbsp;
+<a name="line79"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line80"></a>         *    Opens a socket for reading and writing.
+<a name="line81"></a>         *    @param string $host      Hostname to send request to.
+<a name="line82"></a>         *    @param integer $port     Port on remote machine to open.
+<a name="line83"></a>         *    @param integer $timeout  Connection timeout in seconds.
+<a name="line84"></a>         *    @access public
+<a name="line85"></a>         */</span>
+<a name="line86"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleSocket<span style="color: #009900;">&#40;</span><span style="color: #000088;">$host</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line87"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">SimpleStickyError</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line88"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_is_open <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line89"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_sent <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line90"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_handle <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_openSocket<span style="color: #009900;">&#40;</span><span style="color: #000088;">$host</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error_number</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line91"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_setError<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Cannot open [<span style="color: #006699; font-weight: bold;">$host</span>:<span style="color: #006699; font-weight: bold;">$port</span>] with [<span style="color: #006699; font-weight: bold;">$error</span>] within [<span style="color: #006699; font-weight: bold;">$timeout</span>] seconds&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line92"></a>                <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line93"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line94"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_is_open <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line95"></a>            SimpleTestCompatibility<span style="color: #339933;">::</span><span style="color: #004000;">setTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_handle<span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line96"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line97"></a>&nbsp;
+<a name="line98"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line99"></a>         *    Writes some data to the socket and saves alocal copy.
+<a name="line100"></a>         *    @param string $message       String to send to socket.
+<a name="line101"></a>         *    @return boolean              True if successful.
+<a name="line102"></a>         *    @access public
+<a name="line103"></a>         */</span>
+<a name="line104"></a>        <span style="color: #000000; font-weight: bold;">function</span> write<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line105"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isError</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #339933;">!</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isOpen</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line106"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line107"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line108"></a>            <span style="color: #000088;">$count</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/fwrite"><span style="color: #990000;">fwrite</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_handle<span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line109"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$count</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line110"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$count</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line111"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_setError<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'Cannot write to socket'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line112"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line113"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line114"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line115"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line116"></a>            <a href="http://www.php.net/fflush"><span style="color: #990000;">fflush</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_handle<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line117"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_sent <span style="color: #339933;">.=</span> <span style="color: #000088;">$message</span><span style="color: #339933;">;</span>
+<a name="line118"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line119"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line120"></a>&nbsp;
+<a name="line121"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line122"></a>         *    Reads data from the socket. The error suppresion
+<a name="line123"></a>         *    is a workaround for PHP4 always throwing a warning
+<a name="line124"></a>         *    with a secure socket.
+<a name="line125"></a>         *    @param integer $block_size       Size of chunk to read.
+<a name="line126"></a>         *    @return integer                  Incoming bytes. False
+<a name="line127"></a>         *                                     on error.
+<a name="line128"></a>         *    @access public
+<a name="line129"></a>         */</span>
+<a name="line130"></a>        <span style="color: #000000; font-weight: bold;">function</span> read<span style="color: #009900;">&#40;</span><span style="color: #000088;">$block_size</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">255</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line131"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isError</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #339933;">!</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isOpen</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line132"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line133"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line134"></a>            <span style="color: #000088;">$raw</span> <span style="color: #339933;">=</span> <span style="color: #339933;">@</span><a href="http://www.php.net/fread"><span style="color: #990000;">fread</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_handle<span style="color: #339933;">,</span> <span style="color: #000088;">$block_size</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line135"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$raw</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line136"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_setError<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'Cannot read from socket'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line137"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line138"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line139"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$raw</span><span style="color: #339933;">;</span>
+<a name="line140"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line141"></a>&nbsp;
+<a name="line142"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line143"></a>         *    Accessor for socket open state.
+<a name="line144"></a>         *    @return boolean           True if open.
+<a name="line145"></a>         *    @access public
+<a name="line146"></a>         */</span>
+<a name="line147"></a>        <span style="color: #000000; font-weight: bold;">function</span> isOpen<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line148"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_is_open<span style="color: #339933;">;</span>
+<a name="line149"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line150"></a>&nbsp;
+<a name="line151"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line152"></a>         *    Closes the socket preventing further reads.
+<a name="line153"></a>         *    Cannot be reopened once closed.
+<a name="line154"></a>         *    @return boolean           True if successful.
+<a name="line155"></a>         *    @access public
+<a name="line156"></a>         */</span>
+<a name="line157"></a>        <span style="color: #000000; font-weight: bold;">function</span> close<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line158"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_is_open <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line159"></a>            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/fclose"><span style="color: #990000;">fclose</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_handle<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line160"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line161"></a>&nbsp;
+<a name="line162"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line163"></a>         *    Accessor for content so far.
+<a name="line164"></a>         *    @return string        Bytes sent only.
+<a name="line165"></a>         *    @access public
+<a name="line166"></a>         */</span>
+<a name="line167"></a>        <span style="color: #000000; font-weight: bold;">function</span> getSent<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line168"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_sent<span style="color: #339933;">;</span>
+<a name="line169"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line170"></a>&nbsp;
+<a name="line171"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line172"></a>         *    Actually opens the low level socket.
+<a name="line173"></a>         *    @param string $host          Host to connect to.
+<a name="line174"></a>         *    @param integer $port         Port on host.
+<a name="line175"></a>         *    @param integer $error_number Recipient of error code.
+<a name="line176"></a>         *    @param string $error         Recipoent of error message.
+<a name="line177"></a>         *    @param integer $timeout      Maximum time to wait for connection.
+<a name="line178"></a>         *    @access protected
+<a name="line179"></a>         */</span>
+<a name="line180"></a>        <span style="color: #000000; font-weight: bold;">function</span> _openSocket<span style="color: #009900;">&#40;</span><span style="color: #000088;">$host</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$error_number</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$error</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line181"></a>            <span style="color: #b1b100;">return</span> <span style="color: #339933;">@</span><a href="http://www.php.net/fsockopen"><span style="color: #990000;">fsockopen</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$host</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error_number</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line182"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line183"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line184"></a>&nbsp;
+<a name="line185"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line186"></a>     *    Wrapper for TCP/IP socket over TLS.
+<a name="line187"></a>	 *    @package SimpleTest
+<a name="line188"></a>	 *    @subpackage WebTester
+<a name="line189"></a>     */</span>
+<a name="line190"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleSecureSocket <span style="color: #000000; font-weight: bold;">extends</span> SimpleSocket <span style="color: #009900;">&#123;</span>
+<a name="line191"></a>&nbsp;
+<a name="line192"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line193"></a>         *    Opens a secure socket for reading and writing.
+<a name="line194"></a>         *    @param string $host      Hostname to send request to.
+<a name="line195"></a>         *    @param integer $port     Port on remote machine to open.
+<a name="line196"></a>         *    @param integer $timeout  Connection timeout in seconds.
+<a name="line197"></a>         *    @access public
+<a name="line198"></a>         */</span>
+<a name="line199"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleSecureSocket<span style="color: #009900;">&#40;</span><span style="color: #000088;">$host</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line200"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">SimpleSocket</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$host</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line201"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line202"></a>&nbsp;
+<a name="line203"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line204"></a>         *    Actually opens the low level socket.
+<a name="line205"></a>         *    @param string $host          Host to connect to.
+<a name="line206"></a>         *    @param integer $port         Port on host.
+<a name="line207"></a>         *    @param integer $error_number Recipient of error code.
+<a name="line208"></a>         *    @param string $error         Recipient of error message.
+<a name="line209"></a>         *    @param integer $timeout      Maximum time to wait for connection.
+<a name="line210"></a>         *    @access protected
+<a name="line211"></a>         */</span>
+<a name="line212"></a>        <span style="color: #000000; font-weight: bold;">function</span> _openSocket<span style="color: #009900;">&#40;</span><span style="color: #000088;">$host</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$error_number</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$error</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line213"></a>            <span style="color: #b1b100;">return</span> parent<span style="color: #339933;">::</span>_openSocket<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;tls://<span style="color: #006699; font-weight: bold;">$host</span>&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$port</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error_number</span><span style="color: #339933;">,</span> <span style="color: #000088;">$error</span><span style="color: #339933;">,</span> <span style="color: #000088;">$timeout</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line214"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line215"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line216"></a><span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/socket.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:36:58 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>internals/core.get_php_resource.php (Smarty)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/internals/core.get_php_resource.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>internals/core.get_php_resource.php</h1>
+<div class="comment" id="overview_description"><p>Smarty plugin</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a> * Smarty plugin
+<a name="line4"></a> * @package Smarty
+<a name="line5"></a> * @subpackage plugins
+<a name="line6"></a> */</span>
+<a name="line7"></a>&nbsp;
+<a name="line8"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line9"></a> * Retrieves PHP script resource
+<a name="line10"></a> *
+<a name="line11"></a> * sets $php_resource to the returned resource
+<a name="line12"></a> * @param string $resource
+<a name="line13"></a> * @param string $resource_type
+<a name="line14"></a> * @param  $php_resource
+<a name="line15"></a> * @return boolean
+<a name="line16"></a> */</span>
+<a name="line17"></a>&nbsp;
+<a name="line18"></a><span style="color: #000000; font-weight: bold;">function</span> smarty_core_get_php_resource<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$params</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span>
+<a name="line19"></a><span style="color: #009900;">&#123;</span>
+<a name="line20"></a>&nbsp;
+<a name="line21"></a>    <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_base_path'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">trusted_dir</span><span style="color: #339933;">;</span>
+<a name="line22"></a>    <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span>_parse_resource_name<span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #339933;">,</span> <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line23"></a>&nbsp;
+<a name="line24"></a>    <span style="color: #666666; font-style: italic;">/*
+<a name="line25"></a>     * Find out if the resource exists.
+<a name="line26"></a>     */</span>
+<a name="line27"></a>&nbsp;
+<a name="line28"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'file'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line29"></a>        <span style="color: #000088;">$_readable</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line30"></a>        <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/file_exists"><span style="color: #990000;">file_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_name'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/is_readable"><span style="color: #990000;">is_readable</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_name'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line31"></a>            <span style="color: #000088;">$_readable</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line32"></a>        <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line33"></a>            <span style="color: #666666; font-style: italic;">// test for file in include_path</span>
+<a name="line34"></a>            <span style="color: #000088;">$_params</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'file_path'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_name'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line35"></a>            <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span>SMARTY_CORE_DIR <span style="color: #339933;">.</span> <span style="color: #0000ff;">'core.get_include_path.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line36"></a>            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>smarty_core_get_include_path<span style="color: #009900;">&#40;</span><span style="color: #000088;">$_params</span><span style="color: #339933;">,</span> <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line37"></a>                <span style="color: #000088;">$_include_path</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'new_file_path'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line38"></a>                <span style="color: #000088;">$_readable</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line39"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line40"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line41"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'file'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line42"></a>        <span style="color: #000088;">$_template_source</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<a name="line43"></a>        <span style="color: #000088;">$_readable</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/is_callable"><span style="color: #990000;">is_callable</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span>_plugins<span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_type'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+<a name="line44"></a>            <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/call_user_func_array"><span style="color: #990000;">call_user_func_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span>_plugins<span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_type'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span>
+<a name="line45"></a>                                    <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_name'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$_template_source</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line46"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line47"></a>&nbsp;
+<a name="line48"></a>    <span style="color: #666666; font-style: italic;">/*
+<a name="line49"></a>     * Set the error function, depending on which class calls us.
+<a name="line50"></a>     */</span>
+<a name="line51"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/method_exists"><span style="color: #990000;">method_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$smarty</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'_syntax_error'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line52"></a>        <span style="color: #000088;">$_error_funcc</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'_syntax_error'</span><span style="color: #339933;">;</span>
+<a name="line53"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line54"></a>        <span style="color: #000088;">$_error_funcc</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'trigger_error'</span><span style="color: #339933;">;</span>
+<a name="line55"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line56"></a>&nbsp;
+<a name="line57"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$_readable</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line58"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">security</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line59"></a>            <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span>SMARTY_CORE_DIR <span style="color: #339933;">.</span> <span style="color: #0000ff;">'core.is_trusted.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line60"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>smarty_core_is_trusted<span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #339933;">,</span> <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line61"></a>                <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #000088;">$_error_funcc</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'(secure mode) '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">':'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_name'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">' is not trusted'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line62"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line63"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line64"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line65"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line66"></a>        <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #000088;">$_error_funcc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">':'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_name'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">' is not readable'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line67"></a>        <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line68"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line69"></a>&nbsp;
+<a name="line70"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'file'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line71"></a>        <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'php_resource'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'resource_name'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line72"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line73"></a>        <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'php_resource'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_template_source</span><span style="color: #339933;">;</span>
+<a name="line74"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line75"></a>    <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line76"></a><span style="color: #009900;">&#125;</span>
+<a name="line77"></a>&nbsp;
+<a name="line78"></a><span style="color: #666666; font-style: italic;">/* vim: set expandtab: */</span>
+<a name="line79"></a>&nbsp;
+<a name="line80"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line81"></a>&nbsp;</pre>
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/internals/core.get_php_resource.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

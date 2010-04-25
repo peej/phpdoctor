@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>MinimumCallCountExpectation (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/minimumcallcountexpectation.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\MinimumCallCountExpectation</div>
+<a href="../source/mock_objects.php.html#line241" class="location">mock_objects.php at line 241</a>
+
+<h1>Class MinimumCallCountExpectation</h1>
+
+<pre class="tree"><a href="../simpletest/simpleexpectation.html">SimpleExpectation</a><br>    └─<strong>MinimumCallCountExpectation</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>MinimumCallCountExpectation</strong><br>extends <a href="../simpletest/simpleexpectation.html">SimpleExpectation</a>
+
+</p>
+
+<div class="comment" id="overview_description"><p>Confirms that the number of calls on a method is as expected.</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>UnitTester</dd>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#MinimumCallCountExpectation()">MinimumCallCountExpectation</a>(string method, integer count, string message)</p><p class="description">Stashes the method and expected count for later
+reporting.</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#test()">test</a>(integer compare)</p><p class="description">Tests the assertion. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#testMessage()">testMessage</a>(integer compare)</p><p class="description">Reports the comparison.</p></td>
+</tr>
+</table>
+
+<table class="inherit">
+<tr><th colspan="2">Methods inherited from SimpleTest\SimpleExpectation</th></tr>
+<tr><td><a href="../simpletest/simpleexpectation.html#overlayMessage()">overlayMessage</a>, <a href="../simpletest/simpleexpectation.html#test()">test</a>, <a href="../simpletest/simpleexpectation.html#testMessage()">testMessage</a></td></tr></table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/mock_objects.php.html#line252" class="location">mock_objects.php at line 252</a>
+
+<h3 id="MinimumCallCountExpectation()">MinimumCallCountExpectation</h3>
+<code class="signature">public <strong>MinimumCallCountExpectation</strong>(string method, integer count, string message)</code>
+<div class="details">
+<p>Stashes the method and expected count for later
+reporting.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Name of method to confirm against.</dd>
+<dd>count - Minimum number of calls.</dd>
+<dd>message - Custom error message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/mock_objects.php.html#line264" class="location">mock_objects.php at line 264</a>
+
+<h3 id="test()">test</h3>
+<code class="signature">public  boolean <strong>test</strong>(integer compare)</code>
+<div class="details">
+<p>Tests the assertion. True if correct.</p><dl>
+<dt>Parameters:</dt>
+<dd>compare - Measured call count.</dd>
+<dt>Returns:</dt>
+<dd>True if enough.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line274" class="location">mock_objects.php at line 274</a>
+
+<h3 id="testMessage()">testMessage</h3>
+<code class="signature">public  string <strong>testMessage</strong>(integer compare)</code>
+<div class="details">
+<p>Reports the comparison.</p><dl>
+<dt>Parameters:</dt>
+<dd>compare - Measured call count.</dd>
+<dt>Returns:</dt>
+<dd>Message to show.</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/minimumcallcountexpectation.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

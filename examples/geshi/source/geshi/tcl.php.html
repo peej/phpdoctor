@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:26:35 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>geshi/tcl.php (GeSHi)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/tcl.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>geshi/tcl.php</h1>
+<div class="comment" id="overview_description"><p>tcl.php
+---------------------------------
+Author: Reid van Melle (rvanmelle@gmail.com)
+Copyright: (c) 2004 Reid van Melle (sorry@nowhere)
+Release Version: 1.0.8.3
+Date Started: 2006/05/05</p><p>TCL/iTCL language file for GeSHi.</p><p>This was thrown together in about an hour so I don't expect
+really great things.  However, it is a good start.  I never
+got a change to try out the iTCL or object-based support but
+this is not widely used anyway.</p><p>CHANGES
+-------
+2008/05/23 (1.0.7.22)
+-  Added description of extra language features (SF#1970248)
+2006/05/05 (1.0.0)
+-  First Release</p><p>TODO (updated 2006/05/05)
+-------------------------
+- Get TCL built-in special variables highlighted with a new color..
+currently, these are listed in //special variables in the keywords
+section, but they get covered by the general REGEXP for symbols
+- General cleanup, testing, and verification</p><p></p><p>This file is part of GeSHi.</p><p>GeSHi is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p><p>GeSHi is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License
+along with GeSHi; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*************************************************************************************
+<a name="line3"></a> * tcl.php
+<a name="line4"></a> * ---------------------------------
+<a name="line5"></a> * Author: Reid van Melle (rvanmelle@gmail.com)
+<a name="line6"></a> * Copyright: (c) 2004 Reid van Melle (sorry@nowhere)
+<a name="line7"></a> * Release Version: 1.0.8.3
+<a name="line8"></a> * Date Started: 2006/05/05
+<a name="line9"></a> *
+<a name="line10"></a> * TCL/iTCL language file for GeSHi.
+<a name="line11"></a> *
+<a name="line12"></a> * This was thrown together in about an hour so I don't expect
+<a name="line13"></a> * really great things.  However, it is a good start.  I never
+<a name="line14"></a> * got a change to try out the iTCL or object-based support but
+<a name="line15"></a> * this is not widely used anyway.
+<a name="line16"></a> *
+<a name="line17"></a> * CHANGES
+<a name="line18"></a> * -------
+<a name="line19"></a> * 2008/05/23 (1.0.7.22)
+<a name="line20"></a> *  -  Added description of extra language features (SF#1970248)
+<a name="line21"></a> * 2006/05/05 (1.0.0)
+<a name="line22"></a> *  -  First Release
+<a name="line23"></a> *
+<a name="line24"></a> * TODO (updated 2006/05/05)
+<a name="line25"></a> * -------------------------
+<a name="line26"></a> * - Get TCL built-in special variables highlighted with a new color..
+<a name="line27"></a> *   currently, these are listed in //special variables in the keywords
+<a name="line28"></a> *   section, but they get covered by the general REGEXP for symbols
+<a name="line29"></a> * - General cleanup, testing, and verification
+<a name="line30"></a> *
+<a name="line31"></a> *************************************************************************************
+<a name="line32"></a> *
+<a name="line33"></a> *     This file is part of GeSHi.
+<a name="line34"></a> *
+<a name="line35"></a> *   GeSHi is free software; you can redistribute it and/or modify
+<a name="line36"></a> *   it under the terms of the GNU General Public License as published by
+<a name="line37"></a> *   the Free Software Foundation; either version 2 of the License, or
+<a name="line38"></a> *   (at your option) any later version.
+<a name="line39"></a> *
+<a name="line40"></a> *   GeSHi is distributed in the hope that it will be useful,
+<a name="line41"></a> *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line42"></a> *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line43"></a> *   GNU General Public License for more details.
+<a name="line44"></a> *
+<a name="line45"></a> *   You should have received a copy of the GNU General Public License
+<a name="line46"></a> *   along with GeSHi; if not, write to the Free Software
+<a name="line47"></a> *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line48"></a> *
+<a name="line49"></a> ************************************************************************************/</span>
+<a name="line50"></a>&nbsp;
+<a name="line51"></a><span style="color: #000088;">$language_data</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a> <span style="color: #009900;">&#40;</span>
+<a name="line52"></a>    <span style="color: #0000ff;">'LANG_NAME'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'TCL'</span><span style="color: #339933;">,</span>
+<a name="line53"></a>    <span style="color: #0000ff;">'COMMENT_SINGLE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'#'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line54"></a>    <span style="color: #0000ff;">'COMMENT_MULTI'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line55"></a>    <span style="color: #0000ff;">'COMMENT_REGEXP'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line56"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'/(?&lt;!\\\\)#(?:\\\\\\\\|\\\\\\n|.)*$/m'</span><span style="color: #339933;">,</span>
+<a name="line57"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'/{[^}\n]+}/'</span>
+<a name="line58"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line59"></a>    <span style="color: #0000ff;">'CASE_KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> GESHI_CAPS_NO_CHANGE<span style="color: #339933;">,</span>
+<a name="line60"></a>    <span style="color: #0000ff;">'QUOTEMARKS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'&quot;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;'&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line61"></a>    <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span>
+<a name="line62"></a>    <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line63"></a>        <span style="color: #666666; font-style: italic;">/*
+<a name="line64"></a>         * Set 1: reserved words
+<a name="line65"></a>         * http://python.org/doc/current/ref/keywords.html
+<a name="line66"></a>         */</span>
+<a name="line67"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line68"></a>            <span style="color: #0000ff;">'proc'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'global'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'upvar'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'if'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'then'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'else'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'elseif'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'for'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'foreach'</span><span style="color: #339933;">,</span>
+<a name="line69"></a>            <span style="color: #0000ff;">'break'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'continue'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'while'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'set'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'eval'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'case'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'in'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'switch'</span><span style="color: #339933;">,</span>
+<a name="line70"></a>            <span style="color: #0000ff;">'default'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'exit'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'error'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'return'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'uplevel'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'loop'</span><span style="color: #339933;">,</span>
+<a name="line71"></a>            <span style="color: #0000ff;">'for_array_keys'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'for_recursive_glob'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'for_file'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'unwind_protect'</span><span style="color: #339933;">,</span>
+<a name="line72"></a>            <span style="color: #0000ff;">'expr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'catch'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'namespace'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'rename'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'variable'</span><span style="color: #339933;">,</span>
+<a name="line73"></a>            <span style="color: #666666; font-style: italic;">// itcl</span>
+<a name="line74"></a>            <span style="color: #0000ff;">'method'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'itcl_class'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'public'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'protected'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line75"></a>&nbsp;
+<a name="line76"></a>        <span style="color: #666666; font-style: italic;">/*
+<a name="line77"></a>         * Set 2: builtins
+<a name="line78"></a>         * http://asps.activatestate.com/ASPN/docs/ActiveTcl/8.4/tcl/tcl_2_contents.htm
+<a name="line79"></a>         */</span>
+<a name="line80"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line81"></a>            <span style="color: #666666; font-style: italic;">// string handling</span>
+<a name="line82"></a>            <span style="color: #0000ff;">'append'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'binary'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'format'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'re_syntax'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'regexp'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'regsub'</span><span style="color: #339933;">,</span>
+<a name="line83"></a>            <span style="color: #0000ff;">'scan'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'subst'</span><span style="color: #339933;">,</span>
+<a name="line84"></a>            <span style="color: #666666; font-style: italic;">// list handling</span>
+<a name="line85"></a>            <span style="color: #0000ff;">'concat'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'join'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lappend'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lindex'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'list'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'llength'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lrange'</span><span style="color: #339933;">,</span>
+<a name="line86"></a>            <span style="color: #0000ff;">'lreplace'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lsearch'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lset'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lsort'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'split'</span><span style="color: #339933;">,</span>
+<a name="line87"></a>            <span style="color: #666666; font-style: italic;">// procedures and output</span>
+<a name="line88"></a>            <span style="color: #0000ff;">'incr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'close'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'eof'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'fblocked'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'fconfigure'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'fcopy'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'file'</span><span style="color: #339933;">,</span>
+<a name="line89"></a>            <span style="color: #0000ff;">'fileevent'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'flush'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'gets'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'open'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'puts'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'read'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'seek'</span><span style="color: #339933;">,</span>
+<a name="line90"></a>            <span style="color: #0000ff;">'socket'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'tell'</span><span style="color: #339933;">,</span>
+<a name="line91"></a>            <span style="color: #666666; font-style: italic;">// packages and source files</span>
+<a name="line92"></a>            <span style="color: #0000ff;">'load'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'loadTk'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'package'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pgk::create'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pgk_mkIndex'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'source'</span><span style="color: #339933;">,</span>
+<a name="line93"></a>            <span style="color: #666666; font-style: italic;">// interpreter routines</span>
+<a name="line94"></a>            <span style="color: #0000ff;">'bgerror'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'history'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'info'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'interp'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'memory'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'unknown'</span><span style="color: #339933;">,</span>
+<a name="line95"></a>            <span style="color: #666666; font-style: italic;">// library routines</span>
+<a name="line96"></a>            <span style="color: #0000ff;">'enconding'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'http'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'msgcat'</span><span style="color: #339933;">,</span>
+<a name="line97"></a>            <span style="color: #666666; font-style: italic;">// system related</span>
+<a name="line98"></a>            <span style="color: #0000ff;">'cd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'clock'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'exec'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'glob'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pwd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'time'</span><span style="color: #339933;">,</span>
+<a name="line99"></a>            <span style="color: #666666; font-style: italic;">// platform specified</span>
+<a name="line100"></a>            <span style="color: #0000ff;">'dde'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'registry'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'resource'</span><span style="color: #339933;">,</span>
+<a name="line101"></a>            <span style="color: #666666; font-style: italic;">// special variables</span>
+<a name="line102"></a>            <span style="color: #0000ff;">'$argc'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$argv'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$errorCode'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$errorInfo'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$argv0'</span><span style="color: #339933;">,</span>
+<a name="line103"></a>            <span style="color: #0000ff;">'$auto_index'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$auto_oldpath'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$auto_path'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$env'</span><span style="color: #339933;">,</span>
+<a name="line104"></a>            <span style="color: #0000ff;">'$tcl_interactive'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$tcl_libpath'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$tcl_library'</span><span style="color: #339933;">,</span>
+<a name="line105"></a>            <span style="color: #0000ff;">'$tcl_pkgPath'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$tcl_platform'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$tcl_precision'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$tcl_traceExec'</span><span style="color: #339933;">,</span>
+<a name="line106"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line107"></a>&nbsp;
+<a name="line108"></a>        <span style="color: #666666; font-style: italic;">/*
+<a name="line109"></a>         * Set 3: standard library
+<a name="line110"></a>         */</span>
+<a name="line111"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line112"></a>            <span style="color: #0000ff;">'comment'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'filename'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'library'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'packagens'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'tcltest'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'tclvars'</span><span style="color: #339933;">,</span>
+<a name="line113"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line114"></a>&nbsp;
+<a name="line115"></a>        <span style="color: #666666; font-style: italic;">/*
+<a name="line116"></a>         * Set 4: special methods
+<a name="line117"></a>         */</span>
+<a name="line118"></a><span style="color: #666666; font-style: italic;">//        4 =&gt; array(</span>
+<a name="line119"></a><span style="color: #666666; font-style: italic;">//            )</span>
+<a name="line120"></a>&nbsp;
+<a name="line121"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line122"></a>    <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line123"></a>        <span style="color: #0000ff;">'('</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">')'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'['</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">']'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'{'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'}'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'*'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&amp;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'%'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'!'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">';'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&lt;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'?'</span>
+<a name="line124"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line125"></a>    <span style="color: #0000ff;">'CASE_SENSITIVE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line126"></a>        GESHI_COMMENTS <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line127"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line128"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line129"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line130"></a><span style="color: #666666; font-style: italic;">//        4 =&gt; true</span>
+<a name="line131"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line132"></a>    <span style="color: #0000ff;">'STYLES'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line133"></a>        <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line134"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #ff7700;font-weight:bold;'</span><span style="color: #339933;">,</span>    <span style="color: #666666; font-style: italic;">// Reserved</span>
+<a name="line135"></a>            <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #008000;'</span><span style="color: #339933;">,</span>                        <span style="color: #666666; font-style: italic;">// Built-ins + self</span>
+<a name="line136"></a>            <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #dc143c;'</span><span style="color: #339933;">,</span>                        <span style="color: #666666; font-style: italic;">// Standard lib</span>
+<a name="line137"></a><span style="color: #666666; font-style: italic;">//            4 =&gt; 'color: #0000cd;'                        // Special methods</span>
+<a name="line138"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line139"></a>        <span style="color: #0000ff;">'COMMENTS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line140"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #808080; font-style: italic;'</span><span style="color: #339933;">,</span>
+<a name="line141"></a>            <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #483d8b;'</span><span style="color: #339933;">,</span>
+<a name="line142"></a>            <span style="color: #0000ff;">'MULTI'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #808080; font-style: italic;'</span>
+<a name="line143"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line144"></a>        <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line145"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #000099; font-weight: bold;'</span>
+<a name="line146"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line147"></a>        <span style="color: #0000ff;">'BRACKETS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line148"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: black;'</span>
+<a name="line149"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line150"></a>        <span style="color: #0000ff;">'STRINGS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line151"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #483d8b;'</span>
+<a name="line152"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line153"></a>        <span style="color: #0000ff;">'NUMBERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line154"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #ff4500;'</span>
+<a name="line155"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line156"></a>        <span style="color: #0000ff;">'METHODS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line157"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: black;'</span>
+<a name="line158"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line159"></a>        <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line160"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #66cc66;'</span>
+<a name="line161"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line162"></a>        <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line163"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #ff3333;'</span>
+<a name="line164"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line165"></a>        <span style="color: #0000ff;">'SCRIPT'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line166"></a>            <span style="color: #009900;">&#41;</span>
+<a name="line167"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line168"></a>    <span style="color: #0000ff;">'URLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line169"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line170"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line171"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line172"></a><span style="color: #666666; font-style: italic;">//        4 =&gt; ''</span>
+<a name="line173"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line174"></a>    <span style="color: #0000ff;">'OOLANG'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line175"></a>    <span style="color: #0000ff;">'OBJECT_SPLITTERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line176"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'::'</span>
+<a name="line177"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line178"></a>    <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line179"></a>        <span style="color: #666666; font-style: italic;">//Special variables</span>
+<a name="line180"></a>        <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'[\\$]+[a-zA-Z_][a-zA-Z0-9_]*'</span><span style="color: #339933;">,</span>
+<a name="line181"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line182"></a>    <span style="color: #0000ff;">'STRICT_MODE_APPLIES'</span> <span style="color: #339933;">=&gt;</span> GESHI_NEVER<span style="color: #339933;">,</span>
+<a name="line183"></a>    <span style="color: #0000ff;">'SCRIPT_DELIMITERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line184"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line185"></a>    <span style="color: #0000ff;">'HIGHLIGHT_STRICT_BLOCK'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line186"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line187"></a>    <span style="color: #0000ff;">'PARSER_CONTROL'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line188"></a>        <span style="color: #0000ff;">'COMMENTS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line189"></a>            <span style="color: #0000ff;">'DISALLOWED_BEFORE'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'\\'</span>
+<a name="line190"></a>        <span style="color: #009900;">&#41;</span>
+<a name="line191"></a>    <span style="color: #009900;">&#41;</span>
+<a name="line192"></a><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line193"></a>&nbsp;
+<a name="line194"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line195"></a>&nbsp;</pre>
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/tcl.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

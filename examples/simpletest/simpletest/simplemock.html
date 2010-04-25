@@ -1,0 +1,378 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>SimpleMock (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplemock.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\SimpleMock</div>
+<a href="../source/mock_objects.php.html#line640" class="location">mock_objects.php at line 640</a>
+
+<h1>Class SimpleMock</h1>
+
+<pre class="tree"><a href="../simpletest/simplestub.html">SimpleStub</a><br>    └─<strong>SimpleMock</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>SimpleMock</strong><br>extends <a href="../simpletest/simplestub.html">SimpleStub</a>
+
+</p>
+
+<div class="comment" id="overview_description"><p>An empty collection of methods that can have their
+return values set and expectations made of the
+calls upon them. The mock will assert the
+expectations against it's attached test case in
+addition to the server stub behaviour.</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>MockObjects</dd>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#SimpleMock()">SimpleMock</a>(<a href="../simpletest/simpletestcase.html">SimpleTestCase</a> test, mixed wildcard, boolean is_strict)</p><p class="description">Creates an empty return list and expectation list.
+</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectArguments()">expectArguments</a>(string method, array args, string message)</p><p class="description">Sets up an expected call with a set of
+expected parameters in that call. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectArgumentsAt()">expectArgumentsAt</a>(integer timing, string method, array args, string message)</p><p class="description">Sets up an expected call with a set of
+expected parameters in that call. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectAtLeastOnce()">expectAtLeastOnce</a>(string method, array args, string message)</p><p class="description">Convenience method for requiring a method
+call.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectCallCount()">expectCallCount</a>(string method, integer count, string message)</p><p class="description">Sets an expectation for the number of times
+a method will be called. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectMaximumCallCount()">expectMaximumCallCount</a>(string method, integer count, string message)</p><p class="description">Sets the number of times a method may be called
+before a test failure is triggered.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectMinimumCallCount()">expectMinimumCallCount</a>(string method, integer count, string message)</p><p class="description">Sets the number of times to call a method to prevent
+a failure on the tally.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectNever()">expectNever</a>(string method, string message)</p><p class="description">Convenience method for barring a method
+call.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#expectOnce()">expectOnce</a>(string method, array args, string message)</p><p class="description">Convenience method for a single method
+call.</p></td>
+</tr>
+<tr>
+<td class="type"> <a href="../simpletest/simpletestcase.html">SimpleTestCase</a></td>
+<td class="description"><p class="name"><a href="#getTest()">getTest</a>()</p><p class="description">Accessor for attached unit test so that when
+subclassed, new expectations can be added easily.</p></td>
+</tr>
+<tr>
+<td class="type">static  <a href="../simpletest/simpletestcase.html">SimpleTestCase</a></td>
+<td class="description"><p class="name"><a href="#injectTest()">injectTest</a>(mixed key, string class)</p><p class="description">Resolves the dependency on the test case.</p></td>
+</tr>
+<tr>
+<td class="type">static  string</td>
+<td class="description"><p class="name"><a href="#registerTest()">registerTest</a>(<a href="../simpletest/simpletestcase.html">SimpleTestCase</a> test)</p><p class="description">Stashes the test case for later recovery.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#tally()">tally</a>()</p><p class="description">Totals up the call counts and triggers a test
+assertion if a test is present for expected
+call counts.
+</p></td>
+</tr>
+</table>
+
+<table class="inherit">
+<tr><th colspan="2">Methods inherited from SimpleTest\SimpleStub</th></tr>
+<tr><td><a href="../simpletest/simplestub.html#getCallCount()">getCallCount</a>, <a href="../simpletest/simplestub.html#setReturnReference()">setReturnReference</a>, <a href="../simpletest/simplestub.html#setReturnReferenceAt()">setReturnReferenceAt</a>, <a href="../simpletest/simplestub.html#setReturnValue()">setReturnValue</a>, <a href="../simpletest/simplestub.html#setReturnValueAt()">setReturnValueAt</a></td></tr></table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/mock_objects.php.html#line656" class="location">mock_objects.php at line 656</a>
+
+<h3 id="SimpleMock()">SimpleMock</h3>
+<code class="signature">public <strong>SimpleMock</strong>(<a href="../simpletest/simpletestcase.html">SimpleTestCase</a> test, mixed wildcard, boolean is_strict)</code>
+<div class="details">
+<p>Creates an empty return list and expectation list.
+All call counts are set to zero.</p><dl>
+<dt>Parameters:</dt>
+<dd>test - Test case to test expectations in.</dd>
+<dd>wildcard - Parameter matching wildcard.</dd>
+<dd>is_strict - Enables method name checks on expectations.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/mock_objects.php.html#line705" class="location">mock_objects.php at line 705</a>
+
+<h3 id="expectArguments()">expectArguments</h3>
+<code class="signature">public  void <strong>expectArguments</strong>(string method, array args, string message)</code>
+<div class="details">
+<p>Sets up an expected call with a set of
+expected parameters in that call. All
+calls will be compared to these expectations
+regardless of when the call is made.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Method call to test.</dd>
+<dd>args - Expected parameters for the call including wildcards.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line727" class="location">mock_objects.php at line 727</a>
+
+<h3 id="expectArgumentsAt()">expectArgumentsAt</h3>
+<code class="signature">public  void <strong>expectArgumentsAt</strong>(integer timing, string method, array args, string message)</code>
+<div class="details">
+<p>Sets up an expected call with a set of
+expected parameters in that call. The
+expected call count will be adjusted if it
+is set too low to reach this call.</p><dl>
+<dt>Parameters:</dt>
+<dd>timing - Number of calls in the future at which to test. Next call is 0.</dd>
+<dd>method - Method call to test.</dd>
+<dd>args - Expected parameters for the call including wildcards.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line825" class="location">mock_objects.php at line 825</a>
+
+<h3 id="expectAtLeastOnce()">expectAtLeastOnce</h3>
+<code class="signature">public  void <strong>expectAtLeastOnce</strong>(string method, array args, string message)</code>
+<div class="details">
+<p>Convenience method for requiring a method
+call.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Method call to track.</dd>
+<dd>args - Expected argument list or false for any arguments.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line750" class="location">mock_objects.php at line 750</a>
+
+<h3 id="expectCallCount()">expectCallCount</h3>
+<code class="signature">public  void <strong>expectCallCount</strong>(string method, integer count, string message)</code>
+<div class="details">
+<p>Sets an expectation for the number of times
+a method will be called. The tally method
+is used to check this.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Method call to test.</dd>
+<dd>count - Number of times it should have been called at tally.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line766" class="location">mock_objects.php at line 766</a>
+
+<h3 id="expectMaximumCallCount()">expectMaximumCallCount</h3>
+<code class="signature">public  void <strong>expectMaximumCallCount</strong>(string method, integer count, string message)</code>
+<div class="details">
+<p>Sets the number of times a method may be called
+before a test failure is triggered.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Method call to test.</dd>
+<dd>count - Most number of times it should have been called.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line782" class="location">mock_objects.php at line 782</a>
+
+<h3 id="expectMinimumCallCount()">expectMinimumCallCount</h3>
+<code class="signature">public  void <strong>expectMinimumCallCount</strong>(string method, integer count, string message)</code>
+<div class="details">
+<p>Sets the number of times to call a method to prevent
+a failure on the tally.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Method call to test.</dd>
+<dd>count - Least number of times it should have been called.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line796" class="location">mock_objects.php at line 796</a>
+
+<h3 id="expectNever()">expectNever</h3>
+<code class="signature">public  void <strong>expectNever</strong>(string method, string message)</code>
+<div class="details">
+<p>Convenience method for barring a method
+call.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Method call to ban.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line809" class="location">mock_objects.php at line 809</a>
+
+<h3 id="expectOnce()">expectOnce</h3>
+<code class="signature">public  void <strong>expectOnce</strong>(string method, array args, string message)</code>
+<div class="details">
+<p>Convenience method for a single method
+call.</p><dl>
+<dt>Parameters:</dt>
+<dd>method - Method call to track.</dd>
+<dd>args - Expected argument list or false for any arguments.</dd>
+<dd>message - Overridden message.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line675" class="location">mock_objects.php at line 675</a>
+
+<h3 id="getTest()">getTest</h3>
+<code class="signature">public  <a href="../simpletest/simpletestcase.html">SimpleTestCase</a> <strong>getTest</strong>()</code>
+<div class="details">
+<p>Accessor for attached unit test so that when
+subclassed, new expectations can be added easily.</p><dl>
+<dt>Returns:</dt>
+<dd>Unit test passed in constructor.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line936" class="location">mock_objects.php at line 936</a>
+
+<h3 id="injectTest()">injectTest</h3>
+<code class="signature">public static  <a href="../simpletest/simpletestcase.html">SimpleTestCase</a> <strong>injectTest</strong>(mixed key, string class)</code>
+<div class="details">
+<p>Resolves the dependency on the test case.</p><dl>
+<dt>Parameters:</dt>
+<dd>class - Key to look up test case in.</dd>
+<dt>Returns:</dt>
+<dd>Test case to send results to.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line923" class="location">mock_objects.php at line 923</a>
+
+<h3 id="registerTest()">registerTest</h3>
+<code class="signature">public static  string <strong>registerTest</strong>(<a href="../simpletest/simpletestcase.html">SimpleTestCase</a> test)</code>
+<div class="details">
+<p>Stashes the test case for later recovery.</p><dl>
+<dt>Parameters:</dt>
+<dd>test - Test case.</dd>
+<dt>Returns:</dt>
+<dd>Key to find it again.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/mock_objects.php.html#line840" class="location">mock_objects.php at line 840</a>
+
+<h3 id="tally()">tally</h3>
+<code class="signature">public  void <strong>tally</strong>()</code>
+<div class="details">
+<p>Totals up the call counts and triggers a test
+assertion if a test is present for expected
+call counts.
+This method must be called explicitly for the call
+count assertions to be triggered.</p></div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplemock.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:37:06 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>plugins/shared.make_timestamp.php (Smarty)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/plugins/shared.make_timestamp.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>plugins/shared.make_timestamp.php</h1>
+<div class="comment" id="overview_description"><p>Smarty shared plugin</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a> * Smarty shared plugin
+<a name="line4"></a> * @package Smarty
+<a name="line5"></a> * @subpackage plugins
+<a name="line6"></a> */</span>
+<a name="line7"></a>&nbsp;
+<a name="line8"></a>&nbsp;
+<a name="line9"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line10"></a> * Function: smarty_make_timestamp&lt;br&gt;
+<a name="line11"></a> * Purpose:  used by other smarty functions to make a timestamp
+<a name="line12"></a> *           from a string.
+<a name="line13"></a> * @author   Monte Ohrt &lt;monte at ohrt dot com&gt;
+<a name="line14"></a> * @param string
+<a name="line15"></a> * @return string
+<a name="line16"></a> */</span>
+<a name="line17"></a><span style="color: #000000; font-weight: bold;">function</span> smarty_make_timestamp<span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#41;</span>
+<a name="line18"></a><span style="color: #009900;">&#123;</span>
+<a name="line19"></a>    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/empty"><span style="color: #990000;">empty</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line20"></a>        <span style="color: #666666; font-style: italic;">// use &quot;now&quot;:</span>
+<a name="line21"></a>        <span style="color: #000088;">$time</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/time"><span style="color: #990000;">time</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line22"></a>&nbsp;
+<a name="line23"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/^\d{14}$/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$string</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line24"></a>        <span style="color: #666666; font-style: italic;">// it is mysql timestamp format of YYYYMMDDHHMMSS?            </span>
+<a name="line25"></a>        <span style="color: #000088;">$time</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/mktime"><span style="color: #990000;">mktime</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">8</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">12</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line26"></a>                       <a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">4</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">6</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">4</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line27"></a>&nbsp;
+<a name="line28"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_numeric"><span style="color: #990000;">is_numeric</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line29"></a>        <span style="color: #666666; font-style: italic;">// it is a numeric string, we handle it as timestamp</span>
+<a name="line30"></a>        <span style="color: #000088;">$time</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>int<span style="color: #009900;">&#41;</span><span style="color: #000088;">$string</span><span style="color: #339933;">;</span>
+<a name="line31"></a>&nbsp;
+<a name="line32"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line33"></a>        <span style="color: #666666; font-style: italic;">// strtotime should handle it</span>
+<a name="line34"></a>        <span style="color: #000088;">$time</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtotime"><span style="color: #990000;">strtotime</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line35"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$time</span> <span style="color: #339933;">==</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span> <span style="color: #339933;">||</span> <span style="color: #000088;">$time</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line36"></a>            <span style="color: #666666; font-style: italic;">// strtotime() was not able to parse $string, use &quot;now&quot;:</span>
+<a name="line37"></a>            <span style="color: #000088;">$time</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/time"><span style="color: #990000;">time</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line38"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line39"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line40"></a>    <span style="color: #b1b100;">return</span> <span style="color: #000088;">$time</span><span style="color: #339933;">;</span>
+<a name="line41"></a>&nbsp;
+<a name="line42"></a><span style="color: #009900;">&#125;</span>
+<a name="line43"></a>&nbsp;
+<a name="line44"></a><span style="color: #666666; font-style: italic;">/* vim: set expandtab: */</span>
+<a name="line45"></a>&nbsp;
+<a name="line46"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line47"></a>&nbsp;</pre>
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/plugins/shared.make_timestamp.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

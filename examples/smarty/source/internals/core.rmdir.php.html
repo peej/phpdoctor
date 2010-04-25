@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:36:59 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>internals/core.rmdir.php (Smarty)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/internals/core.rmdir.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>internals/core.rmdir.php</h1>
+<div class="comment" id="overview_description"><p>Smarty plugin</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a> * Smarty plugin
+<a name="line4"></a> * @package Smarty
+<a name="line5"></a> * @subpackage plugins
+<a name="line6"></a> */</span>
+<a name="line7"></a>&nbsp;
+<a name="line8"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line9"></a> * delete a dir recursively (level=0 -&gt; keep root)
+<a name="line10"></a> * WARNING: no tests, it will try to remove what you tell it!
+<a name="line11"></a> *
+<a name="line12"></a> * @param string $dirname
+<a name="line13"></a> * @param integer $level
+<a name="line14"></a> * @param integer $exp_time
+<a name="line15"></a> * @return boolean
+<a name="line16"></a> */</span>
+<a name="line17"></a>&nbsp;
+<a name="line18"></a><span style="color: #666666; font-style: italic;">//  $dirname, $level = 1, $exp_time = null</span>
+<a name="line19"></a>&nbsp;
+<a name="line20"></a><span style="color: #000000; font-weight: bold;">function</span> smarty_core_rmdir<span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span>
+<a name="line21"></a><span style="color: #009900;">&#123;</span>
+<a name="line22"></a>   <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'level'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'level'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> <span style="color: #009900;">&#125;</span>
+<a name="line23"></a>   <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'exp_time'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'exp_time'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span> <span style="color: #009900;">&#125;</span>
+<a name="line24"></a>&nbsp;
+<a name="line25"></a>   <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$_handle</span> <span style="color: #339933;">=</span> <span style="color: #339933;">@</span><a href="http://www.php.net/opendir"><span style="color: #990000;">opendir</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'dirname'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line26"></a>&nbsp;
+<a name="line27"></a>        <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">false</span> <span style="color: #339933;">!==</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$_entry</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/readdir"><span style="color: #990000;">readdir</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$_handle</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line28"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$_entry</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'.'</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #000088;">$_entry</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'..'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line29"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">@</span><a href="http://www.php.net/is_dir"><span style="color: #990000;">is_dir</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'dirname'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #009900; font-weight: bold;">DIRECTORY_SEPARATOR</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$_entry</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line30"></a>                    <span style="color: #000088;">$_params</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line31"></a>                        <span style="color: #0000ff;">'dirname'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'dirname'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #009900; font-weight: bold;">DIRECTORY_SEPARATOR</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$_entry</span><span style="color: #339933;">,</span>
+<a name="line32"></a>                        <span style="color: #0000ff;">'level'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'level'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">,</span>
+<a name="line33"></a>                        <span style="color: #0000ff;">'exp_time'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'exp_time'</span><span style="color: #009900;">&#93;</span>
+<a name="line34"></a>                    <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line35"></a>                    smarty_core_rmdir<span style="color: #009900;">&#40;</span><span style="color: #000088;">$_params</span><span style="color: #339933;">,</span> <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line36"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line37"></a>                <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line38"></a>                    <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span>_unlink<span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'dirname'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">.</span> <span style="color: #009900; font-weight: bold;">DIRECTORY_SEPARATOR</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$_entry</span><span style="color: #339933;">,</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'exp_time'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line39"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line40"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line41"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line42"></a>        <a href="http://www.php.net/closedir"><span style="color: #990000;">closedir</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$_handle</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line43"></a>   <span style="color: #009900;">&#125;</span>
+<a name="line44"></a>&nbsp;
+<a name="line45"></a>   <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'level'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line46"></a>       <span style="color: #b1b100;">return</span> <span style="color: #339933;">@</span><a href="http://www.php.net/rmdir"><span style="color: #990000;">rmdir</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'dirname'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line47"></a>   <span style="color: #009900;">&#125;</span>
+<a name="line48"></a>   <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span>bool<span style="color: #009900;">&#41;</span><span style="color: #000088;">$_handle</span><span style="color: #339933;">;</span>
+<a name="line49"></a>&nbsp;
+<a name="line50"></a><span style="color: #009900;">&#125;</span>
+<a name="line51"></a>&nbsp;
+<a name="line52"></a><span style="color: #666666; font-style: italic;">/* vim: set expandtab: */</span>
+<a name="line53"></a>&nbsp;
+<a name="line54"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line55"></a>&nbsp;</pre>
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/internals/core.rmdir.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

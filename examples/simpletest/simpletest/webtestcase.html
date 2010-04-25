@@ -1,0 +1,1380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>WebTestCase (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/webtestcase.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\WebTestCase</div>
+<a href="../source/web_tester.php.html#line477" class="location">web_tester.php at line 477</a>
+
+<h1>Class WebTestCase</h1>
+
+<pre class="tree"><a href="../simpletest/simpletestcase.html">SimpleTestCase</a><br>    └─<strong>WebTestCase</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>WebTestCase</strong><br>extends <a href="../simpletest/simpletestcase.html">SimpleTestCase</a>
+
+</p>
+
+<div class="comment" id="overview_description"><p>Test case for testing of web pages. Allows
+fetching of pages, parsing of HTML and
+submitting forms.</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>WebTester</dd>
+<dt>Package		SimpleTest.</dt>
+<dt>Subpackage	UnitTester.</dt>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#WebTestCase()">WebTestCase</a>(string label)</p><p class="description">Creates an empty test case. </p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#addHeader()">addHeader</a>(string header)</p><p class="description">Adds a header to every fetch.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#ageCookies()">ageCookies</a>(integer interval)</p><p class="description">Moves cookie expiry times back into the past.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertAuthentication()">assertAuthentication</a>(string authentication, string message)</p><p class="description">Attempt to match the authentication type within
+the security realm we are currently matching.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertCookie()">assertCookie</a>(string name, string expected, string message)</p><p class="description">Checks that a cookie is set for the current page
+and optionally checks the value.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertField()">assertField</a>(string name, mixed expected, string message)</p><p class="description">Confirms that the form element is currently set
+to the expected value. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertFieldById()">assertFieldById</a>(string/integer id, mixed expected, string message)</p><p class="description">Confirms that the form element is currently set
+to the expected value. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertHeader()">assertHeader</a>(string header, string value, mixed message)</p><p class="description">Checks each header line for the required value. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertHeaderPattern()">assertHeaderPattern</a>(string header, string pattern, mixed message)</p><p class="description">Checks each header line for the required pattern.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertLink()">assertLink</a>(string label, string message)</p><p class="description">Tests for the presence of a link label. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertLinkById()">assertLinkById</a>(string id, string message)</p><p class="description">Tests for the presence of a link id attribute.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertMime()">assertMime</a>(array types, string message)</p><p class="description">Checks the mime type against a list
+of possible values.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoAuthentication()">assertNoAuthentication</a>(string message)</p><p class="description">Checks that no authentication is necessary to view
+the desired page.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoCookie()">assertNoCookie</a>(string name, string message)</p><p class="description">Checks that no cookie is present or that it has
+been successfully cleared.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoLink()">assertNoLink</a>(string/integer label, string message)</p><p class="description">Tests for the non-presence of a link label. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoLinkById()">assertNoLinkById</a>(string id, string message)</p><p class="description">Tests for the non-presence of a link label. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoUnwantedHeader()">assertNoUnwantedHeader</a>(string header, mixed message)</p><p class="description">Confirms that the header type has not been received.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoUnwantedPattern()">assertNoUnwantedPattern</a>(string pattern, string message)</p><p class="description">Will trigger a pass if the perl regex pattern
+is not present in raw content.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoUnwantedText()">assertNoUnwantedText</a>(string text, string message)</p><p class="description">Will trigger a pass if the text is not found in the plain
+text form of the page.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertRealm()">assertRealm</a>(string realm, string message)</p><p class="description">Attempts to match the current security realm.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertResponse()">assertResponse</a>(array responses, string message)</p><p class="description">Checks the response code against a list
+of possible values.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertTitle()">assertTitle</a>(string title, string message)</p><p class="description">Tests the text between the title tags.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertWantedPattern()">assertWantedPattern</a>(string pattern, string message)</p><p class="description">Will trigger a pass if the Perl regex pattern
+is found in the raw content.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertWantedText()">assertWantedText</a>(string text, string message)</p><p class="description">Will trigger a pass if the text is found in the plain
+text form of the page.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#authenticate()">authenticate</a>(string username, string password)</p><p class="description">Retries a request after setting the authentication
+for the current realm.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#back()">back</a>()</p><p class="description">Equivalent to hitting the back button on the
+browser.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#clearFrameFocus()">clearFrameFocus</a>()</p><p class="description">Clears the frame focus. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickImage()">clickImage</a>(string label, integer x, integer y, hash additional)</p><p class="description">Clicks the submit image by some kind of label. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickImageById()">clickImageById</a>(integer/string id, integer x, integer y, hash additional)</p><p class="description">Clicks the submit image by ID attribute. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickImageByName()">clickImageByName</a>(string name, integer x, integer y, hash additional)</p><p class="description">Clicks the submit image by the name. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickLink()">clickLink</a>(string label, integer index)</p><p class="description">Follows a link by name. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickLinkById()">clickLinkById</a>(string id)</p><p class="description">Follows a link by id attribute.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickSubmit()">clickSubmit</a>(string label, hash additional)</p><p class="description">Clicks the submit button by label. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickSubmitById()">clickSubmitById</a>(string id, hash additional)</p><p class="description">Clicks the submit button by ID attribute. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#clickSubmitByName()">clickSubmitByName</a>(string name, hash additional)</p><p class="description">Clicks the submit button by name attribute. </p></td>
+</tr>
+<tr>
+<td class="type"> TestBrowser</td>
+<td class="description"><p class="name"><a href="#createBrowser()">createBrowser</a>()</p><p class="description">Creates a new default web browser object.
+</p></td>
+</tr>
+<tr>
+<td class="type"> <a href="../simpletest/simpleinvoker.html">SimpleInvoker</a></td>
+<td class="description"><p class="name"><a href="#createInvoker()">createInvoker</a>()</p><p class="description">Sets the invoker to one that restarts the browser on
+each request.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#forward()">forward</a>()</p><p class="description">Equivalent to hitting the forward button on the
+browser.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#get()">get</a>(string url, hash parameters)</p><p class="description">Fetches a page into the page buffer. </p></td>
+</tr>
+<tr>
+<td class="type"> <a href="../simpletest/simplebrowser.html">SimpleBrowser</a></td>
+<td class="description"><p class="name"><a href="#getBrowser()">getBrowser</a>()</p><p class="description">Gets a current browser reference for setting
+special expectations or for detailed
+examination of page fetches.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getCookie()">getCookie</a>(string name)</p><p class="description">Gets the cookie value for the current browser context.</p></td>
+</tr>
+<tr>
+<td class="type"> integer/string/boolean</td>
+<td class="description"><p class="name"><a href="#getFrameFocus()">getFrameFocus</a>()</p><p class="description">Accessor for current frame focus. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getTransportError()">getTransportError</a>()</p><p class="description">Gets the last response error.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getUrl()">getUrl</a>()</p><p class="description">Accessor for the currently selected URL.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#head()">head</a>(string url, hash parameters)</p><p class="description">Does a HTTP HEAD fetch, fetching only the page
+headers. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#ignoreFrames()">ignoreFrames</a>()</p><p class="description">Disables frames support. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#post()">post</a>(string url, hash parameters)</p><p class="description">Fetches a page by POST into the page buffer.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#restart()">restart</a>(string/integer date)</p><p class="description">Simulates the closing and reopening of the browser.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#retry()">retry</a>()</p><p class="description">Equivalent to hitting the retry button on the
+browser. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#setBrowser()">setBrowser</a>(<a href="../simpletest/simplebrowser.html">SimpleBrowser</a> browser)</p><p class="description">Gets a current browser reference for setting
+special expectations or for detailed
+examination of page fetches.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#setConnectionTimeout()">setConnectionTimeout</a>(integer timeout)</p><p class="description">Sets the socket timeout for opening a connection and
+receiving at least one byte of information.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#setCookie()">setCookie</a>(string name, string value, string host, string path, string expiry)</p><p class="description">Sets a cookie in the current browser.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#setField()">setField</a>(string name, string value)</p><p class="description">Sets all form fields with that name.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#setFieldById()">setFieldById</a>(string/integer id, string value)</p><p class="description">Sets all form fields with that name.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#setFrameFocus()">setFrameFocus</a>(string name)</p><p class="description">Sets the focus by name.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#setFrameFocusByIndex()">setFrameFocusByIndex</a>(integer choice)</p><p class="description">Sets the focus by index. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#setMaximumRedirects()">setMaximumRedirects</a>(integer max)</p><p class="description">Sets the maximum number of redirects before
+the web page is loaded regardless.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#showHeaders()">showHeaders</a>()</p><p class="description">Dumps the current HTTP headers for debugging.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#showRequest()">showRequest</a>()</p><p class="description">Dumps the current request for debugging.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#showSource()">showSource</a>()</p><p class="description">Dumps the current HTML source for debugging.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean/string</td>
+<td class="description"><p class="name"><a href="#submitFormById()">submitFormById</a>(string id)</p><p class="description">Submits a form by the ID.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#unsetBrowser()">unsetBrowser</a>()</p><p class="description">Clears the current browser reference to help the
+PHP garbage collector.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#useProxy()">useProxy</a>(string proxy, string username, string password)</p><p class="description">Sets proxy to use on all requests for when
+testing from behind a firewall. </p></td>
+</tr>
+</table>
+
+<table class="inherit">
+<tr><th colspan="2">Methods inherited from SimpleTest\SimpleTestCase</th></tr>
+<tr><td><a href="../simpletest/simpletestcase.html#assertExpectation()">assertExpectation</a>, <a href="../simpletest/simpletestcase.html#assertFalse()">assertFalse</a>, <a href="../simpletest/simpletestcase.html#assertTrue()">assertTrue</a>, <a href="../simpletest/simpletestcase.html#createInvoker()">createInvoker</a>, <a href="../simpletest/simpletestcase.html#dump()">dump</a>, <a href="../simpletest/simpletestcase.html#error()">error</a>, <a href="../simpletest/simpletestcase.html#fail()">fail</a>, <a href="../simpletest/simpletestcase.html#getAssertionLine()">getAssertionLine</a>, <a href="../simpletest/simpletestcase.html#getLabel()">getLabel</a>, <a href="../simpletest/simpletestcase.html#getSize()">getSize</a>, <a href="../simpletest/simpletestcase.html#pass()">pass</a>, <a href="../simpletest/simpletestcase.html#run()">run</a>, <a href="../simpletest/simpletestcase.html#sendMessage()">sendMessage</a>, <a href="../simpletest/simpletestcase.html#setUp()">setUp</a>, <a href="../simpletest/simpletestcase.html#signal()">signal</a>, <a href="../simpletest/simpletestcase.html#swallowErrors()">swallowErrors</a>, <a href="../simpletest/simpletestcase.html#tearDown()">tearDown</a></td></tr></table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/web_tester.php.html#line487" class="location">web_tester.php at line 487</a>
+
+<h3 id="WebTestCase()">WebTestCase</h3>
+<code class="signature">public <strong>WebTestCase</strong>(string label)</code>
+<div class="details">
+<p>Creates an empty test case. Should be subclassed
+with test methods for a functional test case.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - Name of test case. Will use the class name if none specified.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/web_tester.php.html#line628" class="location">web_tester.php at line 628</a>
+
+<h3 id="addHeader()">addHeader</h3>
+<code class="signature">public  void <strong>addHeader</strong>(string header)</code>
+<div class="details">
+<p>Adds a header to every fetch.</p><dl>
+<dt>Parameters:</dt>
+<dd>header - Header line to add to every request until cleared.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line609" class="location">web_tester.php at line 609</a>
+
+<h3 id="ageCookies()">ageCookies</h3>
+<code class="signature">public  void <strong>ageCookies</strong>(integer interval)</code>
+<div class="details">
+<p>Moves cookie expiry times back into the past.
+Useful for testing timeouts and expiries.</p><dl>
+<dt>Parameters:</dt>
+<dd>interval - Amount to age in seconds.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1126" class="location">web_tester.php at line 1126</a>
+
+<h3 id="assertAuthentication()">assertAuthentication</h3>
+<code class="signature">public  boolean <strong>assertAuthentication</strong>(string authentication, string message)</code>
+<div class="details">
+<p>Attempt to match the authentication type within
+the security realm we are currently matching.</p><dl>
+<dt>Parameters:</dt>
+<dd>authentication - Usually basic.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1303" class="location">web_tester.php at line 1303</a>
+
+<h3 id="assertCookie()">assertCookie</h3>
+<code class="signature">public  boolean <strong>assertCookie</strong>(string name, string expected, string message)</code>
+<div class="details">
+<p>Checks that a cookie is set for the current page
+and optionally checks the value.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name of cookie to test.</dd>
+<dd>expected - Expected value as a string or false if any value will do.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1044" class="location">web_tester.php at line 1044</a>
+
+<h3 id="assertField()">assertField</h3>
+<code class="signature">public  boolean <strong>assertField</strong>(string name, mixed expected, string message)</code>
+<div class="details">
+<p>Confirms that the form element is currently set
+to the expected value. A missing form will always
+fail. If no value is given then only the existence
+of the field is checked.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name of field in forms.</dd>
+<dd>expected - Expected string/array value or false for unset fields.</dd>
+<dd>message - Message to display. Default can be embedded with %s.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1071" class="location">web_tester.php at line 1071</a>
+
+<h3 id="assertFieldById()">assertFieldById</h3>
+<code class="signature">public  boolean <strong>assertFieldById</strong>(string/integer id, mixed expected, string message)</code>
+<div class="details">
+<p>Confirms that the form element is currently set
+to the expected value. A missing form will always
+fail. If no ID is given then only the existence
+of the field is checked.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - Name of field in forms.</dd>
+<dd>expected - Expected string/array value or false for unset fields.</dd>
+<dd>message - Message to display. Default can be embedded with %s.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1179" class="location">web_tester.php at line 1179</a>
+
+<h3 id="assertHeader()">assertHeader</h3>
+<code class="signature">public  boolean <strong>assertHeader</strong>(string header, string value, mixed message)</code>
+<div class="details">
+<p>Checks each header line for the required value. If no
+value is given then only an existence check is made.</p><dl>
+<dt>Parameters:</dt>
+<dd>header - Case insensitive header name.</dd>
+<dd>value - Case sensitive trimmed string to match against.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1193" class="location">web_tester.php at line 1193</a>
+
+<h3 id="assertHeaderPattern()">assertHeaderPattern</h3>
+<code class="signature">public  boolean <strong>assertHeaderPattern</strong>(string header, string pattern, mixed message)</code>
+<div class="details">
+<p>Checks each header line for the required pattern.</p><dl>
+<dt>Parameters:</dt>
+<dd>header - Case insensitive header name.</dd>
+<dd>pattern - Pattern to match value against.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line958" class="location">web_tester.php at line 958</a>
+
+<h3 id="assertLink()">assertLink</h3>
+<code class="signature">public  boolean <strong>assertLink</strong>(string label, string message)</code>
+<div class="details">
+<p>Tests for the presence of a link label. Match is
+case insensitive with normalised space.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - Text between the anchor tags.</dd>
+<dd>message - Message to display. Default can be embedded with %s.</dd>
+<dt>Returns:</dt>
+<dd>True if link present.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line988" class="location">web_tester.php at line 988</a>
+
+<h3 id="assertLinkById()">assertLinkById</h3>
+<code class="signature">public  boolean <strong>assertLinkById</strong>(string id, string message)</code>
+<div class="details">
+<p>Tests for the presence of a link id attribute.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - Id attribute value.</dd>
+<dd>message - Message to display. Default can be embedded with %s.</dd>
+<dt>Returns:</dt>
+<dd>True if link present.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1110" class="location">web_tester.php at line 1110</a>
+
+<h3 id="assertMime()">assertMime</h3>
+<code class="signature">public  boolean <strong>assertMime</strong>(array types, string message)</code>
+<div class="details">
+<p>Checks the mime type against a list
+of possible values.</p><dl>
+<dt>Parameters:</dt>
+<dd>types - Possible mime types for a pass.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1149" class="location">web_tester.php at line 1149</a>
+
+<h3 id="assertNoAuthentication()">assertNoAuthentication</h3>
+<code class="signature">public  boolean <strong>assertNoAuthentication</strong>(string message)</code>
+<div class="details">
+<p>Checks that no authentication is necessary to view
+the desired page.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1324" class="location">web_tester.php at line 1324</a>
+
+<h3 id="assertNoCookie()">assertNoCookie</h3>
+<code class="signature">public  boolean <strong>assertNoCookie</strong>(string name, string message)</code>
+<div class="details">
+<p>Checks that no cookie is present or that it has
+been successfully cleared.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name of cookie to test.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line974" class="location">web_tester.php at line 974</a>
+
+<h3 id="assertNoLink()">assertNoLink</h3>
+<code class="signature">public  boolean <strong>assertNoLink</strong>(string/integer label, string message)</code>
+<div class="details">
+<p>Tests for the non-presence of a link label. Match is
+case insensitive with normalised space.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - Text between the anchor tags or ID attribute.</dd>
+<dd>message - Message to display. Default can be embedded with %s.</dd>
+<dt>Returns:</dt>
+<dd>True if link missing.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1003" class="location">web_tester.php at line 1003</a>
+
+<h3 id="assertNoLinkById()">assertNoLinkById</h3>
+<code class="signature">public  boolean <strong>assertNoLinkById</strong>(string id, string message)</code>
+<div class="details">
+<p>Tests for the non-presence of a link label. Match is
+case insensitive with normalised space.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - Id attribute value.</dd>
+<dd>message - Message to display. Default can be embedded with %s.</dd>
+<dt>Returns:</dt>
+<dd>True if link missing.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1209" class="location">web_tester.php at line 1209</a>
+
+<h3 id="assertNoUnwantedHeader()">assertNoUnwantedHeader</h3>
+<code class="signature">public  boolean <strong>assertNoUnwantedHeader</strong>(string header, mixed message)</code>
+<div class="details">
+<p>Confirms that the header type has not been received.
+Only the landing page is checked. If you want to check
+redirect pages, then you should limit redirects so
+as to capture the page you want.</p><dl>
+<dt>Parameters:</dt>
+<dd>header - Case insensitive header name.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1286" class="location">web_tester.php at line 1286</a>
+
+<h3 id="assertNoUnwantedPattern()">assertNoUnwantedPattern</h3>
+<code class="signature">public  boolean <strong>assertNoUnwantedPattern</strong>(string pattern, string message)</code>
+<div class="details">
+<p>Will trigger a pass if the perl regex pattern
+is not present in raw content.</p><dl>
+<dt>Parameters:</dt>
+<dd>pattern - Perl regex to look for including the regex delimiters.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1254" class="location">web_tester.php at line 1254</a>
+
+<h3 id="assertNoUnwantedText()">assertNoUnwantedText</h3>
+<code class="signature">public  boolean <strong>assertNoUnwantedText</strong>(string text, string message)</code>
+<div class="details">
+<p>Will trigger a pass if the text is not found in the plain
+text form of the page.</p><dl>
+<dt>Parameters:</dt>
+<dd>text - Text to look for.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1162" class="location">web_tester.php at line 1162</a>
+
+<h3 id="assertRealm()">assertRealm</h3>
+<code class="signature">public  boolean <strong>assertRealm</strong>(string realm, string message)</code>
+<div class="details">
+<p>Attempts to match the current security realm.</p><dl>
+<dt>Parameters:</dt>
+<dd>realm - Name of security realm.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1094" class="location">web_tester.php at line 1094</a>
+
+<h3 id="assertResponse()">assertResponse</h3>
+<code class="signature">public  boolean <strong>assertResponse</strong>(array responses, string message)</code>
+<div class="details">
+<p>Checks the response code against a list
+of possible values.</p><dl>
+<dt>Parameters:</dt>
+<dd>responses - Possible responses for a pass.</dd>
+<dd>message - Message to display. Default can be embedded with %s.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1224" class="location">web_tester.php at line 1224</a>
+
+<h3 id="assertTitle()">assertTitle</h3>
+<code class="signature">public  boolean <strong>assertTitle</strong>(string title, string message)</code>
+<div class="details">
+<p>Tests the text between the title tags.</p><dl>
+<dt>Parameters:</dt>
+<dd>title - Expected title or empty if expecting no title.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1270" class="location">web_tester.php at line 1270</a>
+
+<h3 id="assertWantedPattern()">assertWantedPattern</h3>
+<code class="signature">public  boolean <strong>assertWantedPattern</strong>(string pattern, string message)</code>
+<div class="details">
+<p>Will trigger a pass if the Perl regex pattern
+is found in the raw content.</p><dl>
+<dt>Parameters:</dt>
+<dd>pattern - Perl regex to look for including the regex delimiters.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1239" class="location">web_tester.php at line 1239</a>
+
+<h3 id="assertWantedText()">assertWantedText</h3>
+<code class="signature">public  boolean <strong>assertWantedText</strong>(string text, string message)</code>
+<div class="details">
+<p>Will trigger a pass if the text is found in the plain
+text form of the page.</p><dl>
+<dt>Parameters:</dt>
+<dd>text - Text to look for.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line759" class="location">web_tester.php at line 759</a>
+
+<h3 id="authenticate()">authenticate</h3>
+<code class="signature">public  boolean <strong>authenticate</strong>(string username, string password)</code>
+<div class="details">
+<p>Retries a request after setting the authentication
+for the current realm.</p><dl>
+<dt>Parameters:</dt>
+<dd>username - Username for realm.</dd>
+<dd>password - Password for realm.</dd>
+<dt>Returns:</dt>
+<dd>True if successful fetch. Note that authentication may still have failed.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line734" class="location">web_tester.php at line 734</a>
+
+<h3 id="back()">back</h3>
+<code class="signature">public  boolean <strong>back</strong>()</code>
+<div class="details">
+<p>Equivalent to hitting the back button on the
+browser.</p><dl>
+<dt>Returns:</dt>
+<dd>True if history entry and fetch succeeded.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line823" class="location">web_tester.php at line 823</a>
+
+<h3 id="clearFrameFocus()">clearFrameFocus</h3>
+<code class="signature">public  void <strong>clearFrameFocus</strong>()</code>
+<div class="details">
+<p>Clears the frame focus. All frames will be searched
+for content.</p></div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line877" class="location">web_tester.php at line 877</a>
+
+<h3 id="clickImage()">clickImage</h3>
+<code class="signature">public  boolean/string <strong>clickImage</strong>(string label, integer x, integer y, hash additional)</code>
+<div class="details">
+<p>Clicks the submit image by some kind of label. Usually
+the alt tag or the nearest equivalent. The owning
+form will be submitted by this. Clicking outside of
+the boundary of the coordinates will result in
+a failure.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - Alt attribute of button.</dd>
+<dd>x - X-coordinate of imaginary click.</dd>
+<dd>y - Y-coordinate of imaginary click.</dd>
+<dd>additional - Additional form values.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line910" class="location">web_tester.php at line 910</a>
+
+<h3 id="clickImageById()">clickImageById</h3>
+<code class="signature">public  boolean/string <strong>clickImageById</strong>(integer/string id, integer x, integer y, hash additional)</code>
+<div class="details">
+<p>Clicks the submit image by ID attribute. The owning
+form will be submitted by this. Clicking outside of
+the boundary of the coordinates will result in
+a failure.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - ID attribute of button.</dd>
+<dd>x - X-coordinate of imaginary click.</dd>
+<dd>y - Y-coordinate of imaginary click.</dd>
+<dd>additional - Additional form values.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line894" class="location">web_tester.php at line 894</a>
+
+<h3 id="clickImageByName()">clickImageByName</h3>
+<code class="signature">public  boolean/string <strong>clickImageByName</strong>(string name, integer x, integer y, hash additional)</code>
+<div class="details">
+<p>Clicks the submit image by the name. Usually
+the alt tag or the nearest equivalent. The owning
+form will be submitted by this. Clicking outside of
+the boundary of the coordinates will result in
+a failure.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name attribute of button.</dd>
+<dd>x - X-coordinate of imaginary click.</dd>
+<dd>y - Y-coordinate of imaginary click.</dd>
+<dd>additional - Additional form values.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line935" class="location">web_tester.php at line 935</a>
+
+<h3 id="clickLink()">clickLink</h3>
+<code class="signature">public  boolean/string <strong>clickLink</strong>(string label, integer index)</code>
+<div class="details">
+<p>Follows a link by name. Will click the first link
+found with this link text by default, or a later
+one if an index is given. Match is case insensitive
+with normalised space.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - Text between the anchor tags.</dd>
+<dd>index - Link position counting from zero.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line945" class="location">web_tester.php at line 945</a>
+
+<h3 id="clickLinkById()">clickLinkById</h3>
+<code class="signature">public  boolean/string <strong>clickLinkById</strong>(string id)</code>
+<div class="details">
+<p>Follows a link by id attribute.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - ID attribute value.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line836" class="location">web_tester.php at line 836</a>
+
+<h3 id="clickSubmit()">clickSubmit</h3>
+<code class="signature">public  boolean/string <strong>clickSubmit</strong>(string label, hash additional)</code>
+<div class="details">
+<p>Clicks the submit button by label. The owning
+form will be submitted by this.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - Button label. An unlabeled button can be triggered by 'Submit'.</dd>
+<dd>additional - Additional form values.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line860" class="location">web_tester.php at line 860</a>
+
+<h3 id="clickSubmitById()">clickSubmitById</h3>
+<code class="signature">public  boolean/string <strong>clickSubmitById</strong>(string id, hash additional)</code>
+<div class="details">
+<p>Clicks the submit button by ID attribute. The owning
+form will be submitted by this.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - ID attribute of button.</dd>
+<dd>additional - Additional form values.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line848" class="location">web_tester.php at line 848</a>
+
+<h3 id="clickSubmitByName()">clickSubmitByName</h3>
+<code class="signature">public  boolean/string <strong>clickSubmitByName</strong>(string name, hash additional)</code>
+<div class="details">
+<p>Clicks the submit button by name attribute. The owning
+form will be submitted by this.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name attribute of button.</dd>
+<dd>additional - Additional form values.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line538" class="location">web_tester.php at line 538</a>
+
+<h3 id="createBrowser()">createBrowser</h3>
+<code class="signature">public  TestBrowser <strong>createBrowser</strong>()</code>
+<div class="details">
+<p>Creates a new default web browser object.
+Will be cleared at the end of the test method.</p><dl>
+<dt>Returns:</dt>
+<dd>New browser.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line497" class="location">web_tester.php at line 497</a>
+
+<h3 id="createInvoker()">createInvoker</h3>
+<code class="signature">public  <a href="../simpletest/simpleinvoker.html">SimpleInvoker</a> <strong>createInvoker</strong>()</code>
+<div class="details">
+<p>Sets the invoker to one that restarts the browser on
+each request.</p><dl>
+<dt>Returns:</dt>
+<dd>Invoker for each method.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line745" class="location">web_tester.php at line 745</a>
+
+<h3 id="forward()">forward</h3>
+<code class="signature">public  boolean <strong>forward</strong>()</code>
+<div class="details">
+<p>Equivalent to hitting the forward button on the
+browser.</p><dl>
+<dt>Returns:</dt>
+<dd>True if history entry and fetch succeeded.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line679" class="location">web_tester.php at line 679</a>
+
+<h3 id="get()">get</h3>
+<code class="signature">public  boolean <strong>get</strong>(string url, hash parameters)</code>
+<div class="details">
+<p>Fetches a page into the page buffer. If
+there is no base for the URL then the
+current base URL is used. After the fetch
+the base URL reflects the new location.</p><dl>
+<dt>Parameters:</dt>
+<dd>url - URL to fetch.</dd>
+<dd>parameters - Optional additional GET data.</dd>
+<dt>Returns:</dt>
+<dd>True on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line508" class="location">web_tester.php at line 508</a>
+
+<h3 id="getBrowser()">getBrowser</h3>
+<code class="signature">public  <a href="../simpletest/simplebrowser.html">SimpleBrowser</a> <strong>getBrowser</strong>()</code>
+<div class="details">
+<p>Gets a current browser reference for setting
+special expectations or for detailed
+examination of page fetches.</p><dl>
+<dt>Returns:</dt>
+<dd>Current test browser object.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line769" class="location">web_tester.php at line 769</a>
+
+<h3 id="getCookie()">getCookie</h3>
+<code class="signature">public  string <strong>getCookie</strong>(string name)</code>
+<div class="details">
+<p>Gets the cookie value for the current browser context.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name of cookie.</dd>
+<dt>Returns:</dt>
+<dd>Value of cookie or false if unset.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line794" class="location">web_tester.php at line 794</a>
+
+<h3 id="getFrameFocus()">getFrameFocus</h3>
+<code class="signature">public  integer/string/boolean <strong>getFrameFocus</strong>()</code>
+<div class="details">
+<p>Accessor for current frame focus. Will be
+false if no frame has focus.</p><dl>
+<dt>Returns:</dt>
+<dd>Label if any, otherwise the position in the frameset or false if none.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line547" class="location">web_tester.php at line 547</a>
+
+<h3 id="getTransportError()">getTransportError</h3>
+<code class="signature">public  string <strong>getTransportError</strong>()</code>
+<div class="details">
+<p>Gets the last response error.</p><dl>
+<dt>Returns:</dt>
+<dd>Last low level HTTP error.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line557" class="location">web_tester.php at line 557</a>
+
+<h3 id="getUrl()">getUrl</h3>
+<code class="signature">public  string <strong>getUrl</strong>()</code>
+<div class="details">
+<p>Accessor for the currently selected URL.</p><dl>
+<dt>Returns:</dt>
+<dd>Current location or false if no page yet fetched.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line713" class="location">web_tester.php at line 713</a>
+
+<h3 id="head()">head</h3>
+<code class="signature">public  boolean <strong>head</strong>(string url, hash parameters)</code>
+<div class="details">
+<p>Does a HTTP HEAD fetch, fetching only the page
+headers. The current base URL is unchanged by this.</p><dl>
+<dt>Parameters:</dt>
+<dd>url - URL to fetch.</dd>
+<dd>parameters - Optional additional GET data.</dd>
+<dt>Returns:</dt>
+<dd>True on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line618" class="location">web_tester.php at line 618</a>
+
+<h3 id="ignoreFrames()">ignoreFrames</h3>
+<code class="signature">public  void <strong>ignoreFrames</strong>()</code>
+<div class="details">
+<p>Disables frames support. Frames will not be fetched
+and the frameset page will be used instead.</p></div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line697" class="location">web_tester.php at line 697</a>
+
+<h3 id="post()">post</h3>
+<code class="signature">public  boolean <strong>post</strong>(string url, hash parameters)</code>
+<div class="details">
+<p>Fetches a page by POST into the page buffer.
+If there is no base for the URL then the
+current base URL is used. After the fetch
+the base URL reflects the new location.</p><dl>
+<dt>Parameters:</dt>
+<dd>url - URL to fetch.</dd>
+<dd>parameters - Optional additional GET data.</dd>
+<dt>Returns:</dt>
+<dd>True on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line596" class="location">web_tester.php at line 596</a>
+
+<h3 id="restart()">restart</h3>
+<code class="signature">public  void <strong>restart</strong>(string/integer date)</code>
+<div class="details">
+<p>Simulates the closing and reopening of the browser.
+Temporary cookies will be discarded and timed
+cookies will be expired if later than the
+specified time.</p><dl>
+<dt>Parameters:</dt>
+<dd>date - Time when session restarted. If ommitted then all persistent cookies are kept. Time is either Cookie format string or timestamp.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line723" class="location">web_tester.php at line 723</a>
+
+<h3 id="retry()">retry</h3>
+<code class="signature">public  boolean <strong>retry</strong>()</code>
+<div class="details">
+<p>Equivalent to hitting the retry button on the
+browser. Will attempt to repeat the page fetch.</p><dl>
+<dt>Returns:</dt>
+<dd>True if fetch succeeded.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line519" class="location">web_tester.php at line 519</a>
+
+<h3 id="setBrowser()">setBrowser</h3>
+<code class="signature">public  void <strong>setBrowser</strong>(<a href="../simpletest/simplebrowser.html">SimpleBrowser</a> browser)</code>
+<div class="details">
+<p>Gets a current browser reference for setting
+special expectations or for detailed
+examination of page fetches.</p><dl>
+<dt>Parameters:</dt>
+<dd>browser - New test browser object.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line652" class="location">web_tester.php at line 652</a>
+
+<h3 id="setConnectionTimeout()">setConnectionTimeout</h3>
+<code class="signature">public  void <strong>setConnectionTimeout</strong>(integer timeout)</code>
+<div class="details">
+<p>Sets the socket timeout for opening a connection and
+receiving at least one byte of information.</p><dl>
+<dt>Parameters:</dt>
+<dd>timeout - Maximum time in seconds.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line782" class="location">web_tester.php at line 782</a>
+
+<h3 id="setCookie()">setCookie</h3>
+<code class="signature">public  void <strong>setCookie</strong>(string name, string value, string host, string path, string expiry)</code>
+<div class="details">
+<p>Sets a cookie in the current browser.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name of cookie.</dd>
+<dd>value - Cookie value.</dd>
+<dd>host - Host upon which the cookie is valid.</dd>
+<dd>path - Cookie path if not host wide.</dd>
+<dd>expiry - Expiry date.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1016" class="location">web_tester.php at line 1016</a>
+
+<h3 id="setField()">setField</h3>
+<code class="signature">public  boolean <strong>setField</strong>(string name, string value)</code>
+<div class="details">
+<p>Sets all form fields with that name.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Name of field in forms.</dd>
+<dd>value - New value of field.</dd>
+<dt>Returns:</dt>
+<dd>True if field exists, otherwise false.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line1027" class="location">web_tester.php at line 1027</a>
+
+<h3 id="setFieldById()">setFieldById</h3>
+<code class="signature">public  boolean <strong>setFieldById</strong>(string/integer id, string value)</code>
+<div class="details">
+<p>Sets all form fields with that name.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - Id of field in forms.</dd>
+<dd>value - New value of field.</dd>
+<dt>Returns:</dt>
+<dd>True if field exists, otherwise false.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line814" class="location">web_tester.php at line 814</a>
+
+<h3 id="setFrameFocus()">setFrameFocus</h3>
+<code class="signature">public  boolean <strong>setFrameFocus</strong>(string name)</code>
+<div class="details">
+<p>Sets the focus by name.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Chosen frame.</dd>
+<dt>Returns:</dt>
+<dd>True if frame exists.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line804" class="location">web_tester.php at line 804</a>
+
+<h3 id="setFrameFocusByIndex()">setFrameFocusByIndex</h3>
+<code class="signature">public  boolean <strong>setFrameFocusByIndex</strong>(integer choice)</code>
+<div class="details">
+<p>Sets the focus by index. The integer index starts from 1.</p><dl>
+<dt>Parameters:</dt>
+<dd>choice - Chosen frame.</dd>
+<dt>Returns:</dt>
+<dd>True if frame exists.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line638" class="location">web_tester.php at line 638</a>
+
+<h3 id="setMaximumRedirects()">setMaximumRedirects</h3>
+<code class="signature">public  void <strong>setMaximumRedirects</strong>(integer max)</code>
+<div class="details">
+<p>Sets the maximum number of redirects before
+the web page is loaded regardless.</p><dl>
+<dt>Parameters:</dt>
+<dd>max - Maximum hops.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line573" class="location">web_tester.php at line 573</a>
+
+<h3 id="showHeaders()">showHeaders</h3>
+<code class="signature">public  void <strong>showHeaders</strong>()</code>
+<div class="details">
+<p>Dumps the current HTTP headers for debugging.</p></div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line565" class="location">web_tester.php at line 565</a>
+
+<h3 id="showRequest()">showRequest</h3>
+<code class="signature">public  void <strong>showRequest</strong>()</code>
+<div class="details">
+<p>Dumps the current request for debugging.</p></div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line581" class="location">web_tester.php at line 581</a>
+
+<h3 id="showSource()">showSource</h3>
+<code class="signature">public  void <strong>showSource</strong>()</code>
+<div class="details">
+<p>Dumps the current HTML source for debugging.</p></div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line921" class="location">web_tester.php at line 921</a>
+
+<h3 id="submitFormById()">submitFormById</h3>
+<code class="signature">public  boolean/string <strong>submitFormById</strong>(string id)</code>
+<div class="details">
+<p>Submits a form by the ID.</p><dl>
+<dt>Parameters:</dt>
+<dd>id - Form ID. No button information is submitted this way.</dd>
+<dt>Returns:</dt>
+<dd>Page on success.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line528" class="location">web_tester.php at line 528</a>
+
+<h3 id="unsetBrowser()">unsetBrowser</h3>
+<code class="signature">public  void <strong>unsetBrowser</strong>()</code>
+<div class="details">
+<p>Clears the current browser reference to help the
+PHP garbage collector.</p></div>
+
+<hr>
+
+<a href="../source/web_tester.php.html#line665" class="location">web_tester.php at line 665</a>
+
+<h3 id="useProxy()">useProxy</h3>
+<code class="signature">public  void <strong>useProxy</strong>(string proxy, string username, string password)</code>
+<div class="details">
+<p>Sets proxy to use on all requests for when
+testing from behind a firewall. Set URL
+to false to disable.</p><dl>
+<dt>Parameters:</dt>
+<dd>proxy - Proxy URL.</dd>
+<dd>username - Proxy username for authentication.</dd>
+<dd>password - Proxy password for authentication.</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/webtestcase.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

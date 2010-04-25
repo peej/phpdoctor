@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:46 +0100">
 
 <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
 <link rel="start" href="../../overview-summary.html">
@@ -21,6 +23,7 @@
 <li><a href="../../phpdoctor/tags/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../../phpdoctor/tags/package-tree.html">Tree</a></li>
+<li><a href="../../overview-files.html">Files</a></li>
 <li><a href="../../deprecated-list.html">Deprecated</a></li>
 <li><a href="../../index-all.html">Index</a></li>
 </ul>
@@ -36,12 +39,12 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<div class="qualifiedName">PHPDoctor.Tags.LinkTag</div>
-<div class="location">/classes/linkTag.php at line 30</div>
+<div class="qualifiedName">PHPDoctor\Tags.LinkTag</div>
+<a href="../../source/classes/linktag.php.html#line27" class="location">classes/linkTag.php at line 27</a>
 
 <h1>Class LinkTag</h1>
 
-<pre class="tree"><a href="../../phpdoctor/tags/tag.html">Tag</a><br>  |<br>  +--<a href="../../phpdoctor/tags/seetag.html">SeeTag</a><br>       |<br>       +--<a href="../../phpdoctor/tags/linkplaintag.html">LinkPlainTag</a><br>            |<br>            +--<strong>LinkTag</strong><br /></pre>
+<pre class="tree"><a href="../../phpdoctor/tags/tag.html">Tag</a><br>    └─<a href="../../phpdoctor/tags/seetag.html">SeeTag</a><br>       └─<a href="../../phpdoctor/tags/linkplaintag.html">LinkPlainTag</a><br>          └─<strong>LinkTag</strong><br /></pre>
 
 <hr>
 
@@ -49,21 +52,14 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 </p>
 
-<div class="comment" id="overview_description"><p>
-Represents an inline link tag.
-</p></div>
+<div class="comment" id="overview_description"><p>Represents an inline link tag.</p></div>
 
-<dl>
-<dt>Version:</dt>
-<dd>$Revision: 1.4 $</dd>
-</dl>
 <hr>
 
 <table id="summary_constr">
 <tr><th colspan="2">Constructor Summary</th></tr>
 <tr>
-<td class="description"><p class="name"><a href="#linkTag()">linkTag</a>(str text, str data, <a href="../../phpdoctor/rootdoc.html">RootDoc</a> root)</p><p class="description">Constructor
-</p></td>
+<td class="description"><p class="name"><a href="#linkTag()">linkTag</a>(str text, str data, <a href="../../phpdoctor/rootdoc.html">RootDoc</a> root)</p><p class="description">Constructor</p></td>
 </tr>
 </table>
 
@@ -71,72 +67,57 @@ Represents an inline link tag.
 <tr><th colspan="2">Method Summary</th></tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#inConstructor()">inConstructor</a>()</p><p class="description">
-Return true if this Taglet is used in constructor documentation.
-</p></td>
+<td class="description"><p class="name"><a href="#inConstructor()">inConstructor</a>()</p><p class="description">Return true if this Taglet is used in constructor documentation.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#inField()">inField</a>()</p><p class="description">
-Return true if this Taglet is used in field documentation.
-</p></td>
+<td class="description"><p class="name"><a href="#inField()">inField</a>()</p><p class="description">Return true if this Taglet is used in field documentation.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#inMethod()">inMethod</a>()</p><p class="description">
-Return true if this Taglet is used in method documentation. </p></td>
+<td class="description"><p class="name"><a href="#inMethod()">inMethod</a>()</p><p class="description">Return true if this Taglet is used in method documentation.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#inOverview()">inOverview</a>()</p><p class="description">
-Return true if this Taglet is used in overview documentation.
-</p></td>
+<td class="description"><p class="name"><a href="#inOverview()">inOverview</a>()</p><p class="description">Return true if this Taglet is used in overview documentation.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#inPackage()">inPackage</a>()</p><p class="description">
-Return true if this Taglet is used in package documentation.
-</p></td>
+<td class="description"><p class="name"><a href="#inPackage()">inPackage</a>()</p><p class="description">Return true if this Taglet is used in package documentation.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#inType()">inType</a>()</p><p class="description">
-Return true if this Taglet is used in class or interface documentation.
-</p></td>
+<td class="description"><p class="name"><a href="#inType()">inType</a>()</p><p class="description">Return true if this Taglet is used in class or interface documentation.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isInlineTag()">isInlineTag</a>()</p><p class="description">
-Return true if this Taglet is an inline tag.
-</p></td>
+<td class="description"><p class="name"><a href="#isInlineTag()">isInlineTag</a>()</p><p class="description">Return true if this Taglet is an inline tag.</p></td>
 </tr>
 <tr>
 <td class="type"> str</td>
-<td class="description"><p class="name"><a href="#text()">text</a>()</p><p class="description">
-Get value of this tag.
-</p></td>
+<td class="description"><p class="name"><a href="#text()">text</a>()</p><p class="description">Get value of this tag.</p></td>
 </tr>
 </table>
 
 <table class="inherit">
-<tr><th colspan="2">Methods inherited from PHPDoctor.Tags.LinkPlainTag</th></tr>
+<tr><th colspan="2">Methods inherited from PHPDoctor\Tags.LinkPlainTag</th></tr>
 <tr><td><a href="../../phpdoctor/tags/linkplaintag.html#inConstructor()">inConstructor</a>, <a href="../../phpdoctor/tags/linkplaintag.html#inField()">inField</a>, <a href="../../phpdoctor/tags/linkplaintag.html#inMethod()">inMethod</a>, <a href="../../phpdoctor/tags/linkplaintag.html#inOverview()">inOverview</a>, <a href="../../phpdoctor/tags/linkplaintag.html#inPackage()">inPackage</a>, <a href="../../phpdoctor/tags/linkplaintag.html#inType()">inType</a>, <a href="../../phpdoctor/tags/linkplaintag.html#isInlineTag()">isInlineTag</a></td></tr></table>
 
 <table class="inherit">
-<tr><th colspan="2">Methods inherited from PHPDoctor.Tags.SeeTag</th></tr>
+<tr><th colspan="2">Methods inherited from PHPDoctor\Tags.SeeTag</th></tr>
 <tr><td><a href="../../phpdoctor/tags/seetag.html#displayName()">displayName</a>, <a href="../../phpdoctor/tags/seetag.html#inConstructor()">inConstructor</a>, <a href="../../phpdoctor/tags/seetag.html#inField()">inField</a>, <a href="../../phpdoctor/tags/seetag.html#inMethod()">inMethod</a>, <a href="../../phpdoctor/tags/seetag.html#inOverview()">inOverview</a>, <a href="../../phpdoctor/tags/seetag.html#inPackage()">inPackage</a>, <a href="../../phpdoctor/tags/seetag.html#inType()">inType</a>, <a href="../../phpdoctor/tags/seetag.html#isInlineTag()">isInlineTag</a>, <a href="../../phpdoctor/tags/seetag.html#text()">text</a></td></tr></table>
 
 <table class="inherit">
-<tr><th colspan="2">Methods inherited from PHPDoctor.Tags.Tag</th></tr>
+<tr><th colspan="2">Methods inherited from PHPDoctor\Tags.Tag</th></tr>
 <tr><td><a href="../../phpdoctor/tags/tag.html#displayEmpty()">displayEmpty</a>, <a href="../../phpdoctor/tags/tag.html#displayName()">displayName</a>, <a href="../../phpdoctor/tags/tag.html#firstSentenceTags()">firstSentenceTags</a>, <a href="../../phpdoctor/tags/tag.html#inConstructor()">inConstructor</a>, <a href="../../phpdoctor/tags/tag.html#inField()">inField</a>, <a href="../../phpdoctor/tags/tag.html#inMethod()">inMethod</a>, <a href="../../phpdoctor/tags/tag.html#inOverview()">inOverview</a>, <a href="../../phpdoctor/tags/tag.html#inPackage()">inPackage</a>, <a href="../../phpdoctor/tags/tag.html#inType()">inType</a>, <a href="../../phpdoctor/tags/tag.html#inlineTags()">inlineTags</a>, <a href="../../phpdoctor/tags/tag.html#isInlineTag()">isInlineTag</a>, <a href="../../phpdoctor/tags/tag.html#name()">name</a>, <a href="../../phpdoctor/tags/tag.html#setParent()">setParent</a>, <a href="../../phpdoctor/tags/tag.html#text()">text</a></td></tr></table>
 
 <h2 id="detail_constr">Constructor Detail</h2>
-<div class="location">/classes/linkTag.php at line 40</div>
+<a href="../../source/classes/linktag.php.html#line37" class="location">classes/linkTag.php at line 37</a>
+
 <h3 id="linkTag()">linkTag</h3>
 <code class="signature">public <strong>linkTag</strong>(str text, str data, <a href="../../phpdoctor/rootdoc.html">RootDoc</a> root)</code>
 <div class="details">
-<p></p><p>Constructor
-</p><dl>
+<p>Constructor</p><dl>
 <dt>Parameters:</dt>
 <dd>text - The contents of the tag</dd>
 <dd>data - Reference to doc comment data array</dd>
@@ -147,83 +128,75 @@ Get value of this tag.
 <hr>
 
 <h2 id="detail_method">Method Detail</h2>
-<div class="location">/classes/linkTag.php at line 59</div>
+<a href="../../source/classes/linktag.php.html#line56" class="location">classes/linkTag.php at line 56</a>
+
 <h3 id="inConstructor()">inConstructor</h3>
 <code class="signature">public  bool <strong>inConstructor</strong>()</code>
 <div class="details">
-<p>
-Return true if this Taglet is used in constructor documentation.
-</p></div>
+<p>Return true if this Taglet is used in constructor documentation.</p></div>
 
 <hr>
 
-<div class="location">/classes/linkTag.php at line 68</div>
+<a href="../../source/classes/linktag.php.html#line65" class="location">classes/linkTag.php at line 65</a>
+
 <h3 id="inField()">inField</h3>
 <code class="signature">public  bool <strong>inField</strong>()</code>
 <div class="details">
-<p>
-Return true if this Taglet is used in field documentation.
-</p></div>
+<p>Return true if this Taglet is used in field documentation.</p></div>
 
 <hr>
 
-<div class="location">/classes/linkTag.php at line 77</div>
+<a href="../../source/classes/linktag.php.html#line74" class="location">classes/linkTag.php at line 74</a>
+
 <h3 id="inMethod()">inMethod</h3>
 <code class="signature">public  bool <strong>inMethod</strong>()</code>
 <div class="details">
-<p>
-Return true if this Taglet is used in method documentation.          
-</p></div>
+<p>Return true if this Taglet is used in method documentation.</p></div>
 
 <hr>
 
-<div class="location">/classes/linkTag.php at line 86</div>
+<a href="../../source/classes/linktag.php.html#line83" class="location">classes/linkTag.php at line 83</a>
+
 <h3 id="inOverview()">inOverview</h3>
 <code class="signature">public  bool <strong>inOverview</strong>()</code>
 <div class="details">
-<p>
-Return true if this Taglet is used in overview documentation.
-</p></div>
+<p>Return true if this Taglet is used in overview documentation.</p></div>
 
 <hr>
 
-<div class="location">/classes/linkTag.php at line 95</div>
+<a href="../../source/classes/linktag.php.html#line92" class="location">classes/linkTag.php at line 92</a>
+
 <h3 id="inPackage()">inPackage</h3>
 <code class="signature">public  bool <strong>inPackage</strong>()</code>
 <div class="details">
-<p>
-Return true if this Taglet is used in package documentation.
-</p></div>
+<p>Return true if this Taglet is used in package documentation.</p></div>
 
 <hr>
 
-<div class="location">/classes/linkTag.php at line 104</div>
+<a href="../../source/classes/linktag.php.html#line101" class="location">classes/linkTag.php at line 101</a>
+
 <h3 id="inType()">inType</h3>
 <code class="signature">public  bool <strong>inType</strong>()</code>
 <div class="details">
-<p>
-Return true if this Taglet is used in class or interface documentation.
-</p></div>
+<p>Return true if this Taglet is used in class or interface documentation.</p></div>
 
 <hr>
 
-<div class="location">/classes/linkTag.php at line 113</div>
+<a href="../../source/classes/linktag.php.html#line110" class="location">classes/linkTag.php at line 110</a>
+
 <h3 id="isInlineTag()">isInlineTag</h3>
 <code class="signature">public  bool <strong>isInlineTag</strong>()</code>
 <div class="details">
-<p>
-Return true if this Taglet is an inline tag.
-</p></div>
+<p>Return true if this Taglet is an inline tag.</p></div>
 
 <hr>
 
-<div class="location">/classes/linkTag.php at line 50</div>
+<a href="../../source/classes/linktag.php.html#line47" class="location">classes/linkTag.php at line 47</a>
+
 <h3 id="text()">text</h3>
 <code class="signature">public  str <strong>text</strong>()</code>
 <div class="details">
-<p>
-Get value of this tag.
-</p></div>
+<p>Get value of this tag.</p></div>
 
 <hr>
 
@@ -234,6 +207,7 @@ Get value of this tag.
 <li><a href="../../phpdoctor/tags/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../../phpdoctor/tags/package-tree.html">Tree</a></li>
+<li><a href="../../overview-files.html">Files</a></li>
 <li><a href="../../deprecated-list.html">Deprecated</a></li>
 <li><a href="../../index-all.html">Index</a></li>
 </ul>
@@ -249,7 +223,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

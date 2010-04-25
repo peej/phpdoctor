@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:37:02 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>plugins/function.html_select_time.php (Smarty)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/plugins/function.html_select_time.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>plugins/function.html_select_time.php</h1>
+<div class="comment" id="overview_description"><p>Smarty plugin</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a> * Smarty plugin
+<a name="line4"></a> * @package Smarty
+<a name="line5"></a> * @subpackage plugins
+<a name="line6"></a> */</span>
+<a name="line7"></a>&nbsp;
+<a name="line8"></a>&nbsp;
+<a name="line9"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line10"></a> * Smarty {html_select_time} function plugin
+<a name="line11"></a> *
+<a name="line12"></a> * Type:     function&lt;br&gt;
+<a name="line13"></a> * Name:     html_select_time&lt;br&gt;
+<a name="line14"></a> * Purpose:  Prints the dropdowns for time selection
+<a name="line15"></a> * @link http://smarty.php.net/manual/en/language.function.html.select.time.php {html_select_time}
+<a name="line16"></a> *          (Smarty online manual)
+<a name="line17"></a> * @author Roberto Berto &lt;roberto@berto.net&gt;
+<a name="line18"></a> * @credits Monte Ohrt &lt;monte AT ohrt DOT com&gt;
+<a name="line19"></a> * @param array
+<a name="line20"></a> * @param Smarty
+<a name="line21"></a> * @return string
+<a name="line22"></a> * @uses smarty_make_timestamp()
+<a name="line23"></a> */</span>
+<a name="line24"></a><span style="color: #000000; font-weight: bold;">function</span> smarty_function_html_select_time<span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span>
+<a name="line25"></a><span style="color: #009900;">&#123;</span>
+<a name="line26"></a>    <span style="color: #b1b100;">require_once</span> <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span>_get_plugin_filepath<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'shared'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'make_timestamp'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line27"></a>    <span style="color: #b1b100;">require_once</span> <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span>_get_plugin_filepath<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'function'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'html_options'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line28"></a>    <span style="color: #666666; font-style: italic;">/* Default values. */</span>
+<a name="line29"></a>    <span style="color: #000088;">$prefix</span>             <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Time_&quot;</span><span style="color: #339933;">;</span>
+<a name="line30"></a>    <span style="color: #000088;">$time</span>               <span style="color: #339933;">=</span> <a href="http://www.php.net/time"><span style="color: #990000;">time</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line31"></a>    <span style="color: #000088;">$display_hours</span>      <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line32"></a>    <span style="color: #000088;">$display_minutes</span>    <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line33"></a>    <span style="color: #000088;">$display_seconds</span>    <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line34"></a>    <span style="color: #000088;">$display_meridian</span>   <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line35"></a>    <span style="color: #000088;">$use_24_hours</span>       <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+<a name="line36"></a>    <span style="color: #000088;">$minute_interval</span>    <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+<a name="line37"></a>    <span style="color: #000088;">$second_interval</span>    <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+<a name="line38"></a>    <span style="color: #666666; font-style: italic;">/* Should the select boxes be part of an array when returned from PHP?
+<a name="line39"></a>       e.g. setting it to &quot;birthday&quot;, would create &quot;birthday[Hour]&quot;,
+<a name="line40"></a>       &quot;birthday[Minute]&quot;, &quot;birthday[Seconds]&quot; &amp; &quot;birthday[Meridian]&quot;.
+<a name="line41"></a>       Can be combined with prefix. */</span>
+<a name="line42"></a>    <span style="color: #000088;">$field_array</span>        <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<a name="line43"></a>    <span style="color: #000088;">$all_extra</span>          <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<a name="line44"></a>    <span style="color: #000088;">$hour_extra</span>         <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<a name="line45"></a>    <span style="color: #000088;">$minute_extra</span>       <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<a name="line46"></a>    <span style="color: #000088;">$second_extra</span>       <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<a name="line47"></a>    <span style="color: #000088;">$meridian_extra</span>     <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<a name="line48"></a>&nbsp;
+<a name="line49"></a>    <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$_key</span><span style="color: #339933;">=&gt;</span><span style="color: #000088;">$_value</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line50"></a>        <span style="color: #b1b100;">switch</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$_key</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line51"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'prefix'</span><span style="color: #339933;">:</span>
+<a name="line52"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'time'</span><span style="color: #339933;">:</span>
+<a name="line53"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'field_array'</span><span style="color: #339933;">:</span>
+<a name="line54"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'all_extra'</span><span style="color: #339933;">:</span>
+<a name="line55"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'hour_extra'</span><span style="color: #339933;">:</span>
+<a name="line56"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'minute_extra'</span><span style="color: #339933;">:</span>
+<a name="line57"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'second_extra'</span><span style="color: #339933;">:</span>
+<a name="line58"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'meridian_extra'</span><span style="color: #339933;">:</span>
+<a name="line59"></a>                <span style="color: #000088;">$$_key</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>string<span style="color: #009900;">&#41;</span><span style="color: #000088;">$_value</span><span style="color: #339933;">;</span>
+<a name="line60"></a>                <span style="color: #b1b100;">break</span><span style="color: #339933;">;</span>
+<a name="line61"></a>&nbsp;
+<a name="line62"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'display_hours'</span><span style="color: #339933;">:</span>
+<a name="line63"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'display_minutes'</span><span style="color: #339933;">:</span>
+<a name="line64"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'display_seconds'</span><span style="color: #339933;">:</span>
+<a name="line65"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'display_meridian'</span><span style="color: #339933;">:</span>
+<a name="line66"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'use_24_hours'</span><span style="color: #339933;">:</span>
+<a name="line67"></a>                <span style="color: #000088;">$$_key</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>bool<span style="color: #009900;">&#41;</span><span style="color: #000088;">$_value</span><span style="color: #339933;">;</span>
+<a name="line68"></a>                <span style="color: #b1b100;">break</span><span style="color: #339933;">;</span>
+<a name="line69"></a>&nbsp;
+<a name="line70"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'minute_interval'</span><span style="color: #339933;">:</span>
+<a name="line71"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'second_interval'</span><span style="color: #339933;">:</span>
+<a name="line72"></a>                <span style="color: #000088;">$$_key</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>int<span style="color: #009900;">&#41;</span><span style="color: #000088;">$_value</span><span style="color: #339933;">;</span>
+<a name="line73"></a>                <span style="color: #b1b100;">break</span><span style="color: #339933;">;</span>
+<a name="line74"></a>&nbsp;
+<a name="line75"></a>            <span style="color: #b1b100;">default</span><span style="color: #339933;">:</span>
+<a name="line76"></a>                <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">trigger_error</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;[html_select_time] unknown parameter <span style="color: #006699; font-weight: bold;">$_key</span>&quot;</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">E_USER_WARNING</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line77"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line78"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line79"></a>&nbsp;
+<a name="line80"></a>    <span style="color: #000088;">$time</span> <span style="color: #339933;">=</span> smarty_make_timestamp<span style="color: #009900;">&#40;</span><span style="color: #000088;">$time</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line81"></a>&nbsp;
+<a name="line82"></a>    <span style="color: #000088;">$html_result</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line83"></a>&nbsp;
+<a name="line84"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$display_hours</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line85"></a>        <span style="color: #000088;">$hours</span>       <span style="color: #339933;">=</span> <span style="color: #000088;">$use_24_hours</span> ? <a href="http://www.php.net/range"><span style="color: #990000;">range</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">23</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">:</span> <a href="http://www.php.net/range"><span style="color: #990000;">range</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">12</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line86"></a>        <span style="color: #000088;">$hour_fmt</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$use_24_hours</span> ? <span style="color: #0000ff;">'%H'</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">'%I'</span><span style="color: #339933;">;</span>
+<a name="line87"></a>        <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$i</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #000088;">$for_max</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$hours</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span> <span style="color: #339933;">&lt;</span> <span style="color: #000088;">$for_max</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+<a name="line88"></a>            <span style="color: #000088;">$hours</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/sprintf"><span style="color: #990000;">sprintf</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%02d'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$hours</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line89"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&lt;select name='</span><span style="color: #339933;">;</span>
+<a name="line90"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$field_array</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line91"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$field_array</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'['</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Hour]&quot;'</span><span style="color: #339933;">;</span>
+<a name="line92"></a>        <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line93"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Hour&quot;'</span><span style="color: #339933;">;</span>
+<a name="line94"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line95"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$hour_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line96"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$hour_extra</span><span style="color: #339933;">;</span>
+<a name="line97"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line98"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$all_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line99"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$all_extra</span><span style="color: #339933;">;</span>
+<a name="line100"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line101"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line102"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> smarty_function_html_options<span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'output'</span>          <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$hours</span><span style="color: #339933;">,</span>
+<a name="line103"></a>                                                           <span style="color: #0000ff;">'values'</span>          <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$hours</span><span style="color: #339933;">,</span>
+<a name="line104"></a>                                                           <span style="color: #0000ff;">'selected'</span>      <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/strftime"><span style="color: #990000;">strftime</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$hour_fmt</span><span style="color: #339933;">,</span> <span style="color: #000088;">$time</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line105"></a>                                                           <span style="color: #0000ff;">'print_result'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line106"></a>                                                     <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line107"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;&lt;/select&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line108"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line109"></a>&nbsp;
+<a name="line110"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$display_minutes</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line111"></a>        <span style="color: #000088;">$all_minutes</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/range"><span style="color: #990000;">range</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">59</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line112"></a>        <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$i</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #000088;">$for_max</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$all_minutes</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span> <span style="color: #339933;">&lt;</span> <span style="color: #000088;">$for_max</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">+=</span> <span style="color: #000088;">$minute_interval</span><span style="color: #009900;">&#41;</span>
+<a name="line113"></a>            <span style="color: #000088;">$minutes</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/sprintf"><span style="color: #990000;">sprintf</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%02d'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$all_minutes</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line114"></a>        <span style="color: #000088;">$selected</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/intval"><span style="color: #990000;">intval</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/floor"><span style="color: #990000;">floor</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/strftime"><span style="color: #990000;">strftime</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%M'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$time</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">/</span> <span style="color: #000088;">$minute_interval</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">*</span> <span style="color: #000088;">$minute_interval</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line115"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&lt;select name='</span><span style="color: #339933;">;</span>
+<a name="line116"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$field_array</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line117"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$field_array</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'['</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Minute]&quot;'</span><span style="color: #339933;">;</span>
+<a name="line118"></a>        <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line119"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Minute&quot;'</span><span style="color: #339933;">;</span>
+<a name="line120"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line121"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$minute_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line122"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$minute_extra</span><span style="color: #339933;">;</span>
+<a name="line123"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line124"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$all_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line125"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$all_extra</span><span style="color: #339933;">;</span>
+<a name="line126"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line127"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line128"></a>&nbsp;
+<a name="line129"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> smarty_function_html_options<span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'output'</span>          <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$minutes</span><span style="color: #339933;">,</span>
+<a name="line130"></a>                                                           <span style="color: #0000ff;">'values'</span>          <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$minutes</span><span style="color: #339933;">,</span>
+<a name="line131"></a>                                                           <span style="color: #0000ff;">'selected'</span>      <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$selected</span><span style="color: #339933;">,</span>
+<a name="line132"></a>                                                           <span style="color: #0000ff;">'print_result'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line133"></a>                                                     <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line134"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;&lt;/select&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line135"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line136"></a>&nbsp;
+<a name="line137"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$display_seconds</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line138"></a>        <span style="color: #000088;">$all_seconds</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/range"><span style="color: #990000;">range</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">59</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line139"></a>        <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$i</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #000088;">$for_max</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$all_seconds</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span> <span style="color: #339933;">&lt;</span> <span style="color: #000088;">$for_max</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">+=</span> <span style="color: #000088;">$second_interval</span><span style="color: #009900;">&#41;</span>
+<a name="line140"></a>            <span style="color: #000088;">$seconds</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/sprintf"><span style="color: #990000;">sprintf</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%02d'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$all_seconds</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line141"></a>        <span style="color: #000088;">$selected</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/intval"><span style="color: #990000;">intval</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/floor"><span style="color: #990000;">floor</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/strftime"><span style="color: #990000;">strftime</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%S'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$time</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">/</span> <span style="color: #000088;">$second_interval</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">*</span> <span style="color: #000088;">$second_interval</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line142"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&lt;select name='</span><span style="color: #339933;">;</span>
+<a name="line143"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$field_array</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line144"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$field_array</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'['</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Second]&quot;'</span><span style="color: #339933;">;</span>
+<a name="line145"></a>        <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line146"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Second&quot;'</span><span style="color: #339933;">;</span>
+<a name="line147"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line148"></a>&nbsp;
+<a name="line149"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$second_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line150"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$second_extra</span><span style="color: #339933;">;</span>
+<a name="line151"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line152"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$all_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line153"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$all_extra</span><span style="color: #339933;">;</span>
+<a name="line154"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line155"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line156"></a>&nbsp;
+<a name="line157"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> smarty_function_html_options<span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'output'</span>          <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$seconds</span><span style="color: #339933;">,</span>
+<a name="line158"></a>                                                           <span style="color: #0000ff;">'values'</span>          <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$seconds</span><span style="color: #339933;">,</span>
+<a name="line159"></a>                                                           <span style="color: #0000ff;">'selected'</span>      <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$selected</span><span style="color: #339933;">,</span>
+<a name="line160"></a>                                                           <span style="color: #0000ff;">'print_result'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line161"></a>                                                     <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line162"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;&lt;/select&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line163"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line164"></a>&nbsp;
+<a name="line165"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$display_meridian</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #339933;">!</span><span style="color: #000088;">$use_24_hours</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line166"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&lt;select name='</span><span style="color: #339933;">;</span>
+<a name="line167"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$field_array</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line168"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$field_array</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'['</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Meridian]&quot;'</span><span style="color: #339933;">;</span>
+<a name="line169"></a>        <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line170"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&quot;'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$prefix</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'Meridian&quot;'</span><span style="color: #339933;">;</span>
+<a name="line171"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line172"></a>&nbsp;
+<a name="line173"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$meridian_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line174"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$meridian_extra</span><span style="color: #339933;">;</span>
+<a name="line175"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line176"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">!==</span> <span style="color: #000088;">$all_extra</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+<a name="line177"></a>            <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">' '</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$all_extra</span><span style="color: #339933;">;</span>
+<a name="line178"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line179"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line180"></a>&nbsp;
+<a name="line181"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> smarty_function_html_options<span style="color: #009900;">&#40;</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'output'</span>          <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'AM'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'PM'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line182"></a>                                                           <span style="color: #0000ff;">'values'</span>          <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'am'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pm'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line183"></a>                                                           <span style="color: #0000ff;">'selected'</span>      <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/strtolower"><span style="color: #990000;">strtolower</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/strftime"><span style="color: #990000;">strftime</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%p'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$time</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line184"></a>                                                           <span style="color: #0000ff;">'print_result'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line185"></a>                                                     <span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line186"></a>        <span style="color: #000088;">$html_result</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;&lt;/select&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line187"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line188"></a>&nbsp;
+<a name="line189"></a>    <span style="color: #b1b100;">return</span> <span style="color: #000088;">$html_result</span><span style="color: #339933;">;</span>
+<a name="line190"></a><span style="color: #009900;">&#125;</span>
+<a name="line191"></a>&nbsp;
+<a name="line192"></a><span style="color: #666666; font-style: italic;">/* vim: set expandtab: */</span>
+<a name="line193"></a>&nbsp;
+<a name="line194"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line195"></a>&nbsp;</pre>
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/plugins/function.html_select_time.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

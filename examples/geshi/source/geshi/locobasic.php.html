@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:26:17 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>geshi/locobasic.php (GeSHi)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/locobasic.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>geshi/locobasic.php</h1>
+<div class="comment" id="overview_description"><p>locobasic.php
+-------------
+Author: Nacho Cabanes
+Copyright: (c) 2009 Nacho Cabanes (http://www.nachocabanes.com)
+Release Version: 1.0.8.3
+Date Started: 2009/03/22</p><p>Locomotive Basic (Amstrad CPC series) language file for GeSHi.</p><p>More details at http://en.wikipedia.org/wiki/Locomotive_BASIC</p><p>CHANGES
+-------
+2009/03/22 (1.0.8.3)
+-  First Release</p><p></p><p>This file is part of GeSHi.</p><p>GeSHi is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p><p>GeSHi is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License
+along with GeSHi; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*************************************************************************************
+<a name="line3"></a> * locobasic.php
+<a name="line4"></a> * -------------
+<a name="line5"></a> * Author: Nacho Cabanes
+<a name="line6"></a> * Copyright: (c) 2009 Nacho Cabanes (http://www.nachocabanes.com)
+<a name="line7"></a> * Release Version: 1.0.8.3
+<a name="line8"></a> * Date Started: 2009/03/22
+<a name="line9"></a> *
+<a name="line10"></a> * Locomotive Basic (Amstrad CPC series) language file for GeSHi.
+<a name="line11"></a> *
+<a name="line12"></a> * More details at http://en.wikipedia.org/wiki/Locomotive_BASIC
+<a name="line13"></a> *
+<a name="line14"></a> * CHANGES
+<a name="line15"></a> * -------
+<a name="line16"></a> * 2009/03/22 (1.0.8.3)
+<a name="line17"></a> *  -  First Release
+<a name="line18"></a> *
+<a name="line19"></a> *************************************************************************************
+<a name="line20"></a> *
+<a name="line21"></a> *     This file is part of GeSHi.
+<a name="line22"></a> *
+<a name="line23"></a> *   GeSHi is free software; you can redistribute it and/or modify
+<a name="line24"></a> *   it under the terms of the GNU General Public License as published by
+<a name="line25"></a> *   the Free Software Foundation; either version 2 of the License, or
+<a name="line26"></a> *   (at your option) any later version.
+<a name="line27"></a> *
+<a name="line28"></a> *   GeSHi is distributed in the hope that it will be useful,
+<a name="line29"></a> *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line30"></a> *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line31"></a> *   GNU General Public License for more details.
+<a name="line32"></a> *
+<a name="line33"></a> *   You should have received a copy of the GNU General Public License
+<a name="line34"></a> *   along with GeSHi; if not, write to the Free Software
+<a name="line35"></a> *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line36"></a> *
+<a name="line37"></a> ************************************************************************************/</span>
+<a name="line38"></a>&nbsp;
+<a name="line39"></a><span style="color: #000088;">$language_data</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a> <span style="color: #009900;">&#40;</span>
+<a name="line40"></a>    <span style="color: #0000ff;">'LANG_NAME'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Locomotive Basic'</span><span style="color: #339933;">,</span>
+<a name="line41"></a>    <span style="color: #0000ff;">'COMMENT_SINGLE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">&quot;'&quot;</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'REM'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line42"></a>    <span style="color: #0000ff;">'COMMENT_MULTI'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line43"></a>    <span style="color: #0000ff;">'CASE_KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> GESHI_CAPS_NO_CHANGE<span style="color: #339933;">,</span>
+<a name="line44"></a>    <span style="color: #0000ff;">'QUOTEMARKS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'&quot;'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line45"></a>    <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span>
+<a name="line46"></a>    <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line47"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line48"></a>            <span style="color: #0000ff;">&quot;AFTER&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;AND&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;AUTO&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;BORDER&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;BREAK&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CALL&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CAT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CHAIN&quot;</span><span style="color: #339933;">,</span>
+<a name="line49"></a>            <span style="color: #0000ff;">&quot;CLEAR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CLG&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CLS&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CLOSEIN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CLOSEOUT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CONT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CURSOR&quot;</span><span style="color: #339933;">,</span>
+<a name="line50"></a>            <span style="color: #0000ff;">&quot;DATA&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DEF&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DEFINT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DEFREAL&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DEFSTR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DEG&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DELETE&quot;</span><span style="color: #339933;">,</span>
+<a name="line51"></a>            <span style="color: #0000ff;">&quot;DERR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DI&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DIM&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DRAW&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DRAWR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;EDIT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;EI&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ELSE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;END&quot;</span><span style="color: #339933;">,</span>
+<a name="line52"></a>            <span style="color: #0000ff;">&quot;ENV&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ENT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;EOF&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ERASE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ERL&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ERR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ERROR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;EVERY&quot;</span><span style="color: #339933;">,</span>
+<a name="line53"></a>            <span style="color: #0000ff;">&quot;FILL&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;FN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;FOR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;FRAME&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;GOSUB&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;GOTO&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;GRAPHICS&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;HIMEM&quot;</span><span style="color: #339933;">,</span>
+<a name="line54"></a>            <span style="color: #0000ff;">&quot;IF&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;INK&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;INPUT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;KEY&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LET&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LINE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LIST&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LOAD&quot;</span><span style="color: #339933;">,</span>
+<a name="line55"></a>            <span style="color: #0000ff;">&quot;LOCATE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MASK&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MEMORY&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MERGE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MODE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MOVE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MOVER&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;NEW&quot;</span><span style="color: #339933;">,</span>
+<a name="line56"></a>            <span style="color: #0000ff;">&quot;NEXT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;NOT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ON&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;OPENIN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;OPENOUT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;OR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ORIGIN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;PAPER&quot;</span><span style="color: #339933;">,</span>
+<a name="line57"></a>            <span style="color: #0000ff;">&quot;PEEK&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;PEN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;PLOT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;PLOTR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;POKE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;PRINT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RAD&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RANDOMIZE&quot;</span><span style="color: #339933;">,</span>
+<a name="line58"></a>            <span style="color: #0000ff;">&quot;READ&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RELEASE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;REMAIN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RENUM&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RESTORE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RESUME&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RETURN&quot;</span><span style="color: #339933;">,</span>
+<a name="line59"></a>            <span style="color: #0000ff;">&quot;RUN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SAVE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SPEED&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SOUND&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SPC&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SQ&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;STEP&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;STOP&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SWAP&quot;</span><span style="color: #339933;">,</span>
+<a name="line60"></a>            <span style="color: #0000ff;">&quot;SYMBOL&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TAB&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TAG&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TAGOFF&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TEST&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TESTR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TIME&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TO&quot;</span><span style="color: #339933;">,</span>
+<a name="line61"></a>            <span style="color: #0000ff;">&quot;THEN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TRON&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TROFF&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;USING&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;WAIT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;WEND&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;WHILE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;WIDTH&quot;</span><span style="color: #339933;">,</span>
+<a name="line62"></a>            <span style="color: #0000ff;">&quot;WINDOW&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;WRITE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;XOR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ZONE&quot;</span>
+<a name="line63"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line64"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line65"></a>            <span style="color: #0000ff;">&quot;ABS&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ASC&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ATN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;BIN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CHR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;CINT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;COPYCHR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;COS&quot;</span><span style="color: #339933;">,</span>
+<a name="line66"></a>            <span style="color: #0000ff;">&quot;CREAL&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;DEC&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;FIX&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;FRE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;EXP&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;HEX&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;INKEY&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;INP&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;INSTR&quot;</span><span style="color: #339933;">,</span>
+<a name="line67"></a>            <span style="color: #0000ff;">&quot;INT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;JOY&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LEFT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LEN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LOG&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LOG10&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;LOWER&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MAX&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MID&quot;</span><span style="color: #339933;">,</span>
+<a name="line68"></a>            <span style="color: #0000ff;">&quot;MIN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;MOD&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;OUT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;PI&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;POS&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RIGHT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;RND&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;ROUND&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SGN&quot;</span><span style="color: #339933;">,</span>
+<a name="line69"></a>            <span style="color: #0000ff;">&quot;SIN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SPACE&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;SQR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;STR&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;STRING&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;TAN&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;UNT&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;UPPER&quot;</span><span style="color: #339933;">,</span>
+<a name="line70"></a>            <span style="color: #0000ff;">&quot;VAL&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;VPOS&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;XPOS&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;YPOS&quot;</span>
+<a name="line71"></a>            <span style="color: #009900;">&#41;</span>
+<a name="line72"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line73"></a>    <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line74"></a>        <span style="color: #0000ff;">'('</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">')'</span>
+<a name="line75"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line76"></a>    <span style="color: #0000ff;">'CASE_SENSITIVE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line77"></a>        GESHI_COMMENTS <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line78"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line79"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span>
+<a name="line80"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line81"></a>    <span style="color: #0000ff;">'STYLES'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line82"></a>        <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line83"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #0000ff; font-weight: bold;'</span><span style="color: #339933;">,</span>
+<a name="line84"></a>            <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #008888; font-weight: bold;'</span>
+<a name="line85"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line86"></a>        <span style="color: #0000ff;">'COMMENTS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line87"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #808080;'</span><span style="color: #339933;">,</span>
+<a name="line88"></a>            <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #808080;'</span>
+<a name="line89"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line90"></a>        <span style="color: #0000ff;">'BRACKETS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line91"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #ff0000;'</span>
+<a name="line92"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line93"></a>        <span style="color: #0000ff;">'STRINGS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line94"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #ff0000;'</span>
+<a name="line95"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line96"></a>        <span style="color: #0000ff;">'NUMBERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line97"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #0044ff;'</span>
+<a name="line98"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line99"></a>        <span style="color: #0000ff;">'METHODS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line100"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #66cc66;'</span>
+<a name="line101"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line102"></a>        <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line103"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #66cc66;'</span>
+<a name="line104"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line105"></a>        <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line106"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #000099;'</span>
+<a name="line107"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line108"></a>        <span style="color: #0000ff;">'SCRIPT'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line109"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line110"></a>        <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line111"></a>            <span style="color: #009900;">&#41;</span>
+<a name="line112"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line113"></a>    <span style="color: #0000ff;">'URLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line114"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line115"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span>
+<a name="line116"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line117"></a>    <span style="color: #0000ff;">'OOLANG'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line118"></a>    <span style="color: #0000ff;">'OBJECT_SPLITTERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line119"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'.'</span>
+<a name="line120"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line121"></a>    <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line122"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line123"></a>    <span style="color: #0000ff;">'STRICT_MODE_APPLIES'</span> <span style="color: #339933;">=&gt;</span> GESHI_NEVER<span style="color: #339933;">,</span>
+<a name="line124"></a>    <span style="color: #0000ff;">'SCRIPT_DELIMITERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line125"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line126"></a>    <span style="color: #0000ff;">'HIGHLIGHT_STRICT_BLOCK'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line127"></a>        <span style="color: #009900;">&#41;</span>
+<a name="line128"></a><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line129"></a>&nbsp;
+<a name="line130"></a><span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/locobasic.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

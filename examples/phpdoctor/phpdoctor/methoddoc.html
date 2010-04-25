@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:46 +0100">
 
 <link rel="stylesheet" type="text/css" href="../stylesheet.css">
 <link rel="start" href="../overview-summary.html">
@@ -21,6 +23,7 @@
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -37,11 +40,11 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 <hr>
 
 <div class="qualifiedName">PHPDoctor.MethodDoc</div>
-<div class="location">/classes/methodDoc.php at line 28</div>
+<a href="../source/classes/methoddoc.php.html#line25" class="location">classes/methodDoc.php at line 25</a>
 
 <h1>Class MethodDoc</h1>
 
-<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>  |<br>  +--<a href="../phpdoctor/programelementdoc.html">ProgramElementDoc</a><br>       |<br>       +--<a href="../phpdoctor/executabledoc.html">ExecutableDoc</a><br>            |<br>            +--<strong>MethodDoc</strong><br /></pre>
+<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>    └─<a href="../phpdoctor/programelementdoc.html">ProgramElementDoc</a><br>       └─<a href="../phpdoctor/executabledoc.html">ExecutableDoc</a><br>          └─<strong>MethodDoc</strong><br /></pre>
 
 <hr>
 
@@ -49,22 +52,14 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 </p>
 
-<div class="comment" id="overview_description"><p>
-Represents a PHP function or method (member function).
-</p></div>
+<div class="comment" id="overview_description"><p>Represents a PHP function or method (member function).</p></div>
 
-<dl>
-<dt>Version:</dt>
-<dd>$Revision: 1.11 $</dd>
-</dl>
 <hr>
 
 <table id="summary_constr">
 <tr><th colspan="2">Constructor Summary</th></tr>
 <tr>
-<td class="description"><p class="name"><a href="#methodDoc()">methodDoc</a>(str name, ClassDoc|MethodDoc parent, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root, str filename, int lineNumber)</p><p class="description">
-Constructor
-</p></td>
+<td class="description"><p class="name"><a href="#methodDoc()">methodDoc</a>(str name, ClassDoc|MethodDoc parent, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root, str filename, int lineNumber)</p><p class="description">Constructor</p></td>
 </tr>
 </table>
 
@@ -72,38 +67,27 @@ Constructor
 <tr><th colspan="2">Method Summary</th></tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addParameter()">addParameter</a>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> parameter)</p><p class="description">
-Add a parameter to this method.
-</p></td>
+<td class="description"><p class="name"><a href="#addParameter()">addParameter</a>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> parameter)</p><p class="description">Add a parameter to this method.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isAbstract()">isAbstract</a>()</p><p class="description">
-Return true if this class is abstract.
-</p></td>
+<td class="description"><p class="name"><a href="#isAbstract()">isAbstract</a>()</p><p class="description">Return true if this class is abstract.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isFunction()">isFunction</a>()</p><p class="description">
-Is this construct a function.
-</p></td>
+<td class="description"><p class="name"><a href="#isFunction()">isFunction</a>()</p><p class="description">Is this construct a function.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isMethod()">isMethod</a>()</p><p class="description">
-Is this construct a method.
-</p></td>
+<td class="description"><p class="name"><a href="#isMethod()">isMethod</a>()</p><p class="description">Is this construct a method.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/type.html">Type</a></td>
-<td class="description"><p class="name"><a href="#returnType()">returnType</a>()</p><p class="description">
-Get return type.
-</p></td>
+<td class="description"><p class="name"><a href="#returnType()">returnType</a>()</p><p class="description">Get return type.</p></td>
 </tr>
 <tr>
 <td class="type"> str</td>
-<td class="description"><p class="name"><a href="#returnTypeAsString()">returnTypeAsString</a>()</p><p class="description">
-Format a return type for outputting. </p></td>
+<td class="description"><p class="name"><a href="#returnTypeAsString()">returnTypeAsString</a>()</p><p class="description">Format a return type for outputting. </p></td>
 </tr>
 </table>
 
@@ -113,20 +97,19 @@ Format a return type for outputting. </p></td>
 
 <table class="inherit">
 <tr><th colspan="2">Methods inherited from PHPDoctor.ProgramElementDoc</th></tr>
-<tr><td><a href="../phpdoctor/programelementdoc.html#asPath()">asPath</a>, <a href="../phpdoctor/programelementdoc.html#containingClass()">containingClass</a>, <a href="../phpdoctor/programelementdoc.html#containingPackage()">containingPackage</a>, <a href="../phpdoctor/programelementdoc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/programelementdoc.html#isPrivate()">isPrivate</a>, <a href="../phpdoctor/programelementdoc.html#isProtected()">isProtected</a>, <a href="../phpdoctor/programelementdoc.html#isPublic()">isPublic</a>, <a href="../phpdoctor/programelementdoc.html#isStatic()">isStatic</a>, <a href="../phpdoctor/programelementdoc.html#location()">location</a>, <a href="../phpdoctor/programelementdoc.html#makePrivate()">makePrivate</a>, <a href="../phpdoctor/programelementdoc.html#makeProtected()">makeProtected</a>, <a href="../phpdoctor/programelementdoc.html#makePublic()">makePublic</a>, <a href="../phpdoctor/programelementdoc.html#modifiers()">modifiers</a>, <a href="../phpdoctor/programelementdoc.html#packageName()">packageName</a>, <a href="../phpdoctor/programelementdoc.html#qualifiedName()">qualifiedName</a></td></tr></table>
+<tr><td><a href="../phpdoctor/programelementdoc.html#asPath()">asPath</a>, <a href="../phpdoctor/programelementdoc.html#containingClass()">containingClass</a>, <a href="../phpdoctor/programelementdoc.html#containingPackage()">containingPackage</a>, <a href="../phpdoctor/programelementdoc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/programelementdoc.html#isPrivate()">isPrivate</a>, <a href="../phpdoctor/programelementdoc.html#isProtected()">isProtected</a>, <a href="../phpdoctor/programelementdoc.html#isPublic()">isPublic</a>, <a href="../phpdoctor/programelementdoc.html#isStatic()">isStatic</a>, <a href="../phpdoctor/programelementdoc.html#location()">location</a>, <a href="../phpdoctor/programelementdoc.html#makePrivate()">makePrivate</a>, <a href="../phpdoctor/programelementdoc.html#makeProtected()">makeProtected</a>, <a href="../phpdoctor/programelementdoc.html#makePublic()">makePublic</a>, <a href="../phpdoctor/programelementdoc.html#modifiers()">modifiers</a>, <a href="../phpdoctor/programelementdoc.html#packageName()">packageName</a>, <a href="../phpdoctor/programelementdoc.html#qualifiedName()">qualifiedName</a>, <a href="../phpdoctor/programelementdoc.html#sourceFilename()">sourceFilename</a>, <a href="../phpdoctor/programelementdoc.html#sourceLine()">sourceLine</a></td></tr></table>
 
 <table class="inherit">
 <tr><th colspan="2">Methods inherited from PHPDoctor.Doc</th></tr>
 <tr><td><a href="../phpdoctor/doc.html#getHTMLContents()">getHTMLContents</a>, <a href="../phpdoctor/doc.html#getRawCommentText()">getRawCommentText</a>, <a href="../phpdoctor/doc.html#isClass()">isClass</a>, <a href="../phpdoctor/doc.html#isConstructor()">isConstructor</a>, <a href="../phpdoctor/doc.html#isException()">isException</a>, <a href="../phpdoctor/doc.html#isField()">isField</a>, <a href="../phpdoctor/doc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/doc.html#isFunction()">isFunction</a>, <a href="../phpdoctor/doc.html#isGlobal()">isGlobal</a>, <a href="../phpdoctor/doc.html#isInterface()">isInterface</a>, <a href="../phpdoctor/doc.html#isMethod()">isMethod</a>, <a href="../phpdoctor/doc.html#isOrdinaryClass()">isOrdinaryClass</a>, <a href="../phpdoctor/doc.html#mergeData()">mergeData</a>, <a href="../phpdoctor/doc.html#name()">name</a>, <a href="../phpdoctor/doc.html#set()">set</a>, <a href="../phpdoctor/doc.html#setByRef()">setByRef</a>, <a href="../phpdoctor/doc.html#setTag()">setTag</a>, <a href="../phpdoctor/doc.html#tags()">tags</a></td></tr></table>
 
 <h2 id="detail_constr">Constructor Detail</h2>
-<div class="location">/classes/methodDoc.php at line 51</div>
+<a href="../source/classes/methoddoc.php.html#line48" class="location">classes/methodDoc.php at line 48</a>
+
 <h3 id="methodDoc()">methodDoc</h3>
 <code class="signature">public <strong>methodDoc</strong>(str name, ClassDoc|MethodDoc parent, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root, str filename, int lineNumber)</code>
 <div class="details">
-<p>
-Constructor
-</p><dl>
+<p>Constructor</p><dl>
 <dt>Parameters:</dt>
 <dd>name - Name of this element</dd>
 <dd>parent - The parent of this element</dd>
@@ -139,64 +122,58 @@ Constructor
 <hr>
 
 <h2 id="detail_method">Method Detail</h2>
-<div class="location">/classes/methodDoc.php at line 65</div>
+<a href="../source/classes/methoddoc.php.html#line62" class="location">classes/methodDoc.php at line 62</a>
+
 <h3 id="addParameter()">addParameter</h3>
 <code class="signature">public  void <strong>addParameter</strong>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> parameter)</code>
 <div class="details">
-<p>
-Add a parameter to this method.
-</p></div>
+<p>Add a parameter to this method.</p></div>
 
 <hr>
 
-<div class="location">/classes/methodDoc.php at line 122</div>
+<a href="../source/classes/methoddoc.php.html#line119" class="location">classes/methodDoc.php at line 119</a>
+
 <h3 id="isAbstract()">isAbstract</h3>
 <code class="signature">public  bool <strong>isAbstract</strong>()</code>
 <div class="details">
-<p>
-Return true if this class is abstract.
-</p></div>
+<p>Return true if this class is abstract.</p></div>
 
 <hr>
 
-<div class="location">/classes/methodDoc.php at line 100</div>
+<a href="../source/classes/methoddoc.php.html#line97" class="location">classes/methodDoc.php at line 97</a>
+
 <h3 id="isFunction()">isFunction</h3>
 <code class="signature">public  bool <strong>isFunction</strong>()</code>
 <div class="details">
-<p>
-Is this construct a function.
-</p></div>
+<p>Is this construct a function.</p></div>
 
 <hr>
 
-<div class="location">/classes/methodDoc.php at line 113</div>
+<a href="../source/classes/methoddoc.php.html#line110" class="location">classes/methodDoc.php at line 110</a>
+
 <h3 id="isMethod()">isMethod</h3>
 <code class="signature">public  bool <strong>isMethod</strong>()</code>
 <div class="details">
-<p>
-Is this construct a method.
-</p></div>
+<p>Is this construct a method.</p></div>
 
 <hr>
 
-<div class="location">/classes/methodDoc.php at line 74</div>
+<a href="../source/classes/methoddoc.php.html#line71" class="location">classes/methodDoc.php at line 71</a>
+
 <h3 id="returnType()">returnType</h3>
 <code class="signature">public  <a href="../phpdoctor/type.html">Type</a> <strong>returnType</strong>()</code>
 <div class="details">
-<p>
-Get return type.
-</p></div>
+<p>Get return type.</p></div>
 
 <hr>
 
-<div class="location">/classes/methodDoc.php at line 84</div>
+<a href="../source/classes/methoddoc.php.html#line81" class="location">classes/methodDoc.php at line 81</a>
+
 <h3 id="returnTypeAsString()">returnTypeAsString</h3>
 <code class="signature">public  str <strong>returnTypeAsString</strong>()</code>
 <div class="details">
-<p>
-Format a return type for outputting. Recognised types are turned into
-HTML anchor tags to the documentation page for the class defining them.
-</p><dl>
+<p>Format a return type for outputting. Recognised types are turned into
+HTML anchor tags to the documentation page for the class defining them.</p><dl>
 <dt>Returns:</dt>
 <dd>The string representation of the return type</dd>
 </dl>
@@ -211,6 +188,7 @@ HTML anchor tags to the documentation page for the class defining them.
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -226,7 +204,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

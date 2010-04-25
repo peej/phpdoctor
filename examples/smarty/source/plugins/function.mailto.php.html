@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:37:03 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>plugins/function.mailto.php (Smarty)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/plugins/function.mailto.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>plugins/function.mailto.php</h1>
+<div class="comment" id="overview_description"><p>Smarty plugin</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a> * Smarty plugin
+<a name="line4"></a> * @package Smarty
+<a name="line5"></a> * @subpackage plugins
+<a name="line6"></a> */</span>
+<a name="line7"></a>&nbsp;
+<a name="line8"></a>&nbsp;
+<a name="line9"></a><span style="color: #009933; font-style: italic;">/**
+<a name="line10"></a> * Smarty {mailto} function plugin
+<a name="line11"></a> *
+<a name="line12"></a> * Type:     function&lt;br&gt;
+<a name="line13"></a> * Name:     mailto&lt;br&gt;
+<a name="line14"></a> * Date:     May 21, 2002
+<a name="line15"></a> * Purpose:  automate mailto address link creation, and optionally
+<a name="line16"></a> *           encode them.&lt;br&gt;
+<a name="line17"></a> * Input:&lt;br&gt;
+<a name="line18"></a> *         - address = e-mail address
+<a name="line19"></a> *         - text = (optional) text to display, default is address
+<a name="line20"></a> *         - encode = (optional) can be one of:
+<a name="line21"></a> *                * none : no encoding (default)
+<a name="line22"></a> *                * javascript : encode with javascript
+<a name="line23"></a> *                * javascript_charcode : encode with javascript charcode
+<a name="line24"></a> *                * hex : encode with hexidecimal (no javascript)
+<a name="line25"></a> *         - cc = (optional) address(es) to carbon copy
+<a name="line26"></a> *         - bcc = (optional) address(es) to blind carbon copy
+<a name="line27"></a> *         - subject = (optional) e-mail subject
+<a name="line28"></a> *         - newsgroups = (optional) newsgroup(s) to post to
+<a name="line29"></a> *         - followupto = (optional) address(es) to follow up to
+<a name="line30"></a> *         - extra = (optional) extra tags for the href link
+<a name="line31"></a> *
+<a name="line32"></a> * Examples:
+<a name="line33"></a> * &lt;pre&gt;
+<a name="line34"></a> * {mailto address=&quot;me@domain.com&quot;}
+<a name="line35"></a> * {mailto address=&quot;me@domain.com&quot; encode=&quot;javascript&quot;}
+<a name="line36"></a> * {mailto address=&quot;me@domain.com&quot; encode=&quot;hex&quot;}
+<a name="line37"></a> * {mailto address=&quot;me@domain.com&quot; subject=&quot;Hello to you!&quot;}
+<a name="line38"></a> * {mailto address=&quot;me@domain.com&quot; cc=&quot;you@domain.com,they@domain.com&quot;}
+<a name="line39"></a> * {mailto address=&quot;me@domain.com&quot; extra='class=&quot;mailto&quot;'}
+<a name="line40"></a> * &lt;/pre&gt;
+<a name="line41"></a> * @link http://smarty.php.net/manual/en/language.function.mailto.php {mailto}
+<a name="line42"></a> *          (Smarty online manual)
+<a name="line43"></a> * @version  1.2
+<a name="line44"></a> * @author   Monte Ohrt &lt;monte at ohrt dot com&gt;
+<a name="line45"></a> * @author   credits to Jason Sweat (added cc, bcc and subject functionality)
+<a name="line46"></a> * @param    array
+<a name="line47"></a> * @param    Smarty
+<a name="line48"></a> * @return   string
+<a name="line49"></a> */</span>
+<a name="line50"></a><span style="color: #000000; font-weight: bold;">function</span> smarty_function_mailto<span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$smarty</span><span style="color: #009900;">&#41;</span>
+<a name="line51"></a><span style="color: #009900;">&#123;</span>
+<a name="line52"></a>    <span style="color: #000088;">$extra</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line53"></a>&nbsp;
+<a name="line54"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/empty"><span style="color: #990000;">empty</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'address'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line55"></a>        <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">trigger_error</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;mailto: missing 'address' parameter&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line56"></a>        <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line57"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line58"></a>        <span style="color: #000088;">$address</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'address'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line59"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line60"></a>&nbsp;
+<a name="line61"></a>    <span style="color: #000088;">$text</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$address</span><span style="color: #339933;">;</span>
+<a name="line62"></a>&nbsp;
+<a name="line63"></a>    <span style="color: #666666; font-style: italic;">// netscape and mozilla do not decode %40 (@) in BCC field (bug?)</span>
+<a name="line64"></a>    <span style="color: #666666; font-style: italic;">// so, don't encode it.</span>
+<a name="line65"></a>    <span style="color: #000088;">$search</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'%40'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'%2C'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line66"></a>    <span style="color: #000088;">$replace</span>  <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'@'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">','</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line67"></a>    <span style="color: #000088;">$mail_parms</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line68"></a>    <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$var</span><span style="color: #339933;">=&gt;</span><span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line69"></a>        <span style="color: #b1b100;">switch</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$var</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line70"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'cc'</span><span style="color: #339933;">:</span>
+<a name="line71"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'bcc'</span><span style="color: #339933;">:</span>
+<a name="line72"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'followupto'</span><span style="color: #339933;">:</span>
+<a name="line73"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><a href="http://www.php.net/empty"><span style="color: #990000;">empty</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+<a name="line74"></a>                    <span style="color: #000088;">$mail_parms</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$var</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'='</span><span style="color: #339933;">.</span><a href="http://www.php.net/str_replace"><span style="color: #990000;">str_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$search</span><span style="color: #339933;">,</span><span style="color: #000088;">$replace</span><span style="color: #339933;">,</span><a href="http://www.php.net/rawurlencode"><span style="color: #990000;">rawurlencode</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line75"></a>                <span style="color: #b1b100;">break</span><span style="color: #339933;">;</span>
+<a name="line76"></a>&nbsp;
+<a name="line77"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'subject'</span><span style="color: #339933;">:</span>
+<a name="line78"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'newsgroups'</span><span style="color: #339933;">:</span>
+<a name="line79"></a>                <span style="color: #000088;">$mail_parms</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$var</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'='</span><span style="color: #339933;">.</span><a href="http://www.php.net/rawurlencode"><span style="color: #990000;">rawurlencode</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line80"></a>                <span style="color: #b1b100;">break</span><span style="color: #339933;">;</span>
+<a name="line81"></a>&nbsp;
+<a name="line82"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'extra'</span><span style="color: #339933;">:</span>
+<a name="line83"></a>            <span style="color: #b1b100;">case</span> <span style="color: #0000ff;">'text'</span><span style="color: #339933;">:</span>
+<a name="line84"></a>                <span style="color: #000088;">$$var</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$value</span><span style="color: #339933;">;</span>
+<a name="line85"></a>&nbsp;
+<a name="line86"></a>            <span style="color: #b1b100;">default</span><span style="color: #339933;">:</span>
+<a name="line87"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line88"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line89"></a>&nbsp;
+<a name="line90"></a>    <span style="color: #000088;">$mail_parm_vals</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line91"></a>    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$i</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">&lt;</span>count<span style="color: #009900;">&#40;</span><span style="color: #000088;">$mail_parms</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$i</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line92"></a>        <span style="color: #000088;">$mail_parm_vals</span> <span style="color: #339933;">.=</span> <span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">==</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#41;</span> ? <span style="color: #0000ff;">'?'</span> <span style="color: #339933;">:</span> <span style="color: #0000ff;">'&amp;'</span><span style="color: #339933;">;</span>
+<a name="line93"></a>        <span style="color: #000088;">$mail_parm_vals</span> <span style="color: #339933;">.=</span> <span style="color: #000088;">$mail_parms</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$i</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line94"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line95"></a>    <span style="color: #000088;">$address</span> <span style="color: #339933;">.=</span> <span style="color: #000088;">$mail_parm_vals</span><span style="color: #339933;">;</span>
+<a name="line96"></a>&nbsp;
+<a name="line97"></a>    <span style="color: #000088;">$encode</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/empty"><span style="color: #990000;">empty</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'encode'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> ? <span style="color: #0000ff;">'none'</span> <span style="color: #339933;">:</span> <span style="color: #000088;">$params</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'encode'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line98"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><a href="http://www.php.net/in_array"><span style="color: #990000;">in_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$encode</span><span style="color: #339933;">,</span><a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'javascript'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'javascript_charcode'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'hex'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'none'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line99"></a>        <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">trigger_error</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;mailto: 'encode' parameter must be none, javascript or hex&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line100"></a>        <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line101"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line102"></a>&nbsp;
+<a name="line103"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$encode</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'javascript'</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line104"></a>        <span style="color: #000088;">$string</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'document.write(\'&lt;a href=&quot;mailto:'</span><span style="color: #339933;">.</span><span style="color: #000088;">$address</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&quot; '</span><span style="color: #339933;">.</span><span style="color: #000088;">$extra</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #000088;">$text</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&lt;/a&gt;\');'</span><span style="color: #339933;">;</span>
+<a name="line105"></a>&nbsp;
+<a name="line106"></a>        <span style="color: #000088;">$js_encode</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line107"></a>        <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span> <span style="color: #339933;">&lt;</span> <a href="http://www.php.net/strlen"><span style="color: #990000;">strlen</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line108"></a>            <span style="color: #000088;">$js_encode</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'%'</span> <span style="color: #339933;">.</span> <a href="http://www.php.net/bin2hex"><span style="color: #990000;">bin2hex</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$x</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line109"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line110"></a>&nbsp;
+<a name="line111"></a>        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'&lt;script type=&quot;text/javascript&quot;&gt;eval(unescape(\''</span><span style="color: #339933;">.</span><span style="color: #000088;">$js_encode</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'\'))&lt;/script&gt;'</span><span style="color: #339933;">;</span>
+<a name="line112"></a>&nbsp;
+<a name="line113"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$encode</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'javascript_charcode'</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line114"></a>        <span style="color: #000088;">$string</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'&lt;a href=&quot;mailto:'</span><span style="color: #339933;">.</span><span style="color: #000088;">$address</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&quot; '</span><span style="color: #339933;">.</span><span style="color: #000088;">$extra</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #000088;">$text</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&lt;/a&gt;'</span><span style="color: #339933;">;</span>
+<a name="line115"></a>&nbsp;
+<a name="line116"></a>        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #000088;">$y</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strlen"><span style="color: #990000;">strlen</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span> <span style="color: #339933;">&lt;</span> <span style="color: #000088;">$y</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span><span style="color: #339933;">++</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line117"></a>            <span style="color: #000088;">$ord</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/ord"><span style="color: #990000;">ord</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$string</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$x</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>   
+<a name="line118"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line119"></a>&nbsp;
+<a name="line120"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;&lt;script type=<span style="color: #000099; font-weight: bold;">\&quot;</span>text/javascript<span style="color: #000099; font-weight: bold;">\&quot;</span> language=<span style="color: #000099; font-weight: bold;">\&quot;</span>javascript<span style="color: #000099; font-weight: bold;">\&quot;</span>&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line121"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;&lt;!--<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line122"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;{document.write(String.fromCharCode(&quot;</span><span style="color: #339933;">;</span>
+<a name="line123"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">.=</span> <a href="http://www.php.net/implode"><span style="color: #990000;">implode</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">','</span><span style="color: #339933;">,</span><span style="color: #000088;">$ord</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line124"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;))&quot;</span><span style="color: #339933;">;</span>
+<a name="line125"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;}<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line126"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;//--&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line127"></a>        <span style="color: #000088;">$_ret</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">&quot;&lt;/script&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line128"></a>&nbsp;
+<a name="line129"></a>        <span style="color: #b1b100;">return</span> <span style="color: #000088;">$_ret</span><span style="color: #339933;">;</span>
+<a name="line130"></a>&nbsp;
+<a name="line131"></a>&nbsp;
+<a name="line132"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$encode</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'hex'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line133"></a>&nbsp;
+<a name="line134"></a>        <a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'!^(.*)(\?.*)$!'</span><span style="color: #339933;">,</span><span style="color: #000088;">$address</span><span style="color: #339933;">,</span><span style="color: #000088;">$match</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line135"></a>        <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><a href="http://www.php.net/empty"><span style="color: #990000;">empty</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$match</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line136"></a>            <span style="color: #000088;">$smarty</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">trigger_error</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;mailto: hex encoding does not work with extra attributes. Try javascript.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line137"></a>            <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line138"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line139"></a>        <span style="color: #000088;">$address_encode</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line140"></a>        <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span> <span style="color: #339933;">&lt;</span> <a href="http://www.php.net/strlen"><span style="color: #990000;">strlen</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$address</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line141"></a>            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/preg_match"><span style="color: #990000;">preg_match</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'!\w!'</span><span style="color: #339933;">,</span><span style="color: #000088;">$address</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$x</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line142"></a>                <span style="color: #000088;">$address_encode</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'%'</span> <span style="color: #339933;">.</span> <a href="http://www.php.net/bin2hex"><span style="color: #990000;">bin2hex</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$address</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$x</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line143"></a>            <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line144"></a>                <span style="color: #000088;">$address_encode</span> <span style="color: #339933;">.=</span> <span style="color: #000088;">$address</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$x</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line145"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line146"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line147"></a>        <span style="color: #000088;">$text_encode</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line148"></a>        <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span> <span style="color: #339933;">&lt;</span> <a href="http://www.php.net/strlen"><span style="color: #990000;">strlen</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$text</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000088;">$x</span><span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line149"></a>            <span style="color: #000088;">$text_encode</span> <span style="color: #339933;">.=</span> <span style="color: #0000ff;">'&amp;#x'</span> <span style="color: #339933;">.</span> <a href="http://www.php.net/bin2hex"><span style="color: #990000;">bin2hex</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$text</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$x</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">';'</span><span style="color: #339933;">;</span>
+<a name="line150"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line151"></a>&nbsp;
+<a name="line152"></a>        <span style="color: #000088;">$mailto</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&quot;</span><span style="color: #339933;">;</span>
+<a name="line153"></a>        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'&lt;a href=&quot;'</span><span style="color: #339933;">.</span><span style="color: #000088;">$mailto</span><span style="color: #339933;">.</span><span style="color: #000088;">$address_encode</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&quot; '</span><span style="color: #339933;">.</span><span style="color: #000088;">$extra</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #000088;">$text_encode</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&lt;/a&gt;'</span><span style="color: #339933;">;</span>
+<a name="line154"></a>&nbsp;
+<a name="line155"></a>    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line156"></a>        <span style="color: #666666; font-style: italic;">// no encoding</span>
+<a name="line157"></a>        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'&lt;a href=&quot;mailto:'</span><span style="color: #339933;">.</span><span style="color: #000088;">$address</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&quot; '</span><span style="color: #339933;">.</span><span style="color: #000088;">$extra</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">.</span><span style="color: #000088;">$text</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&lt;/a&gt;'</span><span style="color: #339933;">;</span>
+<a name="line158"></a>&nbsp;
+<a name="line159"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line160"></a>&nbsp;
+<a name="line161"></a><span style="color: #009900;">&#125;</span>
+<a name="line162"></a>&nbsp;
+<a name="line163"></a><span style="color: #666666; font-style: italic;">/* vim: set expandtab: */</span>
+<a name="line164"></a>&nbsp;
+<a name="line165"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line166"></a>&nbsp;</pre>
+<div class="header">
+<h1>Smarty</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/plugins/function.mailto.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

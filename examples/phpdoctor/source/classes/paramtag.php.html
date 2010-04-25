@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:47 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>classes/paramTag.php (PHPDoctor)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/classes/paramtag.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>classes/paramTag.php</h1>
+<div class="comment" id="overview_description"><p>Represents a parameter tag.</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*
+<a name="line3"></a>PHPDoctor: The PHP Documentation Creator
+<a name="line4"></a>Copyright (C) 2004 Paul James &lt;paul@peej.co.uk&gt;
+<a name="line5"></a>&nbsp;
+<a name="line6"></a>This program is free software; you can redistribute it and/or modify
+<a name="line7"></a>it under the terms of the GNU General Public License as published by
+<a name="line8"></a>the Free Software Foundation; either version 2 of the License, or
+<a name="line9"></a>(at your option) any later version.
+<a name="line10"></a>&nbsp;
+<a name="line11"></a>This program is distributed in the hope that it will be useful,
+<a name="line12"></a>but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line13"></a>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line14"></a>GNU General Public License for more details.
+<a name="line15"></a>&nbsp;
+<a name="line16"></a>You should have received a copy of the GNU General Public License
+<a name="line17"></a>along with this program; if not, write to the Free Software
+<a name="line18"></a>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line19"></a>*/</span>
+<a name="line20"></a>&nbsp;
+<a name="line21"></a><span style="color: #009933; font-style: italic;">/** Represents a parameter tag.
+<a name="line22"></a> *
+<a name="line23"></a> * @package PHPDoctor\Tags
+<a name="line24"></a> */</span>
+<a name="line25"></a><span style="color: #000000; font-weight: bold;">class</span> ParamTag <span style="color: #000000; font-weight: bold;">extends</span> Tag
+<a name="line26"></a><span style="color: #009900;">&#123;</span>
+<a name="line27"></a>&nbsp;
+<a name="line28"></a>	<span style="color: #009933; font-style: italic;">/** The variable name of the parameter
+<a name="line29"></a>	 *
+<a name="line30"></a>	 * @var str
+<a name="line31"></a>	 */</span>
+<a name="line32"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_var</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<a name="line33"></a>&nbsp;
+<a name="line34"></a>	<span style="color: #009933; font-style: italic;">/**
+<a name="line35"></a>	 * Constructor
+<a name="line36"></a>	 *
+<a name="line37"></a>	 * @param str text The contents of the tag
+<a name="line38"></a>	 * @param str[] data Reference to doc comment data array
+<a name="line39"></a>	 * @param RootDoc root The root object
+<a name="line40"></a>	 */</span>
+<a name="line41"></a>	<span style="color: #000000; font-weight: bold;">function</span> paramTag<span style="color: #009900;">&#40;</span><span style="color: #000088;">$text</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$data</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$root</span><span style="color: #009900;">&#41;</span>
+<a name="line42"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line43"></a>		<span style="color: #000088;">$explode</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/preg_split"><span style="color: #990000;">preg_split</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/[ \t]+/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$text</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line44"></a>		<span style="color: #000088;">$type</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array_shift"><span style="color: #990000;">array_shift</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$explode</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line45"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$type</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line46"></a>			<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_var <span style="color: #339933;">=</span> <a href="http://www.php.net/trim"><span style="color: #990000;">trim</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/array_shift"><span style="color: #990000;">array_shift</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$explode</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'$'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line47"></a>			<span style="color: #000088;">$data</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'parameters'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_var<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'type'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$type</span><span style="color: #339933;">;</span>
+<a name="line48"></a>			<span style="color: #000088;">$text</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/join"><span style="color: #990000;">join</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">' '</span><span style="color: #339933;">,</span> <span style="color: #000088;">$explode</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line49"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line50"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$text</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">''</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line51"></a>			parent<span style="color: #339933;">::</span><span style="color: #004000;">tag</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'@param'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_var<span style="color: #339933;">.</span><span style="color: #0000ff;">' - '</span><span style="color: #339933;">.</span><span style="color: #000088;">$text</span><span style="color: #339933;">,</span> <span style="color: #000088;">$root</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line52"></a>		<span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line53"></a>			parent<span style="color: #339933;">::</span><span style="color: #004000;">tag</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'@param'</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">,</span> <span style="color: #000088;">$root</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line54"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line55"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line56"></a>&nbsp;
+<a name="line57"></a>	<span style="color: #009933; font-style: italic;">/** Get display name of this tag.
+<a name="line58"></a>	 *
+<a name="line59"></a>	 * @return str
+<a name="line60"></a>	 */</span>
+<a name="line61"></a>	<span style="color: #000000; font-weight: bold;">function</span> displayName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line62"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line63"></a>		<span style="color: #b1b100;">return</span> <span style="color: #0000ff;">'Parameters'</span><span style="color: #339933;">;</span>
+<a name="line64"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line65"></a>&nbsp;
+<a name="line66"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet is used in constructor documentation.
+<a name="line67"></a>     *
+<a name="line68"></a>     * @return bool
+<a name="line69"></a>     */</span>
+<a name="line70"></a>	<span style="color: #000000; font-weight: bold;">function</span> inConstructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line71"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line72"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #339933;">;</span>
+<a name="line73"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line74"></a>&nbsp;
+<a name="line75"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet is used in field documentation.
+<a name="line76"></a>     *
+<a name="line77"></a>     * @return bool
+<a name="line78"></a>     */</span>
+<a name="line79"></a>	<span style="color: #000000; font-weight: bold;">function</span> inField<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line80"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line81"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #339933;">;</span>
+<a name="line82"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line83"></a>&nbsp;
+<a name="line84"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet is used in method documentation.
+<a name="line85"></a>     *
+<a name="line86"></a>     * @return bool
+<a name="line87"></a>     */</span>
+<a name="line88"></a>	<span style="color: #000000; font-weight: bold;">function</span> inMethod<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line89"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line90"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #339933;">;</span>
+<a name="line91"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line92"></a>&nbsp;
+<a name="line93"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet is used in overview documentation.
+<a name="line94"></a>     *
+<a name="line95"></a>     * @return bool
+<a name="line96"></a>     */</span>
+<a name="line97"></a>	<span style="color: #000000; font-weight: bold;">function</span> inOverview<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line98"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line99"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #339933;">;</span>
+<a name="line100"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line101"></a>&nbsp;
+<a name="line102"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet is used in package documentation.
+<a name="line103"></a>     *
+<a name="line104"></a>     * @return bool
+<a name="line105"></a>     */</span>
+<a name="line106"></a>	<span style="color: #000000; font-weight: bold;">function</span> inPackage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line107"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line108"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #339933;">;</span>
+<a name="line109"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line110"></a>&nbsp;
+<a name="line111"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet is used in class or interface documentation.
+<a name="line112"></a>     *
+<a name="line113"></a>     * @return bool
+<a name="line114"></a>     */</span>
+<a name="line115"></a>	<span style="color: #000000; font-weight: bold;">function</span> inType<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line116"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line117"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #339933;">;</span>
+<a name="line118"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line119"></a>&nbsp;
+<a name="line120"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet is an inline tag.
+<a name="line121"></a>     *
+<a name="line122"></a>     * @return bool
+<a name="line123"></a>     */</span>
+<a name="line124"></a>	<span style="color: #000000; font-weight: bold;">function</span> isInlineTag<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line125"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line126"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #339933;">;</span>
+<a name="line127"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line128"></a>&nbsp;
+<a name="line129"></a>	<span style="color: #009933; font-style: italic;">/** Return true if this Taglet should be outputted even if it has no text content.
+<a name="line130"></a>     *
+<a name="line131"></a>     * @return bool
+<a name="line132"></a>     */</span>
+<a name="line133"></a>	<span style="color: #000000; font-weight: bold;">function</span> displayEmpty<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line134"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line135"></a>		<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #339933;">;</span>
+<a name="line136"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line137"></a>&nbsp;
+<a name="line138"></a><span style="color: #009900;">&#125;</span>
+<a name="line139"></a>&nbsp;
+<a name="line140"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line141"></a>&nbsp;</pre>
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/classes/paramtag.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:46 +0100">
 
 <link rel="stylesheet" type="text/css" href="../stylesheet.css">
 <link rel="start" href="../overview-summary.html">
@@ -21,6 +23,7 @@
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -37,11 +40,11 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 <hr>
 
 <div class="qualifiedName">PHPDoctor.RootDoc</div>
-<div class="location">/classes/rootDoc.php at line 31</div>
+<a href="../source/classes/rootdoc.php.html#line28" class="location">classes/rootDoc.php at line 28</a>
 
 <h1>Class RootDoc</h1>
 
-<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>  |<br>  +--<strong>RootDoc</strong><br /></pre>
+<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>    └─<strong>RootDoc</strong><br /></pre>
 
 <hr>
 
@@ -49,17 +52,11 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 </p>
 
-<div class="comment" id="overview_description"><p>
-This class holds the information from one run of PHPDoctor. Particularly
+<div class="comment" id="overview_description"><p>This class holds the information from one run of PHPDoctor. Particularly
 the packages, classes and options specified by the user. It is the root
 of the parsed tokens and is passed to the doclet to be formatted into
-output.
-</p></div>
+output.</p></div>
 
-<dl>
-<dt>Version:</dt>
-<dd>$Revision: 1.11 $</dd>
-</dl>
 <hr>
 
 <table class="inherit">
@@ -69,9 +66,7 @@ output.
 <table id="summary_constr">
 <tr><th colspan="2">Constructor Summary</th></tr>
 <tr>
-<td class="description"><p class="name"><a href="#rootDoc()">rootDoc</a>(<a href="../phpdoctor/phpdoctor.html">PHPDoctor</a> phpdoctor)</p><p class="description">
-Constructor
-</p></td>
+<td class="description"><p class="name"><a href="#rootDoc()">rootDoc</a>(<a href="../phpdoctor/phpdoctor.html">PHPDoctor</a> phpdoctor)</p><p class="description">Constructor</p></td>
 </tr>
 </table>
 
@@ -79,49 +74,47 @@ Constructor
 <tr><th colspan="2">Method Summary</th></tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addPackage()">addPackage</a>(<a href="../phpdoctor/packagedoc.html">PackageDoc</a> package)</p><p class="description">
-Add a package to this root.</p></td>
+<td class="description"><p class="name"><a href="#addPackage()">addPackage</a>(<a href="../phpdoctor/packagedoc.html">PackageDoc</a> package)</p><p class="description">Add a package to this root.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#addSource()">addSource</a>(str filename, str source, str fileData)</p><p class="description">Add a source file to this root.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc</a></td>
-<td class="description"><p class="name"><a href="#classNamed()">classNamed</a>(str name)</p><p class="description">
-Return a reference to a classDoc for the specified class/interface name
-</p></td>
+<td class="description"><p class="name"><a href="#classNamed()">classNamed</a>(str name)</p><p class="description">Return a reference to a classDoc for the specified class/interface name</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc[]</a></td>
-<td class="description"><p class="name"><a href="#classes()">classes</a>()</p><p class="description">
-Return a reference to the classes and interfaces to be documented.</p></td>
+<td class="description"><p class="name"><a href="#classes()">classes</a>()</p><p class="description">Return a reference to the classes and interfaces to be documented.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/methoddoc.html">MethodDoc[]</a></td>
-<td class="description"><p class="name"><a href="#functions()">functions</a>()</p><p class="description">
-Return a reference to the functions to be documented.</p></td>
+<td class="description"><p class="name"><a href="#functions()">functions</a>()</p><p class="description">Return a reference to the functions to be documented.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/fielddoc.html">FieldDoc[]</a></td>
-<td class="description"><p class="name"><a href="#globals()">globals</a>()</p><p class="description">
-Return a reference to the globals to be documented.</p></td>
+<td class="description"><p class="name"><a href="#globals()">globals</a>()</p><p class="description">Return a reference to the globals to be documented.</p></td>
 </tr>
 <tr>
 <td class="type"> str[]</td>
-<td class="description"><p class="name"><a href="#options()">options</a>()</p><p class="description">
-Return a reference to the set options.</p></td>
+<td class="description"><p class="name"><a href="#options()">options</a>()</p><p class="description">Return a reference to the set options.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/packagedoc.html">PackageDoc</a></td>
-<td class="description"><p class="name"><a href="#packageNamed()">packageNamed</a>(str name, bool create)</p><p class="description">
-Return a reference to a packageDoc for the specified package name. </p></td>
+<td class="description"><p class="name"><a href="#packageNamed()">packageNamed</a>(str name, bool create)</p><p class="description">Return a reference to a packageDoc for the specified package name. </p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/packagedoc.html">PackageDoc[]</a></td>
-<td class="description"><p class="name"><a href="#packages()">packages</a>()</p><p class="description">
-Return a reference to the packages to be documented.</p></td>
+<td class="description"><p class="name"><a href="#packages()">packages</a>()</p><p class="description">Return a reference to the packages to be documented.</p></td>
 </tr>
 <tr>
 <td class="type"> PHPDoctor.</td>
-<td class="description"><p class="name"><a href="#phpdoctor()">phpdoctor</a>()</p><p class="description">
-Return a reference to the PHPDoctor application object.</p></td>
+<td class="description"><p class="name"><a href="#phpdoctor()">phpdoctor</a>()</p><p class="description">Return a reference to the PHPDoctor application object.</p></td>
+</tr>
+<tr>
+<td class="type"> str[]</td>
+<td class="description"><p class="name"><a href="#sources()">sources</a>()</p><p class="description">Return a reference to the source files to be documented.</p></td>
 </tr>
 </table>
 
@@ -130,13 +123,12 @@ Return a reference to the PHPDoctor application object.</p></td>
 <tr><td><a href="../phpdoctor/doc.html#getHTMLContents()">getHTMLContents</a>, <a href="../phpdoctor/doc.html#getRawCommentText()">getRawCommentText</a>, <a href="../phpdoctor/doc.html#isClass()">isClass</a>, <a href="../phpdoctor/doc.html#isConstructor()">isConstructor</a>, <a href="../phpdoctor/doc.html#isException()">isException</a>, <a href="../phpdoctor/doc.html#isField()">isField</a>, <a href="../phpdoctor/doc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/doc.html#isFunction()">isFunction</a>, <a href="../phpdoctor/doc.html#isGlobal()">isGlobal</a>, <a href="../phpdoctor/doc.html#isInterface()">isInterface</a>, <a href="../phpdoctor/doc.html#isMethod()">isMethod</a>, <a href="../phpdoctor/doc.html#isOrdinaryClass()">isOrdinaryClass</a>, <a href="../phpdoctor/doc.html#mergeData()">mergeData</a>, <a href="../phpdoctor/doc.html#name()">name</a>, <a href="../phpdoctor/doc.html#set()">set</a>, <a href="../phpdoctor/doc.html#setByRef()">setByRef</a>, <a href="../phpdoctor/doc.html#setTag()">setTag</a>, <a href="../phpdoctor/doc.html#tags()">tags</a></td></tr></table>
 
 <h2 id="detail_constr">Constructor Detail</h2>
-<div class="location">/classes/rootDoc.php at line 50</div>
+<a href="../source/classes/rootdoc.php.html#line53" class="location">classes/rootDoc.php at line 53</a>
+
 <h3 id="rootDoc()">rootDoc</h3>
 <code class="signature">public <strong>rootDoc</strong>(<a href="../phpdoctor/phpdoctor.html">PHPDoctor</a> phpdoctor)</code>
 <div class="details">
-<p>
-Constructor
-</p><dl>
+<p>Constructor</p><dl>
 <dt>Parameters:</dt>
 <dd>phpdoctor - Application object</dd>
 </dl>
@@ -145,23 +137,30 @@ Constructor
 <hr>
 
 <h2 id="detail_method">Method Detail</h2>
-<div class="location">/classes/rootDoc.php at line 76</div>
+<a href="../source/classes/rootdoc.php.html#line79" class="location">classes/rootDoc.php at line 79</a>
+
 <h3 id="addPackage()">addPackage</h3>
 <code class="signature">public  void <strong>addPackage</strong>(<a href="../phpdoctor/packagedoc.html">PackageDoc</a> package)</code>
 <div class="details">
-<p>
-Add a package to this root.
-</p></div>
+<p>Add a package to this root.</p></div>
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 193</div>
+<a href="../source/classes/rootdoc.php.html#line90" class="location">classes/rootDoc.php at line 90</a>
+
+<h3 id="addSource()">addSource</h3>
+<code class="signature">public  void <strong>addSource</strong>(str filename, str source, str fileData)</code>
+<div class="details">
+<p>Add a source file to this root.</p></div>
+
+<hr>
+
+<a href="../source/classes/rootdoc.php.html#line218" class="location">classes/rootDoc.php at line 218</a>
+
 <h3 id="classNamed()">classNamed</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc</a> <strong>classNamed</strong>(str name)</code>
 <div class="details">
-<p>
-Return a reference to a classDoc for the specified class/interface name
-</p><dl>
+<p>Return a reference to a classDoc for the specified class/interface name</p><dl>
 <dt>Parameters:</dt>
 <dd>name - Class name</dd>
 </dl>
@@ -169,43 +168,39 @@ Return a reference to a classDoc for the specified class/interface name
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 112</div>
+<a href="../source/classes/rootdoc.php.html#line137" class="location">classes/rootDoc.php at line 137</a>
+
 <h3 id="classes()">classes</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc[]</a> <strong>classes</strong>()</code>
 <div class="details">
-<p>
-Return a reference to the classes and interfaces to be documented.
-</p></div>
+<p>Return a reference to the classes and interfaces to be documented.</p></div>
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 132</div>
+<a href="../source/classes/rootdoc.php.html#line157" class="location">classes/rootDoc.php at line 157</a>
+
 <h3 id="functions()">functions</h3>
 <code class="signature">public  <a href="../phpdoctor/methoddoc.html">MethodDoc[]</a> <strong>functions</strong>()</code>
 <div class="details">
-<p>
-Return a reference to the functions to be documented.
-</p></div>
+<p>Return a reference to the functions to be documented.</p></div>
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 151</div>
+<a href="../source/classes/rootdoc.php.html#line176" class="location">classes/rootDoc.php at line 176</a>
+
 <h3 id="globals()">globals</h3>
 <code class="signature">public  <a href="../phpdoctor/fielddoc.html">FieldDoc[]</a> <strong>globals</strong>()</code>
 <div class="details">
-<p>
-Return a reference to the globals to be documented.
-</p></div>
+<p>Return a reference to the globals to be documented.</p></div>
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 94</div>
+<a href="../source/classes/rootdoc.php.html#line110" class="location">classes/rootDoc.php at line 110</a>
+
 <h3 id="options()">options</h3>
 <code class="signature">public  str[] <strong>options</strong>()</code>
 <div class="details">
-<p>
-Return a reference to the set options.
-</p><dl>
+<p>Return a reference to the set options.</p><dl>
 <dt>Returns:</dt>
 <dd>An array of strings.</dd>
 </dl>
@@ -213,15 +208,14 @@ Return a reference to the set options.
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 175</div>
+<a href="../source/classes/rootdoc.php.html#line200" class="location">classes/rootDoc.php at line 200</a>
+
 <h3 id="packageNamed()">packageNamed</h3>
 <code class="signature">public  <a href="../phpdoctor/packagedoc.html">PackageDoc</a> <strong>packageNamed</strong>(str name, bool create)</code>
 <div class="details">
-<p>
-Return a reference to a packageDoc for the specified package name. If a
+<p>Return a reference to a packageDoc for the specified package name. If a
 package of the requested name does not exist, this method will create the
-package object, add it to the root and return it.
-</p><dl>
+package object, add it to the root and return it.</p><dl>
 <dt>Parameters:</dt>
 <dd>name - Package name</dd>
 <dd>create - Create package if it does not exist</dd>
@@ -230,23 +224,30 @@ package object, add it to the root and return it.
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 103</div>
+<a href="../source/classes/rootdoc.php.html#line119" class="location">classes/rootDoc.php at line 119</a>
+
 <h3 id="packages()">packages</h3>
 <code class="signature">public  <a href="../phpdoctor/packagedoc.html">PackageDoc[]</a> <strong>packages</strong>()</code>
 <div class="details">
-<p>
-Return a reference to the packages to be documented.
-</p></div>
+<p>Return a reference to the packages to be documented.</p></div>
 
 <hr>
 
-<div class="location">/classes/rootDoc.php at line 85</div>
+<a href="../source/classes/rootdoc.php.html#line101" class="location">classes/rootDoc.php at line 101</a>
+
 <h3 id="phpdoctor()">phpdoctor</h3>
 <code class="signature">public  PHPDoctor. <strong>phpdoctor</strong>()</code>
 <div class="details">
-<p>
-Return a reference to the PHPDoctor application object.
-</p></div>
+<p>Return a reference to the PHPDoctor application object.</p></div>
+
+<hr>
+
+<a href="../source/classes/rootdoc.php.html#line128" class="location">classes/rootDoc.php at line 128</a>
+
+<h3 id="sources()">sources</h3>
+<code class="signature">public  str[] <strong>sources</strong>()</code>
+<div class="details">
+<p>Return a reference to the source files to be documented.</p></div>
 
 <hr>
 
@@ -257,6 +258,7 @@ Return a reference to the PHPDoctor application object.
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -272,7 +274,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

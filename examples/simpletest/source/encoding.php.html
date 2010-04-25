@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:06 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>encoding.php (SimpleTest)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/encoding.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>encoding.php</h1>
+<div class="comment" id="overview_description"><p>base include file for SimpleTest</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a>     *	base include file for SimpleTest
+<a name="line4"></a>     *	@package	SimpleTest
+<a name="line5"></a>     *	@subpackage	WebTester
+<a name="line6"></a>     *	@version	$Id: encoding.php,v 1.6 2005/01/02 23:43:23 lastcraft Exp $
+<a name="line7"></a>     */</span>
+<a name="line8"></a>&nbsp;
+<a name="line9"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line10"></a>     *    Bundle of GET/POST parameters. Can include
+<a name="line11"></a>     *    repeated parameters.
+<a name="line12"></a>	 *    @package SimpleTest
+<a name="line13"></a>	 *    @subpackage WebTester
+<a name="line14"></a>     */</span>
+<a name="line15"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleFormEncoding <span style="color: #009900;">&#123;</span>
+<a name="line16"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_request</span><span style="color: #339933;">;</span>
+<a name="line17"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_x</span><span style="color: #339933;">;</span>
+<a name="line18"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_y</span><span style="color: #339933;">;</span>
+<a name="line19"></a>&nbsp;
+<a name="line20"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line21"></a>         *    Starts empty.
+<a name="line22"></a>         *    @param array $query/SimpleQueryString  Hash of parameters.
+<a name="line23"></a>         *                                           Multiple values are
+<a name="line24"></a>         *                                           as lists on a single key.
+<a name="line25"></a>         *    @access public
+<a name="line26"></a>         */</span>
+<a name="line27"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleFormEncoding<span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line28"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$query</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line29"></a>                <span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line30"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line31"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line32"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setCoordinates</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line33"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">merge</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line34"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line35"></a>&nbsp;
+<a name="line36"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line37"></a>         *    Adds a parameter to the query.
+<a name="line38"></a>         *    @param string $key            Key to add value to.
+<a name="line39"></a>         *    @param string/array $value    New data.
+<a name="line40"></a>         *    @access public
+<a name="line41"></a>         */</span>
+<a name="line42"></a>        <span style="color: #000000; font-weight: bold;">function</span> add<span style="color: #009900;">&#40;</span><span style="color: #000088;">$key</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line43"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$value</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line44"></a>                <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line45"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line46"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line47"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line48"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line49"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line50"></a>                <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$value</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$item</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line51"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$item</span><span style="color: #339933;">;</span>
+<a name="line52"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line53"></a>            <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line54"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$value</span><span style="color: #339933;">;</span>
+<a name="line55"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line56"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line57"></a>&nbsp;
+<a name="line58"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line59"></a>         *    Adds a set of parameters to this query.
+<a name="line60"></a>         *    @param array/SimpleQueryString $query  Multiple values are
+<a name="line61"></a>         *                                           as lists on a single key.
+<a name="line62"></a>         *    @access public
+<a name="line63"></a>         */</span>
+<a name="line64"></a>        <span style="color: #000000; font-weight: bold;">function</span> merge<span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line65"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_object"><span style="color: #990000;">is_object</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line66"></a>                <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getKeys</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$key</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line67"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$key</span><span style="color: #339933;">,</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getValue</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line68"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line69"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getX</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line70"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setCoordinates</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getX</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getY</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line71"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line72"></a>            <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line73"></a>                <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$query</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$key</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line74"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$key</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line75"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line76"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line77"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line78"></a>&nbsp;
+<a name="line79"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line80"></a>         *    Sets image coordinates. Set to false to clear
+<a name="line81"></a>         *    them.
+<a name="line82"></a>         *    @param integer $x    Horizontal position.
+<a name="line83"></a>         *    @param integer $y    Vertical position.
+<a name="line84"></a>         *    @access public
+<a name="line85"></a>         */</span>
+<a name="line86"></a>        <span style="color: #000000; font-weight: bold;">function</span> setCoordinates<span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span> <span style="color: #000088;">$y</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line87"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$x</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$y</span> <span style="color: #339933;">===</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line88"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_x <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_y <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line89"></a>                <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+<a name="line90"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line91"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_x <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>integer<span style="color: #009900;">&#41;</span><span style="color: #000088;">$x</span><span style="color: #339933;">;</span>
+<a name="line92"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_y <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>integer<span style="color: #009900;">&#41;</span><span style="color: #000088;">$y</span><span style="color: #339933;">;</span>
+<a name="line93"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line94"></a>&nbsp;
+<a name="line95"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line96"></a>         *    Accessor for horizontal image coordinate.
+<a name="line97"></a>         *    @return integer        X value.
+<a name="line98"></a>         *    @access public
+<a name="line99"></a>         */</span>
+<a name="line100"></a>        <span style="color: #000000; font-weight: bold;">function</span> getX<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line101"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_x<span style="color: #339933;">;</span>
+<a name="line102"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line103"></a>&nbsp;
+<a name="line104"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line105"></a>         *    Accessor for vertical image coordinate.
+<a name="line106"></a>         *    @return integer        Y value.
+<a name="line107"></a>         *    @access public
+<a name="line108"></a>         */</span>
+<a name="line109"></a>        <span style="color: #000000; font-weight: bold;">function</span> getY<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line110"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_y<span style="color: #339933;">;</span>
+<a name="line111"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line112"></a>&nbsp;
+<a name="line113"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line114"></a>         *    Accessor for single value.
+<a name="line115"></a>         *    @return string/array    False if missing, string
+<a name="line116"></a>         *                            if present and array if
+<a name="line117"></a>         *                            multiple entries.
+<a name="line118"></a>         *    @access public
+<a name="line119"></a>         */</span>
+<a name="line120"></a>        <span style="color: #000000; font-weight: bold;">function</span> getValue<span style="color: #009900;">&#40;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line121"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line122"></a>                <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line123"></a>            <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">elseif</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line124"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line125"></a>            <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line126"></a>                <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#91;</span><span style="color: #000088;">$key</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line127"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line128"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line129"></a>&nbsp;
+<a name="line130"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line131"></a>         *    Accessor for key list.
+<a name="line132"></a>         *    @return array        List of keys present.
+<a name="line133"></a>         *    @access public
+<a name="line134"></a>         */</span>
+<a name="line135"></a>        <span style="color: #000000; font-weight: bold;">function</span> getKeys<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line136"></a>            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array_keys"><span style="color: #990000;">array_keys</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line137"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line138"></a>&nbsp;
+<a name="line139"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line140"></a>         *    Renders the query string as a URL encoded
+<a name="line141"></a>         *    request part.
+<a name="line142"></a>         *    @return string        Part of URL.
+<a name="line143"></a>         *    @access public
+<a name="line144"></a>         */</span>
+<a name="line145"></a>        <span style="color: #000000; font-weight: bold;">function</span> asString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line146"></a>            <span style="color: #000088;">$statements</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line147"></a>            <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_request <span style="color: #b1b100;">as</span> <span style="color: #000088;">$key</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$values</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line148"></a>                <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$values</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line149"></a>                    <span style="color: #000088;">$statements</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;<span style="color: #006699; font-weight: bold;">$key</span>=&quot;</span> <span style="color: #339933;">.</span> <a href="http://www.php.net/urlencode"><span style="color: #990000;">urlencode</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$value</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line150"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line151"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line152"></a>            <span style="color: #000088;">$coords</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_x <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span> ? <span style="color: #0000ff;">'?'</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_x <span style="color: #339933;">.</span> <span style="color: #0000ff;">','</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_y <span style="color: #339933;">:</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">;</span>
+<a name="line153"></a>            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/implode"><span style="color: #990000;">implode</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'&amp;'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$statements</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #000088;">$coords</span><span style="color: #339933;">;</span>
+<a name="line154"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line155"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line156"></a><span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/encoding.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

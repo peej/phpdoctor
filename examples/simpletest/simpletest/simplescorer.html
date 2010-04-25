@@ -1,0 +1,445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>SimpleScorer (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplescorer.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\SimpleScorer</div>
+<a href="../source/scorer.php.html#line17" class="location">scorer.php at line 17</a>
+
+<h1>Class SimpleScorer</h1>
+
+<pre class="tree"><strong>SimpleScorer</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public abstract  class <strong>SimpleScorer</strong></p>
+
+<div class="comment" id="overview_description"><p>Can recieve test events and display them. Display
+is achieved by making display methods available
+and visiting the incoming event.</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>UnitTester</dd>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#SimpleScorer()">SimpleScorer</a>()</p><p class="description">Starts the test run with no results.</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#getExceptionCount()">getExceptionCount</a>()</p><p class="description">Accessor for the number of untrapped errors
+so far.</p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#getFailCount()">getFailCount</a>()</p><p class="description">Accessor for the number of fails so far.</p></td>
+</tr>
+<tr>
+<td class="type"> integer</td>
+<td class="description"><p class="name"><a href="#getPassCount()">getPassCount</a>()</p><p class="description">Accessor for the number of passes so far.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#getStatus()">getStatus</a>()</p><p class="description">Accessor for current status. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#makeDry()">makeDry</a>(mixed is_dry)</p><p class="description">Signals that the next evaluation will be a dry
+run. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintCaseEnd()">paintCaseEnd</a>(string test_name)</p><p class="description">Paints the end of a test case.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintCaseStart()">paintCaseStart</a>(string test_name)</p><p class="description">Paints the start of a test case.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintError()">paintError</a>(string message)</p><p class="description">Deals with PHP 4 throwing an error.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintException()">paintException</a>(Exception exception)</p><p class="description">Deals with PHP 5 throwing an exception
+This isn't really implemented yet.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintFail()">paintFail</a>(string message)</p><p class="description">Increments the fail count.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintFormattedMessage()">paintFormattedMessage</a>(string message)</p><p class="description">Paints a formatted ASCII message such as a
+variable dump.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintGroupEnd()">paintGroupEnd</a>(string test_name)</p><p class="description">Paints the end of a group test.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintGroupStart()">paintGroupStart</a>(string test_name, integer size)</p><p class="description">Paints the start of a group test.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintMessage()">paintMessage</a>(string message)</p><p class="description">Paints a simple supplementary message.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintMethodEnd()">paintMethodEnd</a>(string test_name)</p><p class="description">Paints the end of a test method.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintMethodStart()">paintMethodStart</a>(string test_name)</p><p class="description">Paints the start of a test method.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintPass()">paintPass</a>(string message)</p><p class="description">Increments the pass count.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#paintSignal()">paintSignal</a>(string type, mixed payload)</p><p class="description">By default just ignores user generated events.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#shouldInvoke()">shouldInvoke</a>(string test_case_name, string method)</p><p class="description">The reporter has a veto on what should be run.</p></td>
+</tr>
+</table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/scorer.php.html#line27" class="location">scorer.php at line 27</a>
+
+<h3 id="SimpleScorer()">SimpleScorer</h3>
+<code class="signature">public <strong>SimpleScorer</strong>()</code>
+<div class="details">
+<p>Starts the test run with no results.</p></div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/scorer.php.html#line178" class="location">scorer.php at line 178</a>
+
+<h3 id="getExceptionCount()">getExceptionCount</h3>
+<code class="signature">public  integer <strong>getExceptionCount</strong>()</code>
+<div class="details">
+<p>Accessor for the number of untrapped errors
+so far.</p><dl>
+<dt>Returns:</dt>
+<dd>Number of exceptions.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line168" class="location">scorer.php at line 168</a>
+
+<h3 id="getFailCount()">getFailCount</h3>
+<code class="signature">public  integer <strong>getFailCount</strong>()</code>
+<div class="details">
+<p>Accessor for the number of fails so far.</p><dl>
+<dt>Returns:</dt>
+<dd>Number of fails.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line159" class="location">scorer.php at line 159</a>
+
+<h3 id="getPassCount()">getPassCount</h3>
+<code class="signature">public  integer <strong>getPassCount</strong>()</code>
+<div class="details">
+<p>Accessor for the number of passes so far.</p><dl>
+<dt>Returns:</dt>
+<dd>Number of passes.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line60" class="location">scorer.php at line 60</a>
+
+<h3 id="getStatus()">getStatus</h3>
+<code class="signature">public  boolean <strong>getStatus</strong>()</code>
+<div class="details">
+<p>Accessor for current status. Will be false
+if there have been any failures or exceptions.
+Used for command line tools.</p><dl>
+<dt>Returns:</dt>
+<dd>True if no failures.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line39" class="location">scorer.php at line 39</a>
+
+<h3 id="makeDry()">makeDry</h3>
+<code class="signature">public  void <strong>makeDry</strong>(mixed is_dry)</code>
+<div class="details">
+<p>Signals that the next evaluation will be a dry
+run. That is, the structure events will be
+recorded, but no tests will be run.</p></div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line96" class="location">scorer.php at line 96</a>
+
+<h3 id="paintCaseEnd()">paintCaseEnd</h3>
+<code class="signature">public  void <strong>paintCaseEnd</strong>(string test_name)</code>
+<div class="details">
+<p>Paints the end of a test case.</p><dl>
+<dt>Parameters:</dt>
+<dd>test_name - Name of test or other label.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line88" class="location">scorer.php at line 88</a>
+
+<h3 id="paintCaseStart()">paintCaseStart</h3>
+<code class="signature">public  void <strong>paintCaseStart</strong>(string test_name)</code>
+<div class="details">
+<p>Paints the start of a test case.</p><dl>
+<dt>Parameters:</dt>
+<dd>test_name - Name of test or other label.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line140" class="location">scorer.php at line 140</a>
+
+<h3 id="paintError()">paintError</h3>
+<code class="signature">public  void <strong>paintError</strong>(string message)</code>
+<div class="details">
+<p>Deals with PHP 4 throwing an error.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Text of error formatted by the test case.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line150" class="location">scorer.php at line 150</a>
+
+<h3 id="paintException()">paintException</h3>
+<code class="signature">public  void <strong>paintException</strong>(Exception exception)</code>
+<div class="details">
+<p>Deals with PHP 5 throwing an exception
+This isn't really implemented yet.</p><dl>
+<dt>Parameters:</dt>
+<dd>exception - Object thrown.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line130" class="location">scorer.php at line 130</a>
+
+<h3 id="paintFail()">paintFail</h3>
+<code class="signature">public  void <strong>paintFail</strong>(string message)</code>
+<div class="details">
+<p>Increments the fail count.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Message is ignored.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line196" class="location">scorer.php at line 196</a>
+
+<h3 id="paintFormattedMessage()">paintFormattedMessage</h3>
+<code class="signature">public  void <strong>paintFormattedMessage</strong>(string message)</code>
+<div class="details">
+<p>Paints a formatted ASCII message such as a
+variable dump.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Text to display.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line113" class="location">scorer.php at line 113</a>
+
+<h3 id="paintGroupEnd()">paintGroupEnd</h3>
+<code class="signature">public  void <strong>paintGroupEnd</strong>(string test_name)</code>
+<div class="details">
+<p>Paints the end of a group test.</p><dl>
+<dt>Parameters:</dt>
+<dd>test_name - Name of test or other label.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line105" class="location">scorer.php at line 105</a>
+
+<h3 id="paintGroupStart()">paintGroupStart</h3>
+<code class="signature">public  void <strong>paintGroupStart</strong>(string test_name, integer size)</code>
+<div class="details">
+<p>Paints the start of a group test.</p><dl>
+<dt>Parameters:</dt>
+<dd>test_name - Name of test or other label.</dd>
+<dd>size - Number of test cases starting.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line187" class="location">scorer.php at line 187</a>
+
+<h3 id="paintMessage()">paintMessage</h3>
+<code class="signature">public  void <strong>paintMessage</strong>(string message)</code>
+<div class="details">
+<p>Paints a simple supplementary message.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Text to display.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line80" class="location">scorer.php at line 80</a>
+
+<h3 id="paintMethodEnd()">paintMethodEnd</h3>
+<code class="signature">public  void <strong>paintMethodEnd</strong>(string test_name)</code>
+<div class="details">
+<p>Paints the end of a test method.</p><dl>
+<dt>Parameters:</dt>
+<dd>test_name - Name of test or other label.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line72" class="location">scorer.php at line 72</a>
+
+<h3 id="paintMethodStart()">paintMethodStart</h3>
+<code class="signature">public  void <strong>paintMethodStart</strong>(string test_name)</code>
+<div class="details">
+<p>Paints the start of a test method.</p><dl>
+<dt>Parameters:</dt>
+<dd>test_name - Name of test or other label.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line121" class="location">scorer.php at line 121</a>
+
+<h3 id="paintPass()">paintPass</h3>
+<code class="signature">public  void <strong>paintPass</strong>(string message)</code>
+<div class="details">
+<p>Increments the pass count.</p><dl>
+<dt>Parameters:</dt>
+<dd>message - Message is ignored.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line205" class="location">scorer.php at line 205</a>
+
+<h3 id="paintSignal()">paintSignal</h3>
+<code class="signature">public  void <strong>paintSignal</strong>(string type, mixed payload)</code>
+<div class="details">
+<p>By default just ignores user generated events.</p><dl>
+<dt>Parameters:</dt>
+<dd>type - Event type as text.</dd>
+<dd>payload - Message or object.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/scorer.php.html#line49" class="location">scorer.php at line 49</a>
+
+<h3 id="shouldInvoke()">shouldInvoke</h3>
+<code class="signature">public  void <strong>shouldInvoke</strong>(string test_case_name, string method)</code>
+<div class="details">
+<p>The reporter has a veto on what should be run.</p><dl>
+<dt>Parameters:</dt>
+<dd>test_case_name - name of test case.</dd>
+<dd>method - Name of test method.</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplescorer.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

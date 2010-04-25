@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>SimpleCookie (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplecookie.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\SimpleCookie</div>
+<a href="../source/http.php.html#line24" class="location">http.php at line 24</a>
+
+<h1>Class SimpleCookie</h1>
+
+<pre class="tree"><strong>SimpleCookie</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>SimpleCookie</strong></p>
+
+<div class="comment" id="overview_description"><p>Cookie data holder. Cookie rules are full of pretty
+arbitary stuff. I have used...
+http://wp.netscape.com/newsref/std/cookie_spec.html
+http://www.cookiecentral.com/faq</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>WebTester</dd>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#SimpleCookie()">SimpleCookie</a>(string name, string value, string path, string expiry, boolean is_secure)</p><p class="description">Constructor. </p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#agePrematurely()">agePrematurely</a>(integer interval)</p><p class="description">Ages the cookie by the specified number of
+seconds.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getExpiry()">getExpiry</a>()</p><p class="description">Accessor for expiry.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getHost()">getHost</a>()</p><p class="description">Accessor for the truncated host to which this
+cookie applies.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getName()">getName</a>()</p><p class="description">Accessor for name.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getPath()">getPath</a>()</p><p class="description">Accessor for path.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getValue()">getValue</a>()</p><p class="description">Accessor for value. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#isExpired()">isExpired</a>(integer/string now)</p><p class="description">Test to see if cookie is expired against
+the cookie format time or timestamp.
+</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#isSecure()">isSecure</a>()</p><p class="description">Accessor for the secure flag.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#isValidHost()">isValidHost</a>(string host)</p><p class="description">Test for a cookie being valid for a host name.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#isValidPath()">isValidPath</a>(string path)</p><p class="description">Tests a path to see if the cookie applies
+there. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#setHost()">setHost</a>(string host)</p><p class="description">Sets the host. </p></td>
+</tr>
+</table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/http.php.html#line40" class="location">http.php at line 40</a>
+
+<h3 id="SimpleCookie()">SimpleCookie</h3>
+<code class="signature">public <strong>SimpleCookie</strong>(string name, string value, string path, string expiry, boolean is_secure)</code>
+<div class="details">
+<p>Constructor. Sets the stored values.</p><dl>
+<dt>Parameters:</dt>
+<dd>name - Cookie key.</dd>
+<dd>value - Value of cookie.</dd>
+<dd>path - Cookie path if not host wide.</dd>
+<dd>expiry - Expiry date as string.</dd>
+<dd>is_secure - Currently ignored.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/http.php.html#line191" class="location">http.php at line 191</a>
+
+<h3 id="agePrematurely()">agePrematurely</h3>
+<code class="signature">public  void <strong>agePrematurely</strong>(integer interval)</code>
+<div class="details">
+<p>Ages the cookie by the specified number of
+seconds.</p><dl>
+<dt>Parameters:</dt>
+<dd>interval - In seconds.</dd>
+<dt>Public.</dt>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line157" class="location">http.php at line 157</a>
+
+<h3 id="getExpiry()">getExpiry</h3>
+<code class="signature">public  string <strong>getExpiry</strong>()</code>
+<div class="details">
+<p>Accessor for expiry.</p><dl>
+<dt>Returns:</dt>
+<dd>Expiry string.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line78" class="location">http.php at line 78</a>
+
+<h3 id="getHost()">getHost</h3>
+<code class="signature">public  string <strong>getHost</strong>()</code>
+<div class="details">
+<p>Accessor for the truncated host to which this
+cookie applies.</p><dl>
+<dt>Returns:</dt>
+<dd>Truncated hostname.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line114" class="location">http.php at line 114</a>
+
+<h3 id="getName()">getName</h3>
+<code class="signature">public  string <strong>getName</strong>()</code>
+<div class="details">
+<p>Accessor for name.</p><dl>
+<dt>Returns:</dt>
+<dd>Cookie key.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line133" class="location">http.php at line 133</a>
+
+<h3 id="getPath()">getPath</h3>
+<code class="signature">public  string <strong>getPath</strong>()</code>
+<div class="details">
+<p>Accessor for path.</p><dl>
+<dt>Returns:</dt>
+<dd>Valid cookie path.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line124" class="location">http.php at line 124</a>
+
+<h3 id="getValue()">getValue</h3>
+<code class="signature">public  string <strong>getValue</strong>()</code>
+<div class="details">
+<p>Accessor for value. A deleted cookie will
+have an empty string for this.</p><dl>
+<dt>Returns:</dt>
+<dd>Cookie value.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line175" class="location">http.php at line 175</a>
+
+<h3 id="isExpired()">isExpired</h3>
+<code class="signature">public  void <strong>isExpired</strong>(integer/string now)</code>
+<div class="details">
+<p>Test to see if cookie is expired against
+the cookie format time or timestamp.
+Will give true for a session cookie.</p><dl>
+<dt>Parameters:</dt>
+<dd>now - Time to test against. Result will be false if this time is later than the cookie expiry. Can be either a timestamp integer or a cookie format date.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line202" class="location">http.php at line 202</a>
+
+<h3 id="isSecure()">isSecure</h3>
+<code class="signature">public  boolean <strong>isSecure</strong>()</code>
+<div class="details">
+<p>Accessor for the secure flag.</p><dl>
+<dt>Returns:</dt>
+<dd>True if cookie needs SSL.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line88" class="location">http.php at line 88</a>
+
+<h3 id="isValidHost()">isValidHost</h3>
+<code class="signature">public  boolean <strong>isValidHost</strong>(string host)</code>
+<div class="details">
+<p>Test for a cookie being valid for a host name.</p><dl>
+<dt>Parameters:</dt>
+<dd>host - Host to test against.</dd>
+<dt>Returns:</dt>
+<dd>True if the cookie would be valid here.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line145" class="location">http.php at line 145</a>
+
+<h3 id="isValidPath()">isValidPath</h3>
+<code class="signature">public  boolean <strong>isValidPath</strong>(string path)</code>
+<div class="details">
+<p>Tests a path to see if the cookie applies
+there. The test path must be longer or
+equal to the cookie path.</p><dl>
+<dt>Parameters:</dt>
+<dd>path - Path to test against.</dd>
+<dt>Returns:</dt>
+<dd>True if cookie valid here.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/http.php.html#line64" class="location">http.php at line 64</a>
+
+<h3 id="setHost()">setHost</h3>
+<code class="signature">public  boolean <strong>setHost</strong>(string host)</code>
+<div class="details">
+<p>Sets the host. The cookie rules determine
+that the first two parts are taken for
+certain TLDs and three for others. If the
+new host does not match these rules then the
+call will fail.</p><dl>
+<dt>Parameters:</dt>
+<dd>host - New hostname.</dd>
+<dt>Returns:</dt>
+<dd>True if hostname is valid.</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/simplecookie.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

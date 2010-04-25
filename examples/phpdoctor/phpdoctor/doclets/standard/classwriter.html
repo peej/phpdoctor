@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:46 +0100">
 
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
 <link rel="start" href="../../../overview-summary.html">
@@ -21,6 +23,7 @@
 <li><a href="../../../phpdoctor/doclets/standard/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../../../phpdoctor/doclets/standard/package-tree.html">Tree</a></li>
+<li><a href="../../../overview-files.html">Files</a></li>
 <li><a href="../../../deprecated-list.html">Deprecated</a></li>
 <li><a href="../../../index-all.html">Index</a></li>
 </ul>
@@ -36,12 +39,12 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<div class="qualifiedName">PHPDoctor.Doclets.Standard.ClassWriter</div>
-<div class="location">/doclets/standard/classWriter.php at line 29</div>
+<div class="qualifiedName">PHPDoctor\Doclets\Standard.ClassWriter</div>
+<a href="../../../source/doclets/standard/classwriter.php.html#line26" class="location">doclets/standard/classWriter.php at line 26</a>
 
 <h1>Class ClassWriter</h1>
 
-<pre class="tree"><a href="../../../phpdoctor/doclets/standard/htmlwriter.html">HTMLWriter</a><br>  |<br>  +--<strong>ClassWriter</strong><br /></pre>
+<pre class="tree"><a href="../../../phpdoctor/doclets/standard/htmlwriter.html">HTMLWriter</a><br>    └─<strong>ClassWriter</strong><br /></pre>
 
 <hr>
 
@@ -49,22 +52,15 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 </p>
 
-<div class="comment" id="overview_description"><p>
-This generates the HTML API documentation for each individual interface
-and class.
-</p></div>
+<div class="comment" id="overview_description"><p>This generates the HTML API documentation for each individual interface
+and class.</p></div>
 
-<dl>
-<dt>Version:</dt>
-<dd>$Revision: 1.19 $</dd>
-</dl>
 <hr>
 
 <table id="summary_constr">
 <tr><th colspan="2">Constructor Summary</th></tr>
 <tr>
-<td class="description"><p class="name"><a href="#classWriter()">classWriter</a>(Doclet doclet)</p><p class="description">
-Build the class definitons.</p></td>
+<td class="description"><p class="name"><a href="#classWriter()">classWriter</a>(Doclet doclet)</p><p class="description">Build the class definitons.</p></td>
 </tr>
 </table>
 
@@ -72,47 +68,42 @@ Build the class definitons.</p></td>
 <tr><th colspan="2">Method Summary</th></tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#inheritFields()">inheritFields</a>(<a href="../../../phpdoctor/programelementdoc.html">ProgramElementDoc</a> element, <a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc, <a href="../../../phpdoctor/packagedoc.html">PackageDoc</a> package)</p><p class="description">
-Display the inherited fields of an element. </p></td>
+<td class="description"><p class="name"><a href="#inheritFields()">inheritFields</a>(<a href="../../../phpdoctor/programelementdoc.html">ProgramElementDoc</a> element, <a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc, <a href="../../../phpdoctor/packagedoc.html">PackageDoc</a> package)</p><p class="description">Display the inherited fields of an element. </p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#inheritMethods()">inheritMethods</a>(<a href="../../../phpdoctor/programelementdoc.html">ProgramElementDoc</a> element, <a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc, <a href="../../../phpdoctor/packagedoc.html">PackageDoc</a> package)</p><p class="description">
-Display the inherited methods of an element. </p></td>
+<td class="description"><p class="name"><a href="#inheritMethods()">inheritMethods</a>(<a href="../../../phpdoctor/programelementdoc.html">ProgramElementDoc</a> element, <a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc, <a href="../../../phpdoctor/packagedoc.html">PackageDoc</a> package)</p><p class="description">Display the inherited methods of an element. </p></td>
 </tr>
 </table>
 
 <h2 id="detail_constr">Constructor Detail</h2>
-<div class="location">/doclets/standard/classWriter.php at line 36</div>
+<a href="../../../source/doclets/standard/classwriter.php.html#line33" class="location">doclets/standard/classWriter.php at line 33</a>
+
 <h3 id="classWriter()">classWriter</h3>
 <code class="signature">public <strong>classWriter</strong>(Doclet doclet)</code>
 <div class="details">
-<p>
-Build the class definitons.
-</p></div>
+<p>Build the class definitons.</p></div>
 
 <hr>
 
 <h2 id="detail_method">Method Detail</h2>
-<div class="location">/doclets/standard/classWriter.php at line 318</div>
+<a href="../../../source/doclets/standard/classwriter.php.html#line314" class="location">doclets/standard/classWriter.php at line 314</a>
+
 <h3 id="inheritFields()">inheritFields</h3>
 <code class="signature">public  void <strong>inheritFields</strong>(<a href="../../../phpdoctor/programelementdoc.html">ProgramElementDoc</a> element, <a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc, <a href="../../../phpdoctor/packagedoc.html">PackageDoc</a> package)</code>
 <div class="details">
-<p>
-Display the inherited fields of an element. This method calls itself
-recursively if the element has a parent class.
-</p></div>
+<p>Display the inherited fields of an element. This method calls itself
+recursively if the element has a parent class.</p></div>
 
 <hr>
 
-<div class="location">/doclets/standard/classWriter.php at line 351</div>
+<a href="../../../source/doclets/standard/classwriter.php.html#line347" class="location">doclets/standard/classWriter.php at line 347</a>
+
 <h3 id="inheritMethods()">inheritMethods</h3>
 <code class="signature">public  void <strong>inheritMethods</strong>(<a href="../../../phpdoctor/programelementdoc.html">ProgramElementDoc</a> element, <a href="../../../phpdoctor/rootdoc.html">RootDoc</a> rootDoc, <a href="../../../phpdoctor/packagedoc.html">PackageDoc</a> package)</code>
 <div class="details">
-<p>
-Display the inherited methods of an element. This method calls itself
-recursively if the element has a parent class.
-</p></div>
+<p>Display the inherited methods of an element. This method calls itself
+recursively if the element has a parent class.</p></div>
 
 <hr>
 
@@ -123,6 +114,7 @@ recursively if the element has a parent class.
 <li><a href="../../../phpdoctor/doclets/standard/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../../../phpdoctor/doclets/standard/package-tree.html">Tree</a></li>
+<li><a href="../../../overview-files.html">Files</a></li>
 <li><a href="../../../deprecated-list.html">Deprecated</a></li>
 <li><a href="../../../index-all.html">Index</a></li>
 </ul>
@@ -138,7 +130,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

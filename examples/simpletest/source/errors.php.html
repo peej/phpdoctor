@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:06 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>errors.php (SimpleTest)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/errors.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>errors.php</h1>
+<div class="comment" id="overview_description"><p>base include file for SimpleTest</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a>     *	base include file for SimpleTest
+<a name="line4"></a>     *	@package	SimpleTest
+<a name="line5"></a>     *	@subpackage	UnitTester
+<a name="line6"></a>     *	@version	$Id: errors.php,v 1.13 2005/01/08 03:48:39 lastcraft Exp $
+<a name="line7"></a>     */</span>
+<a name="line8"></a>    <span style="color: #009933; font-style: italic;">/** @ignore - PHP5 compatibility fix. */</span>
+<a name="line9"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/defined"><span style="color: #990000;">defined</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'E_STRICT'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line10"></a>        <a href="http://www.php.net/define"><span style="color: #990000;">define</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'E_STRICT'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">2048</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line11"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line12"></a>&nbsp;
+<a name="line13"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line14"></a>     *    Singleton error queue used to record trapped
+<a name="line15"></a>     *    errors.
+<a name="line16"></a>	 *	  @package	SimpleTest
+<a name="line17"></a>	 *	  @subpackage	UnitTester
+<a name="line18"></a>     */</span>
+<a name="line19"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleErrorQueue <span style="color: #009900;">&#123;</span>
+<a name="line20"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_queue</span><span style="color: #339933;">;</span>
+<a name="line21"></a>&nbsp;
+<a name="line22"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line23"></a>         *    Starts with an empty queue.
+<a name="line24"></a>         *    @access public
+<a name="line25"></a>         */</span>
+<a name="line26"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleErrorQueue<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line27"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">clear</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line28"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line29"></a>&nbsp;
+<a name="line30"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line31"></a>         *    Adds an error to the front of the queue.
+<a name="line32"></a>         *    @param $severity        PHP error code.
+<a name="line33"></a>         *    @param $message         Text of error.
+<a name="line34"></a>         *    @param $filename        File error occoured in.
+<a name="line35"></a>         *    @param $line            Line number of error.
+<a name="line36"></a>         *    @param $super_globals   Hash of PHP super global arrays.
+<a name="line37"></a>         *    @access public
+<a name="line38"></a>         */</span>
+<a name="line39"></a>        <span style="color: #000000; font-weight: bold;">function</span> add<span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$filename</span><span style="color: #339933;">,</span> <span style="color: #000088;">$line</span><span style="color: #339933;">,</span> <span style="color: #000088;">$super_globals</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line40"></a>            <a href="http://www.php.net/array_push"><span style="color: #990000;">array_push</span></a><span style="color: #009900;">&#40;</span>
+<a name="line41"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_queue<span style="color: #339933;">,</span>
+<a name="line42"></a>                    <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$filename</span><span style="color: #339933;">,</span> <span style="color: #000088;">$line</span><span style="color: #339933;">,</span> <span style="color: #000088;">$super_globals</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line43"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line44"></a>&nbsp;
+<a name="line45"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line46"></a>         *    Pulls the earliest error from the queue.
+<a name="line47"></a>         *    @return     False if none, or a list of error
+<a name="line48"></a>         *                information. Elements are: severity
+<a name="line49"></a>         *                as the PHP error code, the error message,
+<a name="line50"></a>         *                the file with the error, the line number
+<a name="line51"></a>         *                and a list of PHP super global arrays.
+<a name="line52"></a>         *    @access public
+<a name="line53"></a>         */</span>
+<a name="line54"></a>        <span style="color: #000000; font-weight: bold;">function</span> <a href="http://www.php.net/extract"><span style="color: #990000;">extract</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line55"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_queue<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line56"></a>                <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array_shift"><span style="color: #990000;">array_shift</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_queue<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line57"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line58"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line59"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line60"></a>&nbsp;
+<a name="line61"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line62"></a>         *    Discards the contents of the error queue.
+<a name="line63"></a>         *    @access public
+<a name="line64"></a>         */</span>
+<a name="line65"></a>        <span style="color: #000000; font-weight: bold;">function</span> clear<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line66"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_queue <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line67"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line68"></a>&nbsp;
+<a name="line69"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line70"></a>         *    Tests to see if the queue is empty.
+<a name="line71"></a>         *    @return        True if empty.
+<a name="line72"></a>         */</span>
+<a name="line73"></a>        <span style="color: #000000; font-weight: bold;">function</span> isEmpty<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line74"></a>            <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/count"><span style="color: #990000;">count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_queue<span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line75"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line76"></a>&nbsp;
+<a name="line77"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line78"></a>         *    Global access to a single error queue.
+<a name="line79"></a>         *    @return        Global error queue object.
+<a name="line80"></a>         *    @access public
+<a name="line81"></a>         *    @static
+<a name="line82"></a>         */</span>
+<a name="line83"></a>        <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>instance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line84"></a>            static <span style="color: #000088;">$queue</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+<a name="line85"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$queue</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line86"></a>                <span style="color: #000088;">$queue</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SimpleErrorQueue<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line87"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line88"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$queue</span><span style="color: #339933;">;</span>
+<a name="line89"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line90"></a>&nbsp;
+<a name="line91"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line92"></a>         *    Converst an error code into it's string
+<a name="line93"></a>         *    representation.
+<a name="line94"></a>         *    @param $severity  PHP integer error code.
+<a name="line95"></a>         *    @return           String version of error code.
+<a name="line96"></a>         *    @access public
+<a name="line97"></a>         *    @static
+<a name="line98"></a>         */</span>
+<a name="line99"></a>        <span style="color: #000000; font-weight: bold;">function</span> getSeverityAsString<span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line100"></a>            static <span style="color: #000088;">$map</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line101"></a>                    <span style="color: #009900; font-weight: bold;">E_STRICT</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_STRICT'</span><span style="color: #339933;">,</span>
+<a name="line102"></a>                    <span style="color: #009900; font-weight: bold;">E_ERROR</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_ERROR'</span><span style="color: #339933;">,</span>
+<a name="line103"></a>                    <span style="color: #009900; font-weight: bold;">E_WARNING</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_WARNING'</span><span style="color: #339933;">,</span>
+<a name="line104"></a>                    <span style="color: #009900; font-weight: bold;">E_PARSE</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_PARSE'</span><span style="color: #339933;">,</span>
+<a name="line105"></a>                    <span style="color: #009900; font-weight: bold;">E_NOTICE</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_NOTICE'</span><span style="color: #339933;">,</span>
+<a name="line106"></a>                    <span style="color: #009900; font-weight: bold;">E_CORE_ERROR</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_CORE_ERROR'</span><span style="color: #339933;">,</span>
+<a name="line107"></a>                    <span style="color: #009900; font-weight: bold;">E_CORE_WARNING</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_CORE_WARNING'</span><span style="color: #339933;">,</span>
+<a name="line108"></a>                    <span style="color: #009900; font-weight: bold;">E_COMPILE_ERROR</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_COMPILE_ERROR'</span><span style="color: #339933;">,</span>
+<a name="line109"></a>                    <span style="color: #009900; font-weight: bold;">E_COMPILE_WARNING</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_COMPILE_WARNING'</span><span style="color: #339933;">,</span>
+<a name="line110"></a>                    <span style="color: #009900; font-weight: bold;">E_USER_ERROR</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_USER_ERROR'</span><span style="color: #339933;">,</span>
+<a name="line111"></a>                    <span style="color: #009900; font-weight: bold;">E_USER_WARNING</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_USER_WARNING'</span><span style="color: #339933;">,</span>
+<a name="line112"></a>                    <span style="color: #009900; font-weight: bold;">E_USER_NOTICE</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'E_USER_NOTICE'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line113"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$map</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$severity</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line114"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line115"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line116"></a>&nbsp;
+<a name="line117"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line118"></a>     *    Error handler that simply stashes any errors into the global
+<a name="line119"></a>     *    error queue. Simulates the existing behaviour with respect to
+<a name="line120"></a>     *    logging errors, but this feature may be removed in future.
+<a name="line121"></a>     *    @param $severity        PHP error code.
+<a name="line122"></a>     *    @param $message         Text of error.
+<a name="line123"></a>     *    @param $filename        File error occoured in.
+<a name="line124"></a>     *    @param $line            Line number of error.
+<a name="line125"></a>     *    @param $super_globals   Hash of PHP super global arrays.
+<a name="line126"></a>     *    @static
+<a name="line127"></a>     *    @access public
+<a name="line128"></a>     */</span>
+<a name="line129"></a>    <span style="color: #000000; font-weight: bold;">function</span> simpleTestErrorHandler<span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$filename</span><span style="color: #339933;">,</span> <span style="color: #000088;">$line</span><span style="color: #339933;">,</span> <span style="color: #000088;">$super_globals</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line130"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$severity</span> <span style="color: #339933;">&amp;</span> <a href="http://www.php.net/error_reporting"><span style="color: #990000;">error_reporting</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line131"></a>            <a href="http://www.php.net/restore_error_handler"><span style="color: #990000;">restore_error_handler</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line132"></a>            <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/ini_get"><span style="color: #990000;">ini_get</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'log_errors'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line133"></a>                <span style="color: #000088;">$label</span> <span style="color: #339933;">=</span> SimpleErrorQueue<span style="color: #339933;">::</span><span style="color: #004000;">getSeverityAsString</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line134"></a>                <a href="http://www.php.net/error_log"><span style="color: #990000;">error_log</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;<span style="color: #006699; font-weight: bold;">$label</span>: <span style="color: #006699; font-weight: bold;">$message</span> in <span style="color: #006699; font-weight: bold;">$filename</span> on line <span style="color: #006699; font-weight: bold;">$line</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line135"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line136"></a>            <span style="color: #000088;">$queue</span> <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span>SimpleErrorQueue<span style="color: #339933;">::</span><span style="color: #004000;">instance</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line137"></a>            <span style="color: #000088;">$queue</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$filename</span><span style="color: #339933;">,</span> <span style="color: #000088;">$line</span><span style="color: #339933;">,</span> <span style="color: #000088;">$super_globals</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line138"></a>            <a href="http://www.php.net/set_error_handler"><span style="color: #990000;">set_error_handler</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'simpleTestErrorHandler'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line139"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line140"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line141"></a><span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/errors.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,2135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:25:51 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>GeSHi (GeSHi)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../geshi/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../geshi/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../geshi/geshi.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">geshi.GeSHi</div>
+<a href="../source/geshi.php.html#line253" class="location">geshi.php at line 253</a>
+
+<h1>Class GeSHi</h1>
+
+<pre class="tree"><strong>GeSHi</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>GeSHi</strong></p>
+
+<div class="comment" id="overview_description"><p>The GeSHi Class.</p><p>Please refer to the documentation for GeSHi 1.0.X that is available
+at http://qbnz.com/highlighter/documentation.php for more information
+about how to use this class.</p></div>
+
+<dl>
+<dt>Author:</dt>
+<dd>Nigel McNie <nigel@geshi.org>, Benny Baumann <BenBE@omorphia.de></dd>
+<dt>Copyright:</dt>
+<dd>(C) 2004 - 2007 Nigel McNie, (C) 2007 - 2008 Benny Baumann</dd>
+</dl>
+<hr>
+
+<table id="summary_field">
+<tr><th colspan="2">Field Summary</th></tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#add_ids">$add_ids</a></p><p class="description">Whether CSS IDs should be added to the code</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#allow_multiline_span">$allow_multiline_span</a></p><p class="description">Flag to decide if multi line spans are allowed. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#code_style">$code_style</a></p><p class="description">The style for the actual code</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#enable_important_blocks">$enable_important_blocks</a></p><p class="description">Whether important blocks should be recognised or not</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#encoding">$encoding</a></p><p class="description">The encoding to use for entity encoding
+NOTE: Used with Escape Char Sequences to fix UTF-8 handling (cf. </p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#error">$error</a></p><p class="description">The error message associated with an error</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#error_messages">$error_messages</a></p><p class="description">Possible error messages</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#footer_content">$footer_content</a></p><p class="description">The content of the footer block</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#footer_content_style">$footer_content_style</a></p><p class="description">The style of the footer block</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#force_code_block">$force_code_block</a></p><p class="description">Tells if a block around the highlighted source should be forced
+if not using line numbering</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#header_content">$header_content</a></p><p class="description">The content of the header block</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#header_content_style">$header_content_style</a></p><p class="description">The style of the header block</p></td>
+</tr>
+<tr>
+<td class="type"> int</td>
+<td class="description"><p class="name"><a href="#header_type">$header_type</a></p><p class="description">The type of header to use. </p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#highlight_extra_lines">$highlight_extra_lines</a></p><p class="description">Lines that should be highlighted extra</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#highlight_extra_lines_style">$highlight_extra_lines_style</a></p><p class="description">Styles of extra-highlighted lines</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#highlight_extra_lines_styles">$highlight_extra_lines_styles</a></p><p class="description">Styles of lines that should be highlighted extra</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#important_styles">$important_styles</a></p><p class="description">Styles for important parts of the code</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#keyword_links">$keyword_links</a></p><p class="description">Should keywords be linked?</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#language">$language</a></p><p class="description">The language to use when highlighting</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#language_data">$language_data</a></p><p class="description">The data for the language used</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#language_path">$language_path</a></p><p class="description">The path to the language files</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#lexic_permissions">$lexic_permissions</a></p><p class="description">Array of permissions for which lexics should be highlighted</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#line_ending">$line_ending</a></p><p class="description">The line ending
+If null, nl2br() will be used on the result string.
+</p></td>
+</tr>
+<tr>
+<td class="type"> int</td>
+<td class="description"><p class="name"><a href="#line_nth_row">$line_nth_row</a></p><p class="description">The "nth" value for fancy line highlighting</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#line_numbers">$line_numbers</a></p><p class="description">Flag for how line numbers are displayed</p></td>
+</tr>
+<tr>
+<td class="type"> int</td>
+<td class="description"><p class="name"><a href="#line_numbers_start">$line_numbers_start</a></p><p class="description">Number at which line numbers should start at</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#line_style1">$line_style1</a></p><p class="description">Line number styles</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#line_style2">$line_style2</a></p><p class="description">Line number styles for fancy lines</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#link_styles">$link_styles</a></p><p class="description">The styles for hyperlinks in the code</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#link_target">$link_target</a></p><p class="description">Default target for keyword links</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#loaded_language">$loaded_language</a></p><p class="description">Currently loaded language file</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#overall_class">$overall_class</a></p><p class="description">The overall class for this code block</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#overall_id">$overall_id</a></p><p class="description">The overall ID for this code block</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#overall_style">$overall_style</a></p><p class="description">The overall style for this code block</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#parse_cache_built">$parse_cache_built</a></p><p class="description">Wether the caches needed for parsing are built or not</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#strict_mode">$strict_mode</a></p><p class="description">Whether highlighting is strict or not</p></td>
+</tr>
+<tr>
+<td class="type"> int</td>
+<td class="description"><p class="name"><a href="#tab_width">$tab_width</a></p><p class="description">The size of tab stops</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#table_linenumber_style">$table_linenumber_style</a></p><p class="description">Style for line numbers when GESHI_HEADER_PRE_TABLE is chosen</p></td>
+</tr>
+<tr>
+<td class="type"> double</td>
+<td class="description"><p class="name"><a href="#time">$time</a></p><p class="description">The time it took to parse the code</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#use_classes">$use_classes</a></p><p class="description">Whether to use CSS classes in output</p></td>
+</tr>
+<tr>
+<td class="type"> int</td>
+<td class="description"><p class="name"><a href="#use_language_tab_width">$use_language_tab_width</a></p><p class="description">Should we use language-defined tab stop widths?</p></td>
+</tr>
+</table>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#GeSHi()">GeSHi</a>(mixed source, mixed language, mixed path, string The)</p><p class="description">Creates a new GeSHi object, with source and language</p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#add_keyword()">add_keyword</a>(mixed key, mixed word, string The)</p><p class="description">Adds a keyword to a keyword group for highlighting</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#add_keyword_group()">add_keyword_group</a>(mixed key, mixed styles, mixed case_sensitive, mixed words, array The, boolean Whether)</p><p class="description">Creates a new keyword group</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#disable_highlighting()">disable_highlighting</a>()</p><p class="description">Disables all highlighting</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_classes()">enable_classes</a>(mixed flag, boolean Whether)</p><p class="description">Sets whether CSS classes should be used to highlight the source. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_highlighting()">enable_highlighting</a>(mixed flag, boolean A)</p><p class="description">Enables all highlightingThe optional flag parameter was added in version 1.0.7.21 and can be used
+to enable (true) or disable (false) all highlighting.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_ids()">enable_ids</a>(mixed flag, boolean If)</p><p class="description">Whether CSS IDs should be added to each line</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_important_blocks()">enable_important_blocks</a>(mixed flag, boolean Tells)</p><p class="description">Sets whether context-important blocks are highlighted</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_inner_code_block()">enable_inner_code_block</a>(mixed flag, boolean Tells)</p><p class="description">Sets whether to force a surrounding block around
+the highlighted code or not</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_keyword_links()">enable_keyword_links</a>(mixed enable, boolean If)</p><p class="description">Turns linking of keywords on or off.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_line_numbers()">enable_line_numbers</a>(mixed flag, mixed nth_row, int How, int Defines)</p><p class="description">Sets whether line numbers should be displayed.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_multiline_span()">enable_multiline_span</a>(mixed flag, boolean Wether)</p><p class="description">Sets wether spans and other HTML markup generated by GeSHi can
+span over multiple lines or not. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#enable_strict_mode()">enable_strict_mode</a>(mixed mode, boolean Whether)</p><p class="description">Enables/disables strict highlighting. </p></td>
+</tr>
+<tr>
+<td class="type"> string|false</td>
+<td class="description"><p class="name"><a href="#error()">error</a>()</p><p class="description">Returns an error message associated with the last GeSHi operation,
+or false if no error has occured</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#get_language_name()">get_language_name</a>()</p><p class="description">Gets a human-readable language name (thanks to Simon Patterson
+for the idea :))</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#get_language_name_from_extension()">get_language_name_from_extension</a>(mixed extension, mixed lookup, string The, array A)</p><p class="description">Given a file extension, this method returns either a valid geshi language
+name, or the empty string if it couldn't be found</p></td>
+</tr>
+<tr>
+<td class="type"> bool</td>
+<td class="description"><p class="name"><a href="#get_multiline_span()">get_multiline_span</a>()</p><p class="description">Get current setting for multiline spans, see GeSHi->enable_multiline_span().</p></td>
+</tr>
+<tr>
+<td class="type"> int</td>
+<td class="description"><p class="name"><a href="#get_real_tab_width()">get_real_tab_width</a>()</p><p class="description">Returns the tab width to use, based on the current language and user
+preference</p></td>
+</tr>
+<tr>
+<td class="type">static  string</td>
+<td class="description"><p class="name"><a href="#get_stylesheet()">get_stylesheet</a>(mixed economy_mode, boolean Whether)</p><p class="description">Returns a stylesheet for the highlighted code. </p></td>
+</tr>
+<tr>
+<td class="type"> double</td>
+<td class="description"><p class="name"><a href="#get_time()">get_time</a>()</p><p class="description">Gets the time taken to parse the code</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#highlight_lines_extra()">highlight_lines_extra</a>(mixed lines, mixed style, mixed An, string A)</p><p class="description">Specifies which lines to highlight extraThe extra style parameter was added in 1.0.7.21.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#load_from_file()">load_from_file</a>(mixed file_name, mixed lookup, string The, array A)</p><p class="description">Given a file name, this method loads its contents in, and attempts
+to set the language automatically. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#optimize_keyword_group()">optimize_keyword_group</a>(mixed key, int The)</p><p class="description">compile optimized regexp list for keyword group</p></td>
+</tr>
+<tr>
+<td class="type">static  void</td>
+<td class="description"><p class="name"><a href="#parse_code()">parse_code</a>()</p><p class="description">Returns the code in $this->source, highlighted and surrounded by the
+nessecary HTML.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#remove_keyword()">remove_keyword</a>(mixed key, mixed word, mixed recompile, string The, bool Wether)</p><p class="description">Removes a keyword from a keyword group</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#remove_keyword_group()">remove_keyword_group</a>(mixed key, int The)</p><p class="description">Removes a keyword group</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_brackets_highlighting()">set_brackets_highlighting</a>(mixed flag, boolean Whether)</p><p class="description">Turns highlighting on/off for bracketsThis method is DEPRECATED: use set_symbols_highlighting instead.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_brackets_style()">set_brackets_style</a>(mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the styles for brackets. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_case_keywords()">set_case_keywords</a>(mixed case, int A)</p><p class="description">Sets the case that keywords should use when found. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_case_sensitivity()">set_case_sensitivity</a>(mixed key, mixed case, int The, boolean Whether)</p><p class="description">Sets whether a set of keywords are checked for in a case sensitive manner</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_code_style()">set_code_style</a>(mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the style for the actual code. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_comments_highlighting()">set_comments_highlighting</a>(mixed key, mixed flag, int The, boolean Whether)</p><p class="description">Turns highlighting on/off for comment groups</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_comments_style()">set_comments_style</a>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the styles for comment groups. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_encoding()">set_encoding</a>(mixed encoding, string The)</p><p class="description">Sets the encoding used for htmlspecialchars(), for international
+support.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_escape_characters_highlighting()">set_escape_characters_highlighting</a>(mixed flag, boolean Whether)</p><p class="description">Turns highlighting on/off for escaped characters</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_escape_characters_style()">set_escape_characters_style</a>(mixed style, mixed preserve_defaults, mixed group, string The, boolean Whether)</p><p class="description">Sets the styles for escaped characters. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_footer_content()">set_footer_content</a>(mixed content, string The)</p><p class="description">Sets the content of the footer block</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_footer_content_style()">set_footer_content_style</a>(mixed style, string The)</p><p class="description">Sets the style for the footer content</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_header_content()">set_header_content</a>(mixed content, string The)</p><p class="description">Sets the content of the header block</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_header_content_style()">set_header_content_style</a>(mixed style, string The)</p><p class="description">Sets the style for the header content</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_header_type()">set_header_type</a>(mixed type, int The)</p><p class="description">Sets the type of header to be used.
+</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_highlight_lines_extra_style()">set_highlight_lines_extra_style</a>(mixed styles, string The)</p><p class="description">Sets the style for extra-highlighted lines</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_important_styles()">set_important_styles</a>(mixed styles, string The)</p><p class="description">Sets styles for important parts of the code</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_keyword_group_highlighting()">set_keyword_group_highlighting</a>(mixed key, mixed flag, int The, boolean Whether)</p><p class="description">Turns highlighting on/off for a keyword group</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_keyword_group_style()">set_keyword_group_style</a>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the style for a keyword group. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_language()">set_language</a>(mixed language, mixed force_reset, string The)</p><p class="description">Sets the language for this object</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_language_path()">set_language_path</a>(mixed path, string The)</p><p class="description">Sets the path to the directory containing the language files. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_line_ending()">set_line_ending</a>(mixed line_ending, string The)</p><p class="description">Sets the line-ending</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_line_style()">set_line_style</a>(mixed style1, mixed style2, mixed preserve_defaults, string The, boolean If)</p><p class="description">Sets the styles for the line numbers.</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_link_styles()">set_link_styles</a>(mixed type, mixed styles, int A, string The)</p><p class="description">Sets styles for links in code</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_link_target()">set_link_target</a>(mixed target, string The)</p><p class="description">Sets the target for links in code</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_methods_highlighting()">set_methods_highlighting</a>(mixed flag, boolean Whether)</p><p class="description">Turns highlighting on/off for methods</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_methods_style()">set_methods_style</a>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the styles for methods. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_numbers_highlighting()">set_numbers_highlighting</a>(mixed flag, boolean Whether)</p><p class="description">Turns highlighting on/off for numbers</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_numbers_style()">set_numbers_style</a>(mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the styles for numbers. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_overall_class()">set_overall_class</a>(mixed class, string The)</p><p class="description">Sets the overall classname for this block of code. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_overall_id()">set_overall_id</a>(mixed id, string The)</p><p class="description">Sets the overall id for this block of code. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_overall_style()">set_overall_style</a>(mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the styles for the code that will be outputted
+when this object is parsed. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_regexps_highlighting()">set_regexps_highlighting</a>(mixed key, mixed flag, int The, boolean Whether)</p><p class="description">Turns highlighting on/off for regexps</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_regexps_style()">set_regexps_style</a>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the styles for regexps. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_source()">set_source</a>(mixed source, string The)</p><p class="description">Sets the source code for this object</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_strings_highlighting()">set_strings_highlighting</a>(mixed flag, boolean Whether)</p><p class="description">Turns highlighting on/off for strings</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_strings_style()">set_strings_style</a>(mixed style, mixed preserve_defaults, string The, boolean Whether)</p><p class="description">Sets the styles for strings. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_symbols_highlighting()">set_symbols_highlighting</a>(mixed flag, boolean Whether)</p><p class="description">Turns highlighting on/off for symbols</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_symbols_style()">set_symbols_style</a>(mixed style, mixed preserve_defaults, mixed group, string The, boolean Whether, int Tells)</p><p class="description">Sets the styles for symbols. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_tab_width()">set_tab_width</a>(mixed width, int The)</p><p class="description">Sets how many spaces a tab is substituted forWidths below zero are ignored</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_url_for_keyword_group()">set_url_for_keyword_group</a>(mixed group, mixed url, string The)</p><p class="description">Sets the base URL to be used for keywords</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#set_use_language_tab_width()">set_use_language_tab_width</a>(mixed use, boolean Whether)</p><p class="description">Sets whether or not to use tab-stop width specifed by language</p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#start_line_numbers_at()">start_line_numbers_at</a>(mixed number, int The)</p><p class="description">Sets what number line numbers should start at. </p></td>
+</tr>
+</table>
+
+<h2 id="detail_field">Field Detail</h2>
+<a href="../source/geshi.php.html#line404" class="location">geshi.php at line 404</a>
+
+<h3 id="add_ids">add_ids</h3>
+<code class="signature">public  boolean <strong>$add_ids</strong> = false</code>
+<div class="details">
+<p>Whether CSS IDs should be added to the code</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line491" class="location">geshi.php at line 491</a>
+
+<h3 id="allow_multiline_span">allow_multiline_span</h3>
+<code class="signature">public  boolean <strong>$allow_multiline_span</strong> = true</code>
+<div class="details">
+<p>Flag to decide if multi line spans are allowed. Set it to false to make sure
+each tag is closed before and reopened after each linefeed.</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line448" class="location">geshi.php at line 448</a>
+
+<h3 id="code_style">code_style</h3>
+<code class="signature">public  string <strong>$code_style</strong> = 'font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;'</code>
+<div class="details">
+<p>The style for the actual code</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line389" class="location">geshi.php at line 389</a>
+
+<h3 id="enable_important_blocks">enable_important_blocks</h3>
+<code class="signature">public  boolean <strong>$enable_important_blocks</strong> = false</code>
+<div class="details">
+<p>Whether important blocks should be recognised or not</p><dl>
+<dt>Deprecated.</dt>
+<dt>Todo:</dt>
+<dd>REMOVE THIS FUNCTIONALITY!</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line522" class="location">geshi.php at line 522</a>
+
+<h3 id="encoding">encoding</h3>
+<code class="signature">public  string <strong>$encoding</strong> = 'utf-8'</code>
+<div class="details">
+<p>The encoding to use for entity encoding
+NOTE: Used with Escape Char Sequences to fix UTF-8 handling (cf. SF#2037598)</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line286" class="location">geshi.php at line 286</a>
+
+<h3 id="error">error</h3>
+<code class="signature">public  string <strong>$error</strong> = false</code>
+<div class="details">
+<p>The error message associated with an error</p><dl>
+<dt>Todo:</dt>
+<dd>check err reporting works</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line292" class="location">geshi.php at line 292</a>
+
+<h3 id="error_messages">error_messages</h3>
+<code class="signature">public  array <strong>$error_messages</strong> = array(...)</code>
+<div class="details">
+<p>Possible error messages</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line356" class="location">geshi.php at line 356</a>
+
+<h3 id="footer_content">footer_content</h3>
+<code class="signature">public  string <strong>$footer_content</strong> = ''</code>
+<div class="details">
+<p>The content of the footer block</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line368" class="location">geshi.php at line 368</a>
+
+<h3 id="footer_content_style">footer_content_style</h3>
+<code class="signature">public  string <strong>$footer_content_style</strong> = ''</code>
+<div class="details">
+<p>The style of the footer block</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line375" class="location">geshi.php at line 375</a>
+
+<h3 id="force_code_block">force_code_block</h3>
+<code class="signature">public  boolean <strong>$force_code_block</strong> = false</code>
+<div class="details">
+<p>Tells if a block around the highlighted source should be forced
+if not using line numbering</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line350" class="location">geshi.php at line 350</a>
+
+<h3 id="header_content">header_content</h3>
+<code class="signature">public  string <strong>$header_content</strong> = ''</code>
+<div class="details">
+<p>The content of the header block</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line362" class="location">geshi.php at line 362</a>
+
+<h3 id="header_content_style">header_content_style</h3>
+<code class="signature">public  string <strong>$header_content_style</strong> = ''</code>
+<div class="details">
+<p>The style of the header block</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line321" class="location">geshi.php at line 321</a>
+
+<h3 id="header_type">header_type</h3>
+<code class="signature">public  int <strong>$header_type</strong> = GESHI_HEADER_PRE</code>
+<div class="details">
+<p>The type of header to use. Can be one of the following
+values:</p><p>- GESHI_HEADER_PRE: Source is outputted in a "pre" HTML element.
+- GESHI_HEADER_DIV: Source is outputted in a "div" HTML element.
+- GESHI_HEADER_NONE: No header is outputted.</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line410" class="location">geshi.php at line 410</a>
+
+<h3 id="highlight_extra_lines">highlight_extra_lines</h3>
+<code class="signature">public  array <strong>$highlight_extra_lines</strong> = array()</code>
+<div class="details">
+<p>Lines that should be highlighted extra</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line422" class="location">geshi.php at line 422</a>
+
+<h3 id="highlight_extra_lines_style">highlight_extra_lines_style</h3>
+<code class="signature">public  string <strong>$highlight_extra_lines_style</strong> = 'background-color: #ffc;'</code>
+<div class="details">
+<p>Styles of extra-highlighted lines</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line416" class="location">geshi.php at line 416</a>
+
+<h3 id="highlight_extra_lines_styles">highlight_extra_lines_styles</h3>
+<code class="signature">public  array <strong>$highlight_extra_lines_styles</strong> = array()</code>
+<div class="details">
+<p>Styles of lines that should be highlighted extra</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line398" class="location">geshi.php at line 398</a>
+
+<h3 id="important_styles">important_styles</h3>
+<code class="signature">public  string <strong>$important_styles</strong> = 'font-weight: bold; color: red;'</code>
+<div class="details">
+<p>Styles for important parts of the code</p><dl>
+<dt>Deprecated.</dt>
+<dt>Todo:</dt>
+<dd>As above - rethink the whole idea of important blocks as it is buggy and will be hard to implement in 1.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line528" class="location">geshi.php at line 528</a>
+
+<h3 id="keyword_links">keyword_links</h3>
+<code class="signature">public  boolean <strong>$keyword_links</strong> = true</code>
+<div class="details">
+<p>Should keywords be linked?</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line267" class="location">geshi.php at line 267</a>
+
+<h3 id="language">language</h3>
+<code class="signature">public  string <strong>$language</strong> = ''</code>
+<div class="details">
+<p>The language to use when highlighting</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line273" class="location">geshi.php at line 273</a>
+
+<h3 id="language_data">language_data</h3>
+<code class="signature">public  array <strong>$language_data</strong> = array()</code>
+<div class="details">
+<p>The data for the language used</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line279" class="location">geshi.php at line 279</a>
+
+<h3 id="language_path">language_path</h3>
+<code class="signature">public  string <strong>$language_path</strong> = GESHI_LANG_ROOT</code>
+<div class="details">
+<p>The path to the language files</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line327" class="location">geshi.php at line 327</a>
+
+<h3 id="lexic_permissions">lexic_permissions</h3>
+<code class="signature">public  array <strong>$lexic_permissions</strong> = array(...)</code>
+<div class="details">
+<p>Array of permissions for which lexics should be highlighted</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line430" class="location">geshi.php at line 430</a>
+
+<h3 id="line_ending">line_ending</h3>
+<code class="signature">public  string <strong>$line_ending</strong> = null</code>
+<div class="details">
+<p>The line ending
+If null, nl2br() will be used on the result string.
+Otherwise, all instances of \n will be replaced with $line_ending</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line497" class="location">geshi.php at line 497</a>
+
+<h3 id="line_nth_row">line_nth_row</h3>
+<code class="signature">public  int <strong>$line_nth_row</strong></code>
+<div class="details">
+<p>The "nth" value for fancy line highlighting</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line484" class="location">geshi.php at line 484</a>
+
+<h3 id="line_numbers">line_numbers</h3>
+<code class="signature">public  boolean <strong>$line_numbers</strong> = GESHI_NO_LINE_NUMBERS</code>
+<div class="details">
+<p>Flag for how line numbers are displayed</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line436" class="location">geshi.php at line 436</a>
+
+<h3 id="line_numbers_start">line_numbers_start</h3>
+<code class="signature">public  int <strong>$line_numbers_start</strong> = 1</code>
+<div class="details">
+<p>Number at which line numbers should start at</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line466" class="location">geshi.php at line 466</a>
+
+<h3 id="line_style1">line_style1</h3>
+<code class="signature">public  string <strong>$line_style1</strong> = 'font-weight: normal; vertical-align:top;'</code>
+<div class="details">
+<p>Line number styles</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line472" class="location">geshi.php at line 472</a>
+
+<h3 id="line_style2">line_style2</h3>
+<code class="signature">public  string <strong>$line_style2</strong> = 'font-weight: bold; vertical-align:top;'</code>
+<div class="details">
+<p>Line number styles for fancy lines</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line381" class="location">geshi.php at line 381</a>
+
+<h3 id="link_styles">link_styles</h3>
+<code class="signature">public  array <strong>$link_styles</strong> = array()</code>
+<div class="details">
+<p>The styles for hyperlinks in the code</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line515" class="location">geshi.php at line 515</a>
+
+<h3 id="link_target">link_target</h3>
+<code class="signature">public  string <strong>$link_target</strong> = ''</code>
+<div class="details">
+<p>Default target for keyword links</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line535" class="location">geshi.php at line 535</a>
+
+<h3 id="loaded_language">loaded_language</h3>
+<code class="signature">public  string <strong>$loaded_language</strong> = ''</code>
+<div class="details">
+<p>Currently loaded language file</p><dl>
+<dt>Since:</dt>
+<dd>1.0.7.22</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line454" class="location">geshi.php at line 454</a>
+
+<h3 id="overall_class">overall_class</h3>
+<code class="signature">public  string <strong>$overall_class</strong> = ''</code>
+<div class="details">
+<p>The overall class for this code block</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line460" class="location">geshi.php at line 460</a>
+
+<h3 id="overall_id">overall_id</h3>
+<code class="signature">public  string <strong>$overall_id</strong> = ''</code>
+<div class="details">
+<p>The overall ID for this code block</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line442" class="location">geshi.php at line 442</a>
+
+<h3 id="overall_style">overall_style</h3>
+<code class="signature">public  string <strong>$overall_style</strong> = 'font-family:monospace;'</code>
+<div class="details">
+<p>The overall style for this code block</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line543" class="location">geshi.php at line 543</a>
+
+<h3 id="parse_cache_built">parse_cache_built</h3>
+<code class="signature">public  bool <strong>$parse_cache_built</strong> = false</code>
+<div class="details">
+<p>Wether the caches needed for parsing are built or not</p><dl>
+<dt>Since:</dt>
+<dd>1.0.8</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line303" class="location">geshi.php at line 303</a>
+
+<h3 id="strict_mode">strict_mode</h3>
+<code class="signature">public  boolean <strong>$strict_mode</strong> = false</code>
+<div class="details">
+<p>Whether highlighting is strict or not</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line503" class="location">geshi.php at line 503</a>
+
+<h3 id="tab_width">tab_width</h3>
+<code class="signature">public  int <strong>$tab_width</strong> = 8</code>
+<div class="details">
+<p>The size of tab stops</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line478" class="location">geshi.php at line 478</a>
+
+<h3 id="table_linenumber_style">table_linenumber_style</h3>
+<code class="signature">public  string <strong>$table_linenumber_style</strong> = 'width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;'</code>
+<div class="details">
+<p>Style for line numbers when GESHI_HEADER_PRE_TABLE is chosen</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line344" class="location">geshi.php at line 344</a>
+
+<h3 id="time">time</h3>
+<code class="signature">public  double <strong>$time</strong></code>
+<div class="details">
+<p>The time it took to parse the code</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line309" class="location">geshi.php at line 309</a>
+
+<h3 id="use_classes">use_classes</h3>
+<code class="signature">public  boolean <strong>$use_classes</strong> = false</code>
+<div class="details">
+<p>Whether to use CSS classes in output</p></div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line509" class="location">geshi.php at line 509</a>
+
+<h3 id="use_language_tab_width">use_language_tab_width</h3>
+<code class="signature">public  int <strong>$use_language_tab_width</strong> = false</code>
+<div class="details">
+<p>Should we use language-defined tab stop widths?</p></div>
+
+<hr>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/geshi.php.html#line591" class="location">geshi.php at line 591</a>
+
+<h3 id="GeSHi()">GeSHi</h3>
+<code class="signature">public <strong>GeSHi</strong>(mixed source, mixed language, mixed path, string The)</code>
+<div class="details">
+<p>Creates a new GeSHi object, with source and language</p><dl>
+<dt>Parameters:</dt>
+<dd>The - source code to highlight</dd>
+<dd>The - language to highlight the source with</dd>
+<dd>The - path to the language file directory. <b>This is deprecated!</b> I've backported the auto path detection from the 1.1.X dev branch, so now it should be automatically set correctly. If you have renamed the language directory however, you will still need to set the path using this parameter or {@link GeSHi->set_language_path()}</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/geshi.php.html#line1441" class="location">geshi.php at line 1441</a>
+
+<h3 id="add_keyword()">add_keyword</h3>
+<code class="signature">public  void <strong>add_keyword</strong>(mixed key, mixed word, string The)</code>
+<div class="details">
+<p>Adds a keyword to a keyword group for highlighting</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to add the keyword to</dd>
+<dd>The - word to add to the keyword group</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1487" class="location">geshi.php at line 1487</a>
+
+<h3 id="add_keyword_group()">add_keyword_group</h3>
+<code class="signature">public  void <strong>add_keyword_group</strong>(mixed key, mixed styles, mixed case_sensitive, mixed words, array The, boolean Whether)</code>
+<div class="details">
+<p>Creates a new keyword group</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to create</dd>
+<dd>The - styles for the keyword group</dd>
+<dd>Whether - the keyword group is case sensitive ornot</dd>
+<dd>The - words to use for the keyword group</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1288" class="location">geshi.php at line 1288</a>
+
+<h3 id="disable_highlighting()">disable_highlighting</h3>
+<code class="signature">public  void <strong>disable_highlighting</strong>()</code>
+<div class="details">
+<p>Disables all highlighting</p><dl>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+<dt>Todo:</dt>
+<dd>Rewrite with array traversal</dd>
+<dt>Deprecated:</dt>
+<dd>In favour of enable_highlighting</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line805" class="location">geshi.php at line 805</a>
+
+<h3 id="enable_classes()">enable_classes</h3>
+<code class="signature">public  void <strong>enable_classes</strong>(mixed flag, boolean Whether)</code>
+<div class="details">
+<p>Sets whether CSS classes should be used to highlight the source. Default
+is off, calling this method with no arguments will turn it on</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to turn classes on or not</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1302" class="location">geshi.php at line 1302</a>
+
+<h3 id="enable_highlighting()">enable_highlighting</h3>
+<code class="signature">public  void <strong>enable_highlighting</strong>(mixed flag, boolean A)</code>
+<div class="details">
+<p>Enables all highlighting</p><p>The optional flag parameter was added in version 1.0.7.21 and can be used
+to enable (true) or disable (false) all highlighting.</p><dl>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+<dt>Parameters:</dt>
+<dd>A - flag specifying whether to enable or disable all highlighting</dd>
+<dt>Todo:</dt>
+<dd>Rewrite with array traversal</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1671" class="location">geshi.php at line 1671</a>
+
+<h3 id="enable_ids()">enable_ids</h3>
+<code class="signature">public  void <strong>enable_ids</strong>(mixed flag, boolean If)</code>
+<div class="details">
+<p>Whether CSS IDs should be added to each line</p><dl>
+<dt>Parameters:</dt>
+<dd>If - true, IDs will be added to each line.</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1661" class="location">geshi.php at line 1661</a>
+
+<h3 id="enable_important_blocks()">enable_important_blocks</h3>
+<code class="signature">public  void <strong>enable_important_blocks</strong>(mixed flag, boolean Tells)</code>
+<div class="details">
+<p>Sets whether context-important blocks are highlighted</p><dl>
+<dt>Parameters:</dt>
+<dd>Tells - whether to enable or disable highlighting of important blocks</dd>
+<dt>Todo:</dt>
+<dd>REMOVE THIS SHIZ FROM GESHI!</dd>
+<dt>Deprecated.</dt>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1600" class="location">geshi.php at line 1600</a>
+
+<h3 id="enable_inner_code_block()">enable_inner_code_block</h3>
+<code class="signature">public  void <strong>enable_inner_code_block</strong>(mixed flag, boolean Tells)</code>
+<div class="details">
+<p>Sets whether to force a surrounding block around
+the highlighted code or not</p><dl>
+<dt>Parameters:</dt>
+<dd>Tells - whether to enable or disable this feature</dd>
+<dt>Since:</dt>
+<dd>1.0.7.20</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1775" class="location">geshi.php at line 1775</a>
+
+<h3 id="enable_keyword_links()">enable_keyword_links</h3>
+<code class="signature">public  void <strong>enable_keyword_links</strong>(mixed enable, boolean If)</code>
+<div class="details">
+<p>Turns linking of keywords on or off.</p><dl>
+<dt>Parameters:</dt>
+<dd>If - true, links will be added to keywords</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line878" class="location">geshi.php at line 878</a>
+
+<h3 id="enable_line_numbers()">enable_line_numbers</h3>
+<code class="signature">public  void <strong>enable_line_numbers</strong>(mixed flag, mixed nth_row, int How, int Defines)</code>
+<div class="details">
+<p>Sets whether line numbers should be displayed.</p><p>Valid values for the first parameter are:</p><p>- GESHI_NO_LINE_NUMBERS: Line numbers will not be displayed
+- GESHI_NORMAL_LINE_NUMBERS: Line numbers will be displayed
+- GESHI_FANCY_LINE_NUMBERS: Fancy line numbers will be displayed</p><p>For fancy line numbers, the second parameter is used to signal which lines
+are to be fancy. For example, if the value of this parameter is 5 then every
+5th line will be fancy.</p><dl>
+<dt>Parameters:</dt>
+<dd>How - line numbers should be displayed</dd>
+<dd>Defines - which lines are fancy</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line896" class="location">geshi.php at line 896</a>
+
+<h3 id="enable_multiline_span()">enable_multiline_span</h3>
+<code class="signature">public  void <strong>enable_multiline_span</strong>(mixed flag, boolean Wether)</code>
+<div class="details">
+<p>Sets wether spans and other HTML markup generated by GeSHi can
+span over multiple lines or not. Defaults to true to reduce overhead.
+Set it to false if you want to manipulate the output or manually display
+the code in an ordered list.</p><dl>
+<dt>Parameters:</dt>
+<dd>Wether - multiline spans are allowed or not</dd>
+<dt>Since:</dt>
+<dd>1.0.7.22</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1275" class="location">geshi.php at line 1275</a>
+
+<h3 id="enable_strict_mode()">enable_strict_mode</h3>
+<code class="signature">public  void <strong>enable_strict_mode</strong>(mixed mode, boolean Whether)</code>
+<div class="details">
+<p>Enables/disables strict highlighting. Default is off, calling this
+method without parameters will turn it on. See documentation
+for more details on strict mode and where to use it.</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to enable strict mode or not</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line608" class="location">geshi.php at line 608</a>
+
+<h3 id="error()">error</h3>
+<code class="signature">public  string|false <strong>error</strong>()</code>
+<div class="details">
+<p>Returns an error message associated with the last GeSHi operation,
+or false if no error has occured</p><dl>
+<dt>Returns:</dt>
+<dd>An error message if there has been an error, else false</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line632" class="location">geshi.php at line 632</a>
+
+<h3 id="get_language_name()">get_language_name</h3>
+<code class="signature">public  string <strong>get_language_name</strong>()</code>
+<div class="details">
+<p>Gets a human-readable language name (thanks to Simon Patterson
+for the idea :))</p><dl>
+<dt>Returns:</dt>
+<dd>The name for the current language</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1329" class="location">geshi.php at line 1329</a>
+
+<h3 id="get_language_name_from_extension()">get_language_name_from_extension</h3>
+<code class="signature">public  void <strong>get_language_name_from_extension</strong>(mixed extension, mixed lookup, string The, array A)</code>
+<div class="details">
+<p>Given a file extension, this method returns either a valid geshi language
+name, or the empty string if it couldn't be found</p><dl>
+<dt>Parameters:</dt>
+<dd>The - extension to get a language name for</dd>
+<dd>A - lookup array to use instead of the default one</dd>
+<dt>Since:</dt>
+<dd>1.0.5</dd>
+<dt>Todo:</dt>
+<dd>Re-think about how this method works (maybe make it private and/or make it a extension->lang lookup?)</dd>
+<dd>static?</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line906" class="location">geshi.php at line 906</a>
+
+<h3 id="get_multiline_span()">get_multiline_span</h3>
+<code class="signature">public  bool <strong>get_multiline_span</strong>()</code>
+<div class="details">
+<p>Get current setting for multiline spans, see GeSHi->enable_multiline_span().</p><dl>
+<dt>See Also:</dt>
+<dd><a href="../geshi/geshi.html#enable_multiline_span()">enable_multiline_span</a></dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1258" class="location">geshi.php at line 1258</a>
+
+<h3 id="get_real_tab_width()">get_real_tab_width</h3>
+<code class="signature">public  int <strong>get_real_tab_width</strong>()</code>
+<div class="details">
+<p>Returns the tab width to use, based on the current language and user
+preference</p><dl>
+<dt>Returns:</dt>
+<dd>Tab width</dd>
+<dt>Since:</dt>
+<dd>1.0.7.20</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line4202" class="location">geshi.php at line 4202</a>
+
+<h3 id="get_stylesheet()">get_stylesheet</h3>
+<code class="signature">public static  string <strong>get_stylesheet</strong>(mixed economy_mode, boolean Whether)</code>
+<div class="details">
+<p>Returns a stylesheet for the highlighted code. If $economy mode
+is true, we only return the stylesheet declarations that matter for
+this code block instead of the whole thing</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to use economy mode or not</dd>
+<dt>Returns:</dt>
+<dd>A stylesheet built on the data for the current language</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line3543" class="location">geshi.php at line 3543</a>
+
+<h3 id="get_time()">get_time</h3>
+<code class="signature">public  double <strong>get_time</strong>()</code>
+<div class="details">
+<p>Gets the time taken to parse the code</p><dl>
+<dt>Returns:</dt>
+<dd>The time taken to parse the code</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1689" class="location">geshi.php at line 1689</a>
+
+<h3 id="highlight_lines_extra()">highlight_lines_extra</h3>
+<code class="signature">public  void <strong>highlight_lines_extra</strong>(mixed lines, mixed style, mixed An, string A)</code>
+<div class="details">
+<p>Specifies which lines to highlight extra</p><p>The extra style parameter was added in 1.0.7.21.</p><dl>
+<dt>Parameters:</dt>
+<dd>An - array of line numbers to highlight, or just a line number on its own.</dd>
+<dd>A - string specifying the style to use for this line. If null is specified, the default style is used. If false is specified, the line will be removed from special highlighting</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+<dt>Todo:</dt>
+<dd>Some data replication here that could be cut down on</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1425" class="location">geshi.php at line 1425</a>
+
+<h3 id="load_from_file()">load_from_file</h3>
+<code class="signature">public  void <strong>load_from_file</strong>(mixed file_name, mixed lookup, string The, array A)</code>
+<div class="details">
+<p>Given a file name, this method loads its contents in, and attempts
+to set the language automatically. An optional lookup table can be
+passed for looking up the language name. If not specified a default
+table is used</p><p>The language table is in the form
+<pre>array(
+'lang_name' => array('extension', 'extension', ...),
+'lang_name' ...
+);</pre></p><dl>
+<dt>Parameters:</dt>
+<dd>The - filename to load the source from</dd>
+<dd>A - lookup array to use instead of the default one</dd>
+<dt>Todo:</dt>
+<dd>Complete rethink of this and above method</dd>
+<dt>Since:</dt>
+<dd>1.0.5</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1529" class="location">geshi.php at line 1529</a>
+
+<h3 id="optimize_keyword_group()">optimize_keyword_group</h3>
+<code class="signature">public  void <strong>optimize_keyword_group</strong>(mixed key, int The)</code>
+<div class="details">
+<p>compile optimized regexp list for keyword group</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to compile & optimize</dd>
+<dt>Since:</dt>
+<dd>1.0.8</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line2011" class="location">geshi.php at line 2011</a>
+
+<h3 id="parse_code()">parse_code</h3>
+<code class="signature">public static  void <strong>parse_code</strong>()</code>
+<div class="details">
+<p>Returns the code in $this->source, highlighted and surrounded by the
+nessecary HTML.</p><p>This should only be called ONCE, cos it's SLOW! If you want to highlight
+the same source multiple times, you're better off doing a whole lot of
+str_replaces to replace the &lt;span&gt;s</p><dl>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1466" class="location">geshi.php at line 1466</a>
+
+<h3 id="remove_keyword()">remove_keyword</h3>
+<code class="signature">public  void <strong>remove_keyword</strong>(mixed key, mixed word, mixed recompile, string The, bool Wether)</code>
+<div class="details">
+<p>Removes a keyword from a keyword group</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to remove the keyword from</dd>
+<dd>The - word to remove from the keyword group</dd>
+<dd>Wether - to automatically recompile the optimized regexp list or not. Note: if you set this to false and @see GeSHi->parse_code() was already called once, for the current language, you have to manually call @see GeSHi->optimize_keyword_group() or the removed keyword will stay in cache and still be highlighted! On the other hand it might be too expensive to recompile the regexp list for every removal if you want to remove a lot of keywords.</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1512" class="location">geshi.php at line 1512</a>
+
+<h3 id="remove_keyword_group()">remove_keyword_group</h3>
+<code class="signature">public  void <strong>remove_keyword_group</strong>(mixed key, int The)</code>
+<div class="details">
+<p>Removes a keyword group</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to remove</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1036" class="location">geshi.php at line 1036</a>
+
+<h3 id="set_brackets_highlighting()">set_brackets_highlighting</h3>
+<code class="signature">public  void <strong>set_brackets_highlighting</strong>(mixed flag, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for brackets</p><p>This method is DEPRECATED: use set_symbols_highlighting instead.
+This method will be remove in 1.2.X</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to turn highlighting for brackets on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+<dt>Deprecated:</dt>
+<dd>In favour of set_symbols_highlighting</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1018" class="location">geshi.php at line 1018</a>
+
+<h3 id="set_brackets_style()">set_brackets_style</h3>
+<code class="signature">public  void <strong>set_brackets_style</strong>(mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for brackets. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><p>This method is DEPRECATED: use set_symbols_style instead.
+This method will be removed in 1.2.X</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style to make the brackets</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+<dt>Deprecated:</dt>
+<dd>In favour of set_symbols_style</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1216" class="location">geshi.php at line 1216</a>
+
+<h3 id="set_case_keywords()">set_case_keywords</h3>
+<code class="signature">public  void <strong>set_case_keywords</strong>(mixed case, int A)</code>
+<div class="details">
+<p>Sets the case that keywords should use when found. Use the constants:</p><p>- GESHI_CAPS_NO_CHANGE: leave keywords as-is
+- GESHI_CAPS_UPPER: convert all keywords to uppercase where found
+- GESHI_CAPS_LOWER: convert all keywords to lowercase where found</p><dl>
+<dt>Parameters:</dt>
+<dd>A - constant specifying what to do with matched keywords</dd>
+<dt>Since:</dt>
+<dd>1.0.1</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1202" class="location">geshi.php at line 1202</a>
+
+<h3 id="set_case_sensitivity()">set_case_sensitivity</h3>
+<code class="signature">public  void <strong>set_case_sensitivity</strong>(mixed key, mixed case, int The, boolean Whether)</code>
+<div class="details">
+<p>Sets whether a set of keywords are checked for in a case sensitive manner</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to change the case sensitivity of</dd>
+<dd>Whether - to check in a case sensitive manner or not</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line824" class="location">geshi.php at line 824</a>
+
+<h3 id="set_code_style()">set_code_style</h3>
+<code class="signature">public  void <strong>set_code_style</strong>(mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the style for the actual code. This should be a string
+containing valid stylesheet declarations. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><p>Note: Use this method to override any style changes you made to
+the line numbers if you are using line numbers, else the line of
+code will have the same style as the line number! Consult the
+GeSHi documentation for more information about this.</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style to use for actual code</dd>
+<dd>Whether - to merge the current styles with the new styles</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line972" class="location">geshi.php at line 972</a>
+
+<h3 id="set_comments_highlighting()">set_comments_highlighting</h3>
+<code class="signature">public  void <strong>set_comments_highlighting</strong>(mixed key, mixed flag, int The, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for comment groups</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the comment group to turn on or off</dd>
+<dd>Whether - to turn highlighting for that group on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line957" class="location">geshi.php at line 957</a>
+
+<h3 id="set_comments_style()">set_comments_style</h3>
+<code class="signature">public  void <strong>set_comments_style</strong>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for comment groups.  If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the comment group to change the styles of</dd>
+<dd>The - style to make the comments</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1763" class="location">geshi.php at line 1763</a>
+
+<h3 id="set_encoding()">set_encoding</h3>
+<code class="signature">public  void <strong>set_encoding</strong>(mixed encoding, string The)</code>
+<div class="details">
+<p>Sets the encoding used for htmlspecialchars(), for international
+support.</p><p>NOTE: This is not needed for now because htmlspecialchars() is not
+being used (it has a security hole in PHP4 that has not been patched).
+Maybe in a future version it may make a return for speed reasons, but
+I doubt it.</p><dl>
+<dt>Parameters:</dt>
+<dd>The - encoding to use for the source</dd>
+<dt>Since:</dt>
+<dd>1.0.3</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1000" class="location">geshi.php at line 1000</a>
+
+<h3 id="set_escape_characters_highlighting()">set_escape_characters_highlighting</h3>
+<code class="signature">public  void <strong>set_escape_characters_highlighting</strong>(mixed flag, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for escaped characters</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to turn highlighting for escape characters on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line986" class="location">geshi.php at line 986</a>
+
+<h3 id="set_escape_characters_style()">set_escape_characters_style</h3>
+<code class="signature">public  void <strong>set_escape_characters_style</strong>(mixed style, mixed preserve_defaults, mixed group, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for escaped characters. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style to make the escape characters</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1569" class="location">geshi.php at line 1569</a>
+
+<h3 id="set_footer_content()">set_footer_content</h3>
+<code class="signature">public  void <strong>set_footer_content</strong>(mixed content, string The)</code>
+<div class="details">
+<p>Sets the content of the footer block</p><dl>
+<dt>Parameters:</dt>
+<dd>The - content of the footer block</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1589" class="location">geshi.php at line 1589</a>
+
+<h3 id="set_footer_content_style()">set_footer_content_style</h3>
+<code class="signature">public  void <strong>set_footer_content_style</strong>(mixed style, string The)</code>
+<div class="details">
+<p>Sets the style for the footer content</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style for the footer content</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1559" class="location">geshi.php at line 1559</a>
+
+<h3 id="set_header_content()">set_header_content</h3>
+<code class="signature">public  void <strong>set_header_content</strong>(mixed content, string The)</code>
+<div class="details">
+<p>Sets the content of the header block</p><dl>
+<dt>Parameters:</dt>
+<dd>The - content of the header block</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1579" class="location">geshi.php at line 1579</a>
+
+<h3 id="set_header_content_style()">set_header_content_style</h3>
+<code class="signature">public  void <strong>set_header_content_style</strong>(mixed style, string The)</code>
+<div class="details">
+<p>Sets the style for the header content</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style for the header content</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line746" class="location">geshi.php at line 746</a>
+
+<h3 id="set_header_type()">set_header_type</h3>
+<code class="signature">public  void <strong>set_header_type</strong>(mixed type, int The)</code>
+<div class="details">
+<p>Sets the type of header to be used.</p><p>If GESHI_HEADER_DIV is used, the code is surrounded in a "div".This
+means more source code but more control over tab width and line-wrapping.
+GESHI_HEADER_PRE means that a "pre" is used - less source, but less
+control. Default is GESHI_HEADER_PRE.</p><p>From 1.0.7.2, you can use GESHI_HEADER_NONE to specify that no header code
+should be outputted.</p><dl>
+<dt>Parameters:</dt>
+<dd>The - type of header to be used</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1718" class="location">geshi.php at line 1718</a>
+
+<h3 id="set_highlight_lines_extra_style()">set_highlight_lines_extra_style</h3>
+<code class="signature">public  void <strong>set_highlight_lines_extra_style</strong>(mixed styles, string The)</code>
+<div class="details">
+<p>Sets the style for extra-highlighted lines</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style for extra-highlighted lines</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1649" class="location">geshi.php at line 1649</a>
+
+<h3 id="set_important_styles()">set_important_styles</h3>
+<code class="signature">public  void <strong>set_important_styles</strong>(mixed styles, string The)</code>
+<div class="details">
+<p>Sets styles for important parts of the code</p><dl>
+<dt>Parameters:</dt>
+<dd>The - styles to use on important parts of the code</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line942" class="location">geshi.php at line 942</a>
+
+<h3 id="set_keyword_group_highlighting()">set_keyword_group_highlighting</h3>
+<code class="signature">public  void <strong>set_keyword_group_highlighting</strong>(mixed key, mixed flag, int The, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for a keyword group</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to turn on or off</dd>
+<dd>Whether - to turn highlighting for that group on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line921" class="location">geshi.php at line 921</a>
+
+<h3 id="set_keyword_group_style()">set_keyword_group_style</h3>
+<code class="signature">public  void <strong>set_keyword_group_style</strong>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the style for a keyword group. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to change the styles of</dd>
+<dd>The - style to make the keywords</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line659" class="location">geshi.php at line 659</a>
+
+<h3 id="set_language()">set_language</h3>
+<code class="signature">public  void <strong>set_language</strong>(mixed language, mixed force_reset, string The)</code>
+<div class="details">
+<p>Sets the language for this object</p><dl>
+<dt>Note:</dt>
+<dd>since 1.0.8 this function won't reset language-settings by default anymore! if you need this set $force_reset = true</dd>
+<dt>Parameters:</dt>
+<dd>The - name of the language to use</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line703" class="location">geshi.php at line 703</a>
+
+<h3 id="set_language_path()">set_language_path</h3>
+<code class="signature">public  void <strong>set_language_path</strong>(mixed path, string The)</code>
+<div class="details">
+<p>Sets the path to the directory containing the language files. Note
+that this path is relative to the directory of the script that included
+geshi.php, NOT geshi.php itself.</p><dl>
+<dt>Parameters:</dt>
+<dd>The - path to the language directory</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+<dt>Deprecated:</dt>
+<dd>The path to the language files should now be automatically detected, so this method should no longer be needed. The 1.1.X branch handles manual setting of the path differently so this method will disappear in 1.2.0.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1728" class="location">geshi.php at line 1728</a>
+
+<h3 id="set_line_ending()">set_line_ending</h3>
+<code class="signature">public  void <strong>set_line_ending</strong>(mixed line_ending, string The)</code>
+<div class="details">
+<p>Sets the line-ending</p><dl>
+<dt>Parameters:</dt>
+<dd>The - new line-ending</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line844" class="location">geshi.php at line 844</a>
+
+<h3 id="set_line_style()">set_line_style</h3>
+<code class="signature">public  void <strong>set_line_style</strong>(mixed style1, mixed style2, mixed preserve_defaults, string The, boolean If)</code>
+<div class="details">
+<p>Sets the styles for the line numbers.</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style for the line numbers that are "normal"</dd>
+<dd>If - a string, this is the style of the line numbers that are "fancy", otherwise if boolean then this defines whether the normal styles should be merged with the new normal styles or not</dd>
+<dd>If - set, is the flag for whether to merge the "fancy" styles with the current styles or not</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1625" class="location">geshi.php at line 1625</a>
+
+<h3 id="set_link_styles()">set_link_styles</h3>
+<code class="signature">public  void <strong>set_link_styles</strong>(mixed type, mixed styles, int A, string The)</code>
+<div class="details">
+<p>Sets styles for links in code</p><dl>
+<dt>Parameters:</dt>
+<dd>A - constant that specifies what state the style is being set for - e.g. :hover or :visited</dd>
+<dd>The - styles to use for that state</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1635" class="location">geshi.php at line 1635</a>
+
+<h3 id="set_link_target()">set_link_target</h3>
+<code class="signature">public  void <strong>set_link_target</strong>(mixed target, string The)</code>
+<div class="details">
+<p>Sets the target for links in code</p><dl>
+<dt>Parameters:</dt>
+<dd>The - target for links in the code, e.g. _blank</dd>
+<dt>Since:</dt>
+<dd>1.0.3</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1162" class="location">geshi.php at line 1162</a>
+
+<h3 id="set_methods_highlighting()">set_methods_highlighting</h3>
+<code class="signature">public  void <strong>set_methods_highlighting</strong>(mixed flag, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for methods</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to turn highlighting for methods on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1148" class="location">geshi.php at line 1148</a>
+
+<h3 id="set_methods_style()">set_methods_style</h3>
+<code class="signature">public  void <strong>set_methods_style</strong>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for methods. $key is a number that references the
+appropriate "object splitter" - see the language file for the language
+you are highlighting to get this number. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the object splitter to change the styles of</dd>
+<dd>The - style to make the methods</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1131" class="location">geshi.php at line 1131</a>
+
+<h3 id="set_numbers_highlighting()">set_numbers_highlighting</h3>
+<code class="signature">public  void <strong>set_numbers_highlighting</strong>(mixed flag, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for numbers</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to turn highlighting for numbers on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1117" class="location">geshi.php at line 1117</a>
+
+<h3 id="set_numbers_style()">set_numbers_style</h3>
+<code class="signature">public  void <strong>set_numbers_style</strong>(mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for numbers. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style to make the numbers</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line783" class="location">geshi.php at line 783</a>
+
+<h3 id="set_overall_class()">set_overall_class</h3>
+<code class="signature">public  void <strong>set_overall_class</strong>(mixed class, string The)</code>
+<div class="details">
+<p>Sets the overall classname for this block of code. This
+class can then be used in a stylesheet to style this object's
+output</p><dl>
+<dt>Parameters:</dt>
+<dd>The - class name to use for this block of code</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line794" class="location">geshi.php at line 794</a>
+
+<h3 id="set_overall_id()">set_overall_id</h3>
+<code class="signature">public  void <strong>set_overall_id</strong>(mixed id, string The)</code>
+<div class="details">
+<p>Sets the overall id for this block of code. This id can then
+be used in a stylesheet to style this object's output</p><dl>
+<dt>Parameters:</dt>
+<dd>The - ID to use for this block of code</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line767" class="location">geshi.php at line 767</a>
+
+<h3 id="set_overall_style()">set_overall_style</h3>
+<code class="signature">public  void <strong>set_overall_style</strong>(mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for the code that will be outputted
+when this object is parsed. The style should be a
+string of valid stylesheet declarations</p><dl>
+<dt>Parameters:</dt>
+<dd>The - overall style for the outputted code block</dd>
+<dd>Whether - to merge the styles with the current styles or not</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1191" class="location">geshi.php at line 1191</a>
+
+<h3 id="set_regexps_highlighting()">set_regexps_highlighting</h3>
+<code class="signature">public  void <strong>set_regexps_highlighting</strong>(mixed key, mixed flag, int The, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for regexps</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the regular expression group to turn on or off</dd>
+<dd>Whether - to turn highlighting for the regular expression group on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1176" class="location">geshi.php at line 1176</a>
+
+<h3 id="set_regexps_style()">set_regexps_style</h3>
+<code class="signature">public  void <strong>set_regexps_style</strong>(mixed key, mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for regexps. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style to make the regular expression matches</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line645" class="location">geshi.php at line 645</a>
+
+<h3 id="set_source()">set_source</h3>
+<code class="signature">public  void <strong>set_source</strong>(mixed source, string The)</code>
+<div class="details">
+<p>Sets the source code for this object</p><dl>
+<dt>Parameters:</dt>
+<dd>The - source code to highlight</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1103" class="location">geshi.php at line 1103</a>
+
+<h3 id="set_strings_highlighting()">set_strings_highlighting</h3>
+<code class="signature">public  void <strong>set_strings_highlighting</strong>(mixed flag, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for strings</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to turn highlighting for strings on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1089" class="location">geshi.php at line 1089</a>
+
+<h3 id="set_strings_style()">set_strings_style</h3>
+<code class="signature">public  void <strong>set_strings_style</strong>(mixed style, mixed preserve_defaults, string The, boolean Whether)</code>
+<div class="details">
+<p>Sets the styles for strings. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style to make the escape characters</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1071" class="location">geshi.php at line 1071</a>
+
+<h3 id="set_symbols_highlighting()">set_symbols_highlighting</h3>
+<code class="signature">public  void <strong>set_symbols_highlighting</strong>(mixed flag, boolean Whether)</code>
+<div class="details">
+<p>Turns highlighting on/off for symbols</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to turn highlighting for symbols on or off</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1051" class="location">geshi.php at line 1051</a>
+
+<h3 id="set_symbols_style()">set_symbols_style</h3>
+<code class="signature">public  void <strong>set_symbols_style</strong>(mixed style, mixed preserve_defaults, mixed group, string The, boolean Whether, int Tells)</code>
+<div class="details">
+<p>Sets the styles for symbols. If $preserve_defaults is
+true, then styles are merged with the default styles, with the
+user defined styles having priority</p><dl>
+<dt>Parameters:</dt>
+<dd>The - style to make the symbols</dd>
+<dd>Whether - to merge the new styles with the old or just to overwrite them</dd>
+<dd>Tells - the group of symbols for which style should be set.</dd>
+<dt>Since:</dt>
+<dd>1.0.1</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1231" class="location">geshi.php at line 1231</a>
+
+<h3 id="set_tab_width()">set_tab_width</h3>
+<code class="signature">public  void <strong>set_tab_width</strong>(mixed width, int The)</code>
+<div class="details">
+<p>Sets how many spaces a tab is substituted for</p><p>Widths below zero are ignored</p><dl>
+<dt>Parameters:</dt>
+<dd>The - tab width</dd>
+<dt>Since:</dt>
+<dd>1.0.0</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1613" class="location">geshi.php at line 1613</a>
+
+<h3 id="set_url_for_keyword_group()">set_url_for_keyword_group</h3>
+<code class="signature">public  void <strong>set_url_for_keyword_group</strong>(mixed group, mixed url, string The)</code>
+<div class="details">
+<p>Sets the base URL to be used for keywords</p><dl>
+<dt>Parameters:</dt>
+<dd>The - key of the keyword group to set the URL for</dd>
+<dd>The - URL to set for the group. If {FNAME} is in the url somewhere, it is replaced by the keyword that the URL is being made for</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1247" class="location">geshi.php at line 1247</a>
+
+<h3 id="set_use_language_tab_width()">set_use_language_tab_width</h3>
+<code class="signature">public  void <strong>set_use_language_tab_width</strong>(mixed use, boolean Whether)</code>
+<div class="details">
+<p>Sets whether or not to use tab-stop width specifed by language</p><dl>
+<dt>Parameters:</dt>
+<dd>Whether - to use language-specific tab-stop widths</dd>
+<dt>Since:</dt>
+<dd>1.0.7.20</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line1747" class="location">geshi.php at line 1747</a>
+
+<h3 id="start_line_numbers_at()">start_line_numbers_at</h3>
+<code class="signature">public  void <strong>start_line_numbers_at</strong>(mixed number, int The)</code>
+<div class="details">
+<p>Sets what number line numbers should start at. Should
+be a positive integer, and will be converted to one.</p><p><b>Warning:</b> Using this method will add the "start"
+attribute to the &lt;ol&gt; that is used for line numbering.
+This is <b>not</b> valid XHTML strict, so if that's what you
+care about then don't use this method. Firefox is getting
+support for the CSS method of doing this in 1.1 and Opera
+has support for the CSS method, but (of course) IE doesn't
+so it's not worth doing it the CSS way yet.</p><dl>
+<dt>Parameters:</dt>
+<dd>The - number to start line numbers at</dd>
+<dt>Since:</dt>
+<dd>1.0.2</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../geshi/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../geshi/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../geshi/geshi.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

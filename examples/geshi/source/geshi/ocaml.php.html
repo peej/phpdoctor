@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:26:23 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>geshi/ocaml.php (GeSHi)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/ocaml.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>geshi/ocaml.php</h1>
+<div class="comment" id="overview_description"><p>ocaml.php
+----------
+Author: Flaie (fireflaie@gmail.com)
+Copyright: (c) 2005 Flaie, Nigel McNie (http://qbnz.com/highlighter)
+Release Version: 1.0.8.3
+Date Started: 2005/08/27</p><p>OCaml (Objective Caml) language file for GeSHi.</p><p>CHANGES
+-------
+2008/03/29 (1.0.7.22)
+-  Fixed warnings resulting from missing style information
+2005/08/27 (1.0.0)
+-  First Release</p><p>TODO (updated 2005/08/27)
+-------------------------</p><p></p><p>This file is part of GeSHi.</p><p>GeSHi is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p><p>GeSHi is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License
+along with GeSHi; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*************************************************************************************
+<a name="line3"></a> * ocaml.php
+<a name="line4"></a> * ----------
+<a name="line5"></a> * Author: Flaie (fireflaie@gmail.com)
+<a name="line6"></a> * Copyright: (c) 2005 Flaie, Nigel McNie (http://qbnz.com/highlighter)
+<a name="line7"></a> * Release Version: 1.0.8.3
+<a name="line8"></a> * Date Started: 2005/08/27
+<a name="line9"></a> *
+<a name="line10"></a> * OCaml (Objective Caml) language file for GeSHi.
+<a name="line11"></a> *
+<a name="line12"></a> * CHANGES
+<a name="line13"></a> * -------
+<a name="line14"></a> * 2008/03/29 (1.0.7.22)
+<a name="line15"></a> *   -  Fixed warnings resulting from missing style information
+<a name="line16"></a> * 2005/08/27 (1.0.0)
+<a name="line17"></a> *   -  First Release
+<a name="line18"></a> *
+<a name="line19"></a> * TODO (updated 2005/08/27)
+<a name="line20"></a> * -------------------------
+<a name="line21"></a> *
+<a name="line22"></a> *************************************************************************************
+<a name="line23"></a> *
+<a name="line24"></a> *   This file is part of GeSHi.
+<a name="line25"></a> *
+<a name="line26"></a> *   GeSHi is free software; you can redistribute it and/or modify
+<a name="line27"></a> *   it under the terms of the GNU General Public License as published by
+<a name="line28"></a> *   the Free Software Foundation; either version 2 of the License, or
+<a name="line29"></a> *   (at your option) any later version.
+<a name="line30"></a> *
+<a name="line31"></a> *   GeSHi is distributed in the hope that it will be useful,
+<a name="line32"></a> *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line33"></a> *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line34"></a> *   GNU General Public License for more details.
+<a name="line35"></a> *
+<a name="line36"></a> *   You should have received a copy of the GNU General Public License
+<a name="line37"></a> *   along with GeSHi; if not, write to the Free Software
+<a name="line38"></a> *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line39"></a> *
+<a name="line40"></a> ************************************************************************************/</span>
+<a name="line41"></a>&nbsp;
+<a name="line42"></a><span style="color: #000088;">$language_data</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a> <span style="color: #009900;">&#40;</span>
+<a name="line43"></a>    <span style="color: #0000ff;">'LANG_NAME'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'OCaml'</span><span style="color: #339933;">,</span>
+<a name="line44"></a>    <span style="color: #0000ff;">'COMMENT_SINGLE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line45"></a>    <span style="color: #0000ff;">'COMMENT_MULTI'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'(*'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'*)'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line46"></a>    <span style="color: #0000ff;">'CASE_KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span>
+<a name="line47"></a>    <span style="color: #0000ff;">'QUOTEMARKS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'&quot;'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line48"></a>    <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">&quot;&quot;</span><span style="color: #339933;">,</span>
+<a name="line49"></a>    <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line50"></a>        <span style="color: #666666; font-style: italic;">/* main OCaml keywords */</span>
+<a name="line51"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line52"></a>            <span style="color: #0000ff;">'and'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'as'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'asr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'begin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'class'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'closed'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'constraint'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'do'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'done'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'downto'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'else'</span><span style="color: #339933;">,</span>
+<a name="line53"></a>            <span style="color: #0000ff;">'end'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'exception'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'external'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'failwith'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'false'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'for'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'fun'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'function'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'functor'</span><span style="color: #339933;">,</span>
+<a name="line54"></a>            <span style="color: #0000ff;">'if'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'in'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'include'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'inherit'</span><span style="color: #339933;">,</span>  <span style="color: #0000ff;">'incr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'land'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'let'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'load'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'los'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lsl'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lsr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'lxor'</span><span style="color: #339933;">,</span>
+<a name="line55"></a>            <span style="color: #0000ff;">'match'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'method'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'mod'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'module'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'mutable'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'new'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'not'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'of'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'open'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'option'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'or'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'parser'</span><span style="color: #339933;">,</span>
+<a name="line56"></a>            <span style="color: #0000ff;">'private'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ref'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'rec'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'raise'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'regexp'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'sig'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'struct'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'stdout'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'stdin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'stderr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'then'</span><span style="color: #339933;">,</span>
+<a name="line57"></a>            <span style="color: #0000ff;">'to'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'true'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'try'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'type'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'val'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'virtual'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'when'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'while'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'with'</span>
+<a name="line58"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line59"></a>        <span style="color: #666666; font-style: italic;">/* define names of main librarys, so we can link to it */</span>
+<a name="line60"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line61"></a>            <span style="color: #0000ff;">'Arg'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Arith_status'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Array'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ArrayLabels'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Big_int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Bigarray'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Buffer'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Callback'</span><span style="color: #339933;">,</span>
+<a name="line62"></a>            <span style="color: #0000ff;">'CamlinternalOO'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Char'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Complex'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Condition'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Dbm'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Digest'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Dynlink'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Event'</span><span style="color: #339933;">,</span>
+<a name="line63"></a>            <span style="color: #0000ff;">'Filename'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Format'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Gc'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Genlex'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Graphics'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'GraphicsX11'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Hashtbl'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Int32'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Int64'</span><span style="color: #339933;">,</span>
+<a name="line64"></a>            <span style="color: #0000ff;">'Lazy'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Lexing'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'List'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ListLabels'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Map'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Marshal'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MoreLabels'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Mutex'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Nativeint'</span><span style="color: #339933;">,</span>
+<a name="line65"></a>            <span style="color: #0000ff;">'Num'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Obj'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Oo'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Parsing'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Pervasives'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Printexc'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Printf'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Queue'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Random'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Scanf'</span><span style="color: #339933;">,</span>
+<a name="line66"></a>            <span style="color: #0000ff;">'Set'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Sort'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Stack'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'StdLabels'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Str'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Stream'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'String'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'StringLabels'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Sys'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Thread'</span><span style="color: #339933;">,</span>
+<a name="line67"></a>            <span style="color: #0000ff;">'ThreadUnix'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Tk'</span>
+<a name="line68"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line69"></a>        <span style="color: #666666; font-style: italic;">/* just link to the Pervasives functions library, cause it's the default opened library when starting OCaml */</span>
+<a name="line70"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line71"></a>            <span style="color: #0000ff;">'abs'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'abs_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'acos'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'asin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'at_exit'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'atan'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'atan2'</span><span style="color: #339933;">,</span>
+<a name="line72"></a>            <span style="color: #0000ff;">'bool_of_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ceil'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'char_of_int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'classify_float'</span><span style="color: #339933;">,</span>
+<a name="line73"></a>            <span style="color: #0000ff;">'close_in'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'close_in_noerr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'close_out'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'close_out_noerr'</span><span style="color: #339933;">,</span>
+<a name="line74"></a>            <span style="color: #0000ff;">'compare'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'cos'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'cosh'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'decr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'epsilon_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'exit'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'exp'</span><span style="color: #339933;">,</span>
+<a name="line75"></a>            <span style="color: #0000ff;">'float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'float_of_int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'float_of_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'floor'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'flush'</span><span style="color: #339933;">,</span>
+<a name="line76"></a>            <span style="color: #0000ff;">'flush_all'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'format_of_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'frexp'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'fst'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ignore'</span><span style="color: #339933;">,</span>
+<a name="line77"></a>            <span style="color: #0000ff;">'in_channel_length'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'infinity'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'input'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'input_binary_int'</span><span style="color: #339933;">,</span>
+<a name="line78"></a>            <span style="color: #0000ff;">'input_byte'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'input_char'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'input_line'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'input_value'</span><span style="color: #339933;">,</span>
+<a name="line79"></a>            <span style="color: #0000ff;">'int_of_char'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'int_of_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'int_of_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'invalid_arg'</span><span style="color: #339933;">,</span>
+<a name="line80"></a>            <span style="color: #0000ff;">'ldexp'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'log'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'log10'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'max'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'max_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'max_int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'min'</span><span style="color: #339933;">,</span>
+<a name="line81"></a>            <span style="color: #0000ff;">'min_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'min_int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'mod_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'modf'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nan'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'open_in'</span><span style="color: #339933;">,</span>
+<a name="line82"></a>            <span style="color: #0000ff;">'open_in_bin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'open_in_gen'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'open_out'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'open_out_bin'</span><span style="color: #339933;">,</span>
+<a name="line83"></a>            <span style="color: #0000ff;">'open_out_gen'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'out_channel_length'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'output'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'output_binary_int'</span><span style="color: #339933;">,</span>
+<a name="line84"></a>            <span style="color: #0000ff;">'output_byte'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'output_char'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'output_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'output_value'</span><span style="color: #339933;">,</span>
+<a name="line85"></a>            <span style="color: #0000ff;">'pos_in'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'pos_out'</span><span style="color: #339933;">,</span>  <span style="color: #0000ff;">'pred'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'prerr_char'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'prerr_endline'</span><span style="color: #339933;">,</span>
+<a name="line86"></a>            <span style="color: #0000ff;">'prerr_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'prerr_int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'prerr_newline'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'prerr_string'</span><span style="color: #339933;">,</span>
+<a name="line87"></a>            <span style="color: #0000ff;">'print_char'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'print_endline'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'print_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'print_int'</span><span style="color: #339933;">,</span>
+<a name="line88"></a>            <span style="color: #0000ff;">'print_newline'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'print_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'read_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'read_int'</span><span style="color: #339933;">,</span>
+<a name="line89"></a>            <span style="color: #0000ff;">'read_line'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'really_input'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'seek_in'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'seek_out'</span><span style="color: #339933;">,</span>
+<a name="line90"></a>            <span style="color: #0000ff;">'set_binary_mode_in'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'set_binary_mode_out'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'sin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'sinh'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'snd'</span><span style="color: #339933;">,</span>
+<a name="line91"></a>            <span style="color: #0000ff;">'sqrt'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'string_of_bool'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'string_of_float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'string_of_format'</span><span style="color: #339933;">,</span>
+<a name="line92"></a>            <span style="color: #0000ff;">'string_of_int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'succ'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'tan'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'tanh'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'truncate'</span>
+<a name="line93"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line94"></a>        <span style="color: #666666; font-style: italic;">/* here Pervasives Types */</span>
+<a name="line95"></a>        <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a> <span style="color: #009900;">&#40;</span>
+<a name="line96"></a>            <span style="color: #0000ff;">'fpclass'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'in_channel'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'out_channel'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'open_flag'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Sys_error'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'format'</span>
+<a name="line97"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line98"></a>        <span style="color: #666666; font-style: italic;">/* finally Pervasives Exceptions */</span>
+<a name="line99"></a>        <span style="color: #cc66cc;">5</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a> <span style="color: #009900;">&#40;</span>
+<a name="line100"></a>            <span style="color: #0000ff;">'Exit'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Invalid_Argument'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Failure'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Division_by_zero'</span>
+<a name="line101"></a>            <span style="color: #009900;">&#41;</span>
+<a name="line102"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line103"></a>    <span style="color: #666666; font-style: italic;">/* highlighting symbols is really important in OCaml */</span>
+<a name="line104"></a>    <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line105"></a>        <span style="color: #0000ff;">';'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'!'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">':'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'.'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'%'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'^'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'*'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'-'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'+'</span><span style="color: #339933;">,</span>
+<a name="line106"></a>        <span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&lt;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'('</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">')'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'['</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">']'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&amp;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'|'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'#'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;'&quot;</span>
+<a name="line107"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line108"></a>    <span style="color: #0000ff;">'CASE_SENSITIVE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line109"></a>        GESHI_COMMENTS <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line110"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line111"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">/* functions name are case sensitive */</span>
+<a name="line112"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">/* types name too */</span>
+<a name="line113"></a>        <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">/* pervasives types */</span>
+<a name="line114"></a>        <span style="color: #cc66cc;">5</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span>  <span style="color: #666666; font-style: italic;">/* pervasives exceptions */</span>
+<a name="line115"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line116"></a>    <span style="color: #0000ff;">'STYLES'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line117"></a>        <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line118"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #06c; font-weight: bold;'</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">/* nice blue */</span>
+<a name="line119"></a>            <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #06c; font-weight: bold;'</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">/* nice blue */</span>
+<a name="line120"></a>            <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #06c; font-weight: bold;'</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">/* nice blue */</span>
+<a name="line121"></a>            <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #06c; font-weight: bold;'</span><span style="color: #339933;">,</span> <span style="color: #666666; font-style: italic;">/* nice blue */</span>
+<a name="line122"></a>            <span style="color: #cc66cc;">5</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #06c; font-weight: bold;'</span> <span style="color: #666666; font-style: italic;">/* nice blue */</span>
+<a name="line123"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line124"></a>        <span style="color: #0000ff;">'COMMENTS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line125"></a>            <span style="color: #0000ff;">'MULTI'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #5d478b; font-style: italic;'</span> <span style="color: #666666; font-style: italic;">/* light purple */</span>
+<a name="line126"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line127"></a>        <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line128"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line129"></a>        <span style="color: #0000ff;">'BRACKETS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line130"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #6c6;'</span>
+<a name="line131"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line132"></a>        <span style="color: #0000ff;">'STRINGS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line133"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #3cb371;'</span> <span style="color: #666666; font-style: italic;">/* nice green */</span>
+<a name="line134"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line135"></a>        <span style="color: #0000ff;">'NUMBERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line136"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #c6c;'</span> <span style="color: #666666; font-style: italic;">/* pink */</span>
+<a name="line137"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line138"></a>        <span style="color: #0000ff;">'METHODS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line139"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #060;'</span> <span style="color: #666666; font-style: italic;">/* dark green */</span>
+<a name="line140"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line141"></a>        <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line142"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line143"></a>        <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line144"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color: #a52a2a;'</span> <span style="color: #666666; font-style: italic;">/* maroon */</span>
+<a name="line145"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line146"></a>        <span style="color: #0000ff;">'SCRIPT'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line147"></a>            <span style="color: #009900;">&#41;</span>
+<a name="line148"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line149"></a>    <span style="color: #0000ff;">'URLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line150"></a>        <span style="color: #666666; font-style: italic;">/* some of keywords are Pervasives functions (land, lxor, asr, ...) */</span>
+<a name="line151"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line152"></a>        <span style="color: #666666; font-style: italic;">/* link to the wanted library */</span>
+<a name="line153"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'http://caml.inria.fr/pub/docs/manual-ocaml/libref/{FNAME}.html'</span><span style="color: #339933;">,</span>
+<a name="line154"></a>        <span style="color: #666666; font-style: italic;">/* link to Pervasives functions */</span>
+<a name="line155"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html#VAL{FNAME}'</span><span style="color: #339933;">,</span>
+<a name="line156"></a>        <span style="color: #666666; font-style: italic;">/* link to Pervasives type */</span>
+<a name="line157"></a>        <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html#TYPE{FNAME}'</span><span style="color: #339933;">,</span>
+<a name="line158"></a>        <span style="color: #666666; font-style: italic;">/* link to Pervasives exceptions */</span>
+<a name="line159"></a>        <span style="color: #cc66cc;">5</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html#EXCEPTION{FNAME}'</span>
+<a name="line160"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line161"></a>    <span style="color: #0000ff;">'OOLANG'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line162"></a>    <span style="color: #0000ff;">'OBJECT_SPLITTERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line163"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'.'</span>
+<a name="line164"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line165"></a>    <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line166"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line167"></a>    <span style="color: #0000ff;">'STRICT_MODE_APPLIES'</span> <span style="color: #339933;">=&gt;</span> GESHI_NEVER<span style="color: #339933;">,</span>
+<a name="line168"></a>    <span style="color: #0000ff;">'SCRIPT_DELIMITERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line169"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line170"></a>    <span style="color: #0000ff;">'HIGHLIGHT_STRICT_BLOCK'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line171"></a>        <span style="color: #009900;">&#41;</span>
+<a name="line172"></a><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line173"></a>&nbsp;
+<a name="line174"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line175"></a>&nbsp;</pre>
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/ocaml.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

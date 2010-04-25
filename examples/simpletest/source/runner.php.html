@@ -1,0 +1,361 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:09 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>runner.php (SimpleTest)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/runner.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>runner.php</h1>
+<div class="comment" id="overview_description"><p>Base include file for SimpleTest</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line3"></a>     *	Base include file for SimpleTest
+<a name="line4"></a>     *	@package	SimpleTest
+<a name="line5"></a>     *	@subpackage	UnitTester
+<a name="line6"></a>     *	@version	$Id: runner.php,v 1.29 2005/01/11 04:03:46 lastcraft Exp $
+<a name="line7"></a>     */</span>
+<a name="line8"></a>&nbsp;
+<a name="line9"></a>    <span style="color: #009933; font-style: italic;">/**#@+
+<a name="line10"></a>     * Includes SimpleTest files and defined the root constant
+<a name="line11"></a>     * for dependent libraries.
+<a name="line12"></a>     */</span>
+<a name="line13"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/errors.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line14"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/options.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line15"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/scorer.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line16"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/expectation.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line17"></a>    <span style="color: #b1b100;">require_once</span><span style="color: #009900;">&#40;</span><a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/dumper.php'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line18"></a>    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <a href="http://www.php.net/defined"><span style="color: #990000;">defined</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'SIMPLE_TEST'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line19"></a>        <a href="http://www.php.net/define"><span style="color: #990000;">define</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'SIMPLE_TEST'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/dirname"><span style="color: #990000;">dirname</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">__FILE__</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line20"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line21"></a>    <span style="color: #009933; font-style: italic;">/**#@-*/</span>
+<a name="line22"></a>&nbsp;
+<a name="line23"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line24"></a>     *    This is called by the class runner to run a
+<a name="line25"></a>     *    single test method. Will also run the setUp()
+<a name="line26"></a>     *    and tearDown() methods.
+<a name="line27"></a>	 *	  @package SimpleTest
+<a name="line28"></a>	 *	  @subpackage UnitTester
+<a name="line29"></a>     */</span>
+<a name="line30"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleInvoker <span style="color: #009900;">&#123;</span>
+<a name="line31"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_test_case</span><span style="color: #339933;">;</span>
+<a name="line32"></a>&nbsp;
+<a name="line33"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line34"></a>         *    Stashes the test case for later.
+<a name="line35"></a>         *    @param SimpleTestCase $test_case  Test case to run.
+<a name="line36"></a>         */</span>
+<a name="line37"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleInvoker<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$test_case</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line38"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$test_case</span><span style="color: #339933;">;</span>
+<a name="line39"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line40"></a>&nbsp;
+<a name="line41"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line42"></a>         *    Accessor for test case being run.
+<a name="line43"></a>         *    @return SimpleTestCase    Test case.
+<a name="line44"></a>         *    @access public
+<a name="line45"></a>         */</span>
+<a name="line46"></a>        <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>getTestCase<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line47"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">;</span>
+<a name="line48"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line49"></a>&nbsp;
+<a name="line50"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line51"></a>         *    Invokes a test method and buffered with setUp()
+<a name="line52"></a>         *    and tearDown() calls.
+<a name="line53"></a>         *    @param string $method    Test method to call.
+<a name="line54"></a>         *    @access public
+<a name="line55"></a>         */</span>
+<a name="line56"></a>        <span style="color: #000000; font-weight: bold;">function</span> invoke<span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line57"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">-&gt;</span><span style="color: #004000;">setUp</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line58"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">-&gt;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line59"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">-&gt;</span><span style="color: #004000;">tearDown</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line60"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line61"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line62"></a>&nbsp;
+<a name="line63"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line64"></a>     *    Do nothing decorator. Just passes the invocation
+<a name="line65"></a>     *    straight through.
+<a name="line66"></a>	 *	  @package SimpleTest
+<a name="line67"></a>	 *	  @subpackage UnitTester
+<a name="line68"></a>     */</span>
+<a name="line69"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleInvokerDecorator <span style="color: #009900;">&#123;</span>
+<a name="line70"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_invoker</span><span style="color: #339933;">;</span>
+<a name="line71"></a>&nbsp;
+<a name="line72"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line73"></a>         *    Stores the invoker to wrap.
+<a name="line74"></a>         *    @param SimpleInvoker $invoker  Test method runner.
+<a name="line75"></a>         */</span>
+<a name="line76"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleInvokerDecorator<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$invoker</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line77"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_invoker <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$invoker</span><span style="color: #339933;">;</span>
+<a name="line78"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line79"></a>&nbsp;
+<a name="line80"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line81"></a>         *    Accessor for test case being run.
+<a name="line82"></a>         *    @return SimpleTestCase    Test case.
+<a name="line83"></a>         *    @access public
+<a name="line84"></a>         */</span>
+<a name="line85"></a>        <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>getTestCase<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line86"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_invoker<span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTestCase</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line87"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line88"></a>&nbsp;
+<a name="line89"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line90"></a>         *    Invokes a test method and buffered with setUp()
+<a name="line91"></a>         *    and tearDown() calls.
+<a name="line92"></a>         *    @param string $method    Test method to call.
+<a name="line93"></a>         *    @access public
+<a name="line94"></a>         */</span>
+<a name="line95"></a>        <span style="color: #000000; font-weight: bold;">function</span> invoke<span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line96"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_invoker<span style="color: #339933;">-&gt;</span><span style="color: #004000;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line97"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line98"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line99"></a>&nbsp;
+<a name="line100"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line101"></a>     *    Extension that traps errors into an error queue.
+<a name="line102"></a>	 *	  @package SimpleTest
+<a name="line103"></a>	 *	  @subpackage UnitTester
+<a name="line104"></a>     */</span>
+<a name="line105"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleErrorTrappingInvoker <span style="color: #000000; font-weight: bold;">extends</span> SimpleInvokerDecorator <span style="color: #009900;">&#123;</span>
+<a name="line106"></a>&nbsp;
+<a name="line107"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line108"></a>        /**
+<a name="line109"></a>         *    Stores the invoker to wrap.
+<a name="line110"></a>         *    @param SimpleInvoker $invoker  Test method runner.
+<a name="line111"></a>         */</span>
+<a name="line112"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleErrorTrappingInvoker<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$invoker</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line113"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">SimpleInvokerDecorator</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$invoker</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line114"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line115"></a>&nbsp;
+<a name="line116"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line117"></a>         *    Invokes a test method and dispatches any
+<a name="line118"></a>         *    untrapped errors. Called back from
+<a name="line119"></a>         *    the visiting runner.
+<a name="line120"></a>         *    @param string $method    Test method to call.
+<a name="line121"></a>         *    @access public
+<a name="line122"></a>         */</span>
+<a name="line123"></a>        <span style="color: #000000; font-weight: bold;">function</span> invoke<span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line124"></a>            <a href="http://www.php.net/set_error_handler"><span style="color: #990000;">set_error_handler</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'simpleTestErrorHandler'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line125"></a>            parent<span style="color: #339933;">::</span><span style="color: #004000;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line126"></a>            <span style="color: #000088;">$queue</span> <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span>SimpleErrorQueue<span style="color: #339933;">::</span><span style="color: #004000;">instance</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line127"></a>            <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/list"><span style="color: #990000;">list</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$file</span><span style="color: #339933;">,</span> <span style="color: #000088;">$line</span><span style="color: #339933;">,</span> <span style="color: #000088;">$globals</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$queue</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">extract</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line128"></a>                <span style="color: #000088;">$test_case</span> <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTestCase</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line129"></a>                <span style="color: #000088;">$test_case</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">error</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$severity</span><span style="color: #339933;">,</span> <span style="color: #000088;">$message</span><span style="color: #339933;">,</span> <span style="color: #000088;">$file</span><span style="color: #339933;">,</span> <span style="color: #000088;">$line</span><span style="color: #339933;">,</span> <span style="color: #000088;">$globals</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line130"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line131"></a>            <a href="http://www.php.net/restore_error_handler"><span style="color: #990000;">restore_error_handler</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line132"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line133"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line134"></a>&nbsp;
+<a name="line135"></a>    <span style="color: #009933; font-style: italic;">/**
+<a name="line136"></a>     *    The standard runner. Will run every method starting
+<a name="line137"></a>     *    with test Basically the
+<a name="line138"></a>     *    Mediator pattern.
+<a name="line139"></a>	 *	  @package SimpleTest
+<a name="line140"></a>	 *	  @subpackage UnitTester
+<a name="line141"></a>     */</span>
+<a name="line142"></a>    <span style="color: #000000; font-weight: bold;">class</span> SimpleRunner <span style="color: #009900;">&#123;</span>
+<a name="line143"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_test_case</span><span style="color: #339933;">;</span>
+<a name="line144"></a>        <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_scorer</span><span style="color: #339933;">;</span>
+<a name="line145"></a>&nbsp;
+<a name="line146"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line147"></a>         *    Takes in the test case and reporter to mediate between.
+<a name="line148"></a>         *    @param SimpleTestCase $test_case  Test case to run.
+<a name="line149"></a>         *    @param SimpleScorer $scorer       Reporter to receive events.
+<a name="line150"></a>         */</span>
+<a name="line151"></a>        <span style="color: #000000; font-weight: bold;">function</span> SimpleRunner<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$test_case</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$scorer</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line152"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$test_case</span><span style="color: #339933;">;</span>
+<a name="line153"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$scorer</span><span style="color: #339933;">;</span>
+<a name="line154"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line155"></a>&nbsp;
+<a name="line156"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line157"></a>         *    Accessor for test case being run.
+<a name="line158"></a>         *    @return SimpleTestCase    Test case.
+<a name="line159"></a>         *    @access public
+<a name="line160"></a>         */</span>
+<a name="line161"></a>        <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>getTestCase<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line162"></a>            <span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">;</span>
+<a name="line163"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line164"></a>&nbsp;
+<a name="line165"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line166"></a>         *    Runs the test methods in the test case.
+<a name="line167"></a>         *    @param SimpleTest $test_case    Test case to run test on.
+<a name="line168"></a>         *    @param string $method           Name of test method.
+<a name="line169"></a>         *    @access public
+<a name="line170"></a>         */</span>
+<a name="line171"></a>        <span style="color: #000000; font-weight: bold;">function</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line172"></a>            <span style="color: #000088;">$methods</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/get_class_methods"><span style="color: #990000;">get_class_methods</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/get_class"><span style="color: #990000;">get_class</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line173"></a>            <span style="color: #000088;">$invoker</span> <span style="color: #339933;">=</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">-&gt;</span><span style="color: #004000;">createInvoker</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line174"></a>            <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$methods</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line175"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_isTest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line176"></a>                    <span style="color: #b1b100;">continue</span><span style="color: #339933;">;</span>
+<a name="line177"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line178"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_isConstructor<span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line179"></a>                    <span style="color: #b1b100;">continue</span><span style="color: #339933;">;</span>
+<a name="line180"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line181"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintMethodStart</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line182"></a>                <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">shouldInvoke</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">-&gt;</span><span style="color: #004000;">getLabel</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line183"></a>                    <span style="color: #000088;">$invoker</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line184"></a>                <span style="color: #009900;">&#125;</span>
+<a name="line185"></a>                <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintMethodEnd</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line186"></a>            <span style="color: #009900;">&#125;</span>
+<a name="line187"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line188"></a>&nbsp;
+<a name="line189"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line190"></a>         *    Tests to see if the method is the constructor and
+<a name="line191"></a>         *    so should be ignored.
+<a name="line192"></a>         *    @param string $method        Method name to try.
+<a name="line193"></a>         *    @return boolean              True if constructor.
+<a name="line194"></a>         *    @access protected
+<a name="line195"></a>         */</span>
+<a name="line196"></a>        <span style="color: #000000; font-weight: bold;">function</span> _isConstructor<span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line197"></a>            <span style="color: #b1b100;">return</span> SimpleTestCompatibility<span style="color: #339933;">::</span><span style="color: #004000;">isA</span><span style="color: #009900;">&#40;</span>
+<a name="line198"></a>                    <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_test_case<span style="color: #339933;">,</span>
+<a name="line199"></a>                    <a href="http://www.php.net/strtolower"><span style="color: #990000;">strtolower</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line200"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line201"></a>&nbsp;
+<a name="line202"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line203"></a>         *    Tests to see if the method is a test that should
+<a name="line204"></a>         *    be run. Currently any method that starts with 'test'
+<a name="line205"></a>         *    is a candidate.
+<a name="line206"></a>         *    @param string $method        Method name to try.
+<a name="line207"></a>         *    @return boolean              True if test method.
+<a name="line208"></a>         *    @access protected
+<a name="line209"></a>         */</span>
+<a name="line210"></a>        <span style="color: #000000; font-weight: bold;">function</span> _isTest<span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line211"></a>            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/strtolower"><span style="color: #990000;">strtolower</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">4</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'test'</span><span style="color: #339933;">;</span>
+<a name="line212"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line213"></a>&nbsp;
+<a name="line214"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line215"></a>         *    Paints the start of a test method.
+<a name="line216"></a>         *    @param string $test_name     Name of test or other label.
+<a name="line217"></a>         *    @access public
+<a name="line218"></a>         */</span>
+<a name="line219"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintMethodStart<span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_name</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line220"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintMethodStart</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_name</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line221"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line222"></a>&nbsp;
+<a name="line223"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line224"></a>         *    Paints the end of a test method.
+<a name="line225"></a>         *    @param string $test_name     Name of test or other label.
+<a name="line226"></a>         *    @access public
+<a name="line227"></a>         */</span>
+<a name="line228"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintMethodEnd<span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_name</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line229"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintMethodEnd</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$test_name</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line230"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line231"></a>&nbsp;
+<a name="line232"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line233"></a>         *    Chains to the wrapped reporter.
+<a name="line234"></a>         *    @param string $message        Message is ignored.
+<a name="line235"></a>         *    @access public
+<a name="line236"></a>         */</span>
+<a name="line237"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintPass<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line238"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintPass</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line239"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line240"></a>&nbsp;
+<a name="line241"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line242"></a>         *    Chains to the wrapped reporter.
+<a name="line243"></a>         *    @param string $message        Message is ignored.
+<a name="line244"></a>         *    @access public
+<a name="line245"></a>         */</span>
+<a name="line246"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintFail<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line247"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintFail</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line248"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line249"></a>&nbsp;
+<a name="line250"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line251"></a>         *    Chains to the wrapped reporter.
+<a name="line252"></a>         *    @param string $message    Text of error formatted by
+<a name="line253"></a>         *                              the test case.
+<a name="line254"></a>         *    @access public
+<a name="line255"></a>         */</span>
+<a name="line256"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintError<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line257"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintError</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line258"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line259"></a>&nbsp;
+<a name="line260"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line261"></a>         *    Chains to the wrapped reporter.
+<a name="line262"></a>         *    @param Exception $exception     Object thrown.
+<a name="line263"></a>         *    @access public
+<a name="line264"></a>         */</span>
+<a name="line265"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintException<span style="color: #009900;">&#40;</span><span style="color: #000088;">$exception</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line266"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintException</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$exception</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line267"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line268"></a>&nbsp;
+<a name="line269"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line270"></a>         *    Chains to the wrapped reporter.
+<a name="line271"></a>         *    @param string $message        Text to display.
+<a name="line272"></a>         *    @access public
+<a name="line273"></a>         */</span>
+<a name="line274"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintMessage<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line275"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintMessage</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line276"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line277"></a>&nbsp;
+<a name="line278"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line279"></a>         *    Chains to the wrapped reporter.
+<a name="line280"></a>         *    @param string $message        Text to display.
+<a name="line281"></a>         *    @access public
+<a name="line282"></a>         */</span>
+<a name="line283"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintFormattedMessage<span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line284"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintFormattedMessage</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$message</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line285"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line286"></a>&nbsp;
+<a name="line287"></a>        <span style="color: #009933; font-style: italic;">/**
+<a name="line288"></a>         *    Chains to the wrapped reporter.
+<a name="line289"></a>         *    @param string $type        Event type as text.
+<a name="line290"></a>         *    @param mixed $payload      Message or object.
+<a name="line291"></a>         *    @return boolean            Should return false if this
+<a name="line292"></a>         *                               type of signal should fail the
+<a name="line293"></a>         *                               test suite.
+<a name="line294"></a>         *    @access public
+<a name="line295"></a>         */</span>
+<a name="line296"></a>        <span style="color: #000000; font-weight: bold;">function</span> paintSignal<span style="color: #009900;">&#40;</span><span style="color: #000088;">$type</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$payload</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line297"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_scorer<span style="color: #339933;">-&gt;</span><span style="color: #004000;">paintSignal</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$type</span><span style="color: #339933;">,</span> <span style="color: #000088;">$payload</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line298"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line299"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line300"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line301"></a>&nbsp;</pre>
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../source/runner.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

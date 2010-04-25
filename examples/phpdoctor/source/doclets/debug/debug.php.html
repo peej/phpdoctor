@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:50 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+<link rel="start" href="../../../overview-summary.html">
+
+<title>doclets/debug/debug.php (PHPDoctor)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../../overview-files.html">Files</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../../index.html" target="_top">Frames</a>
+<a href="../../../source/doclets/debug/debug.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>doclets/debug/debug.php</h1>
+<div class="comment" id="overview_description"><p>The debugging doclet. This doclet outputs all the parsed data in a format
+suitable for debugging PHPDoctor.</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*
+<a name="line3"></a>PHPDoctor: The PHP Documentation Creator
+<a name="line4"></a>Copyright (C) 2004 Paul James &lt;paul@peej.co.uk&gt;
+<a name="line5"></a>&nbsp;
+<a name="line6"></a>This program is free software; you can redistribute it and/or modify
+<a name="line7"></a>it under the terms of the GNU General Public License as published by
+<a name="line8"></a>the Free Software Foundation; either version 2 of the License, or
+<a name="line9"></a>(at your option) any later version.
+<a name="line10"></a>&nbsp;
+<a name="line11"></a>This program is distributed in the hope that it will be useful,
+<a name="line12"></a>but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line13"></a>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line14"></a>GNU General Public License for more details.
+<a name="line15"></a>&nbsp;
+<a name="line16"></a>You should have received a copy of the GNU General Public License
+<a name="line17"></a>along with this program; if not, write to the Free Software
+<a name="line18"></a>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line19"></a>*/</span>
+<a name="line20"></a>&nbsp;
+<a name="line21"></a><span style="color: #009933; font-style: italic;">/** The debugging doclet. This doclet outputs all the parsed data in a format
+<a name="line22"></a> * suitable for debugging PHPDoctor.
+<a name="line23"></a> *
+<a name="line24"></a> * @package PHPDoctor\Doclets\Debug
+<a name="line25"></a> */</span>
+<a name="line26"></a><span style="color: #000000; font-weight: bold;">class</span> Debug
+<a name="line27"></a><span style="color: #009900;">&#123;</span>
+<a name="line28"></a>&nbsp;
+<a name="line29"></a>	<span style="color: #009933; font-style: italic;">/** The depth of processing through the element hierarchy.
+<a name="line30"></a>	 *
+<a name="line31"></a>	 * @var int
+<a name="line32"></a>	 */</span>
+<a name="line33"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$depth</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+<a name="line34"></a>&nbsp;
+<a name="line35"></a>	<span style="color: #009933; font-style: italic;">/** Doclet constructor.
+<a name="line36"></a>	 *
+<a name="line37"></a>	 * @param RootDoc rootDoc
+<a name="line38"></a>	 */</span>
+<a name="line39"></a>	<span style="color: #000000; font-weight: bold;">function</span> debug<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$rootDoc</span><span style="color: #009900;">&#41;</span>
+<a name="line40"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line41"></a>&nbsp;
+<a name="line42"></a>		<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$rootDoc</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packages</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$package</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line43"></a>			<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'- Namespace '</span><span style="color: #339933;">,</span> <span style="color: #000088;">$package</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line44"></a>			<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fieldDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$package</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">globals</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line45"></a>			<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">methodDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$package</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">functions</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line46"></a>			<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">classDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$package</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">allClasses</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line47"></a>&nbsp;
+<a name="line48"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line49"></a>&nbsp;
+<a name="line50"></a>		<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">&quot;Done<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line51"></a>&nbsp;
+<a name="line52"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line53"></a>&nbsp;
+<a name="line54"></a>    <span style="color: #009933; font-style: italic;">/** Return the depth indicator string
+<a name="line55"></a>     *
+<a name="line56"></a>     * @return str
+<a name="line57"></a>     */</span>
+<a name="line58"></a>    <span style="color: #000000; font-weight: bold;">function</span> showDepth<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line59"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line60"></a>        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/str_repeat"><span style="color: #990000;">str_repeat</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'|'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'- '</span><span style="color: #339933;">;</span>
+<a name="line61"></a>    <span style="color: #009900;">&#125;</span>
+<a name="line62"></a>&nbsp;
+<a name="line63"></a>	<span style="color: #009933; font-style: italic;">/** Output fieldDoc
+<a name="line64"></a>	 *
+<a name="line65"></a>	 * @param FieldDoc[] fields
+<a name="line66"></a>	 */</span>
+<a name="line67"></a>	<span style="color: #000000; font-weight: bold;">function</span> fieldDoc<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$fields</span><span style="color: #339933;">,</span> <span style="color: #000088;">$showAccess</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #009900;">&#41;</span>
+<a name="line68"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line69"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">++;</span>
+<a name="line70"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$fields</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line71"></a>			<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$fields</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$field</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line72"></a>				<span style="color: #000088;">$type</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">type</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line73"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">showDepth</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">modifiers</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$showAccess</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$type</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">' '</span><span style="color: #339933;">;</span>
+<a name="line74"></a>				<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isFinal</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line75"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line76"></a>				<span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line77"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\$'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line78"></a>				<span style="color: #009900;">&#125;</span>
+<a name="line79"></a>				<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">value</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line80"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' = '</span><span style="color: #339933;">,</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">value</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line81"></a>				<span style="color: #009900;">&#125;</span>
+<a name="line82"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' ['</span><span style="color: #339933;">,</span> <span style="color: #000088;">$field</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">location</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">']'</span><span style="color: #339933;">;</span>
+<a name="line83"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line84"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line85"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line86"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">--;</span>
+<a name="line87"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line88"></a>&nbsp;
+<a name="line89"></a>	<span style="color: #009933; font-style: italic;">/** Output methodDoc
+<a name="line90"></a>	 *
+<a name="line91"></a>	 * @param MethodDoc[] methods
+<a name="line92"></a>	 */</span>
+<a name="line93"></a>	<span style="color: #000000; font-weight: bold;">function</span> methodDoc<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$methods</span><span style="color: #009900;">&#41;</span>
+<a name="line94"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line95"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">++;</span>
+<a name="line96"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$methods</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line97"></a>			<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$methods</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$method</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line98"></a>				<span style="color: #000088;">$type</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">returnType</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line99"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">showDepth</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">modifiers</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line100"></a>				<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$type</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line101"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$type</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">' '</span><span style="color: #339933;">;</span>
+<a name="line102"></a>				<span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line103"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'void '</span><span style="color: #339933;">;</span>
+<a name="line104"></a>				<span style="color: #009900;">&#125;</span>
+<a name="line105"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">flatSignature</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line106"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' ['</span><span style="color: #339933;">,</span> <span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">location</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">']'</span><span style="color: #339933;">;</span>
+<a name="line107"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line108"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fieldDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">parameters</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line109"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">methodDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">functions</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line110"></a>				<span style="color: #000088;">$exceptions</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$method</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">thrownExceptions</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line111"></a>				<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$exceptions</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line112"></a>					<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$exceptions</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$exception</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line113"></a>						<span style="color: #b1b100;">echo</span> <a href="http://www.php.net/str_repeat"><span style="color: #990000;">str_repeat</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'|'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span> <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'- throws '</span><span style="color: #339933;">;</span>
+<a name="line114"></a>						<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_object"><span style="color: #990000;">is_object</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$exception</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line115"></a>							<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$exception</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$exception</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line116"></a>						<span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line117"></a>							<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$exception</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line118"></a>						<span style="color: #009900;">&#125;</span>
+<a name="line119"></a>					<span style="color: #009900;">&#125;</span>
+<a name="line120"></a>				<span style="color: #009900;">&#125;</span>
+<a name="line121"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line122"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line123"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">--;</span>
+<a name="line124"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line125"></a>&nbsp;
+<a name="line126"></a>	<span style="color: #009933; font-style: italic;">/** Output constructorDoc
+<a name="line127"></a>	 *
+<a name="line128"></a>	 * @param ConstructorDoc[] constructors
+<a name="line129"></a>	 */</span>
+<a name="line130"></a>	<span style="color: #000000; font-weight: bold;">function</span> constructorDoc<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$constructors</span><span style="color: #009900;">&#41;</span>
+<a name="line131"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line132"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">++;</span>
+<a name="line133"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$constructors</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line134"></a>			<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$constructors</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$constructor</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line135"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">showDepth</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$constructor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">modifiers</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line136"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$constructor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$constructor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$constructor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">flatSignature</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line137"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' ['</span><span style="color: #339933;">,</span> <span style="color: #000088;">$constructor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">location</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">']'</span><span style="color: #339933;">;</span>
+<a name="line138"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line139"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fieldDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$constructor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">parameters</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line140"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line141"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line142"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">--;</span>
+<a name="line143"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line144"></a>&nbsp;
+<a name="line145"></a>	<span style="color: #009933; font-style: italic;">/** Output classDoc
+<a name="line146"></a>	 *
+<a name="line147"></a>	 * @param ClassDoc[] classes
+<a name="line148"></a>	 */</span>
+<a name="line149"></a>	<span style="color: #000000; font-weight: bold;">function</span> classDoc<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$classes</span><span style="color: #009900;">&#41;</span>
+<a name="line150"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line151"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">++;</span>
+<a name="line152"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$classes</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line153"></a>			<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$classes</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line154"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">showDepth</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">modifiers</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line155"></a>				<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isInterface</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line156"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'interface '</span><span style="color: #339933;">;</span>
+<a name="line157"></a>				<span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line158"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">'class '</span><span style="color: #339933;">;</span>
+<a name="line159"></a>				<span style="color: #009900;">&#125;</span>
+<a name="line160"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line161"></a>				<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">superclass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line162"></a>				    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$classes</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">superclass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line163"></a>				        <span style="color: #000088;">$superclass</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$classes</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">superclass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line164"></a>				        <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' extends '</span><span style="color: #339933;">,</span> <span style="color: #000088;">$superclass</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$superclass</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line165"></a>				    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line166"></a>				        <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' extends '</span><span style="color: #339933;">,</span> <span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">superclass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line167"></a>				    <span style="color: #009900;">&#125;</span>
+<a name="line168"></a>				<span style="color: #009900;">&#125;</span>
+<a name="line169"></a>				<span style="color: #000088;">$interfaces</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">interfaces</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line170"></a>				<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$interfaces</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line171"></a>					<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' implements '</span><span style="color: #339933;">;</span>
+<a name="line172"></a>					<span style="color: #b1b100;">foreach</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$interfaces</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$interface</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line173"></a>						<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$interface</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">packageName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$interface</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">' '</span><span style="color: #339933;">;</span>
+<a name="line174"></a>					<span style="color: #009900;">&#125;</span>
+<a name="line175"></a>				<span style="color: #009900;">&#125;</span>
+<a name="line176"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">' ['</span><span style="color: #339933;">,</span> <span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">location</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">']'</span><span style="color: #339933;">;</span>
+<a name="line177"></a>				<span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line178"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fieldDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line179"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">constructorDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">constructor</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line180"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">methodDoc</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">methods</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line181"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line182"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line183"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">depth</span><span style="color: #339933;">--;</span>
+<a name="line184"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line185"></a>&nbsp;
+<a name="line186"></a><span style="color: #009900;">&#125;</span>
+<a name="line187"></a>&nbsp;
+<a name="line188"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line189"></a>&nbsp;</pre>
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../../overview-files.html">Files</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../../index.html" target="_top">Frames</a>
+<a href="../../../source/doclets/debug/debug.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

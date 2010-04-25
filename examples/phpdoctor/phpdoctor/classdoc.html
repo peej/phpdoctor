@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 
-<meta name="generator" content="PHPDoctor 2RC4 (http://phpdoctor.sourceforge.net/)">
-<meta name="when" content="Sat, 08 Dec 2007 12:04:48 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:46 +0100">
 
 <link rel="stylesheet" type="text/css" href="../stylesheet.css">
 <link rel="start" href="../overview-summary.html">
@@ -21,6 +23,7 @@
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -37,11 +40,11 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 <hr>
 
 <div class="qualifiedName">PHPDoctor.ClassDoc</div>
-<div class="location">/classes/classDoc.php at line 32</div>
+<a href="../source/classes/classdoc.php.html#line29" class="location">classes/classDoc.php at line 29</a>
 
 <h1>Class ClassDoc</h1>
 
-<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>  |<br>  +--<a href="../phpdoctor/programelementdoc.html">ProgramElementDoc</a><br>       |<br>       +--<strong>ClassDoc</strong><br /></pre>
+<pre class="tree"><a href="../phpdoctor/doc.html">Doc</a><br>    └─<a href="../phpdoctor/programelementdoc.html">ProgramElementDoc</a><br>       └─<strong>ClassDoc</strong><br /></pre>
 
 <hr>
 
@@ -49,26 +52,18 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 
 </p>
 
-<div class="comment" id="overview_description"><p>
-Represents a PHP class and provides access to information about the class,
+<div class="comment" id="overview_description"><p>Represents a PHP class and provides access to information about the class,
 the class' comment and tags, and the members of the class. A classDoc only
 exists if it was processed in this run of PHPDoctor. References to classes
 which may or may not have been processed in this run are referred to using
-type (which can be converted to classDoc, if possible).
-</p></div>
+type (which can be converted to classDoc, if possible).</p></div>
 
-<dl>
-<dt>Version:</dt>
-<dd>$Revision: 1.11 $</dd>
-</dl>
 <hr>
 
 <table id="summary_constr">
 <tr><th colspan="2">Constructor Summary</th></tr>
 <tr>
-<td class="description"><p class="name"><a href="#classDoc()">classDoc</a>(str name, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root, str filename, int lineNumber)</p><p class="description">
-Constructor
-</p></td>
+<td class="description"><p class="name"><a href="#classDoc()">classDoc</a>(str name, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root, str filename, int lineNumber)</p><p class="description">Constructor</p></td>
 </tr>
 </table>
 
@@ -76,80 +71,55 @@ Constructor
 <tr><th colspan="2">Method Summary</th></tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addConstructor()">addConstructor</a>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> constructor)</p><p class="description">
-Add a constructor to this class.
-</p></td>
+<td class="description"><p class="name"><a href="#addConstructor()">addConstructor</a>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> constructor)</p><p class="description">Add a constructor to this class.</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addField()">addField</a>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> field)</p><p class="description">
-Add a field to this class.
-</p></td>
+<td class="description"><p class="name"><a href="#addField()">addField</a>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> field)</p><p class="description">Add a field to this class.</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
-<td class="description"><p class="name"><a href="#addMethod()">addMethod</a>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> method)</p><p class="description">
-Add a method to this class.
-</p></td>
+<td class="description"><p class="name"><a href="#addMethod()">addMethod</a>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> method)</p><p class="description">Add a method to this class.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/constructordoc.html">ConstructorDoc</a></td>
-<td class="description"><p class="name"><a href="#constructor()">constructor</a>()</p><p class="description">
-Return the constructor for this class.
-</p></td>
+<td class="description"><p class="name"><a href="#constructor()">constructor</a>()</p><p class="description">Return the constructor for this class.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/fielddoc.html">FieldDoc</a></td>
-<td class="description"><p class="name"><a href="#fieldNamed()">fieldNamed</a>(mixed fieldName)</p><p class="description">
-Return a field in this class.
-</p></td>
+<td class="description"><p class="name"><a href="#fieldNamed()">fieldNamed</a>(mixed fieldName)</p><p class="description">Return a field in this class.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/fielddoc.html">FieldDoc[]</a></td>
-<td class="description"><p class="name"><a href="#fields()">fields</a>()</p><p class="description">
-Return fields in this class.
-</p></td>
+<td class="description"><p class="name"><a href="#fields()">fields</a>()</p><p class="description">Return fields in this class.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc</a></td>
-<td class="description"><p class="name"><a href="#interfaceNamed()">interfaceNamed</a>(mixed interfaceName)</p><p class="description">
-Return an interface in this class.
-</p></td>
+<td class="description"><p class="name"><a href="#interfaceNamed()">interfaceNamed</a>(mixed interfaceName)</p><p class="description">Return an interface in this class.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc[]</a></td>
-<td class="description"><p class="name"><a href="#interfaces()">interfaces</a>()</p><p class="description">
-Return interfaces implemented by this class or interfaces extended by this interface.
-</p></td>
+<td class="description"><p class="name"><a href="#interfaces()">interfaces</a>()</p><p class="description">Return interfaces implemented by this class or interfaces extended by this interface.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isAbstract()">isAbstract</a>()</p><p class="description">
-Return true if this class is abstract.
-</p></td>
+<td class="description"><p class="name"><a href="#isAbstract()">isAbstract</a>()</p><p class="description">Return true if this class is abstract.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isClass()">isClass</a>()</p><p class="description">
-Is this construct a class. </p></td>
+<td class="description"><p class="name"><a href="#isClass()">isClass</a>()</p><p class="description">Is this construct a class. </p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isException()">isException</a>()</p><p class="description">
-Is this construct an exception.
-</p></td>
+<td class="description"><p class="name"><a href="#isException()">isException</a>()</p><p class="description">Is this construct an exception.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isInterface()">isInterface</a>()</p><p class="description">
-Return true if this element is an interface.
-</p></td>
+<td class="description"><p class="name"><a href="#isInterface()">isInterface</a>()</p><p class="description">Return true if this element is an interface.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#isOrdinaryClass()">isOrdinaryClass</a>()</p><p class="description">
-Is this construct an ordinary class (not an interface or an exception).
-</p></td>
+<td class="description"><p class="name"><a href="#isOrdinaryClass()">isOrdinaryClass</a>()</p><p class="description">Is this construct an ordinary class (not an interface or an exception).</p></td>
 </tr>
 <tr>
 <td class="type"> void</td>
@@ -157,46 +127,37 @@ Is this construct an ordinary class (not an interface or an exception).
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/methoddoc.html">MethodDoc</a></td>
-<td class="description"><p class="name"><a href="#methodNamed()">methodNamed</a>(mixed methodName)</p><p class="description">
-Return a method in this class.
-</p></td>
+<td class="description"><p class="name"><a href="#methodNamed()">methodNamed</a>(mixed methodName)</p><p class="description">Return a method in this class.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/methoddoc.html">MethodDoc[]</a></td>
-<td class="description"><p class="name"><a href="#methods()">methods</a>(mixed methodName)</p><p class="description">
-Return the methods in this class.
-</p></td>
+<td class="description"><p class="name"><a href="#methods()">methods</a>(mixed methodName)</p><p class="description">Return the methods in this class.</p></td>
 </tr>
 <tr>
 <td class="type"> bool</td>
-<td class="description"><p class="name"><a href="#subclassOf()">subclassOf</a>(<a href="../phpdoctor/classdoc.html">ClassDoc</a> cd)</p><p class="description">
-Test whether this class is a subclass of the specified class.
-</p></td>
+<td class="description"><p class="name"><a href="#subclassOf()">subclassOf</a>(<a href="../phpdoctor/classdoc.html">ClassDoc</a> cd)</p><p class="description">Test whether this class is a subclass of the specified class.</p></td>
 </tr>
 <tr>
 <td class="type"> <a href="../phpdoctor/classdoc.html">ClassDoc</a></td>
-<td class="description"><p class="name"><a href="#superclass()">superclass</a>()</p><p class="description">
-Return the superclass of this class.
-</p></td>
+<td class="description"><p class="name"><a href="#superclass()">superclass</a>()</p><p class="description">Return the superclass of this class.</p></td>
 </tr>
 </table>
 
 <table class="inherit">
 <tr><th colspan="2">Methods inherited from PHPDoctor.ProgramElementDoc</th></tr>
-<tr><td><a href="../phpdoctor/programelementdoc.html#asPath()">asPath</a>, <a href="../phpdoctor/programelementdoc.html#containingClass()">containingClass</a>, <a href="../phpdoctor/programelementdoc.html#containingPackage()">containingPackage</a>, <a href="../phpdoctor/programelementdoc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/programelementdoc.html#isPrivate()">isPrivate</a>, <a href="../phpdoctor/programelementdoc.html#isProtected()">isProtected</a>, <a href="../phpdoctor/programelementdoc.html#isPublic()">isPublic</a>, <a href="../phpdoctor/programelementdoc.html#isStatic()">isStatic</a>, <a href="../phpdoctor/programelementdoc.html#location()">location</a>, <a href="../phpdoctor/programelementdoc.html#makePrivate()">makePrivate</a>, <a href="../phpdoctor/programelementdoc.html#makeProtected()">makeProtected</a>, <a href="../phpdoctor/programelementdoc.html#makePublic()">makePublic</a>, <a href="../phpdoctor/programelementdoc.html#modifiers()">modifiers</a>, <a href="../phpdoctor/programelementdoc.html#packageName()">packageName</a>, <a href="../phpdoctor/programelementdoc.html#qualifiedName()">qualifiedName</a></td></tr></table>
+<tr><td><a href="../phpdoctor/programelementdoc.html#asPath()">asPath</a>, <a href="../phpdoctor/programelementdoc.html#containingClass()">containingClass</a>, <a href="../phpdoctor/programelementdoc.html#containingPackage()">containingPackage</a>, <a href="../phpdoctor/programelementdoc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/programelementdoc.html#isPrivate()">isPrivate</a>, <a href="../phpdoctor/programelementdoc.html#isProtected()">isProtected</a>, <a href="../phpdoctor/programelementdoc.html#isPublic()">isPublic</a>, <a href="../phpdoctor/programelementdoc.html#isStatic()">isStatic</a>, <a href="../phpdoctor/programelementdoc.html#location()">location</a>, <a href="../phpdoctor/programelementdoc.html#makePrivate()">makePrivate</a>, <a href="../phpdoctor/programelementdoc.html#makeProtected()">makeProtected</a>, <a href="../phpdoctor/programelementdoc.html#makePublic()">makePublic</a>, <a href="../phpdoctor/programelementdoc.html#modifiers()">modifiers</a>, <a href="../phpdoctor/programelementdoc.html#packageName()">packageName</a>, <a href="../phpdoctor/programelementdoc.html#qualifiedName()">qualifiedName</a>, <a href="../phpdoctor/programelementdoc.html#sourceFilename()">sourceFilename</a>, <a href="../phpdoctor/programelementdoc.html#sourceLine()">sourceLine</a></td></tr></table>
 
 <table class="inherit">
 <tr><th colspan="2">Methods inherited from PHPDoctor.Doc</th></tr>
 <tr><td><a href="../phpdoctor/doc.html#getHTMLContents()">getHTMLContents</a>, <a href="../phpdoctor/doc.html#getRawCommentText()">getRawCommentText</a>, <a href="../phpdoctor/doc.html#isClass()">isClass</a>, <a href="../phpdoctor/doc.html#isConstructor()">isConstructor</a>, <a href="../phpdoctor/doc.html#isException()">isException</a>, <a href="../phpdoctor/doc.html#isField()">isField</a>, <a href="../phpdoctor/doc.html#isFinal()">isFinal</a>, <a href="../phpdoctor/doc.html#isFunction()">isFunction</a>, <a href="../phpdoctor/doc.html#isGlobal()">isGlobal</a>, <a href="../phpdoctor/doc.html#isInterface()">isInterface</a>, <a href="../phpdoctor/doc.html#isMethod()">isMethod</a>, <a href="../phpdoctor/doc.html#isOrdinaryClass()">isOrdinaryClass</a>, <a href="../phpdoctor/doc.html#mergeData()">mergeData</a>, <a href="../phpdoctor/doc.html#name()">name</a>, <a href="../phpdoctor/doc.html#set()">set</a>, <a href="../phpdoctor/doc.html#setByRef()">setByRef</a>, <a href="../phpdoctor/doc.html#setTag()">setTag</a>, <a href="../phpdoctor/doc.html#tags()">tags</a></td></tr></table>
 
 <h2 id="detail_constr">Constructor Detail</h2>
-<div class="location">/classes/classDoc.php at line 84</div>
+<a href="../source/classes/classdoc.php.html#line81" class="location">classes/classDoc.php at line 81</a>
+
 <h3 id="classDoc()">classDoc</h3>
 <code class="signature">public <strong>classDoc</strong>(str name, <a href="../phpdoctor/rootdoc.html">RootDoc</a> root, str filename, int lineNumber)</code>
 <div class="details">
-<p>
-Constructor
-</p><dl>
+<p>Constructor</p><dl>
 <dt>Parameters:</dt>
 <dd>name - Name of this element</dd>
 <dd>root - The root element</dd>
@@ -208,181 +169,165 @@ Constructor
 <hr>
 
 <h2 id="detail_method">Method Detail</h2>
-<div class="location">/classes/classDoc.php at line 107</div>
+<a href="../source/classes/classdoc.php.html#line104" class="location">classes/classDoc.php at line 104</a>
+
 <h3 id="addConstructor()">addConstructor</h3>
 <code class="signature">public  void <strong>addConstructor</strong>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> constructor)</code>
 <div class="details">
-<p>
-Add a constructor to this class.
-</p></div>
+<p>Add a constructor to this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 96</div>
+<a href="../source/classes/classdoc.php.html#line93" class="location">classes/classDoc.php at line 93</a>
+
 <h3 id="addField()">addField</h3>
 <code class="signature">public  void <strong>addField</strong>(<a href="../phpdoctor/fielddoc.html">FieldDoc</a> field)</code>
 <div class="details">
-<p>
-Add a field to this class.
-</p></div>
+<p>Add a field to this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 121</div>
+<a href="../source/classes/classdoc.php.html#line118" class="location">classes/classDoc.php at line 118</a>
+
 <h3 id="addMethod()">addMethod</h3>
 <code class="signature">public  void <strong>addMethod</strong>(<a href="../phpdoctor/methoddoc.html">MethodDoc</a> method)</code>
 <div class="details">
-<p>
-Add a method to this class.
-</p></div>
+<p>Add a method to this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 135</div>
+<a href="../source/classes/classdoc.php.html#line132" class="location">classes/classDoc.php at line 132</a>
+
 <h3 id="constructor()">constructor</h3>
 <code class="signature">public  <a href="../phpdoctor/constructordoc.html">ConstructorDoc</a> <strong>constructor</strong>()</code>
 <div class="details">
-<p>
-Return the constructor for this class.
-</p></div>
+<p>Return the constructor for this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 153</div>
+<a href="../source/classes/classdoc.php.html#line150" class="location">classes/classDoc.php at line 150</a>
+
 <h3 id="fieldNamed()">fieldNamed</h3>
 <code class="signature">public  <a href="../phpdoctor/fielddoc.html">FieldDoc</a> <strong>fieldNamed</strong>(mixed fieldName)</code>
 <div class="details">
-<p>
-Return a field in this class.
-</p></div>
+<p>Return a field in this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 144</div>
+<a href="../source/classes/classdoc.php.html#line141" class="location">classes/classDoc.php at line 141</a>
+
 <h3 id="fields()">fields</h3>
 <code class="signature">public  <a href="../phpdoctor/fielddoc.html">FieldDoc[]</a> <strong>fields</strong>()</code>
 <div class="details">
-<p>
-Return fields in this class.
-</p></div>
+<p>Return fields in this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 197</div>
+<a href="../source/classes/classdoc.php.html#line194" class="location">classes/classDoc.php at line 194</a>
+
 <h3 id="interfaceNamed()">interfaceNamed</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc</a> <strong>interfaceNamed</strong>(mixed interfaceName)</code>
 <div class="details">
-<p>
-Return an interface in this class.
-</p></div>
+<p>Return an interface in this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 188</div>
+<a href="../source/classes/classdoc.php.html#line185" class="location">classes/classDoc.php at line 185</a>
+
 <h3 id="interfaces()">interfaces</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc[]</a> <strong>interfaces</strong>()</code>
 <div class="details">
-<p>
-Return interfaces implemented by this class or interfaces extended by this interface.
-</p></div>
+<p>Return interfaces implemented by this class or interfaces extended by this interface.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 210</div>
+<a href="../source/classes/classdoc.php.html#line207" class="location">classes/classDoc.php at line 207</a>
+
 <h3 id="isAbstract()">isAbstract</h3>
 <code class="signature">public  bool <strong>isAbstract</strong>()</code>
 <div class="details">
-<p>
-Return true if this class is abstract.
-</p></div>
+<p>Return true if this class is abstract.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 251</div>
+<a href="../source/classes/classdoc.php.html#line248" class="location">classes/classDoc.php at line 248</a>
+
 <h3 id="isClass()">isClass</h3>
 <code class="signature">public  bool <strong>isClass</strong>()</code>
 <div class="details">
-<p>
-Is this construct a class. Note: interfaces are not classes.
-</p></div>
+<p>Is this construct a class. Note: interfaces are not classes.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 273</div>
+<a href="../source/classes/classdoc.php.html#line270" class="location">classes/classDoc.php at line 270</a>
+
 <h3 id="isException()">isException</h3>
 <code class="signature">public  bool <strong>isException</strong>()</code>
 <div class="details">
-<p>
-Is this construct an exception.
-</p></div>
+<p>Is this construct an exception.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 219</div>
+<a href="../source/classes/classdoc.php.html#line216" class="location">classes/classDoc.php at line 216</a>
+
 <h3 id="isInterface()">isInterface</h3>
 <code class="signature">public  bool <strong>isInterface</strong>()</code>
 <div class="details">
-<p>
-Return true if this element is an interface.
-</p></div>
+<p>Return true if this element is an interface.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 260</div>
+<a href="../source/classes/classdoc.php.html#line257" class="location">classes/classDoc.php at line 257</a>
+
 <h3 id="isOrdinaryClass()">isOrdinaryClass</h3>
 <code class="signature">public  bool <strong>isOrdinaryClass</strong>()</code>
 <div class="details">
-<p>
-Is this construct an ordinary class (not an interface or an exception).
-</p></div>
+<p>Is this construct an ordinary class (not an interface or an exception).</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 287</div>
+<a href="../source/classes/classdoc.php.html#line284" class="location">classes/classDoc.php at line 284</a>
+
 <h3 id="mergeSuperClassData()">mergeSuperClassData</h3>
 <code class="signature">public  void <strong>mergeSuperClassData</strong>(str superClassName)</code>
 <div class="details">
-<p></p><p>Merge the details of the superclass with this class.</p></div>
+<p>Merge the details of the superclass with this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 175</div>
+<a href="../source/classes/classdoc.php.html#line172" class="location">classes/classDoc.php at line 172</a>
+
 <h3 id="methodNamed()">methodNamed</h3>
 <code class="signature">public  <a href="../phpdoctor/methoddoc.html">MethodDoc</a> <strong>methodNamed</strong>(mixed methodName)</code>
 <div class="details">
-<p>
-Return a method in this class.
-</p></div>
+<p>Return a method in this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 166</div>
+<a href="../source/classes/classdoc.php.html#line163" class="location">classes/classDoc.php at line 163</a>
+
 <h3 id="methods()">methods</h3>
 <code class="signature">public  <a href="../phpdoctor/methoddoc.html">MethodDoc[]</a> <strong>methods</strong>(mixed methodName)</code>
 <div class="details">
-<p>
-Return the methods in this class.
-</p></div>
+<p>Return the methods in this class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 229</div>
+<a href="../source/classes/classdoc.php.html#line226" class="location">classes/classDoc.php at line 226</a>
+
 <h3 id="subclassOf()">subclassOf</h3>
 <code class="signature">public  bool <strong>subclassOf</strong>(<a href="../phpdoctor/classdoc.html">ClassDoc</a> cd)</code>
 <div class="details">
-<p>
-Test whether this class is a subclass of the specified class.
-</p></div>
+<p>Test whether this class is a subclass of the specified class.</p></div>
 
 <hr>
 
-<div class="location">/classes/classDoc.php at line 242</div>
+<a href="../source/classes/classdoc.php.html#line239" class="location">classes/classDoc.php at line 239</a>
+
 <h3 id="superclass()">superclass</h3>
 <code class="signature">public  <a href="../phpdoctor/classdoc.html">ClassDoc</a> <strong>superclass</strong>()</code>
 <div class="details">
-<p>
-Return the superclass of this class.
-</p></div>
+<p>Return the superclass of this class.</p></div>
 
 <hr>
 
@@ -393,6 +338,7 @@ Return the superclass of this class.
 <li><a href="../phpdoctor/package-summary.html">Package</a></li>
 <li class="active">Class</li>
 <li><a href="../phpdoctor/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
 <li><a href="../deprecated-list.html">Deprecated</a></li>
 <li><a href="../index-all.html">Index</a></li>
 </ul>
@@ -408,7 +354,7 @@ Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> 
 </div>
 <hr>
 
-<p id="footer">This document was generated by <a href="http://phpdoctor.sourceforge.net/">PHPDoctor: The PHP Documentation Creator</a></p>
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
 
 </body>
 

@@ -1,0 +1,918 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:25:51 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>Globals (GeSHi)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../geshi/package-summary.html">Package</a></li>
+<li class="active">Global</li>
+<li><a href="../overview-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../geshi/package-globals.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_global">Global</a>
+Detail: <a href="#detail_global">Global</a>
+</div>
+<hr>
+
+<h1>Globals</h1>
+
+<hr>
+
+<table id="summary_global" class="title">
+<tr><th colspan="2" class="title">Global Summary</th></tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_ACTIVE">GESHI_ACTIVE</a></p><p class="description">Links in the source in the :active state</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_AFTER">GESHI_AFTER</a></p><p class="description">The key of the regex array defining what bracket group in a
+matched search to put after the replacement</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_ALWAYS">GESHI_ALWAYS</a></p><p class="description">Strict mode always applies</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_BEFORE">GESHI_BEFORE</a></p><p class="description">The key of the regex array defining what bracket group in a
+matched search to put before the replacement</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_CAPS_LOWER">GESHI_CAPS_LOWER</a></p><p class="description">Leave keywords found as the case that they are</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_CAPS_NO_CHANGE">GESHI_CAPS_NO_CHANGE</a></p><p class="description">Lowercase keywords found</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_CAPS_UPPER">GESHI_CAPS_UPPER</a></p><p class="description">Uppercase keywords found</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_CLASS">GESHI_CLASS</a></p><p class="description">The key of the regex array defining a custom keyword to use
+for this regexp's html tag class</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_COMMENTS">GESHI_COMMENTS</a></p><p class="description">Used in language files to mark comments</p></td>
+</tr>
+<tr>
+<td class="type">final  str</td>
+<td class="description"><p class="name"><a href="#GESHI_END_IMPORTANT">GESHI_END_IMPORTANT</a></p><p class="description">The ender for important parts of the source</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_ERROR_FILE_NOT_READABLE">GESHI_ERROR_FILE_NOT_READABLE</a></p><p class="description">GeSHi could not open a file for reading (generally a language file)</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_ERROR_INVALID_HEADER_TYPE">GESHI_ERROR_INVALID_HEADER_TYPE</a></p><p class="description">The header type passed to {@link GeSHi->set_header_type()} was invalid</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_ERROR_INVALID_LINE_NUMBER_TYPE">GESHI_ERROR_INVALID_LINE_NUMBER_TYPE</a></p><p class="description">The line number type passed to {@link GeSHi->enable_line_numbers()} was invalid</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_ERROR_NO_INPUT">GESHI_ERROR_NO_INPUT</a></p><p class="description">No sourcecode to highlight was specified</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_ERROR_NO_SUCH_LANG">GESHI_ERROR_NO_SUCH_LANG</a></p><p class="description">The language specified does not exist</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_FANCY_LINE_NUMBERS">GESHI_FANCY_LINE_NUMBERS</a></p><p class="description">Use fancy line numbers when building the result</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_HEADER_DIV">GESHI_HEADER_DIV</a></p><p class="description">Use a "div" to surround the source</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_HEADER_NONE">GESHI_HEADER_NONE</a></p><p class="description">Use nothing to surround the source</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_HEADER_PRE">GESHI_HEADER_PRE</a></p><p class="description">Use a "pre" to surround the source</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_HEADER_PRE_TABLE">GESHI_HEADER_PRE_TABLE</a></p><p class="description">Use a "table" to surround the source:
+$header
+$linenumbers$code>
+$footer
+this is essentially only a workaround for Firefox, see sf#1651996 or take a look at
+https://bugzilla.mozilla.org/show_bug.cgi?id=365805</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_HEADER_PRE_VALID">GESHI_HEADER_PRE_VALID</a></p><p class="description">Use a pre to wrap lines when line numbers are enabled or to wrap the whole code.</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_HOVER">GESHI_HOVER</a></p><p class="description">Links in the source in the :hover state</p></td>
+</tr>
+<tr>
+<td class="type">final  mixed</td>
+<td class="description"><p class="name"><a href="#GESHI_LANG_ROOT">GESHI_LANG_ROOT</a></p><p class="description">The language file directory for GeSHi
+@access private</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_LINK">GESHI_LINK</a></p><p class="description">Links in the source in the :link state</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_MAX_PCRE_LENGTH">GESHI_MAX_PCRE_LENGTH</a></p><p class="description">it's also important not to generate too long regular expressions
+be generous here... </p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_MAX_PCRE_SUBPATTERNS">GESHI_MAX_PCRE_SUBPATTERNS</a></p><p class="description">some old PHP / PCRE subpatterns only support up to xxx subpatterns in
+regular expressions. </p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_MAYBE">GESHI_MAYBE</a></p><p class="description">Strict mode *might* apply, and can be enabled or
+disabled by {@link GeSHi->enable_strict_mode()}</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_MODIFIERS">GESHI_MODIFIERS</a></p><p class="description">The key of the regex array defining any modifiers to the regular expression</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NORMAL_LINE_NUMBERS">GESHI_NORMAL_LINE_NUMBERS</a></p><p class="description">Use normal line numbers when building the result</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NO_LINE_NUMBERS">GESHI_NO_LINE_NUMBERS</a></p><p class="description">Use no line numbers when building the result</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_BIN_PREFIX_0B">GESHI_NUMBER_BIN_PREFIX_0B</a></p><p class="description">Number format to highlight binary numbers with a prefix 0b (C)</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_BIN_PREFIX_PERCENT">GESHI_NUMBER_BIN_PREFIX_PERCENT</a></p><p class="description">Number format to highlight binary numbers with a prefix %</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_BIN_SUFFIX">GESHI_NUMBER_BIN_SUFFIX</a></p><p class="description">Number format to highlight binary numbers with a suffix "b"</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_FLT_NONSCI">GESHI_NUMBER_FLT_NONSCI</a></p><p class="description">Number format to highlight floating-point numbers without support for scientific notation</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_FLT_NONSCI_F">GESHI_NUMBER_FLT_NONSCI_F</a></p><p class="description">Number format to highlight floating-point numbers without support for scientific notation</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_FLT_SCI_SHORT">GESHI_NUMBER_FLT_SCI_SHORT</a></p><p class="description">Number format to highlight floating-point numbers with support for scientific notation (E) and optional leading zero</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_FLT_SCI_ZERO">GESHI_NUMBER_FLT_SCI_ZERO</a></p><p class="description">Number format to highlight floating-point numbers with support for scientific notation (E) and required leading digit</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_HEX_PREFIX">GESHI_NUMBER_HEX_PREFIX</a></p><p class="description">Number format to highlight hex numbers with a prefix 0x</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_HEX_SUFFIX">GESHI_NUMBER_HEX_SUFFIX</a></p><p class="description">Number format to highlight hex numbers with a suffix of h</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_INT_BASIC">GESHI_NUMBER_INT_BASIC</a></p><p class="description">Basic number format for integers</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_INT_CSTYLE">GESHI_NUMBER_INT_CSTYLE</a></p><p class="description">Enhanced number format for integers like seen in C</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_OCT_PREFIX">GESHI_NUMBER_OCT_PREFIX</a></p><p class="description">Number format to highlight octal numbers with a leading zero</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_NUMBER_OCT_SUFFIX">GESHI_NUMBER_OCT_SUFFIX</a></p><p class="description">Number format to highlight octal numbers with a suffix of o</p></td>
+</tr>
+<tr>
+<td class="type">final  mixed</td>
+<td class="description"><p class="name"><a href="#GESHI_PHP_PRE_433">GESHI_PHP_PRE_433</a></p><p class="description">Used to work around missing PHP features</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_REPLACE">GESHI_REPLACE</a></p><p class="description">The key of the regex array defining what bracket group in a
+matched search to use as a replacement</p></td>
+</tr>
+<tr>
+<td class="type">final  mixed</td>
+<td class="description"><p class="name"><a href="#GESHI_ROOT">GESHI_ROOT</a></p><p class="description">The root directory for GeSHi</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_SEARCH">GESHI_SEARCH</a></p><p class="description">The key of the regex array defining what to search for</p></td>
+</tr>
+<tr>
+<td class="type">final  mixed</td>
+<td class="description"><p class="name"><a href="#GESHI_SECURITY_PARANOID">GESHI_SECURITY_PARANOID</a></p><p class="description">Tells GeSHi to be paranoid about security settings</p></td>
+</tr>
+<tr>
+<td class="type">final  str</td>
+<td class="description"><p class="name"><a href="#GESHI_START_IMPORTANT">GESHI_START_IMPORTANT</a></p><p class="description">The starter for important parts of the source</p></td>
+</tr>
+<tr>
+<td class="type">final  str</td>
+<td class="description"><p class="name"><a href="#GESHI_VERSION">GESHI_VERSION</a></p><p class="description">The version of this GeSHi file</p></td>
+</tr>
+<tr>
+<td class="type">final  int</td>
+<td class="description"><p class="name"><a href="#GESHI_VISITED">GESHI_VISITED</a></p><p class="description">Links in the source in the :visited state</p></td>
+</tr>
+<tr>
+<td class="type"> mixed</td>
+<td class="description"><p class="name"><a href="#language_data">language_data</a></p><p class="description">abap.php
+--------
+Author: Andres Picazo (andres@andrespicazo.com)
+Contributors:
+- Sandra Rossi (sandra.rossi@gmail.com)
+- Jacob Laursen (jlu@kmd.dk)
+Copyright: (c) 2007 Andres Picazo
+Release Version: 1.0.8.3
+Date Started: 2004/06/04ABAP language file for GeSHi.
+</p></td>
+</tr>
+</table>
+
+<h2 id="detail_global">Global Detail</h2>
+<a href="../source/geshi.php.html#line107" class="location">geshi.php at line 107</a>
+
+<h3 id="GESHI_ACTIVE">GESHI_ACTIVE</h3>
+<code class="signature">public final  int <strong>GESHI_ACTIVE</strong> = 2</code>
+<div class="details">
+<p>Links in the source in the :active state</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line144" class="location">geshi.php at line 144</a>
+
+<h3 id="GESHI_AFTER">GESHI_AFTER</h3>
+<code class="signature">public final  int <strong>GESHI_AFTER</strong> = 4</code>
+<div class="details">
+<p>The key of the regex array defining what bracket group in a
+matched search to put after the replacement</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line129" class="location">geshi.php at line 129</a>
+
+<h3 id="GESHI_ALWAYS">GESHI_ALWAYS</h3>
+<code class="signature">public final  int <strong>GESHI_ALWAYS</strong> = 2</code>
+<div class="details">
+<p>Strict mode always applies</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line141" class="location">geshi.php at line 141</a>
+
+<h3 id="GESHI_BEFORE">GESHI_BEFORE</h3>
+<code class="signature">public final  int <strong>GESHI_BEFORE</strong> = 3</code>
+<div class="details">
+<p>The key of the regex array defining what bracket group in a
+matched search to put before the replacement</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line99" class="location">geshi.php at line 99</a>
+
+<h3 id="GESHI_CAPS_LOWER">GESHI_CAPS_LOWER</h3>
+<code class="signature">public final  int <strong>GESHI_CAPS_LOWER</strong> = 2</code>
+<div class="details">
+<p>Leave keywords found as the case that they are</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line95" class="location">geshi.php at line 95</a>
+
+<h3 id="GESHI_CAPS_NO_CHANGE">GESHI_CAPS_NO_CHANGE</h3>
+<code class="signature">public final  int <strong>GESHI_CAPS_NO_CHANGE</strong></code>
+<div class="details">
+<p>Lowercase keywords found</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line97" class="location">geshi.php at line 97</a>
+
+<h3 id="GESHI_CAPS_UPPER">GESHI_CAPS_UPPER</h3>
+<code class="signature">public final  int <strong>GESHI_CAPS_UPPER</strong> = 1</code>
+<div class="details">
+<p>Uppercase keywords found</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line147" class="location">geshi.php at line 147</a>
+
+<h3 id="GESHI_CLASS">GESHI_CLASS</h3>
+<code class="signature">public final  int <strong>GESHI_CLASS</strong> = 5</code>
+<div class="details">
+<p>The key of the regex array defining a custom keyword to use
+for this regexp's html tag class</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line150" class="location">geshi.php at line 150</a>
+
+<h3 id="GESHI_COMMENTS">GESHI_COMMENTS</h3>
+<code class="signature">public final  int <strong>GESHI_COMMENTS</strong></code>
+<div class="details">
+<p>Used in language files to mark comments</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line117" class="location">geshi.php at line 117</a>
+
+<h3 id="GESHI_END_IMPORTANT">GESHI_END_IMPORTANT</h3>
+<code class="signature">public final  str <strong>GESHI_END_IMPORTANT</strong> = '<END GeSHi>'</code>
+<div class="details">
+<p>The ender for important parts of the source</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line234" class="location">geshi.php at line 234</a>
+
+<h3 id="GESHI_ERROR_FILE_NOT_READABLE">GESHI_ERROR_FILE_NOT_READABLE</h3>
+<code class="signature">public final  int <strong>GESHI_ERROR_FILE_NOT_READABLE</strong> = 3</code>
+<div class="details">
+<p>GeSHi could not open a file for reading (generally a language file)</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line236" class="location">geshi.php at line 236</a>
+
+<h3 id="GESHI_ERROR_INVALID_HEADER_TYPE">GESHI_ERROR_INVALID_HEADER_TYPE</h3>
+<code class="signature">public final  int <strong>GESHI_ERROR_INVALID_HEADER_TYPE</strong> = 4</code>
+<div class="details">
+<p>The header type passed to <code>GeSHi->set_header_type()</code> was invalid</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line238" class="location">geshi.php at line 238</a>
+
+<h3 id="GESHI_ERROR_INVALID_LINE_NUMBER_TYPE">GESHI_ERROR_INVALID_LINE_NUMBER_TYPE</h3>
+<code class="signature">public final  int <strong>GESHI_ERROR_INVALID_LINE_NUMBER_TYPE</strong> = 5</code>
+<div class="details">
+<p>The line number type passed to <code>GeSHi->enable_line_numbers()</code> was invalid</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line230" class="location">geshi.php at line 230</a>
+
+<h3 id="GESHI_ERROR_NO_INPUT">GESHI_ERROR_NO_INPUT</h3>
+<code class="signature">public final  int <strong>GESHI_ERROR_NO_INPUT</strong> = 1</code>
+<div class="details">
+<p>No sourcecode to highlight was specified</p>
+</div>
+
+<dl>
+<dt>Deprecated.</dt>
+</dl>
+<hr>
+
+<a href="../source/geshi.php.html#line232" class="location">geshi.php at line 232</a>
+
+<h3 id="GESHI_ERROR_NO_SUCH_LANG">GESHI_ERROR_NO_SUCH_LANG</h3>
+<code class="signature">public final  int <strong>GESHI_ERROR_NO_SUCH_LANG</strong> = 2</code>
+<div class="details">
+<p>The language specified does not exist</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line67" class="location">geshi.php at line 67</a>
+
+<h3 id="GESHI_FANCY_LINE_NUMBERS">GESHI_FANCY_LINE_NUMBERS</h3>
+<code class="signature">public final  int <strong>GESHI_FANCY_LINE_NUMBERS</strong> = 2</code>
+<div class="details">
+<p>Use fancy line numbers when building the result</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line73" class="location">geshi.php at line 73</a>
+
+<h3 id="GESHI_HEADER_DIV">GESHI_HEADER_DIV</h3>
+<code class="signature">public final  int <strong>GESHI_HEADER_DIV</strong> = 1</code>
+<div class="details">
+<p>Use a "div" to surround the source</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line71" class="location">geshi.php at line 71</a>
+
+<h3 id="GESHI_HEADER_NONE">GESHI_HEADER_NONE</h3>
+<code class="signature">public final  int <strong>GESHI_HEADER_NONE</strong></code>
+<div class="details">
+<p>Use nothing to surround the source</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line75" class="location">geshi.php at line 75</a>
+
+<h3 id="GESHI_HEADER_PRE">GESHI_HEADER_PRE</h3>
+<code class="signature">public final  int <strong>GESHI_HEADER_PRE</strong> = 2</code>
+<div class="details">
+<p>Use a "pre" to surround the source</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line91" class="location">geshi.php at line 91</a>
+
+<h3 id="GESHI_HEADER_PRE_TABLE">GESHI_HEADER_PRE_TABLE</h3>
+<code class="signature">public final  int <strong>GESHI_HEADER_PRE_TABLE</strong> = 4</code>
+<div class="details">
+<p>Use a "table" to surround the source:</p><p><table>
+<thead><tr><td colspan="2">$header</td></tr></thead>
+<tbody><tr><td><pre>$linenumbers</pre></td><td><pre>$code></pre></td></tr></tbody>
+<tfooter><tr><td colspan="2">$footer</td></tr></tfoot>
+</table></p><p>this is essentially only a workaround for Firefox, see sf#1651996 or take a look at
+https://bugzilla.mozilla.org/show_bug.cgi?id=365805</p>
+</div>
+
+<dl>
+<dt>Note:</dt>
+<dd>when linenumbers are disabled this is essentially the same as GESHI_HEADER_PRE</dd>
+</dl>
+<hr>
+
+<a href="../source/geshi.php.html#line77" class="location">geshi.php at line 77</a>
+
+<h3 id="GESHI_HEADER_PRE_VALID">GESHI_HEADER_PRE_VALID</h3>
+<code class="signature">public final  int <strong>GESHI_HEADER_PRE_VALID</strong> = 3</code>
+<div class="details">
+<p>Use a pre to wrap lines when line numbers are enabled or to wrap the whole code.</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line105" class="location">geshi.php at line 105</a>
+
+<h3 id="GESHI_HOVER">GESHI_HOVER</h3>
+<code class="signature">public final  int <strong>GESHI_HOVER</strong> = 1</code>
+<div class="details">
+<p>Links in the source in the :hover state</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line53" class="location">geshi.php at line 53</a>
+
+<h3 id="GESHI_LANG_ROOT">GESHI_LANG_ROOT</h3>
+<code class="signature">public final  mixed <strong>GESHI_LANG_ROOT</strong> = GESHI_ROOT . 'geshi' . DIRECTORY_SEPARATOR</code>
+<div class="details">
+<p>The language file directory for GeSHi
+@access private</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line103" class="location">geshi.php at line 103</a>
+
+<h3 id="GESHI_LINK">GESHI_LINK</h3>
+<code class="signature">public final  int <strong>GESHI_LINK</strong></code>
+<div class="details">
+<p>Links in the source in the :link state</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line195" class="location">geshi.php at line 195</a>
+
+<h3 id="GESHI_MAX_PCRE_LENGTH">GESHI_MAX_PCRE_LENGTH</h3>
+<code class="signature">public final  int <strong>GESHI_MAX_PCRE_LENGTH</strong> = 12288</code>
+<div class="details">
+<p>it's also important not to generate too long regular expressions
+be generous here... but keep in mind, that when reaching this limit we
+still have to close open patterns. 12k should do just fine on a 16k limit.
+@see GeSHi->optimize_regexp_list()</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line189" class="location">geshi.php at line 189</a>
+
+<h3 id="GESHI_MAX_PCRE_SUBPATTERNS">GESHI_MAX_PCRE_SUBPATTERNS</h3>
+<code class="signature">public final  int <strong>GESHI_MAX_PCRE_SUBPATTERNS</strong> = 500</code>
+<div class="details">
+<p>some old PHP / PCRE subpatterns only support up to xxx subpatterns in
+regular expressions. Set this to false if your PCRE lib is up to date
+@see GeSHi->optimize_regexp_list()</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line127" class="location">geshi.php at line 127</a>
+
+<h3 id="GESHI_MAYBE">GESHI_MAYBE</h3>
+<code class="signature">public final  int <strong>GESHI_MAYBE</strong> = 1</code>
+<div class="details">
+<p>Strict mode *might* apply, and can be enabled or
+disabled by <code>GeSHi->enable_strict_mode()</code></p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line138" class="location">geshi.php at line 138</a>
+
+<h3 id="GESHI_MODIFIERS">GESHI_MODIFIERS</h3>
+<code class="signature">public final  int <strong>GESHI_MODIFIERS</strong> = 2</code>
+<div class="details">
+<p>The key of the regex array defining any modifiers to the regular expression</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line65" class="location">geshi.php at line 65</a>
+
+<h3 id="GESHI_NORMAL_LINE_NUMBERS">GESHI_NORMAL_LINE_NUMBERS</h3>
+<code class="signature">public final  int <strong>GESHI_NORMAL_LINE_NUMBERS</strong> = 1</code>
+<div class="details">
+<p>Use normal line numbers when building the result</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line63" class="location">geshi.php at line 63</a>
+
+<h3 id="GESHI_NO_LINE_NUMBERS">GESHI_NO_LINE_NUMBERS</h3>
+<code class="signature">public final  int <strong>GESHI_NO_LINE_NUMBERS</strong></code>
+<div class="details">
+<p>Use no line numbers when building the result</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line207" class="location">geshi.php at line 207</a>
+
+<h3 id="GESHI_NUMBER_BIN_PREFIX_0B">GESHI_NUMBER_BIN_PREFIX_0B</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_BIN_PREFIX_0B</strong> = 64</code>
+<div class="details">
+<p>Number format to highlight binary numbers with a prefix 0b (C)</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line205" class="location">geshi.php at line 205</a>
+
+<h3 id="GESHI_NUMBER_BIN_PREFIX_PERCENT">GESHI_NUMBER_BIN_PREFIX_PERCENT</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_BIN_PREFIX_PERCENT</strong> = 32</code>
+<div class="details">
+<p>Number format to highlight binary numbers with a prefix %</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line203" class="location">geshi.php at line 203</a>
+
+<h3 id="GESHI_NUMBER_BIN_SUFFIX">GESHI_NUMBER_BIN_SUFFIX</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_BIN_SUFFIX</strong> = 16</code>
+<div class="details">
+<p>Number format to highlight binary numbers with a suffix "b"</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line217" class="location">geshi.php at line 217</a>
+
+<h3 id="GESHI_NUMBER_FLT_NONSCI">GESHI_NUMBER_FLT_NONSCI</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_FLT_NONSCI</strong> = 65536</code>
+<div class="details">
+<p>Number format to highlight floating-point numbers without support for scientific notation</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line219" class="location">geshi.php at line 219</a>
+
+<h3 id="GESHI_NUMBER_FLT_NONSCI_F">GESHI_NUMBER_FLT_NONSCI_F</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_FLT_NONSCI_F</strong> = 131072</code>
+<div class="details">
+<p>Number format to highlight floating-point numbers without support for scientific notation</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line221" class="location">geshi.php at line 221</a>
+
+<h3 id="GESHI_NUMBER_FLT_SCI_SHORT">GESHI_NUMBER_FLT_SCI_SHORT</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_FLT_SCI_SHORT</strong> = 262144</code>
+<div class="details">
+<p>Number format to highlight floating-point numbers with support for scientific notation (E) and optional leading zero</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line223" class="location">geshi.php at line 223</a>
+
+<h3 id="GESHI_NUMBER_FLT_SCI_ZERO">GESHI_NUMBER_FLT_SCI_ZERO</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_FLT_SCI_ZERO</strong> = 524288</code>
+<div class="details">
+<p>Number format to highlight floating-point numbers with support for scientific notation (E) and required leading digit</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line213" class="location">geshi.php at line 213</a>
+
+<h3 id="GESHI_NUMBER_HEX_PREFIX">GESHI_NUMBER_HEX_PREFIX</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_HEX_PREFIX</strong> = 4096</code>
+<div class="details">
+<p>Number format to highlight hex numbers with a prefix 0x</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line215" class="location">geshi.php at line 215</a>
+
+<h3 id="GESHI_NUMBER_HEX_SUFFIX">GESHI_NUMBER_HEX_SUFFIX</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_HEX_SUFFIX</strong> = 8192</code>
+<div class="details">
+<p>Number format to highlight hex numbers with a suffix of h</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line199" class="location">geshi.php at line 199</a>
+
+<h3 id="GESHI_NUMBER_INT_BASIC">GESHI_NUMBER_INT_BASIC</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_INT_BASIC</strong> = 1</code>
+<div class="details">
+<p>Basic number format for integers</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line201" class="location">geshi.php at line 201</a>
+
+<h3 id="GESHI_NUMBER_INT_CSTYLE">GESHI_NUMBER_INT_CSTYLE</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_INT_CSTYLE</strong> = 2</code>
+<div class="details">
+<p>Enhanced number format for integers like seen in C</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line209" class="location">geshi.php at line 209</a>
+
+<h3 id="GESHI_NUMBER_OCT_PREFIX">GESHI_NUMBER_OCT_PREFIX</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_OCT_PREFIX</strong> = 256</code>
+<div class="details">
+<p>Number format to highlight octal numbers with a leading zero</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line211" class="location">geshi.php at line 211</a>
+
+<h3 id="GESHI_NUMBER_OCT_SUFFIX">GESHI_NUMBER_OCT_SUFFIX</h3>
+<code class="signature">public final  int <strong>GESHI_NUMBER_OCT_SUFFIX</strong> = 512</code>
+<div class="details">
+<p>Number format to highlight octal numbers with a suffix of o</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line153" class="location">geshi.php at line 153</a>
+
+<h3 id="GESHI_PHP_PRE_433">GESHI_PHP_PRE_433</h3>
+<code class="signature">public final  mixed <strong>GESHI_PHP_PRE_433</strong> = !(version_compare(PHP_VERSION, '4.3.3'</code>
+<div class="details">
+<p>Used to work around missing PHP features</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line136" class="location">geshi.php at line 136</a>
+
+<h3 id="GESHI_REPLACE">GESHI_REPLACE</h3>
+<code class="signature">public final  int <strong>GESHI_REPLACE</strong> = 1</code>
+<div class="details">
+<p>The key of the regex array defining what bracket group in a
+matched search to use as a replacement</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line49" class="location">geshi.php at line 49</a>
+
+<h3 id="GESHI_ROOT">GESHI_ROOT</h3>
+<code class="signature">public final  mixed <strong>GESHI_ROOT</strong> = dirname(__FILE__</code>
+<div class="details">
+<p>The root directory for GeSHi</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line133" class="location">geshi.php at line 133</a>
+
+<h3 id="GESHI_SEARCH">GESHI_SEARCH</h3>
+<code class="signature">public final  int <strong>GESHI_SEARCH</strong></code>
+<div class="details">
+<p>The key of the regex array defining what to search for</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line58" class="location">geshi.php at line 58</a>
+
+<h3 id="GESHI_SECURITY_PARANOID">GESHI_SECURITY_PARANOID</h3>
+<code class="signature">public final  mixed <strong>GESHI_SECURITY_PARANOID</strong> = false</code>
+<div class="details">
+<p>Tells GeSHi to be paranoid about security settings</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line115" class="location">geshi.php at line 115</a>
+
+<h3 id="GESHI_START_IMPORTANT">GESHI_START_IMPORTANT</h3>
+<code class="signature">public final  str <strong>GESHI_START_IMPORTANT</strong> = '<BEGIN GeSHi>'</code>
+<div class="details">
+<p>The starter for important parts of the source</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line44" class="location">geshi.php at line 44</a>
+
+<h3 id="GESHI_VERSION">GESHI_VERSION</h3>
+<code class="signature">public final  str <strong>GESHI_VERSION</strong> = '1.0.8.3'</code>
+<div class="details">
+<p>The version of this GeSHi file</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi.php.html#line109" class="location">geshi.php at line 109</a>
+
+<h3 id="GESHI_VISITED">GESHI_VISITED</h3>
+<code class="signature">public final  int <strong>GESHI_VISITED</strong> = 3</code>
+<div class="details">
+<p>Links in the source in the :visited state</p>
+</div>
+
+<hr>
+
+<a href="../source/geshi/abap.php.html#line93" class="location">geshi/abap.php at line 93</a>
+
+<h3 id="language_data">language_data</h3>
+<code class="signature">public  mixed <strong>language_data</strong> = array(
+    'LANG_NAME' => 'ABAP'</code>
+<div class="details">
+<p>abap.php
+--------
+Author: Andres Picazo (andres@andrespicazo.com)
+Contributors:
+- Sandra Rossi (sandra.rossi@gmail.com)
+- Jacob Laursen (jlu@kmd.dk)
+Copyright: (c) 2007 Andres Picazo
+Release Version: 1.0.8.3
+Date Started: 2004/06/04</p><p>ABAP language file for GeSHi.</p><p>Reference abap language documentation (abap 7.1) : http://help.sap.com/abapdocu/en/ABENABAP_INDEX.htm</p><p>ABAP syntax is highly complex, several problems could not be addressed, see TODO below if you dare ;-)
+Be aware that in ABAP language, keywords may be composed of several tokens,
+separated by one or more spaces or carriage returns
+(for example CONCATENATE 'hello' 'world' INTO string SEPARATED  BY ' ')
+it's why we must decode them with REGEXPS. As there are many keywords with several tokens,
+I had to create a separate section in the code to simplify the reading.
+Be aware that some words may be highlighted several times like for "ref to data", which is first
+highlighted for "ref to data", then secondly for "ref to". It is very important to
+position "ref to" after "ref to data" otherwise "data" wouldn't be highlighted because
+of the previous highlight.
+Styles used : keywords are all displayed in upper case, and they are organized into 4 categories :
+1) control statements (blue), 2) declarative statements (red-maroon),
+3) other statements (blue-green), 4) keywords (violet).
++ GeSHi : literals (red) + symbols (green) + methods/attributes (mauve)
++ unchanged style for other words.
+Control, declarative and other statements are assigned URLs to sap documentation website:
+http://help.sap.com/abapdocu/en/ABAP<statement_name>.htm</p><p>CHANGES
+-------
+2009/02/25 (1.0.8.3)
+-  Some more rework of the language file
+2009/01/04 (1.0.8.2)
+-  Major Release, more than 1000 statements and keywords added = whole abap 7.1 (Sandra Rossi)
+2007/06/27 (1.0.0)
+-  First Release</p><p>TODO
+----
+- in DATA data TYPE type, 2nd "data" and 2nd "type" are highlighted with data
+style, but should be ignored. Same problem for all words!!! This is quite impossible to
+solve it as we should define syntaxes of all statements (huge effort!) and use a lex
+or something like that instead of regexp I guess.
+- Some words are considered as being statement names (report, tables, etc.) though they
+are used as keyword in some statements. For example: FORM xxxx TABLES itab. It was
+arbitrary decided to define them as statement instead of keyword, because it may be
+useful to have the URL to SAP help for some of them.
+- if a comment is between 2 words of a keyword (for example SEPARATED "comment \n BY),
+it is not considered as a keyword, but it should!
+- for statements like "READ DATASET", GeSHi does not allow to set URLs because these
+statements are determined by REGEXPS. For "READ DATASET", the URL should be
+ABAPREAD_DATASET.htm. If a technical solution is found, be careful : URLs
+are sometimes not valid because the URL does not exist. For example, for "AT NEW"
+statement, the URL should be ABAPAT_ITAB.htm (not ABAPAT_NEW.htm).
+There are many other exceptions.
+Note: for adding this functionality within your php program, you can execute this code:
+function add_urls_to_multi_tokens( $matches ) {
+$url = preg_replace( "/[ \n]+/" , "_" , $matches[3] );
+if( $url == $matches[3] ) return $matches[0] ;
+else return $matches[1]."<a href=\"http://help.sap.com/abapdocu/en/ABAP".strtoupper($url).".htm\">".$matches[3]."</a>".$matches[4];
+}
+$html = $geshi->parse_code();
+$html = preg_replace_callback( "£(zzz:(control|statement|data);\">)(.+?)(</span>)£s", "add_urls_to_multi_tokens", $html );
+echo $html;
+- Numbers followed by a dot terminating the statement are not properly recognized</p><p></p><p>This file is part of GeSHi.</p><p>GeSHi is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p><p>GeSHi is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License
+along with GeSHi; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</p>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../geshi/package-summary.html">Package</a></li>
+<li class="active">Global</li>
+<li><a href="../overview-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../geshi/package-globals.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_global">Global</a>
+Detail: <a href="#detail_global">Global</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

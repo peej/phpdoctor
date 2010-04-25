@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:08:47 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>classes/packageDoc.php (PHPDoctor)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/classes/packagedoc.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>classes/packageDoc.php</h1>
+<div class="comment" id="overview_description"><p>Represents a PHP package. Provides access to information about the package,
+the package's comment and tags, and the classes in the package.</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*
+<a name="line3"></a>PHPDoctor: The PHP Documentation Creator
+<a name="line4"></a>Copyright (C) 2004 Paul James &lt;paul@peej.co.uk&gt;
+<a name="line5"></a>&nbsp;
+<a name="line6"></a>This program is free software; you can redistribute it and/or modify
+<a name="line7"></a>it under the terms of the GNU General Public License as published by
+<a name="line8"></a>the Free Software Foundation; either version 2 of the License, or
+<a name="line9"></a>(at your option) any later version.
+<a name="line10"></a>&nbsp;
+<a name="line11"></a>This program is distributed in the hope that it will be useful,
+<a name="line12"></a>but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line13"></a>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line14"></a>GNU General Public License for more details.
+<a name="line15"></a>&nbsp;
+<a name="line16"></a>You should have received a copy of the GNU General Public License
+<a name="line17"></a>along with this program; if not, write to the Free Software
+<a name="line18"></a>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line19"></a>*/</span>
+<a name="line20"></a>&nbsp;
+<a name="line21"></a><span style="color: #009933; font-style: italic;">/** Represents a PHP package. Provides access to information about the package,
+<a name="line22"></a> * the package's comment and tags, and the classes in the package.
+<a name="line23"></a> *
+<a name="line24"></a> * @package PHPDoctor
+<a name="line25"></a> */</span>
+<a name="line26"></a><span style="color: #000000; font-weight: bold;">class</span> PackageDoc <span style="color: #000000; font-weight: bold;">extends</span> Doc
+<a name="line27"></a><span style="color: #009900;">&#123;</span>
+<a name="line28"></a>&nbsp;
+<a name="line29"></a>	<span style="color: #009933; font-style: italic;">/** The classes in this package
+<a name="line30"></a>	 *
+<a name="line31"></a>	 * @var classDoc[]
+<a name="line32"></a>	 */</span>
+<a name="line33"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_classes</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line34"></a>&nbsp;
+<a name="line35"></a>	<span style="color: #009933; font-style: italic;">/** The globals in this package
+<a name="line36"></a>	 *
+<a name="line37"></a>	 * @var fieldDoc[]
+<a name="line38"></a>	 */</span>
+<a name="line39"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_globals</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line40"></a>&nbsp;
+<a name="line41"></a>	<span style="color: #009933; font-style: italic;">/** The functions in this package
+<a name="line42"></a>	 *
+<a name="line43"></a>	 * @var methodDoc[]
+<a name="line44"></a>	 */</span>
+<a name="line45"></a>	<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #000088;">$_functions</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line46"></a>&nbsp;
+<a name="line47"></a>	<span style="color: #009933; font-style: italic;">/** Constructor
+<a name="line48"></a>	 *
+<a name="line49"></a>	 * @param str name
+<a name="line50"></a>	 * @param RootDoc root
+<a name="line51"></a>	 */</span>
+<a name="line52"></a>	<span style="color: #000000; font-weight: bold;">function</span> packageDoc<span style="color: #009900;">&#40;</span><span style="color: #000088;">$name</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$root</span><span style="color: #009900;">&#41;</span>
+<a name="line53"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line54"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name <span style="color: #339933;">=</span> <span style="color: #000088;">$name</span><span style="color: #339933;">;</span>
+<a name="line55"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_root <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$root</span><span style="color: #339933;">;</span>
+<a name="line56"></a>&nbsp;
+<a name="line57"></a>		<span style="color: #000088;">$phpdoctor</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$root</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">phpdoctor</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line58"></a>&nbsp;
+<a name="line59"></a>		<span style="color: #666666; font-style: italic;">// parse overview file</span>
+<a name="line60"></a>		<span style="color: #000088;">$packageCommentDir</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getOption</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'packageCommentDir'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line61"></a>        <span style="color: #000088;">$packageCommentFilename</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtolower"><span style="color: #990000;">strtolower</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/str_replace"><span style="color: #990000;">str_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'.'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'.html'</span><span style="color: #339933;">;</span>
+<a name="line62"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$packageCommentDir</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/is_file"><span style="color: #990000;">is_file</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$packageCommentDir</span><span style="color: #339933;">.</span><span style="color: #000088;">$packageCommentFilename</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line63"></a>			<span style="color: #000088;">$overviewFile</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$packageCommentDir</span><span style="color: #339933;">.</span><span style="color: #000088;">$packageCommentFilename</span><span style="color: #339933;">;</span>
+<a name="line64"></a>		<span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line65"></a>			<span style="color: #000088;">$pos</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strrpos"><span style="color: #990000;">strrpos</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/str_replace"><span style="color: #990000;">str_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span>_currentFilename<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line66"></a>			<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$pos</span> <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line67"></a>				<span style="color: #000088;">$overviewFile</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/substr"><span style="color: #990000;">substr</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span>_currentFilename<span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #000088;">$pos</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'/package.html'</span><span style="color: #339933;">;</span>
+<a name="line68"></a>			<span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span>
+<a name="line69"></a>				<span style="color: #000088;">$overviewFile</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">sourcePath</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #339933;">.</span><span style="color: #0000ff;">'.html'</span><span style="color: #339933;">;</span>
+<a name="line70"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line71"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line72"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/is_file"><span style="color: #990000;">is_file</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$overviewFile</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line73"></a>			<span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">message</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'Reading package overview file &quot;'</span><span style="color: #339933;">.</span><span style="color: #000088;">$overviewFile</span><span style="color: #339933;">.</span><span style="color: #0000ff;">'&quot;.'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line74"></a>			<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$html</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getHTMLContents</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$overviewFile</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line75"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_data <span style="color: #339933;">=</span> <span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">processDocComment</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/** '</span><span style="color: #339933;">.</span><span style="color: #000088;">$html</span><span style="color: #339933;">.</span><span style="color: #0000ff;">' */'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_root<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line76"></a>				<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">mergeData</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line77"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line78"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line79"></a>&nbsp;
+<a name="line80"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line81"></a>&nbsp;
+<a name="line82"></a>	<span style="color: #009933; font-style: italic;">/** Return the package path.
+<a name="line83"></a>	 *
+<a name="line84"></a>	 * @return str
+<a name="line85"></a>	 */</span>
+<a name="line86"></a>	<span style="color: #000000; font-weight: bold;">function</span> asPath<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line87"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line88"></a>		<span style="color: #b1b100;">return</span> <a href="http://www.php.net/strtolower"><span style="color: #990000;">strtolower</span></a><span style="color: #009900;">&#40;</span><a href="http://www.php.net/str_replace"><span style="color: #990000;">str_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'.'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/str_replace"><span style="color: #990000;">str_replace</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line89"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line90"></a>&nbsp;
+<a name="line91"></a>	<span style="color: #009933; font-style: italic;">/** Calculate the depth of this package from the root.
+<a name="line92"></a>	 *
+<a name="line93"></a>	 * @return int
+<a name="line94"></a>	 */</span>
+<a name="line95"></a>	<span style="color: #000000; font-weight: bold;">function</span> depth<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line96"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line97"></a>		<span style="color: #000088;">$depth</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/substr_count"><span style="color: #990000;">substr_count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #339933;">,</span> <span style="color: #0000ff;">'.'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line98"></a>		<span style="color: #000088;">$depth</span> <span style="color: #339933;">+=</span> <a href="http://www.php.net/substr_count"><span style="color: #990000;">substr_count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #339933;">,</span> <span style="color: #0000ff;">'\\'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line99"></a>		<span style="color: #000088;">$depth</span> <span style="color: #339933;">+=</span> <a href="http://www.php.net/substr_count"><span style="color: #990000;">substr_count</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_name<span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line100"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$depth</span><span style="color: #339933;">;</span>
+<a name="line101"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line102"></a>&nbsp;
+<a name="line103"></a>	<span style="color: #009933; font-style: italic;">/** Add a class to this package.
+<a name="line104"></a>	 *
+<a name="line105"></a>	 * @param ClassDoc class
+<a name="line106"></a>	 */</span>
+<a name="line107"></a>	<span style="color: #000000; font-weight: bold;">function</span> addClass<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span>
+<a name="line108"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line109"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #009900;">&#91;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line110"></a>            <span style="color: #000088;">$phpdoctor</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_root<span style="color: #339933;">-&gt;</span><span style="color: #004000;">phpdoctor</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line111"></a>            <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line112"></a>            <span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">warning</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'Found class '</span><span style="color: #339933;">.</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">' again, overwriting previous version'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line113"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line114"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #009900;">&#91;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$class</span><span style="color: #339933;">;</span>
+<a name="line115"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line116"></a>&nbsp;
+<a name="line117"></a>	<span style="color: #009933; font-style: italic;">/** Add a global to this package.
+<a name="line118"></a>	 *
+<a name="line119"></a>	 * @param FieldDoc global
+<a name="line120"></a>	 */</span>
+<a name="line121"></a>	<span style="color: #000000; font-weight: bold;">function</span> addGlobal<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$global</span><span style="color: #009900;">&#41;</span>
+<a name="line122"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line123"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_globals<span style="color: #009900;">&#91;</span><span style="color: #000088;">$global</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line124"></a>            <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_globals<span style="color: #009900;">&#91;</span><span style="color: #000088;">$global</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$global</span><span style="color: #339933;">;</span>
+<a name="line125"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line126"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line127"></a>&nbsp;
+<a name="line128"></a>	<span style="color: #009933; font-style: italic;">/** Add a function to this package.
+<a name="line129"></a>	 *
+<a name="line130"></a>	 * @param MethodDoc function
+<a name="line131"></a>	 */</span>
+<a name="line132"></a>	<span style="color: #000000; font-weight: bold;">function</span> addFunction<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$function</span><span style="color: #009900;">&#41;</span>
+<a name="line133"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line134"></a>        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_functions<span style="color: #009900;">&#91;</span><span style="color: #000088;">$function</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line135"></a>            <span style="color: #000088;">$phpdoctor</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_root<span style="color: #339933;">-&gt;</span><span style="color: #004000;">phpdoctor</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line136"></a>            <span style="color: #b1b100;">echo</span> <span style="color: #0000ff;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<a name="line137"></a>            <span style="color: #000088;">$phpdoctor</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">warning</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'Found function '</span><span style="color: #339933;">.</span><span style="color: #000088;">$function</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">' again, overwriting previous version'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line138"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line139"></a>		<span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_functions<span style="color: #009900;">&#91;</span><span style="color: #000088;">$function</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">name</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$function</span><span style="color: #339933;">;</span>
+<a name="line140"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line141"></a>&nbsp;
+<a name="line142"></a>	<span style="color: #009933; font-style: italic;">/** Get all included classes (including exceptions and interfaces).
+<a name="line143"></a>	 *
+<a name="line144"></a>	 * @return ClassDoc[] An array of classes
+<a name="line145"></a>	 */</span>
+<a name="line146"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>allClasses<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line147"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line148"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #339933;">;</span>
+<a name="line149"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line150"></a>&nbsp;
+<a name="line151"></a>	<span style="color: #009933; font-style: italic;">/** Get exceptions in this package.
+<a name="line152"></a>	 *
+<a name="line153"></a>	 * @return ClassDoc[] An array of exceptions
+<a name="line154"></a>	 */</span>
+<a name="line155"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>exceptions<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line156"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line157"></a>		<span style="color: #000088;">$exceptions</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<a name="line158"></a>		<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes <span style="color: #b1b100;">as</span> <span style="color: #000088;">$name</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$exception</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line159"></a>			<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$exception</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isException</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line160"></a>				<span style="color: #000088;">$exceptions</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$name</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #009900;">&#91;</span><span style="color: #000088;">$name</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line161"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line162"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line163"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$exceptions</span><span style="color: #339933;">;</span>
+<a name="line164"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line165"></a>&nbsp;
+<a name="line166"></a>	<span style="color: #009933; font-style: italic;">/** Get interfaces in this package.
+<a name="line167"></a>	 *
+<a name="line168"></a>	 * @return ClassDoc[] An array of interfaces
+<a name="line169"></a>	 */</span>
+<a name="line170"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>interfaces<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line171"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line172"></a>		<span style="color: #000088;">$interfaces</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<a name="line173"></a>		<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes <span style="color: #b1b100;">as</span> <span style="color: #000088;">$name</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$interface</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line174"></a>			<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$interface</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isInterface</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line175"></a>				<span style="color: #000088;">$interfaces</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$name</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #009900;">&#91;</span><span style="color: #000088;">$name</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line176"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line177"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line178"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$interfaces</span><span style="color: #339933;">;</span>
+<a name="line179"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line180"></a>&nbsp;
+<a name="line181"></a>	<span style="color: #009933; font-style: italic;">/** Get ordinary classes (excluding exceptions and interfaces) in this package.
+<a name="line182"></a>	 *
+<a name="line183"></a>	 * @return ClassDoc[] An array of classes
+<a name="line184"></a>	 */</span>
+<a name="line185"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>ordinaryClasses<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line186"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line187"></a>		<span style="color: #000088;">$classes</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<a name="line188"></a>		<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes <span style="color: #b1b100;">as</span> <span style="color: #000088;">$name</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line189"></a>			<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$class</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isOrdinaryClass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line190"></a>				<span style="color: #000088;">$classes</span><span style="color: #009900;">&#91;</span><span style="color: #000088;">$name</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #009900;">&#91;</span><span style="color: #000088;">$name</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line191"></a>			<span style="color: #009900;">&#125;</span>
+<a name="line192"></a>		<span style="color: #009900;">&#125;</span>
+<a name="line193"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$classes</span><span style="color: #339933;">;</span>
+<a name="line194"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line195"></a>&nbsp;
+<a name="line196"></a>	<span style="color: #009933; font-style: italic;">/** Get globals in this package.
+<a name="line197"></a>	 *
+<a name="line198"></a>	 * @return FieldDoc[] An array of globals
+<a name="line199"></a>	 */</span>
+<a name="line200"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>globals<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line201"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line202"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_globals<span style="color: #339933;">;</span>
+<a name="line203"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line204"></a>&nbsp;
+<a name="line205"></a>	<span style="color: #009933; font-style: italic;">/** Get functions in this package.
+<a name="line206"></a>	 *
+<a name="line207"></a>	 * @return MethodDoc[] An array of functions
+<a name="line208"></a>	 */</span>
+<a name="line209"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>functions<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<a name="line210"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line211"></a>		<span style="color: #b1b100;">return</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_functions<span style="color: #339933;">;</span>
+<a name="line212"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line213"></a>&nbsp;
+<a name="line214"></a>	<span style="color: #009933; font-style: italic;">/** Lookup for a class within this package.
+<a name="line215"></a>	 *
+<a name="line216"></a>	 * @param str className Name of the class to lookup
+<a name="line217"></a>	 * @return ClassDoc A class
+<a name="line218"></a>	 */</span>
+<a name="line219"></a>	<span style="color: #000000; font-weight: bold;">function</span> <span style="color: #339933;">&amp;</span>findClass<span style="color: #009900;">&#40;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#41;</span>
+<a name="line220"></a>    <span style="color: #009900;">&#123;</span>
+<a name="line221"></a>        <span style="color: #000088;">$return</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<a name="line222"></a>		<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><a href="http://www.php.net/isset"><span style="color: #990000;">isset</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #009900;">&#91;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+<a name="line223"></a>			<span style="color: #000088;">$return</span> <span style="color: #339933;">=&amp;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span>_classes<span style="color: #009900;">&#91;</span><span style="color: #000088;">$className</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<a name="line224"></a>        <span style="color: #009900;">&#125;</span>
+<a name="line225"></a>        <span style="color: #b1b100;">return</span> <span style="color: #000088;">$return</span><span style="color: #339933;">;</span>
+<a name="line226"></a>	<span style="color: #009900;">&#125;</span>
+<a name="line227"></a>&nbsp;
+<a name="line228"></a><span style="color: #009900;">&#125;</span>
+<a name="line229"></a>&nbsp;
+<a name="line230"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line231"></a>&nbsp;</pre>
+<div class="header">
+<h1>PHPDoctor</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/classes/packagedoc.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:25:58 +0100">
+
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+<link rel="start" href="../../overview-summary.html">
+
+<title>geshi/avisynth.php (GeSHi)</title>
+
+</head>
+<body id="file" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/avisynth.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<h1>geshi/avisynth.php</h1>
+<div class="comment" id="overview_description"><p>avisynth.php
+--------
+Author: Ryan Jones (sciguyryan@gmail.com)
+Copyright: (c) 2008 Ryan Jones
+Release Version: 1.0.8.3
+Date Started: 2008/10/08</p><p>AviSynth language file for GeSHi.</p><p>CHANGES
+-------
+2008/10/08 (1.0.8.1)
+-  First Release</p><p>TODO (updated 2008/10/08)
+-------------------------
+There are also some special words that can't currently be specified directly in GeSHi as they may
+also be used as variables which would really mess things up.
+Also there is an issue with the escape character as this language uses a muti-character escape system. Escape char should be """ but has been left
+as empty due to this restiction.</p><p></p><p>This file is part of GeSHi.</p><p>GeSHi is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p><p>GeSHi is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License
+along with GeSHi; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</p></div>
+
+<hr>
+
+<a name="line1"></a><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a name="line2"></a><span style="color: #666666; font-style: italic;">/*************************************************************************************
+<a name="line3"></a> * avisynth.php
+<a name="line4"></a> * --------
+<a name="line5"></a> * Author: Ryan Jones (sciguyryan@gmail.com)
+<a name="line6"></a> * Copyright: (c) 2008 Ryan Jones
+<a name="line7"></a> * Release Version: 1.0.8.3
+<a name="line8"></a> * Date Started: 2008/10/08
+<a name="line9"></a> *
+<a name="line10"></a> * AviSynth language file for GeSHi.
+<a name="line11"></a> *
+<a name="line12"></a> * CHANGES
+<a name="line13"></a> * -------
+<a name="line14"></a> * 2008/10/08 (1.0.8.1)
+<a name="line15"></a> *  -  First Release
+<a name="line16"></a> *
+<a name="line17"></a> * TODO (updated 2008/10/08)
+<a name="line18"></a> * -------------------------
+<a name="line19"></a> * * There are also some special words that can't currently be specified directly in GeSHi as they may
+<a name="line20"></a> *      also be used as variables which would really mess things up.
+<a name="line21"></a> * * Also there is an issue with the escape character as this language uses a muti-character escape system. Escape char should be &quot;&quot;&quot; but has been left
+<a name="line22"></a> *      as empty due to this restiction.
+<a name="line23"></a> *
+<a name="line24"></a> *************************************************************************************
+<a name="line25"></a> *
+<a name="line26"></a> *     This file is part of GeSHi.
+<a name="line27"></a> *
+<a name="line28"></a> *   GeSHi is free software; you can redistribute it and/or modify
+<a name="line29"></a> *   it under the terms of the GNU General Public License as published by
+<a name="line30"></a> *   the Free Software Foundation; either version 2 of the License, or
+<a name="line31"></a> *   (at your option) any later version.
+<a name="line32"></a> *
+<a name="line33"></a> *   GeSHi is distributed in the hope that it will be useful,
+<a name="line34"></a> *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+<a name="line35"></a> *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a name="line36"></a> *   GNU General Public License for more details.
+<a name="line37"></a> *
+<a name="line38"></a> *   You should have received a copy of the GNU General Public License
+<a name="line39"></a> *   along with GeSHi; if not, write to the Free Software
+<a name="line40"></a> *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<a name="line41"></a> *
+<a name="line42"></a> ************************************************************************************/</span>
+<a name="line43"></a>&nbsp;
+<a name="line44"></a><span style="color: #000088;">$language_data</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a> <span style="color: #009900;">&#40;</span>
+<a name="line45"></a>    <span style="color: #0000ff;">'LANG_NAME'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'AviSynth'</span><span style="color: #339933;">,</span>
+<a name="line46"></a>    <span style="color: #0000ff;">'COMMENT_SINGLE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'#'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line47"></a>    <span style="color: #0000ff;">'COMMENT_MULTI'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'/*'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'*/'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'[*'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'*]'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line48"></a>    <span style="color: #0000ff;">'CASE_KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> GESHI_CAPS_NO_CHANGE<span style="color: #339933;">,</span>
+<a name="line49"></a>    <span style="color: #0000ff;">'QUOTEMARKS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'&quot;'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line50"></a>    <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line51"></a>    <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line52"></a>        <span style="color: #666666; font-style: italic;">//  Reserved words.</span>
+<a name="line53"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line54"></a>            <span style="color: #0000ff;">'try'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'cache'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'function'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'global'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'return'</span>
+<a name="line55"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line56"></a>        <span style="color: #666666; font-style: italic;">// Constants / special variables.</span>
+<a name="line57"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line58"></a>            <span style="color: #0000ff;">'true'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'yes'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'false'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'no'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'__END__'</span>
+<a name="line59"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line60"></a>        <span style="color: #666666; font-style: italic;">// Internal Filters.</span>
+<a name="line61"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line62"></a>            <span style="color: #0000ff;">'AviSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AviFileSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AddBorders'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AlignedSplice'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AssumeFPS'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AssumeScaledFPS'</span><span style="color: #339933;">,</span>
+<a name="line63"></a>            <span style="color: #0000ff;">'AssumeFrameBased'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AssumeFieldBased'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AssumeBFF'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AssumeTFF'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Amplify'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AmplifydB'</span><span style="color: #339933;">,</span>
+<a name="line64"></a>            <span style="color: #0000ff;">'AssumeSampleRate'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AudioDub'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AudioDubEx'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Animate'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ApplyRange'</span><span style="color: #339933;">,</span>
+<a name="line65"></a>            <span style="color: #0000ff;">'BicubicResize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'BilinearResize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'BlackmanResize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Blur'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Bob'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'BlankClip'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Blackness'</span><span style="color: #339933;">,</span>
+<a name="line66"></a>            <span style="color: #0000ff;">'ColorYUV'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertBackToYUY2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToRGB'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToRGB24'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToRGB32'</span><span style="color: #339933;">,</span>
+<a name="line67"></a>            <span style="color: #0000ff;">'ConvertToYUY2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToY8'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToYV411'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToYV12'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToYV16'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToYV24'</span><span style="color: #339933;">,</span>
+<a name="line68"></a>            <span style="color: #0000ff;">'ColorKeyMask'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Crop'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'CropBottom'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ChangeFPS'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertFPS'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ComplementParity'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertAudioTo8bit'</span><span style="color: #339933;">,</span>
+<a name="line69"></a>            <span style="color: #0000ff;">'ConvertAudioTo16bit'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertAudioTo24bit'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertAudioTo32bit'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertAudioToFloat'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConvertToMono'</span><span style="color: #339933;">,</span>
+<a name="line70"></a>            <span style="color: #0000ff;">'ConditionalFilter'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ConditionalReader'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ColorBars'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Compare'</span><span style="color: #339933;">,</span>
+<a name="line71"></a>            <span style="color: #0000ff;">'DirectShowSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'DeleteFrame'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Dissolve'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'DuplicateFrame'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'DoubleWeave'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'DelayAudio'</span><span style="color: #339933;">,</span>
+<a name="line72"></a>            <span style="color: #0000ff;">'EnsureVBRMP3Sync'</span><span style="color: #339933;">,</span>
+<a name="line73"></a>            <span style="color: #0000ff;">'FixLuminance'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FlipHorizontal'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FlipVertical'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FixBrokenChromaUpsampling'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeIn0'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeIn'</span><span style="color: #339933;">,</span>
+<a name="line74"></a>            <span style="color: #0000ff;">'FadeIn2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeOut0'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeOut'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeOut2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeIO0'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeIO'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FadeIO2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FreezeFrame'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'FrameEvaluate'</span><span style="color: #339933;">,</span>
+<a name="line75"></a>            <span style="color: #0000ff;">'GreyScale'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'GaussResize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'GeneralConvolution'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'GetChannel'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'GetLeftChannel'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'GetRightChannel'</span><span style="color: #339933;">,</span>
+<a name="line76"></a>            <span style="color: #0000ff;">'HorizontalReduceBy2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Histogram'</span><span style="color: #339933;">,</span>
+<a name="line77"></a>            <span style="color: #0000ff;">'ImageReader'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ImageSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ImageWriter'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Invert'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Interleave'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Info'</span><span style="color: #339933;">,</span>
+<a name="line78"></a>            <span style="color: #0000ff;">'KillAudio'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'KillVideo'</span><span style="color: #339933;">,</span>
+<a name="line79"></a>            <span style="color: #0000ff;">'Levels'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Limiter'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Layer'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Letterbox'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'LanczosResize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Lanczos4Resize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Loop'</span><span style="color: #339933;">,</span>
+<a name="line80"></a>            <span style="color: #0000ff;">'MergeARGB'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MergeRGB'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MergeChroma'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MergeLuma'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Merge'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Mask'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MaskHS'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MergeChannels'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MixAudio'</span><span style="color: #339933;">,</span>
+<a name="line81"></a>            <span style="color: #0000ff;">'MonoToStereo'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MessageClip'</span><span style="color: #339933;">,</span>
+<a name="line82"></a>            <span style="color: #0000ff;">'Normalize'</span><span style="color: #339933;">,</span>
+<a name="line83"></a>            <span style="color: #0000ff;">'OpenDMLSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Overlay'</span><span style="color: #339933;">,</span>
+<a name="line84"></a>            <span style="color: #0000ff;">'PointResize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'PeculiarBlend'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Pulldown'</span><span style="color: #339933;">,</span>
+<a name="line85"></a>            <span style="color: #0000ff;">'RGBAdjust'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ResetMask'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Reverse'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ResampleAudio'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ReduceBy2'</span><span style="color: #339933;">,</span>
+<a name="line86"></a>            <span style="color: #0000ff;">'SegmentedAviSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SegmentedDirectShowSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SoundOut'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ShowAlpha'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ShowRed'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ShowGreen'</span><span style="color: #339933;">,</span>
+<a name="line87"></a>            <span style="color: #0000ff;">'ShowBlue'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SwapUV'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Subtract'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SincResize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Spline16Resize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Spline36Resize'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Spline64Resize'</span><span style="color: #339933;">,</span>
+<a name="line88"></a>            <span style="color: #0000ff;">'SelectEven'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SelectOdd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SelectEvery'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SelectRangeEvery'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Sharpen'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SpatialSoften'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SeparateFields'</span><span style="color: #339933;">,</span>
+<a name="line89"></a>            <span style="color: #0000ff;">'ShowFiveVersions'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ShowFrameNumber'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ShowSMPTE'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ShowTime'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'StackHorizontal'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'StackVertical'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Subtitle'</span><span style="color: #339933;">,</span>
+<a name="line90"></a>            <span style="color: #0000ff;">'SwapFields'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SuperEQ'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SSRC'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ScriptClip'</span><span style="color: #339933;">,</span>
+<a name="line91"></a>            <span style="color: #0000ff;">'Tweak'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'TurnLeft'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'TurnRight'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Turn180'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'TemporalSoften'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'TimeStretch'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'TCPServer'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'TCPSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Trim'</span><span style="color: #339933;">,</span>
+<a name="line92"></a>            <span style="color: #0000ff;">'Tone'</span><span style="color: #339933;">,</span>
+<a name="line93"></a>            <span style="color: #0000ff;">'UToY'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'UToY8'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'UnalignedSplice'</span><span style="color: #339933;">,</span>
+<a name="line94"></a>            <span style="color: #0000ff;">'VToY'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VToY8'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VerticalReduceBy2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Version'</span><span style="color: #339933;">,</span>
+<a name="line95"></a>            <span style="color: #0000ff;">'WavSource'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Weave'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'WriteFile'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'WriteFileIf'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'WriteFileStart'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'WriteFileEnd'</span><span style="color: #339933;">,</span>
+<a name="line96"></a>            <span style="color: #0000ff;">'YToUV'</span>
+<a name="line97"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line98"></a>        <span style="color: #666666; font-style: italic;">// Internal functions.</span>
+<a name="line99"></a>        <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line100"></a>            <span style="color: #0000ff;">'Abs'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Apply'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Assert'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AverageLuma'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AverageChromaU'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'AverageChromaV'</span><span style="color: #339933;">,</span>
+<a name="line101"></a>            <span style="color: #0000ff;">'Ceil'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Cos'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Chr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ChromaUDifference'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ChromaVDifference'</span><span style="color: #339933;">,</span>
+<a name="line102"></a>            <span style="color: #0000ff;">'Defined'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Default'</span><span style="color: #339933;">,</span>
+<a name="line103"></a>            <span style="color: #0000ff;">'Exp'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Exist'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Eval'</span><span style="color: #339933;">,</span>
+<a name="line104"></a>            <span style="color: #0000ff;">'Floor'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Frac'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Float'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Findstr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'GetMTMode'</span><span style="color: #339933;">,</span>
+<a name="line105"></a>            <span style="color: #0000ff;">'HexValue'</span><span style="color: #339933;">,</span>
+<a name="line106"></a>            <span style="color: #0000ff;">'Int'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'IsBool'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'IsClip'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'IsFloat'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'IsInt'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'IsString'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Import'</span><span style="color: #339933;">,</span>
+<a name="line107"></a>            <span style="color: #0000ff;">'LoadPlugin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Log'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'LCase'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'LeftStr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'LumaDifference'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'LoadVirtualDubPlugin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'LoadVFAPIPlugin'</span><span style="color: #339933;">,</span>
+<a name="line108"></a>            <span style="color: #0000ff;">'LoadCPlugin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Load_Stdcall_Plugin'</span><span style="color: #339933;">,</span>
+<a name="line109"></a>            <span style="color: #0000ff;">'Max'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MulDiv'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'MidStr'</span><span style="color: #339933;">,</span>
+<a name="line110"></a>            <span style="color: #0000ff;">'NOP'</span><span style="color: #339933;">,</span>
+<a name="line111"></a>            <span style="color: #0000ff;">'OPT_AllowFloatAudio'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'OPT_UseWaveExtensible'</span><span style="color: #339933;">,</span>
+<a name="line112"></a>            <span style="color: #0000ff;">'Pi'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Pow'</span><span style="color: #339933;">,</span>
+<a name="line113"></a>            <span style="color: #0000ff;">'Round'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Rand'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'RevStr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'RightStr'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'RGBDifference'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'RGBDifferenceFromPrevious'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'RGBDifferenceToNext'</span><span style="color: #339933;">,</span>
+<a name="line114"></a>            <span style="color: #0000ff;">'Sin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Sqrt'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Sign'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Spline'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'StrLen'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'String'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'Select'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SetMemoryMax'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SetWorkingDir'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'SetMTMode'</span><span style="color: #339933;">,</span>
+<a name="line115"></a>            <span style="color: #0000ff;">'SetPlanarLegacyAlignment'</span><span style="color: #339933;">,</span>
+<a name="line116"></a>            <span style="color: #0000ff;">'Time'</span><span style="color: #339933;">,</span>
+<a name="line117"></a>            <span style="color: #0000ff;">'UCase'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'UDifferenceFromPrevious'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'UDifferenceToNext'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'UPlaneMax'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'UPlaneMin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'UPlaneMedian'</span><span style="color: #339933;">,</span>
+<a name="line118"></a>            <span style="color: #0000ff;">'UPlaneMinMaxDifference'</span><span style="color: #339933;">,</span>
+<a name="line119"></a>            <span style="color: #0000ff;">'Value'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VersionNumber'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VersionString'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VDifferenceFromPrevious'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VDifferenceToNext'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VPlaneMax'</span><span style="color: #339933;">,</span>
+<a name="line120"></a>            <span style="color: #0000ff;">'VPlaneMin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VPlaneMedian'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'VPlaneMinMaxDifference'</span><span style="color: #339933;">,</span>
+<a name="line121"></a>            <span style="color: #0000ff;">'YDifferenceFromPrevious'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'YDifferenceToNext'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'YPlaneMax'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'YPlaneMin'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'YPlaneMedian'</span><span style="color: #339933;">,</span>
+<a name="line122"></a>            <span style="color: #0000ff;">'YPlaneMinMaxDifference'</span>
+<a name="line123"></a>            <span style="color: #009900;">&#41;</span>
+<a name="line124"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line125"></a>    <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line126"></a>        <span style="color: #0000ff;">'+'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'++'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'-'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'--'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'/'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'*'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'%'</span><span style="color: #339933;">,</span>
+<a name="line127"></a>        <span style="color: #0000ff;">'='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'=='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&lt;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&lt;='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&gt;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&gt;='</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&lt;&gt;'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'!='</span><span style="color: #339933;">,</span>
+<a name="line128"></a>        <span style="color: #0000ff;">'!'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'?'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">':'</span><span style="color: #339933;">,</span>
+<a name="line129"></a>        <span style="color: #0000ff;">'|'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'||'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'&amp;&amp;'</span><span style="color: #339933;">,</span>
+<a name="line130"></a>        <span style="color: #0000ff;">'\\'</span><span style="color: #339933;">,</span>
+<a name="line131"></a>        <span style="color: #0000ff;">'('</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">')'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'{'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'}'</span><span style="color: #339933;">,</span>
+<a name="line132"></a>        <span style="color: #0000ff;">'.'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">','</span>
+<a name="line133"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line134"></a>    <span style="color: #0000ff;">'CASE_SENSITIVE'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line135"></a>        GESHI_COMMENTS <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line136"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line137"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line138"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+<a name="line139"></a>        <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line140"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line141"></a>    <span style="color: #0000ff;">'STYLES'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line142"></a>        <span style="color: #0000ff;">'KEYWORDS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line143"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#9966CC; font-weight:bold;'</span><span style="color: #339933;">,</span>
+<a name="line144"></a>            <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#0000FF; font-weight:bold;'</span><span style="color: #339933;">,</span>
+<a name="line145"></a>            <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#CC3300; font-weight:bold;'</span><span style="color: #339933;">,</span>
+<a name="line146"></a>            <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#660000; font-weight:bold;'</span>
+<a name="line147"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line148"></a>        <span style="color: #0000ff;">'COMMENTS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line149"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#008000; font-style:italic;'</span><span style="color: #339933;">,</span>
+<a name="line150"></a>            <span style="color: #0000ff;">'MULTI'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#000080; font-style:italic;'</span>
+<a name="line151"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line152"></a>        <span style="color: #0000ff;">'ESCAPE_CHAR'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line153"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#000099;'</span>
+<a name="line154"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line155"></a>        <span style="color: #0000ff;">'BRACKETS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line156"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#006600; font-weight:bold;'</span>
+<a name="line157"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line158"></a>        <span style="color: #0000ff;">'STRINGS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line159"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#996600;'</span>
+<a name="line160"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line161"></a>        <span style="color: #0000ff;">'NUMBERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line162"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#006666;'</span>
+<a name="line163"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line164"></a>        <span style="color: #0000ff;">'METHODS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line165"></a>            <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#9900CC;'</span>
+<a name="line166"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line167"></a>        <span style="color: #0000ff;">'SYMBOLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line168"></a>            <span style="color: #cc66cc;">0</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'color:#006600; font-weight:bold;'</span>
+<a name="line169"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line170"></a>        <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line171"></a>            <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line172"></a>        <span style="color: #0000ff;">'SCRIPT'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line173"></a>            <span style="color: #009900;">&#41;</span>
+<a name="line174"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line175"></a>    <span style="color: #0000ff;">'URLS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line176"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line177"></a>        <span style="color: #cc66cc;">2</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span><span style="color: #339933;">,</span>
+<a name="line178"></a>        <span style="color: #cc66cc;">3</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'http://avisynth.org/mediawiki/{FNAME}'</span><span style="color: #339933;">,</span>
+<a name="line179"></a>        <span style="color: #cc66cc;">4</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">''</span>
+<a name="line180"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line181"></a>    <span style="color: #0000ff;">'REGEXPS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line182"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line183"></a>    <span style="color: #0000ff;">'OOLANG'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+<a name="line184"></a>    <span style="color: #0000ff;">'OBJECT_SPLITTERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line185"></a>        <span style="color: #cc66cc;">1</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'.'</span>
+<a name="line186"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line187"></a>    <span style="color: #0000ff;">'STRICT_MODE_APPLIES'</span> <span style="color: #339933;">=&gt;</span> GESHI_MAYBE<span style="color: #339933;">,</span>
+<a name="line188"></a>    <span style="color: #0000ff;">'SCRIPT_DELIMITERS'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line189"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line190"></a>    <span style="color: #0000ff;">'HIGHLIGHT_STRICT_BLOCK'</span> <span style="color: #339933;">=&gt;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span>
+<a name="line191"></a>        <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+<a name="line192"></a>    <span style="color: #0000ff;">'TAB_WIDTH'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #cc66cc;">4</span>
+<a name="line193"></a><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<a name="line194"></a><span style="color: #000000; font-weight: bold;">?&gt;</span>
+<a name="line195"></a>&nbsp;</pre>
+<div class="header">
+<h1>GeSHi</h1>
+<ul>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li>Package</li><li>Class</li><li>Tree</li><li><a href="../../overview-files.html">Files</a></li>
+<li><a href="../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../../index.html" target="_top">Frames</a>
+<a href="../../source/geshi/avisynth.php.html" target="_top">No frames</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>

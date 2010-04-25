@@ -1,0 +1,361 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="generator" content="PHPDoctor 2RC4 (http://peej.github.com/phpdoctor/)">
+<meta name="when" content="Sun, 25 Apr 2010 10:34:05 +0100">
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+<link rel="start" href="../overview-summary.html">
+
+<title>ShellTestCase (SimpleTest)</title>
+
+</head>
+<body id="definition" onload="parent.document.title=document.title;">
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/shelltestcase.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<div class="qualifiedName">SimpleTest\ShellTestCase</div>
+<a href="../source/shell_tester.php.html#line71" class="location">shell_tester.php at line 71</a>
+
+<h1>Class ShellTestCase</h1>
+
+<pre class="tree"><a href="../simpletest/simpletestcase.html">SimpleTestCase</a><br>    └─<strong>ShellTestCase</strong><br /></pre>
+
+<hr>
+
+<p class="signature">public  class <strong>ShellTestCase</strong><br>extends <a href="../simpletest/simpletestcase.html">SimpleTestCase</a>
+
+</p>
+
+<div class="comment" id="overview_description"><p>Test case for testing of command line scripts and
+utilities. Usually scripts taht are external to the
+PHP code, but support it in some way.</p></div>
+
+<dl>
+<dt>Subpackage:</dt>
+<dd>UnitTester</dd>
+<dt>Package		SimpleTest.</dt>
+<dt>Subpackage	UnitTester.</dt>
+</dl>
+<hr>
+
+<table id="summary_constr">
+<tr><th colspan="2">Constructor Summary</th></tr>
+<tr>
+<td class="description"><p class="name"><a href="#ShellTestCase()">ShellTestCase</a>(string label)</p><p class="description">Creates an empty test case. </p></td>
+</tr>
+</table>
+
+<table id="summary_method">
+<tr><th colspan="2">Method Summary</th></tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertExitCode()">assertExitCode</a>(integer status, string message)</p><p class="description">Tests the last status code from the shell.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertFileExists()">assertFileExists</a>(string path, string message)</p><p class="description">File existence check.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertFileNotExists()">assertFileNotExists</a>(string path, string message)</p><p class="description">File non-existence check.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertFilePattern()">assertFilePattern</a>(string pattern, string path, string message)</p><p class="description">Scans a file for a Perl regex. </p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoFilePattern()">assertNoFilePattern</a>(string pattern, string path, string message)</p><p class="description">If a Perl regex is found anywhere in the named
+file then a failure is generated, else a pass.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertNoOutputPattern()">assertNoOutputPattern</a>(string pattern, mixed message, $message Message)</p><p class="description">If a Perl regex is found anywhere in the current
+output then a failure is generated, else a pass.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertOutput()">assertOutput</a>(string expected, string message)</p><p class="description">Attempt to exactly match the combined STDERR and
+STDOUT output.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#assertOutputPattern()">assertOutputPattern</a>(string pattern, string message)</p><p class="description">Scans the output for a Perl regex. </p></td>
+</tr>
+<tr>
+<td class="type"> void</td>
+<td class="description"><p class="name"><a href="#dumpOutput()">dumpOutput</a>()</p><p class="description">Dumps the output of the last command.</p></td>
+</tr>
+<tr>
+<td class="type"> boolean</td>
+<td class="description"><p class="name"><a href="#execute()">execute</a>(string command)</p><p class="description">Executes a command and buffers the results.</p></td>
+</tr>
+<tr>
+<td class="type"> string</td>
+<td class="description"><p class="name"><a href="#getOutput()">getOutput</a>()</p><p class="description">Accessor for the last output.</p></td>
+</tr>
+<tr>
+<td class="type"> array</td>
+<td class="description"><p class="name"><a href="#getOutputAsList()">getOutputAsList</a>()</p><p class="description">Accessor for the last output.</p></td>
+</tr>
+</table>
+
+<table class="inherit">
+<tr><th colspan="2">Methods inherited from SimpleTest\SimpleTestCase</th></tr>
+<tr><td><a href="../simpletest/simpletestcase.html#assertExpectation()">assertExpectation</a>, <a href="../simpletest/simpletestcase.html#assertFalse()">assertFalse</a>, <a href="../simpletest/simpletestcase.html#assertTrue()">assertTrue</a>, <a href="../simpletest/simpletestcase.html#createInvoker()">createInvoker</a>, <a href="../simpletest/simpletestcase.html#dump()">dump</a>, <a href="../simpletest/simpletestcase.html#error()">error</a>, <a href="../simpletest/simpletestcase.html#fail()">fail</a>, <a href="../simpletest/simpletestcase.html#getAssertionLine()">getAssertionLine</a>, <a href="../simpletest/simpletestcase.html#getLabel()">getLabel</a>, <a href="../simpletest/simpletestcase.html#getSize()">getSize</a>, <a href="../simpletest/simpletestcase.html#pass()">pass</a>, <a href="../simpletest/simpletestcase.html#run()">run</a>, <a href="../simpletest/simpletestcase.html#sendMessage()">sendMessage</a>, <a href="../simpletest/simpletestcase.html#setUp()">setUp</a>, <a href="../simpletest/simpletestcase.html#signal()">signal</a>, <a href="../simpletest/simpletestcase.html#swallowErrors()">swallowErrors</a>, <a href="../simpletest/simpletestcase.html#tearDown()">tearDown</a></td></tr></table>
+
+<h2 id="detail_constr">Constructor Detail</h2>
+<a href="../source/shell_tester.php.html#line83" class="location">shell_tester.php at line 83</a>
+
+<h3 id="ShellTestCase()">ShellTestCase</h3>
+<code class="signature">public <strong>ShellTestCase</strong>(string label)</code>
+<div class="details">
+<p>Creates an empty test case. Should be subclassed
+with test methods for a functional test case.</p><dl>
+<dt>Parameters:</dt>
+<dd>label - Name of test case. Will use the class name if none specified.</dd>
+</dl>
+</div>
+
+<hr>
+
+<h2 id="detail_method">Method Detail</h2>
+<a href="../source/shell_tester.php.html#line139" class="location">shell_tester.php at line 139</a>
+
+<h3 id="assertExitCode()">assertExitCode</h3>
+<code class="signature">public  boolean <strong>assertExitCode</strong>(integer status, string message)</code>
+<div class="details">
+<p>Tests the last status code from the shell.</p><dl>
+<dt>Parameters:</dt>
+<dd>status - Expected status of last command.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line201" class="location">shell_tester.php at line 201</a>
+
+<h3 id="assertFileExists()">assertFileExists</h3>
+<code class="signature">public  boolean <strong>assertFileExists</strong>(string path, string message)</code>
+<div class="details">
+<p>File existence check.</p><dl>
+<dt>Parameters:</dt>
+<dd>path - Full filename and path.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line213" class="location">shell_tester.php at line 213</a>
+
+<h3 id="assertFileNotExists()">assertFileNotExists</h3>
+<code class="signature">public  boolean <strong>assertFileNotExists</strong>(string path, string message)</code>
+<div class="details">
+<p>File non-existence check.</p><dl>
+<dt>Parameters:</dt>
+<dd>path - Full filename and path.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line227" class="location">shell_tester.php at line 227</a>
+
+<h3 id="assertFilePattern()">assertFilePattern</h3>
+<code class="signature">public  boolean <strong>assertFilePattern</strong>(string pattern, string path, string message)</code>
+<div class="details">
+<p>Scans a file for a Perl regex. If found
+anywhere it passes, else it fails.</p><dl>
+<dt>Parameters:</dt>
+<dd>pattern - Regex to search for.</dd>
+<dd>path - Full filename and path.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line244" class="location">shell_tester.php at line 244</a>
+
+<h3 id="assertNoFilePattern()">assertNoFilePattern</h3>
+<code class="signature">public  boolean <strong>assertNoFilePattern</strong>(string pattern, string path, string message)</code>
+<div class="details">
+<p>If a Perl regex is found anywhere in the named
+file then a failure is generated, else a pass.</p><dl>
+<dt>Parameters:</dt>
+<dd>pattern - Regex to search for.</dd>
+<dd>path - Full filename and path.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line186" class="location">shell_tester.php at line 186</a>
+
+<h3 id="assertNoOutputPattern()">assertNoOutputPattern</h3>
+<code class="signature">public  boolean <strong>assertNoOutputPattern</strong>(string pattern, mixed message, $message Message)</code>
+<div class="details">
+<p>If a Perl regex is found anywhere in the current
+output then a failure is generated, else a pass.</p><dl>
+<dt>Parameters:</dt>
+<dd>pattern - Regex to search for.</dd>
+<dd>Message - to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line154" class="location">shell_tester.php at line 154</a>
+
+<h3 id="assertOutput()">assertOutput</h3>
+<code class="signature">public  boolean <strong>assertOutput</strong>(string expected, string message)</code>
+<div class="details">
+<p>Attempt to exactly match the combined STDERR and
+STDOUT output.</p><dl>
+<dt>Parameters:</dt>
+<dd>expected - Expected output.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line170" class="location">shell_tester.php at line 170</a>
+
+<h3 id="assertOutputPattern()">assertOutputPattern</h3>
+<code class="signature">public  boolean <strong>assertOutputPattern</strong>(string pattern, string message)</code>
+<div class="details">
+<p>Scans the output for a Perl regex. If found
+anywhere it passes, else it fails.</p><dl>
+<dt>Parameters:</dt>
+<dd>pattern - Regex to search for.</dd>
+<dd>message - Message to display.</dd>
+<dt>Returns:</dt>
+<dd>True if pass.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line107" class="location">shell_tester.php at line 107</a>
+
+<h3 id="dumpOutput()">dumpOutput</h3>
+<code class="signature">public  void <strong>dumpOutput</strong>()</code>
+<div class="details">
+<p>Dumps the output of the last command.</p></div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line96" class="location">shell_tester.php at line 96</a>
+
+<h3 id="execute()">execute</h3>
+<code class="signature">public  boolean <strong>execute</strong>(string command)</code>
+<div class="details">
+<p>Executes a command and buffers the results.</p><dl>
+<dt>Parameters:</dt>
+<dd>command - Command to run.</dd>
+<dt>Returns:</dt>
+<dd>True if zero exit code.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line116" class="location">shell_tester.php at line 116</a>
+
+<h3 id="getOutput()">getOutput</h3>
+<code class="signature">public  string <strong>getOutput</strong>()</code>
+<div class="details">
+<p>Accessor for the last output.</p><dl>
+<dt>Returns:</dt>
+<dd>Output as text.</dd>
+</dl>
+</div>
+
+<hr>
+
+<a href="../source/shell_tester.php.html#line126" class="location">shell_tester.php at line 126</a>
+
+<h3 id="getOutputAsList()">getOutputAsList</h3>
+<code class="signature">public  array <strong>getOutputAsList</strong>()</code>
+<div class="details">
+<p>Accessor for the last output.</p><dl>
+<dt>Returns:</dt>
+<dd>Output as array of lines.</dd>
+</dl>
+</div>
+
+<hr>
+
+<div class="header">
+<h1>SimpleTest</h1>
+<ul>
+<li><a href="../overview-summary.html">Overview</a></li>
+<li><a href="../simpletest/package-summary.html">Package</a></li>
+<li class="active">Class</li>
+<li><a href="../simpletest/package-tree.html">Tree</a></li>
+<li><a href="../overview-files.html">Files</a></li>
+<li><a href="../deprecated-list.html">Deprecated</a></li>
+<li><a href="../index-all.html">Index</a></li>
+</ul>
+</div>
+
+<div class="small_links">
+<a href="../index.html" target="_top">Frames</a>
+<a href="../simpletest/shelltestcase.html" target="_top">No frames</a>
+</div>
+<div class="small_links">
+Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>
+Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>
+</div>
+<hr>
+
+<p id="footer">This document was generated by <a href="http://peej.github.com/phpdoctor/">PHPDoctor: The PHP Documentation Creator</a></p>
+
+</body>
+
+</html>
