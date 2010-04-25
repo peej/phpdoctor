@@ -124,7 +124,7 @@ class ProgramElementDoc extends Doc
 	 *
 	 * <pre>Example:
 for the method bar() in class Foo in the package Baz, return:
-	Baz.Foo.bar()</pre>
+	Baz\Foo\bar()</pre>
 	 *
 	 * @return str
 	 */
@@ -132,9 +132,9 @@ for the method bar() in class Foo in the package Baz, return:
     {
 		$parent =& $this->containingClass();
 		if ($parent && $parent->name() != '' && $this->_package != $parent->name()) {
-			return $this->_package.'.'.$parent->name().'.'.$this->_name;
+			return $this->_package.'\\'.$parent->name().'\\'.$this->_name;
 		} else {
-			return $this->_package.'.'.$this->_name;
+			return $this->_package.'\\'.$this->_name;
 		}
 	}
 
