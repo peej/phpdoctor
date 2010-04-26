@@ -75,7 +75,7 @@ class SeeTag extends Tag
 			$link = $this->_link;
 		}
 		$element =& $this->_resolveLink();
-		if ($element) {
+		if ($element && $this->_parent) {
 			$package =& $this->_parent->containingPackage();
 			$path = str_repeat('../', $package->depth() + 1).$element->asPath();
 			return '<a href="'.$path.'">'.$link.'</a>';
