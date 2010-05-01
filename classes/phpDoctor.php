@@ -534,6 +534,7 @@ class PHPDoctor
 							    $token[0] == T_VARIABLE
                             )) { // we have a code block after the 1st comment, so it is not a file level comment
 							    $defaultPackage = $this->_defaultPackage;
+							    $fileData = array();
 							}
 							
 							switch ($token[0]) {
