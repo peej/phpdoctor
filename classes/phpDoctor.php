@@ -201,6 +201,12 @@ class PHPDoctor
 	 */
 	var $_currentFilename = NULL;
 	
+    /** Whether or not to use PEAR compatibility mode for first sentence tags.
+     *
+     * @var boolean
+     */
+    var $_pearCompat = FALSE;
+    
 	/** Constructor
 	 *
 	 * @param str config The configuration file to use for this run of PHPDoctor
@@ -276,6 +282,8 @@ class PHPDoctor
 		if (isset($this->_options['doclet'])) $this->_doclet = $this->_options['doclet'];
 		if (isset($this->_options['doclet_path'])) $this->_docletPath = $this->_options['doclet_path'];
 		else $this->_docletPath = $this->_path.DIRECTORY_SEPARATOR.$this->_docletPath;
+		
+		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
 		
 	}
 	
