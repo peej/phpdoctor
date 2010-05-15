@@ -57,7 +57,7 @@ class Debug
      */
     function showDepth()
     {
-        return str_repeat('|', $this->depth).'- ';
+        return str_repeat('|', $this->depth);
     }
 
 	/** Output fieldDoc
@@ -70,7 +70,7 @@ class Debug
 		if ($fields) {
 			foreach ($fields as $field) {
 				$type = $field->type();
-				echo $this->showDepth(), $field->modifiers($showAccess), $type->toString(), ' ';
+				echo $this->showDepth(), '- ', $field->modifiers($showAccess), $type->toString(), ' ';
 				if ($field->isFinal()) {
 					echo $field->packageName(), '\\', $field->name();
 				} else {
@@ -81,6 +81,7 @@ class Debug
 				}
 				echo ' [', $field->location(), ']';
 				echo "\n";
+				$this->docComment($field);
 			}
 		}
 		$this->depth--;
@@ -96,7 +97,7 @@ class Debug
 		if ($methods) {
 			foreach ($methods as $method) {
 				$type = $method->returnType();
-				echo $this->showDepth(), $method->modifiers();
+				echo $this->showDepth(), '- ', $method->modifiers();
 				if ($type) {
 					echo $type->toString(), ' ';
 				} else {
@@ -110,7 +111,7 @@ class Debug
 				$exceptions =& $method->thrownExceptions();
 				if ($exceptions) {
 					foreach ($exceptions as $exception) {
-						echo str_repeat('|', $this->depth + 1), '- throws ';
+						echo $this->showDepth(), '|- throws ';
 						if (is_object($exception)) {
 							echo $exception->packageName(), '\\', $exception->name(), "\n";
 						} else {
@@ -118,6 +119,7 @@ class Debug
 						}
 					}
 				}
+				$this->docComment($method);
 			}
 		}
 		$this->depth--;
@@ -132,7 +134,7 @@ class Debug
 		$this->depth++;
 		if ($constructors) {
 			foreach ($constructors as $constructor) {
-				echo $this->showDepth(), $constructor->modifiers();
+				echo $this->showDepth(), '- ', $constructor->modifiers();
 				echo $constructor->packageName(), '\\', $constructor->name(), $constructor->flatSignature();
 				echo ' [', $constructor->location(), ']';
 				echo "\n";
@@ -151,7 +153,7 @@ class Debug
 		$this->depth++;
 		if ($classes) {
 			foreach ($classes as $class) {
-				echo $this->showDepth(), $class->modifiers();
+				echo $this->showDepth(), '- ', $class->modifiers();
 				if ($class->isInterface()) {
 					echo 'interface ';
 				} else {
@@ -175,12 +177,25 @@ class Debug
 				}
 				echo ' [', $class->location(), ']';
 				echo "\n";
+				$this->docComment($class);
 				$this->fieldDoc($class->fields(), TRUE);
 				$this->constructorDoc($class->constructor());
 				$this->methodDoc($class->methods());
 			}
 		}
 		$this->depth--;
+	}
+	
+	function docComment(&$programElement) {
+	    $textTag =& $programElement->tags('@text');
+        if ($textTag && $textTag->text()) {
+            echo $this->showDepth(), '|= ', $textTag->text(), "\n";
+            foreach($textTag->inlineTags() as $inlineTag) {
+                if ($inlineTag->name() != '@text') {
+                    echo $this->showDepth(), '|= ', $inlineTag->displayName(), ': ', $inlineTag->text(), "\n";
+                }
+            }
+        }
 	}
 	
 }
