@@ -26,7 +26,8 @@ class TestStandardDoclet extends UnitTestCase
 	}
 	
 	function testExtendingClassWithSameNameInDifferentNamespace() {
-	    
+		$results = $this->readFile('phpdoctor/tests/filelevel/duplicateclass.html');
+		$this->assertTrue(strpos($results, '<p class="signature">public  class <strong>duplicateClass</strong><br>extends <a href="../../../phpdoctor/tests/mynamespace/duplicateclass.html">duplicateClass</a>'));
 	}
 
 }

@@ -119,6 +119,9 @@ class aClass implements anInterface {
  */
 class childClass extends aClass {}
 
+require_once 'php5-test2.php';
+class duplicateClass extends PHPDoctor\Tests\MyNamespace\duplicateClass {}
+
 
 function aFunction() { }
 function aFunctionWithParams($one, int $two) { }

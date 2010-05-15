@@ -6,7 +6,7 @@ require_once 'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'mock_objects.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'reporter.php';
 
-define('PHP', 'php');
+define('PHP', '~/php-5.3.2/sapi/cli/php');
 
 $parser = &new GroupTest('Parser');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'php5.php');

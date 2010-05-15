@@ -70,6 +70,11 @@ class TestPHP5 extends UnitTestCase
     function testHTMLInVariable() {
         $this->assertTrue(strpos($this->results, 'public mixed PHPDoctor\\Tests\\Data\\$varContainingHTMLToEscape = \'<strong>Escape me</strong>\''));
 	}
+	
+	function testExtendingClassWithSameNameInDifferentNamespace() {
+	    $this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\FileLevel\\duplicateClass extends PHPDoctor\\Tests\\MyNamespace\\duplicateClass'));
+	    $this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\MyNamespace\\duplicateClass'));
+	}
 
 }
 

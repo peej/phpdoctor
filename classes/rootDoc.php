@@ -217,11 +217,21 @@ class RootDoc extends Doc
 	 */
 	function &classNamed($name)
     {
-		$packages = $this->_packages; // we do this copy so as not to upset the internal pointer of the array outside this scope
-		foreach($packages as $packageName => $package) {
-			$class =& $package->findClass($name);
-			if ($class != NULL) break;
+        $class = NULL;
+        $pos = strrpos($name, '\\');
+        if ($pos != FALSE) {
+            $package = substr($name, 0, $pos);
+            $name = substr($name, $pos + 1);
 		}
+		if (isset($package) && isset($this->_packages[$package])) {
+		    $class =& $this->_packages[$package]->findClass($name);
+		} else {
+            $packages = $this->_packages; // we do this copy so as not to upset the internal pointer of the array outside this scope
+            foreach($packages as $packageName => $package) {
+                $class =& $package->findClass($name);
+                if ($class != NULL) break;
+            }
+        }
 		return $class;
 	}
 

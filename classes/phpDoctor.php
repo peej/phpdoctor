@@ -32,6 +32,7 @@ if (!defined('T_CONST')) define('T_CONST', 0);
 if (!defined('T_THROW')) define('T_THROW', 0);
 if (!defined('T_NAMESPACE')) define('T_NAMESPACE', 0);
 if (!defined('T_NS_C')) define('T_NS_C', 0);
+if (!defined('T_NS_SEPARATOR')) define('T_NS_SEPARATOR', 0);
 if (!defined('T_USE')) define('T_USE', 0);
 if (!defined('GLOB_ONLYDIR')) define('GLOB_ONLYDIR', FALSE);
 
@@ -490,7 +491,7 @@ class PHPDoctor
 		$option = '_'.$option;
 		return $this->$option;
 	}
-
+	
 	/** Parse files into tokens and create rootDoc.
 	 *
 	 * @return RootDoc
@@ -565,7 +566,7 @@ class PHPDoctor
 							
 							case T_CLASS:
 							// read class
-								$class =& new classDoc($this->_getNext($tokens, $key, T_STRING), $rootDoc, $filename, $lineNumber); // create class object
+								$class =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber); // create class object
 								$this->verbose('+ Entering '.get_class($class).': '.$class->name());
 								if (isset($currentData['docComment'])) { // set doc comment
 									$class->set('docComment', $currentData['docComment']);
@@ -588,7 +589,7 @@ class PHPDoctor
 								
 							case T_INTERFACE:
 							// read interface
-								$interface =& new classDoc($this->_getNext($tokens, $key, T_STRING), $rootDoc, $filename, $lineNumber); // create interface object
+								$interface =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber); // create interface object
 								$this->verbose('+ Entering '.get_class($interface).': '.$interface->name());
 								if (isset($currentData['docComment'])) { // set doc comment
 									$interface->set('docComment', $currentData['docComment']);
@@ -612,7 +613,7 @@ class PHPDoctor
 	
 							case T_EXTENDS:
 							// get extends clause
-								$superClassName = $this->_getNext($tokens, $key, T_STRING);
+								$superClassName = $this->_getProgramElementName($tokens, $key);
 								$ce->set('superclass', $superClassName);
 								if ($superClass =& $rootDoc->classNamed($superClassName) && $commentTag =& $superClass->tags('@text')) {
 									$ce->setTag('@text', $commentTag);
@@ -633,7 +634,7 @@ class PHPDoctor
 								
 							case T_THROW:
 							// throws exception
-								$className = $this->_getNext($tokens, $key, T_STRING);
+								$className = $this->_getProgramElementName($tokens, $key);
 								$class =& $rootDoc->classNamed($className);
 								if ($class) {
 									$ce->setByRef('throws', $class);
@@ -688,7 +689,7 @@ class PHPDoctor
 								
 							case T_FUNCTION:
 							// read function
-								$method =& new methodDoc($this->_getNext($tokens, $key, T_STRING), $ce, $rootDoc, $filename, $lineNumber); // create method object
+								$method =& new methodDoc($this->_getProgramElementName($tokens, $key), $ce, $rootDoc, $filename, $lineNumber); // create method object
 								$this->verbose('+ Entering '.get_class($method).': '.$method->name());
 								if (isset($currentData['docComment'])) { // set doc comment
 									$method->set('docComment', $currentData['docComment']); // set doc comment
@@ -1122,7 +1123,28 @@ class PHPDoctor
 		}
 		return $tokens[$key][1];
 	}
-
+	
+	/**
+	 * Get the next program element name from the token list
+	 *
+	 * @param mixed[] tokens
+	 * @param int key
+	 * @return str
+	 */
+	function _getProgramElementName($tokens, $key) {
+	    $name = '';
+	    $key++;
+	    while (isset($tokens[$key][0]) && (
+	        $tokens[$key][0] == T_WHITESPACE ||
+	        $tokens[$key][0] == T_STRING ||
+	        $tokens[$key][0] == T_NS_SEPARATOR
+        )) {
+            $name .= $tokens[$key][1];
+            $key++;
+        }
+        return trim($name);
+	}
+	
 	/**
 	 * Process a doc comment into a doc tag array.
 	 *
