@@ -11,7 +11,7 @@ class TestStandardDoclet extends UnitTestCase
 	function testStandardDoclet() {
         $this->UnitTestCase('Standard doclet tests');
         ob_start();
-        passthru('php phpdoc.php tests/php5-test-standard.ini');
+        passthru(PHP.' phpdoc.php tests/php5-test-standard.ini');
         $this->results = ob_get_contents();
         ob_end_clean();
     }
@@ -20,10 +20,13 @@ class TestStandardDoclet extends UnitTestCase
         return file_get_contents('testdocs/'.$filename);
     }
 	
-	function testEscapeHTMLInVariable()
-	{
+	function testEscapeHTMLInVariable() {
 		$results = $this->readFile('phpdoctor/tests/data/aclass.html');
 		$this->assertTrue(strpos($results, '<strong>$varContainingHTMLToEscape</strong> = \'&lt;strong&gt;Escape me&lt;/strong&gt;\'</code>'));
+	}
+	
+	function testExtendingClassWithSameNameInDifferentNamespace() {
+	    
 	}
 
 }

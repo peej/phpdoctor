@@ -11,7 +11,7 @@ class TestPHP5 extends UnitTestCase
 	function testPHP5() {
         $this->UnitTestCase('PHP5 tests');
 		ob_start();
-		passthru('php phpdoc.php tests/php5-test.ini');
+		passthru(PHP.' phpdoc.php tests/php5-test.ini');
 		$this->results = ob_get_contents();
 		ob_end_clean();
     	

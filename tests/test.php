@@ -6,6 +6,8 @@ require_once 'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'mock_objects.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'reporter.php';
 
+define('PHP', 'php');
+
 $parser = &new GroupTest('Parser');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'php5.php');
 
