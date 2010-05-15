@@ -43,6 +43,8 @@ interface anInterface {
 	const aConst = 'const';
 	
 	/**
+	 * Some words about this constant
+	 *
 	 * @var int
 	 */
 	const anIntConst = 0;
@@ -58,17 +60,7 @@ interface anInterface {
 }
 
 /**
- * @access private
- */
-interface aPrivateInterface {}
-
-/**
- * @access protected
- * @package PHPDoctor\Tests\Data
- */
-interface aProtectedInterface {}
-
-/**
+ * This is aClass that implements anInterface
  * @package PHPDoctor\Tests\Data
  */
 class aClass implements anInterface {
@@ -98,14 +90,19 @@ class aClass implements anInterface {
 	
 	function aClass() {}
 	
-	function aFunction() {
+	/**
+	 * This is a method of the class aClass
+	 *
+	 * @throws Exception
+	 */
+	function aMethod() {
 		/**
 		 * @var int
 		 */
 		define('THREE', 3);
 	}
 	
-	function aFunctionWithParams($one, $two) {}
+	function aMethodWithParams($one, $two) {}
 	
 	/**
 	 * @access private
@@ -113,7 +110,7 @@ class aClass implements anInterface {
 	 * @param int two
 	 * @return bool
 	 */
-	function aPrivateFunctionWithParams($one, $two) {}
+	function aPrivateMethodWithParams($one, $two) {}
 	
 }
 
@@ -121,6 +118,10 @@ class aClass implements anInterface {
  * @package PHPDoctor\Tests\Data
  */
 class childClass extends aClass {}
+
+
+function aFunction() { }
+function aFunctionWithParams($one, int $two) { }
 
 /**
  * @namespace PHPDoctor\Tests\Data
