@@ -204,7 +204,7 @@ class ClassWriter extends HTMLWriter
 							echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
 							if (!$field->constantValue()) echo '$';
 							echo $field->name(), '</strong>';
-							if ($field->value()) echo ' = ', $field->value();
+							if ($field->value()) echo ' = ', htmlspecialchars($field->value());
 							echo "</code>\n";
                             echo '<div class="details">', "\n";
 							if ($textTag) {

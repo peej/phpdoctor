@@ -17,6 +17,8 @@ class TestPHP5 extends UnitTestCase
 		$results = ob_get_contents();
 		ob_end_clean();
 		
+		#echo $results; die;
+		
 		$this->assertTrue(strpos($results, 'public interface PHPDoctor\\Tests\\Data\\anInterface'));
 		$this->assertTrue(strpos($results, 'public final str PHPDoctor\\Tests\\Data\\aConst = \'const\''));
 		$this->assertTrue(strpos($results, 'public final int PHPDoctor\\Tests\\Data\\anIntConst'));
@@ -54,6 +56,8 @@ class TestPHP5 extends UnitTestCase
         $this->assertTrue(strpos($results, 'final int PHPDoctor\\Tests\\FileLevel\\CONSTANT2 = 2'));
         $this->assertTrue(strpos($results, 'final str PHPDoctor\\Tests\\FileLevel\\CONSTANT3 = \'three\''));
         
+        //testEscapeHTMLInVariable
+        $this->assertTrue(strpos($results, 'public mixed PHPDoctor\\Tests\\Data\\$varContainingHTMLToEscape = \'<strong>Escape me</strong>\''));
 	}
 
 }

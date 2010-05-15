@@ -94,6 +94,8 @@ class aClass implements anInterface {
 	
 	var $anArrayVar = array(4, 5, 6);
 	
+	var $varContainingHTMLToEscape = '<strong>Escape me</strong>';
+	
 	function aClass() {}
 	
 	function aFunction() {

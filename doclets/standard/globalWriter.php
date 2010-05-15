@@ -91,7 +91,7 @@ class GlobalWriter extends HTMLWriter
 					echo '<h3 id="', $global->name(),'">', $global->name(), "</h3>\n";
 					echo '<code class="signature">', $global->modifiers(), ' ', $global->typeAsString(), ' <strong>';
 					echo $global->name(), '</strong>';
-					if ($global->value()) echo ' = ', $global->value();
+					if ($global->value()) echo ' = ', htmlspecialchars($global->value());
 					echo "</code>\n";
                     echo '<div class="details">', "\n";
 					if ($textTag) {
