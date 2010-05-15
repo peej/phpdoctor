@@ -30,6 +30,7 @@ if (!defined('T_INTERFACE')) define('T_INTERFACE', 0);
 if (!defined('T_IMPLEMENTS')) define('T_IMPLEMENTS', 0);
 if (!defined('T_CONST')) define('T_CONST', 0);
 if (!defined('T_THROW')) define('T_THROW', 0);
+if (!defined('T_NAMESPACE')) define('T_NAMESPACE', 0);
 if (!defined('T_NS_C')) define('T_NS_C', 0);
 if (!defined('T_USE')) define('T_USE', 0);
 if (!defined('GLOB_ONLYDIR')) define('GLOB_ONLYDIR', FALSE);
