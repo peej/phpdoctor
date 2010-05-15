@@ -6,9 +6,14 @@
 class TestStandardDoclet extends UnitTestCase
 {
 	
+    var $results;
+    
 	function testStandardDoclet() {
         $this->UnitTestCase('Standard doclet tests');
-        exec('php phpdoc.php tests/php5-test-standard.ini');
+        ob_start();
+        passthru('php phpdoc.php tests/php5-test-standard.ini');
+        $this->results = ob_get_contents();
+        ob_end_clean();
     }
     
     function readFile($filename) {
@@ -18,7 +23,7 @@ class TestStandardDoclet extends UnitTestCase
 	function testEscapeHTMLInVariable()
 	{
 		$results = $this->readFile('phpdoctor/tests/data/aclass.html');
-		$this->assertTrue(strpos($results, '<code class="signature">public  mixed <strong>$varContainingHTMLToEscape</strong> = \'&lt;strong&gt;Escape me&lt;/strong&gt;\'</code>'));
+		$this->assertTrue(strpos($results, '<strong>$varContainingHTMLToEscape</strong> = \'&lt;strong&gt;Escape me&lt;/strong&gt;\'</code>'));
 	}
 
 }
