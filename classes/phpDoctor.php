@@ -519,7 +519,7 @@ class PHPDoctor
 					$currentData = array();
 					
 					$currentPackage = $this->_defaultPackage; // the current package
-					$defaultPackage = $currentPackage;
+					$defaultPackage = $oldDefaultPackage = $currentPackage;
 					$fileData = array();
 					
 					$currentElement = array(); // stack of element family, current at top of stack
@@ -543,7 +543,7 @@ class PHPDoctor
 							    $token[0] == T_FUNCTION ||
 							    $token[0] == T_VARIABLE
                             )) { // we have a code block after the 1st comment, so it is not a file level comment
-							    $defaultPackage = $this->_defaultPackage;
+							    $defaultPackage = $oldDefaultPackage;
 							    $fileData = array();
 							}
 							
@@ -557,6 +557,7 @@ class PHPDoctor
 								    $commentNumber++;
                                     if ($commentNumber == 1) {
                                         if (isset($currentData['package'])) { // store 1st comment incase it is a file level comment
+                                            $oldDefaultPackage = $defaultPackage;
                                             $defaultPackage = $currentData['package'];
                                         }
                                         $fileData = $currentData;
@@ -575,7 +576,7 @@ class PHPDoctor
 								if (isset($currentData['package']) && $currentData['package'] != NULL) { // set package
 									$currentPackage = $currentData['package'];
 								}
-                                $class->set('package', $currentPackage);
+								$class->set('package', $currentPackage);
                                 
 								$parentPackage =& $rootDoc->packageNamed($class->packageName(), TRUE); // get parent package
 								$parentPackage->addClass($class); // add class to package
@@ -599,7 +600,7 @@ class PHPDoctor
 								if (isset($currentData['package']) && $currentData['package'] != NULL) { // set package
 									$currentPackage = $currentData['package'];
 								}
-                                $interface->set('package', $currentPackage);
+								$interface->set('package', $currentPackage);
                                 
 								$parentPackage =& $rootDoc->packageNamed($interface->packageName(), TRUE); // get parent package
 								$parentPackage->addClass($interface); // add class to package
@@ -622,14 +623,22 @@ class PHPDoctor
 	
 							case T_IMPLEMENTS:
 							// get implements clause
+							    //*
+							    $interfaceName = $this->_getProgramElementName($tokens, $key);
+							    $interface =& $rootDoc->classNamed($interfaceName);
+							    if ($interface) {
+							        $ce->set('interfaces', $interface);
+							    }
+							    /*/
 								while($tokens[++$key] != '{') {
 									if ($tokens[$key][0] == T_STRING) {
-										$interface =& $rootDoc->classNamed($tokens[$key][1]);
+									    $interface =& $rootDoc->classNamed($tokens[$key][1]);
 										if ($interface) {
 											$ce->set('interfaces', $interface);
 										}
 									}
 								}
+								//*/
 								break;
 								
 							case T_THROW:
@@ -684,7 +693,7 @@ class PHPDoctor
                                         $namespace .= $tokens[$key][1];
                                     }
                                 }
-                                $currentPackage = $namespace;
+                                $currentPackage = $defaultPackage = $oldDefaultPackage = $namespace;
                                 break;
 								
 							case T_FUNCTION:

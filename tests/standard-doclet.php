@@ -29,6 +29,15 @@ class TestStandardDoclet extends UnitTestCase
 		$results = $this->readFile('phpdoctor/tests/filelevel/duplicateclass.html');
 		$this->assertTrue(strpos($results, '<p class="signature">public  class <strong>duplicateClass</strong><br>extends <a href="../../../phpdoctor/tests/mynamespace/duplicateclass.html">duplicateClass</a>'));
 	}
+	
+	function testInterfaceImplementsLink() {
+	    $results = $this->readFile('phpdoctor/tests/data/aclass.html');
+		$this->assertTrue(strpos($results, '<a href="../../../phpdoctor/tests/data/aninterface.html">anInterface</a>'));
+		
+	    $results = $this->readFile('phpdoctor/tests/filelevel/implementanexternalinterface.html');
+		$this->assertTrue(strpos($results, '<a href="../../../phpdoctor/tests/mynamespace/aninterface.html">PHPDoctor\Tests\MyNamespace\anInterface</a>'));
+		
+	}
 
 }
 

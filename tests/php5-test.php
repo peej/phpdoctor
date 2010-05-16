@@ -145,6 +145,19 @@ class anotherClassWithSameMemberAsAnotherClass {
 	}
 }
 
+
+/**
+ * Duplicate interface name in a different namespace
+ *
+ * @package PHPDoctor\Tests\MyNamespace
+ */
+interface anInterface { }
+
+/**
+ * This class implements the namespaced interface PHPDoctor\Tests\MyNamespace\anInterface
+ */
+class implementAnExternalInterface implements PHPDoctor\Tests\MyNamespace\anInterface { }
+
 define('CONSTANT', 1);
 define( 'CONSTANT2' , 2 );
 define(  'CONSTANT3'  ,  'three'  );
