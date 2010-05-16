@@ -116,6 +116,8 @@ class aClass implements anInterface {
 	 */
 	function aPrivateMethodWithParams($one, $two) {}
 	
+	function aMethodWithGuessedParamTypes($stringParam = 'string', $integerParam = 2, $booleanParam = TRUE) {}
+	
 }
 
 /**

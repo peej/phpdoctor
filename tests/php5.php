@@ -58,6 +58,8 @@ class TestPHP5 extends UnitTestCase
 		$this->assertTrue(strpos($this->results, 'private bool PHPDoctor\\Tests\\Data\\aPrivateMethodWithParams(str one, int two)'));
 		$this->assertTrue(strpos($this->results, 'str PHPDoctor\\Tests\\Data\\$one'));
 		$this->assertTrue(strpos($this->results, 'int PHPDoctor\\Tests\\Data\\$two'));
+		
+		$this->assertTrue(strpos($this->results, 'public void PHPDoctor\\Tests\Data\\aMethodWithGuessedParamTypes(str stringParam, int integerParam, bool booleanParam)'));
 	}
 	
 	function testConstant() {

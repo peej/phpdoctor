@@ -861,8 +861,21 @@ class PHPDoctor
 												$param->mergeData();
 												$ce->addParameter($param);
 												$typehint = NULL;
-											} elseif(isset($param) && ($tokens[$key][0] == T_STRING || $tokens[$key][0] == T_CONSTANT_ENCAPSED_STRING)) { // set value
-												$param->set('value', $tokens[$key][1]);
+											} elseif (isset($param) && ($tokens[$key][0] == T_STRING || $tokens[$key][0] == T_CONSTANT_ENCAPSED_STRING || $tokens[$key][0] == T_LNUMBER)) { // set value
+											    $value = $tokens[$key][1];
+												$param->set('value', $value);
+												if (!$typehint) {
+												    if (is_numeric($value)) {
+                                                        $param->set('type', new type('int', $rootDoc));
+                                                    } elseif (strtolower($value) == 'true' || strtolower($value) == 'false') {
+                                                        $param->set('type', new type('bool', $rootDoc));
+                                                    } elseif (
+                                                        substr($value, 0, 1) == '"' && substr($value, -1, 1) == '"' ||
+                                                        substr($value, 0, 1) == "'" && substr($value, -1, 1) == "'"
+                                                    ) {
+                                                        $param->set('type', new type('str', $rootDoc));
+                                                    }
+												}
 											}
 										}
 									} while(isset($tokens[$key]) && $tokens[$key] != ')');
