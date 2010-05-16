@@ -124,7 +124,8 @@ class duplicateClass extends PHPDoctor\Tests\MyNamespace\duplicateClass {}
 
 
 function aFunction() { }
-function aFunctionWithParams($one, int $two) { }
+function aFunctionWithParams($one, $two) { }
+function aFunctionWithTypeHints(int $three, string $four) {}
 
 /**
  * @namespace PHPDoctor\Tests\Data

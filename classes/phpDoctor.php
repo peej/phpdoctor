@@ -532,7 +532,10 @@ class PHPDoctor
 					$lineNumber = 1;
 					$commentNumber = 0;
 					
-					foreach ($tokens as $key => $token) {
+					$numOfTokens = count($tokens);
+					for ($key = 0; $key < $numOfTokens; $key++) {
+					    $token = $tokens[$key];
+					    
 						if (!$in_parsed_string && is_array($token)) {
 							
 							$lineNumber += substr_count($token[1], "\n");
@@ -739,7 +742,7 @@ class PHPDoctor
 								break;
 	
 							case T_STRING:
-							// read global constant
+							    // read global constant
                                 if ($token[1] == 'define') {// && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
 									$const =& new fieldDoc($this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING), $ce, $rootDoc, $filename, $lineNumber); // create constant object
 									$this->verbose('Found '.get_class($const).': global constant '.$const->name());
@@ -841,22 +844,30 @@ class PHPDoctor
 	
 								// function parameter
 								} elseif (strtolower(get_class($ce)) == 'methoddoc' && $ce->inBody == 0) {
+								    $typehint = NULL;
 									do {
 										$key++;
 										if ($tokens[$key] == ',' || $tokens[$key] == ')') {
 											unset($param);
 										} elseif (is_array($tokens[$key])) {
-											if ($tokens[$key][0] == T_VARIABLE && !isset($param)) {
+										    if ($tokens[$key][0] == T_STRING && !isset($param)) { // type hint
+										        $typehint = $tokens[$key][1];
+											} elseif ($tokens[$key][0] == T_VARIABLE && !isset($param)) {
 												$param =& new fieldDoc($tokens[$key][1], $ce, $rootDoc, $filename, $lineNumber); // create constant object
 												$this->verbose('Found '.get_class($param).': '.$param->name());
 												if (isset($currentData['docComment'])) { // set doc comment
 													$param->set('docComment', $currentData['docComment']);
+												}
+												if ($typehint) {
+												    $param->set('type', new type($typehint, $rootDoc));
+												    $this->verbose(' has a typehint of '.$typehint);
 												}
 												$param->set('data', $currentData); // set data
 												$param->set('package', $ce->packageName()); // set package
 												$this->verbose(' is a parameter of '.get_class($ce).' '.$ce->name());
 												$param->mergeData();
 												$ce->addParameter($param);
+												$typehint = NULL;
 											} elseif(isset($param) && ($tokens[$key][0] == T_STRING || $tokens[$key][0] == T_CONSTANT_ENCAPSED_STRING)) { // set value
 												$param->set('value', $tokens[$key][1]);
 											}

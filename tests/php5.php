@@ -43,6 +43,7 @@ class TestPHP5 extends UnitTestCase
 	function testFunction() {
 	    $this->assertTrue(strpos($this->results, 'public void PHPDoctor\\Tests\\FileLevel\\aFunction()'));
 	    $this->assertTrue(strpos($this->results, 'public void PHPDoctor\\Tests\\FileLevel\\aFunctionWithParams(mixed one, mixed two)'));
+	    $this->assertTrue(strpos($this->results, 'public void PHPDoctor\\Tests\\FileLevel\\aFunctionWithTypeHints(int three, string four)'));
 	}
 	
 	function testMethod() {
