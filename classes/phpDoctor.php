@@ -756,6 +756,8 @@ class PHPDoctor
 									$const->set('value', $value);
                                     if (is_numeric($value)) {
                                         $const->set('type', new type('int', $rootDoc));
+                                    } elseif (strtolower($value) == 'true' || strtolower($value) == 'false') {
+                                        $const->set('type', new type('bool', $rootDoc));
                                     } elseif (
                                         substr($value, 0, 1) == '"' && substr($value, -1, 1) == '"' ||
                                         substr($value, 0, 1) == "'" && substr($value, -1, 1) == "'"
@@ -808,6 +810,8 @@ class PHPDoctor
 												$const->set('value', $value);
                                                 if (is_numeric($value)) {
                                                     $const->set('type', new type('int', $rootDoc));
+                                                } elseif (strtolower($value) == 'true' || strtolower($value) == 'false') {
+                                                    $const->set('type', new type('bool', $rootDoc));
                                                 } elseif (
                                                     substr($value, 0, 1) == '"' && substr($value, -1, 1) == '"' ||
                                                     substr($value, 0, 1) == "'" && substr($value, -1, 1) == "'"

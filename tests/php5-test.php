@@ -65,6 +65,10 @@ interface anInterface {
  */
 class aClass implements anInterface {
 	
+    const booleanClassConstant = TRUE;
+    const stringClassConstant = 'str';
+    const integerClassConstant = 3;
+    
 	var $aVar;
 	
 	/**

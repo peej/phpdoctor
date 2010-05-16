@@ -38,6 +38,10 @@ class TestPHP5 extends UnitTestCase
 		$this->assertTrue(strpos($this->results, 'public mixed PHPDoctor\\Tests\\Data\\$multipleVars3 = 3'));
 		$this->assertTrue(strpos($this->results, 'public mixed PHPDoctor\\Tests\\Data\\$aVarWithValue = 1'));
 		$this->assertTrue(strpos($this->results, 'public mixed PHPDoctor\\Tests\\Data\\$anArrayVar = array(4, 5, 6)'));
+		
+		$this->assertTrue(strpos($this->results, 'final bool PHPDoctor\\Tests\\Data\\booleanClassConstant = TRUE'));
+		$this->assertTrue(strpos($this->results, 'final str PHPDoctor\\Tests\\Data\\stringClassConstant = \'str\''));
+		$this->assertTrue(strpos($this->results, 'final int PHPDoctor\\Tests\\Data\\integerClassConstant = 3'));
 	}
 	
 	function testFunction() {
