@@ -696,7 +696,7 @@ class PHPDoctor
 									$method->set('docComment', $currentData['docComment']); // set doc comment
 								}
 								$method->set('data', $currentData); // set data
-								$ceClass = strtolower(get_class($ce));
+                                $ceClass = strtolower(get_class($ce));
 								if ($ceClass == 'rootdoc') { // global function, add to package
 									$this->verbose(' is a global function');
                                     if (isset($currentData['access']) && $currentData['access'] == 'private') $method->makePrivate();
@@ -705,6 +705,7 @@ class PHPDoctor
 									} else {
 										$method->set('package', $currentPackage);
 									}
+                                    $method->mergeData();
 									$parentPackage =& $rootDoc->packageNamed($method->packageName(), TRUE); // get parent package
                                     if ($this->_includeElements($method)) {
                                         $parentPackage->addFunction($method); // add method to package

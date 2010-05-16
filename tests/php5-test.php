@@ -150,6 +150,7 @@ class anotherClassWithSameMemberAsAnotherClass {
      */
     function aFunction($foo) {
 	}
+
 }
 
 
@@ -168,5 +169,14 @@ class implementAnExternalInterface implements PHPDoctor\Tests\MyNamespace\anInte
 define('CONSTANT', 1);
 define( 'CONSTANT2' , 2 );
 define(  'CONSTANT3'  ,  'three'  );
+
+class myException extends Exception { }
+
+/**
+ * This is a function that throws a custom exception
+ *
+ * @throws myException
+ */
+function customExceptionThrower { }
 
 ?>
