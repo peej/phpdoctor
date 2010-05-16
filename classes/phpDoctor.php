@@ -626,22 +626,11 @@ class PHPDoctor
 	
 							case T_IMPLEMENTS:
 							// get implements clause
-							    //*
 							    $interfaceName = $this->_getProgramElementName($tokens, $key);
 							    $interface =& $rootDoc->classNamed($interfaceName);
 							    if ($interface) {
 							        $ce->set('interfaces', $interface);
 							    }
-							    /*/
-								while($tokens[++$key] != '{') {
-									if ($tokens[$key][0] == T_STRING) {
-									    $interface =& $rootDoc->classNamed($tokens[$key][1]);
-										if ($interface) {
-											$ce->set('interfaces', $interface);
-										}
-									}
-								}
-								//*/
 								break;
 								
 							case T_THROW:
