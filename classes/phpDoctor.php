@@ -841,6 +841,7 @@ class PHPDoctor
 								    $typehint = NULL;
 									do {
 										$key++;
+										if (!isset($tokens[$key])) break;
 										if ($tokens[$key] == ',' || $tokens[$key] == ')') {
 											unset($param);
 										} elseif (is_array($tokens[$key])) {
@@ -1161,7 +1162,7 @@ class PHPDoctor
 	function _getProgramElementName($tokens, $key) {
 	    $name = '';
 	    $key++;
-	    while (isset($tokens[$key][0]) && (
+	    while (isset($tokens[$key][0]) && isset($tokens[$key][1]) && (
 	        $tokens[$key][0] == T_WHITESPACE ||
 	        $tokens[$key][0] == T_STRING ||
 	        $tokens[$key][0] == T_NS_SEPARATOR

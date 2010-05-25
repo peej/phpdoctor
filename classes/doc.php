@@ -252,7 +252,7 @@ class Doc {
 	/** Merge the contents of the doc comment into the element object. */
 	function mergeData()
     {
-		if (is_array($this->_data)) {
+		if (isset($this->_data) && is_array($this->_data)) {
 			// merge primitive types
 			foreach ($this->_data as $member => $value) {
 				if (!is_array($value)) {
