@@ -38,7 +38,12 @@ class TestStandardDoclet extends UnitTestCase
 		$this->assertTrue(strpos($results, '<a href="../../../phpdoctor/tests/mynamespace/aninterface.html">PHPDoctor\Tests\MyNamespace\anInterface</a>'));
 		
 	}
-
+	
+	function testShortDescriptionWithAFullStop() {
+		$results = $this->readFile('phpdoctor/tests/data/package-summary.html');
+		$this->assertTrue(strpos($results, '<td class="description">This is aClass that implements anInterface. </td>'));
+	}
+	
 }
 
 ?>
