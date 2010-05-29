@@ -81,8 +81,10 @@ class TestPHP5 extends UnitTestCase
 	}
 	
 	function testExtendingClassWithSameNameInDifferentNamespace() {
-	    $this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\FileLevel\\duplicateClass extends PHPDoctor\\Tests\\MyNamespace\\duplicateClass'));
-	    $this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\MyNamespace\\duplicateClass'));
+	    if (version_compare(EXEC_VERSION, '5.3.0', '>=')) {
+            $this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\FileLevel\\duplicateClass extends PHPDoctor\\Tests\\MyNamespace\\duplicateClass'));
+            $this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\MyNamespace\\duplicateClass'));
+        }
 	}
 
 }

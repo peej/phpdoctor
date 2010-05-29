@@ -6,7 +6,12 @@ require_once 'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'mock_objects.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'reporter.php';
 
-if (!defined('PHP')) define('PHP', '~/php-5.3.2/sapi/cli/php');
+if (!defined('PHP')) define('PHP', 'php');
+#if (!defined('PHP')) define('PHP', '~/php-5.3.2/sapi/cli/php');
+
+exec(PHP.' -v', $versionInfo);
+preg_match('/PHP ([0-9]+\.[0-9]+\.[0-9]+)/', $versionInfo[0], $versionInfo);
+define('EXEC_VERSION', $versionInfo[1]);
 
 $parser = &new GroupTest('Parser');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'php5.php');

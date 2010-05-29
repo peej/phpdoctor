@@ -26,16 +26,20 @@ class TestStandardDoclet extends UnitTestCase
 	}
 	
 	function testExtendingClassWithSameNameInDifferentNamespace() {
-		$results = $this->readFile('phpdoctor/tests/filelevel/duplicateclass.html');
-		$this->assertTrue(strpos($results, '<p class="signature">public  class <strong>duplicateClass</strong><br>extends <a href="../../../phpdoctor/tests/mynamespace/duplicateclass.html">duplicateClass</a>'));
+	    if (version_compare(EXEC_VERSION, '5.3.0', '>=')) {
+            $results = $this->readFile('phpdoctor/tests/filelevel/duplicateclass.html');
+            $this->assertTrue(strpos($results, '<p class="signature">public  class <strong>duplicateClass</strong><br>extends <a href="../../../phpdoctor/tests/mynamespace/duplicateclass.html">duplicateClass</a>'));
+        }
 	}
 	
 	function testInterfaceImplementsLink() {
 	    $results = $this->readFile('phpdoctor/tests/data/aclass.html');
 		$this->assertTrue(strpos($results, '<a href="../../../phpdoctor/tests/data/aninterface.html">anInterface</a>'));
 		
-	    $results = $this->readFile('phpdoctor/tests/filelevel/implementanexternalinterface.html');
-		$this->assertTrue(strpos($results, '<a href="../../../phpdoctor/tests/mynamespace/aninterface.html">PHPDoctor\Tests\MyNamespace\anInterface</a>'));
+		if (version_compare(EXEC_VERSION, '5.3.0', '>=')) {
+            $results = $this->readFile('phpdoctor/tests/filelevel/implementanexternalinterface.html');
+            $this->assertTrue(strpos($results, '<a href="../../../phpdoctor/tests/mynamespace/aninterface.html">PHPDoctor\Tests\MyNamespace\anInterface</a>'));
+        }
 		
 	}
 	
