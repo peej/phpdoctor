@@ -41,12 +41,18 @@ class ClassDoc extends ProgramElementDoc
 	 */
 	var $_interface = FALSE;
 	
+	/** The class constants.
+	 *
+	 * @var fieldDoc[]
+	 */
+	var $_constants = array();
+	
 	/** The class fields.
 	 *
 	 * @var fieldDoc[]
 	 */
 	var $_fields = array();
-
+	
 	/** The class methods.
 	 *
 	 * @var methodDoc[]
@@ -79,7 +85,18 @@ class ClassDoc extends ProgramElementDoc
 		$this->_filename = $filename;
 		$this->_lineNumber = $lineNumber;
 	}
-
+	
+	/** Add a constant to this class.
+	 *
+	 * @param FieldDoc field
+	 */
+	function addConstant(&$constant)
+    {
+        if (!isset($this->_constants[$constant->name()])) {
+            $this->_constants[$constant->name()] =& $constant;
+        }
+	}
+	
 	/** Add a field to this class.
 	 *
 	 * @param FieldDoc field
@@ -104,7 +121,16 @@ class ClassDoc extends ProgramElementDoc
         }
 		$this->_methods[$method->name()] =& $method;
 	}
-
+	
+	/** Return constants in this class.
+	 *
+	 * @return FieldDoc[]
+	 */
+	function &constants()
+    {
+		return $this->_constants;
+	}
+	
 	/** Return fields in this class.
 	 *
 	 * @return FieldDoc[]
@@ -113,7 +139,7 @@ class ClassDoc extends ProgramElementDoc
     {
 		return $this->_fields;
 	}
-
+	
 	/** Return a field in this class.
 	 *
 	 * @return FieldDoc

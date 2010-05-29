@@ -176,8 +176,8 @@ class Debug
 				echo ' [', $class->location(), ']';
 				echo "\n";
 				$this->docComment($class);
+				$this->fieldDoc($class->constants(), TRUE);
 				$this->fieldDoc($class->fields(), TRUE);
-				$this->constructorDoc($class->constructor());
 				$this->methodDoc($class->methods());
 			}
 		}

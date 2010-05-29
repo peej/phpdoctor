@@ -20,12 +20,12 @@ class TestPHP5 extends UnitTestCase
 	
 	function testInterface() {
 		$this->assertTrue(strpos($this->results, 'public interface PHPDoctor\\Tests\\Data\\anInterface'));
-		$this->assertTrue(strpos($this->results, 'public final str PHPDoctor\\Tests\\Data\\aConst = \'const\''));
-		$this->assertTrue(strpos($this->results, 'public final int PHPDoctor\\Tests\\Data\\anIntConst'));
-		$this->assertTrue(strpos($this->results, 'private final int PHPDoctor\\Tests\\Data\\aPrivateIntConst'));
-		$this->assertTrue(strpos($this->results, 'public final int PHPDoctor\\Tests\\Data\\multipleConsts1 = 1'));
-		$this->assertTrue(strpos($this->results, 'public final int PHPDoctor\\Tests\\Data\\multipleConsts2 = 2'));
-		$this->assertTrue(strpos($this->results, 'public final int PHPDoctor\\Tests\\Data\\multipleConsts3 = 3'));
+		$this->assertTrue(strpos($this->results, 'public final static str PHPDoctor\\Tests\\Data\\aConst = \'const\''));
+		$this->assertTrue(strpos($this->results, 'public final static int PHPDoctor\\Tests\\Data\\anIntConst'));
+		$this->assertTrue(strpos($this->results, 'private final static int PHPDoctor\\Tests\\Data\\aPrivateIntConst'));
+		$this->assertTrue(strpos($this->results, 'public final static int PHPDoctor\\Tests\\Data\\multipleConsts1 = 1'));
+		$this->assertTrue(strpos($this->results, 'public final static int PHPDoctor\\Tests\\Data\\multipleConsts2 = 2'));
+		$this->assertTrue(strpos($this->results, 'public final static int PHPDoctor\\Tests\\Data\\multipleConsts3 = 3'));
 	}
 	
 	function testClass() {
@@ -39,9 +39,9 @@ class TestPHP5 extends UnitTestCase
 		$this->assertTrue(strpos($this->results, 'public mixed PHPDoctor\\Tests\\Data\\$aVarWithValue = 1'));
 		$this->assertTrue(strpos($this->results, 'public mixed PHPDoctor\\Tests\\Data\\$anArrayVar = array(4, 5, 6)'));
 		
-		$this->assertTrue(strpos($this->results, 'final bool PHPDoctor\\Tests\\Data\\booleanClassConstant = TRUE'));
-		$this->assertTrue(strpos($this->results, 'final str PHPDoctor\\Tests\\Data\\stringClassConstant = \'str\''));
-		$this->assertTrue(strpos($this->results, 'final int PHPDoctor\\Tests\\Data\\integerClassConstant = 3'));
+		$this->assertTrue(strpos($this->results, 'final static bool PHPDoctor\\Tests\\Data\\booleanClassConstant = TRUE'));
+		$this->assertTrue(strpos($this->results, 'final static str PHPDoctor\\Tests\\Data\\stringClassConstant = \'str\''));
+		$this->assertTrue(strpos($this->results, 'final static int PHPDoctor\\Tests\\Data\\integerClassConstant = 3'));
 	}
 	
 	function testFunction() {

@@ -832,10 +832,11 @@ class PHPDoctor
 											}
 											$const->set('data', $currentData); // set data
 											$const->set('package', $ce->packageName()); // set package
+											$const->set('static', TRUE);
 											$this->verbose(' is a member constant of '.get_class($ce).' '.$ce->name());
 											$const->mergeData();
 											if ($this->_includeElements($const)) {
-												$ce->addField($const);
+												$ce->addConstant($const);
 											}
 											unset($name);
 											unset($value);
