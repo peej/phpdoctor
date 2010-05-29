@@ -690,17 +690,9 @@ class PHPDoctor
 							case T_FUNCTION:
 							// read function
 							    $name = $this->_getProgramElementName($tokens, $key);
-								$method =& new methodDoc($name, $ce, $rootDoc, $filename, $lineNumber); // create method object
+							    $method =& new methodDoc($name, $ce, $rootDoc, $filename, $lineNumber); // create method object
 								$this->verbose('+ Entering '.get_class($method).': '.$method->name());
-							    if ($name == '') {
-							        var_dump($key);
-							        var_dump($tokens[$key], token_name($tokens[$key][0]));
-							        var_dump($tokens[$key + 1], token_name($tokens[$key + 1][0]));
-							        var_dump($tokens[$key + 2]);
-							        var_dump($tokens[$key + 3], token_name($tokens[$key + 3][0]));
-							        die;
-							    }
-								if (isset($currentData['docComment'])) { // set doc comment
+							    if (isset($currentData['docComment'])) { // set doc comment
 									$method->set('docComment', $currentData['docComment']); // set doc comment
 								}
 								$method->set('data', $currentData); // set data
@@ -1172,12 +1164,13 @@ class PHPDoctor
 	    $key++;
 	    while (
 	        $tokens[$key] && (
-	        !is_array($tokens[$key]) || (
-                isset($tokens[$key][0]) && isset($tokens[$key][1]) && (
-                $tokens[$key][0] == T_WHITESPACE ||
-                $tokens[$key][0] == T_STRING ||
-                $tokens[$key][0] == T_NS_SEPARATOR
-            ))
+                $tokens[$key] == '&' || (
+                    isset($tokens[$key][0]) && isset($tokens[$key][1]) && (
+                    $tokens[$key][0] == T_WHITESPACE ||
+                    $tokens[$key][0] == T_STRING ||
+                    $tokens[$key][0] == T_NS_SEPARATOR
+                )
+            )
         )) {
             $name .= $tokens[$key][1];
             $key++;
