@@ -127,7 +127,12 @@ class aClass implements anInterface {
 /**
  * @package PHPDoctor\Tests\Data
  */
-class childClass extends aClass {}
+class childClass extends aClass {
+    
+    function __construct($foo, $bar = NULL) {}
+    function __destruct() {}
+    
+}
 
 require_once 'php5-test2.php';
 class duplicateClass extends PHPDoctor\Tests\MyNamespace\duplicateClass {}

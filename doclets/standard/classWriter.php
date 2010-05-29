@@ -124,8 +124,6 @@ class ClassWriter extends HTMLWriter
 
 					$fields =& $class->fields();
                     ksort($fields);
-					$constructors =& $class->constructor();
-                    ksort($constructors);
 					$methods =& $class->methods();
                     ksort($methods);
 
@@ -156,38 +154,21 @@ class ClassWriter extends HTMLWriter
                         }
 					}
 
-					if ($constructors) {
-						echo '<table id="summary_constr">', "\n";
-						echo '<tr><th colspan="2">Constructor Summary</th></tr>', "\n";
-						foreach ($constructors as $constructor) {
-							$textTag =& $constructor->tags('@text');
-							echo "<tr>\n";
-							echo '<td class="description">';
-							echo '<p class="name"><a href="#', $constructor->name(), '()">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
-							if ($textTag) {
-								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
-							}
-							echo "</td>\n";
-							echo "</tr>\n";
-						}
-						echo "</table>\n\n";
-					}
-
 					if ($methods) {
 						echo '<table id="summary_method">', "\n";
 						echo '<tr><th colspan="2">Method Summary</th></tr>', "\n";
-						foreach($methods as $method) {
-							$textTag =& $method->tags('@text');
-							echo "<tr>\n";
-							echo '<td class="type">', $method->modifiers(FALSE), ' ', $method->returnTypeAsString(), "</td>\n";
-							echo '<td class="description">';
-							echo '<p class="name"><a href="#', $method->name(), '()">', $method->name(), '</a>', $method->flatSignature(), '</p>';
-							if ($textTag) {
-								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
-							}
-							echo "</td>\n";
-							echo "</tr>\n";
-						}
+                        foreach($methods as $method) {
+                            $textTag =& $method->tags('@text');
+                            echo "<tr>\n";
+                            echo '<td class="type">', $method->modifiers(FALSE), ' ', $method->returnTypeAsString(), "</td>\n";
+                            echo '<td class="description">';
+                            echo '<p class="name"><a href="#', $method->name(), '()">', $method->name(), '</a>', $method->flatSignature(), '</p>';
+                            if ($textTag) {
+                                echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+                            }
+                            echo "</td>\n";
+                            echo "</tr>\n";
+                        }
 						echo "</table>\n\n";
 					}
 					
@@ -219,43 +200,24 @@ class ClassWriter extends HTMLWriter
 							echo "<hr>\n\n";
 						}
 					}
-
-					if ($constructors) {
-						echo '<h2 id="detail_constr">Constructor Detail</h2>', "\n";
-						foreach($constructors as $constructor) {
-							$textTag =& $constructor->tags('@text');
-							$this->_sourceLocation($constructor);
-							echo '<h3 id="', $constructor->name(),'()">', $constructor->name(), "</h3>\n";
-							echo '<code class="signature">public <strong>';
-							echo $constructor->name(), '</strong>', $constructor->flatSignature();
-							echo "</code>\n";
-                            echo '<div class="details">', "\n";
-							if ($textTag) {
-								echo $this->_processInlineTags($textTag);
-							}
-							$this->_processTags($constructor->tags());
-                            echo "</div>\n\n";
-							echo "<hr>\n\n";
-						}
-					}
-
+					
 					if ($methods) {
 						echo '<h2 id="detail_method">Method Detail</h2>', "\n";
-						foreach($methods as $method) {
-							$textTag =& $method->tags('@text');
-							$this->_sourceLocation($method);
-							echo '<h3 id="', $method->name(),'()">', $method->name(), "</h3>\n";
-							echo '<code class="signature">', $method->modifiers(), ' ', $method->returnTypeAsString(), ' <strong>';
-							echo $method->name(), '</strong>', $method->flatSignature();
-							echo "</code>\n";
+                        foreach($methods as $method) {
+                            $textTag =& $method->tags('@text');
+                            $this->_sourceLocation($method);
+                            echo '<h3 id="', $method->name(),'()">', $method->name(), "</h3>\n";
+                            echo '<code class="signature">', $method->modifiers(), ' ', $method->returnTypeAsString(), ' <strong>';
+                            echo $method->name(), '</strong>', $method->flatSignature();
+                            echo "</code>\n";
                             echo '<div class="details">', "\n";
-							if ($textTag) {
-								echo $this->_processInlineTags($textTag);
-							}
-							$this->_processTags($method->tags());
+                            if ($textTag) {
+                                echo $this->_processInlineTags($textTag);
+                            }
+                            $this->_processTags($method->tags());
                             echo "</div>\n\n";
-							echo "<hr>\n\n";
-						}
+                            echo "<hr>\n\n";
+                        }
 					}
 
 					$this->_output = ob_get_contents();

@@ -273,7 +273,6 @@ class Doc {
 								($thisClass == 'rootdoc' && $this->_data['tags'][$name][$key]->inOverview()) ||
 								($thisClass == 'packagedoc' && $this->_data['tags'][$name][$key]->inPackage()) ||
 								($thisClass == 'classdoc' && $this->_data['tags'][$name][$key]->inType()) ||
-								($thisClass == 'constructordoc' && $this->_data['tags'][$name][$key]->inConstructor()) ||
 								($thisClass == 'methoddoc' && $this->_data['tags'][$name][$key]->inMethod()) ||
 								($thisClass == 'fielddoc' && $this->_data['tags'][$name][$key]->inField())
 							) {
@@ -286,7 +285,6 @@ class Doc {
 							($thisClass == 'rootdoc' && $this->_data['tags'][$name]->inOverview()) ||
 							($thisClass == 'packagedoc' && $this->_data['tags'][$name]->inPackage()) ||
 							($thisClass == 'classdoc' && $this->_data['tags'][$name]->inType()) ||
-							($thisClass == 'constructordoc' && $this->_data['tags'][$name]->inConstructor()) ||
 							($thisClass == 'methoddoc' && $this->_data['tags'][$name]->inMethod()) ||
 							($thisClass == 'fielddoc' && $this->_data['tags'][$name]->inField())
 						) {

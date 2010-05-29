@@ -127,19 +127,17 @@ class Debug
 	
 	/** Output constructorDoc
 	 *
-	 * @param ConstructorDoc[] constructors
+	 * @param ConstructorDoc constructor
 	 */
-	function constructorDoc(&$constructors)
+	function constructorDoc(&$constructor)
     {
 		$this->depth++;
-		if ($constructors) {
-			foreach ($constructors as $constructor) {
-				echo $this->showDepth(), '- ', $constructor->modifiers();
-				echo $constructor->packageName(), '\\', $constructor->name(), $constructor->flatSignature();
-				echo ' [', $constructor->location(), ']';
-				echo "\n";
-				$this->fieldDoc($constructor->parameters());
-			}
+		if ($constructor) {
+            echo $this->showDepth(), '- ', $constructor->modifiers();
+            echo $constructor->packageName(), '\\', $constructor->name(), $constructor->flatSignature();
+            echo ' [', $constructor->location(), ']';
+            echo "\n";
+            $this->fieldDoc($constructor->parameters());
 		}
 		$this->depth--;
 	}

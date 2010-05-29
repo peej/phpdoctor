@@ -40,13 +40,7 @@ class ClassDoc extends ProgramElementDoc
 	 * @var bool
 	 */
 	var $_interface = FALSE;
-
-	/** The class constructor.
-	 *
-	 * @var constructorDoc[]
-	 */
-	var $_constructor = array();
-
+	
 	/** The class fields.
 	 *
 	 * @var fieldDoc[]
@@ -96,21 +90,7 @@ class ClassDoc extends ProgramElementDoc
             $this->_fields[$field->name()] =& $field;
         }
 	}
-
-	/** Add a constructor to this class.
-	 *
-	 * @param MethodDoc constructor
-	 */
-	function addConstructor(&$constructor)
-    {
-        if (isset($this->_constructor[$constructor->name()])) {
-            $phpdoctor =& $this->_root->phpdoctor();
-            echo "\n";
-            $phpdoctor->warning('Found constructor '.$constructor->name().' again, overwriting previous version');
-        }
-		$this->_constructor[$constructor->name()] =& $constructor;
-	}
-
+	
 	/** Add a method to this class.
 	 *
 	 * @param MethodDoc method
@@ -123,15 +103,6 @@ class ClassDoc extends ProgramElementDoc
             $phpdoctor->warning('Found method '.$method->name().' again, overwriting previous version');
         }
 		$this->_methods[$method->name()] =& $method;
-	}
-	
-	/** Return the constructor for this class.
-	 *
-	 * @return ConstructorDoc
-	 */
-	function &constructor()
-    {
-		return $this->_constructor;
 	}
 
 	/** Return fields in this class.
@@ -317,10 +288,6 @@ class ClassDoc extends ProgramElementDoc
             
             // merge method data
             $methods =& $this->methods();
-            $constructor =& $this->constructor();
-            if (is_object($constructor)) {
-                $methods = array_merge(array($constructor->name() => $constructor), $methods);
-            }
             foreach ($methods as $name => $method) {
                 $parentMethod =& $parent->methodNamed($name);
                 if ($parentMethod) {

@@ -44,7 +44,6 @@ require('classes/programElementDoc.php');
 require('classes/fieldDoc.php');
 require('classes/classDoc.php');
 require('classes/executableDoc.php');
-require('classes/constructorDoc.php');
 require('classes/methodDoc.php');
 require('classes/type.php');
 require('classes/tag.php');
@@ -690,8 +689,17 @@ class PHPDoctor
 								
 							case T_FUNCTION:
 							// read function
-								$method =& new methodDoc($this->_getProgramElementName($tokens, $key), $ce, $rootDoc, $filename, $lineNumber); // create method object
+							    $name = $this->_getProgramElementName($tokens, $key);
+								$method =& new methodDoc($name, $ce, $rootDoc, $filename, $lineNumber); // create method object
 								$this->verbose('+ Entering '.get_class($method).': '.$method->name());
+							    if ($name == '') {
+							        var_dump($key);
+							        var_dump($tokens[$key], token_name($tokens[$key][0]));
+							        var_dump($tokens[$key + 1], token_name($tokens[$key + 1][0]));
+							        var_dump($tokens[$key + 2]);
+							        var_dump($tokens[$key + 3], token_name($tokens[$key + 3][0]));
+							        die;
+							    }
 								if (isset($currentData['docComment'])) { // set doc comment
 									$method->set('docComment', $currentData['docComment']); // set doc comment
 								}
@@ -714,11 +722,10 @@ class PHPDoctor
 									$method->set('package', $ce->packageName()); // set package
 									if ($method->name() == '__construct' || strtolower($method->name()) == strtolower($ce->name())) { // constructor
 										$this->verbose(' is a constructor of '.get_class($ce).' '.$ce->name());
-										// Will Gilbert (gilbert@informagen.com) - Write out the constuctor as the class's name rather than '__construct'
-										if ($method->name() == '__construct') $method->set("name", $ce->name()); 
-										$ce->addConstructor($method);
+										$method->set("name", "__construct");
+										$ce->addMethod($method);
 									} else {
-										if ($this->_hasPrivateName($method->name())) $method->makePrivate();
+									    if ($this->_hasPrivateName($method->name())) $method->makePrivate();
                                         if (isset($currentData['access']) && $currentData['access'] == 'private') $method->makePrivate();
 										$this->verbose(' is a method of '.get_class($ce).' '.$ce->name());
 										if ($this->_includeElements($method)) {
@@ -1159,13 +1166,17 @@ class PHPDoctor
 	 * @param int key
 	 * @return str
 	 */
-	function _getProgramElementName($tokens, $key) {
+	function _getProgramElementName(&$tokens, $key) {
 	    $name = '';
 	    $key++;
-	    while (isset($tokens[$key][0]) && isset($tokens[$key][1]) && (
-	        $tokens[$key][0] == T_WHITESPACE ||
-	        $tokens[$key][0] == T_STRING ||
-	        $tokens[$key][0] == T_NS_SEPARATOR
+	    while (
+	        $tokens[$key] && (
+	        !is_array($tokens[$key]) || (
+                isset($tokens[$key][0]) && isset($tokens[$key][1]) && (
+                $tokens[$key][0] == T_WHITESPACE ||
+                $tokens[$key][0] == T_STRING ||
+                $tokens[$key][0] == T_NS_SEPARATOR
+            ))
         )) {
             $name .= $tokens[$key][1];
             $key++;
