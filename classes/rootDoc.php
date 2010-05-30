@@ -142,7 +142,7 @@ class RootDoc extends Doc
 			$packageClasses = $this->_packages[$name]->allClasses(); // not by reference so as not to move the internal array pointer
 			if ($packageClasses) {
 				foreach ($packageClasses as $key => $pack) {
-					$classes[$name.'.'.$key] =& $packageClasses[$key];
+					$classes[$key.'.'.$name] =& $packageClasses[$key];
 				}
 			}
 		}
