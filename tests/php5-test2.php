@@ -6,3 +6,11 @@ namespace PHPDoctor\Tests\MyNamespace;
  */
 class duplicateClass { }
 
+/**
+ * Non-explicit parameter doctags
+ *
+ * @param string
+ * @param string
+ * @param bool
+ */
+function NonExplicitParameterDoctags($field, $value, $default) { }

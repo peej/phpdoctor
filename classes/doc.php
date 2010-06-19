@@ -297,12 +297,20 @@ class Doc {
 			// merge parameter types
 			if (isset($this->_parameters) && isset($this->_data['parameters'])) {
 				foreach($this->_data['parameters'] as $name => $param) {
-					if (!isset($this->_parameters[$name])) {
-						//phpdoctor::warning('Unknown parameter "'.$name.'" found for method "'.$this->_package.'.'.$this->_parent->name().'::'.$this->_name.'".');
-						$this->_parameters[$name] =& new fieldDoc($name, $this, $this->_root);
-						if (isset($this->_package)) $this->_parameters[$name]->set('package', $this->_package);
-					}
-					$this->_parameters[$name]->set('type', new type($param['type'], $this->_root));
+				    if (substr($name, 0, 9) == '__unknown') {
+                        $index = substr($name, 9);
+                        $parameters = array_values($this->_parameters);
+                        if (isset($parameters[$index])) {
+                            $parameters[$index]->set('type', new type($param['type'], $this->_root));
+                        }
+				    } else {
+                        if (!isset($this->_parameters[$name])) {
+                            //phpdoctor::warning('Unknown parameter "'.$name.'" found for method "'.$this->_package.'.'.$this->_parent->name().'::'.$this->_name.'".');
+                            $this->_parameters[$name] =& new fieldDoc($name, $this, $this->_root);
+                            if (isset($this->_package)) $this->_parameters[$name]->set('package', $this->_package);
+                        }
+                        $this->_parameters[$name]->set('type', new type($param['type'], $this->_root));
+                    }
 				}
 			}
 			// merge return type
@@ -317,7 +325,7 @@ class Doc {
 			}
 		}
 		// remove data array since we no longer need it
-		unset($this->_data);
+		#unset($this->_data);
 	}
 
 	/**

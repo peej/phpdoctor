@@ -86,7 +86,11 @@ class TestPHP5 extends UnitTestCase
             $this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\MyNamespace\\duplicateClass'));
         }
 	}
-
+	
+	function testNonExplicitParameterDoctags() {
+        $this->assertTrue(strpos($this->results, 'public void PHPDoctor\\Tests\\MyNamespace\\NonExplicitParameterDoctags(string field, string value, bool default)'));
+	}
+	
 }
 
 ?>

@@ -44,7 +44,12 @@ class ParamTag extends Tag
 		$type = array_shift($explode);
 		if ($type) {
 			$this->_var = trim(array_shift($explode), '$');
-			$data['parameters'][$this->_var]['type'] = $type;
+			if ($this->_var) {
+			    $data['parameters'][$this->_var]['type'] = $type; 
+			} else {
+			    $count = isset($data['parameters']) ? count($data['parameters']) : 0;
+			    $data['parameters']['__unknown'.$count]['type'] = $type;
+			}
 			$text = join(' ', $explode);
 		}
 		if ($text != '') {
