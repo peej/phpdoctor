@@ -1001,7 +1001,7 @@ class PHPDoctor
 									} else {
 										$ce->inBody--;
 										if ($ce->inBody == 0 && count($currentElement) > 0) {
-											$ce->mergeData();
+										    $ce->mergeData();
 											$this->verbose('- Leaving '.get_class($ce).': '.$ce->name());
 											array_pop($currentElement); // re-assign current element
 											if (count($currentElement) > 0) {
@@ -1172,7 +1172,9 @@ class PHPDoctor
                 )
             )
         )) {
-            $name .= $tokens[$key][1];
+            if (isset($tokens[$key][1])) {
+                $name .= $tokens[$key][1];
+            }
             $key++;
         }
         return trim($name);
@@ -1207,14 +1209,9 @@ class PHPDoctor
             $tag = preg_replace('/[\r\n]+/', '', $tag);
             $tag = trim($tag);
 			
-			$pos = strpos($tag, ' ');
-			if ($pos !== FALSE) {
-				$name = trim(substr($tag, 0, $pos));
-				$text = trim(substr($tag, $pos + 1), "\n\r \t\0\x0B");
-			} else {
-				$name = $tag;
-				$text = NULL;
-			}
+			$parts = preg_split('/\s+/', $tag);
+			$name = isset($parts[0]) ? array_shift($parts) : $tag;
+			$text = join(' ', $parts);
 			if ($name) {
 				switch ($name) {
 				case 'package': // place current element in package
