@@ -415,7 +415,13 @@ class PHPDoctor
 		) {
 			return $path;
 		} else {
-			return str_replace('./', '', $this->fixPath($prefix).$path);
+		    $absPath = $this->fixPath($prefix).$path;
+		    $count = 1;
+		    while ($count > 0) {
+		        $absPath = preg_replace('|\w+/\.\./|', '', $absPath, -1, $count);
+		    }
+		    $absPath = str_replace('./', '', $absPath);
+			return $absPath;
 		}
 	}
 	

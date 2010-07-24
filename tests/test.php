@@ -15,6 +15,7 @@ define('EXEC_VERSION', $versionInfo[1]);
 
 $parser = &new GroupTest('Parser');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'php5.php');
+$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'config.php');
 
 $standardDoclet = &new GroupTest('Standard Doclet');
 $standardDoclet->addTestFile('tests'.DIRECTORY_SEPARATOR.'standard-doclet.php');
