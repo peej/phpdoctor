@@ -208,12 +208,15 @@ class HTMLWriter
     {
 		$phpdoctor =& $this->_doclet->phpdoctor();
 		
+		// make directory separators suitable to this platform
+		$path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+		
 		// make directories if they don't exist
-		$dirs = explode('/', $path);
+		$dirs = explode(DIRECTORY_SEPARATOR, $path);
 		array_pop($dirs);
 		$testPath = $this->_doclet->destinationPath();
 		foreach ($dirs as $dir) {
-			$testPath .= $dir.'/';
+			$testPath .= $dir.DIRECTORY_SEPARATOR;
 			if (!is_dir($testPath)) {
                 if (!@mkdir($testPath)) {
                     $phpdoctor->error(sprintf('Could not create directory "%s"', $testPath));
