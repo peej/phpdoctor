@@ -110,7 +110,8 @@ class PHPDoctor
 	 *
 	 * @var str
 	 */
-	var $_sourcePath = './';
+	var $_sourcePath = array('./');
+  var $_sourceIndex = 0;
 
 	/** Traverse sub-directories
 	 *
@@ -240,7 +241,14 @@ class PHPDoctor
 		}
 		if (isset($this->_options['quiet'])) $this->_quiet = $this->_options['quiet'];
 				
-		if (isset($this->_options['source_path'])) $this->_sourcePath = $this->fixPath($this->makeAbsolutePath($this->_options['source_path'], getcwd()));
+    if (isset($this->_options['source_path'])) {
+      $this->_sourcePath = array();
+      foreach (explode(',', $this->_options['source_path']) as $path) {
+        $this->_sourcePath[] = $this->fixPath($path, getcwd());
+      }
+    }
+
+
 		if (isset($this->_options['subdirs'])) $this->_subdirs = $this->_options['subdirs'];
 		if (isset($this->_options['files'])) {
 			$files = explode(',', $this->_options['files']);
@@ -252,15 +260,19 @@ class PHPDoctor
 		}
 		
 		$this->verbose('Searching for files to parse...');
-		$this->_files = array_unique($this->_buildFileList($files, $this->_sourcePath));
+    $this->_files = array();
+    foreach ($this->_sourcePath as $path) {
+      $this->_files[$path] = array_unique($this->_buildFileList($files, $path));
+    }
 		if (count($this->_files) == 0) {
 			$this->error('Could not find any files to parse');
 			exit;
 		}
 		
 		if (isset($this->_options['default_package'])) $this->_defaultPackage = $this->_options['default_package'];
-		if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->_sourcePath);
-		if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->_sourcePath);
+    // use first path element
+		//if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->_sourcePath[0]);
+		//if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->_sourcePath[0]);
 
 		if (isset($this->_options['globals'])) $this->_globals = $this->_options['globals'];
 		if (isset($this->_options['constants'])) $this->_constants = $this->_options['constants'];
@@ -456,7 +468,7 @@ class PHPDoctor
 	 */
 	function sourcePath()
     {
-		return realpath($this->_sourcePath);
+		return realpath($this->_sourcePath[$this->_sourceIndex]);
 	}
 
 	/** Return the version of PHPDoctor.
@@ -505,8 +517,13 @@ class PHPDoctor
     {
 
 		$rootDoc =& new rootDoc($this);
+  $ii = 0;
+  foreach ($this->_files as $path => $files) {
+    $this->_sourceIndex = $ii++;
+		if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->sourcePath());
+		if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->sourcePath());
 
-		foreach ($this->_files as $filename) {
+		foreach ($files as $filename) {
 			if ($filename) {
 				$this->message('Reading file "'.$filename.'"');
 				$fileString = @file_get_contents($filename);
@@ -1056,6 +1073,7 @@ class PHPDoctor
 				}
 			}
 		}
+  }
         
         // add parent data to child elements
         $this->message('Merging superclass data');
