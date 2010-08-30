@@ -953,6 +953,7 @@ class PHPDoctor
 									(isset($currentData['var']) && $currentData['var'] == 'var') || 
 									(isset($currentData['access']) && ($currentData['access'] == 'public' || $currentData['access'] == 'protected' || $currentData['access'] == 'private'))
 								) {
+								    unset($name);
 									do {
 										$key++;
 										if ($tokens[$key] == '=') { // start value
@@ -1239,7 +1240,6 @@ class PHPDoctor
 			if ($name) {
 				switch ($name) {
 				case 'package': // place current element in package
-                case 'namespace':
 					$data['package'] = $text;
 					break;
 				case 'var': // set variable type
