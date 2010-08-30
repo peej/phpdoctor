@@ -18,24 +18,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/** This generates the deprecated elements index.
+/** This generates the todo elements index.
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class DeprecatedWriter extends HTMLWriter
+class TodoWriter extends HTMLWriter
 {
 
-	/** Build the deprecated index.
+	/** Build the todo index.
 	 *
 	 * @param Doclet doclet
 	 */
-	function deprecatedWriter(&$doclet)
+	function todoWriter(&$doclet)
     {
 	
 		parent::HTMLWriter($doclet);
 		
-		//$this->_id = 'definition';
-
 		$rootDoc =& $this->_doclet->rootDoc();
 
         $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
@@ -44,52 +42,52 @@ class DeprecatedWriter extends HTMLWriter
         //$this->_sections[3] = array('title' => 'Use');
         $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
         if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
-        $this->_sections[6] = array('title' => 'Deprecated', 'selected' => TRUE);
-        $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
+        $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+        $this->_sections[7] = array('title' => 'Todo', 'selected' => TRUE);
         $this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
         
-        $deprecatedClasses = array();
+        $todoClasses = array();
         $classes =& $rootDoc->classes();
-        $deprecatedFields = array();
-        $deprecatedMethods = array();
+        $todoFields = array();
+        $todoMethods = array();
         if ($classes) {
             foreach ($classes as $class) {
-                if ($class->tags('@deprecated')) {
-                    $deprecatedClasses[] = $class;
+                if ($class->tags('@todo')) {
+                    $todoClasses[] = $class;
                 }
                 $fields =& $class->fields();
                 if ($fields) {
                     foreach ($fields as $field) {
-                        if ($field->tags('@deprecated')) {
-                            $deprecatedFields[] = $field;
+                        if ($field->tags('@todo')) {
+                            $todoFields[] = $field;
                         }
                     }
                 }
                 $classes =& $class->methods();
                 if ($classes) {
                     foreach ($classes as $method) {
-                        if ($method->tags('@deprecated')) {
-                            $deprecatedMethods[] = $method;
+                        if ($method->tags('@todo')) {
+                            $todoMethods[] = $method;
                         }
                     }
                 }
             }
         }
-        $deprecatedGlobals = array();
+        $todoGlobals = array();
         $globals =& $rootDoc->globals();
         if ($globals) {
             foreach ($globals as $global) {
-                if ($global->tags('@deprecated')) {
-                    $deprecatedGlobals[] = $global;
+                if ($global->tags('@todo')) {
+                    $todoGlobals[] = $global;
                 }
             }
         }
-        $deprecatedFunctions = array();
+        $todoFunctions = array();
         $functions =& $rootDoc->functions();
         if ($functions) {
             foreach ($functions as $function) {
-                if ($function->tags('@deprecated')) {
-                    $deprecatedFunctions[] = $function;
+                if ($function->tags('@todo')) {
+                    $todoFunctions[] = $function;
                 }
             }
         }
@@ -98,35 +96,35 @@ class DeprecatedWriter extends HTMLWriter
         
         echo "<hr>\n\n";
         
-        echo '<h1>Deprecated API</h1>';
+        echo '<h1>Todo</h1>';
 
         echo "<hr>\n\n";
         
-        if ($deprecatedClasses || $deprecatedFields || $deprecatedMethods || $deprecatedGlobals || $deprecatedFunctions) {
+        if ($todoClasses || $todoFields || $todoMethods || $todoGlobals || $todoFunctions) {
             echo "<h2>Contents</h2>\n";
             echo "<ul>\n";
-            if ($deprecatedClasses) {
-                echo '<li><a href="#deprecated_class">Deprecated Classes</a></li>';
+            if ($todoClasses) {
+                echo '<li><a href="#todo_class">Todo Classes</a></li>';
             }
-            if ($deprecatedFields) {
-                echo '<li><a href="#deprecated_field">Deprecated Fields</a></li>';
+            if ($todoFields) {
+                echo '<li><a href="#todo_field">Todo Fields</a></li>';
             }
-            if ($deprecatedMethods) {
-                echo '<li><a href="#deprecated_method">Deprecated Methods</a></li>';
+            if ($todoMethods) {
+                echo '<li><a href="#todo_method">Todo Methods</a></li>';
             }
-            if ($deprecatedGlobals) {
-                echo '<li><a href="#deprecated_global">Deprecated Globals</a></li>';
+            if ($todoGlobals) {
+                echo '<li><a href="#todo_global">Todo Globals</a></li>';
             }
-            if ($deprecatedFunctions) {
-                echo '<li><a href="#deprecated_function">Deprecated Functions</a></li>';
+            if ($todoFunctions) {
+                echo '<li><a href="#todo_function">Todo Functions</a></li>';
             }
             echo "</ul>\n";
         }
         
-        if ($deprecatedClasses) {
-            echo '<table id="deprecated_class" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Classes</th></tr>', "\n";
-            foreach($deprecatedClasses as $class) {
+        if ($todoClasses) {
+            echo '<table id="todo_class" class="detail">', "\n";
+            echo '<tr><th colspan="2" class="title">Todo Classes</th></tr>', "\n";
+            foreach($todoClasses as $class) {
                 $textTag =& $class->tags('@text');
                 echo '<tr><td class="name"><a href="', $class->asPath(), '">', $class->qualifiedName(), '</a></td>';
                 echo '<td class="description">';
@@ -136,10 +134,10 @@ class DeprecatedWriter extends HTMLWriter
             echo "</table>\n\n";
         }
         
-        if ($deprecatedFields) {
-            echo '<table id="deprecated_field" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Fields</th></tr>', "\n";
-            foreach ($deprecatedFields as $field) {
+        if ($todoFields) {
+            echo '<table id="todo_field" class="detail">', "\n";
+            echo '<tr><th colspan="2" class="title">Todo Fields</th></tr>', "\n";
+            foreach ($todoFields as $field) {
                 $textTag =& $field->tags('@text');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $field->asPath(), '">', $field->qualifiedName(), "</a></td>\n";
@@ -151,10 +149,10 @@ class DeprecatedWriter extends HTMLWriter
             echo "</table>\n\n";
         }
         
-        if ($deprecatedMethods) {
-            echo '<table id="deprecated_method" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Methods</th></tr>', "\n";
-            foreach($deprecatedMethods as $method) {
+        if ($todoMethods) {
+            echo '<table id="todo_method" class="detail">', "\n";
+            echo '<tr><th colspan="2" class="title">Todo Methods</th></tr>', "\n";
+            foreach($todoMethods as $method) {
                 $textTag =& $method->tags('@text');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $method->asPath(), '">', $method->qualifiedName(), "</a></td>\n";
@@ -166,10 +164,10 @@ class DeprecatedWriter extends HTMLWriter
             echo "</table>\n\n";
         }
         
-        if ($deprecatedGlobals) {
-            echo '<table id="deprecated_global" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Globals</th></tr>', "\n";
-            foreach($deprecatedGlobals as $global) {
+        if ($todoGlobals) {
+            echo '<table id="todo_global" class="detail">', "\n";
+            echo '<tr><th colspan="2" class="title">Todo Globals</th></tr>', "\n";
+            foreach($todoGlobals as $global) {
                 $textTag =& $global->tags('@text');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $global->asPath(), '">', $global->qualifiedName(), "</a></td>\n";
@@ -181,10 +179,10 @@ class DeprecatedWriter extends HTMLWriter
             echo "</table>\n\n";
 		}
         
-        if ($deprecatedFunctions) {
-            echo '<table id="deprecated_function" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Functions</th></tr>', "\n";
-            foreach($deprecatedFunctions as $function) {
+        if ($todoFunctions) {
+            echo '<table id="todo_function" class="detail">', "\n";
+            echo '<tr><th colspan="2" class="title">Todo Functions</th></tr>', "\n";
+            foreach($todoFunctions as $function) {
                 $textTag =& $function->tags('@text');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $function->asPath(), '">', $function->qualifiedName(), "</a></td>\n";
@@ -199,7 +197,7 @@ class DeprecatedWriter extends HTMLWriter
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write('deprecated-list.html', 'Deprecated', TRUE);
+        $this->_write('todo-list.html', 'Todo', TRUE);
 	
 	}
   

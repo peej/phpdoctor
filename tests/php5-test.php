@@ -187,6 +187,42 @@ class myException extends Exception { }
  *
  * @throws myException
  */
-function customExceptionThrower { }
+function customExceptionThrower() { }
+
+/**
+ * Test inheriting of class doccomments 
+ */
+class inheritTest {
+    
+    /**
+     * Test inheriting of field doccomments 
+     */
+    var $aField;
+    
+    /**
+     * Test inheriting of method doccomments 
+     */
+    function aMethod() { }
+    
+}
+
+/**
+ * A child class doccomment
+ *
+ * {@inheritDoc}
+ */
+class inheritTestChild extends inheritTest {
+    
+    /**
+     * Parent field comment is: {@inheritDoc}
+     */
+    var $aField;
+    
+    /**
+     * Parent method comment is: {@inheritDoc}
+     */
+    function aMethod() { }
+    
+}
 
 ?>

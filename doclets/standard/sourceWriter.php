@@ -59,7 +59,8 @@ class SourceWriter extends HTMLWriter
         
         echo "<ul>\n";
         foreach ($sources as $filename => $data) {
-            echo '<li><a href="source/', strtolower($filename), '.html">', $filename, '</a></li>';
+            $url = strtolower(str_replace(DIRECTORY_SEPARATOR, '/', $filename));
+            echo '<li><a href="source/', $url, '.html">', $filename, '</a></li>';
         }
         echo "</ul>\n";
         
@@ -80,7 +81,8 @@ class SourceWriter extends HTMLWriter
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree');
 			$this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
 			$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
+			$this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
+			$this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
 			
             $this->_depth = substr_count($filename, '/') + 1;
             

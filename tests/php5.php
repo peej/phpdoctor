@@ -74,6 +74,11 @@ class TestPHP5 extends UnitTestCase
 	
 	function testInheritance() {
 		$this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\Data\\childClass extends PHPDoctor\\Tests\\Data\\aClass'));
+		
+		$this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\FileLevel\\inheritTestChild extends PHPDoctor\\Tests\\FileLevel\\inheritTest'));
+		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of class doccomments'));
+		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of method doccomments'));
+		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of field doccomments'));
 	}
         
     function testHTMLInVariable() {
