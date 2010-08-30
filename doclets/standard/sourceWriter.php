@@ -59,7 +59,8 @@ class SourceWriter extends HTMLWriter
         
         echo "<ul>\n";
         foreach ($sources as $filename => $data) {
-            echo '<li><a href="source/', strtolower($filename), '.html">', $filename, '</a></li>';
+            $url = strtolower(str_replace(DIRECTORY_SEPARATOR, '/', $filename));
+            echo '<li><a href="source/', $url, '.html">', $filename, '</a></li>';
         }
         echo "</ul>\n";
         

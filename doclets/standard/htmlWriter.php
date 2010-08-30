@@ -192,7 +192,8 @@ class HTMLWriter
 	function _sourceLocation($doc)
 	{
 	    if ($this->_doclet->includeSource()) {
-	        echo '<a href="', str_repeat('../', $this->_depth), 'source/', strtolower($doc->sourceFilename()), '.html#line', $doc->sourceLine(), '" class="location">', $doc->location(), "</a>\n\n";
+	        $url = strtolower(str_replace(DIRECTORY_SEPARATOR, '/', $doc->sourceFilename()));
+	        echo '<a href="', str_repeat('../', $this->_depth), 'source/', $url, '.html#line', $doc->sourceLine(), '" class="location">', $doc->location(), "</a>\n\n";
 	    } else {
 	        echo '<div class="location">', $doc->location(), "</div>\n";
 	    }
