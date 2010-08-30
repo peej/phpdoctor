@@ -30,6 +30,7 @@ require('functionWriter.php');
 require('globalWriter.php');
 require('indexWriter.php');
 require('deprecatedWriter.php');
+require('todoWriter.php');
 require('sourceWriter.php');
 
 /** The standard doclet. This doclet generates HTML output similar to that
@@ -173,6 +174,9 @@ class Standard
         
 		// write deprecated index
 		$deprecatedWriter =& new deprecatedWriter($this);
+		
+		// write todo index
+		$todoWriter =& new todoWriter($this);
 		
 		// write source files
 		if ($this->_includeSource) {
