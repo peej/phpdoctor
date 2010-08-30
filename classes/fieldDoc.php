@@ -44,8 +44,9 @@ class FieldDoc extends ProgramElementDoc
 	 * @param RootDoc root The root element
 	 * @param str filename The filename of the source file this element is in
 	 * @param int lineNumber The line number of the source file this element is at
+	 * @param str sourcePath The source path containing the source file
 	 */
-	function fieldDoc($name, &$parent, &$root, $filename = NULL, $lineNumber = NULL)
+	function fieldDoc($name, &$parent, &$root, $filename = NULL, $lineNumber = NULL, $sourcePath = NULL)
     {
 		$this->_name = trim($name, '$\'"');
 		$this->_parent =& $parent; // set reference to parent
@@ -53,6 +54,7 @@ class FieldDoc extends ProgramElementDoc
 		$this->_type =& new type('mixed', $root);
 		$this->_filename = $filename;
 		$this->_lineNumber = $lineNumber;
+		$this->_sourcePath = $sourcePath;
 	}
 
 	/** Get type of this variable.
