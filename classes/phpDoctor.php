@@ -592,7 +592,7 @@ class PHPDoctor
 							
 							case T_CLASS:
 							// read class
-								$class =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber); // create class object
+								$class =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create class object
 								$this->verbose('+ Entering '.get_class($class).': '.$class->name());
 								if (isset($currentData['docComment'])) { // set doc comment
 									$class->set('docComment', $currentData['docComment']);
@@ -615,7 +615,7 @@ class PHPDoctor
 								
 							case T_INTERFACE:
 							// read interface
-								$interface =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber); // create interface object
+								$interface =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create interface object
 								$this->verbose('+ Entering '.get_class($interface).': '.$interface->name());
 								if (isset($currentData['docComment'])) { // set doc comment
 									$interface->set('docComment', $currentData['docComment']);
@@ -713,7 +713,7 @@ class PHPDoctor
 							case T_FUNCTION:
 							// read function
 							    $name = $this->_getProgramElementName($tokens, $key);
-							    $method =& new methodDoc($name, $ce, $rootDoc, $filename, $lineNumber); // create method object
+							    $method =& new methodDoc($name, $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create method object
 								$this->verbose('+ Entering '.get_class($method).': '.$method->name());
 							    if (isset($currentData['docComment'])) { // set doc comment
 									$method->set('docComment', $currentData['docComment']); // set doc comment
@@ -756,7 +756,7 @@ class PHPDoctor
 							case T_STRING:
 							    // read global constant
                                 if ($token[1] == 'define') {// && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
-									$const =& new fieldDoc($this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING), $ce, $rootDoc, $filename, $lineNumber); // create constant object
+									$const =& new fieldDoc($this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING), $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create constant object
 									$this->verbose('Found '.get_class($const).': global constant '.$const->name());
 									$const->set('final', TRUE); // is constant
 									$value = '';
@@ -821,7 +821,7 @@ class PHPDoctor
 											if (!isset($name)) {
 												$name = $this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING));
 											}
-											$const =& new fieldDoc($name, $ce, $rootDoc, $filename, $lineNumber); // create field object
+											$const =& new fieldDoc($name, $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create field object
 											$this->verbose('Found '.get_class($const).': '.$const->name());
 											if ($this->_hasPrivateName($const->name())) $const->makePrivate();
 											$const->set('final', TRUE);
@@ -871,7 +871,7 @@ class PHPDoctor
 										    if ($tokens[$key][0] == T_STRING && !isset($param)) { // type hint
 										        $typehint = $tokens[$key][1];
 											} elseif ($tokens[$key][0] == T_VARIABLE && !isset($param)) {
-												$param =& new fieldDoc($tokens[$key][1], $ce, $rootDoc, $filename, $lineNumber); // create constant object
+												$param =& new fieldDoc($tokens[$key][1], $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create constant object
 												$this->verbose('Found '.get_class($param).': '.$param->name());
 												if (isset($currentData['docComment'])) { // set doc comment
 													$param->set('docComment', $currentData['docComment']);
@@ -911,7 +911,7 @@ class PHPDoctor
 							case T_VARIABLE:
 								// read global variable
 								if (strtolower(get_class($ce)) == 'rootdoc') { // global var, add to package
-									$global =& new fieldDoc($tokens[$key][1], $ce, $rootDoc, $filename, $lineNumber); // create constant object
+									$global =& new fieldDoc($tokens[$key][1], $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create constant object
 									$this->verbose('Found '.get_class($global).': global variable '.$global->name());
 									if (isset($tokens[$key - 1][0]) && isset($tokens[$key - 2][0]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
 										$global->set('type', new type($tokens[$key - 2][1], $rootDoc));
@@ -975,7 +975,7 @@ class PHPDoctor
 											if (!isset($name)) {
 												$name = $this->_getPrev($tokens, $key, T_VARIABLE);
 											}
-											$field =& new fieldDoc($name, $ce, $rootDoc, $filename, $lineNumber); // create field object
+											$field =& new fieldDoc($name, $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create field object
 											$this->verbose('Found '.get_class($field).': '.$field->name());
 											if ($this->_hasPrivateName($field->name())) $field->makePrivate();
 											if (isset($value)) { // set value
