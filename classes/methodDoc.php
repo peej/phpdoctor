@@ -44,8 +44,9 @@ class MethodDoc extends ExecutableDoc
 	 * @param RootDoc root The root element
 	 * @param str filename The filename of the source file this element is in
 	 * @param int lineNumber The line number of the source file this element is at
+	 * @param str sourcePath The source path containing the source file
 	 */
-	function methodDoc($name, &$parent, &$root, $filename, $lineNumber)
+	function methodDoc($name, &$parent, &$root, $filename, $lineNumber, $sourcePath)
     {
 		$this->_name = $name;
 		$this->_parent =& $parent; // set reference to parent
@@ -53,6 +54,7 @@ class MethodDoc extends ExecutableDoc
 		$this->_returnType =& new type('void', $root);
 		$this->_filename = $filename;
 		$this->_lineNumber = $lineNumber;
+		$this->_sourcePath = $sourcePath;
 	}
 
 	/** Add a parameter to this method.

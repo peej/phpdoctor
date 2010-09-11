@@ -70,6 +70,12 @@ class ProgramElementDoc extends Doc
 	 */
 	var $_lineNumber = NULL;
 	
+	/** The source path containing the source file
+	 *
+	 * @var str
+	 */
+	var $_sourcePath = NULL;
+	
 	/** Set element to have public access */
 	function makePublic()
     {
@@ -234,7 +240,7 @@ modifiers() would return:
 	function sourceFilename()
 	{
 		$phpdoctor = $this->_root->phpdoctor();
-	    return substr($this->_filename, strlen($phpdoctor->sourcePath()) + 1);
+	    return substr($this->_filename, strlen($this->_sourcePath) + 1);
 	}
 	
 	function sourceLine()

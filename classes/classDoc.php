@@ -77,13 +77,15 @@ class ClassDoc extends ProgramElementDoc
 	 * @param RootDoc root The root element
 	 * @param str filename The filename of the source file this element is in
 	 * @param int lineNumber The line number of the source file this element is at
+	 * @param str sourcePath The source path containing the source file
 	 */
-	function classDoc($name, &$root, $filename, $lineNumber)
+	function classDoc($name, &$root, $filename, $lineNumber, $sourcePath)
     {
 		$this->_name = $name;
 		$this->_root =& $root;
 		$this->_filename = $filename;
 		$this->_lineNumber = $lineNumber;
+		$this->_sourcePath = $sourcePath;
 	}
 	
 	/** Add a constant to this class.
