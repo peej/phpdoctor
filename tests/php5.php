@@ -79,8 +79,13 @@ class TestPHP5 extends UnitTestCase
 		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of class doccomments'));
 		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of method doccomments'));
 		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of field doccomments'));
+		
+		$this->assertTrue(strpos($this->results, 'public class PHPDoctor\\Tests\\FileLevel\\inheritTestImplements implements PHPDoctor\\Tests\\FileLevel\\inheritInterfaceTest'));
+		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of interface doccomments'));
+		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of interface method doccomments'));
+		$this->assertTrue(strpos($this->results, 'InheritDoc: Test inheriting of interface field doccomments'));
 	}
-        
+    
     function testHTMLInVariable() {
         $this->assertTrue(strpos($this->results, 'public mixed PHPDoctor\\Tests\\Data\\$varContainingHTMLToEscape = \'<strong>Escape me</strong>\''));
 	}

@@ -48,6 +48,15 @@ class TestStandardDoclet extends UnitTestCase
 		$this->assertTrue(strpos($results, '<td class="description">This is aClass that implements anInterface. </td>'));
 	}
 	
+	function testInheritance() {
+		$results = $this->readFile('phpdoctor/tests/filelevel/inherittestchild.html');
+		$this->assertTrue(strpos($results, '<p>Test inheriting of class doccomments</p>'));
+		$this->assertTrue(strpos($results, '<p class="description">Parent field comment is: Test inheriting of field doccomments</p>'));
+		$this->assertTrue(strpos($results, '<p class="description">Parent method comment is: Test inheriting of method doccomments</p>'));
+		$this->assertTrue(strpos($results, '<p>Parent field comment is: Test inheriting of field doccomments</p>'));
+		$this->assertTrue(strpos($results, '<p>Parent method comment is: Test inheriting of method doccomments</p>'));
+	}
+	
 }
 
 ?>

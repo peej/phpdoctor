@@ -225,4 +225,40 @@ class inheritTestChild extends inheritTest {
     
 }
 
+/**
+ * Test inheriting of interface doccomments 
+ */
+interface inheritInterfaceTest {
+    
+    /**
+     * Test inheriting of interface field doccomments 
+     */
+    var $anInterfaceField;
+    
+    /**
+     * Test inheriting of interface method doccomments 
+     */
+    function anInterfaceMethod();
+    
+}
+
+/**
+ * A child class doccomment
+ *
+ * {@inheritDoc}
+ */
+class inheritTestImplements implements inheritInterfaceTest {
+    
+    /**
+     * Parent field comment is: {@inheritDoc}
+     */
+    var $anInterfaceField;
+    
+    /**
+     * Parent method comment is: {@inheritDoc}
+     */
+    function anInterfaceMethod() { }
+    
+}
+
 ?>

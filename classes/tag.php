@@ -160,9 +160,9 @@ class Tag
 				$return =& $this->_getInlineTags($this->text().'.');
 			}
 		} else {
-			$expression = '/^(.+)\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)/sU';
+		    $expression = '/^(.+)(\.(?: |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)|$)/sU';
 			if (preg_match($expression, $this->text(), $matches)) {
-				$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
+				$return =& $this->_getInlineTags($matches[1].$matches[2]);
 			} else {
 				$return = array(&$this);
 			}
@@ -184,7 +184,7 @@ class Tag
 			$inlineTags = NULL;
 			$phpdoctor =& $this->_root->phpdoctor();
 			foreach ($tagStrings as $tag) {
-				if (substr($tag, 0, 1) == '@') {
+			    if (substr($tag, 0, 1) == '@') {
 					$pos = strpos($tag, ' ');
 					if ($pos !== FALSE) {
 						$name = trim(substr($tag, 0, $pos));

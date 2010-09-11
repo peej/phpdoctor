@@ -296,7 +296,7 @@ class HTMLWriter
 			} else {
 				$tags =& $tag->inlineTags();
 			}
-			if ($tags) {
+            if ($tags) {
 				foreach ($tags as $aTag) {
 					if ($aTag) {
 						$tagText = $aTag->text();
