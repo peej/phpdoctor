@@ -14,15 +14,17 @@ preg_match('/PHP ([0-9]+\.[0-9]+\.[0-9]+)/', $versionInfo[0], $versionInfo);
 define('EXEC_VERSION', $versionInfo[1]);
 
 $parser = &new GroupTest('Parser');
-$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'php5.php');
-$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'config.php');
+#$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'php5.php');
+#$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'config.php');
+#$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'ignore-package-tags.php');
+$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'use-class-path-as-package.php');
 
 $standardDoclet = &new GroupTest('Standard Doclet');
 $standardDoclet->addTestFile('tests'.DIRECTORY_SEPARATOR.'standard-doclet.php');
 
 $test = &new GroupTest('PHPDoctor');
 $test->addTestCase($parser);
-$test->addTestCase($standardDoclet);
+#$test->addTestCase($standardDoclet);
 
 if (TextReporter::inCli()) {
 	exit ($test->run(new TextReporter()) ? 0 : 1);
