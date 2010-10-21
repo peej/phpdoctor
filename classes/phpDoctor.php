@@ -1315,7 +1315,7 @@ class PHPDoctor
 			$tagletFile = $this->makeAbsolutePath($this->fixPath($this->_tagletPath).substr($name, 1).'.php', $this->_path);
 			if (is_file($tagletFile)) { // load taglet for this tag
 				if (!class_exists($class)) require_once($tagletFile);
-				$tag =& new $class($name, $text, $root);
+				$tag =& new $class($text, $data, $root);
 				return $tag;
 			} else {
 			    $tagFile = $this->makeAbsolutePath('classes/'.$class.'Tag.php', $this->_path);
