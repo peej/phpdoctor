@@ -312,6 +312,7 @@ class PHPDoctor
 		if (isset($this->_options['doclet'])) $this->_doclet = $this->_options['doclet'];
 		if (isset($this->_options['doclet_path'])) $this->_docletPath = $this->_options['doclet_path'];
 		else $this->_docletPath = $this->_path.DIRECTORY_SEPARATOR.$this->_docletPath;
+		if (isset($this->_options['taglet_path'])) $this->_tagletPath = $this->_options['taglet_path'];
 		
 		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
 		
