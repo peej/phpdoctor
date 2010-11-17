@@ -547,6 +547,7 @@ class PHPDoctor
                     $fileString = @file_get_contents($filename);
                     if ($fileString !== FALSE) {
 						$fileString = str_replace( "\r\n", "\n", $fileString ); // fix Windows line endings
+						$fileString = str_replace( "\r", "\n", $fileString ); // fix ancient Mac line endings
 						
                         $this->_currentFilename = $filename;
                         
