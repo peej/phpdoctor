@@ -546,6 +546,8 @@ class PHPDoctor
                     $this->message('Reading file "'.$filename.'"');
                     $fileString = @file_get_contents($filename);
                     if ($fileString !== FALSE) {
+						$fileString = str_replace( "\r\n", "\n", $fileString ); // fix Windows line endings
+						
                         $this->_currentFilename = $filename;
                         
                         $tokens = token_get_all($fileString);
