@@ -22,9 +22,19 @@ $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'use-class-path-as-package.php'
 $standardDoclet = &new GroupTest('Standard Doclet');
 $standardDoclet->addTestFile('tests'.DIRECTORY_SEPARATOR.'standard-doclet.php');
 
+$fixes = &new GroupTest('Bugfixes'); // these tests will work with PHP5 < 5.3
+#$fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'linefeed.php');
+#$fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lastline.php');
+#$fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'zerovalue.php');
+
+$features = &new GroupTest('Features'); // these tests will work with PHP5 < 5.3
+$features->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lists-ul.php');
+
 $test = &new GroupTest('PHPDoctor');
-$test->addTestCase($parser);
+#$test->addTestCase($parser);
 #$test->addTestCase($standardDoclet);
+#$test->addTestCase($fixes);
+$test->addTestCase($features);
 
 if (TextReporter::inCli()) {
 	exit ($test->run(new TextReporter()) ? 0 : 1);
