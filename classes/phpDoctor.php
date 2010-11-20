@@ -1244,9 +1244,12 @@ class PHPDoctor
 		
 		$explodedComment = preg_split('/[\n|\r][ \r\n\t\/]*\*[ \t]*@/', "\n".$comment);
 		
-		preg_match_all('/^[ \t\/*]*\** ?(.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches);
+		preg_match_all('/^[ \t]*[\/*]*\**( ?.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches); // changed; we need the leading whitespace to detect multi-line list entries
 		if (isset($matches[1])) {
-			$data['tags']['@text'] = $this->createTag('@text', trim(implode("\n", $matches[1]), " \n\r\t\0\x0B*/"), $data, $root);
+			$txt = implode("\n", $matches[1]);
+			$txt = $this->_addListMarkupUL($txt);
+			$txt = preg_replace("/[ \t]*\n[ \t]*/", "\n", $txt);
+			$data['tags']['@text'] = $this->createTag('@text', trim($txt, " \n\r\t\0\x0B*/"), $data, $root);
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags
@@ -1368,6 +1371,34 @@ class PHPDoctor
 	function _hasPrivateName($name)
 	{
 		return substr($name, 0, 1) == '_';
+	}
+	
+	/**
+	 * Detects unordered lists and adds the necessary markup.
+	 * 
+	 * @param  string  $txt 			the text to parse and modify
+	 * @return string    
+	 */
+	function _addListMarkupUL($txt)
+	{
+		// Create unordered lists. -, +, # and o are recogized as bullet points
+		
+		$li_rx = '^([ \t]+([\-+#o])[ \t]+)(\S.*(?:\n [ \t]+(?!\2)(?![ \t]).*|\n[ \t]*)*\n)'; // regex capturing a list entry, including those extending over multiple lines and those padded with empty lines
+		$ul_rx = "(?:$li_rx){2,}"; // regex capturing an unordered list - at least two list entries required
+		
+		$txt = preg_replace("/$ul_rx/m", "<ul>\n$0\n</ul>\n\n", $txt);
+		
+		if (preg_match_all("%<ul>.*?</ul>%s", $txt, $outerLists)) {
+			$lists = preg_replace("/$li_rx/m", "<li>$3</li>", $outerLists[0]);
+			$txt = str_replace($outerLists[0], $lists, $txt);
+			
+			// Cleanup: Making sure that the lists won't appear inside a <p> and won't have empty paragraphs
+			// in between list items.
+			$txt = preg_replace('%\s*<ul>\s*(<li>.+?</li>)\s*</ul>\s*%s', "<ul>\n$1\n</ul>", $txt);
+			$txt = preg_replace('%\s*</li>\s*%', "</li>\n", $txt);
+		} 
+		
+		return $txt;
 	}
 }
 

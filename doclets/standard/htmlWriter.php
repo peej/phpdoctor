@@ -300,6 +300,17 @@ class HTMLWriter
 				foreach ($tags as $aTag) {
 					if ($aTag) {
 						$tagText = $aTag->text();
+						if (strpos($tagText, '<ul>') !== false) {
+							$tagText = str_replace('<ul>', "</p>\n<ul>", $tagText);
+							$tagText = str_replace('</ul>', "</ul>\n<p>", $tagText);
+							
+							// Inside <li>s which contain multiple paragraphs, use <p>s with a css hook.
+							preg_match_all("%<li>.*?</li>%s", $tagText, $items);
+							$adjustedItems = preg_replace("%[ \t]*\n\n[ \t]*%", '</p><p class="list">', $items[0]);
+							$adjustedItems = preg_replace('%^<li>(.*?</p><p class="list">.*?)</li>$%s', "<li><p class=\"list\">$1</p></li>", $adjustedItems);
+							$tagText = str_replace($items[0], $adjustedItems, $tagText);
+						}
+						
 						$description .= str_replace("\n\n", '</p><p>', $tagText);
 					}
 				}
