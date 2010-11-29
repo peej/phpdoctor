@@ -550,6 +550,9 @@ class PHPDoctor
                     $this->message('Reading file "'.$filename.'"');
                     $fileString = @file_get_contents($filename);
                     if ($fileString !== FALSE) {
+						$fileString = str_replace( "\r\n", "\n", $fileString ); // fix Windows line endings
+						$fileString = str_replace( "\r", "\n", $fileString ); // fix ancient Mac line endings
+						
                         $this->_currentFilename = $filename;
                         
                         $tokens = token_get_all($fileString);
@@ -1246,17 +1249,17 @@ class PHPDoctor
 			'tags' => array()
 		);
 		
-		$explodedComment = preg_split('/[\n|\r][ \r\n\t\/]*\*[ \t]*@/', "\n".$comment);
+		$explodedComment = preg_split('/\n[ \n\t\/]*\*[ \t]*@/', "\n".$comment);
 		
 		preg_match_all('/^[ \t\/*]*\** ?(.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches);
 		if (isset($matches[1])) {
-			$data['tags']['@text'] = $this->createTag('@text', trim(implode("\n", $matches[1]), " \n\r\t\0\x0B*/"), $data, $root);
+			$data['tags']['@text'] = $this->createTag('@text', trim(implode("\n", $matches[1]), " \n\t\0\x0B*/"), $data, $root);
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags
             // strip whitespace, newlines and asterisks
-            $tag = preg_replace('/(^[\s\n\r\*]+|\s*\*\/$)/m', ' ', $tag);
-            $tag = preg_replace('/[\r\n]+/', '', $tag);
+            $tag = preg_replace('/(^[\s\n\*]+|\s*\*\/$)/m', ' ', $tag);
+            $tag = preg_replace('/[\n]+/', '', $tag);
             $tag = trim($tag);
 			
 			$parts = preg_split('/\s+/', $tag);
