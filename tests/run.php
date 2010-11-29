@@ -20,7 +20,6 @@
     if (!file_exists($casedir.'tmp')) mkdir( $casedir.'tmp');
     if (!file_exists($casedir.'output')) mkdir( $casedir.'output');
     
-    require_once 'doctorTestCase.php';
     include('test.php');
     
 ?>

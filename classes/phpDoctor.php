@@ -327,7 +327,11 @@ class PHPDoctor
 	function _buildFileList($files, $dir)
     {
 		$list = array();
-
+		
+		$dir = realpath($dir);
+		if (!$dir) {
+		    return $list;
+		}
 		$dir = $this->fixPath($dir);
 
 		foreach ($files as $filename) {
