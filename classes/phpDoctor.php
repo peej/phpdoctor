@@ -1258,8 +1258,8 @@ class PHPDoctor
 		
 		foreach ($explodedComment as $tag) { // process tags
             // strip whitespace, newlines and asterisks
-            $tag = preg_replace('/(^[\s\n\*]+|\s*\*\/$)/m', ' ', $tag);
-            $tag = preg_replace('/[\n]+/', '', $tag);
+            $tag = preg_replace('/(^[\s\n\*]+|[\s\*]*\*\/$)/m', ' ', $tag); // fixed: empty comment lines at end of docblock
+            $tag = preg_replace('/\n+/', '', $tag);
             $tag = trim($tag);
 			
 			$parts = preg_split('/\s+/', $tag);

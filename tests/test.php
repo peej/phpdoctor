@@ -26,11 +26,10 @@ $standardDoclet->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPAR
 
 $fixes = &new GroupTest('Bugfixes'); // these tests will work with PHP5 < 5.3
 $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'linefeed.php');
-#$fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lastline.php');
+$fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lastline.php');
 $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'zerovalue.php');
 
 $test = &new GroupTest('PHPDoctor');
-
 $test->addTestCase($parser);
 $test->addTestCase($standardDoclet);
 $test->addTestCase($fixes);
