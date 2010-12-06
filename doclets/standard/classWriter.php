@@ -139,7 +139,7 @@ class ClassWriter extends HTMLWriter
 							echo '<td class="type">', $field->modifiers(FALSE), ' ', $field->typeAsString(), "</td>\n";
 							echo '<td class="description">';
 							echo '<p class="name"><a href="#', $field->name(), '">';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</a></p>';
 							if ($textTag) {
 								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
@@ -159,7 +159,7 @@ class ClassWriter extends HTMLWriter
 							echo '<td class="type">', $field->modifiers(FALSE), ' ', $field->typeAsString(), "</td>\n";
 							echo '<td class="description">';
 							echo '<p class="name"><a href="#', $field->name(), '">';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</a></p>';
 							if ($textTag) {
 								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
@@ -210,9 +210,9 @@ class ClassWriter extends HTMLWriter
 							$this->_sourceLocation($field);
 							echo '<h3 id="', $field->name(),'">', $field->name(), "</h3>\n";
 							echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</strong>';
-							if ($field->value()) echo ' = ', htmlspecialchars($field->value());
+							if (!is_null($field->value())) echo ' = ', htmlspecialchars($field->value());
 							echo "</code>\n";
                             echo '<div class="details">', "\n";
 							if ($textTag) {
@@ -232,9 +232,9 @@ class ClassWriter extends HTMLWriter
 							$this->_sourceLocation($field);
 							echo '<h3 id="', $field->name(),'">', $field->name(), "</h3>\n";
 							echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</strong>';
-							if ($field->value()) echo ' = ', htmlspecialchars($field->value());
+							if (!is_null($field->value())) echo ' = ', htmlspecialchars($field->value());
 							echo "</code>\n";
                             echo '<div class="details">', "\n";
 							if ($textTag) {

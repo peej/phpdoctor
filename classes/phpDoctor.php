@@ -327,7 +327,11 @@ class PHPDoctor
 	function _buildFileList($files, $dir)
     {
 		$list = array();
-
+		
+		$dir = realpath($dir);
+		if (!$dir) {
+		    return $list;
+		}
 		$dir = $this->fixPath($dir);
 
 		foreach ($files as $filename) {
@@ -546,6 +550,9 @@ class PHPDoctor
                     $this->message('Reading file "'.$filename.'"');
                     $fileString = @file_get_contents($filename);
                     if ($fileString !== FALSE) {
+						$fileString = str_replace( "\r\n", "\n", $fileString ); // fix Windows line endings
+						$fileString = str_replace( "\r", "\n", $fileString ); // fix ancient Mac line endings
+						
                         $this->_currentFilename = $filename;
                         
                         $tokens = token_get_all($fileString);
@@ -1242,20 +1249,20 @@ class PHPDoctor
 			'tags' => array()
 		);
 		
-		$explodedComment = preg_split('/[\n|\r][ \r\n\t\/]*\*[ \t]*@/', "\n".$comment);
+		$explodedComment = preg_split('/\n[ \n\t\/]*\*[ \t]*@/', "\n".$comment);
 		
 		preg_match_all('/^[ \t]*[\/*]*\**( ?.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches); // changed; we need the leading whitespace to detect multi-line list entries
 		if (isset($matches[1])) {
 			$txt = implode("\n", $matches[1]);
 			$txt = $this->_addListMarkupUL($txt);
 			$txt = preg_replace("/[ \t]*\n[ \t]*/", "\n", $txt);
-			$data['tags']['@text'] = $this->createTag('@text', trim($txt, " \n\r\t\0\x0B*/"), $data, $root);
+			$data['tags']['@text'] = $this->createTag('@text', trim($txt, " \n\t\0\x0B*/"), $data, $root);
 		}
 		
 		foreach ($explodedComment as $tag) { // process tags
             // strip whitespace, newlines and asterisks
-            $tag = preg_replace('/(^[\s\n\r\*]+|\s*\*\/$)/m', ' ', $tag);
-            $tag = preg_replace('/[\r\n]+/', '', $tag);
+            $tag = preg_replace('/(^[\s\n\*]+|[\s\*]*\*\/$)/m', ' ', $tag); // fixed: empty comment lines at end of docblock
+            $tag = preg_replace('/\n+/', '', $tag);
             $tag = trim($tag);
 			
 			$parts = preg_split('/\s+/', $tag);
