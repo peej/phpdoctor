@@ -195,6 +195,18 @@ class PHPDoctor
 	 */
 	var $_doclet = 'standard';
 
+	/** Specifies the name of the text formatter class.
+	 *
+	 * @var str
+	 */
+	var $_formatterName = 'htmlStandardFormatter';
+
+	/** The formatter object.
+	 *
+	 * @var TextFormatter
+	 */
+	var $_formatter = null;
+
 	/** Specifies the path to the doclet starting class file. If the doclet class
 	 * is not in a file named <_doclet>/<_doclet>.php then this path should
 	 * include the filename of the class file also.
@@ -208,6 +220,12 @@ class PHPDoctor
 	 * @var str
 	 */
 	var $_tagletPath = 'taglets';
+
+	/** Specifies the path to the formatters to use.
+	 *
+	 * @var str
+	 */
+	var $_formatterPath = 'formatters';
 
 	/** The path and filename of the current file being parsed.
 	 *
@@ -313,9 +331,13 @@ class PHPDoctor
 		if (isset($this->_options['doclet_path'])) $this->_docletPath = $this->_options['doclet_path'];
 		else $this->_docletPath = $this->_path.DIRECTORY_SEPARATOR.$this->_docletPath;
 		if (isset($this->_options['taglet_path'])) $this->_tagletPath = $this->_options['taglet_path'];
+		if (isset($this->_options['formatter'])) $this->_formatterName = $this->_options['formatter'];
+		if (isset($this->_options['formatter_path'])) $this->_formatterPath = $this->_options['formatter_path'];
+		else $this->_formatterPath = $this->_path.DIRECTORY_SEPARATOR.$this->_formatterPath;
 		
 		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
 		
+		$this->_formatter = $this->getFormatter();
 	}
 	
 	/**
@@ -1129,6 +1151,21 @@ class PHPDoctor
 		$this->message('Done ('.round($this->_getTime() - $this->_startTime, 2).' seconds)');
 	}
     
+	/** Creates the formatter and returns it.
+	 *
+	 * @return TextFormatter
+	 */
+	function getFormatter()
+    {
+		$formatterFile = $this->fixPath($this->_formatterPath).$this->_formatterName.'.php';
+		if (is_file($formatterFile)) {
+			require_once($formatterFile);
+			return new $this->_formatterName();
+		} else {
+			$this->error('Could not find formatter "'.$formatterFile.'"');
+		}
+	}
+    
     /**
      * @param rootDoc rootDoc
      * @param str parent
@@ -1254,8 +1291,6 @@ class PHPDoctor
 		preg_match_all('/^[ \t]*[\/*]*\**( ?.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches); // changed; we need the leading whitespace to detect multi-line list entries
 		if (isset($matches[1])) {
 			$txt = implode("\n", $matches[1]);
-			$txt = $this->_addListMarkupUL($txt);
-			$txt = preg_replace("/[ \t]*\n[ \t]*/", "\n", $txt);
 			$data['tags']['@text'] = $this->createTag('@text', trim($txt, " \n\t\0\x0B*/"), $data, $root);
 		}
 		
@@ -1326,17 +1361,17 @@ class PHPDoctor
 			$tagletFile = $this->makeAbsolutePath($this->fixPath($this->_tagletPath).substr($name, 1).'.php', $this->_path);
 			if (is_file($tagletFile)) { // load taglet for this tag
 				if (!class_exists($class)) require_once($tagletFile);
-				$tag =& new $class($text, $data, $root);
+				$tag =& new $class($text, $data, $root, $this->_formatter);
 				return $tag;
 			} else {
 			    $tagFile = $this->makeAbsolutePath('classes/'.$class.'Tag.php', $this->_path);
 				if (is_file($tagFile)) { // load class for this tag
 					$class .= 'Tag';
 					if (!class_exists($class)) require_once($tagFile);
-					$tag =& new $class($text, $data, $root);
+					$tag =& new $class($text, $data, $root, $this->_formatter);
 					return $tag;
 				} else { // create standard tag
-					$tag =& new tag($name, $text, $root);
+					$tag =& new tag($name, $text, $root, $this->_formatter);
 					return $tag;
 				}
 			}
@@ -1380,33 +1415,6 @@ class PHPDoctor
 		return substr($name, 0, 1) == '_';
 	}
 	
-	/**
-	 * Detects unordered lists and adds the necessary markup.
-	 * 
-	 * @param  string  $txt 			the text to parse and modify
-	 * @return string    
-	 */
-	function _addListMarkupUL($txt)
-	{
-		// Create unordered lists. -, +, # and o are recogized as bullet points
-		
-		$li_rx = '^([ \t]+([\-+#o])[ \t]+)(\S.*(?:\n [ \t]+(?!\2)(?![ \t]).*|\n[ \t]*)*\n)'; // regex capturing a list entry, including those extending over multiple lines and those padded with empty lines
-		$ul_rx = "(?:$li_rx){2,}"; // regex capturing an unordered list - at least two list entries required
-		
-		$txt = preg_replace("/$ul_rx/m", "<ul>\n$0\n</ul>\n\n", $txt);
-		
-		if (preg_match_all("%<ul>.*?</ul>%s", $txt, $outerLists)) {
-			$lists = preg_replace("/$li_rx/m", "<li>$3</li>", $outerLists[0]);
-			$txt = str_replace($outerLists[0], $lists, $txt);
-			
-			// Cleanup: Making sure that the lists won't appear inside a <p> and won't have empty paragraphs
-			// in between list items.
-			$txt = preg_replace('%\s*<ul>\s*(<li>.+?</li>)\s*</ul>\s*%s', "<ul>\n$1\n</ul>", $txt);
-			$txt = preg_replace('%\s*</li>\s*%', "</li>\n", $txt);
-		} 
-		
-		return $txt;
-	}
 }
 
 ?>

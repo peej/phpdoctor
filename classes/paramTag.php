@@ -37,8 +37,9 @@ class ParamTag extends Tag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
 	 * @param RootDoc root The root object
+	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function paramTag($text, &$data, &$root)
+	function paramTag($text, &$data, &$root, &$formatter)
     {
 		$explode = preg_split('/[ \t]+/', $text);
 		$type = array_shift($explode);
@@ -53,9 +54,9 @@ class ParamTag extends Tag
 			$text = join(' ', $explode);
 		}
 		if ($text != '') {
-			parent::tag('@param', $this->_var.' - '.$text, $root);
+			parent::tag('@param', $this->_var.' - '.$text, $root, $formatter);
 		} else {
-			parent::tag('@param', NULL, $root);
+			parent::tag('@param', NULL, $root, $formatter);
 		}
 	}
 	

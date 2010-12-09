@@ -41,7 +41,7 @@ class TestStandardDoclet extends DoctorTestCase
 	
 	function testShortDescriptionWithAFullStop() {
 		$results = $this->readOutputFile('phpdoctor/tests/data/package-summary.html');
-		$this->assertTrue(strpos($results, '<td class="description">This is aClass that implements anInterface. </td>'));
+		$this->assertStringContains('<td class="description">This is aClass that implements anInterface.|</td>', $results, true);
 	}
 	
 	function testInheritance() {

@@ -34,11 +34,23 @@ class Tag
 	 */
 	var $_name = NULL;
 
-	/** The value of the tag.
+	/** The plain text value of the tag.
 	 *
 	 * @var str
 	 */
-	var $_text = NULL;
+	var $_plainText = NULL;
+		
+	/** The value of the tag, as formatted text.
+	 *
+	 * @var str
+	 */
+	var $_formattedText = NULL;
+		
+	/** The value of the tag as raw data, without any text processing applied.
+	 *
+	 * @var str
+	 */
+	var $_rawText = NULL;
 		
 	/** Reference to the root element.
 	 *
@@ -58,17 +70,15 @@ class Tag
 	 * @param str name The name of the tag (including @)
 	 * @param str text The contents of the tag
 	 * @param RootDoc root The root object
+	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function tag($name, $text, &$root)
+	function tag($name, $text, &$root, &$formatter)
     {
 		$this->_name = $name;
 		$this->_root =& $root;
-		$processedLines = array();
-		foreach (explode("\n", $text) as $line) {
-			//$processedLines[] = trim($line, " \n\r\t\0\x0B*/");
-			$processedLines[] = $line; // keep formatting
- 		}
-		$this->_text = implode("\n", $processedLines);
+		$this->_rawText = $text;
+		$this->_plainText = $formatter->toPlainText($text);
+		$this->_formattedText = $formatter->toFormattedText($text);
 	}
 
 	/** Get name of this tag.
@@ -89,13 +99,31 @@ class Tag
 		return ucfirst(substr($this->_name, 1));
 	}
 
-	/** Get value of this tag.
+	/** Get the plain text value of the tag.
 	 *
 	 * @return str
 	 */
-	function text()
+	function plainText()
     {
-		return $this->_text;
+		return $this->_plainText;
+	}
+	
+	/** Get the value of this tag, as formatted text.
+	 *
+	 * @return str
+	 */
+	function formattedText()
+    {
+		return $this->_formattedText;
+	}
+	
+	/** Get the value of the tag as raw data, without any text processing applied.
+	 *
+	 * @return str
+	 */
+	function rawText()
+    {
+		return $this->_rawText;
 	}
 	
 	/** Set this tags parent
@@ -123,7 +151,7 @@ class Tag
 	 */
 	function &inlineTags()
     {
-		return $this->_getInlineTags($this->text());
+		return $this->_getInlineTags($this->rawText());
 	}
 	
 	/**
@@ -149,19 +177,19 @@ class Tag
 		$matches = array();
 		
 		if ($phpdoctor->getOption('pearCompat')) {
-			$expression = '/^(.+)(?:\n\n|\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr))/sU';
-			if (preg_match($expression, $this->text(), $matches)) {
+			$expression = '/^(.+)(?:\n\n|\.( |\t|\n|<\/p>|<\/?h[1-6]>|<hr))/sU';
+			if (preg_match($expression, $this->rawText(), $matches)) {
 				if (isset($matches[2])) {
 					$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
 				} else {
 					$return =& $this->_getInlineTags($matches[1].'.');
 				}
 			} else {
-				$return =& $this->_getInlineTags($this->text().'.');
+				$return =& $this->_getInlineTags($this->rawText().'.');
 			}
 		} else {
-		    $expression = '/^(.+)(\.(?: |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)|$)/sU';
-			if (preg_match($expression, $this->text(), $matches)) {
+		    $expression = '/^(.+)(\.(?: |\t|\n|<\/p>|<\/?h[1-6]>|<hr)|$)/sU';
+			if (preg_match($expression, $this->rawText(), $matches)) {
 				$return =& $this->_getInlineTags($matches[1].$matches[2]);
 			} else {
 				$return = array(&$this);

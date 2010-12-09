@@ -33,14 +33,14 @@ class ThrowsTag extends SeeTag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
 	 * @param RootDoc root The root object
-	 * @param ProgramElementDoc parent The tags parent element
+	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function throwsTag($text, &$data, &$root)
+	function throwsTag($text, &$data, &$root, &$formatter)
     {
 		$explode = preg_split('/[ \t]+/', $text);
 		$this->_link = array_shift($explode);
 		$data['throws'][$this->_link] = $this->_link;
-		parent::tag('@throws', join(' ', $explode), $root);
+		parent::tag('@throws', join(' ', $explode), $root, $formatter);
 	}
 
 	/** Get display name of this tag.
@@ -52,11 +52,39 @@ class ThrowsTag extends SeeTag
 		return 'Throws';
 	}
 
-	/** Get value of this tag.
+	/** Get the plain text value of the tag.
 	 *
 	 * @return str
 	 */
-	function text()
+	function plainText()
+    {
+		return $this->_addLink($this->_plainText);
+	}
+	
+	/** Get the value of this tag, as formatted text.
+	 *
+	 * @return str
+	 */
+	function formattedText()
+    {
+		return $this->_addLink($this->_formattedText);
+	}
+	
+	/** Get the value of the tag as raw data, without any text processing applied.
+	 *
+	 * @return str
+	 */
+	function rawText()
+    {
+		return $this->_addLink($this->_rawText);
+	}
+	
+	/** Get value of this tag.
+	 *
+	 * @param str text 	the text value, without the link
+	 * @return str
+	 */
+	function _addLink($text)
     {
 		$link = $this->_link;
 		$res = '';
@@ -71,8 +99,8 @@ class ThrowsTag extends SeeTag
 		} else {
 			$res =  $link;
 		}
-
-		return $res . ($this->_text ? ' ' . $this->_text : '');
+		
+		return $res . ($text ? ' ' . $text : '');
 	}
 
 	/** Return true if this Taglet is used in constructor documentation.
