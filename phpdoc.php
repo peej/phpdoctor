@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-error_reporting(0);
+error_reporting(E_ALL & ~E_DEPRECATED);
 
 // check we are running from the command line
 if (!isset($argv[0])) {

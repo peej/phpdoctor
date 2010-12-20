@@ -24,6 +24,7 @@ $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'pa
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'config.php');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'ignore-package-tags.php');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'use-class-path-as-package.php');
+$parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'namespace-syntax.php');
 
 $standardDoclet = new GroupTest('Standard Doclet');
 $standardDoclet->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'standard-doclet.php');
