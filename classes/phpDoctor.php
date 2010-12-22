@@ -589,7 +589,7 @@ class PHPDoctor
                         
                         $currentPackage = $this->_defaultPackage; // the current package
                         if ($this->_useClassPathAsPackage) { // magic up package name from filepath
-                            $currentPackage .= '\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', substr(dirname($filename), strlen($this->sourcePath()) + 1))));
+                            $currentPackage .= '\\'.str_replace(' ', '\\', ucwords(str_replace(DIRECTORY_SEPARATOR, ' ', substr(dirname($filename), strlen($this->sourcePath()) + 1))));
                         }
                         $defaultPackage = $oldDefaultPackage = $currentPackage;
                         $fileData = array();
