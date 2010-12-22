@@ -3,9 +3,6 @@
 // Run forever if we need to
 ini_set('max_execution_time', 0);
 
-// Turn off E_STRICT and E_DEPRECATED so we don't get PHP errors when running our tests
-error_reporting(~E_STRICT & ~E_DEPRECATED);
-
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'mock_objects.php';
 require_once 'simpletest'.DIRECTORY_SEPARATOR.'reporter.php';

@@ -9,7 +9,7 @@
      * Makes sure the test dirs are in the include path.
      */
     
-    error_reporting(error_reporting() & ~2048); // Make sure E_STRICT is disabled
+    error_reporting(error_reporting() & ~2048 & ~8192); // Make sure E_STRICT and E_DEPRECATED are disabled
     
     $testdir = dirname(__FILE__).DIRECTORY_SEPARATOR;
     $casedir = $testdir.'cases'.DIRECTORY_SEPARATOR;

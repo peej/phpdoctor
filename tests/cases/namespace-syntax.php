@@ -14,20 +14,23 @@ class TestNamespaceSyntax extends DoctorTestCase
 	
 	function testStandardSyntax() {
 	    
-		$this->setIniFile('standard-namespace-syntax.ini');
-		$output = $this->runPhpDoctor();
-		
-		$this->assertTrue(strpos($output, 'public final static int foo\bar\ZERO'));
-		$this->assertTrue(strpos($output, 'public final static int foo\bar\ONE = 1'));
+		if (version_compare(EXEC_VERSION, '5.3.0', '>=')) {
+			$this->setIniFile('standard-namespace-syntax.ini');
+			$output = $this->runPhpDoctor();
+			
+			$this->assertTrue(strpos($output, 'public final static int foo\bar\ZERO'));
+			$this->assertTrue(strpos($output, 'public final static int foo\bar\ONE = 1'));
+		}
 	}
 	
 	function testAltSyntax() {
-	    
-		$this->setIniFile('alt-namespace-syntax.ini');
-		$output = $this->runPhpDoctor();
-		
-		$this->assertTrue(strpos($output, 'public final static int woo\yay\ZERO'));
-		$this->assertTrue(strpos($output, 'public final static int woo\yay\ONE = 1'));
+	    if (version_compare(EXEC_VERSION, '5.3.0', '>=')) {
+			$this->setIniFile('alt-namespace-syntax.ini');
+			$output = $this->runPhpDoctor();
+			
+			$this->assertTrue(strpos($output, 'public final static int woo\yay\ZERO'));
+			$this->assertTrue(strpos($output, 'public final static int woo\yay\ONE = 1'));
+		}
 	}
 	
 }
