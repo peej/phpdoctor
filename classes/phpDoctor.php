@@ -751,13 +751,13 @@ class PHPDoctor
                                 case T_NAMESPACE:
                                 case T_NS_C:
                                     $namespace = '';
-                                    while ($tokens[++$key] != ';') {
-                                        if ($tokens[$key][0] == T_STRING) {
-                                            if ($namespace != '') $namespace .= '\\';
-                                            $namespace .= $tokens[$key][1];
-                                        }
+                                    while($tokens[++$key][0] != T_STRING);
+                                    $namespace = $tokens[$key++][1];
+                                    while($tokens[$key][0] == T_NS_SEPARATOR) {
+                                        $namespace .= $tokens[$key++][1] . $tokens[$key++][1];
                                     }
                                     $currentPackage = $defaultPackage = $oldDefaultPackage = $namespace;
+                                    $key--;
                                     break;
                                     
                                 case T_FUNCTION:
