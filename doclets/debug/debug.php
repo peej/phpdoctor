@@ -186,11 +186,11 @@ class Debug
 	
 	function docComment(&$programElement) {
 	    $textTag =& $programElement->tags('@text');
-        if ($textTag && $textTag->text()) {
-            echo $this->showDepth(), '|= ', $textTag->text(), "\n";
+        if ($textTag && $textTag->formattedText()) {
+            echo $this->showDepth(), '|= ', $textTag->formattedText(), "\n";
             foreach($textTag->inlineTags() as $inlineTag) {
                 if ($inlineTag->name() != '@text') {
-                    echo $this->showDepth(), '|= ', $inlineTag->displayName(), ': ', $inlineTag->text(), "\n";
+                    echo $this->showDepth(), '|= ', $inlineTag->displayName(), ': ', $inlineTag->formattedText(), "\n";
                 }
             }
         }

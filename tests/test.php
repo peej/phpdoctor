@@ -33,10 +33,9 @@ $features = &new GroupTest('Features'); // these tests will work with PHP5 < 5.3
 $features->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lists-ul.php');
 
 $test = &new GroupTest('PHPDoctor');
-#$test->addTestCase($parser);
+$test->addTestCase($parser);
 $test->addTestCase($standardDoclet);
 $test->addTestCase($fixes);
-#$test->addTestCase($fixes);
 $test->addTestCase($features);
 
 if (TextReporter::inCli()) {

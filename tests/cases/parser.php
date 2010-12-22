@@ -98,7 +98,9 @@ class TestPHP5 extends DoctorTestCase
 	}
 	
 	function testNonExplicitParameterDoctags() {
-        $this->assertTrue(strpos($this->output, 'public void PHPDoctor\\Tests\\MyNamespace\\NonExplicitParameterDoctags(string field, string value, bool default)'));
+		if (version_compare(EXEC_VERSION, '5.3.0', '>=')) {
+			$this->assertTrue(strpos($this->output, 'public void PHPDoctor\\Tests\\MyNamespace\\NonExplicitParameterDoctags(string field, string value, bool default)'));
+		}
 	}
 	
 }
