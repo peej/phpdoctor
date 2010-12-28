@@ -16,6 +16,13 @@ exec(PHP.' -v', $versionInfo);
 preg_match('/PHP ([0-9]+\.[0-9]+\.[0-9]+)/', $versionInfo[0], $versionInfo);
 define('EXEC_VERSION', $versionInfo[1]);
 
+if (TextReporter::inCli()) {
+	$reporter = new TextReporter();
+} else {
+    $reporter = new HtmlReporter();
+}
+
+
 $parser = new GroupTest('Parser');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'parser.php');
 $parser->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'config.php');
@@ -33,7 +40,12 @@ $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'zer
 
 $formatters = new GroupTest('Formatters'); // these tests will work with PHP5 < 5.3
 $formatters->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lists-ul.php');
-$formatters->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'markdown.php');
+include_once "markdown.php";
+if (function_exists('Markdown')) {
+    $formatters->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'markdown.php');
+} else {
+    $reporter->paintMessage("Not running Markdown test, Markdown not available on system");
+}
 
 $test = new GroupTest('PHPDoctor');
 $test->addTestCase($parser);
@@ -42,8 +54,8 @@ $test->addTestCase($fixes);
 $test->addTestCase($formatters);
 
 if (TextReporter::inCli()) {
-	exit ($test->run(new TextReporter()) ? 0 : 1);
+	exit ($test->run($reporter) ? 0 : 1);
 }
-$test->run(new HtmlReporter());
+$test->run($reporter);
 
 ?>

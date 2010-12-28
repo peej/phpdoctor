@@ -8,7 +8,7 @@ class TestMarkdown extends DoctorTestCase
 	
     var $output;
     
-	function testListsUl() {
+	function testMarkdown() {
         $this->DoctorTestCase('Markdown formatter tests');
 		
 		$this->clearOutputDir();
