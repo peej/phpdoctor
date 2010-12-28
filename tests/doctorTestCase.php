@@ -1,6 +1,11 @@
 <?php
     require_once 'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
 	
+    /**
+     * Base test class to run PHPDoctor and capture output
+     *
+     * @package PHPDoctor\Tests
+     */
     class DoctorTestCase extends UnitTestCase {
         
         var $iniPath, $appDir, $testDir, $caseDir, $iniDir, $outputDir, $tempDir;

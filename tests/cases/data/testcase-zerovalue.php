@@ -2,6 +2,8 @@
     
     /**
      * class ZeroValue
+     *
+     * @package PHPDoctor\Tests
      */
     class ZeroValue {
         

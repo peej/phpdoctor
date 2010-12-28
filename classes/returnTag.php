@@ -31,13 +31,12 @@ class ReturnTag extends Tag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
 	 * @param RootDoc root The root object
-	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function returnTag($text, &$data, &$root, &$formatter)
+	function returnTag($text, &$data, &$root)
     {
 		$explode = preg_split('/[ \t]+/', $text);
 		$data['return'] = array_shift($explode);
-		parent::tag('@return', join(' ', $explode), $root, $formatter);
+		parent::tag('@return', join(' ', $explode), $root);
 	}
 	
 	/** Get display name of this tag.

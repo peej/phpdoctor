@@ -34,37 +34,19 @@ class LinkTag extends LinkPlainTag
 	 * @param str[] data Reference to doc comment data array
 	 * @param RootDoc root The root object
 	 */
-	function linkTag($text, &$data, &$root, &$formatter)
+	function linkTag($text, &$data, &$root)
     {
-		parent::linkPlainTag($text, $data, $root, $formatter);
+		parent::linkPlainTag($text, $data, $root);
 		$this->_name = '@link';
 	}
 	
-	/** Get the plain text value of the tag.
-	 *
-	 * @return str
-	 */
-	function plainText()
-    {
-		return '<code>'.parent::plainText().'</code>';
-	}
-	
-	/** Get the value of this tag, as formatted text.
-	 *
-	 * @return str
-	 */
-	function formattedText()
-    {
-		return '<code>'.parent::formattedText().'</code>';
-	}
-
 	/** Get the value of the tag as raw data, without any text processing applied.
 	 *
 	 * @return str
 	 */
-	function rawText()
+	function text()
     {
-		return '<code>'.parent::rawText().'</code>';
+		return '<code>'.parent::text().'</code>';
 	}
 	
 	/** Return true if this Taglet is used in constructor documentation.

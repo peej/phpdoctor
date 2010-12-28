@@ -68,6 +68,7 @@
      * That's it for unordered lists.
      * 
      * @author I don't care who did it, but we want to have a tag here.
+     * @package PHPDoctor\Tests
      */
     class ListsUl {}
     

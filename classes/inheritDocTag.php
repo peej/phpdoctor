@@ -31,46 +31,16 @@ class InheritDocTag extends Tag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
 	 * @param RootDoc root The root object
-	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function inheritDocTag($text, &$data, &$root, &$formatter)
+	function inheritDocTag($text, &$data, &$root)
     {
-		parent::tag('@inheritDoc', $text, $root, $formatter);
-	}
-	
-	/** Get the plain text value of the super element.
-	 *
-	 * @return str
-	 */
-	function plainText()
-    {
-		return $this->_text('plainText');
-	}
-	
-	/** Get the value of the super element, as formatted text.
-	 *
-	 * @return str
-	 */
-	function formattedText()
-    {
-		return $this->_text('formattedText');
-	}
-	
-	/** Get the value of the super element as raw data, without any text processing applied.
-	 *
-	 * @return str
-	 */
-	function rawText()
-    {
-		return $this->_text('rawText');
+		parent::tag('@inheritDoc', $text, $root);
 	}
 	
 	/** Get text from super element
-	 *
-	 * @param str textType the name of the method to retrieve the text (plainText, formattedText, rawText)
 	 * @return str
 	 */
-	function _text($textType)
+	function text()
     {
 		if ($this->_parent) {
 		    if ($this->_parent->isClass()) {
@@ -78,7 +48,7 @@ class InheritDocTag extends Tag
 		        if ($superClassname) {
 		            $superClass =& $this->_root->classNamed($superClassname);
 		            if ($superClass) {
-		                $text = $superClass->tags('@text')->$textType();
+		                $text = $superClass->tags('@text')->text();
 		                if ($text) {
                             return $text;
                         }
@@ -86,7 +56,7 @@ class InheritDocTag extends Tag
 		        }
                 $interfaces = $this->_parent->interfaces();
                 foreach ($interfaces as $interface) {
-                    $text = $interface->tags('@text')->$textType();
+                    $text = $interface->tags('@text')->text();
                     if ($text) {
                         return $text;
                     }
@@ -100,7 +70,7 @@ class InheritDocTag extends Tag
                         if ($superClass) {
                             $superMethod =& $superClass->methodNamed($this->_parent->name());
                             if ($superMethod) {
-                                $text = $superMethod->tags('@text')->$textType();
+                                $text = $superMethod->tags('@text')->text();
                                 if ($text) {
                                     return $text;
                                 }
@@ -111,7 +81,7 @@ class InheritDocTag extends Tag
                     foreach ($interfaces as $interface) {
                         $superMethod =& $interface->methodNamed($this->_parent->name());
                         if ($superMethod) {
-                            $text = $superMethod->tags('@text')->$textType();
+                            $text = $superMethod->tags('@text')->text();
                             if ($text) {
                                 return $text;
                             }
@@ -127,7 +97,7 @@ class InheritDocTag extends Tag
                         if ($superClass) {
                             $superField =& $superClass->fieldNamed($this->_parent->name());
                             if ($superField) {
-                                $text = $superField->tags('@text')->$textType();
+                                $text = $superField->tags('@text')->text();
                                 if ($text) {
                                     return $text;
                                 }
@@ -138,7 +108,7 @@ class InheritDocTag extends Tag
                     foreach ($interfaces as $interface) {
                         $superField =& $interface->fieldNamed($this->_parent->name());
                         if ($superField) {
-                            $text = $superField->tags('@text')->$textType();
+                            $text = $superField->tags('@text')->text();
                             if ($text) {
                                 return $text;
                             }

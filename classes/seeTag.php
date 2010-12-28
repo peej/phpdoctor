@@ -37,9 +37,8 @@ class SeeTag extends Tag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
 	 * @param RootDoc root The root object
-	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function seeTag($text, &$data, &$root, &$formatter)
+	function seeTag($text, &$data, &$root)
     {
 		if (preg_match('/^<a href="(.+)">(.+)<\/a>$/', $text, $matches)) {
 			$this->_link = $matches[1];
@@ -52,7 +51,7 @@ class SeeTag extends Tag
 		} else {
 			$this->_link = NULL;
 		}
-		parent::tag('@see', $text, $root, $formatter);
+		parent::tag('@see', $text, $root);
 	}
 	
 	/** Get display name of this tag.
@@ -64,42 +63,13 @@ class SeeTag extends Tag
 		return 'See Also';
 	}
 	
-	/** Get the plain text value of the tag.
-	 *
-	 * @return str
-	 */
-	function plainText()
-    {
-		return $this->_text('plainText');
-	}
-	
-	/** Get the value of this tag, as formatted text.
-	 *
-	 * @return str
-	 */
-	function formattedText()
-    {
-		return $this->_text('formattedText');
-	}
-	
-	/** Get the value of the tag as raw data, without any text processing applied.
-	 *
-	 * @return str
-	 */
-	function rawText()
-    {
-		return $this->_text('rawText');
-	}
-	
 	/** Get value of this tag.
-	 *
-	 * @param str textType the name of the method to retrieve the text (plainText, formattedText, rawText)
 	 * @return str
 	 */
-	function _text($textType)
+	function text()
     {
-		if (parent::$textType() && parent::$textType() != "\n") {
-			$link = parent::$textType();
+		if (parent::text() && parent::text() != "\n") {
+			$link = parent::text();
 		} else {
 			$link = $this->_link;
 		}

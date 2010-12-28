@@ -1,6 +1,6 @@
 <?php
 
-namespace woo\yay {
+namespace PHPDoctor\Tests\woo\yay {
 
     class AltNamespaceSyntax {
         

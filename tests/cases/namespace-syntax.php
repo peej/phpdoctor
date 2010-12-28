@@ -18,8 +18,8 @@ class TestNamespaceSyntax extends DoctorTestCase
 			$this->setIniFile('standard-namespace-syntax.ini');
 			$output = $this->runPhpDoctor();
 			
-			$this->assertTrue(strpos($output, 'public final static int foo\bar\ZERO'));
-			$this->assertTrue(strpos($output, 'public final static int foo\bar\ONE = 1'));
+			$this->assertTrue(strpos($output, 'public final static int PHPDoctor\Tests\foo\bar\ZERO'));
+			$this->assertTrue(strpos($output, 'public final static int PHPDoctor\Tests\foo\bar\ONE = 1'));
 		}
 	}
 	
@@ -28,8 +28,8 @@ class TestNamespaceSyntax extends DoctorTestCase
 			$this->setIniFile('alt-namespace-syntax.ini');
 			$output = $this->runPhpDoctor();
 			
-			$this->assertTrue(strpos($output, 'public final static int woo\yay\ZERO'));
-			$this->assertTrue(strpos($output, 'public final static int woo\yay\ONE = 1'));
+			$this->assertTrue(strpos($output, 'public final static int PHPDoctor\Tests\woo\yay\ZERO'));
+			$this->assertTrue(strpos($output, 'public final static int PHPDoctor\Tests\woo\yay\ONE = 1'));
 		}
 	}
 	

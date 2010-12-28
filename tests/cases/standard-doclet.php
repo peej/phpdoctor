@@ -49,7 +49,7 @@ class TestStandardDoclet extends DoctorTestCase
 		$this->assertTrue(strpos($results, '<p>Test inheriting of class doccomments</p>'));
 		$this->assertTrue(strpos($results, '<p class="description">Parent field comment is: Test inheriting of field doccomments</p>'));
 		$this->assertTrue(strpos($results, '<p class="description">Parent method comment is: Test inheriting of method doccomments</p>'));
-		$this->assertTrue(strpos($results, '<p>Parent field comment is: Test inheriting of field doccomments</p>'));
+		$this->assertStringContains('<p>Parent field comment is: Test inheriting of field doccomments</p>', $results, TRUE);
 		$this->assertTrue(strpos($results, '<p>Parent method comment is: Test inheriting of method doccomments</p>'));
 	}
 	

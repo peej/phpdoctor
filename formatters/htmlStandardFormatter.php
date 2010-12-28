@@ -4,6 +4,8 @@
     
     /**
      * The standard formatter. Basic implementation, just deals with unordered lists for now.
+     *
+     * @package PHPDoctor\Formatters
      */
     class htmlStandardFormatter extends TextFormatter
     {
@@ -11,6 +13,9 @@
         function toFormattedText($text)
         {
             $text = $this->_addListMarkupUL($text);
+            $text = '<p>'.str_replace("\n\n", '</p><p>', $this->toPlainText($text)).'</p>';
+            $text = str_replace('<ul>', "</p>\n<ul>", $text);
+            $text = str_replace('</ul>', "</ul>\n<p>", $text);
             $text = $this->_removeWhitespace($text);
             return $text;
         }
@@ -31,7 +36,7 @@
             $li_rx = '^([ \t]+([\-+#o])[ \t]+)(\S.*(?:\n [ \t]+(?!\2)(?![ \t]).*|\n[ \t]*)*\n)';
             $ul_rx = "(?:$li_rx){2,}";
             
-            $txt = preg_replace("/$ul_rx/m", "<ul>\n$0\n</ul>\n\n", $txt);
+            $txt = preg_replace("/$ul_rx/m", "\n\n<ul>\n$0\n</ul>\n\n", $txt);
             
             if (preg_match_all("%<ul>.*?</ul>%s", $txt, $outerLists)) {
                 $lists = preg_replace("/$li_rx/m", "<li>$3</li>", $outerLists[0]);

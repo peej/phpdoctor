@@ -2,6 +2,8 @@
     
     /**
      * The formatter base class.
+     *
+     * @package PHPDoctor\Formatters
      */
     class TextFormatter
     {

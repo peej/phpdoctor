@@ -255,18 +255,18 @@ class HTMLWriter
 				if (is_array($tag)) {
                     $hasText = FALSE;
                     foreach ($tag as $key => $tagFromGroup) {
-                        if ($tagFromGroup->formattedText() != '') {
+                        if ($tagFromGroup->text() != '') {
                             $hasText = TRUE;
                         }
                     }
                     if ($hasText) {
                         $tagString .= '<dt>'.$tag[0]->displayName().":</dt>\n";
                         foreach ($tag as $tagFromGroup) {
-                            $tagString .= '<dd>'.$tagFromGroup->formattedText()."</dd>\n";
+                            $tagString .= '<dd>'.$tagFromGroup->text()."</dd>\n";
                         }
                     }
 				} else {
-					$text = $tag->formattedText();
+					$text = $tag->text();
 					if ($text != '') {
 						$tagString .= '<dt>'.$tag->displayName().":</dt>\n";
 						$tagString .= '<dd>'.$text."</dd>\n";
@@ -290,7 +290,7 @@ class HTMLWriter
 	function _processInlineTags(&$tag, $first = FALSE)
     {
 		if ($tag) {
-			$description = '<p>';
+			$description = '';
 			if ($first) {
 				$tags =& $tag->firstSentenceTags();
 			} else {
@@ -299,37 +299,15 @@ class HTMLWriter
             if ($tags) {
 				foreach ($tags as $aTag) {
 					if ($aTag) {
-						$tagText = $aTag->formattedText();
-						
-						// Handle block elements (currently only ul, but could be extended to ol, blockquote etc.)
-						if (strpos($tagText, '<ul>') !== false) {
-							$tagText = str_replace('<ul>', "</p>\n<ul>", $tagText);
-							$tagText = str_replace('</ul>', "</ul>\n<p>", $tagText);
-						}
-						
-						$description .= str_replace("\n\n", '</p><p>', $tagText);
+						$description .= $aTag->text();
 					}
 				}
 			}
-			$description .= '</p>';
-            if ($first) {
-                $description = $this->_stripBlockTags($description);
-            }
-			return $description;
+            return $this->_doclet->formatter->toFormattedText($description);
 		}
 		return NULL;
 	}
     
-    /** Strip block level HTML tags from a string.
-     *
-     * @param str string
-     * @return str
-     */
-    function _stripBlockTags($string)
-    {
-        return strip_tags($string, '<a><b><strong><i><em><code><q><acronym><abbr><ins><del><kbd><samp><sub><sup><tt><var><big><small>');
-    }
-
 }
 
 ?>

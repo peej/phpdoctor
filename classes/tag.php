@@ -33,24 +33,12 @@ class Tag
 	 * @var str
 	 */
 	var $_name = NULL;
-
-	/** The plain text value of the tag.
-	 *
-	 * @var str
-	 */
-	var $_plainText = NULL;
-		
-	/** The value of the tag, as formatted text.
-	 *
-	 * @var str
-	 */
-	var $_formattedText = NULL;
-		
+	
 	/** The value of the tag as raw data, without any text processing applied.
 	 *
 	 * @var str
 	 */
-	var $_rawText = NULL;
+	var $_text = NULL;
 		
 	/** Reference to the root element.
 	 *
@@ -70,15 +58,12 @@ class Tag
 	 * @param str name The name of the tag (including @)
 	 * @param str text The contents of the tag
 	 * @param RootDoc root The root object
-	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function tag($name, $text, &$root, &$formatter)
+	function tag($name, $text, &$root)
     {
 		$this->_name = $name;
 		$this->_root =& $root;
-		$this->_rawText = $text;
-		$this->_plainText = $formatter->toPlainText($text);
-		$this->_formattedText = $formatter->toFormattedText($text);
+		$this->_text = $text;
 	}
 
 	/** Get name of this tag.
@@ -98,32 +83,14 @@ class Tag
     {
 		return ucfirst(substr($this->_name, 1));
 	}
-
-	/** Get the plain text value of the tag.
-	 *
-	 * @return str
-	 */
-	function plainText()
-    {
-		return $this->_plainText;
-	}
-	
-	/** Get the value of this tag, as formatted text.
-	 *
-	 * @return str
-	 */
-	function formattedText()
-    {
-		return $this->_formattedText;
-	}
 	
 	/** Get the value of the tag as raw data, without any text processing applied.
 	 *
 	 * @return str
 	 */
-	function rawText()
+	function text()
     {
-		return $this->_rawText;
+		return $this->_text;
 	}
 	
 	/** Set this tags parent
@@ -151,7 +118,7 @@ class Tag
 	 */
 	function &inlineTags()
     {
-		return $this->_getInlineTags($this->rawText());
+		return $this->_getInlineTags($this->text());
 	}
 	
 	/**
@@ -178,18 +145,18 @@ class Tag
 		
 		if ($phpdoctor->getOption('pearCompat')) {
 			$expression = '/^(.+)(?:\n\n|\.( |\t|\n|<\/p>|<\/?h[1-6]>|<hr))/sU';
-			if (preg_match($expression, $this->rawText(), $matches)) {
+			if (preg_match($expression, $this->text(), $matches)) {
 				if (isset($matches[2])) {
 					$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
 				} else {
 					$return =& $this->_getInlineTags($matches[1].'.');
 				}
 			} else {
-				$return =& $this->_getInlineTags($this->rawText().'.');
+				$return =& $this->_getInlineTags($this->text().'.');
 			}
 		} else {
 		    $expression = '/^(.+)(\.(?: |\t|\n|<\/p>|<\/?h[1-6]>|<hr)|$)/sU';
-			if (preg_match($expression, $this->rawText(), $matches)) {
+			if (preg_match($expression, $this->text(), $matches)) {
 				$return =& $this->_getInlineTags($matches[1].$matches[2]);
 			} else {
 				$return = array(&$this);

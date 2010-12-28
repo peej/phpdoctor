@@ -2,6 +2,8 @@
     
     /**
      * class LastLine
+     *
+     * @package PHPDoctor\Tests
      */
     class LastLine {
         

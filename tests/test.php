@@ -31,14 +31,15 @@ $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lin
 $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lastline.php');
 $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'zerovalue.php');
 
-$features = new GroupTest('Features'); // these tests will work with PHP5 < 5.3
-$features->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lists-ul.php');
+$formatters = new GroupTest('Formatters'); // these tests will work with PHP5 < 5.3
+$formatters->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lists-ul.php');
+$formatters->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'markdown.php');
 
 $test = new GroupTest('PHPDoctor');
 $test->addTestCase($parser);
 $test->addTestCase($standardDoclet);
 $test->addTestCase($fixes);
-$test->addTestCase($features);
+$test->addTestCase($formatters);
 
 if (TextReporter::inCli()) {
 	exit ($test->run(new TextReporter()) ? 0 : 1);

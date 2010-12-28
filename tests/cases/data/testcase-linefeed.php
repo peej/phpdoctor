@@ -9,6 +9,7 @@
      * a second short line.
      *
      * @author Foo
+     * @package PHPDoctor\Tests
      */
     class LineFeed {}
     

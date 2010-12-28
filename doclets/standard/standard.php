@@ -105,13 +105,15 @@ class Standard
 	 *
 	 * @param RootDoc rootDoc
 	 */
-	function standard(&$rootDoc)
+	function standard(&$rootDoc, $formatter)
     {
 	
 		// set doclet options
 		$this->_rootDoc =& $rootDoc;
 		$phpdoctor =& $rootDoc->phpdoctor();
 		$options =& $rootDoc->options();
+		
+		$this->formatter = $formatter;
 		
 		if (isset($options['d'])) {
 			$this->_d = $phpdoctor->makeAbsolutePath($options['d'], $phpdoctor->sourcePath());

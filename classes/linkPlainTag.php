@@ -33,9 +33,8 @@ class LinkPlainTag extends SeeTag
 	 * @param str text The contents of the tag
 	 * @param str[] data Reference to doc comment data array
 	 * @param RootDoc root The root object
-	 * @param TextFormatter formatter The formatter used for processing text
 	 */
-	function linkPlainTag($text, &$data, &$root, &$formatter)
+	function linkPlainTag($text, &$data, &$root)
     {
 		$explode = preg_split('/[ \t]+/', $text);
 		$link = array_shift($explode);
@@ -45,7 +44,7 @@ class LinkPlainTag extends SeeTag
 		} else {
 			$this->_link = NULL;
 		}
-		parent::tag('@linkplain', $text, $root, $formatter);
+		parent::tag('@linkplain', $text, $root);
 	}
 
 	/** Return true if this Taglet is used in constructor documentation.

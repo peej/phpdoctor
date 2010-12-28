@@ -1,6 +1,6 @@
 <?php
 
-namespace foo\bar;
+namespace PHPDoctor\Tests\foo\bar;
 
 class StandardNamespaceSyntax {
     

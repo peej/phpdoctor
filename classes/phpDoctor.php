@@ -199,13 +199,7 @@ class PHPDoctor
 	 *
 	 * @var str
 	 */
-	var $_formatterName = 'htmlStandardFormatter';
-
-	/** The formatter object.
-	 *
-	 * @var TextFormatter
-	 */
-	var $_formatter = null;
+	var $_formatter = 'htmlStandardFormatter';
 
 	/** Specifies the path to the doclet starting class file. If the doclet class
 	 * is not in a file named <_doclet>/<_doclet>.php then this path should
@@ -331,13 +325,11 @@ class PHPDoctor
 		if (isset($this->_options['doclet_path'])) $this->_docletPath = $this->_options['doclet_path'];
 		else $this->_docletPath = $this->_path.DIRECTORY_SEPARATOR.$this->_docletPath;
 		if (isset($this->_options['taglet_path'])) $this->_tagletPath = $this->_options['taglet_path'];
-		if (isset($this->_options['formatter'])) $this->_formatterName = $this->_options['formatter'];
+		if (isset($this->_options['formatter'])) $this->_formatter = $this->_options['formatter'];
 		if (isset($this->_options['formatter_path'])) $this->_formatterPath = $this->_options['formatter_path'];
 		else $this->_formatterPath = $this->_path.DIRECTORY_SEPARATOR.$this->_formatterPath;
 		
 		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
-		
-		$this->_formatter = $this->getFormatter();
 	}
 	
 	/**
@@ -1144,7 +1136,7 @@ class PHPDoctor
 		if (is_file($docletFile)) { // load doclet
 			$this->message('Loading doclet "'.$this->_doclet.'"');
 			require_once($docletFile);
-			$doclet =& new $this->_doclet($rootDoc);
+			$doclet =& new $this->_doclet($rootDoc, $this->getFormatter());
 		} else {
 			$this->error('Could not find doclet "'.$docletFile.'"');
 		}
@@ -1157,12 +1149,13 @@ class PHPDoctor
 	 */
 	function getFormatter()
     {
-		$formatterFile = $this->fixPath($this->_formatterPath).$this->_formatterName.'.php';
+		$formatterFile = $this->fixPath($this->_formatterPath).$this->_formatter.'.php';
 		if (is_file($formatterFile)) {
 			require_once($formatterFile);
-			return new $this->_formatterName();
+			return new $this->_formatter();
 		} else {
 			$this->error('Could not find formatter "'.$formatterFile.'"');
+			exit;
 		}
 	}
     
@@ -1361,17 +1354,17 @@ class PHPDoctor
 			$tagletFile = $this->makeAbsolutePath($this->fixPath($this->_tagletPath).substr($name, 1).'.php', $this->_path);
 			if (is_file($tagletFile)) { // load taglet for this tag
 				if (!class_exists($class)) require_once($tagletFile);
-				$tag =& new $class($text, $data, $root, $this->_formatter);
+				$tag =& new $class($text, $data, $root);
 				return $tag;
 			} else {
 			    $tagFile = $this->makeAbsolutePath('classes/'.$class.'Tag.php', $this->_path);
 				if (is_file($tagFile)) { // load class for this tag
 					$class .= 'Tag';
 					if (!class_exists($class)) require_once($tagFile);
-					$tag =& new $class($text, $data, $root, $this->_formatter);
+					$tag =& new $class($text, $data, $root);
 					return $tag;
 				} else { // create standard tag
-					$tag =& new tag($name, $text, $root, $this->_formatter);
+					$tag =& new tag($name, $text, $root);
 					return $tag;
 				}
 			}

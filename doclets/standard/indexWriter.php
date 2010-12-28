@@ -126,7 +126,7 @@ class IndexWriter extends HTMLWriter
                 if ($textTag =& $element->tags('@text') && $firstSentenceTags =& $textTag->firstSentenceTags()) {
                     echo '<dd>';
                     foreach ($firstSentenceTags as $firstSentenceTag) {
-                        echo $firstSentenceTag->formattedText();
+                        echo $firstSentenceTag->text();
                     }
                     echo "</dd>\n";
                 }
