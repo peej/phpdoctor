@@ -49,6 +49,7 @@ class TestPHP5 extends DoctorTestCase
 	    $this->assertTrue(strpos($this->output, 'public void PHPDoctor\\Tests\\FileLevel\\aFunctionWithParams(mixed one, mixed two)'));
 	    $this->assertTrue(strpos($this->output, 'public void PHPDoctor\\Tests\\FileLevel\\aFunctionWithTypeHints(int three, string four)'));
 	    $this->assertTrue(strpos($this->output, 'throws myException'));
+	    $this->assertTrue(strpos($this->output, 'throws myInterfaceException'));
 	    $this->assertTrue(strpos($this->output, 'public void PHPDoctor\\Tests\\FileLevel\\functionThatReturnsAReference()'));
 	}
 	

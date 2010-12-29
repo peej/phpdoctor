@@ -236,7 +236,9 @@ interface inheritInterfaceTest {
     var $anInterfaceField;
     
     /**
-     * Test inheriting of interface method doccomments 
+     * Test inheriting of interface method doccomments
+     *
+     * @throws myInterfaceException
      */
     function anInterfaceMethod();
     
