@@ -125,10 +125,10 @@ class TodoWriter extends HTMLWriter
             echo '<table id="todo_class" class="detail">', "\n";
             echo '<tr><th colspan="2" class="title">Todo Classes</th></tr>', "\n";
             foreach($todoClasses as $class) {
-                $textTag =& $class->tags('@text');
+                $todoTag =& $class->tags('@todo');
                 echo '<tr><td class="name"><a href="', $class->asPath(), '">', $class->qualifiedName(), '</a></td>';
                 echo '<td class="description">';
-                if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
                 echo "</td></tr>\n";
             }
             echo "</table>\n\n";
@@ -138,11 +138,11 @@ class TodoWriter extends HTMLWriter
             echo '<table id="todo_field" class="detail">', "\n";
             echo '<tr><th colspan="2" class="title">Todo Fields</th></tr>', "\n";
             foreach ($todoFields as $field) {
-                $textTag =& $field->tags('@text');
+                $todoTag =& $field->tags('@todo');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $field->asPath(), '">', $field->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -153,11 +153,11 @@ class TodoWriter extends HTMLWriter
             echo '<table id="todo_method" class="detail">', "\n";
             echo '<tr><th colspan="2" class="title">Todo Methods</th></tr>', "\n";
             foreach($todoMethods as $method) {
-                $textTag =& $method->tags('@text');
+                $todoTag =& $method->tags('@todo');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $method->asPath(), '">', $method->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -168,11 +168,11 @@ class TodoWriter extends HTMLWriter
             echo '<table id="todo_global" class="detail">', "\n";
             echo '<tr><th colspan="2" class="title">Todo Globals</th></tr>', "\n";
             foreach($todoGlobals as $global) {
-                $textTag =& $global->tags('@text');
+                $todoTag =& $global->tags('@todo');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $global->asPath(), '">', $global->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -183,11 +183,11 @@ class TodoWriter extends HTMLWriter
             echo '<table id="todo_function" class="detail">', "\n";
             echo '<tr><th colspan="2" class="title">Todo Functions</th></tr>', "\n";
             foreach($todoFunctions as $function) {
-                $textTag =& $function->tags('@text');
+                $todoTag =& $function->tags('@todo');
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $function->asPath(), '">', $function->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }

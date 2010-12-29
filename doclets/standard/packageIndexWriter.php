@@ -44,7 +44,8 @@ class PackageIndexWriter extends HTMLWriter
 		if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
 		if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
 		$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-		$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
+		$this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
+		$this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
 
 		ob_start();
 		

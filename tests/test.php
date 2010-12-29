@@ -37,6 +37,7 @@ $fixes = new GroupTest('Bugfixes'); // these tests will work with PHP5 < 5.3
 $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'linefeed.php');
 $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lastline.php');
 $fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'zerovalue.php');
+$fixes->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'todo.php');
 
 $formatters = new GroupTest('Formatters'); // these tests will work with PHP5 < 5.3
 $formatters->addTestFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lists-ul.php');
