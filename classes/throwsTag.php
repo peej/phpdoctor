@@ -71,7 +71,7 @@ class ThrowsTag extends SeeTag
 			$res =  $link;
 		}
 		
-		return $res . ($text ? ' ' . $text : '');
+		return $res . ($text ? ' - ' . $text : '');
 	}
 
 	/** Return true if this Taglet is used in constructor documentation.

@@ -185,7 +185,7 @@ class myException extends Exception { }
 /**
  * This is a function that throws a custom exception
  *
- * @throws myException
+ * @throws myException Some kind of exception occurred
  */
 function customExceptionThrower() { }
 
