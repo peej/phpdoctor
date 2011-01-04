@@ -52,26 +52,13 @@ class ThrowsTag extends SeeTag
 	}
 
 	/** Get value of this tag.
+	 *
+	 * @param Doclet doclet
 	 * @return str
 	 */
-	function text()
+	function text($doclet)
     {
-        $text = $this->_text;
-		$link = $this->_link;
-		$res = '';
-
-		$element =& $this->_resolveLink();
-		if ($element && $this->_parent) {
-			$package =& $this->_parent->containingPackage();
-			$path = str_repeat('../', $package->depth() + 1).$element->asPath();
-			$res = '<a href="'.$path.'">'.$link.'</a>';
-		} elseif (preg_match('/^(https?|ftp):\/\//', $this->_link) === 1) {
-			$res = '<a href="'.$this->_link.'">'.$link.'</a>';
-		} else {
-			$res =  $link;
-		}
-		
-		return $res . ($text ? ' - ' . $text : '');
+		return $this->_linkText($this->_link, $doclet) . ($this->_text ? ' - ' . $this->_text : '');
 	}
 
 	/** Return true if this Taglet is used in constructor documentation.

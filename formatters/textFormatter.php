@@ -43,7 +43,7 @@
             $text = preg_replace("/[ \t]*\n[ \t]*/", "\n", $text);
 			return $text;
         }
-		
+        
     }
     
 ?>

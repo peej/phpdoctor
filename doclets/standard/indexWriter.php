@@ -123,10 +123,10 @@ class IndexWriter extends HTMLWriter
                     }
                     break;
                 }
-                if ($textTag =& $element->tags('@text') && $firstSentenceTags =& $textTag->firstSentenceTags()) {
+                if ($textTag =& $element->tags('@text') && $firstSentenceTags =& $textTag->firstSentenceTags($this->_doclet)) {
                     echo '<dd>';
                     foreach ($firstSentenceTags as $firstSentenceTag) {
-                        echo $firstSentenceTag->text();
+                        echo $firstSentenceTag->text($this->_doclet);
                     }
                     echo "</dd>\n";
                 }

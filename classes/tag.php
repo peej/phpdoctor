@@ -86,9 +86,10 @@ class Tag
 	
 	/** Get the value of the tag as raw data, without any text processing applied.
 	 *
+	 * @param Doclet doclet
 	 * @return str
 	 */
-	function text()
+	function text($doclet)
     {
 		return $this->_text;
 	}
@@ -116,9 +117,9 @@ class Tag
 	 * @return Tag[] Array of tags with inline tags.
 	 * @todo This method does not act as described but should be altered to do so
 	 */
-	function &inlineTags()
+	function &inlineTags($formatter)
     {
-		return $this->_getInlineTags($this->text());
+		return $this->_getInlineTags($this->text($formatter));
 	}
 	
 	/**
@@ -138,25 +139,25 @@ class Tag
 	 * comment
 	 * @todo This method does not act as described but should be altered to do so
 	 */
-	function &firstSentenceTags()
+	function &firstSentenceTags($formatter)
     {
 		$phpdoctor = $this->_root->phpdoctor();
 		$matches = array();
 		
 		if ($phpdoctor->getOption('pearCompat')) {
 			$expression = '/^(.+)(?:\n\n|\.( |\t|\n|<\/p>|<\/?h[1-6]>|<hr))/sU';
-			if (preg_match($expression, $this->text(), $matches)) {
+			if (preg_match($expression, $this->text($formatter), $matches)) {
 				if (isset($matches[2])) {
 					$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
 				} else {
 					$return =& $this->_getInlineTags($matches[1].'.');
 				}
 			} else {
-				$return =& $this->_getInlineTags($this->text().'.');
+				$return =& $this->_getInlineTags($this->text($formatter).'.');
 			}
 		} else {
 		    $expression = '/^(.+)(\.(?: |\t|\n|<\/p>|<\/?h[1-6]>|<hr)|$)/sU';
-			if (preg_match($expression, $this->text(), $matches)) {
+			if (preg_match($expression, $this->text($formatter), $matches)) {
 				$return =& $this->_getInlineTags($matches[1].$matches[2]);
 			} else {
 				$return = array(&$this);

@@ -38,9 +38,11 @@ class InheritDocTag extends Tag
 	}
 	
 	/** Get text from super element
+	 *
+	 * @param TextFormatter formatter
 	 * @return str
 	 */
-	function text()
+	function text($formatter)
     {
 		if ($this->_parent) {
 		    if ($this->_parent->isClass()) {
@@ -50,7 +52,7 @@ class InheritDocTag extends Tag
 		            if ($superClass) {
 		                $textTag = $superClass->tags('@text');
 		                if ($textTag) {
-		                    $text = $textTag->text();
+		                    $text = $textTag->text($formatter);
 		                    if ($text) {
 		                        return $text;
 		                    }
@@ -61,7 +63,7 @@ class InheritDocTag extends Tag
                 foreach ($interfaces as $interface) {
                     $textTag = $interface->tags('@text');
                     if ($textTag) {
-                        $text = $textTag->text();
+                        $text = $textTag->text($formatter);
                         if ($text) {
                             return $text;
                         }
@@ -78,7 +80,7 @@ class InheritDocTag extends Tag
                             if ($superMethod) {
                                 $textTag = $superMethod->tags('@text');
                                 if ($textTag) {
-                                    $text = $textTag->text();
+                                    $text = $textTag->text($formatter);
                                     if ($text) {
                                         return $text;
                                     }
@@ -92,7 +94,7 @@ class InheritDocTag extends Tag
                         if ($superMethod) {
                             $textTag = $superMethod->tags('@text');
                             if ($textTag) {
-                                $text = $textTag->text();
+                                $text = $textTag->text($formatter);
                                 if ($text) {
                                     return $text;
                                 }
@@ -111,7 +113,7 @@ class InheritDocTag extends Tag
                             if ($superField) {
                                 $textTag = $superField->tags('@text');
                                 if ($textTag) {
-                                    $text = $textTag->text();
+                                    $text = $textTag->text($formatter);
                                     if ($text) {
                                         return $text;
                                     }
@@ -125,7 +127,7 @@ class InheritDocTag extends Tag
                         if ($superField) {
                             $textTag = $superField->tags('@text');
                             if ($textTag) {
-                                $text = $textTag->text();
+                                $text = $textTag->text($formatter);
                                 if ($text) {
                                     return $text;
                                 }

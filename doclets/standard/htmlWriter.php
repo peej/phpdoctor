@@ -255,18 +255,18 @@ class HTMLWriter
 				if (is_array($tag)) {
                     $hasText = FALSE;
                     foreach ($tag as $key => $tagFromGroup) {
-                        if ($tagFromGroup->text() != '') {
+                        if ($tagFromGroup->text($this->_doclet) != '') {
                             $hasText = TRUE;
                         }
                     }
                     if ($hasText) {
                         $tagString .= '<dt>'.$tag[0]->displayName().":</dt>\n";
                         foreach ($tag as $tagFromGroup) {
-                            $tagString .= '<dd>'.$tagFromGroup->text()."</dd>\n";
+                            $tagString .= '<dd>'.$tagFromGroup->text($this->_doclet)."</dd>\n";
                         }
                     }
 				} else {
-					$text = $tag->text();
+					$text = $tag->text($this->_doclet);
 					if ($text != '') {
 						$tagString .= '<dt>'.$tag->displayName().":</dt>\n";
 						$tagString .= '<dd>'.$text."</dd>\n";
@@ -292,14 +292,14 @@ class HTMLWriter
 		if ($tag) {
 			$description = '';
 			if ($first) {
-				$tags =& $tag->firstSentenceTags();
+				$tags =& $tag->firstSentenceTags($this->_doclet);
 			} else {
-				$tags =& $tag->inlineTags();
+				$tags =& $tag->inlineTags($this->_doclet);
 			}
             if ($tags) {
 				foreach ($tags as $aTag) {
 					if ($aTag) {
-						$description .= $aTag->text();
+						$description .= $aTag->text($this->_doclet);
 					}
 				}
 			}

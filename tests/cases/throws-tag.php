@@ -17,6 +17,7 @@ class TestThrowsTag extends DoctorTestCase
 		$this->runPhpDoctor();
 		
 		$this->output = $this->readOutputFile('phpdoctor/tests/parser/throwstag.html');
+		#die($this->output);
 	}
 	
 	function testThrowsTagContent() {

@@ -47,6 +47,7 @@
     *     2.  Waffle
     *
     * @package PHPDoctor\Tests
+    * @see http://www.google.com/ Something else somewhere on Google
     */
     class MarkdownFormatTest {
         

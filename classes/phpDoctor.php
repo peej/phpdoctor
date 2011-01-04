@@ -1135,6 +1135,7 @@ class PHPDoctor
 		$docletFile = $this->fixPath($this->_docletPath).$this->_doclet.'/'.$this->_doclet.'.php';
 		if (is_file($docletFile)) { // load doclet
 			$this->message('Loading doclet "'.$this->_doclet.'"');
+			require_once($this->fixPath($this->_docletPath).'/doclet.php');
 			require_once($docletFile);
 			$doclet =& new $this->_doclet($rootDoc, $this->getFormatter());
 		} else {

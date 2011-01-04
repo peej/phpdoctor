@@ -13,11 +13,10 @@
         
         function toFormattedText($text)
         {
-            require_once "markdown.php";
+            require_once 'markdown.php';
             @define('MARKDOWN_EMPTY_ELEMENT_SUFFIX', '>');
             return Markdown($text);
         }
-        
     }
     
 ?>

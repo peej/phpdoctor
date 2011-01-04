@@ -17,6 +17,7 @@ class TestMarkdown extends DoctorTestCase
 		$this->runPhpDoctor();
 		
 		$this->output = $this->readOutputFile('phpdoctor/tests/markdownformattest.html');
+		#var_dump($this->output);
 	}
 	
 	function testListConversion() {
