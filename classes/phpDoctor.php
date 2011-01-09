@@ -1300,6 +1300,7 @@ class PHPDoctor
 			if ($name) {
 				switch ($name) {
 				case 'package': // place current element in package
+				case 'namespace':
 				    if (!$this->_ignorePackageTags) { // unless we're ignoring package tags
 				        $data['package'] = $text;
 				    }
