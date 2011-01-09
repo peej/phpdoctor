@@ -38,7 +38,7 @@ class PackageIndexWriter extends HTMLWriter
 		$phpdoctor =& $this->_doclet->phpdoctor();
 		
 		$this->_sections[0] = array('title' => 'Overview', 'selected' => TRUE);
-		$this->_sections[1] = array('title' => 'Package');
+		$this->_sections[1] = array('title' => 'Namespace');
 		$this->_sections[2] = array('title' => 'Class');
 		//$this->_sections[3] = array('title' => 'Use');
 		if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
@@ -65,7 +65,7 @@ class PackageIndexWriter extends HTMLWriter
 		}
 
 		echo '<table class="title">'."\n";
-		echo '<tr><th colspan="2" class="title">Packages</th></tr>'."\n";
+		echo '<tr><th colspan="2" class="title">Namespaces</th></tr>'."\n";
         $packages =& $rootDoc->packages();
         ksort($packages);
 		foreach($packages as $name => $package) {

@@ -46,7 +46,7 @@ class PackageIndexFrameWriter extends HTMLWriter
 		echo '<li><a href="allitems-frame.html" target="index">All Items</a></li>'."\n";
 		echo "</ul>\n\n";
 		
-		echo "<h1>Packages</h1>\n\n";
+		echo "<h1>Namespaces</h1>\n\n";
 
 		$rootDoc =& $this->_doclet->rootDoc();
 

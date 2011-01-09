@@ -39,7 +39,7 @@ class IndexWriter extends HTMLWriter
 		$rootDoc =& $this->_doclet->rootDoc();
         
         $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-        $this->_sections[1] = array('title' => 'Package');
+        $this->_sections[1] = array('title' => 'Namespace');
         $this->_sections[2] = array('title' => 'Class');
         //$this->_sections[3] = array('title' => 'Use');
         $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
@@ -98,7 +98,7 @@ class IndexWriter extends HTMLWriter
                     $in = 'class <a href="'.$parent->asPath().'">'.$parent->qualifiedName().'</a>';
                 } else {
                     $package =& $element->containingPackage();
-                    $in = 'package <a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a>';
+                    $in = 'namespace <a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a>';
                 }
                 switch (strtolower(get_class($element))) {
                 case 'classdoc':

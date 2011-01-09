@@ -42,7 +42,7 @@ class PackageWriter extends HTMLWriter
 		
 		if ($displayTree) {
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-			$this->_sections[1] = array('title' => 'Package');
+			$this->_sections[1] = array('title' => 'Namespace');
 			$this->_sections[2] = array('title' => 'Class');
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'selected' => TRUE);
@@ -84,19 +84,20 @@ class PackageWriter extends HTMLWriter
 			$this->_depth = $package->depth() + 1;
 
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-			$this->_sections[1] = array('title' => 'Package', 'selected' => TRUE);
+			$this->_sections[1] = array('title' => 'Namespace', 'selected' => TRUE);
 			$this->_sections[2] = array('title' => 'Class');
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($displayTree) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
 			if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
 			$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
+			$this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
+			$this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
             
 			ob_start();
 			
 			echo "<hr>\n\n";
 		
-			echo '<h1>Package ', $package->name(), "</h1>\n\n";
+			echo '<h1>Namespace ', $package->name(), "</h1>\n\n";
 
 			$textTag =& $package->tags('@text');
 			if ($textTag) {
@@ -181,7 +182,7 @@ class PackageWriter extends HTMLWriter
 
 			$textTag =& $package->tags('@text');
 			if ($textTag) {
-				echo '<h1>Package ', $package->name(), " Description</h1>\n\n";
+				echo '<h1>Namespace ', $package->name(), " Description</h1>\n\n";
 				echo '<div class="comment" id="overview_description">'. $this->_processInlineTags($textTag), "</div>\n\n";
 			}
 			
@@ -195,12 +196,14 @@ class PackageWriter extends HTMLWriter
 			if ($displayTree) {
 			
 				$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-				$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html', 'relative' => TRUE);
+				$this->_sections[1] = array('title' => 'Namespace', 'url' => $package->asPath().'/package-summary.html', 'relative' => TRUE);
 				$this->_sections[2] = array('title' => 'Class');
 				//$this->_sections[3] = array('title' => 'Use');
 				$this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html', 'selected' => TRUE, 'relative' => TRUE);
-				$this->_sections[5] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-				$this->_sections[6] = array('title' => 'Index', 'url' => 'index-all.html');
+				if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
+                $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+                $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
+                $this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
 
                 $this->_id = 'tree';
                 

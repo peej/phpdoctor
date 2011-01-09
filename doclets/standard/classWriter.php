@@ -46,7 +46,7 @@ class ClassWriter extends HTMLWriter
 		foreach ($packages as $packageName => $package) {
 
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
+			$this->_sections[1] = array('title' => 'Namespace', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
