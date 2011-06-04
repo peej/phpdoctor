@@ -289,23 +289,24 @@ class HTMLWriter
 	 */
 	function _processInlineTags(&$tag, $first = FALSE)
     {
-		if ($tag) {
-			$description = '';
-			if ($first) {
-				$tags =& $tag->firstSentenceTags($this->_doclet);
-			} else {
-				$tags =& $tag->inlineTags($this->_doclet);
-			}
+        $description = '';
+        if (is_array($tag)) $tag = $tag[0];
+        if (is_object($tag)) {
+            if ($first) {
+                $tags =& $tag->firstSentenceTags($this->_doclet);
+            } else {
+                $tags =& $tag->inlineTags($this->_doclet);
+            }
             if ($tags) {
-				foreach ($tags as $aTag) {
-					if ($aTag) {
-						$description .= $aTag->text($this->_doclet);
-					}
-				}
-			}
+                foreach ($tags as $aTag) {
+                    if ($aTag) {
+                        $description .= $aTag->text($this->_doclet);
+                    }
+                }
+            }
             return $this->_doclet->formatter->toFormattedText($description);
 		}
-		return NULL;
+        return NULL;
 	}
     
 }
