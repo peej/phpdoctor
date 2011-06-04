@@ -53,7 +53,7 @@ class IndexWriter extends HTMLWriter
         
         $methods = array();
         foreach ($classes as $class) {
-            foreach ($class->methods() as $name => $method) {
+            foreach ($class->methods(TRUE) as $name => $method) {
                 $methods[$class->name().'::'.$name] = $method;
             }
         }

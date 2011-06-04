@@ -157,11 +157,22 @@ class ClassDoc extends ProgramElementDoc
     
 	/** Return the methods in this class.
 	 *
+	 * @param bool regularOnly Do not return constructors and destructors
 	 * @return MethodDoc[]
 	 */
-	function &methods($methodName = NULL)
+	function &methods($regularOnly = FALSE)
     {
-		return $this->_methods;
+        if ($regularOnly) {
+            $return = array();
+            foreach ($this->_methods as $method) {
+                if (!$method->isConstructor() && !$method->isDestructor()) {
+                    $return[] = $method;
+                }
+            }
+        } else {
+            $return = $this->_methods;
+        }
+		return $return;
 	}
 
 	/** Return a method in this class.
