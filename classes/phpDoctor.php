@@ -699,7 +699,7 @@ class PHPDoctor
                                     
                                 case T_THROW:
                                 // throws exception
-                                    $className = $this->_getProgramElementName($tokens, $key);
+                                    $className = $this->_getNext($tokens, $key, T_STRING);
                                     $class =& $rootDoc->classNamed($className);
                                     if ($class) {
                                         $ce->setByRef('throws', $class);
@@ -786,8 +786,19 @@ class PHPDoctor
                                             if (isset($currentData['access']) && $currentData['access'] == 'private') $method->makePrivate();
                                             $this->verbose(' is a method of '.get_class($ce).' '.$ce->name());
                                             if ($this->_includeElements($method)) {
+                                                $method->mergeData();
                                                 $ce->addMethod($method);
                                             }
+                                            /*
+                                            if ($name == 'exec') {
+                                                echo "\n", $name, "\n";
+                                                foreach ($method->_parameters as $tagName => $tag) {
+                                                    echo $tagName;
+                                                }
+                                                echo "\n";
+                                                #die;
+                                            }
+                                            //*/
                                         }
                                     }
                                     $currentData = array(); // empty data store
@@ -1321,7 +1332,7 @@ class PHPDoctor
 					$data['static'] = TRUE;
 					break;
 				default: //create tag
-					$name = '@'.$name;
+				    $name = '@'.$name;
 					if (isset($data['tags'][$name])) {
 						if (is_array($data['tags'][$name])) {
 							$data['tags'][$name][] = $this->createTag($name, $text, $data, $root);

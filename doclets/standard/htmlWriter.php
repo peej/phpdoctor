@@ -252,8 +252,8 @@ class HTMLWriter
 		$tagString = '';
 		foreach ($tags as $key => $tag) {
 			if ($key != '@text') {
-				if (is_array($tag)) {
-                    $hasText = FALSE;
+			    if (is_array($tag)) {
+				    $hasText = FALSE;
                     foreach ($tag as $key => $tagFromGroup) {
                         if ($tagFromGroup->text($this->_doclet) != '') {
                             $hasText = TRUE;
@@ -266,8 +266,8 @@ class HTMLWriter
                         }
                     }
 				} else {
-					$text = $tag->text($this->_doclet);
-					if ($text != '') {
+			        $text = $tag->text($this->_doclet);
+			        if ($text != '') {
 						$tagString .= '<dt>'.$tag->displayName().":</dt>\n";
 						$tagString .= '<dd>'.$text."</dd>\n";
 					} elseif ($tag->displayEmpty()) {

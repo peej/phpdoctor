@@ -5,9 +5,11 @@
 class ThrowsTag {
 	
     /**
+     * @param int one
+     * @param str two
      * @throws testException Some kind of exception occurred
      */
-    function throwsTag() {}
+    function throwsTag($one, $two) {}
 
 }
 
