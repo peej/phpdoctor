@@ -282,7 +282,7 @@ class ClassWriter extends HTMLWriter
 					if ($constructor) {
 						echo '<h2 id="detail_method">Constructor Detail</h2>', "\n";
                         $textTag =& $constructor->tags('@text');
-                        $this->_sourceLocation($method);
+                        $this->_sourceLocation($constructor);
                         echo '<h3 id="', $constructor->name(),'()">', $constructor->name(), "</h3>\n";
                         echo '<code class="signature">', $constructor->modifiers(), ' ', $constructor->returnTypeAsString(), ' <strong>';
                         echo $constructor->name(), '</strong>', $constructor->flatSignature();
