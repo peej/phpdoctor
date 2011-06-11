@@ -13,4 +13,7 @@ class ThrowsTag {
 
 }
 
+/**
+ * @package PHPDoctor\Tests\Parser
+ */
 class testException extends Exception {}
