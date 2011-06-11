@@ -21,11 +21,8 @@ class TestThrowsTag extends DoctorTestCase
 	}
 	
 	function testThrowsTagContent() {
-		$this->assertStringContains('<dd><a href="../../../phpdoctor/tests/testexception.html">testException</a> - Some kind of exception occurred</dd>', $this->output, TRUE);
-	}
-	
-	function testParamsTags() {
-		#$this->assertStringContains('<dd><a href="../../../phpdoctor/tests/testexception.html">testException</a> - Some kind of exception occurred</dd>', $this->output, TRUE);
+		$this->assertStringContains('<dt>Throws:</dt>
+<dd><a href="../../../phpdoctor/tests/parser/testexception.html">testException</a> - Some kind of exception occurred</dd>', $this->output, TRUE);
 	}
 	
 }
