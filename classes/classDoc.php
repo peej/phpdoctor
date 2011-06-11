@@ -187,6 +187,38 @@ class ClassDoc extends ProgramElementDoc
         }
         return $return;
 	}
+	
+	/** Return constructor for this class.
+	 *
+	 * @return MethodDoc
+	 */
+	function &constructor()
+    {
+        $return = NULL;
+        foreach ($this->_methods as $method) {
+            if ($method->isConstructor()) {
+                $return =& $method;
+                break;
+            }
+        }
+		return $return;
+	}
+	
+	/** Return destructor for this class.
+	 *
+	 * @return MethodDoc
+	 */
+	function &destructor()
+    {
+        $return = NULL;
+        foreach ($this->_methods as $method) {
+            if ($method->isDestructor()) {
+                $return =& $method;
+                break;
+            }
+        }
+		return $return;
+	}
     
 	/** Return interfaces implemented by this class or interfaces extended by this interface.
 	 *
@@ -286,7 +318,21 @@ class ClassDoc extends ProgramElementDoc
 		}
 	}
     
-
+	/** Return the known subclasses of this class
+	 *
+	 * @return classDoc[]
+	 */
+	function subclasses()
+	{
+	    $return = array();
+	    foreach ($this->_root->classes() as $classDoc) {
+	        if ($classDoc->subclassOf($this)) {
+	            $return[] = $classDoc;
+	        }
+	    }
+	    return $return;
+	}
+	
     /**
      * Merge the details of the superclass with this class.
      * @param str superClassName

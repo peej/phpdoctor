@@ -97,6 +97,22 @@ class ClassWriter extends HTMLWriter
 						echo "</dl>\n\n";
 					}
 					
+					$subclasses =& $class->subclasses();
+					if ($subclasses) {
+						echo "<dl>\n";
+						echo "<dt>All Known Subclasses:</dt>\n";
+						echo '<dd>';
+						foreach ($subclasses as $subclass) {
+						    echo '<a href="', str_repeat('../', $this->_depth), $subclass->asPath(), '">';
+						    if ($subclass->packageName() != $class->packageName()) {
+						        echo $subclass->packageName(), '\\';
+						    }
+						    echo $subclass->name(), '</a> ';
+						}
+						echo "</dd>\n";
+						echo "</dl>\n\n";
+					}
+					
 					echo "<hr>\n\n";
 					
 					if ($class->isInterface()) {
@@ -127,7 +143,8 @@ class ClassWriter extends HTMLWriter
                     ksort($constants);
 					$fields =& $class->fields();
                     ksort($fields);
-					$methods =& $class->methods();
+                    $constructor =& $class->constructor();
+					$methods =& $class->methods(TRUE);
                     ksort($methods);
 
 					if ($constants) {
@@ -176,7 +193,23 @@ class ClassWriter extends HTMLWriter
                             $this->inheritFields($superclass, $rootDoc, $package);
                         }
 					}
-
+					
+					if ($constructor) {
+						echo '<table id="summary_constructor">', "\n";
+						echo '<tr><th colspan="2">Constructor Summary</th></tr>', "\n";
+                        $textTag =& $constructor->tags('@text');
+                        echo "<tr>\n";
+                        echo '<td class="type">', $constructor->modifiers(FALSE), ' ', $constructor->returnTypeAsString(), "</td>\n";
+                        echo '<td class="description">';
+                        echo '<p class="name"><a href="#', $constructor->name(), '()">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
+                        if ($textTag) {
+                            echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+                        }
+                        echo "</td>\n";
+                        echo "</tr>\n";
+                    	echo "</table>\n\n";
+					}
+					
 					if ($methods) {
 						echo '<table id="summary_method">', "\n";
 						echo '<tr><th colspan="2">Method Summary</th></tr>', "\n";
@@ -245,6 +278,23 @@ class ClassWriter extends HTMLWriter
 							echo "<hr>\n\n";
 						}
 					}
+					
+					if ($constructor) {
+						echo '<h2 id="detail_method">Constructor Detail</h2>', "\n";
+                        $textTag =& $constructor->tags('@text');
+                        $this->_sourceLocation($method);
+                        echo '<h3 id="', $constructor->name(),'()">', $constructor->name(), "</h3>\n";
+                        echo '<code class="signature">', $constructor->modifiers(), ' ', $constructor->returnTypeAsString(), ' <strong>';
+                        echo $constructor->name(), '</strong>', $constructor->flatSignature();
+                        echo "</code>\n";
+                        echo '<div class="details">', "\n";
+                        if ($textTag) {
+                            echo $this->_processInlineTags($textTag);
+                        }
+                        $this->_processTags($constructor->tags());
+                        echo "</div>\n\n";
+                        echo "<hr>\n\n";
+                    }
 					
 					if ($methods) {
 						echo '<h2 id="detail_method">Method Detail</h2>', "\n";
