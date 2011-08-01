@@ -14,7 +14,7 @@ class TestConfig extends UnitTestCase
 	
 	function testMakeAbsolutePath() {
 	    
-	    $phpdoctor = new PHPDoctor();
+	    $phpdoctor = new PHPDoctor('cases/ini/parser.ini');
 	    
 	    // regular
 	    $this->assertEqual($phpdoctor->makeAbsolutePath('woo', '/var/yay'), '/var/yay/woo');

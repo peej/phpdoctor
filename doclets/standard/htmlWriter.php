@@ -252,22 +252,22 @@ class HTMLWriter
 		$tagString = '';
 		foreach ($tags as $key => $tag) {
 			if ($key != '@text') {
-				if (is_array($tag)) {
-                    $hasText = FALSE;
+			    if (is_array($tag)) {
+				    $hasText = FALSE;
                     foreach ($tag as $key => $tagFromGroup) {
-                        if ($tagFromGroup->text() != '') {
+                        if ($tagFromGroup->text($this->_doclet) != '') {
                             $hasText = TRUE;
                         }
                     }
                     if ($hasText) {
                         $tagString .= '<dt>'.$tag[0]->displayName().":</dt>\n";
                         foreach ($tag as $tagFromGroup) {
-                            $tagString .= '<dd>'.$tagFromGroup->text()."</dd>\n";
+                            $tagString .= '<dd>'.$tagFromGroup->text($this->_doclet)."</dd>\n";
                         }
                     }
 				} else {
-					$text = $tag->text();
-					if ($text != '') {
+			        $text = $tag->text($this->_doclet);
+			        if ($text != '') {
 						$tagString .= '<dt>'.$tag->displayName().":</dt>\n";
 						$tagString .= '<dd>'.$text."</dd>\n";
 					} elseif ($tag->displayEmpty()) {
@@ -289,40 +289,26 @@ class HTMLWriter
 	 */
 	function _processInlineTags(&$tag, $first = FALSE)
     {
-		if ($tag) {
-			$description = '<p>';
-			if ($first) {
-				$tags =& $tag->firstSentenceTags();
-			} else {
-				$tags =& $tag->inlineTags();
-			}
-			if ($tags) {
-				foreach ($tags as $aTag) {
-					if ($aTag) {
-						$tagText = $aTag->text();
-						$description .= str_replace("\n\n", '</p><p>', $tagText);
-					}
-				}
-			}
-			$description .= '</p>';
+        $description = '';
+        if (is_array($tag)) $tag = $tag[0];
+        if (is_object($tag)) {
             if ($first) {
-                $description = $this->_stripBlockTags($description);
+                $tags =& $tag->firstSentenceTags($this->_doclet);
+            } else {
+                $tags =& $tag->inlineTags($this->_doclet);
             }
-			return $description;
+            if ($tags) {
+                foreach ($tags as $aTag) {
+                    if ($aTag) {
+                        $description .= $aTag->text($this->_doclet);
+                    }
+                }
+            }
+            return $this->_doclet->formatter->toFormattedText($description);
 		}
-		return NULL;
+        return NULL;
 	}
     
-    /** Strip block level HTML tags from a string.
-     *
-     * @param str string
-     * @return str
-     */
-    function _stripBlockTags($string)
-    {
-        return strip_tags($string, '<a><b><strong><i><em><code><q><acronym><abbr><ins><del><kbd><samp><sub><sup><tt><var><big><small>');
-    }
-
 }
 
 ?>

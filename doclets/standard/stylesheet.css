@@ -66,6 +66,10 @@ p {
     margin-left: 10px;
 }
 
+p.list {
+	margin-left: 0px;
+}
+
 h1 {
     font-size: 140%;
     font-family: Arial, Helvetica, sans-serif;

@@ -46,7 +46,7 @@ class ClassWriter extends HTMLWriter
 		foreach ($packages as $packageName => $package) {
 
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
+			$this->_sections[1] = array('title' => 'Namespace', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Class', 'selected' => TRUE);
 			//$this->_sections[3] = array('title' => 'Use');
 			if ($phpdoctor->getOption('tree')) $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath().'/package-tree.html');
@@ -97,6 +97,22 @@ class ClassWriter extends HTMLWriter
 						echo "</dl>\n\n";
 					}
 					
+					$subclasses =& $class->subclasses();
+					if ($subclasses) {
+						echo "<dl>\n";
+						echo "<dt>All Known Subclasses:</dt>\n";
+						echo '<dd>';
+						foreach ($subclasses as $subclass) {
+						    echo '<a href="', str_repeat('../', $this->_depth), $subclass->asPath(), '">';
+						    if ($subclass->packageName() != $class->packageName()) {
+						        echo $subclass->packageName(), '\\';
+						    }
+						    echo $subclass->name(), '</a> ';
+						}
+						echo "</dd>\n";
+						echo "</dl>\n\n";
+					}
+					
 					echo "<hr>\n\n";
 					
 					if ($class->isInterface()) {
@@ -127,7 +143,8 @@ class ClassWriter extends HTMLWriter
                     ksort($constants);
 					$fields =& $class->fields();
                     ksort($fields);
-					$methods =& $class->methods();
+                    $constructor =& $class->constructor();
+					$methods =& $class->methods(TRUE);
                     ksort($methods);
 
 					if ($constants) {
@@ -139,7 +156,7 @@ class ClassWriter extends HTMLWriter
 							echo '<td class="type">', $field->modifiers(FALSE), ' ', $field->typeAsString(), "</td>\n";
 							echo '<td class="description">';
 							echo '<p class="name"><a href="#', $field->name(), '">';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</a></p>';
 							if ($textTag) {
 								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
@@ -159,7 +176,7 @@ class ClassWriter extends HTMLWriter
 							echo '<td class="type">', $field->modifiers(FALSE), ' ', $field->typeAsString(), "</td>\n";
 							echo '<td class="description">';
 							echo '<p class="name"><a href="#', $field->name(), '">';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</a></p>';
 							if ($textTag) {
 								echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
@@ -176,7 +193,23 @@ class ClassWriter extends HTMLWriter
                             $this->inheritFields($superclass, $rootDoc, $package);
                         }
 					}
-
+					
+					if ($constructor) {
+						echo '<table id="summary_constructor">', "\n";
+						echo '<tr><th colspan="2">Constructor Summary</th></tr>', "\n";
+                        $textTag =& $constructor->tags('@text');
+                        echo "<tr>\n";
+                        echo '<td class="type">', $constructor->modifiers(FALSE), ' ', $constructor->returnTypeAsString(), "</td>\n";
+                        echo '<td class="description">';
+                        echo '<p class="name"><a href="#', $constructor->name(), '()">', $constructor->name(), '</a>', $constructor->flatSignature(), '</p>';
+                        if ($textTag) {
+                            echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>'), '</p>';
+                        }
+                        echo "</td>\n";
+                        echo "</tr>\n";
+                    	echo "</table>\n\n";
+					}
+					
 					if ($methods) {
 						echo '<table id="summary_method">', "\n";
 						echo '<tr><th colspan="2">Method Summary</th></tr>', "\n";
@@ -210,9 +243,9 @@ class ClassWriter extends HTMLWriter
 							$this->_sourceLocation($field);
 							echo '<h3 id="', $field->name(),'">', $field->name(), "</h3>\n";
 							echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</strong>';
-							if ($field->value()) echo ' = ', htmlspecialchars($field->value());
+							if (!is_null($field->value())) echo ' = ', htmlspecialchars($field->value());
 							echo "</code>\n";
                             echo '<div class="details">', "\n";
 							if ($textTag) {
@@ -232,9 +265,9 @@ class ClassWriter extends HTMLWriter
 							$this->_sourceLocation($field);
 							echo '<h3 id="', $field->name(),'">', $field->name(), "</h3>\n";
 							echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' <strong>';
-							if (!$field->constantValue()) echo '$';
+							if (is_null($field->constantValue())) echo '$';
 							echo $field->name(), '</strong>';
-							if ($field->value()) echo ' = ', htmlspecialchars($field->value());
+							if (!is_null($field->value())) echo ' = ', htmlspecialchars($field->value());
 							echo "</code>\n";
                             echo '<div class="details">', "\n";
 							if ($textTag) {
@@ -245,6 +278,23 @@ class ClassWriter extends HTMLWriter
 							echo "<hr>\n\n";
 						}
 					}
+					
+					if ($constructor) {
+						echo '<h2 id="detail_method">Constructor Detail</h2>', "\n";
+                        $textTag =& $constructor->tags('@text');
+                        $this->_sourceLocation($constructor);
+                        echo '<h3 id="', $constructor->name(),'()">', $constructor->name(), "</h3>\n";
+                        echo '<code class="signature">', $constructor->modifiers(), ' ', $constructor->returnTypeAsString(), ' <strong>';
+                        echo $constructor->name(), '</strong>', $constructor->flatSignature();
+                        echo "</code>\n";
+                        echo '<div class="details">', "\n";
+                        if ($textTag) {
+                            echo $this->_processInlineTags($textTag);
+                        }
+                        $this->_processTags($constructor->tags());
+                        echo "</div>\n\n";
+                        echo "<hr>\n\n";
+                    }
 					
 					if ($methods) {
 						echo '<h2 id="detail_method">Method Detail</h2>', "\n";

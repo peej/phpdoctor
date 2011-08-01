@@ -44,13 +44,14 @@ class GlobalWriter extends HTMLWriter
 		foreach($packages as $packageName => $package) {
 
 			$this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
-			$this->_sections[1] = array('title' => 'Package', 'url' => $package->asPath().'/package-summary.html');
+			$this->_sections[1] = array('title' => 'Namespace', 'url' => $package->asPath().'/package-summary.html');
 			$this->_sections[2] = array('title' => 'Global', 'selected' => TRUE);
 			//$this->_sections[3] = array('title' => 'Use');
 			$this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
 			if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
 			$this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-			$this->_sections[7] = array('title' => 'Index', 'url' => 'index-all.html');
+			$this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
+			$this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
 		
 			$this->_depth = $package->depth() + 1;
 

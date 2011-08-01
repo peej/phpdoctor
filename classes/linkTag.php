@@ -40,15 +40,16 @@ class LinkTag extends LinkPlainTag
 		$this->_name = '@link';
 	}
 	
-	/** Get value of this tag.
+	/** Get the value of the tag as raw data, without any text processing applied.
 	 *
+	 * @param TextFormatter formatter
 	 * @return str
 	 */
-	function text()
+	function text($formatter)
     {
-		return '<code>'.parent::text().'</code>';
+		return $formatter->asCode(parent::text($formatter));
 	}
-
+	
 	/** Return true if this Taglet is used in constructor documentation.
      *
      * @return bool

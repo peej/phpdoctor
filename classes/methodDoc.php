@@ -123,6 +123,24 @@ class MethodDoc extends ExecutableDoc
 		return $this->_abstract;
 	}
 
+	/** Return true if this class is an constructor.
+	 *
+	 * @return bool
+	 */
+	function isConstructor()
+    {
+		return $this->_name == '__construct';
+	}
+
+	/** Return true if this class is an destructor.
+	 *
+	 * @return bool
+	 */
+	function isDestructor()
+    {
+		return $this->_name == '__destruct';
+	}
+
 }
 
 ?>

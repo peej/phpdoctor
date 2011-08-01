@@ -157,11 +157,22 @@ class ClassDoc extends ProgramElementDoc
     
 	/** Return the methods in this class.
 	 *
+	 * @param bool regularOnly Do not return constructors and destructors
 	 * @return MethodDoc[]
 	 */
-	function &methods($methodName = NULL)
+	function &methods($regularOnly = FALSE)
     {
-		return $this->_methods;
+        if ($regularOnly) {
+            $return = array();
+            foreach ($this->_methods as $method) {
+                if (!$method->isConstructor() && !$method->isDestructor()) {
+                    $return[] = $method;
+                }
+            }
+        } else {
+            $return = $this->_methods;
+        }
+		return $return;
 	}
 
 	/** Return a method in this class.
@@ -175,6 +186,38 @@ class ClassDoc extends ProgramElementDoc
             $return =& $this->_methods[$methodName];
         }
         return $return;
+	}
+	
+	/** Return constructor for this class.
+	 *
+	 * @return MethodDoc
+	 */
+	function &constructor()
+    {
+        $return = NULL;
+        foreach ($this->_methods as $method) {
+            if ($method->isConstructor()) {
+                $return =& $method;
+                break;
+            }
+        }
+		return $return;
+	}
+	
+	/** Return destructor for this class.
+	 *
+	 * @return MethodDoc
+	 */
+	function &destructor()
+    {
+        $return = NULL;
+        foreach ($this->_methods as $method) {
+            if ($method->isDestructor()) {
+                $return =& $method;
+                break;
+            }
+        }
+		return $return;
 	}
     
 	/** Return interfaces implemented by this class or interfaces extended by this interface.
@@ -275,7 +318,21 @@ class ClassDoc extends ProgramElementDoc
 		}
 	}
     
-
+	/** Return the known subclasses of this class
+	 *
+	 * @return classDoc[]
+	 */
+	function subclasses()
+	{
+	    $return = array();
+	    foreach ($this->_root->classes() as $classDoc) {
+	        if ($classDoc->subclassOf($this)) {
+	            $return[] = $classDoc;
+	        }
+	    }
+	    return $return;
+	}
+	
     /**
      * Merge the details of the superclass with this class.
      * @param str superClassName

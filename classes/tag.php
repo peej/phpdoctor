@@ -33,8 +33,8 @@ class Tag
 	 * @var str
 	 */
 	var $_name = NULL;
-
-	/** The value of the tag.
+	
+	/** The value of the tag as raw data, without any text processing applied.
 	 *
 	 * @var str
 	 */
@@ -63,12 +63,7 @@ class Tag
     {
 		$this->_name = $name;
 		$this->_root =& $root;
-		$processedLines = array();
-		foreach (explode("\n", $text) as $line) {
-			//$processedLines[] = trim($line, " \n\r\t\0\x0B*/");
-			$processedLines[] = $line; // keep formatting
- 		}
-		$this->_text = implode("\n", $processedLines);
+		$this->_text = $text;
 	}
 
 	/** Get name of this tag.
@@ -88,12 +83,13 @@ class Tag
     {
 		return ucfirst(substr($this->_name, 1));
 	}
-
-	/** Get value of this tag.
+	
+	/** Get the value of the tag as raw data, without any text processing applied.
 	 *
+	 * @param Doclet doclet
 	 * @return str
 	 */
-	function text()
+	function text($doclet)
     {
 		return $this->_text;
 	}
@@ -121,9 +117,9 @@ class Tag
 	 * @return Tag[] Array of tags with inline tags.
 	 * @todo This method does not act as described but should be altered to do so
 	 */
-	function &inlineTags()
+	function &inlineTags($formatter)
     {
-		return $this->_getInlineTags($this->text());
+		return $this->_getInlineTags($this->text($formatter));
 	}
 	
 	/**
@@ -143,26 +139,26 @@ class Tag
 	 * comment
 	 * @todo This method does not act as described but should be altered to do so
 	 */
-	function &firstSentenceTags()
+	function &firstSentenceTags($formatter)
     {
 		$phpdoctor = $this->_root->phpdoctor();
 		$matches = array();
 		
 		if ($phpdoctor->getOption('pearCompat')) {
-			$expression = '/^(.+)(?:\n\n|\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr))/sU';
-			if (preg_match($expression, $this->text(), $matches)) {
+			$expression = '/^(.+)(?:\n\n|\.( |\t|\n|<\/p>|<\/?h[1-6]>|<hr))/sU';
+			if (preg_match($expression, $this->text($formatter), $matches)) {
 				if (isset($matches[2])) {
 					$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
 				} else {
 					$return =& $this->_getInlineTags($matches[1].'.');
 				}
 			} else {
-				$return =& $this->_getInlineTags($this->text().'.');
+				$return =& $this->_getInlineTags($this->text($formatter).'.');
 			}
 		} else {
-			$expression = '/^(.+)\.( |\t|\r|\n|<\/p>|<\/?h[1-6]>|<hr)/sU';
-			if (preg_match($expression, $this->text(), $matches)) {
-				$return =& $this->_getInlineTags($matches[1].'.'.$matches[2]);
+		    $expression = '/^(.+)(\.(?: |\t|\n|<\/p>|<\/?h[1-6]>|<hr)|$)/sU';
+			if (preg_match($expression, $this->text($formatter), $matches)) {
+				$return =& $this->_getInlineTags($matches[1].$matches[2]);
 			} else {
 				$return = array(&$this);
 			}
@@ -184,7 +180,7 @@ class Tag
 			$inlineTags = NULL;
 			$phpdoctor =& $this->_root->phpdoctor();
 			foreach ($tagStrings as $tag) {
-				if (substr($tag, 0, 1) == '@') {
+			    if (substr($tag, 0, 1) == '@') {
 					$pos = strpos($tag, ' ');
 					if ($pos !== FALSE) {
 						$name = trim(substr($tag, 0, $pos));

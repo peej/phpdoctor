@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor\Doclets\Debug
  */
-class Debug
+class Debug extends Doclet
 {
 
 	/** The depth of processing through the element hierarchy.
@@ -35,10 +35,13 @@ class Debug
 	/** Doclet constructor.
 	 *
 	 * @param RootDoc rootDoc
+	 * @param TextFormatter formatter
 	 */
-	function debug(&$rootDoc)
+	function debug(&$rootDoc, $formatter)
     {
-	
+        
+		$this->formatter = $formatter;
+		
 		foreach ($rootDoc->packages() as $package) {
 			echo '- Namespace ', $package->name(), "\n";
 			$this->fieldDoc($package->globals());
@@ -186,11 +189,11 @@ class Debug
 	
 	function docComment(&$programElement) {
 	    $textTag =& $programElement->tags('@text');
-        if ($textTag && $textTag->text()) {
-            echo $this->showDepth(), '|= ', $textTag->text(), "\n";
-            foreach($textTag->inlineTags() as $inlineTag) {
+        if ($textTag && $textTag->text($this)) {
+            echo $this->showDepth(), '|= ', $textTag->text($this), "\n";
+            foreach($textTag->inlineTags($this) as $inlineTag) {
                 if ($inlineTag->name() != '@text') {
-                    echo $this->showDepth(), '|= ', $inlineTag->displayName(), ': ', $inlineTag->text(), "\n";
+                    echo $this->showDepth(), '|= ', $inlineTag->displayName(), ': ', $inlineTag->text($this), "\n";
                 }
             }
         }

@@ -38,7 +38,7 @@ require('sourceWriter.php');
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class Standard
+class Standard extends Doclet
 {
 
 	/** A reference to the root doc.
@@ -104,14 +104,17 @@ class Standard
 	/** Doclet constructor.
 	 *
 	 * @param RootDoc rootDoc
+	 * @param TextFormatter formatter
 	 */
-	function standard(&$rootDoc)
+	function standard(&$rootDoc, $formatter)
     {
 	
 		// set doclet options
 		$this->_rootDoc =& $rootDoc;
 		$phpdoctor =& $rootDoc->phpdoctor();
 		$options =& $rootDoc->options();
+		
+		$this->formatter = $formatter;
 		
 		if (isset($options['d'])) {
 			$this->_d = $phpdoctor->makeAbsolutePath($options['d'], $phpdoctor->sourcePath());
@@ -293,5 +296,28 @@ class Standard
 	{
 	    return $this->_includeSource;
 	}
+	
+    /**
+     * Format a URL link
+     *
+     * @param str url
+     * @param str text
+     */
+    function formatLink($url, $text)
+    {
+        return '<a href="'.$url.'">'.$text.'</a>';
+    }
+    
+    /**
+     * Format text as a piece of code
+     *
+     * @param str text
+     * @return str
+     */
+    function asCode($text)
+    {
+        return '<code>'.$text.'</code>';
+    }
+    
 }
 ?>

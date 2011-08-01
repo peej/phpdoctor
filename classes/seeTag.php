@@ -65,22 +65,32 @@ class SeeTag extends Tag
 	
 	/** Get value of this tag.
 	 *
+	 * @param Doclet doclet
 	 * @return str
 	 */
-	function text()
+	function text($doclet)
     {
-		if ($this->_text && $this->_text != "\n") {
-			$link = $this->_text;
-		} else {
+        $link = parent::text($doclet);
+		if (!$link || $link == "\n") {
 			$link = $this->_link;
 		}
-		$element =& $this->_resolveLink();
+		return $this->_linkText($link, $doclet);
+	}
+	
+	/**
+	 * Generate the text to go into the seeTag link
+	 *
+	 * @param str link
+	 * @param Doclet doclet
+	 */
+	function _linkText($link, $doclet) {
+	    $element =& $this->_resolveLink();
 		if ($element && $this->_parent) {
 			$package =& $this->_parent->containingPackage();
 			$path = str_repeat('../', $package->depth() + 1).$element->asPath();
-			return '<a href="'.$path.'">'.$link.'</a>';
+			return $doclet->formatLink($path, $link);
 		} elseif (preg_match('/^(https?|ftp):\/\//', $this->_link) === 1) {
-			return '<a href="'.$this->_link.'">'.$link.'</a>';
+			return $doclet->formatLink($this->_link, $link);
 		} else {
 			return $link;
 		}
