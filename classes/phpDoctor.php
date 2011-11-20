@@ -463,12 +463,14 @@ class PHPDoctor
 		) {
 			return $path;
 		} else {
+		    if (substr($path, 0, 2) == './') {
+		        $path = substr($path, 2);
+		    }
 		    $absPath = $this->fixPath($prefix).$path;
 		    $count = 1;
 		    while ($count > 0) {
 		        $absPath = preg_replace('|\w+/\.\./|', '', $absPath, -1, $count);
 		    }
-		    $absPath = str_replace('./', '', $absPath);
 			return $absPath;
 		}
 	}
@@ -807,9 +809,18 @@ class PHPDoctor
                                     break;
         
                                 case T_STRING:
+                                    $constOutsideOfClass = (isset($tokens[$key - 2][1]) && $tokens[$key - 2][1] == 'const');
+
                                     // read global constant
-                                    if ($token[1] == 'define') {// && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
-                                        $const =& new fieldDoc($this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING), $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create constant object
+                                    if ($token[1] == 'define' || $constOutsideOfClass) {// && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
+                                        if (!$constOutsideOfClass) {
+                                            // Current token is define() function.
+                                            $constantName = $this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING);
+                                        } else {
+                                            // Current token is constant's name.
+                                            $constantName = $token[1];
+                                        }
+                                        $const =& new fieldDoc($constantName, $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create constant object
                                         $this->verbose('Found '.get_class($const).': global constant '.$const->name());
                                         $const->set('final', TRUE); // is constant
                                         $value = '';
