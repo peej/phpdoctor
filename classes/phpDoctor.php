@@ -463,12 +463,14 @@ class PHPDoctor
 		) {
 			return $path;
 		} else {
+		    if (substr($path, 0, 2) == './') {
+		        $path = substr($path, 2);
+		    }
 		    $absPath = $this->fixPath($prefix).$path;
 		    $count = 1;
 		    while ($count > 0) {
 		        $absPath = preg_replace('|\w+/\.\./|', '', $absPath, -1, $count);
 		    }
-		    $absPath = str_replace('./', '', $absPath);
 			return $absPath;
 		}
 	}
