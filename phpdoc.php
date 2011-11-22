@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 /*
 PHPDoctor: The PHP Documentation Creator
@@ -39,6 +39,8 @@ require('classes'.DIRECTORY_SEPARATOR.'phpDoctor.php');
 if (!isset($argv[1])) {
     if (isset($_ENV['PHPDoctor'])) {
         $argv[1] = $_ENV['PHPDoctor'];
+    } elseif (is_file(getcwd().'/phpdoctor.ini')) {
+        $argv[1] = getcwd().'/phpdoctor.ini';
     } elseif (is_file('default.ini')) {
         phpDoctor::warning('Using default config file "default.ini"');
         $argv[1] = 'default.ini';
