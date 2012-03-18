@@ -70,18 +70,18 @@ class HTMLWriter
 	 */
 	function _htmlHeader($title)
     {
-	
+
 		$output = $this->_doctype();
 		$output .= '<html lang="en">'."\n";
 		$output .= "<head>\n\n";
-		
+
 		$output .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'."\n\n";
 		$output .= '<meta name="generator" content="PHPDoctor '.$this->_doclet->version().' (http://peej.github.com/phpdoctor/)">'."\n";
 		$output .= '<meta name="when" content="'.gmdate('r').'">'."\n\n";
-		
+
 		$output .= '<link rel="stylesheet" type="text/css" href="'.str_repeat('../', $this->_depth).'stylesheet.css">'."\n";
 		$output .= '<link rel="start" href="'.str_repeat('../', $this->_depth).'overview-summary.html">'."\n\n";
-		
+
 		$output .= '<title>';
 		if ($title) {
 			$output .= $title.' ('.$this->_doclet->windowTitle().')';
@@ -94,7 +94,7 @@ class HTMLWriter
 		return $output;
 
 	}
-    
+
     /** Get the HTML DOCTYPE for this output
      *
      * @return str
@@ -103,7 +103,7 @@ class HTMLWriter
     {
         return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">'."\n\n";
     }
-	
+
 	/** Build the HTML footer.
    *
    * @return str
@@ -124,7 +124,7 @@ class HTMLWriter
 		$output .= $this->_nav($path);
 		return $output;
 	}
-	
+
 	/** Build the HTML shell footer. Includes the end of the <body> section, and
 	 * page footer.
 	 *
@@ -138,7 +138,7 @@ class HTMLWriter
 		$output .= "</body>\n\n";
 		return $output;
 	}
-	
+
 	/** Build the navigation bar
 	 *
 	 * @return str
@@ -188,7 +188,7 @@ class HTMLWriter
 
 		return $output;
 	}
-	
+
 	function _sourceLocation($doc)
 	{
 	    if ($this->_doclet->includeSource()) {
@@ -208,10 +208,10 @@ class HTMLWriter
 	function _write($path, $title, $shell)
     {
 		$phpdoctor =& $this->_doclet->phpdoctor();
-		
+
 		// make directory separators suitable to this platform
 		$path = str_replace('/', DIRECTORY_SEPARATOR, $path);
-		
+
 		// make directories if they don't exist
 		$dirs = explode(DIRECTORY_SEPARATOR, $path);
 		array_pop($dirs);
@@ -225,7 +225,7 @@ class HTMLWriter
                 }
             }
 		}
-		
+
 		// write file
 		$fp = fopen($this->_doclet->destinationPath().$path, 'w');
 		if ($fp) {
@@ -241,7 +241,7 @@ class HTMLWriter
             exit;
 		}
 	}
-	
+
 	/** Format tags for output.
 	 *
 	 * @param Tag[] tags
@@ -280,7 +280,7 @@ class HTMLWriter
             echo "<dl>\n", $tagString, "</dl>\n";
         }
 	}
-	
+
 	/** Convert inline tags into a string for outputting.
 	 *
 	 * @param Tag tag The text tag to process
@@ -308,7 +308,7 @@ class HTMLWriter
 		}
         return NULL;
 	}
-    
+
 }
 
 ?>
