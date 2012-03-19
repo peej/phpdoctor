@@ -11,8 +11,8 @@ class TestParser extends DoctorTestCase
     $this->__construct();
   }
 
-	function __consturct() {
-    parent::__construct('PHP5 parser tests');
+	function __construct() {
+    parent::__construct('Parser tests');
 
 		$this->setIniFile('parser.ini');
 		$this->output = $this->runPhpDoctor();
