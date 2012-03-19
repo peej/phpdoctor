@@ -18,26 +18,37 @@ exec(PHP.' -v', $versionInfo);
 preg_match('/PHP ([0-9]+\.[0-9]+\.[0-9]+)/', $versionInfo[0], $versionInfo);
 define('EXEC_VERSION', $versionInfo[1]);
 
+$selected = array();
 if (TextReporter::inCli()) {
     $reporter = new TextReporter();
+    // take parameters as tests to run
+    while (1 < count($argv)) {
+        $selected[] = array_pop($argv);
+    }
 } else {
     $reporter = new HtmlReporter();
+    // run.php?selected[]=zerovalue&selected[]=lastline
+    if (isset($_GET) && array_key_exists('selected', $_GET)) {
+        $selected = $_GET['selected'];
+    }
 }
 
 // All tests, grouped
 $allTests = array(
-    'Parser' => array('parser.php', 'config.php', 'ignore-package-tags.php', 'use-class-path-as-package.php', 'namespace-syntax.php', 'namespace-name-overlap.php'),
-    'Standard Doclet' => array('standard-doclet.php', 'access.php', 'access-php5.php', 'throws-tag.php'),
+    'Parser' => array('parser', 'config', 'ignore-package-tags', 'use-class-path-as-package', 'namespace-syntax', 'namespace-name-overlap'),
+    'Standard Doclet' => array('standard-doclet', 'access', 'access-php5', 'throws-tag'),
     // these tests will work with PHP5 < 5.3
-    'Bugfixes' => array('linefeed.php', 'lastline.php', 'zerovalue.php', 'todo.php', 'comment-links.php'),
-    'Formatters' => array('lists-ul.php', 'markdown.php')
+    'Bugfixes' => array('linefeed', 'lastline', 'zerovalue', 'todo', 'comment-links'),
+    'Formatters' => array('lists-ul', 'markdown')
 );
 
 $suite = new TestSuite('PHPDoctor');
-foreach ($allTests as $name => $files) {
+foreach ($allTests as $name => $tests) {
     $group = new TestSuite($name);
-    foreach ($files as $file) {
-        $group->addFile(sprintf('tests/cases/%s', $file));
+    foreach ($tests as $test) {
+        if (!$selected || in_array($test, $selected)) {
+            $group->addFile(sprintf('tests/cases/%s.php', $test));
+        }
     }
     $suite->add($group);
 }
