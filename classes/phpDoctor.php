@@ -814,7 +814,7 @@ class PHPDoctor
                                     if ($token[1] == 'define' || ($constStr && $globalCtx)) {
                                         if ($token[1] == 'define') {
                                             // Current token is define() function.
-                                            $constantName = $this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING, 1);
+                                            $constantName = $this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING, 3);
                                         } else {
                                             // Current token is constant's name.
                                             $constantName = $token[1];
