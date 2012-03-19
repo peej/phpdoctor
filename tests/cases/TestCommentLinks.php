@@ -7,7 +7,7 @@ class TestCommentLinks extends DoctorTestCase
 {
   var $output;
 
-	function testCommentLinks() {
+	function TestCommentLinks() {
     $this->__construct();
   }
 

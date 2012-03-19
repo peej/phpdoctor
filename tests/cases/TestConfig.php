@@ -8,7 +8,7 @@ require_once 'classes'.DIRECTORY_SEPARATOR.'phpDoctor.php';
 class TestConfig extends UnitTestCase
 {
 
-	function testConfig() {
+	function TestConfig() {
     $this->__construct();
   }
 

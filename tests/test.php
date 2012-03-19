@@ -29,17 +29,17 @@ if (TextReporter::inCli()) {
     $reporter = new HtmlReporter();
     // run.php?selected[]=zerovalue&selected[]=lastline
     if (isset($_GET) && array_key_exists('selected', $_GET)) {
-        $selected = $_GET['selected'];
+        $selected = (array)$_GET['selected'];
     }
 }
 
 // All tests, grouped
 $allTests = array(
-    'Parser' => array('parser', 'config', 'ignore-package-tags', 'use-class-path-as-package', 'namespace-syntax', 'namespace-name-overlap'),
-    'Standard Doclet' => array('standard-doclet', 'access', 'access-php5', 'throws-tag'),
+    'Base' => array('parser', 'config', 'ignorePackageTags', 'useClassPathAsPackage', 'namespaceSyntax', 'namespaceNameOverlap'),
+    'Standard Doclet' => array('standardDoclet', 'accessLevel', 'accessLevelPHP5', 'throwsTag'),
     // these tests will work with PHP5 < 5.3
-    'Bugfixes' => array('linefeed', 'lastline', 'zerovalue', 'todo', 'comment-links'),
-    'Formatters' => array('lists-ul', 'markdown')
+    'Bugfixes' => array('lineFeed', 'lastLine', 'zeroValue', 'todoTag', 'commentLinks'),
+    'Formatters' => array('listsUL', 'markdown')
 );
 
 $suite = new TestSuite('PHPDoctor');
@@ -47,7 +47,7 @@ foreach ($allTests as $name => $tests) {
     $group = new TestSuite($name);
     foreach ($tests as $test) {
         if (!$selected || in_array($test, $selected)) {
-            $group->addFile(sprintf('tests/cases/%s.php', $test));
+            $group->addFile(sprintf('tests/cases/Test%s.php', ucwords($test)));
         }
     }
     $suite->add($group);

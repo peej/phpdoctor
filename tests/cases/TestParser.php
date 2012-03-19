@@ -3,11 +3,11 @@
 /**
  * @package PHPDoctor\Tests
  */
-class TestPHP5 extends DoctorTestCase
+class TestParser extends DoctorTestCase
 {
   var $output;
 
-	function testPHP5() {
+	function TestParser() {
     $this->__construct();
   }
 

@@ -7,7 +7,7 @@ class TestZeroValue extends DoctorTestCase
 {
   var $output;
 
-	function testZeroValue() {
+	function TestZeroValue() {
     $this->__construct();
   }
 

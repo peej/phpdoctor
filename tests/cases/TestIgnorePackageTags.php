@@ -7,7 +7,7 @@ class TestIgnorePackageTags extends DoctorTestCase
 {
   var $output;
 
-	function testIgnorePackageTags() {
+	function TestIgnorePackageTags() {
     $this->__construct();
   }
 

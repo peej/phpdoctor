@@ -7,7 +7,7 @@ class TestThrowsTag extends DoctorTestCase
 {
   var $output;
 
-	function testThrowsTag() {
+	function TestThrowsTag() {
       $this->__construct();
   }
 

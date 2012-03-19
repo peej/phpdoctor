@@ -7,7 +7,7 @@ class TestListsUl extends DoctorTestCase
 {
   var $output;
 
-	function testListsUl() {
+	function TestListsUl() {
     $this->__construct();
   }
 

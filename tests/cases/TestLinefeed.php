@@ -7,7 +7,7 @@ class TestLinefeed extends DoctorTestCase
 {
   var $src, $cmd;
 
-	function testLinefeed() {
+	function TestLinefeed() {
     $this->__construct();
   }
 

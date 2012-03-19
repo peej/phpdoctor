@@ -6,7 +6,7 @@
 class TestNamespaceSyntax extends DoctorTestCase
 {
 
-	function testNamespaceSyntax() {
+	function TestNamespaceSyntax() {
     $this->__construct();
   }
 

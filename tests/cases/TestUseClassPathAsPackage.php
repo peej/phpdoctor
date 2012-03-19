@@ -7,7 +7,7 @@ class TestUseClassPathAsPackage extends DoctorTestCase
 {
   var $output;
 
-	function testUseClassPathAsPackage() {
+	function TestUseClassPathAsPackage() {
     $this->__construct();
   }
 

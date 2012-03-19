@@ -7,7 +7,7 @@ class TestTodoTag extends DoctorTestCase
 {
   var $output;
 
-	function testTodoTag() {
+	function TestTodoTag() {
     $this->__construct();
   }
 

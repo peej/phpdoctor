@@ -7,7 +7,7 @@ class TestMarkdown extends DoctorTestCase
 {
   var $output;
 
-	function testMarkdown() {
+	function TestMarkdown() {
     $this->__construct();
   }
 

@@ -6,7 +6,7 @@
 class TestStandardDoclet extends DoctorTestCase
 {
 
-	function testStandardDoclet() {
+	function TestStandardDoclet() {
     $this->__construct();
   }
 

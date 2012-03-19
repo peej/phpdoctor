@@ -7,7 +7,7 @@ class TestLastLine extends DoctorTestCase
 {
   var $output;
 
-	function testLastLine() {
+	function TestLastLine() {
     $this->__construct();
   }
 

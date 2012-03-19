@@ -3,23 +3,23 @@
 /**
  * @package PHPDoctor\Tests\Parser
  */
-class TestAccessLevelPHP5 extends DoctorTestCase
+class TestAccessLevel extends DoctorTestCase
 {
   var $output;
 
-	function testAccessLevelPHP5() {
+	function TestAccessLevel() {
     $this->__construct();
   }
 
 	function __construct() {
-    parent::__construct('Access level PHP5 tests');
+    parent::__construct('Access level tests');
 
 		$this->clearOutputDir();
 
-		$this->setIniFile('access-php5.ini');
+		$this->setIniFile('access.ini');
 		$this->runPhpDoctor();
 
-		$this->output = $this->readOutputFile('phpdoctor/tests/parser/accesslevelphp5.html');
+		$this->output = $this->readOutputFile('phpdoctor/tests/parser/accesslevel.html');
 	}
 
 	function testPublicVar() {
