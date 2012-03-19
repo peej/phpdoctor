@@ -99,7 +99,7 @@ class PHPDoctor
 	 * @var str[]
 	 */
 	var $_files = array();
-    
+
 	/** Array of files not to parse.
 	 *
 	 * @var str[]
@@ -226,13 +226,13 @@ class PHPDoctor
 	 * @var str
 	 */
 	var $_currentFilename = NULL;
-	
+
     /** Whether or not to use PEAR compatibility mode for first sentence tags.
      *
      * @var boolean
      */
     var $_pearCompat = FALSE;
-    
+
 	/** Constructor
 	 *
 	 * @param str config The configuration file to use for this run of PHPDoctor
@@ -242,10 +242,10 @@ class PHPDoctor
 
 		// record start time
 		$this->_startTime = $this->_getTime();
-	
+
 		// set the path
 		$this->_path = dirname(dirname(__FILE__));
-		
+
 		// read config file
 		if (is_file($config)) {
 			$this->_options = @parse_ini_file($config);
@@ -257,25 +257,25 @@ class PHPDoctor
 			$this->error('Could not find configuration file "'.$config.'"');
 			exit;
 		}
-		
+
 		// set phpdoctor options
 		if (isset($this->_options['verbose'])) {
 			$this->_verbose = $this->_options['verbose'];
 			$this->verbose('Being verbose');
 		}
 		if (isset($this->_options['quiet'])) $this->_quiet = $this->_options['quiet'];
-        
+
 		if (isset($this->_options['source_path'])) {
             $this->_sourcePath = array();
             foreach (explode(',', $this->_options['source_path']) as $path) {
                 $this->_sourcePath[] = $this->fixPath($path, getcwd());
             }
         }
-        
+
 		if (isset($this->_options['subdirs'])) {
 		    $this->_subdirs = $this->_options['subdirs'];
 		}
-		
+
 		if (isset($this->_options['files'])) {
 			$files = explode(',', $this->_options['files']);
 		} else {
@@ -284,7 +284,7 @@ class PHPDoctor
 		if (isset($this->_options['ignore'])) {
 			$this->_ignore = explode(',', $this->_options['ignore']);
 		}
-		
+
 		$this->verbose('Searching for files to parse...');
         $this->_files = array();
         foreach ($this->_sourcePath as $path) {
@@ -294,11 +294,11 @@ class PHPDoctor
 			$this->error('Could not find any files to parse');
 			exit;
 		}
-        
+
 		if (isset($this->_options['default_package'])) $this->_defaultPackage = $this->_options['default_package'];
 		if (isset($this->_options['use_class_path_as_package'])) $this->_useClassPathAsPackage = $this->_options['use_class_path_as_package'];
 		if (isset($this->_options['ignore_package_tags'])) $this->_ignorePackageTags = $this->_options['ignore_package_tags'];
-		
+
     // use first path element
 		//if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->_sourcePath[0]);
 		//if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->_sourcePath[0]);
@@ -328,10 +328,10 @@ class PHPDoctor
 		if (isset($this->_options['formatter'])) $this->_formatter = $this->_options['formatter'];
 		if (isset($this->_options['formatter_path'])) $this->_formatterPath = $this->_options['formatter_path'];
 		else $this->_formatterPath = $this->_path.DIRECTORY_SEPARATOR.$this->_formatterPath;
-		
+
 		if (isset($this->_options['pear_compat'])) $this->_pearCompat = $this->_options['pear_compat'];
 	}
-	
+
 	/**
 	 * Build a complete list of file to parse. Expand out wildcards and
 	 * traverse directories if asked to.
@@ -341,7 +341,7 @@ class PHPDoctor
 	function _buildFileList($files, $dir)
     {
 		$list = array();
-		
+
 		$dir = realpath($dir);
 		if (!$dir) {
 		    return $list;
@@ -367,7 +367,7 @@ class PHPDoctor
 				$this->error('Could not find file "'.$filename.'"');
 			}
 		}
-		
+
 		if ($this->_subdirs) { // recurse into subdir
 			$globResults = glob($dir.'*', GLOB_ONLYDIR); // get subdirs
 			if ($globResults) {
@@ -387,7 +387,7 @@ class PHPDoctor
 
 		return $list;
 	}
-	
+
 	/**
 	 * Write a message to standard output.
 	 *
@@ -444,7 +444,7 @@ class PHPDoctor
 		$microtime = explode(' ', microtime());
 		return $microtime[0] + $microtime[1];
 	}
-	
+
 	/**
 	 * Turn path into an absolute path using the given prefix?
 	 *
@@ -474,7 +474,7 @@ class PHPDoctor
 			return $absPath;
 		}
 	}
-	
+
 	/**
 	 * Add a trailing slash to a path if it does not have one.
 	 *
@@ -526,7 +526,7 @@ class PHPDoctor
     {
 		return $this->_defaultPackage;
 	}
-	
+
 	/** Return a reference to the set options.
 	 *
 	 * @return str[] An array of strings.
@@ -546,21 +546,21 @@ class PHPDoctor
 		$option = '_'.$option;
 		return $this->$option;
 	}
-	
+
 	/** Parse files into tokens and create rootDoc.
 	 *
 	 * @return RootDoc
 	 */
 	function &parse()
     {
-        
+
 		$rootDoc =& new rootDoc($this);
 		$ii = 0;
 		foreach ($this->_files as $path => $files) {
 		    $this->_sourceIndex = $ii++;
             if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->sourcePath());
             if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->sourcePath());
-    
+
             foreach ($files as $filename) {
                 if ($filename) {
                     $this->message('Reading file "'.$filename.'"');
@@ -568,44 +568,43 @@ class PHPDoctor
                     if ($fileString !== FALSE) {
 						$fileString = str_replace( "\r\n", "\n", $fileString ); // fix Windows line endings
 						$fileString = str_replace( "\r", "\n", $fileString ); // fix ancient Mac line endings
-						
+
                         $this->_currentFilename = $filename;
-                        
+
                         $tokens = token_get_all($fileString);
-                        
+
                         if (!$this->_verbose) echo 'Parsing tokens';
-                        
+
                         /* This array holds data gathered before the type of element is
                         discovered and an object is created for it, including doc comment
                         data. This data is stored in the object once it has been created and
                         then merged into the objects data fields upon object completion. */
                         $currentData = array();
-                        
+
                         $currentPackage = $this->_defaultPackage; // the current package
                         if ($this->_useClassPathAsPackage) { // magic up package name from filepath
                             $currentPackage .= '\\'.str_replace(' ', '\\', ucwords(str_replace(DIRECTORY_SEPARATOR, ' ', substr(dirname($filename), strlen($this->sourcePath()) + 1))));
                         }
                         $defaultPackage = $oldDefaultPackage = $currentPackage;
                         $fileData = array();
-                        
+
                         $currentElement = array(); // stack of element family, current at top of stack
                         $ce =& $rootDoc; // reference to element at top of stack
-                        
+
                         $open_curly_braces = FALSE;
                         $in_parsed_string = FALSE;
-                        
+
                         $counter = 0;
                         $lineNumber = 1;
                         $commentNumber = 0;
-                        
+
                         $numOfTokens = count($tokens);
                         for ($key = 0; $key < $numOfTokens; $key++) {
                             $token = $tokens[$key];
-                            
                             if (!$in_parsed_string && is_array($token)) {
-                                
+
                                 $lineNumber += substr_count($token[1], "\n");
-                                
+
                                 if ($commentNumber == 1 && (
                                     $token[0] == T_CLASS ||
                                     $token[0] == T_INTERFACE ||
@@ -615,9 +614,9 @@ class PHPDoctor
                                     $defaultPackage = $oldDefaultPackage;
                                     $fileData = array();
                                 }
-                                
+
                                 switch ($token[0]) {
-                                
+
                                 case T_COMMENT: // read comment
                                 case T_ML_COMMENT: // and multiline comment (deprecated in newer versions)
                                 case T_DOC_COMMENT: // and catch PHP5 doc comment token too
@@ -633,7 +632,7 @@ class PHPDoctor
                                         }
                                     }
                                     break;
-                                
+
                                 case T_CLASS:
                                 // read class
                                     $class =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create class object
@@ -646,7 +645,7 @@ class PHPDoctor
                                         $currentPackage = $currentData['package'];
                                     }
                                     $class->set('package', $currentPackage);
-                                    
+
                                     $parentPackage =& $rootDoc->packageNamed($class->packageName(), TRUE); // get parent package
                                     $parentPackage->addClass($class); // add class to package
                                     $class->setByRef('parent', $parentPackage); // set parent reference
@@ -656,7 +655,7 @@ class PHPDoctor
                                     }
                                     $ce =& $class;
                                     break;
-                                    
+
                                 case T_INTERFACE:
                                 // read interface
                                     $interface =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create interface object
@@ -670,7 +669,7 @@ class PHPDoctor
                                         $currentPackage = $currentData['package'];
                                     }
                                     $interface->set('package', $currentPackage);
-                                    
+
                                     $parentPackage =& $rootDoc->packageNamed($interface->packageName(), TRUE); // get parent package
                                     $parentPackage->addClass($interface); // add class to package
                                     $interface->setByRef('parent', $parentPackage); // set parent reference
@@ -680,7 +679,7 @@ class PHPDoctor
                                     }
                                     $ce =& $interface;
                                     break;
-        
+
                                 case T_EXTENDS:
                                 // get extends clause
                                     $superClassName = $this->_getProgramElementName($tokens, $key);
@@ -689,7 +688,7 @@ class PHPDoctor
                                         $ce->setTag('@text', $commentTag);
                                     }
                                     break;
-        
+
                                 case T_IMPLEMENTS:
                                 // get implements clause
                                     $interfaceName = $this->_getProgramElementName($tokens, $key);
@@ -698,7 +697,7 @@ class PHPDoctor
                                         $ce->set('interfaces', $interface);
                                     }
                                     break;
-                                    
+
                                 case T_THROW:
                                 // throws exception
                                     $className = $this->_getNext($tokens, $key, T_STRING);
@@ -709,39 +708,39 @@ class PHPDoctor
                                         $ce->set('throws', $className);
                                     }
                                     break;
-        
+
                                 case T_PRIVATE:
                                     $currentData['access'] = 'private';
                                     break;
-                                    
+
                                 case T_PROTECTED:
                                     $currentData['access'] = 'protected';
                                     break;
-                                    
+
                                 case T_PUBLIC:
                                     $currentData['access'] = 'public';
                                     break;
-                                    
+
                                 case T_ABSTRACT:
                                     $currentData['abstract'] = TRUE;
                                     break;
-                                    
+
                                 case T_FINAL:
                                     $currentData['final'] = TRUE;
                                     break;
-                                    
+
                                 case T_STATIC:
                                     $currentData['static'] = TRUE;
                                     break;
-                                    
+
                                 case T_VAR:
                                     $currentData['var'] = 'var';
                                     break;
-                                    
+
                                 case T_CONST:
                                     $currentData['var'] = 'const';
                                     break;
-                                    
+
                                 case T_NAMESPACE:
                                 case T_NS_C:
                                     $namespace = '';
@@ -753,7 +752,7 @@ class PHPDoctor
                                     $currentPackage = $defaultPackage = $oldDefaultPackage = $namespace;
                                     $key--;
                                     break;
-                                    
+
                                 case T_FUNCTION:
                                 // read function
                                     $name = $this->_getProgramElementName($tokens, $key);
@@ -807,18 +806,21 @@ class PHPDoctor
                                     $currentElement[count($currentElement)] =& $method; // re-assign current element
                                     $ce =& $method;
                                     break;
-        
-                                case T_STRING:
-                                    $constOutsideOfClass = (isset($tokens[$key - 2][1]) && $tokens[$key - 2][1] == 'const');
 
+                                case T_STRING:
+                                    $constStr = (isset($tokens[$key - 2][1]) && $tokens[$key - 2][1] == 'const');
+                                    $globalCtx = 'rootdoc' == strtolower(get_class($ce));
                                     // read global constant
-                                    if ($token[1] == 'define' || $constOutsideOfClass) {// && $tokens[$key + 2][0] == T_CONSTANT_ENCAPSED_STRING) {
-                                        if (!$constOutsideOfClass) {
+                                    if ($token[1] == 'define' || ($constStr && $globalCtx)) {
+                                        if ($token[1] == 'define') {
                                             // Current token is define() function.
-                                            $constantName = $this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING);
+                                            $constantName = $this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING, 3);
                                         } else {
                                             // Current token is constant's name.
                                             $constantName = $token[1];
+                                        }
+                                        if (false === $constantName) {
+                                            break;
                                         }
                                         $const =& new fieldDoc($constantName, $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create constant object
                                         $this->verbose('Found '.get_class($const).': global constant '.$const->name());
@@ -867,7 +869,7 @@ class PHPDoctor
                                             $parentPackage->addGlobal($const); // add constant to package
                                         }
                                         $currentData = array(); // empty data store
-                                        
+
                                     // member constant
                                     } elseif (isset($currentData['var']) && $currentData['var'] == 'const') {
                                         do {
@@ -922,7 +924,7 @@ class PHPDoctor
                                             }
                                         } while(isset($tokens[$key]) && $tokens[$key] != ';');
                                         $currentData = array(); // empty data store
-        
+
                                     // function parameter
                                     } elseif (strtolower(get_class($ce)) == 'methoddoc' && $ce->inBody == 0) {
                                         $typehint = NULL;
@@ -971,7 +973,7 @@ class PHPDoctor
                                         $currentData = array(); // empty data store
                                     }
                                     break;
-        
+
                                 case T_VARIABLE:
                                     // read global variable
                                     if (strtolower(get_class($ce)) == 'rootdoc') { // global var, add to package
@@ -1011,10 +1013,10 @@ class PHPDoctor
                                             $parentPackage->addGlobal($global); // add constant to package
                                         }
                                         $currentData = array(); // empty data store
-                                        
+
                                 // read member variable
                                     } elseif (
-                                        (isset($currentData['var']) && $currentData['var'] == 'var') || 
+                                        (isset($currentData['var']) && $currentData['var'] == 'var') ||
                                         (isset($currentData['access']) && ($currentData['access'] == 'public' || $currentData['access'] == 'protected' || $currentData['access'] == 'private'))
                                     ) {
                                         unset($name);
@@ -1064,18 +1066,18 @@ class PHPDoctor
                                             }
                                         } while(isset($tokens[$key]) && $tokens[$key] != ';');
                                         $currentData = array(); // empty data store
-        
+
                                     }
                                     break;
-        
+
                                 case T_CURLY_OPEN:
                                 case T_DOLLAR_OPEN_CURLY_BRACES: // we must catch this so we don't accidently step out of the current block
                                     $open_curly_braces = TRUE;
                                     break;
                                 }
-        
+
                             } else { // primitive tokens
-                            
+
                                 switch ($token) {
                                 case '{':
                                     if (!$in_parsed_string) {
@@ -1121,7 +1123,7 @@ class PHPDoctor
                                     break;
                                 }
                             }
-                            
+
                             $counter++;
                             if ($counter > 99) {
                                 if (!$this->_verbose) echo '.';
@@ -1129,9 +1131,9 @@ class PHPDoctor
                             }
                         }
                         if (!$this->_verbose) echo "\n";
-                        
+
                         $rootDoc->addSource($filename, $fileString, $fileData);
-                        
+
                     } else {
                         $this->error('Could not read file "'.$filename.'"');
                         exit;
@@ -1139,11 +1141,11 @@ class PHPDoctor
                 }
             }
 		}
-        
+
         // add parent data to child elements
         $this->message('Merging superclass data');
         $this->_mergeSuperClassData($rootDoc);
-		
+
 		return $rootDoc;
 	}
 
@@ -1165,7 +1167,7 @@ class PHPDoctor
 		}
 		$this->message('Done ('.round($this->_getTime() - $this->_startTime, 2).' seconds)');
 	}
-    
+
 	/** Creates the formatter and returns it.
 	 *
 	 * @return TextFormatter
@@ -1181,7 +1183,7 @@ class PHPDoctor
 			exit;
 		}
 	}
-    
+
     /**
      * @param rootDoc rootDoc
      * @param str parent
@@ -1219,22 +1221,24 @@ class PHPDoctor
 		}
 		return $one;
 	}
-	
+
 	/**
 	 * Get next token of a certain type from token array
 	 *
 	 * @param str[] tokens Token array to search
 	 * @param int key Key to start searching from
 	 * @param int whatToGet Type of token to look for
+	 * @param int maxDist Optional max distance from key to look at; default is 0 for all.
 	 * @return str Value of found token
 	 */
-	function _getNext(&$tokens, $key, $whatToGet)
+	function _getNext(&$tokens, $key, $whatToGet, $maxDist=0)
     {
+    $start = $key;
 		$key++;
 		if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
 		while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
 			$key++;
-			if (!isset($tokens[$key])) return FALSE;
+			if (!isset($tokens[$key]) || (0 < $maxDist && (($key-$start) > $maxDist))) return FALSE;
 		}
 		return $tokens[$key][1];
 	}
@@ -1257,7 +1261,7 @@ class PHPDoctor
 		}
 		return $tokens[$key][1];
 	}
-	
+
 	/**
 	 * Get the next program element name from the token list
 	 *
@@ -1285,7 +1289,7 @@ class PHPDoctor
         }
         return trim($name);
 	}
-	
+
 	/**
 	 * Process a doc comment into a doc tag array.
 	 *
@@ -1296,26 +1300,26 @@ class PHPDoctor
 	function processDocComment($comment, &$root)
     {
 		if (substr(trim($comment), 0, 3) != '/**') return array(); // not doc comment, abort
-        
+
 		$data = array(
 			'docComment' => $comment,
 			'tags' => array()
 		);
-		
+
 		$explodedComment = preg_split('/\n[ \n\t\/]*\*[ \t]*@/', "\n".$comment);
-		
+
 		preg_match_all('/^[ \t]*[\/*]*\**( ?.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches); // changed; we need the leading whitespace to detect multi-line list entries
 		if (isset($matches[1])) {
 			$txt = implode("\n", $matches[1]);
 			$data['tags']['@text'] = $this->createTag('@text', trim($txt, " \n\t\0\x0B*/"), $data, $root);
 		}
-		
+
 		foreach ($explodedComment as $tag) { // process tags
             // strip whitespace, newlines and asterisks
             $tag = preg_replace('/(^[\s\n\*]+|[\s\*]*\*\/$)/m', ' ', $tag); // fixed: empty comment lines at end of docblock
             $tag = preg_replace('/\n+/', '', $tag);
             $tag = trim($tag);
-			
+
 			$parts = preg_split('/\s+/', $tag);
 			$name = isset($parts[0]) ? array_shift($parts) : $tag;
 			$text = join(' ', $parts);
@@ -1394,7 +1398,7 @@ class PHPDoctor
 			}
 		}
 	}
-	
+
 	/**
 	 * Is an element private and we are including private elements, or element is
 	 * protected and we are including protected elements.
@@ -1419,7 +1423,7 @@ class PHPDoctor
 		}
 		return FALSE;
 	}
-	
+
 	/**
 	 * Does the given element name conform to the format that is used for private
 	 * elements?
@@ -1431,7 +1435,7 @@ class PHPDoctor
 	{
 		return substr($name, 0, 1) == '_';
 	}
-	
+
 }
 
 ?>

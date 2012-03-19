@@ -39,7 +39,7 @@ class RootDoc extends Doc
 	 * @var packageDoc[]
 	 */
 	var $_packages = array();
-	
+
 	/** The parsed contents of the source files
 	 *
 	 * @var str[]
@@ -52,10 +52,10 @@ class RootDoc extends Doc
 	 */
 	function rootDoc(&$phpdoctor)
     {
-	
+
 		// set a reference to application object
 		$this->_phpdoctor =& $phpdoctor;
-		
+
 		$overview = $phpdoctor->getOption('overview');
 		// parse overview file
 		if (isset($overview)) {
@@ -69,9 +69,9 @@ class RootDoc extends Doc
 				$phpdoctor->warning('Could not find overview file "'.$overview.'".');
 			}
 		}
-	
+
 	}
-	
+
 	/** Add a package to this root.
 	 *
 	 * @param PackageDoc package
@@ -80,7 +80,7 @@ class RootDoc extends Doc
     {
 		$this->_packages[$package->name()] =& $package;
 	}
-	
+
 	/** Add a source file to this root.
 	 *
 	 * @param str filename
@@ -93,7 +93,7 @@ class RootDoc extends Doc
 		    $source, $fileData
         );
 	}
-	
+
 	/** Return a reference to the PHPDoctor application object.
 	 *
 	 * @return PHPDoctor.
@@ -120,7 +120,7 @@ class RootDoc extends Doc
     {
 		return $this->_packages;
 	}
-	
+
 	/** Return a reference to the source files to be documented.
 	 *
 	 * @return str[]
@@ -188,7 +188,7 @@ class RootDoc extends Doc
 		ksort($globals);
 		return $globals;
 	}
-	
+
 	/** Return a reference to a packageDoc for the specified package name. If a
 	 * package of the requested name does not exist, this method will create the
 	 * package object, add it to the root and return it.
@@ -223,8 +223,10 @@ class RootDoc extends Doc
             $package = substr($name, 0, $pos);
             $name = substr($name, $pos + 1);
 		}
-		if (isset($package) && isset($this->_packages[$package])) {
+    if (isset($package)) {
+      if (isset($this->_packages[$package])) {
 		    $class =& $this->_packages[$package]->findClass($name);
+      }
 		} else {
             $packages = $this->_packages; // we do this copy so as not to upset the internal pointer of the array outside this scope
             foreach($packages as $packageName => $package) {

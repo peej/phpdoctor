@@ -93,7 +93,7 @@ class Standard extends Doclet
 	 * @var str
 	 */
 	var $_tree = TRUE;
-	
+
 	/** Whether or not to parse the code with GeSHi and include the formatted files
 	 * in the documentation.
 	 *
@@ -108,14 +108,14 @@ class Standard extends Doclet
 	 */
 	function standard(&$rootDoc, $formatter)
     {
-	
+
 		// set doclet options
 		$this->_rootDoc =& $rootDoc;
 		$phpdoctor =& $rootDoc->phpdoctor();
 		$options =& $rootDoc->options();
-		
+
 		$this->formatter = $formatter;
-		
+
 		if (isset($options['d'])) {
 			$this->_d = $phpdoctor->makeAbsolutePath($options['d'], $phpdoctor->sourcePath());
 		} elseif (isset($options['output_dir'])) {
@@ -124,14 +124,14 @@ class Standard extends Doclet
 			$this->_d = $phpdoctor->makeAbsolutePath('apidocs', $phpdoctor->sourcePath());
 		}
 		$this->_d = $phpdoctor->fixPath($this->_d);
-		
+
 		if (is_dir($this->_d)) {
 			$phpdoctor->warning('Output directory already exists, overwriting');
 		} else {
 			mkdir($this->_d);
 		}
 		$phpdoctor->verbose('Setting output directory to "'.$this->_d.'"');
-		
+
 		if (isset($options['windowtitle'])) $this->_windowTitle = $options['windowtitle'];
 		if (isset($options['doctitle'])) $this->_docTitle = $options['doctitle'];
 		if (isset($options['header'])) $this->_header = $options['header'];
@@ -139,7 +139,7 @@ class Standard extends Doclet
 		if (isset($options['bottom'])) $this->_bottom = $options['bottom'];
 
 		if (isset($options['tree'])) $this->_tree = $options['tree'];
-		
+
 		if (isset($options['include_source'])) $this->_includeSource = $options['include_source'];
         if ($this->_includeSource) {
             @include_once 'geshi/geshi.php';
@@ -147,7 +147,7 @@ class Standard extends Doclet
                 $phpdoctor->warning('Could not find GeSHi in "geshi/geshi.php", not pretty printing source');
             }
 		}
-		
+
 		// write frame
 		$frameOutputWriter =& new frameOutputWriter($this);
 
@@ -159,37 +159,37 @@ class Standard extends Doclet
 
 		// write package summaries
 		$packageWriter =& new packageWriter($this);
-		
+
 		// write package frame
 		$packageFrameWriter =& new packageFrameWriter($this);
-        
+
 		// write classes
 		$classWriter =& new classWriter($this);
-		
+
 		// write global functions
 		$functionWriter =& new functionWriter($this);
-		
+
 		// write global variables
 		$globalWriter =& new globalWriter($this);
 
 		// write index
 		$indexWriter =& new indexWriter($this);
-        
+
 		// write deprecated index
 		$deprecatedWriter =& new deprecatedWriter($this);
-		
+
 		// write todo index
 		$todoWriter =& new todoWriter($this);
-		
+
 		// write source files
 		if ($this->_includeSource) {
             $sourceWriter =& new sourceWriter($this);
 		}
-		
+
 		// copy stylesheet
 		$phpdoctor->message('Copying stylesheet');
 		copy($phpdoctor->docletPath().'stylesheet.css', $this->_d.'stylesheet.css');
-	
+
 	}
 
 	/** Return a reference to the root doc.
@@ -200,7 +200,7 @@ class Standard extends Doclet
     {
 		return $this->_rootDoc;
 	}
-	
+
 	/** Return a reference to the application object.
 	 *
 	 * @return PHPDoctor
@@ -213,7 +213,7 @@ class Standard extends Doclet
 	/** Get the destination path to write the doclet output to.
 	 *
 	 * @return str
-	 */	
+	 */
 	function destinationPath()
     {
 		return $this->_d;
@@ -287,7 +287,7 @@ class Standard extends Doclet
 		$phpdoctor =& $this->_rootDoc->phpdoctor();
 		return $phpdoctor->version();
 	}
-	
+
 	/** Should we be outputting the source code?
 	 *
 	 * @return bool
@@ -296,7 +296,7 @@ class Standard extends Doclet
 	{
 	    return $this->_includeSource;
 	}
-	
+
     /**
      * Format a URL link
      *
@@ -307,7 +307,7 @@ class Standard extends Doclet
     {
         return '<a href="'.$url.'">'.$text.'</a>';
     }
-    
+
     /**
      * Format text as a piece of code
      *
@@ -318,6 +318,6 @@ class Standard extends Doclet
     {
         return '<code>'.$text.'</code>';
     }
-    
+
 }
 ?>
