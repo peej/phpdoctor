@@ -814,10 +814,13 @@ class PHPDoctor
                                     if ($token[1] == 'define' || ($constStr && $globalCtx)) {
                                         if ($token[1] == 'define') {
                                             // Current token is define() function.
-                                            $constantName = $this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING);
+                                            $constantName = $this->_getNext($tokens, $key, T_CONSTANT_ENCAPSED_STRING, 1);
                                         } else {
                                             // Current token is constant's name.
                                             $constantName = $token[1];
+                                        }
+                                        if (false === $constantName) {
+                                            break;
                                         }
                                         $const =& new fieldDoc($constantName, $ce, $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create constant object
                                         $this->verbose('Found '.get_class($const).': global constant '.$const->name());
@@ -1225,15 +1228,17 @@ class PHPDoctor
 	 * @param str[] tokens Token array to search
 	 * @param int key Key to start searching from
 	 * @param int whatToGet Type of token to look for
+	 * @param int maxDist Optional max distance from key to look at; default is 0 for all.
 	 * @return str Value of found token
 	 */
-	function _getNext(&$tokens, $key, $whatToGet)
+	function _getNext(&$tokens, $key, $whatToGet, $maxDist=0)
     {
+    $start = $key;
 		$key++;
 		if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
 		while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
 			$key++;
-			if (!isset($tokens[$key])) return FALSE;
+			if (!isset($tokens[$key]) || (0 < $maxDist && (($key-$start) > $maxDist))) return FALSE;
 		}
 		return $tokens[$key][1];
 	}

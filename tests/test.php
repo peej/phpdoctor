@@ -35,7 +35,7 @@ if (TextReporter::inCli()) {
 
 // All tests, grouped
 $allTests = array(
-    'Base' => array('parser', 'config', 'ignorePackageTags', 'useClassPathAsPackage', 'namespaceSyntax', 'namespaceNameOverlap'),
+    'Base' => array('parser', 'config', 'ignorePackageTags', 'useClassPathAsPackage', 'namespaceSyntax', 'namespaceNameOverlap', 'dynamicDefine'),
     'Standard Doclet' => array('standardDoclet', 'accessLevel', 'accessLevelPHP5', 'throwsTag'),
     // these tests will work with PHP5 < 5.3
     'Bugfixes' => array('lineFeed', 'lastLine', 'zeroValue', 'todoTag', 'commentLinks'),
