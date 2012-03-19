@@ -20,8 +20,30 @@ class TestMarkdown extends DoctorTestCase
 		$this->runPhpDoctor();
 
 		$this->output = $this->readOutputFile('phpdoctor/tests/markdownformattest.html');
-		#var_dump($this->output);
 	}
+
+  /**
+   * {@inheritDoc}
+   */
+  public function skip() {
+    if (class_exists('Markdown')) {
+      // assume that is the class we need
+      return;
+    }
+
+    // try to find markdown.php in include path
+    $haveMarkdown = false;
+
+    foreach (explode(PATH_SEPARATOR, get_include_path()) as $path) {
+      if (file_exists($path.'/markdown.php')) {
+        // assume that is what is looks like
+        $haveMarkdown = true;
+        break;
+      }
+    }
+
+    $this->skipIf(!$haveMarkdown, 'Markdown not found');
+  }
 
 	function testListConversion() {
 		// This is actually not the way it should be done, but I'm a bit short of time. So here's just a check that
