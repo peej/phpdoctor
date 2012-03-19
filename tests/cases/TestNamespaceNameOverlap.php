@@ -14,7 +14,7 @@ class TestNamespaceNameOverlap extends DoctorTestCase {
   }
 
   function skip() {
-    $this->skipIf(!version_compare(EXEC_VERSION, '5.3.0', '>='));
+    $this->skipIf(!version_compare(EXEC_VERSION, '5.3.0', '>='), "Requires PHP 5.3");
   }
 
   function test() {
