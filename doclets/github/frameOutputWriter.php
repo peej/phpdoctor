@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/** This generates the index.html file used for presenting the frame-formated
+/** This generates the index.md file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor\Doclets\Standard
@@ -42,18 +42,19 @@ class FrameOutputWriter extends HTMLWriter
 
 <frameset rows="30%,70%">
 
-<frame src="overview-frame.html" name="packagelist">
-<frame src="allitems-frame.html" name="index">
+<frame src="overview-frame.md" name="packagelist">
+<frame src="allitems-frame.md" name="index">
 
 </frameset>
 
-<frame src="overview-summary.html" name="main">
+<frame src="overview-summary.md" name="main">
 
 <noframes>
     <body>
-        <h2>Frame Alert</h2>
-        <p>This document is designed to be viewed using frames. If you see this message, you are using a non-frame-capable browser.<br>
-        Link to <a href="overview-summary.html">Non-frame version</a>.</p>
+        ##Frame Alert##
+        <p>This document is designed to be viewed using frames. If you see this message, you are using a non-frame-capable browser.
+
+        Link to <a href="overview-summary.md">Non-frame version</a>.</p>
     </body>
 </noframes>
 
@@ -63,7 +64,7 @@ END;
 		$this->_output = ob_get_contents();
 		ob_end_clean();
 		
-		$this->_write('index.html', FALSE, FALSE);
+		$this->_write('index.md', FALSE, FALSE);
 	
 	}
     

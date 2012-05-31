@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/** This generates the overview-frame.html file used for displaying the list
+/** This generates the overview-frame.md file used for displaying the list
  * of package links in the upper-left frame in the frame-formatted default
  * output.
  *
@@ -40,13 +40,13 @@ class PackageIndexFrameWriter extends HTMLWriter
 		
 		echo '<body id="frame">', "\n\n";
 		
-		echo '<h1>'.$this->_doclet->getHeader()."</h1>\n\n";
+		echo '# '.$this->_doclet->getHeader()." #\n\n";
 		
 		echo "<ul>\n";
-		echo '<li><a href="allitems-frame.html" target="index">All Items</a></li>'."\n";
+		echo '<li><a href="allitems-frame.md" target="index">All Items</a></li>'."\n";
 		echo "</ul>\n\n";
 		
-		echo "<h1>Namespaces</h1>\n\n";
+		echo "# Namespaces #\n\n";
 
 		$rootDoc =& $this->_doclet->rootDoc();
 
@@ -54,7 +54,7 @@ class PackageIndexFrameWriter extends HTMLWriter
         $packages =& $rootDoc->packages();
         ksort($packages);
 		foreach($packages as $name => $package) {
-			echo '<li><a href="'.$package->asPath().'/package-frame.html" target="index">'.$package->name().'</a></li>'."\n";
+			echo '<li><a href="'.$package->asPath().'/package-frame.md" target="index">'.$package->name().'</a></li>'."\n";
 		}
 		echo "</ul>\n\n";
 		
@@ -63,7 +63,7 @@ class PackageIndexFrameWriter extends HTMLWriter
 		$this->_output = ob_get_contents();
 		ob_end_clean();
 		
-		$this->_write('overview-frame.html', 'Overview', FALSE);
+		$this->_write('overview-frame.md', 'Overview', FALSE);
 	
 	}
 

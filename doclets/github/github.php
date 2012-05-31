@@ -155,19 +155,19 @@ class Github extends Doclet {
         }
 
         // write frame
-        $frameOutputWriter = & new frameOutputWriter($this);
+        //$frameOutputWriter = & new frameOutputWriter($this);
 
         // write overview summary
-        $packageIndexWriter = & new packageIndexWriter($this);
+        //$packageIndexWriter = & new packageIndexWriter($this);
 
         // write package overview frame
-        $packageIndexFrameWriter = & new packageIndexFrameWriter($this);
+        //$packageIndexFrameWriter = & new packageIndexFrameWriter($this);
 
         // write package summaries
         $packageWriter = & new packageWriter($this);
 
         // write package frame
-        $packageFrameWriter = & new packageFrameWriter($this);
+        //$packageFrameWriter = & new packageFrameWriter($this);
 
         // write classes
         $classWriter = & new classWriter($this);
@@ -179,22 +179,22 @@ class Github extends Doclet {
         $globalWriter = & new globalWriter($this);
 
         // write index
-        $indexWriter = & new indexWriter($this);
+//        $indexWriter = & new indexWriter($this);
 
         // write deprecated index
         $deprecatedWriter = & new deprecatedWriter($this);
 
         // write todo index
-        $todoWriter = & new todoWriter($this);
+//        $todoWriter = & new todoWriter($this);
 
-        // write source files
+        /* write source files
         if ($this->_includeSource) {
             $sourceWriter = & new sourceWriter($this);
-        }
+        }*/
 
         // copy stylesheet
-        $phpdoctor->message('Copying stylesheet');
-        copy($phpdoctor->docletPath() . 'stylesheet.css', $this->_d . 'stylesheet.css');
+//        $phpdoctor->message('Copying stylesheet');
+//        copy($phpdoctor->docletPath() . 'stylesheet.css', $this->_d . 'stylesheet.css');
     }
 
     /** Return a reference to the root doc.

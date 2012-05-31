@@ -26,9 +26,9 @@
  */
 class ClassWriter extends HTMLWriter {
 
-    /** Build the class definitons.
+    /**
      *
-     * @param Doclet doclet
+     * @param Doclet $doclet 
      */
     function classWriter(&$doclet) {
 
@@ -88,7 +88,7 @@ class ClassWriter extends HTMLWriter {
                         echo "<dt>All Implemented Interfaces:</dt>\n";
                         echo '<dd>';
                         foreach ($implements as $interface) {
-                            echo '<a href="', str_repeat('../', $this->_depth), $interface->asPath(), '">';
+                            echo '<a href="', $this->getFileBaseURL(), $interface->asPath(), '">';
                             if ($interface->packageName() != $class->packageName()) {
                                 echo $interface->packageName(), '\\';
                             }
@@ -104,7 +104,7 @@ class ClassWriter extends HTMLWriter {
                         echo "<dt>All Known Subclasses:</dt>\n";
                         echo '<dd>';
                         foreach ($subclasses as $subclass) {
-                            echo '<a href="', str_repeat('../', $this->_depth), $subclass->asPath(), '">';
+                            echo '<a href="', $this->getFileBaseURL(), $subclass->asPath(), '">';
                             if ($subclass->packageName() != $class->packageName()) {
                                 echo $subclass->packageName(), '\\';
                             }
@@ -114,7 +114,7 @@ class ClassWriter extends HTMLWriter {
                         echo "</dl>\n\n";
                     }
 
-                    echo "<hr>\n\n";
+                    echo "- - -\n\n";
 
                     if ($class->isInterface()) {
                         echo '<p class="signature">', $class->modifiers(), ' interface **', $class->name(), '**';
@@ -124,7 +124,7 @@ class ClassWriter extends HTMLWriter {
                     if ($class->superclass()) {
                         $superclass = & $rootDoc->classNamed($class->superclass());
                         if ($superclass) {
-                            echo '\nextends <a href="', str_repeat('../', $this->_depth), $superclass->asPath(), '">', $superclass->name(), "</a>\n\n";
+                            echo '\nextends <a href="', $this->getFileBaseURL(), $superclass->asPath(), '">', $superclass->name(), "</a>\n\n";
                         } else {
                             echo '\nextends ', $class->superclass(), "\n\n";
                         }
@@ -138,7 +138,7 @@ class ClassWriter extends HTMLWriter {
 
                     $this->_processTags($class->tags());
 
-                    echo "<hr>\n\n";
+                    echo "- - -\n\n";
 
                     $constants = & $class->constants();
                     ksort($constants);
@@ -239,50 +239,50 @@ class ClassWriter extends HTMLWriter {
                     }
 
                     if ($constants) {
-                        echo '<h2 id="detail_field">Constant Detail</h2>', "\n";
+                        echo '##Constant Detail##', "\n";
                         foreach ($constants as $field) {
                             $textTag = & $field->tags('@text');
                             $type = & $field->type();
                             $this->_sourceLocation($field);
                             echo '<h3 id="', $field->name(), '">', $field->name(), "</h3>\n";
-                            echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' **';
+                            echo "```php\n", $field->modifiers(), ' ', $field->typeAsString(), ' **';
                             if (is_null($field->constantValue()))
                                 echo '$';
                             echo $field->name(), '**';
                             if (!is_null($field->value()))
                                 echo ' = ', htmlspecialchars($field->value());
-                            echo "</code>\n";
+                            echo "```\n";
                             echo '<div class="details">', "\n";
                             if ($textTag) {
                                 echo $this->_processInlineTags($textTag);
                             }
                             $this->_processTags($field->tags());
                             echo "</div>\n\n";
-                            echo "<hr>\n\n";
+                            echo "- - -\n\n";
                         }
                     }
 
                     if ($fields) {
-                        echo '<h2 id="detail_field">Field Detail</h2>', "\n";
+                        echo '##Field Detail##', "\n";
                         foreach ($fields as $field) {
                             $textTag = & $field->tags('@text');
                             $type = & $field->type();
                             $this->_sourceLocation($field);
                             echo '<h3 id="', $field->name(), '">', $field->name(), "</h3>\n";
-                            echo '<code class="signature">', $field->modifiers(), ' ', $field->typeAsString(), ' **';
+                            echo "```php\n", $field->modifiers(), ' ', $field->typeAsString(), ' **';
                             if (is_null($field->constantValue()))
                                 echo '$';
                             echo $field->name(), '**';
                             if (!is_null($field->value()))
                                 echo ' = ', htmlspecialchars($field->value());
-                            echo "</code>\n";
+                            echo "```\n";
                             echo '<div class="details">', "\n";
                             if ($textTag) {
                                 echo $this->_processInlineTags($textTag);
                             }
                             $this->_processTags($field->tags());
                             echo "</div>\n\n";
-                            echo "<hr>\n\n";
+                            echo "- - -\n\n";
                         }
                     }
 
@@ -291,16 +291,16 @@ class ClassWriter extends HTMLWriter {
                         $textTag = & $constructor->tags('@text');
                         $this->_sourceLocation($constructor);
                         echo '<h3 id="', $constructor->name(), '()">', $constructor->name(), "</h3>\n";
-                        echo '<code class="signature">', $constructor->modifiers(), ' ', $constructor->returnTypeAsString(), ' **';
+                        echo "```php\n", $constructor->modifiers(), ' ', $constructor->returnTypeAsString(), ' **';
                         echo $constructor->name(), '**', $constructor->flatSignature();
-                        echo "</code>\n";
+                        echo "```\n";
                         echo '<div class="details">', "\n";
                         if ($textTag) {
                             echo $this->_processInlineTags($textTag);
                         }
                         $this->_processTags($constructor->tags());
                         echo "</div>\n\n";
-                        echo "<hr>\n\n";
+                        echo "- - -\n\n";
                     }
 
                     if ($methods) {
@@ -309,16 +309,16 @@ class ClassWriter extends HTMLWriter {
                             $textTag = & $method->tags('@text');
                             $this->_sourceLocation($method);
                             echo '<h3 id="', $method->name(), '()">', $method->name(), "</h3>\n";
-                            echo '<code class="signature">', $method->modifiers(), ' ', $method->returnTypeAsString(), ' **';
+                            echo "```php\n", $method->modifiers(), ' ', $method->returnTypeAsString(), ' **';
                             echo $method->name(), '**', $method->flatSignature();
-                            echo "</code>\n";
+                            echo "```\n";
                             echo '<div class="details">', "\n";
                             if ($textTag) {
                                 echo $this->_processInlineTags($textTag);
                             }
                             $this->_processTags($method->tags());
                             echo "</div>\n\n";
-                            echo "<hr>\n\n";
+                            echo "- - -\n\n";
                         }
                     }
 
@@ -355,18 +355,18 @@ class ClassWriter extends HTMLWriter {
                 $depth = ++$result[1];
             } else {
                 $output .= $class->superclass() . '\n';
-                $output .= str_repeat('   ', $depth) . ' └─';
+                $output .= str_repeat('    ', $depth) . '*';
                 $depth++;
                 $undefinedClass = TRUE;
             }
         }
         if ($depth > 0 && !$undefinedClass) {
-            $output .= str_repeat('   ', $depth) . ' └─';
+            $output .= str_repeat('    ', $depth) . '*';
         }
         if ($start) {
             $output .= '** ' . $class->name() . ' **\n';
         } else {
-            $output .= '<a href="' . str_repeat('../', $this->_depth) . $class->asPath() . '">' . $class->name() . '</a>\n';
+            $output .= '<a href="' . $this->getFileBaseURL() . $class->asPath() . '">' . $class->name() . '</a>\n';
         }
         return array($output, $depth);
     }
@@ -388,7 +388,7 @@ class ClassWriter extends HTMLWriter {
             echo '<tr><th colspan="2">Fields inherited from ', $element->qualifiedName(), "</th></tr>\n";
             echo '<tr><td>';
             foreach ($fields as $field) {
-                echo '<a href="', str_repeat('../', $this->_depth), $field->asPath(), '">', $field->name(), '</a>';
+                echo '<a href="', $this->getFileBaseURL(), $field->asPath(), '">', $field->name(), '</a>';
                 if (++$foo < $num) {
                     echo ', ';
                 }
@@ -421,7 +421,7 @@ class ClassWriter extends HTMLWriter {
             echo '<tr><th colspan="2">Methods inherited from ', $element->qualifiedName(), "</th></tr>\n";
             echo '<tr><td>';
             foreach ($methods as $method) {
-                echo '<a href="', str_repeat('../', $this->_depth), $method->asPath(), '">', $method->name(), '</a>';
+                echo '<a href="', $this->getFileBaseURL(), $method->asPath(), '">', $method->name(), '</a>';
                 if (++$foo < $num) {
                     echo ', ';
                 }

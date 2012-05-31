@@ -38,14 +38,14 @@ class IndexWriter extends HTMLWriter
         
 		$rootDoc =& $this->_doclet->rootDoc();
         
-        $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
+        $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.md');
         $this->_sections[1] = array('title' => 'Namespace');
         $this->_sections[2] = array('title' => 'Class');
         //$this->_sections[3] = array('title' => 'Use');
-        $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-        if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
-        $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
-        $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
+        $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.md');
+        if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.md');
+        $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.md');
+        $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.md');
         $this->_sections[8] = array('title' => 'Index', 'selected' => TRUE);
         
         $classes =& $rootDoc->classes();
@@ -79,7 +79,7 @@ class IndexWriter extends HTMLWriter
             }
         }
 
-        echo "<hr>\n\n";
+        echo "- - -\n\n";
         
         $first = TRUE;
         foreach ($elements as $element) {
@@ -90,7 +90,7 @@ class IndexWriter extends HTMLWriter
                         echo "</dl>\n";
                     }
                     $first = FALSE;
-                    echo '<h1 id="letter', chr($letter), '">', chr($letter), "</h1>\n";
+                    echo '<h1 id="letter', chr($letter), '">', chr($letter), " #\n";
                     echo "<dl>\n";
                 }
                 $parent =& $element->containingClass();
@@ -98,7 +98,7 @@ class IndexWriter extends HTMLWriter
                     $in = 'class <a href="'.$parent->asPath().'">'.$parent->qualifiedName().'</a>';
                 } else {
                     $package =& $element->containingPackage();
-                    $in = 'namespace <a href="'.$package->asPath().'/package-summary.html">'.$package->name().'</a>';
+                    $in = 'namespace <a href="'.$package->asPath().'/README.md">'.$package->name().'</a>';
                 }
                 switch (strtolower(get_class($element))) {
                 case 'classdoc':
@@ -137,7 +137,7 @@ class IndexWriter extends HTMLWriter
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write('index-all.html', 'Index', TRUE);
+        $this->_write('index-all.md', 'Index', TRUE);
 	
 	}
     

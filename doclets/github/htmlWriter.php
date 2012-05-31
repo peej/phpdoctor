@@ -19,13 +19,23 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/** This generates the index.html file used for presenting the frame-formated
+/** This generates the index.md file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
  * @package PHPDoctor\Doclets\Standard
  */
 class HTMLWriter {
 
+    /**
+     *
+     * @var string
+     */
+    var $_gitHubRepository;
+    /**
+     *
+     * @var string 
+     */
+    var $_gitHubBranch = "master";
     /** The doclet that created this object.
      *
      * @var doclet
@@ -60,131 +70,26 @@ class HTMLWriter {
      */
     function htmlWriter(&$doclet) {
         $this->_doclet = & $doclet;
-    }
-
-    /** Build the HTML header. Includes doctype definition, <html> and <head>
-     * sections, meta data and window title.
-     *
-     * @return str
-     */
-    function _htmlHeader($title) {
-
-        $output = $this->_doctype();
-        $output .= '<html lang="en">' . "\n";
-        $output .= "<head>\n\n";
-
-        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">' . "\n\n";
-        $output .= '<meta name="generator" content="PHPDoctor ' . $this->_doclet->version() . ' (http://peej.github.com/phpdoctor/)">' . "\n";
-        $output .= '<meta name="when" content="' . gmdate('r') . '">' . "\n\n";
-
-        $output .= '<link rel="stylesheet" type="text/css" href="' . str_repeat('../', $this->_depth) . 'stylesheet.css">' . "\n";
-        $output .= '<link rel="start" href="' . str_repeat('../', $this->_depth) . 'overview-summary.html">' . "\n\n";
-
-        $output .= '<title>';
-        if ($title) {
-            $output .= $title . ' (' . $this->_doclet->windowTitle() . ')';
-        } else {
-            $output .= $this->_doclet->windowTitle();
+        
+        $this->_gitHubRepository = $this->_doclet->phpdoctor()->_options['github_repository'];
+        
+        if(isset($this->_doclet->phpdoctor()->_options['github_branch'])){
+            $this->_gitHubBranch = $this->_doclet->phpdoctor()->_options['github_branch'];
         }
-        $output .= "</title>\n\n";
-        $output .= "</head>\n";
-
-        return $output;
     }
-
-    /** Get the HTML DOCTYPE for this output
-     *
-     * @return str
-     */
-    function _doctype() {
-        return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">' . "\n\n";
+    
+    function getFileBaseURL() {
+        return "$this->_gitHubRepository/blob/$this->_gitHubBranch/";
     }
-
-    /** Build the HTML footer.
-     *
-     * @return str
-     */
-    function _htmlFooter() {
-        return '</html>';
-    }
-
-    /** Build the HTML shell header. Includes beginning of the <body> section,
-     * and the page header.
-     *
-     * @return str
-     */
-    function _shellHeader($path) {
-        $output = '<body id="' . $this->_id . '" onload="parent.document.title=document.title;">' . "\n\n";
-        $output .= $this->_nav($path);
-        return $output;
-    }
-
-    /** Build the HTML shell footer. Includes the end of the <body> section, and
-     * page footer.
-     *
-     * @return str
-     */
-    function _shellFooter($path) {
-        $output = $this->_nav($path);
-        $output .= "<hr>\n\n";
-        $output .= '<p id="footer">' . $this->_doclet->bottom() . '</p>' . "\n\n";
-        $output .= "</body>\n\n";
-        return $output;
-    }
-
-    /** Build the navigation bar
-     *
-     * @return str
-     */
-    function _nav($path) {
-        $output = '<div class="header">' . "\n";
-        $output .= '<h1>' . $this->_doclet->getHeader() . "</h1>\n";
-        if ($this->_sections) {
-            $output .= "<ul>\n";
-            foreach ($this->_sections as $section) {
-                if (isset($section['selected']) && $section['selected']) {
-                    $output .= '<li class="active">' . $section['title'] . "</li>\n";
-                } else {
-                    if (isset($section['url'])) {
-                        $output .= '<li><a href="' . str_repeat('../', $this->_depth) . $section['url'] . '">' . $section['title'] . "</a></li>\n";
-                    } else {
-                        $output .= '<li>' . $section['title'] . '</li>';
-                    }
-                }
-            }
-            $output .= "</ul>\n";
-        }
-        $output .= "</div>\n\n";
-
-        $output .= '<div class="small_links">' . "\n";
-        $output .= '<a href="' . str_repeat('../', $this->_depth) . 'index.html" target="_top">Frames</a>' . "\n";
-        $output .= '<a href="' . str_repeat('../', $this->_depth) . $path . '" target="_top">No frames</a>' . "\n";
-        $output .= "</div>\n";
-        $thisClass = strtolower(get_class($this));
-        if ($thisClass == 'classwriter') {
-            $output .= '<div class="small_links">' . "\n";
-            $output .= 'Summary: <a href="#summary_field">Field</a> | <a href="#summary_method">Method</a> | <a href="#summary_constr">Constr</a>' . "\n";
-            $output .= 'Detail: <a href="#detail_field">Field</a> | <a href="#detail_method">Method</a> | <a href="#summary_constr">Constr</a>' . "\n";
-            $output .= "</div>\n";
-        } elseif ($thisClass == 'functionwriter') {
-            $output .= '<div class="small_links">' . "\n";
-            $output .= 'Summary: <a href="#summary_function">Function</a>' . "\n";
-            $output .= 'Detail: <a href="#detail_function">Function</a>' . "\n";
-            $output .= "</div>\n";
-        } elseif ($thisClass == 'globalwriter') {
-            $output .= '<div class="small_links">' . "\n";
-            $output .= 'Summary: <a href="#summary_global">Global</a>' . "\n";
-            $output .= 'Detail: <a href="#detail_global">Global</a>' . "\n";
-            $output .= "</div>\n";
-        }
-
-        return $output;
+    
+    function getDirBaseURL() {
+        return "$this->_gitHubRepository/tree/$this->_gitHubBranch/";
     }
 
     function _sourceLocation($doc) {
         if ($this->_doclet->includeSource()) {
-            $url = strtolower(str_replace(DIRECTORY_SEPARATOR, '/', $doc->sourceFilename()));
-            echo '<a href="', str_repeat('../', $this->_depth), 'source/', $url, '.html#line', $doc->sourceLine(), '" class="location">', $doc->location(), "</a>\n\n";
+            $url = str_replace(DIRECTORY_SEPARATOR, '/', $doc->sourceFilename());
+            echo '<a href="', $this->getFileBaseURL(), 'source/', $url, '.md#line', $doc->sourceLine(), '" class="location">', $doc->location(), "</a>\n\n";
         } else {
             echo '<div class="location">', $doc->location(), "</div>\n";
         }
@@ -220,13 +125,13 @@ class HTMLWriter {
         $fp = fopen($this->_doclet->destinationPath() . $path, 'w');
         if ($fp) {
             $phpdoctor->message('Writing "' . $path . '"');
-            fwrite($fp, $this->_htmlHeader($title));
-            if ($shell)
-                fwrite($fp, $this->_shellHeader($path));
+//            fwrite($fp, $this->_htmlHeader($title));
+//            if ($shell)
+//                fwrite($fp, $this->_shellHeader($path));
             fwrite($fp, $this->_output);
-            if ($shell)
-                fwrite($fp, $this->_shellFooter($path));
-            fwrite($fp, $this->_htmlFooter());
+//            if ($shell)
+//                fwrite($fp, $this->_shellFooter($path));
+//            fwrite($fp, $this->_htmlFooter());
             fclose($fp);
         } else {
             $phpdoctor->error('Could not write "' . $this->_doclet->destinationPath() . $path . '"');

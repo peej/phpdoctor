@@ -36,15 +36,15 @@ class TodoWriter extends HTMLWriter
 		
 		$rootDoc =& $this->_doclet->rootDoc();
 
-        $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.html');
+        $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.md');
         $this->_sections[1] = array('title' => 'Namespace');
         $this->_sections[2] = array('title' => 'Class');
         //$this->_sections[3] = array('title' => 'Use');
-        $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.html');
-        if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.html');
-        $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.html');
+        $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.md');
+        if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.md');
+        $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.md');
         $this->_sections[7] = array('title' => 'Todo', 'selected' => TRUE);
-        $this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
+        $this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.md');
         
         $todoClasses = array();
         $classes =& $rootDoc->classes();
@@ -94,14 +94,14 @@ class TodoWriter extends HTMLWriter
         
         ob_start();
         
-        echo "<hr>\n\n";
+        echo "- - -\n\n";
         
-        echo '<h1>Todo</h1>';
+        echo '# Todo #';
 
-        echo "<hr>\n\n";
+        echo "- - -\n\n";
         
         if ($todoClasses || $todoFields || $todoMethods || $todoGlobals || $todoFunctions) {
-            echo "<h2>Contents</h2>\n";
+            echo "##Contents##\n";
             echo "<ul>\n";
             if ($todoClasses) {
                 echo '<li><a href="#todo_class">Todo Classes</a></li>';
@@ -128,7 +128,7 @@ class TodoWriter extends HTMLWriter
                 $todoTag =& $class->tags('@todo');
                 echo '<tr><td class="name"><a href="', $class->asPath(), '">', $class->qualifiedName(), '</a></td>';
                 echo '<td class="description">';
-                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b>**<u><em>');
                 echo "</td></tr>\n";
             }
             echo "</table>\n\n";
@@ -142,7 +142,7 @@ class TodoWriter extends HTMLWriter
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $field->asPath(), '">', $field->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b>**<u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -157,7 +157,7 @@ class TodoWriter extends HTMLWriter
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $method->asPath(), '">', $method->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b>**<u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -172,7 +172,7 @@ class TodoWriter extends HTMLWriter
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $global->asPath(), '">', $global->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b>**<u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -187,7 +187,7 @@ class TodoWriter extends HTMLWriter
                 echo "<tr>\n";
                 echo '<td class="name"><a href="', $function->asPath(), '">', $function->qualifiedName(), "</a></td>\n";
                 echo '<td class="description">';
-                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b><strong><u><em>');
+                if ($todoTag) echo strip_tags($this->_processInlineTags($todoTag, TRUE), '<a><b>**<u><em>');
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -197,7 +197,7 @@ class TodoWriter extends HTMLWriter
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write('todo-list.html', 'Todo', TRUE);
+        $this->_write('todo-list.md', 'Todo', TRUE);
 	
 	}
   

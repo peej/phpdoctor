@@ -5,3 +5,4 @@ tests/cases/tmp
 doclets/standard/geshi
 *.komodoproject
 *.komodotools
+/nbproject/private/
