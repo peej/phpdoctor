@@ -1,86 +1,79 @@
 <?php
+
 /*
-PHPDoctor: The PHP Documentation Creator
-Copyright (C) 2005 Paul James <paul@peej.co.uk>
+  PHPDoctor: The PHP Documentation Creator
+  Copyright (C) 2005 Paul James <paul@peej.co.uk>
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /** This generates the element index.
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class IndexWriter extends HTMLWriter
-{
+class IndexWriter extends HTMLWriter {
 
-	/** Build the element index.
-	 *
-	 * @param Doclet doclet
-	 */
-	function indexWriter(&$doclet)
-    {
-	
-		parent::HTMLWriter($doclet);
-		
-		//$this->_id = 'definition';
-        
-		$rootDoc =& $this->_doclet->rootDoc();
-        
-        $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.md');
-        $this->_sections[1] = array('title' => 'Namespace');
-        $this->_sections[2] = array('title' => 'Class');
-        //$this->_sections[3] = array('title' => 'Use');
-        $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.md');
-        if ($doclet->includeSource()) $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.md');
-        $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.md');
-        $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.md');
-        $this->_sections[8] = array('title' => 'Index', 'selected' => TRUE);
-        
-        $classes =& $rootDoc->classes();
-        if($classes == NULL) $classes = array();
-        
+    /** Build the element index.
+     *
+     * @param Doclet doclet
+     */
+    function indexWriter(&$doclet) {
+
+        parent::HTMLWriter($doclet);
+
+        //$this->_id = "definition";
+
+        $rootDoc = & $this->_doclet->rootDoc();
+
+        $classes = & $rootDoc->classes();
+        if ($classes == NULL)
+            $classes = array();
+
         $methods = array();
         foreach ($classes as $class) {
             foreach ($class->methods(TRUE) as $name => $method) {
-                $methods[$class->name().'::'.$name] = $method;
+                $methods[$class->name() . "::" . $name] = $method;
             }
         }
-        if($methods == NULL) $methods = array();
-        
-        $functions =& $rootDoc->functions();
-        if($functions == NULL) $functions = array();
-        
-        $globals =& $rootDoc->globals();
-        if($globals == NULL) $globals = array();
-        
+        if ($methods == NULL)
+            $methods = array();
+
+        $functions = & $rootDoc->functions();
+        if ($functions == NULL)
+            $functions = array();
+
+        $globals = & $rootDoc->globals();
+        if ($globals == NULL)
+            $globals = array();
+
         $elements = array_merge($classes, $methods, $functions, $globals);
-        uasort($elements, array($this, 'compareElements'));
-        
+        uasort($elements, array($this, "compareElements"));
+
         ob_start();
-        
+
         $letter = 64;
         foreach ($elements as $name => $element) {
             $firstChar = strtoupper(substr($element->name(), 0, 1));
             if (is_object($element) && $firstChar != chr($letter)) {
                 $letter = ord($firstChar);
-                echo '<a href="#letter', chr($letter), '">', chr($letter), "</a>\n";
+                echo "<a href=\"#letter", chr($letter), "\">", chr($letter), "</a>\n";
             }
         }
 
         echo "- - -\n\n";
-        
+
         $first = TRUE;
         foreach ($elements as $element) {
             if (is_object($element)) {
@@ -90,41 +83,41 @@ class IndexWriter extends HTMLWriter
                         echo "</dl>\n";
                     }
                     $first = FALSE;
-                    echo '<h1 id="letter', chr($letter), '">', chr($letter), " #\n";
+                    echo "<h1 id=\"letter", chr($letter), "\">", chr($letter), "#\n";
                     echo "<dl>\n";
                 }
-                $parent =& $element->containingClass();
-                if ($parent && strtolower(get_class($parent)) != 'rootdoc') {
-                    $in = 'class <a href="'.$parent->asPath().'">'.$parent->qualifiedName().'</a>';
+                $parent = & $element->containingClass();
+                if ($parent && strtolower(get_class($parent)) != "rootdoc") {
+                    $in = "class <a href=\"" . $this->_asPath($parent) . "\">" . $parent->qualifiedName() . "</a>";
                 } else {
-                    $package =& $element->containingPackage();
-                    $in = 'namespace <a href="'.$package->asPath().'/README.md">'.$package->name().'</a>';
+                    $package = & $element->containingPackage();
+                    $in = "namespace <a href=\"" . $package->asPath() . "/README.md\">" . $package->name() . "</a>";
                 }
                 switch (strtolower(get_class($element))) {
-                case 'classdoc':
-                    if ($element->isOrdinaryClass()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Class in ', $in, "</dt>\n";
-                    } elseif ($element->isInterface()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Interface in ', $in, "</dt>\n";
-                    } elseif ($element->isException()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Exception in ', $in, "</dt>\n";
-                    }
-                    break;
-                case 'methoddoc':
-                    if ($element->isMethod()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Method in ', $in, "</dt>\n";
-                    } elseif ($element->isFunction()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Function in ', $in, "</dt>\n";
-                    }
-                    break;
-                case 'fielddoc':
-                    if ($element->isGlobal()) {
-                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Global in ', $in, "</dt>\n";
-                    }
-                    break;
+                    case "classdoc":
+                        if ($element->isOrdinaryClass()) {
+                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Class in ", $in, "</dt>\n";
+                        } elseif ($element->isInterface()) {
+                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Interface in ", $in, "</dt>\n";
+                        } elseif ($element->isException()) {
+                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Exception in ", $in, "</dt>\n";
+                        }
+                        break;
+                    case "methoddoc":
+                        if ($element->isMethod()) {
+                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Method in ", $in, "</dt>\n";
+                        } elseif ($element->isFunction()) {
+                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Function in ", $in, "</dt>\n";
+                        }
+                        break;
+                    case "fielddoc":
+                        if ($element->isGlobal()) {
+                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Global in ", $in, "</dt>\n";
+                        }
+                        break;
                 }
-                if ($textTag =& $element->tags('@text') && $firstSentenceTags =& $textTag->firstSentenceTags($this->_doclet)) {
-                    echo '<dd>';
+                if ($textTag = & $element->tags("@text") && $firstSentenceTags = & $textTag->firstSentenceTags($this->_doclet)) {
+                    echo "<dd>";
                     foreach ($firstSentenceTags as $firstSentenceTag) {
                         echo $firstSentenceTag->text($this->_doclet);
                     }
@@ -133,16 +126,14 @@ class IndexWriter extends HTMLWriter
             }
         }
         echo "</dl>\n";
-                
+
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write('index-all.md', 'Index', TRUE);
-	
-	}
-    
-    function compareElements($element1, $element2)
-    {
+        $this->_write("index-all.md", "Index", TRUE);
+    }
+
+    function compareElements($element1, $element2) {
         $e1 = strtolower($element1->name());
         $e2 = strtolower($element2->name());
         if ($e1 == $e2) {

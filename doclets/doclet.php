@@ -34,7 +34,7 @@ class Doclet
      */
     function formatLink($url, $text)
     {
-        return $text.' ('.$url.')';
+        return $text." (".$url.")";
     }
     
     /**

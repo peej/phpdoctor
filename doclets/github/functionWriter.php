@@ -33,7 +33,7 @@ class FunctionWriter extends HTMLWriter {
 
         parent::HTMLWriter($doclet);
 
-        $this->_id = 'definition';
+        $this->_id = "definition";
 
         $rootDoc = & $this->_doclet->rootDoc();
 
@@ -41,25 +41,13 @@ class FunctionWriter extends HTMLWriter {
         ksort($packages);
 
         foreach ($packages as $packageName => $package) {
-
-            $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.md');
-            $this->_sections[1] = array('title' => 'Namespace', 'url' => $package->asPath() . '/README.md');
-            $this->_sections[2] = array('title' => 'Function', 'selected' => TRUE);
-            //$this->_sections[3] = array('title' => 'Use');
-            $this->_sections[4] = array('title' => 'Tree', 'url' => $package->asPath() . '/package-tree.md');
-            if ($doclet->includeSource())
-                $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.md');
-            $this->_sections[6] = array('title' => 'Deprecated', 'url' => 'deprecated-list.md');
-            $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.md');
-            $this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.md');
-
             $this->_depth = $package->depth() + 1;
 
             ob_start();
 
             echo "- - -\n\n";
 
-            echo "# Functions #\n\n";
+            echo "#Functions#\n\n";
 
             echo "- - -\n\n";
 
@@ -67,31 +55,30 @@ class FunctionWriter extends HTMLWriter {
 
             if ($functions) {
                 ksort($functions);
-                echo '<table id="summary_function" class="title">', "\n";
-                echo '<tr><th colspan="2" class="title">Function Summary</th></tr>', "\n";
+                echo "<table id=\"summary_function\" class=\"title\">", "\n";
+                echo "<tr><th colspan=\"2\" class=\"title\">Function Summary</th></tr>", "\n";
                 foreach ($functions as $function) {
-                    $textTag = & $function->tags('@text');
+                    $textTag = & $function->tags("@text");
                     echo "<tr>\n";
-                    echo '<td class="type">', $function->modifiers(FALSE), ' ', $function->returnTypeAsString(), "</td>\n";
-                    echo '<td class="description">';
-                    echo '<p class="name"><a href="#', $function->name(), '()">', $function->name(), '</a>', $function->flatSignature(), '</p>';
+                    echo "<td>", $this->_methodSignature($function), "</td>\n";
+                    echo "<td class=\"description\">";
+                    echo "<p class=\"name\"><a href=\"#{$function->name()}\">", $function->name(), "</a>", $this->_flatSignature($function), "</p>";
                     if ($textTag) {
-                        echo '<p class="description">', strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b>**<u><em>'), '</p>';
+                        echo "<p class=\"description\">", strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>"), "</p>";
                     }
                     echo "</td>\n";
                     echo "</tr>\n";
                 }
                 echo "</table>\n\n";
 
-                echo '<h2 id="detail_function">Function Detail</h2>', "\n";
+                echo "<h2 id=\"detail_function\">Function Detail</h2>", "\n";
                 foreach ($functions as $function) {
-                    $textTag = & $function->tags('@text');
+                    $textTag = & $function->tags("@text");
                     $this->_sourceLocation($function);
-                    echo '<h3 id="', $function->name(), '()">', $function->name(), "</h3>\n";
-                    echo "```php\n", $function->modifiers(), ' ', $function->returnTypeAsString(), ' **';
-                    echo $function->name(), '**', $function->flatSignature();
-                    echo "```\n";
-                    echo '<div class="details">', "\n";
+                    echo "<h3 id=\"", $function->name(), "()\">", $function->name(), "</h3>\n";
+                    echo $this->_methodSignature($function);
+                    echo " {$function->name()} {$this->_flatSignature($function)}\n\n";
+                    echo "<div class=\"details\">\n";
                     if ($textTag) {
                         echo $this->_processInlineTags($textTag), "\n";
                     }
@@ -104,7 +91,7 @@ class FunctionWriter extends HTMLWriter {
             $this->_output = ob_get_contents();
             ob_end_clean();
 
-            $this->_write($package->asPath() . '/package-functions.md', 'Functions', TRUE);
+            $this->_write($package->asPath() . "/package-functions.md", "Functions", TRUE);
         }
     }
 

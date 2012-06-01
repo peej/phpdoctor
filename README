@@ -12,8 +12,10 @@ DESCRIPTION
 
 WHAT IS DIFFERENT FROM THE ORIGINAL
         This fork is to add doclets, the first one will be a doclet that outputs 
-        markdown documentation which can be uploaded to Github and be read from the
+        markdown documentation which can be uploaded to Github and can be read from the
         github source browser.
+
+        Here is a sample output: https://github.com/JeyDotC/Hirudo-docs/tree/master/hirudo/core
 	
 REQUIREMENTS
 	PHP 4.3.0+ is required due to use of the PHP tokenizer extension. The

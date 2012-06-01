@@ -31,22 +31,30 @@ class HTMLWriter {
      * @var string
      */
     var $_gitHubRepository;
+
     /**
      *
      * @var string 
      */
     var $_gitHubBranch = "master";
+
+    /**
+     *
+     * @var string
+     */
+    var $_gitHubSourcesRepository;
+
+    /**
+     *
+     * @var string 
+     */
+    var $_gitHubSourcesBranch = "master";
+
     /** The doclet that created this object.
      *
      * @var doclet
      */
     var $_doclet;
-
-    /** The section titles to place in the header and footer.
-     *
-     * @var str[][]
-     */
-    var $_sections = NULL;
 
     /** The directory structure depth. Used to calculate relative paths.
      *
@@ -58,40 +66,53 @@ class HTMLWriter {
      *
      * @var str
      */
-    var $_id = 'overview';
+    var $_id = "overview";
 
     /** The output body.
      *
      * @var str
      */
-    var $_output = '';
+    var $_output = "";
 
     /** Writer constructor.
      */
     function htmlWriter(&$doclet) {
         $this->_doclet = & $doclet;
-        
-        $this->_gitHubRepository = $this->_doclet->phpdoctor()->_options['github_repository'];
-        
-        if(isset($this->_doclet->phpdoctor()->_options['github_branch'])){
-            $this->_gitHubBranch = $this->_doclet->phpdoctor()->_options['github_branch'];
+
+        //$this->_doclet->phpdoctor()->_options["github_repository"]
+        $this->_gitHubRepository = $this->_doclet->phpdoctor()->_options["github_repository"];
+
+        if (isset($this->_doclet->phpdoctor()->_options["github_branch"])) {
+            $this->_gitHubBranch = $this->_doclet->phpdoctor()->_options["github_branch"];
+        }
+
+        if (isset($this->_doclet->phpdoctor()->_options["github_sources_repository"])) {
+            $this->_gitHubSourcesRepository = $this->_doclet->phpdoctor()->_options["github_sources_repository"];
+        }
+
+        if (isset($this->_doclet->phpdoctor()->_options["github_sources_branch"])) {
+            $this->_gitHubSourcesBranch = $this->_doclet->phpdoctor()->_options["github_sources_branch"];
         }
     }
-    
+
     function getFileBaseURL() {
         return "$this->_gitHubRepository/blob/$this->_gitHubBranch/";
     }
-    
+
     function getDirBaseURL() {
         return "$this->_gitHubRepository/tree/$this->_gitHubBranch/";
     }
 
+    function getSourcesBaseURL() {
+        return "$this->_gitHubSourcesRepository/blob/$this->_gitHubSourcesBranch/";
+    }
+
     function _sourceLocation($doc) {
-        if ($this->_doclet->includeSource()) {
+        if (isset($this->_gitHubSourcesRepository)) {
             $url = str_replace(DIRECTORY_SEPARATOR, '/', $doc->sourceFilename());
-            echo '<a href="', $this->getFileBaseURL(), 'source/', $url, '.md#line', $doc->sourceLine(), '" class="location">', $doc->location(), "</a>\n\n";
+            echo "\n<a href=\"{$this->getSourcesBaseURL()}$url#L{$doc->sourceLine()}\" target='_blank'>{$doc->location()}</a>\n\n";
         } else {
-            echo '<div class="location">', $doc->location(), "</div>\n";
+            echo "\n<div class=\"location\">{$doc->location()}</div>\n";
         }
     }
 
@@ -105,9 +126,9 @@ class HTMLWriter {
         $phpdoctor = & $this->_doclet->phpdoctor();
 
         // make directory separators suitable to this platform
-        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+        $path = str_replace("/", DIRECTORY_SEPARATOR, $path);
 
-        // make directories if they don't exist
+        // make directories if they don"t exist
         $dirs = explode(DIRECTORY_SEPARATOR, $path);
         array_pop($dirs);
         $testPath = $this->_doclet->destinationPath();
@@ -122,16 +143,10 @@ class HTMLWriter {
         }
 
         // write file
-        $fp = fopen($this->_doclet->destinationPath() . $path, 'w');
+        $fp = fopen($this->_doclet->destinationPath() . $path, "w");
         if ($fp) {
             $phpdoctor->message('Writing "' . $path . '"');
-//            fwrite($fp, $this->_htmlHeader($title));
-//            if ($shell)
-//                fwrite($fp, $this->_shellHeader($path));
             fwrite($fp, $this->_output);
-//            if ($shell)
-//                fwrite($fp, $this->_shellFooter($path));
-//            fwrite($fp, $this->_htmlFooter());
             fclose($fp);
         } else {
             $phpdoctor->error('Could not write "' . $this->_doclet->destinationPath() . $path . '"');
@@ -145,29 +160,29 @@ class HTMLWriter {
      * @return str The string representation of the elements doc tags
      */
     function _processTags(&$tags) {
-        $tagString = '';
+        $tagString = "";
         foreach ($tags as $key => $tag) {
-            if ($key != '@text') {
+            if ($key != "@text") {
                 if (is_array($tag)) {
                     $hasText = FALSE;
                     foreach ($tag as $key => $tagFromGroup) {
-                        if ($tagFromGroup->text($this->_doclet) != '') {
+                        if ($tagFromGroup->text($this->_doclet) != "") {
                             $hasText = TRUE;
                         }
                     }
                     if ($hasText) {
-                        $tagString .= '<dt>' . $tag[0]->displayName() . ":</dt>\n";
+                        $tagString .= "<dt>" . $tag[0]->displayName() . ":</dt>\n";
                         foreach ($tag as $tagFromGroup) {
-                            $tagString .= '<dd>' . $tagFromGroup->text($this->_doclet) . "</dd>\n";
+                            $tagString .= "<dd>" . $tagFromGroup->text($this->_doclet) . "</dd>\n";
                         }
                     }
                 } else {
                     $text = $tag->text($this->_doclet);
-                    if ($text != '') {
-                        $tagString .= '<dt>' . $tag->displayName() . ":</dt>\n";
-                        $tagString .= '<dd>' . $text . "</dd>\n";
+                    if ($text != "") {
+                        $tagString .= "<dt>" . $tag->displayName() . ":</dt>\n";
+                        $tagString .= "<dd>" . $text . "</dd>\n";
                     } elseif ($tag->displayEmpty()) {
-                        $tagString .= '<dt>' . $tag->displayName() . ".</dt>\n";
+                        $tagString .= "<dt>" . $tag->displayName() . ".</dt>\n";
                     }
                 }
             }
@@ -184,7 +199,7 @@ class HTMLWriter {
      * @return str The string representation of the elements doc tags
      */
     function _processInlineTags(&$tag, $first = FALSE) {
-        $description = '';
+        $description = "";
         if (is_array($tag))
             $tag = $tag[0];
         if (is_object($tag)) {
@@ -203,6 +218,72 @@ class HTMLWriter {
             return $this->_doclet->formatter->toFormattedText($description);
         }
         return NULL;
+    }
+
+    function _fieldSignature($element) {
+        $type = "";
+        $classDoc = & $element->_type->asClassDoc();
+        if ($classDoc) {
+            $packageDoc = & $classDoc->containingPackage();
+            $type = "<a href='{$this->getFileBaseURL()}{$packageDoc->asPath()}/{$classDoc->name()}'>{$classDoc->name()}{$element->_type->dimension()}</a>";
+        } else {
+            $type = $element->_type->typeName() . $element->_type->dimension();
+        }
+        return "<span class='k'>{$element->modifiers(FALSE)}</span> <span class='nx'>{$type}</span>";
+    }
+
+    function _methodSignature($method) {
+        $classDoc = & $method->_returnType->asClassDoc();
+        $type = "";
+        if ($classDoc) {
+            $packageDoc = & $classDoc->containingPackage();
+            $type = "<a href='{$this->getFileBaseURL()}{$packageDoc->asPath()}/{$classDoc->name()}>{$classDoc->name()}{$method->_returnType->dimension()}</a>";
+        } else {
+            $type = $method->_returnType->typeName() . $method->_returnType->dimension();
+        }
+        return "<span class='k'>{$method->modifiers(FALSE)}</span> <span class='nx'>{$type}</span>";
+    }
+
+    function _flatSignature($method) {
+        $signature = '';
+        foreach ($method->_parameters as $param) {
+            $type = & $param->type();
+            $classDoc = & $type->asClassDoc();
+            if ($classDoc) {
+                $package = & $classDoc->containingPackage();
+                $signature .= '<a href="' . "{$this->getSourcesBaseURL()}{$package->asPath()}/{$classDoc->name()}.md" . '">' . $classDoc->name() . '</a> ' . $param->name() . ', ';
+            } else {
+                $signature .= $type->typeName() . ' ' . $param->name() . ', ';
+            }
+        }
+        return '(' . substr($signature, 0, -2) . ')';
+    }
+
+    function _asPath($element) {
+        $result = $this->getFileBaseURL();
+        
+        if ($element->isClass() || $element->isInterface() || $element->isException()) {
+            $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/') . $element->name() . '.md';
+        } elseif ($element->isField()) {
+            $class = & $element->containingClass();
+            if ($class) {
+                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/') . $class->name() . '.md#' . $element->_name;
+            } else {
+                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package))) . '/package-globals.md#' . $element->_name;
+            }
+        } elseif ($element->isConstructor() || $element->isMethod()) {
+            $class = & $element->containingClass();
+            if ($class) {
+                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/') . $class->name() . '.md#' . $element->_name;
+            } else {
+                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/package-functions.md#') . $element->_name;
+            }
+        } elseif ($element->isGlobal()) {
+            $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/package-globals.md#') . $element->_name;
+        } elseif ($element->isFunction()) {
+            $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/package-functions.md#') . $element->_name;
+        }
+        return $result;
     }
 
 }

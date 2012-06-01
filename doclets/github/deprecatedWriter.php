@@ -33,34 +33,23 @@ class DeprecatedWriter extends HTMLWriter {
 
         parent::HTMLWriter($doclet);
 
-        //$this->_id = 'definition';
+        //$this->_id = "definition";
 
         $rootDoc = & $this->_doclet->rootDoc();
-
-        $this->_sections[0] = array('title' => 'Overview', 'url' => 'overview-summary.md');
-        $this->_sections[1] = array('title' => 'Namespace');
-        $this->_sections[2] = array('title' => 'Class');
-        //$this->_sections[3] = array('title' => 'Use');
-        $this->_sections[4] = array('title' => 'Tree', 'url' => 'overview-tree.md');
-        if ($doclet->includeSource())
-            $this->_sections[5] = array('title' => 'Files', 'url' => 'overview-files.md');
-        $this->_sections[6] = array('title' => 'Deprecated', 'selected' => TRUE);
-        $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.md');
-        $this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.md');
-
+        
         $deprecatedClasses = array();
         $classes = & $rootDoc->classes();
         $deprecatedFields = array();
         $deprecatedMethods = array();
         if ($classes) {
             foreach ($classes as $class) {
-                if ($class->tags('@deprecated')) {
+                if ($class->tags("@deprecated")) {
                     $deprecatedClasses[] = $class;
                 }
                 $fields = & $class->fields();
                 if ($fields) {
                     foreach ($fields as $field) {
-                        if ($field->tags('@deprecated')) {
+                        if ($field->tags("@deprecated")) {
                             $deprecatedFields[] = $field;
                         }
                     }
@@ -68,7 +57,7 @@ class DeprecatedWriter extends HTMLWriter {
                 $classes = & $class->methods();
                 if ($classes) {
                     foreach ($classes as $method) {
-                        if ($method->tags('@deprecated')) {
+                        if ($method->tags("@deprecated")) {
                             $deprecatedMethods[] = $method;
                         }
                     }
@@ -79,7 +68,7 @@ class DeprecatedWriter extends HTMLWriter {
         $globals = & $rootDoc->globals();
         if ($globals) {
             foreach ($globals as $global) {
-                if ($global->tags('@deprecated')) {
+                if ($global->tags("@deprecated")) {
                     $deprecatedGlobals[] = $global;
                 }
             }
@@ -88,7 +77,7 @@ class DeprecatedWriter extends HTMLWriter {
         $functions = & $rootDoc->functions();
         if ($functions) {
             foreach ($functions as $function) {
-                if ($function->tags('@deprecated')) {
+                if ($function->tags("@deprecated")) {
                     $deprecatedFunctions[] = $function;
                 }
             }
@@ -98,7 +87,7 @@ class DeprecatedWriter extends HTMLWriter {
 
         echo "- - -\n\n";
 
-        echo '# Deprecated API #';
+        echo "#Deprecated API#\n\n";
 
         echo "- - -\n\n";
 
@@ -106,46 +95,46 @@ class DeprecatedWriter extends HTMLWriter {
             echo "##Contents##\n\n";
 
             if ($deprecatedClasses) {
-                echo '* <a href="#deprecated_class">Deprecated Classes</a>';
+                echo "\n* <a href=\"#deprecated_class\">Deprecated Classes</a>";
             }
             if ($deprecatedFields) {
-                echo '* <a href="#deprecated_field">Deprecated Fields</a>';
+                echo "\n* <a href=\"#deprecated_field\">Deprecated Fields</a>";
             }
             if ($deprecatedMethods) {
-                echo '* <a href="#deprecated_method">Deprecated Methods</a>';
+                echo "\n* <a href=\"#deprecated_method\">Deprecated Methods</a>";
             }
             if ($deprecatedGlobals) {
-                echo '* <a href="#deprecated_global">Deprecated Globals</a>';
+                echo "\n* <a href=\"#deprecated_global\">Deprecated Globals</a>";
             }
             if ($deprecatedFunctions) {
-                echo '* <a href="#deprecated_function">Deprecated Functions</a>';
+                echo "\n* <a href=\"#deprecated_function\">Deprecated Functions</a>";
             }
         }
 
         if ($deprecatedClasses) {
-            echo '<table id="deprecated_class" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Classes</th></tr>', "\n";
+            echo "\n\n<table id=\"deprecated_class\" class=\"detail\">", "\n";
+            echo "<tr><th colspan=\"2\" class=\"title\">Deprecated Classes</th></tr>", "\n";
             foreach ($deprecatedClasses as $class) {
-                $textTag = & $class->tags('@text');
-                echo '<tr><td class="name"><a href="', $class->asPath(), '">', $class->qualifiedName(), '</a></td>';
-                echo '<td class="description">';
+                $textTag = & $class->tags("@text");
+                echo "<tr><td class=\"name\"><a href=\"", $this->_asPath($class), "\">", $class->qualifiedName(), "</a></td>";
+                echo "<td class=\"description\">";
                 if ($textTag)
-                    echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b>**<u><em>');
+                    echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
                 echo "</td></tr>\n";
             }
             echo "</table>\n\n";
         }
 
         if ($deprecatedFields) {
-            echo '<table id="deprecated_field" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Fields</th></tr>', "\n";
+            echo "<table id=\"deprecated_field\" class=\"detail\">", "\n";
+            echo "<tr><th colspan=\"2\" class=\"title\">Deprecated Fields</th></tr>", "\n";
             foreach ($deprecatedFields as $field) {
-                $textTag = & $field->tags('@text');
+                $textTag = & $field->tags("@text");
                 echo "<tr>\n";
-                echo '<td class="name"><a href="', $field->asPath(), '">', $field->qualifiedName(), "</a></td>\n";
-                echo '<td class="description">';
+                echo "<td class=\"name\"><a href=\"", $this->_asPath($field), "\">", $field->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"description\">";
                 if ($textTag)
-                    echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b>**<u><em>');
+                    echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -153,15 +142,15 @@ class DeprecatedWriter extends HTMLWriter {
         }
 
         if ($deprecatedMethods) {
-            echo '<table id="deprecated_method" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Methods</th></tr>', "\n";
+            echo "<table id=\"deprecated_method\" class=\"detail\">", "\n";
+            echo "<tr><th colspan=\"2\" class=\"title\">Deprecated Methods</th></tr>", "\n";
             foreach ($deprecatedMethods as $method) {
-                $textTag = & $method->tags('@text');
+                $textTag = & $method->tags("@text");
                 echo "<tr>\n";
-                echo '<td class="name"><a href="', $method->asPath(), '">', $method->qualifiedName(), "</a></td>\n";
-                echo '<td class="description">';
+                echo "<td class=\"name\"><a href=\"", $this->_asPath($method), "\">", $method->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"description\">";
                 if ($textTag)
-                    echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b>**<u><em>');
+                    echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -169,15 +158,15 @@ class DeprecatedWriter extends HTMLWriter {
         }
 
         if ($deprecatedGlobals) {
-            echo '<table id="deprecated_global" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Globals</th></tr>', "\n";
+            echo "<table id=\"deprecated_global\" class=\"detail\">", "\n";
+            echo "<tr><th colspan=\"2\" class=\"title\">Deprecated Globals</th></tr>", "\n";
             foreach ($deprecatedGlobals as $global) {
-                $textTag = & $global->tags('@text');
+                $textTag = & $global->tags("@text");
                 echo "<tr>\n";
-                echo '<td class="name"><a href="', $global->asPath(), '">', $global->qualifiedName(), "</a></td>\n";
-                echo '<td class="description">';
+                echo "<td class=\"name\"><a href=\"", $this->_asPath($global), "\">", $global->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"description\">";
                 if ($textTag)
-                    echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b>**<u><em>');
+                    echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -185,15 +174,15 @@ class DeprecatedWriter extends HTMLWriter {
         }
 
         if ($deprecatedFunctions) {
-            echo '<table id="deprecated_function" class="detail">', "\n";
-            echo '<tr><th colspan="2" class="title">Deprecated Functions</th></tr>', "\n";
+            echo "<table id=\"deprecated_function\" class=\"detail\">", "\n";
+            echo "<tr><th colspan=\"2\" class=\"title\">Deprecated Functions</th></tr>", "\n";
             foreach ($deprecatedFunctions as $function) {
-                $textTag = & $function->tags('@text');
+                $textTag = & $function->tags("@text");
                 echo "<tr>\n";
-                echo '<td class="name"><a href="', $function->asPath(), '">', $function->qualifiedName(), "</a></td>\n";
-                echo '<td class="description">';
+                echo "<td class=\"name\"><a href=\"", $this->_asPath($function), "\">", $function->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"description\">";
                 if ($textTag)
-                    echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b>**<u><em>');
+                    echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -203,7 +192,7 @@ class DeprecatedWriter extends HTMLWriter {
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write('deprecated-list.md', 'Deprecated', TRUE);
+        $this->_write("deprecated-list.md", "Deprecated", TRUE);
     }
 
 }
