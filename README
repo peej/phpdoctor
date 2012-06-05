@@ -15,7 +15,7 @@ WHAT IS DIFFERENT FROM THE ORIGINAL
         markdown documentation which can be uploaded to Github and can be read from the
         github source browser.
 
-        Here is a sample output: https://github.com/JeyDotC/Hirudo-docs/tree/master/hirudo/core
+        Here is a sample output: https://github.com/JeyDotC/Hirudo-docs
 	
 REQUIREMENTS
 	PHP 4.3.0+ is required due to use of the PHP tokenizer extension. The
