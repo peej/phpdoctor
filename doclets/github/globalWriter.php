@@ -23,7 +23,7 @@
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class GlobalWriter extends HTMLWriter {
+class GlobalWriter extends MDWriter {
 
     /** Build the function definitons.
      *
@@ -31,7 +31,7 @@ class GlobalWriter extends HTMLWriter {
      */
     function globalWriter(&$doclet) {
 
-        parent::HTMLWriter($doclet);
+        parent::MDWriter($doclet);
 
         $this->_id = "definition";
 
@@ -63,7 +63,7 @@ class GlobalWriter extends HTMLWriter {
                     echo "<tr>\n";
                     echo "<td>", $global->modifiers(FALSE), " ", $global->typeAsString(), "</td>\n";
                     echo "<td class=\"description\">";
-                    echo "<p class=\"name\"><a href=\"#", $global->name(), "\">", $global->name(), "</a></p>";
+                    echo "<p class=\"name\"><a href=\"#", $this->_asURL($global), "\">", $global->name(), "</a></p>";
                     if ($textTag) {
                         echo "<p class=\"description\">", strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>"), "</p>";
                     }
@@ -78,11 +78,11 @@ class GlobalWriter extends HTMLWriter {
                     $type = & $global->type();
                     $this->_sourceLocation($global);
                     echo "<h3 id=\"", $global->name(), "\">", $global->name(), "</h3>\n";
-                    echo "```php\n", $global->modifiers(), " ", $global->typeAsString(), " **";
+                    echo "\n\n", $global->modifiers(), " ", $global->typeAsString(), " **";
                     echo $global->name(), "**";
                     if ($global->value())
                         echo " = ", htmlspecialchars($global->value());
-                    echo "```\n";
+                    echo "\n\n";
                     echo "<div class=\"details\">", "\n";
                     if ($textTag) {
                         echo $this->_processInlineTags($textTag), "\n";
@@ -96,7 +96,7 @@ class GlobalWriter extends HTMLWriter {
             $this->_output = ob_get_contents();
             ob_end_clean();
 
-            $this->_write($package->asPath() . "/package-globals.md", "Globals", TRUE);
+            $this->_write($package->_name . "/package-globals.md");
         }
     }
 

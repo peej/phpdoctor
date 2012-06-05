@@ -22,9 +22,10 @@
 /** This generates the index.md file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\Github
+ * @todo Refactor this class to MDWriter
  */
-class HTMLWriter {
+class MDWriter {
 
     /**
      *
@@ -76,7 +77,7 @@ class HTMLWriter {
 
     /** Writer constructor.
      */
-    function htmlWriter(&$doclet) {
+    function mdWriter(&$doclet) {
         $this->_doclet = & $doclet;
 
         //$this->_doclet->phpdoctor()->_options["github_repository"]
@@ -122,7 +123,7 @@ class HTMLWriter {
      * @param str title The title for this page
      * @param bool shell Include the page shell in the output
      */
-    function _write($path, $title, $shell) {
+    function _write($path) {
         $phpdoctor = & $this->_doclet->phpdoctor();
 
         // make directory separators suitable to this platform
@@ -224,8 +225,7 @@ class HTMLWriter {
         $type = "";
         $classDoc = & $element->_type->asClassDoc();
         if ($classDoc) {
-            $packageDoc = & $classDoc->containingPackage();
-            $type = "<a href='{$this->getFileBaseURL()}{$packageDoc->asPath()}/{$classDoc->name()}'>{$classDoc->name()}{$element->_type->dimension()}</a>";
+            $type = "<a href='{$this->_asURL($classDoc)}'>{$classDoc->name()}{$element->_type->dimension()}</a>";
         } else {
             $type = $element->_type->typeName() . $element->_type->dimension();
         }
@@ -236,8 +236,7 @@ class HTMLWriter {
         $classDoc = & $method->_returnType->asClassDoc();
         $type = "";
         if ($classDoc) {
-            $packageDoc = & $classDoc->containingPackage();
-            $type = "<a href='{$this->getFileBaseURL()}{$packageDoc->asPath()}/{$classDoc->name()}>{$classDoc->name()}{$method->_returnType->dimension()}</a>";
+            $type = "<a href='{$this->_asURL($classDoc)}>{$classDoc->name()}{$method->_returnType->dimension()}</a>";
         } else {
             $type = $method->_returnType->typeName() . $method->_returnType->dimension();
         }
@@ -250,8 +249,7 @@ class HTMLWriter {
             $type = & $param->type();
             $classDoc = & $type->asClassDoc();
             if ($classDoc) {
-                $package = & $classDoc->containingPackage();
-                $signature .= '<a href="' . "{$this->getSourcesBaseURL()}{$package->asPath()}/{$classDoc->name()}.md" . '">' . $classDoc->name() . '</a> ' . $param->name() . ', ';
+                $signature .= '<a href="' . "{$this->_asURL($classDoc)}" . '">' . $classDoc->name() . '</a> ' . $param->name() . ', ';
             } else {
                 $signature .= $type->typeName() . ' ' . $param->name() . ', ';
             }
@@ -259,30 +257,41 @@ class HTMLWriter {
         return '(' . substr($signature, 0, -2) . ')';
     }
 
+    function _asURL($element) {
+        return $this->getFileBaseURL() . $this->_asPath($element);
+    }
+
     function _asPath($element) {
-        $result = $this->getFileBaseURL();
-        
-        if ($element->isClass() || $element->isInterface() || $element->isException()) {
-            $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/') . $element->name() . '.md';
-        } elseif ($element->isField()) {
-            $class = & $element->containingClass();
-            if ($class) {
-                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/') . $class->name() . '.md#' . $element->_name;
-            } else {
-                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package))) . '/package-globals.md#' . $element->_name;
-            }
-        } elseif ($element->isConstructor() || $element->isMethod()) {
-            $class = & $element->containingClass();
-            if ($class) {
-                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/') . $class->name() . '.md#' . $element->_name;
-            } else {
-                $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/package-functions.md#') . $element->_name;
-            }
-        } elseif ($element->isGlobal()) {
-            $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/package-globals.md#') . $element->_name;
-        } elseif ($element->isFunction()) {
-            $result .= strtolower(str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/package-functions.md#') . $element->_name;
+        if (isset($element->_package)){
+            $result = str_replace('.', '/', str_replace('\\', '/', $element->_package)) . '/';
+        }else if(isset ($element->_name)){
+            $result = str_replace('.', '/', str_replace('\\', '/', $element->_name)) . '/';
         }
+        
+        $hashName = strtolower($element->_name);
+
+        if ($element->isClass() || $element->isInterface() || $element->isException()) {
+            $result .= "{$element->name()}.md";
+        } else if ($element->isField()) {
+            $class = & $element->containingClass();
+            if ($class) {
+                $result .= "{$class->name()}.md#{$hashName}";
+            } else {
+                $result .= "package-globals.md#{$hashName}";
+            }
+        } else if ($element->isConstructor() || $element->isMethod()) {
+            $class = & $element->containingClass();
+            if ($class) {
+                $result .= "{$class->name()}.md#{$hashName}";
+            } else {
+                $result .="package-functions.md#{$hashName}";
+            }
+        } else if ($element->isGlobal()) {
+            $result .="package-globals.md#{$hashName}";
+        } else if ($element->isFunction()) {
+            $result .="package-functions.md#{$hashName}";
+        }
+        
         return $result;
     }
 

@@ -23,7 +23,7 @@
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class IndexWriter extends HTMLWriter {
+class IndexWriter extends MDWriter {
 
     /** Build the element index.
      *
@@ -31,24 +31,16 @@ class IndexWriter extends HTMLWriter {
      */
     function indexWriter(&$doclet) {
 
-        parent::HTMLWriter($doclet);
+        parent::MDWriter($doclet);
 
-        //$this->_id = "definition";
+        $phpdoctor = & $this->_doclet->phpdoctor();
+        $displayTree = $phpdoctor->getOption("tree");
 
         $rootDoc = & $this->_doclet->rootDoc();
 
         $classes = & $rootDoc->classes();
         if ($classes == NULL)
             $classes = array();
-
-        $methods = array();
-        foreach ($classes as $class) {
-            foreach ($class->methods(TRUE) as $name => $method) {
-                $methods[$class->name() . "::" . $name] = $method;
-            }
-        }
-        if ($methods == NULL)
-            $methods = array();
 
         $functions = & $rootDoc->functions();
         if ($functions == NULL)
@@ -58,8 +50,29 @@ class IndexWriter extends HTMLWriter {
         if ($globals == NULL)
             $globals = array();
 
-        $elements = array_merge($classes, $methods, $functions, $globals);
+        $elements = array_merge($classes, $functions, $globals);
         uasort($elements, array($this, "compareElements"));
+
+        ob_start();
+
+        echo "#INDEX#";
+
+        if ($displayTree) {
+            echo "\n\n[View class hierarchy]({$this->getDirBaseURL()}/overview-tree.md)";
+        }
+        
+        echo "\n\n[View depreacted list]({$this->getDirBaseURL()}/deprecated-list.md)";
+
+        echo "\n\n[View todo list]({$this->getDirBaseURL()}/todo-list.md)";
+
+        echo "\n\n[View the list of all classes, functions and globals]({$this->getDirBaseURL()}/index-all.md)";
+
+        $this->_output = ob_get_contents();
+        ob_end_clean();
+
+        $this->_write("README.md");
+
+        ///------------------------------------------------------
 
         ob_start();
 
@@ -68,7 +81,7 @@ class IndexWriter extends HTMLWriter {
             $firstChar = strtoupper(substr($element->name(), 0, 1));
             if (is_object($element) && $firstChar != chr($letter)) {
                 $letter = ord($firstChar);
-                echo "<a href=\"#letter", chr($letter), "\">", chr($letter), "</a>\n";
+                echo "<a href=\"#", strtolower(chr($letter)), "\">", chr($letter), "</a>\n";
             }
         }
 
@@ -83,36 +96,34 @@ class IndexWriter extends HTMLWriter {
                         echo "</dl>\n";
                     }
                     $first = FALSE;
-                    echo "<h1 id=\"letter", chr($letter), "\">", chr($letter), "#\n";
+                    echo "<h1 id=\"letter", chr($letter), "\">", chr($letter), "</h1>\n";
                     echo "<dl>\n";
                 }
                 $parent = & $element->containingClass();
                 if ($parent && strtolower(get_class($parent)) != "rootdoc") {
-                    $in = "class <a href=\"" . $this->_asPath($parent) . "\">" . $parent->qualifiedName() . "</a>";
+                    $in = "class <a href=\"" . $this->_asURL($parent) . "\">" . $parent->qualifiedName() . "</a>";
                 } else {
                     $package = & $element->containingPackage();
-                    $in = "namespace <a href=\"" . $package->asPath() . "/README.md\">" . $package->name() . "</a>";
+                    $in = "namespace <a href=\"" . $this->_asURL($package) . "/README.md\">" . $package->name() . "</a>";
                 }
                 switch (strtolower(get_class($element))) {
                     case "classdoc":
                         if ($element->isOrdinaryClass()) {
-                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Class in ", $in, "</dt>\n";
+                            echo "<dt><a href=\"", $this->_asURL($element), "\">", $element->name(), "</a> - Class in ", $in, "</dt>\n";
                         } elseif ($element->isInterface()) {
-                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Interface in ", $in, "</dt>\n";
+                            echo "<dt><a href=\"", $this->_asURL($element), "\">", $element->name(), "</a> - Interface in ", $in, "</dt>\n";
                         } elseif ($element->isException()) {
-                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Exception in ", $in, "</dt>\n";
+                            echo "<dt><a href=\"", $this->_asURL($element), "\">", $element->name(), "</a> - Exception in ", $in, "</dt>\n";
                         }
                         break;
-                    case "methoddoc":
-                        if ($element->isMethod()) {
-                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Method in ", $in, "</dt>\n";
-                        } elseif ($element->isFunction()) {
-                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Function in ", $in, "</dt>\n";
+                    case 'methoddoc':
+                        if ($element->isFunction()) {
+                            echo '<dt><a href="', $this->_asURL($element), '">', $element->name(), '()</a> - Function in ', $in, "</dt>\n";
                         }
                         break;
                     case "fielddoc":
                         if ($element->isGlobal()) {
-                            echo "<dt><a href=\"", $this->_asPath($element), "\">", $element->name(), "()</a> - Global in ", $in, "</dt>\n";
+                            echo "<dt><a href=\"", $this->_asURL($element), "\">", $element->name(), "</a> - Global in ", $in, "</dt>\n";
                         }
                         break;
                 }
@@ -130,7 +141,7 @@ class IndexWriter extends HTMLWriter {
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write("index-all.md", "Index", TRUE);
+        $this->_write("index-all.md");
     }
 
     function compareElements($element1, $element2) {

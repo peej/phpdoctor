@@ -23,7 +23,7 @@
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class DeprecatedWriter extends HTMLWriter {
+class DeprecatedWriter extends MDWriter {
 
     /** Build the deprecated index.
      *
@@ -31,7 +31,7 @@ class DeprecatedWriter extends HTMLWriter {
      */
     function deprecatedWriter(&$doclet) {
 
-        parent::HTMLWriter($doclet);
+        parent::MDWriter($doclet);
 
         //$this->_id = "definition";
 
@@ -113,10 +113,10 @@ class DeprecatedWriter extends HTMLWriter {
 
         if ($deprecatedClasses) {
             echo "\n\n<table id=\"deprecated_class\" class=\"detail\">", "\n";
-            echo "<tr><th colspan=\"2\" class=\"title\">Deprecated Classes</th></tr>", "\n";
+            echo "<tr><th colspan=\"2\">Deprecated Classes</th></tr>", "\n";
             foreach ($deprecatedClasses as $class) {
                 $textTag = & $class->tags("@text");
-                echo "<tr><td class=\"name\"><a href=\"", $this->_asPath($class), "\">", $class->qualifiedName(), "</a></td>";
+                echo "<tr><td class=\"name\"><a href=\"", $this->_asURL($class), "\">", $class->qualifiedName(), "</a></td>";
                 echo "<td class=\"description\">";
                 if ($textTag)
                     echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -131,7 +131,7 @@ class DeprecatedWriter extends HTMLWriter {
             foreach ($deprecatedFields as $field) {
                 $textTag = & $field->tags("@text");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($field), "\">", $field->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($field), "\">", $field->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($textTag)
                     echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -147,7 +147,7 @@ class DeprecatedWriter extends HTMLWriter {
             foreach ($deprecatedMethods as $method) {
                 $textTag = & $method->tags("@text");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($method), "\">", $method->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($method), "\">", $method->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($textTag)
                     echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -163,7 +163,7 @@ class DeprecatedWriter extends HTMLWriter {
             foreach ($deprecatedGlobals as $global) {
                 $textTag = & $global->tags("@text");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($global), "\">", $global->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($global), "\">", $global->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($textTag)
                     echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -179,7 +179,7 @@ class DeprecatedWriter extends HTMLWriter {
             foreach ($deprecatedFunctions as $function) {
                 $textTag = & $function->tags("@text");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($function), "\">", $function->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($function), "\">", $function->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($textTag)
                     echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -192,7 +192,7 @@ class DeprecatedWriter extends HTMLWriter {
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write("deprecated-list.md", "Deprecated", TRUE);
+        $this->_write("deprecated-list.md");
     }
 
 }

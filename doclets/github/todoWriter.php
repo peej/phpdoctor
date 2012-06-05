@@ -23,7 +23,7 @@
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class TodoWriter extends HTMLWriter {
+class TodoWriter extends MDWriter {
 
     /** Build the todo index.
      *
@@ -31,7 +31,7 @@ class TodoWriter extends HTMLWriter {
      */
     function todoWriter(&$doclet) {
 
-        parent::HTMLWriter($doclet);
+        parent::MDWriter($doclet);
 
         $rootDoc = & $this->_doclet->rootDoc();
 
@@ -87,7 +87,7 @@ class TodoWriter extends HTMLWriter {
 
         echo "#Todo#";
 
-        echo "- - -\n\n";
+        echo "\n\n- - -\n\n";
 
         if ($todoClasses || $todoFields || $todoMethods || $todoGlobals || $todoFunctions) {
             echo "##Contents##\n\n";
@@ -116,7 +116,7 @@ class TodoWriter extends HTMLWriter {
             echo "<tr><th colspan=\"2\" class=\"title\">Todo Classes</th></tr>", "\n";
             foreach ($todoClasses as $class) {
                 $todoTag = & $class->tags("@todo");
-                echo "<tr><td class=\"name\"><a href=\"", $this->_asPath($class), "\">", $class->qualifiedName(), "</a></td>";
+                echo "<tr><td class=\"name\"><a href=\"", $this->_asURL($class), "\">", $class->qualifiedName(), "</a></td>";
                 echo "<td class=\"description\">";
                 if ($todoTag)
                     echo strip_tags($this->_processInlineTags($todoTag, TRUE), "<a><b>**<u><em>");
@@ -131,7 +131,7 @@ class TodoWriter extends HTMLWriter {
             foreach ($todoFields as $field) {
                 $todoTag = & $field->tags("@todo");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($field), "\">", $field->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($field), "\">", $field->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($todoTag)
                     echo strip_tags($this->_processInlineTags($todoTag, TRUE), "<a><b>**<u><em>");
@@ -147,7 +147,7 @@ class TodoWriter extends HTMLWriter {
             foreach ($todoMethods as $method) {
                 $todoTag = & $method->tags("@todo");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($method), "\">", $method->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($method), "\">", $method->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($todoTag)
                     echo strip_tags($this->_processInlineTags($todoTag, TRUE), "<a><b>**<u><em>");
@@ -163,7 +163,7 @@ class TodoWriter extends HTMLWriter {
             foreach ($todoGlobals as $global) {
                 $todoTag = & $global->tags("@todo");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($global), "\">", $global->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($global), "\">", $global->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($todoTag)
                     echo strip_tags($this->_processInlineTags($todoTag, TRUE), "<a><b>**<u><em>");
@@ -179,7 +179,7 @@ class TodoWriter extends HTMLWriter {
             foreach ($todoFunctions as $function) {
                 $todoTag = & $function->tags("@todo");
                 echo "<tr>\n";
-                echo "<td class=\"name\"><a href=\"", $this->_asPath($function), "\">", $function->qualifiedName(), "</a></td>\n";
+                echo "<td class=\"name\"><a href=\"", $this->_asURL($function), "\">", $function->qualifiedName(), "</a></td>\n";
                 echo "<td class=\"description\">";
                 if ($todoTag)
                     echo strip_tags($this->_processInlineTags($todoTag, TRUE), "<a><b>**<u><em>");
@@ -192,7 +192,7 @@ class TodoWriter extends HTMLWriter {
         $this->_output = ob_get_contents();
         ob_end_clean();
 
-        $this->_write("todo-list.md", "Todo", TRUE);
+        $this->_write("todo-list.md");
     }
 
 }

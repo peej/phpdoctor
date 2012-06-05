@@ -20,7 +20,7 @@
  */
 
 // load classes
-require("htmlWriter.php");
+require("mdWriter.php");
 require("packageWriter.php");
 require("classWriter.php");
 require("functionWriter.php");
@@ -163,21 +163,21 @@ class Github extends Doclet {
         $globalWriter = & new globalWriter($this);
 
         // write index
-//        $indexWriter = & new indexWriter($this);
+        $indexWriter = & new indexWriter($this);
         // write deprecated index
         $deprecatedWriter = & new deprecatedWriter($this);
 
         // write todo index
         $todoWriter = & new todoWriter($this);
 
-        /* write source files
-          if ($this->_includeSource) {
-          $sourceWriter = & new sourceWriter($this);
-          } */
-
-        // copy stylesheet
-//        $phpdoctor->message("Copying stylesheet");
-//        copy($phpdoctor->docletPath() . "stylesheet.css", $this->_d . "stylesheet.css");
+//        // copy README.md
+//        $phpdoctor->message("Copying README.md");
+//
+//        if (is_file($phpdoctor->sourcePath() . "README.md")) {
+//            copy($phpdoctor->sourcePath() . "README.md", $this->_d . "README.md");
+//        }else if(is_file($phpdoctor->sourcePath() . "README")){
+//            copy($phpdoctor->sourcePath() . "README", $this->_d . "README.md");
+//        }
     }
 
     /** Return a reference to the root doc.

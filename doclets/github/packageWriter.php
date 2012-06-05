@@ -24,7 +24,7 @@
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class PackageWriter extends HTMLWriter {
+class PackageWriter extends MDWriter {
 
     /** Build the package summaries.
      *
@@ -32,7 +32,7 @@ class PackageWriter extends HTMLWriter {
      */
     function packageWriter(&$doclet) {
 
-        parent::HTMLWriter($doclet);
+        parent::MDWriter($doclet);
 
         $rootDoc = & $this->_doclet->rootDoc();
         $phpdoctor = & $this->_doclet->phpdoctor();
@@ -60,7 +60,7 @@ class PackageWriter extends HTMLWriter {
             $this->_output = ob_get_contents();
             ob_end_clean();
 
-            $this->_write("overview-tree.md", "Overview", TRUE);
+            $this->_write("overview-tree.md");
         }
 
         $this->_id = "package";
@@ -76,9 +76,11 @@ class PackageWriter extends HTMLWriter {
 
             echo "\n\n- - -\n\n";
 
-            echo "#Namespace ", $package->name(), "#";
-            
-            echo "\n\n<div><a href='{$this->getDirBaseURL()}{$package->asPath()}/package-tree.md'>View Class Hierarchy for this Package</a></div>\n\n";
+            echo "#Namespace ", $package->name(), "#\n\n";
+
+            if ($displayTree) {
+                echo "<div><a href='{$this->_asURL($package)}/package-tree.md'>View Class Hierarchy for this Package</a></div>\n\n";
+            }
 
             $textTag = & $package->tags("@text");
             if ($textTag) {
@@ -93,7 +95,7 @@ class PackageWriter extends HTMLWriter {
                 echo "<tr><th colspan=\"2\" class=\"title\">Class Summary</th></tr>", "\n";
                 foreach ($classes as $name => $class) {
                     $textTag = & $classes[$name]->tags("@text");
-                    echo "<tr><td class=\"name\"><a href=\"", $this->_asPath($classes[$name]), "\">", $classes[$name]->name(), "</a></td>";
+                    echo "<tr><td class=\"name\"><a href=\"", $this->_asURL($classes[$name]), "\">", $classes[$name]->name(), "</a></td>";
                     echo "<td class=\"description\">";
                     if ($textTag)
                         echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -109,7 +111,7 @@ class PackageWriter extends HTMLWriter {
                 echo "<tr><th colspan=\"2\" class=\"title\">Interface Summary</th></tr>" . "\n";
                 foreach ($interfaces as $name => $interface) {
                     $textTag = & $interfaces[$name]->tags("@text");
-                    echo "<tr><td class=\"name\"><a href=\"", $this->_asPath($interfaces[$name]), "\">", $interfaces[$name]->name(), "</a></td>";
+                    echo "<tr><td class=\"name\"><a href=\"", $this->_asURL($interfaces[$name]), "\">", $interfaces[$name]->name(), "</a></td>";
                     echo "<td class=\"description\">";
                     if ($textTag)
                         echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -125,7 +127,7 @@ class PackageWriter extends HTMLWriter {
                 echo "<tr><th colspan=\"2\" class=\"title\">Exception Summary</th></tr>" . "\n";
                 foreach ($exceptions as $name => $exception) {
                     $textTag = & $exceptions[$name]->tags("@text");
-                    echo "<tr><td class=\"name\"><a href=\"", $this->_asPath($exceptions[$name]), "\">", $exceptions[$name]->name(), "</a></td>";
+                    echo "<tr><td class=\"name\"><a href=\"", $this->_asURL($exceptions[$name]), "\">", $exceptions[$name]->name(), "</a></td>";
                     echo "<td class=\"description\">";
                     if ($textTag)
                         echo strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>");
@@ -177,7 +179,7 @@ class PackageWriter extends HTMLWriter {
             $this->_output = ob_get_contents();
             ob_end_clean();
 
-            $this->_write($package->asPath() . "/README.md", $package->name(), TRUE);
+            $this->_write($package->_name . "/README.md");
 
             if ($displayTree) {
                 $this->_id = "tree";
@@ -196,14 +198,14 @@ class PackageWriter extends HTMLWriter {
                 echo "- - -\n\n";
 
                 echo "#Class Hierarchy for Package {$package->name()}";
-                echo "\n\n<div><a href='{$this->getDirBaseURL()}{$package->asPath()}'>Back to package summary</a></div>\n\n";
+                echo "\n\n<div><a href='{$this->_asURL($package)}'>Back to package summary</a></div>\n\n";
 
                 $this->_displayTree($tree);
 
                 $this->_output = ob_get_contents();
                 ob_end_clean();
 
-                $this->_write($package->asPath() . "/package-tree.md", $package->name(), TRUE);
+                $this->_write($package->_name . "/package-tree.md", $package->name(), TRUE);
             }
         }
     }
@@ -237,7 +239,7 @@ class PackageWriter extends HTMLWriter {
             if ($element->superclass() == $parent) {
                 if ($outputList)
                     echo "<ul>\n";
-                echo "<li><a href=\"", $this->_asPath($element), "\">", $element->qualifiedName(), "</a>";
+                echo "<li><a href=\"", $this->_asURL($element), "\">", $element->qualifiedName(), "</a>";
                 $this->_displayTree($tree, $name);
                 echo "</li>\n";
                 $outputList = FALSE;

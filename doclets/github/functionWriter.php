@@ -23,7 +23,7 @@
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class FunctionWriter extends HTMLWriter {
+class FunctionWriter extends MDWriter {
 
     /** Build the function definitons.
      *
@@ -31,7 +31,7 @@ class FunctionWriter extends HTMLWriter {
      */
     function functionWriter(&$doclet) {
 
-        parent::HTMLWriter($doclet);
+        parent::MDWriter($doclet);
 
         $this->_id = "definition";
 
@@ -62,7 +62,7 @@ class FunctionWriter extends HTMLWriter {
                     echo "<tr>\n";
                     echo "<td>", $this->_methodSignature($function), "</td>\n";
                     echo "<td class=\"description\">";
-                    echo "<p class=\"name\"><a href=\"#{$function->name()}\">", $function->name(), "</a>", $this->_flatSignature($function), "</p>";
+                    echo "<p class=\"name\"><a href=\"#", $this->_asURL($function),"\">", $function->name(), "</a>", $this->_flatSignature($function), "</p>";
                     if ($textTag) {
                         echo "<p class=\"description\">", strip_tags($this->_processInlineTags($textTag, TRUE), "<a><b>**<u><em>"), "</p>";
                     }
@@ -91,7 +91,7 @@ class FunctionWriter extends HTMLWriter {
             $this->_output = ob_get_contents();
             ob_end_clean();
 
-            $this->_write($package->asPath() . "/package-functions.md", "Functions", TRUE);
+            $this->_write($package->_name . "/package-functions.md");
         }
     }
 
