@@ -57,6 +57,10 @@ class IndexWriter extends MDWriter {
 
         echo "#INDEX#";
 
+        if(isset($this->_doclet->phpdoctor()->_options["github_sources_repository"])){
+            echo "\n\n[View Source codes]({$this->getSourcesBaseURL()})";
+        }
+        
         if ($displayTree) {
             echo "\n\n[View class hierarchy]({$this->getDirBaseURL()}/overview-tree.md)";
         }

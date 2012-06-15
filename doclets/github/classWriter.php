@@ -284,7 +284,7 @@ class ClassWriter extends MDWriter {
                     }
 
                     if ($constructor) {
-                        echo "##Constructor Detail##\n\n";
+                        echo "<h2>Constructor Detail</h2>\n\n";
                         $textTag = & $constructor->tags("@text");
                         $this->_sourceLocation($constructor);
                         echo "<h3 id=\"{$constructor->name()}\">{$constructor->name()}</h3>\n";
