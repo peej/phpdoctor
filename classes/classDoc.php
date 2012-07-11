@@ -228,19 +228,6 @@ class ClassDoc extends ProgramElementDoc
     {
 		return $this->_interfaces;
 	}
-
-	/** Return an interface in this class.
-	 *
-	 * @return ClassDoc
-	 */
-	function &interfaceNamed($interfaceName)
-    {
-        $return = NULL;
-        if (isset($this->_interfaces[$interfaceName])) {
-            $return =& $this->_interfaces[$interfaceName];
-        }
-        return $return;
-	}
     
 	/** Return true if this class is abstract.
 	 *

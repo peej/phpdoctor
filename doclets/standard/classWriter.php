@@ -86,12 +86,17 @@ class ClassWriter extends HTMLWriter
 						echo "<dl>\n";
 						echo "<dt>All Implemented Interfaces:</dt>\n";
 						echo '<dd>';
-						foreach ($implements as $interface) {
-						    echo '<a href="', str_repeat('../', $this->_depth), $interface->asPath(), '">';
-						    if ($interface->packageName() != $class->packageName()) {
-						        echo $interface->packageName(), '\\';
-						    }
-						    echo $interface->name(), '</a> ';
+						foreach ($implements as $interfaceName) {
+                $interface = $rootDoc->classNamed($interfaceName);
+                if ($interface) {
+                    echo '<a href="', str_repeat('../', $this->_depth), $interface->asPath(), '">';
+                    if ($interface->packageName() != $class->packageName()) {
+                        echo $interface->packageName(), '\\';
+                    }
+                    echo $interface->name(), '</a> ';
+                } else {
+                    echo $interfaceName;
+                }
 						}
 						echo "</dd>\n";
 						echo "</dl>\n\n";
