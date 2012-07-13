@@ -374,12 +374,17 @@ class ClassDoc extends ProgramElementDoc
             // merge method data
             $methods =& $this->methods();
             foreach ($methods as $name => $method) {
-                $parentMethod =& $parent->methodNamed($name);
+                $methodParams = $method->parameters();
+                $parentMethod = $parent->methodNamed($name);
                 if ($parentMethod) {
                     // tags
                     $tags =& $parentMethod->tags();
                     if ($tags) {
                         foreach ($tags as $tagName => $tag) {
+                            if ($tagName === '@param') {
+                              continue;
+                            }
+
                             if (!isset($methods[$name]->_tags[$tagName])) {
                                 $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with tag '.$tagName.' from parent '.$parent->name().':'.$parentMethod->name());
                                 if (is_array($tag)) {
@@ -393,17 +398,61 @@ class ClassDoc extends ProgramElementDoc
                                 }
                             }
                         }
+
+                        if (isset($tags['@param'])) {
+                          $paramTags = isset($method->_tags['@param'])
+                            ? $method->_tags['@param']
+                            : array();
+
+                          if (!is_array($paramTags)) {
+                            $paramTags = array( $paramTags );
+                          }
+
+                          $parentParamTags = is_array($tags['@param'])
+                            ? $tags['@param']
+                            : array( $tags['@param'] );
+
+                          foreach ($methodParams as $paramName => $param) {
+                            $hasTag = false;
+                            foreach ($paramTags as $paramTag) {
+                              if ($paramTag->_var === $paramName) {
+                                // The parameter already has a param tag
+                                $hasTag = true;
+                                break;
+                              }
+                            }
+
+                            if (!$hasTag) {
+                              // Find a parent param tag with the same name and
+                              // add it to the collection of param tags
+                              foreach ($parentParamTags as $parentParamTag) {
+                                if ($parentParamTag->_var === $paramName) {
+                                  if (!isset($method->_tags['@param'])) {
+                                    $method->_tags['@param'] = $parentParamTag;
+                                  } else if (!is_array($method->_tags['@param'])) {
+                                    $method->_tags['@param'] = array(
+                                      $method->_tags['@param'],
+                                      $parentParamTag
+                                    );
+                                  } else {
+                                    $method->_tags['@param'][] = $parentParamTag;
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
                     }
+
                     // method parameters
                     foreach($parentMethod->parameters() as $paramName => $param) {
                         if (isset($methods[$name]->_parameters[$paramName])) {
                             $type =& $methods[$name]->_parameters[$paramName]->type();
-                        }
-                        if (!isset($methods[$name]->_parameters[$paramName]) || $type->typeName() == 'mixed') {
-                            $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with parameter '.$paramName.' from parent '.$parent->name().':'.$parentMethod->name());
-                            $paramType =& $param->type();
-                            $methods[$name]->_parameters[$paramName] =& new fieldDoc($paramName, $methods[$name], $this->_root);
-                            $methods[$name]->_parameters[$paramName]->set('type', new type($paramType->typeName(), $this->_root));
+                            if ($type->typeName() === 'mixed') {
+                              $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with parameter '.$paramName.' type from parent '.$parent->name().':'.$parentMethod->name());
+                              $paramType =& $param->type();
+                              $methods[$name]->_parameters[$paramName]->set('type', new type($paramType->typeName(), $this->_root));
+                            }
                         }
                     }
                     // method return type
