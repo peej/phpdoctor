@@ -9,6 +9,13 @@ DESCRIPTION
 	PHPDoctor is a Javadoc style comment parser for PHP, written with an
 	emphasis on speed and simplicity. It is designed to be as close a
 	clone to Javadoc as possible.
+
+WHAT IS DIFFERENT FROM THE ORIGINAL
+        This fork is to add doclets, the first one will be a doclet that outputs 
+        markdown documentation which can be uploaded to Github and can be read from the
+        github source browser.
+
+        Here is a sample output: https://github.com/JeyDotC/Hirudo-docs
 	
 REQUIREMENTS
 	PHP 4.3.0+ is required due to use of the PHP tokenizer extension. The
