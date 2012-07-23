@@ -6,3 +6,4 @@ doclets/standard/geshi
 *.komodoproject
 *.komodotools
 /nbproject/private/
+.idea/
