@@ -34,6 +34,7 @@ if (!defined('T_NAMESPACE')) define('T_NAMESPACE', 0);
 if (!defined('T_NS_C')) define('T_NS_C', 0);
 if (!defined('T_NS_SEPARATOR')) define('T_NS_SEPARATOR', 0);
 if (!defined('T_USE')) define('T_USE', 0);
+if (!defined('T_TRAIT')) define('T_TRAIT', 0);
 if (!defined('GLOB_ONLYDIR')) define('GLOB_ONLYDIR', FALSE);
 
 // load classes
@@ -683,6 +684,30 @@ class phpDoctor
                                     $ce =& $interface;
                                     break;
 
+                                case T_TRAIT:
+                                // read trait
+                                    $trait =& new classDoc($this->_getProgramElementName($tokens, $key), $rootDoc, $filename, $lineNumber, $this->sourcePath()); // create trait object
+                                    $this->verbose('+ Entering '.get_class($trait).': '.$trait->name());
+                                    if (isset($currentData['docComment'])) { // set doc comment
+                                        $trait->set('docComment', $currentData['docComment']);
+                                    }
+                                    $trait->set('data', $currentData); // set data
+                                    $trait->set('trait', TRUE); // this element is a trait
+                                    if (isset($currentData['package']) && $currentData['package'] != NULL) { // set package
+                                        $currentPackage = $currentData['package'];
+                                    }
+                                    $trait->set('package', $currentPackage);
+
+                                    $parentPackage =& $rootDoc->packageNamed($trait->packageName(), TRUE); // get parent package
+                                    $parentPackage->addClass($trait); // add class to package
+                                    $trait->setByRef('parent', $parentPackage); // set parent reference
+                                    $currentData = array(); // empty data store
+                                    if ($this->_includeElements($trait)) {
+                                        $currentElement[count($currentElement)] =& $trait; // re-assign current element
+                                    }
+                                    $ce =& $trait;
+                                    break;
+
                                 case T_EXTENDS:
                                 // get extends clause
                                     $superClassName = $this->_getProgramElementName($tokens, $key);
@@ -744,10 +769,26 @@ class phpDoctor
                                     $currentData['var'] = 'const';
                                     break;
 
+                                case T_USE:
+                                    if (strtolower(get_class($ce)) == 'classdoc') {
+                                        while ($tokens[++$key][0] != ';') {
+                                            if ($tokens[$key][0] == T_STRING) {
+                                                $className = $tokens[$key][1];
+                                                $class =& $rootDoc->classNamed($className);
+                                                if ($class) {
+                                                    $ce->setByRef('traits', $class);
+                                                } else {
+                                                    $ce->set('traits', $className);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    break;
+
                                 case T_NAMESPACE:
                                 case T_NS_C:
                                     $namespace = '';
-                                    while($tokens[++$key][0] != T_STRING);
+                                    while ($tokens[++$key][0] != T_STRING);
                                     $namespace = $tokens[$key++][1];
                                     while ($tokens[$key][0] == T_NS_SEPARATOR) {
                                         $namespace .= $tokens[$key++][1] . $tokens[$key++][1];
