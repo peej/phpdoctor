@@ -3,13 +3,13 @@ NAME
 	Peej's Quick & Dirty PHPDoc Clone
 
 VERSION
-	2 RC4
+	2.0.5
 
 DESCRIPTION
 	PHPDoctor is a Javadoc style comment parser for PHP, written with an
 	emphasis on speed and simplicity. It is designed to be as close a
 	clone to Javadoc as possible.
-	
+
 REQUIREMENTS
 	PHP 5.3+ is required. This program may work	with older versions of PHP
 	with the tokenizer extension enabled but it has not been tested and you
