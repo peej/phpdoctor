@@ -97,7 +97,7 @@ class ClassWriter extends HTMLWriter
 						echo "</dl>\n\n";
 					}
 					
-					$subclasses =& $class->subclasses();
+					$subclasses = $class->subclasses();
 					if ($subclasses) {
 						echo "<dl>\n";
 						echo "<dt>All Known Subclasses:</dt>\n";
