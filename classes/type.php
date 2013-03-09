@@ -22,88 +22,86 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor
  */
-class Type
+class type
 {
 
-	/** The name of the type.
-	 *
-	 * @var str
-	 */
-	var $_name = NULL;
+    /** The name of the type.
+     *
+     * @var str
+     */
+    public $_name = NULL;
 
-	/** The number of dimensions this type has.
-	 *
-	 * @var int
-	 */
-	var $_dimension = 0;
+    /** The number of dimensions this type has.
+     *
+     * @var int
+     */
+    public $_dimension = 0;
 
-	/** Reference to the root element.
-	 *
-	 * @var rootDoc
-	 */
-	var $_root = NULL;
+    /** Reference to the root element.
+     *
+     * @var rootDoc
+     */
+    public $_root = NULL;
 
-	/** Constructor
+    /** Constructor
      *
      * @param str name The name of the variable type
      * @param RootDoc root The RootDoc object to tie this type too
-	 */
-	function type($name, &$root)
+     */
+    public function type($name, &$root)
     {
-		while (substr($name, -2) == '[]') {
-			$this->_dimension++;
-			$name = substr($name, 0, -2);
-		}
-		$this->_name = $name;
-		$this->_root =& $root;
-	}
+        while (substr($name, -2) == '[]') {
+            $this->_dimension++;
+            $name = substr($name, 0, -2);
+        }
+        $this->_name = $name;
+        $this->_root =& $root;
+    }
 
-	/** Get name of this type.
-	 *
-	 * @return str
-	 */
-	function typeName()
+    /** Get name of this type.
+     *
+     * @return str
+     */
+    public function typeName()
     {
-		return $this->_name;
-	}
+        return $this->_name;
+    }
 
-	/** Return the type's dimension information, as a string.
-	 *
-	 * @return str
-	 */
-	function dimension()
+    /** Return the type's dimension information, as a string.
+     *
+     * @return str
+     */
+    public function dimension()
     {
-		return str_repeat('[]', $this->_dimension);
-	}
+        return str_repeat('[]', $this->_dimension);
+    }
 
-	/** Get qualified name of this type.
-	 *
-	 * @return str
+    /** Get qualified name of this type.
+     *
+     * @return str
      * @todo This method is still to be implemented
-	 */
-	function qualifiedTypeName()
+     */
+    public function qualifiedTypeName()
     {
         return $this->typeName();
     }
 
-	/** Returns a string representation of the type.
-	 *
-	 * @return str
-	 */
-	function toString()
+    /** Returns a string representation of the type.
+     *
+     * @return str
+     */
+    public function toString()
     {
-		return $this->_name.$this->dimension();
-	}
+        return $this->_name.$this->dimension();
+    }
 
-	/** Return this type as a class.
-	 *
-	 * @return ClassDoc A classDoc if the type is a class, null if it is a primitive type.
-	 */
-	function &asClassDoc()
+    /** Return this type as a class.
+     *
+     * @return ClassDoc A classDoc if the type is a class, null if it is a primitive type.
+     */
+    function &asClassDoc()
     {
-		return $this->_root->classNamed($this->_name);
-	}
+        return $this->_root->classNamed($this->_name);
+    }
 
 }
-
-?>

@@ -18,101 +18,99 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-require_once('linkPlainTag.php');
+require_once 'linkPlainTag.php';
 
 /** Represents an inline link tag.
  *
  * @package PHPDoctor\Tags
  */
-class LinkTag extends LinkPlainTag
+class linkTag extends LinkPlainTag
 {
 
-	/**
-	 * Constructor
-	 *
-	 * @param str text The contents of the tag
-	 * @param str[] data Reference to doc comment data array
-	 * @param RootDoc root The root object
-	 */
-	function linkTag($text, &$data, &$root)
-    {
-		parent::linkPlainTag($text, $data, $root);
-		$this->_name = '@link';
-	}
-	
-	/** Get the value of the tag as raw data, without any text processing applied.
-	 *
-	 * @param TextFormatter formatter
-	 * @return str
-	 */
-	function text($formatter)
-    {
-		return $formatter->asCode(parent::text($formatter));
-	}
-	
-	/** Return true if this Taglet is used in constructor documentation.
+    /**
+     * Constructor
      *
-     * @return bool
+     * @param str text The contents of the tag
+     * @param str[] data Reference to doc comment data array
+     * @param RootDoc root The root object
      */
-	function inConstructor()
+    public function linkTag($text, &$data, &$root)
     {
-		return TRUE;
-	}
+        parent::linkPlainTag($text, $data, $root);
+        $this->_name = '@link';
+    }
 
-	/** Return true if this Taglet is used in field documentation.
+    /** Get the value of the tag as raw data, without any text processing applied.
      *
-     * @return bool
+     * @param TextFormatter formatter
+     * @return str
      */
-	function inField()
+    public function text($formatter)
     {
-		return TRUE;
-	}
+        return $formatter->asCode(parent::text($formatter));
+    }
 
-	/** Return true if this Taglet is used in method documentation.          
+    /** Return true if this Taglet is used in constructor documentation.
      *
      * @return bool
      */
-	function inMethod()
+    public function inConstructor()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in overview documentation.
+    /** Return true if this Taglet is used in field documentation.
      *
      * @return bool
      */
-	function inOverview()
+    public function inField()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in package documentation.
+    /** Return true if this Taglet is used in method documentation.
      *
      * @return bool
      */
-	function inPackage()
+    public function inMethod()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in class or interface documentation.
+    /** Return true if this Taglet is used in overview documentation.
      *
      * @return bool
      */
-	function inType()
+    public function inOverview()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is an inline tag.
+    /** Return true if this Taglet is used in package documentation.
      *
      * @return bool
      */
-	function isInlineTag()
+    public function inPackage()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
+
+    /** Return true if this Taglet is used in class or interface documentation.
+     *
+     * @return bool
+     */
+    public function inType()
+    {
+        return TRUE;
+    }
+
+    /** Return true if this Taglet is an inline tag.
+     *
+     * @return bool
+     */
+    public function isInlineTag()
+    {
+        return TRUE;
+    }
 
 }
-
-?>

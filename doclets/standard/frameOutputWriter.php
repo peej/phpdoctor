@@ -23,21 +23,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor\Doclets\Standard
  */
-class FrameOutputWriter extends HTMLWriter
+class frameOutputWriter extends HTMLWriter
 {
 
-	/** Build the HTML frameset.
-	 *
-	 * @param Doclet doclet
-	 */
-	function frameOutputWriter(&$doclet)
+    /** Build the HTML frameset.
+     *
+     * @param Doclet doclet
+     */
+    public function frameOutputWriter(&$doclet)
     {
-	
-		parent::HTMLWriter($doclet);
 
-		ob_start();
-		echo <<<END
-		
+        parent::HTMLWriter($doclet);
+
+        ob_start();
+        echo <<<END
+
 <frameset cols="20%,80%">
 
 <frameset rows="30%,70%">
@@ -60,22 +60,20 @@ class FrameOutputWriter extends HTMLWriter
 </frameset>
 END;
 
-		$this->_output = ob_get_contents();
-		ob_end_clean();
-		
-		$this->_write('index.html', FALSE, FALSE);
-	
-	}
-    
+        $this->_output = ob_get_contents();
+        ob_end_clean();
+
+        $this->_write('index.html', FALSE, FALSE);
+
+    }
+
     /** Get the HTML DOCTYPE for this output
      *
      * @return str
      */
-    function _doctype()
+    public function _doctype()
     {
         return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">'."\n\n";
     }
 
 }
-
-?>

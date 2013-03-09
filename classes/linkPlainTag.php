@@ -18,98 +18,96 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-require_once('seeTag.php');
+require_once 'seeTag.php';
 
 /** Represents an inline link tag.
  *
  * @package PHPDoctor\Tags
  */
-class LinkPlainTag extends SeeTag
+class linkPlainTag extends SeeTag
 {
 
-	/**
-	 * Constructor
-	 *
-	 * @param str text The contents of the tag
-	 * @param str[] data Reference to doc comment data array
-	 * @param RootDoc root The root object
-	 */
-	function linkPlainTag($text, &$data, &$root)
+    /**
+     * Constructor
+     *
+     * @param str text The contents of the tag
+     * @param str[] data Reference to doc comment data array
+     * @param RootDoc root The root object
+     */
+    public function linkPlainTag($text, &$data, &$root)
     {
-		$explode = preg_split('/[ \t]+/', $text);
-		$link = array_shift($explode);
-		if ($link) {
-			$this->_link = $link;
-			$text = join(' ', $explode);
-		} else {
-			$this->_link = NULL;
-		}
-		parent::tag('@linkplain', $text, $root);
-	}
+        $explode = preg_split('/[ \t]+/', $text);
+        $link = array_shift($explode);
+        if ($link) {
+            $this->_link = $link;
+            $text = join(' ', $explode);
+        } else {
+            $this->_link = NULL;
+        }
+        parent::tag('@linkplain', $text, $root);
+    }
 
-	/** Return true if this Taglet is used in constructor documentation.
+    /** Return true if this Taglet is used in constructor documentation.
      *
      * @return bool
      */
-	function inConstructor()
+    public function inConstructor()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in field documentation.
+    /** Return true if this Taglet is used in field documentation.
      *
      * @return bool
      */
-	function inField()
+    public function inField()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in method documentation.        
+    /** Return true if this Taglet is used in method documentation.
      *
      * @return bool
      */
-	function inMethod()
+    public function inMethod()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in overview documentation.
+    /** Return true if this Taglet is used in overview documentation.
      *
      * @return bool
      */
-	function inOverview()
+    public function inOverview()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in package documentation.
+    /** Return true if this Taglet is used in package documentation.
      *
      * @return bool
      */
-	function inPackage()
+    public function inPackage()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in class or interface documentation.
+    /** Return true if this Taglet is used in class or interface documentation.
      *
      * @return bool
      */
-	function inType()
+    public function inType()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is an inline tag.
+    /** Return true if this Taglet is an inline tag.
      *
      * @return bool
      */
-	function isInlineTag()
+    public function isInlineTag()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
 }
-
-?>

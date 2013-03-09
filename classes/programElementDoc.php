@@ -25,259 +25,261 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * @package PHPDoctor
  * @abstract
  */
-class ProgramElementDoc extends Doc
+class programElementDoc extends Doc
 {
 
-	/** Reference to the elements parent.
-	 *
-	 * @var doc
-	 */
-	var $_parent = NULL;
+    /** Reference to the elements parent.
+     *
+     * @var doc
+     */
+    public $_parent = NULL;
 
-	/** The elements package.
-	 *
-	 * @var str
-	 */
-	var $_package = NULL;
+    /** The elements package.
+     *
+     * @var str
+     */
+    public $_package = NULL;
 
-	/** If this element is final.
-	 *
-	 * @var bool
-	 */
-	var $_final = FALSE;
+    /** If this element is final.
+     *
+     * @var bool
+     */
+    public $_final = FALSE;
 
-	/** Access type for this element.
-	 *
-	 * @var str
-	 */
-	var $_access = 'public';
+    /** Access type for this element.
+     *
+     * @var str
+     */
+    public $_access = 'public';
 
-	/** If this element is static.
-	 *
-	 * @var bool
-	 */
-	var $_static = FALSE;
-	
-	/** Which source file is this element in
-	 *
-	 * @var str
-	 */
-	var $_filename = NULL;
-	
-	/** The line in the source file this element can be found at
-	 *
-	 * @var int
-	 */
-	var $_lineNumber = NULL;
-	
-	/** The source path containing the source file
-	 *
-	 * @var str
-	 */
-	var $_sourcePath = NULL;
-	
-	/** Set element to have public access */
-	function makePublic()
+    /** If this element is static.
+     *
+     * @var bool
+     */
+    public $_static = FALSE;
+
+    /** Which source file is this element in
+     *
+     * @var str
+     */
+    public $_filename = NULL;
+
+    /** The line in the source file this element can be found at
+     *
+     * @var int
+     */
+    public $_lineNumber = NULL;
+
+    /** The source path containing the source file
+     *
+     * @var str
+     */
+    public $_sourcePath = NULL;
+
+    /** Set element to have public access */
+    public function makePublic()
     {
-		$this->_access = 'public';
-	}
+        $this->_access = 'public';
+    }
 
-	/** Set element to have protected access */
-	function makeProtected()
+    /** Set element to have protected access */
+    public function makeProtected()
     {
-		$this->_access = 'protected';
-	}
+        $this->_access = 'protected';
+    }
 
-	/** Set element to have private access */
-	function makePrivate()
+    /** Set element to have private access */
+    public function makePrivate()
     {
-		$this->_access = 'private';
-	}
+        $this->_access = 'private';
+    }
 
-	/** Get the containing class of this program element. If the element is in
-	 * the global scope and does not have a parent class, this will return null.
-	 *
-	 * @return ClassDoc
-	 */
-	function &containingClass()
+    /** Get the containing class of this program element. If the element is in
+     * the global scope and does not have a parent class, this will return null.
+     *
+     * @return ClassDoc
+     */
+    function &containingClass()
     {
         $return = NULL;
         if (strtolower(get_class($this->_parent)) == 'classdoc') {
             $return =& $this->_parent;
         }
+
         return $return;
-	}
+    }
 
-	/** Get the package that this program element is contained in.
-	 *
-	 * @return PackageDoc
-	 */
-	function &containingPackage()
+    /** Get the package that this program element is contained in.
+     *
+     * @return PackageDoc
+     */
+    function &containingPackage()
     {
-		return $this->_root->packageNamed($this->_package);
-	}
-	
-	/** Get the name of the package that this program element is contained in.
-	 *
-	 * @return str
-	 */
-	function packageName()
-    {
-		return $this->_package;
-	}
+        return $this->_root->packageNamed($this->_package);
+    }
 
-	/** Get the fully qualified name.
-	 *
-	 * <pre>Example:
+    /** Get the name of the package that this program element is contained in.
+     *
+     * @return str
+     */
+    public function packageName()
+    {
+        return $this->_package;
+    }
+
+    /** Get the fully qualified name.
+     *
+     * <pre>Example:
 for the method bar() in class Foo in the package Baz, return:
-	Baz\Foo\bar()</pre>
-	 *
-	 * @return str
-	 */
-	function qualifiedName()
+    Baz\Foo\bar()</pre>
+     *
+     * @return str
+     */
+    public function qualifiedName()
     {
-		$parent =& $this->containingClass();
-		if ($parent && $parent->name() != '' && $this->_package != $parent->name()) {
-			return $this->_package.'\\'.$parent->name().'\\'.$this->_name;
-		} else {
-			return $this->_package.'\\'.$this->_name;
-		}
-	}
+        $parent =& $this->containingClass();
+        if ($parent && $parent->name() != '' && $this->_package != $parent->name()) {
+            return $this->_package.'\\'.$parent->name().'\\'.$this->_name;
+        } else {
+            return $this->_package.'\\'.$this->_name;
+        }
+    }
 
-	/** Get modifiers string.
-	 *
-	 * <pre> Example, for:
-	public abstract int foo() { ... }
+    /** Get modifiers string.
+     *
+     * <pre> Example, for:
+    public abstract int foo() { ... }
 modifiers() would return:
-	'public abstract'</pre>
-	 *
-	 * @return str
-	 */
-	function modifiers($showPublic = TRUE)
+    'public abstract'</pre>
+     *
+     * @return str
+     */
+    public function modifiers($showPublic = TRUE)
     {
-		$modifiers = '';
-		if ($showPublic || $this->_access != 'public') {
-			$modifiers .= $this->_access.' ';
-		}
-		if ($this->_final) {
-			$modifiers .= 'final ';
-		}
-		if (isset($this->_abstract) && $this->_abstract) {
-			$modifiers .= 'abstract ';
-		}
-		if ($this->_static) {
-			$modifiers .= 'static ';
-		}
-		return $modifiers;
-	}
+        $modifiers = '';
+        if ($showPublic || $this->_access != 'public') {
+            $modifiers .= $this->_access.' ';
+        }
+        if ($this->_final) {
+            $modifiers .= 'final ';
+        }
+        if (isset($this->_abstract) && $this->_abstract) {
+            $modifiers .= 'abstract ';
+        }
+        if ($this->_static) {
+            $modifiers .= 'static ';
+        }
 
-	/** Return true if this program element is public.
-	 *
-	 * @return bool
-	 */	
-	function isPublic()
-    {
-		if ($this->_access == 'public') {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
+        return $modifiers;
+    }
 
-	/** Return true if this program element is protected.
-	 *
-	 * @return bool
-	 */	
-	function isProtected()
+    /** Return true if this program element is public.
+     *
+     * @return bool
+     */
+    public function isPublic()
     {
-		if ($this->_access == 'protected') {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
+        if ($this->_access == 'public') {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 
-	/** Return true if this program element is private.
-	 *
-	 * @return bool
-	 */	
-	function isPrivate()
+    /** Return true if this program element is protected.
+     *
+     * @return bool
+     */
+    public function isProtected()
     {
-		if ($this->_access == 'private') {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
-	
-	/** Return true if this program element is final.
-	 *
-	 * @return bool
-	 */	
-	function isFinal()
+        if ($this->_access == 'protected') {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /** Return true if this program element is private.
+     *
+     * @return bool
+     */
+    public function isPrivate()
     {
-		return $this->_final;
-	}
-	
-	/** Return true if this program element is static.
-	 *
-	 * @return bool
-	 */	
-	function isStatic()
+        if ($this->_access == 'private') {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /** Return true if this program element is final.
+     *
+     * @return bool
+     */
+    public function isFinal()
     {
-		return $this->_static;
-	}
-	
-	/** Get the source location of this element
-	 *
-	 * @return str
-	 */
-	function location()
-	{
-		return $this->sourceFilename().' at line '.$this->sourceLine();
-	}
-	
-	function sourceFilename()
-	{
-		$phpdoctor = $this->_root->phpdoctor();
-	    return substr($this->_filename, strlen($this->_sourcePath) + 1);
-	}
-	
-	function sourceLine()
-	{
-	    return $this->_lineNumber;
-	}
-    
-	/** Return the element path.
-	 *
-	 * @return str
-	 */
-	function asPath()
+        return $this->_final;
+    }
+
+    /** Return true if this program element is static.
+     *
+     * @return bool
+     */
+    public function isStatic()
     {
-		if ($this->isClass() || $this->isInterface() || $this->isException()) {
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html');
-		} elseif ($this->isField()) {
-			$class =& $this->containingClass();
-			if ($class) {
-				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name;
-			} else {
-				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#').$this->_name;
-			}
-		} elseif ($this->isConstructor() || $this->isMethod()) {
-			$class =& $this->containingClass();
-			if ($class) {
-				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name.'()';
-			} else {
-				return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#').$this->_name.'()';
-			}
-		} elseif ($this->isGlobal()) {
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#').$this->_name;
-		} elseif ($this->isFunction()) {
-			return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#').$this->_name.'()';
-		}
-		return NULL;
-	}
+        return $this->_static;
+    }
+
+    /** Get the source location of this element
+     *
+     * @return str
+     */
+    public function location()
+    {
+        return $this->sourceFilename().' at line '.$this->sourceLine();
+    }
+
+    public function sourceFilename()
+    {
+        $phpdoctor = $this->_root->phpdoctor();
+
+        return substr($this->_filename, strlen($this->_sourcePath) + 1);
+    }
+
+    public function sourceLine()
+    {
+        return $this->_lineNumber;
+    }
+
+    /** Return the element path.
+     *
+     * @return str
+     */
+    public function asPath()
+    {
+        if ($this->isClass() || $this->isInterface() || $this->isException()) {
+            return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html');
+        } elseif ($this->isField()) {
+            $class =& $this->containingClass();
+            if ($class) {
+                return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name;
+            } else {
+                return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#').$this->_name;
+            }
+        } elseif ($this->isConstructor() || $this->isMethod()) {
+            $class =& $this->containingClass();
+            if ($class) {
+                return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$class->name().'.html#').$this->_name.'()';
+            } else {
+                return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#').$this->_name.'()';
+            }
+        } elseif ($this->isGlobal()) {
+            return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-globals.html#').$this->_name;
+        } elseif ($this->isFunction()) {
+            return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/package-functions.html#').$this->_name.'()';
+        }
+
+        return NULL;
+    }
 
 }
-
-?>

@@ -11,11 +11,9 @@ DESCRIPTION
 	clone to Javadoc as possible.
 	
 REQUIREMENTS
-	PHP 4.3.0+ is required due to use of the PHP tokenizer extension. The
-	tokenizer is built into PHP 4.3.0 by default, this program may work
-	with older versions of PHP with the tokenizer extension enabled but it
-	has not been tested and you are recommended to upgrade to 4.3.0+ for
-	using this program.
+	PHP 5.3+ is required. This program may work	with older versions of PHP
+	with the tokenizer extension enabled but it has not been tested and you
+	are recommended to upgrade to 5.3+ for using this program.
 
 Q&A
 	Q: WHY DO WE NEED ANOTHER PHPDOC CLONE?
@@ -36,10 +34,9 @@ Q&A
 	PHP do the parsing of your source code. PHPDoctor just takes the tokens
 	PHP parses out and turns them into API documentation. This means it will
 	work for any valid PHP code, no exceptions, it also makes it very fast.
-	The down side of this is that it needs PHP 4.3 or above to work.
 
 FEATURES
-	* Fast running speed, uses PHP 4.3 tokenizer function to take advantage
+	* Fast running speed, uses PHP tokenizer function to take advantage
 	of PHPs internal parsing functionality.
 	* Parsing of any valid PHP file, with multiple classes and functions in
 	the same file.
@@ -50,8 +47,6 @@ FEATURES
 	present.
 	* Works with both OO and procedural code, also documents global
 	variables and constants.
-	* Supports PHP5 enhanced syntax, including interfaces (requires PHP5
-	to work).
 	* Minimal changes to Sun's Javadoc specification.
 	* Javadoc extensions compatible with other PHPDoc programs.
 	* Did I say it was fast?
@@ -70,13 +65,7 @@ FILES
 	doclets/standard/*.php - Standard HTML doclet
 
 USAGE
-	phpdoc.php <config_file>
-	
-	If you are using MS Windows and don't have the .php file type registered
-	with the PHP CLI executable, you will need to call the PHP executable
-	explicitly as in:
-
-	c:\php\cli\php.exe phpdoc.php <config_file>
+	php phpdoc.php <config_file>
 	
 	To create a config file for your project, copy the default.ini file and
 	edit it to your needs, it's fully commented.

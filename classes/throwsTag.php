@@ -18,112 +18,110 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-require_once('seeTag.php');
+require_once 'seeTag.php';
 
 /** Represents a throws tag.
  *
  * @package PHPDoctor\Tags
  */
-class ThrowsTag extends SeeTag
+class throwsTag extends SeeTag
 {
 
-	/**
-	 * Constructor
-	 *
-	 * @param str text The contents of the tag
-	 * @param str[] data Reference to doc comment data array
-	 * @param RootDoc root The root object
-	 */
-	function throwsTag($text, &$data, &$root)
+    /**
+     * Constructor
+     *
+     * @param str text The contents of the tag
+     * @param str[] data Reference to doc comment data array
+     * @param RootDoc root The root object
+     */
+    public function throwsTag($text, &$data, &$root)
     {
-		$explode = preg_split('/[ \t]+/', $text);
-		$this->_link = array_shift($explode);
-		$data['throws'][$this->_link] = $this->_link;
-		parent::tag('@throws', join(' ', $explode), $root);
-	}
+        $explode = preg_split('/[ \t]+/', $text);
+        $this->_link = array_shift($explode);
+        $data['throws'][$this->_link] = $this->_link;
+        parent::tag('@throws', join(' ', $explode), $root);
+    }
 
-	/** Get display name of this tag.
-	 *
-	 * @return str
-	 */
-	function displayName()
+    /** Get display name of this tag.
+     *
+     * @return str
+     */
+    public function displayName()
     {
-		return 'Throws';
-	}
+        return 'Throws';
+    }
 
-	/** Get value of this tag.
-	 *
-	 * @param Doclet doclet
-	 * @return str
-	 */
-	function text($doclet)
+    /** Get value of this tag.
+     *
+     * @param Doclet doclet
+     * @return str
+     */
+    public function text($doclet)
     {
-		return $this->_linkText($this->_link, $doclet) . ($this->_text ? ' - ' . $this->_text : '');
-	}
+        return $this->_linkText($this->_link, $doclet) . ($this->_text ? ' - ' . $this->_text : '');
+    }
 
-	/** Return true if this Taglet is used in constructor documentation.
+    /** Return true if this Taglet is used in constructor documentation.
      *
      * @return bool
      */
-	function inConstructor()
+    public function inConstructor()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in field documentation.
+    /** Return true if this Taglet is used in field documentation.
      *
      * @return bool
      */
-	function inField()
+    public function inField()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is used in method documentation.
+    /** Return true if this Taglet is used in method documentation.
      *
      * @return bool
      */
-	function inMethod()
+    public function inMethod()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in overview documentation.
+    /** Return true if this Taglet is used in overview documentation.
      *
      * @return bool
      */
-	function inOverview()
+    public function inOverview()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is used in package documentation.
+    /** Return true if this Taglet is used in package documentation.
      *
      * @return bool
      */
-	function inPackage()
+    public function inPackage()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is used in class or interface documentation.
+    /** Return true if this Taglet is used in class or interface documentation.
      *
      * @return bool
      */
-	function inType()
+    public function inType()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is an inline tag.
+    /** Return true if this Taglet is an inline tag.
      *
      * @return bool
      */
-	function isInlineTag()
+    public function isInlineTag()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
 }
-
-?>

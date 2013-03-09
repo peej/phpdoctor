@@ -22,124 +22,122 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor\Tags
  */
-class ParamTag extends Tag
+class paramTag extends Tag
 {
 
-	/** The variable name of the parameter
-	 *
-	 * @var str
-	 */
-	var $_var = NULL;
+    /** The variable name of the parameter
+     *
+     * @var str
+     */
+    public $_var = NULL;
 
-	/**
-	 * Constructor
-	 *
-	 * @param str text The contents of the tag
-	 * @param str[] data Reference to doc comment data array
-	 * @param RootDoc root The root object
-	 */
-	function paramTag($text, &$data, &$root)
+    /**
+     * Constructor
+     *
+     * @param str text The contents of the tag
+     * @param str[] data Reference to doc comment data array
+     * @param RootDoc root The root object
+     */
+    public function paramTag($text, &$data, &$root)
     {
-		$explode = preg_split('/[ \t]+/', $text);
-		$type = array_shift($explode);
-		if ($type) {
-			$this->_var = trim(array_shift($explode), '$');
-			if ($this->_var) {
-			    $data['parameters'][$this->_var]['type'] = $type; 
-			} else {
-			    $count = isset($data['parameters']) ? count($data['parameters']) : 0;
-			    $data['parameters']['__unknown'.$count]['type'] = $type;
-			}
-			$text = join(' ', $explode);
-		}
-		if ($text != '') {
-			parent::tag('@param', $this->_var.' - '.$text, $root);
-		} else {
-			parent::tag('@param', NULL, $root);
-		}
-	}
-	
-	/** Get display name of this tag.
-	 *
-	 * @return str
-	 */
-	function displayName()
+        $explode = preg_split('/[ \t]+/', $text);
+        $type = array_shift($explode);
+        if ($type) {
+            $this->_var = trim(array_shift($explode), '$');
+            if ($this->_var) {
+                $data['parameters'][$this->_var]['type'] = $type;
+            } else {
+                $count = isset($data['parameters']) ? count($data['parameters']) : 0;
+                $data['parameters']['__unknown'.$count]['type'] = $type;
+            }
+            $text = join(' ', $explode);
+        }
+        if ($text != '') {
+            parent::tag('@param', $this->_var.' - '.$text, $root);
+        } else {
+            parent::tag('@param', NULL, $root);
+        }
+    }
+
+    /** Get display name of this tag.
+     *
+     * @return str
+     */
+    public function displayName()
     {
-		return 'Parameters';
-	}
-	
-	/** Return true if this Taglet is used in constructor documentation.
+        return 'Parameters';
+    }
+
+    /** Return true if this Taglet is used in constructor documentation.
      *
      * @return bool
      */
-	function inConstructor()
+    public function inConstructor()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in field documentation.
+    /** Return true if this Taglet is used in field documentation.
      *
      * @return bool
      */
-	function inField()
+    public function inField()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is used in method documentation.
+    /** Return true if this Taglet is used in method documentation.
      *
      * @return bool
      */
-	function inMethod()
+    public function inMethod()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in overview documentation.
+    /** Return true if this Taglet is used in overview documentation.
      *
      * @return bool
      */
-	function inOverview()
+    public function inOverview()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is used in package documentation.
+    /** Return true if this Taglet is used in package documentation.
      *
      * @return bool
      */
-	function inPackage()
+    public function inPackage()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is used in class or interface documentation.
+    /** Return true if this Taglet is used in class or interface documentation.
      *
      * @return bool
      */
-	function inType()
+    public function inType()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is an inline tag.
+    /** Return true if this Taglet is an inline tag.
      *
      * @return bool
      */
-	function isInlineTag()
+    public function isInlineTag()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet should be outputted even if it has no text content.
+    /** Return true if this Taglet should be outputted even if it has no text content.
      *
      * @return bool
      */
-	function displayEmpty()
+    public function displayEmpty()
     {
-		return FALSE;
-	}
-	
+        return FALSE;
+    }
+
 }
-
-?>

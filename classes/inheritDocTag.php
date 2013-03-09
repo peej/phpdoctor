@@ -22,43 +22,43 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor\Tags
  */
-class InheritDocTag extends Tag
+class inheritDocTag extends Tag
 {
 
-	/**
-	 * Constructor
-	 *
-	 * @param str text The contents of the tag
-	 * @param str[] data Reference to doc comment data array
-	 * @param RootDoc root The root object
-	 */
-	function inheritDocTag($text, &$data, &$root)
+    /**
+     * Constructor
+     *
+     * @param str text The contents of the tag
+     * @param str[] data Reference to doc comment data array
+     * @param RootDoc root The root object
+     */
+    public function inheritDocTag($text, &$data, &$root)
     {
-		parent::tag('@inheritDoc', $text, $root);
-	}
-	
-	/** Get text from super element
-	 *
-	 * @param TextFormatter formatter
-	 * @return str
-	 */
-	function text($formatter)
+        parent::tag('@inheritDoc', $text, $root);
+    }
+
+    /** Get text from super element
+     *
+     * @param TextFormatter formatter
+     * @return str
+     */
+    public function text($formatter)
     {
-		if ($this->_parent) {
-		    if ($this->_parent->isClass()) {
-		        $superClassname = $this->_parent->superclass();
-		        if ($superClassname) {
-		            $superClass =& $this->_root->classNamed($superClassname);
-		            if ($superClass) {
-		                $textTag = $superClass->tags('@text');
-		                if ($textTag) {
-		                    $text = $textTag->text($formatter);
-		                    if ($text) {
-		                        return $text;
-		                    }
+        if ($this->_parent) {
+            if ($this->_parent->isClass()) {
+                $superClassname = $this->_parent->superclass();
+                if ($superClassname) {
+                    $superClass =& $this->_root->classNamed($superClassname);
+                    if ($superClass) {
+                        $textTag = $superClass->tags('@text');
+                        if ($textTag) {
+                            $text = $textTag->text($formatter);
+                            if ($text) {
+                                return $text;
+                            }
                         }
-		            }
-		        }
+                    }
+                }
                 $interfaces = $this->_parent->interfaces();
                 foreach ($interfaces as $interface) {
                     $textTag = $interface->tags('@text');
@@ -69,9 +69,9 @@ class InheritDocTag extends Tag
                         }
                     }
                 }
-		    } elseif ($this->_parent->isConstructor() || $this->_parent->isMethod()) {
-		        $parentClass =& $this->_parent->containingClass();
-		        if ($parentClass) {
+            } elseif ($this->_parent->isConstructor() || $this->_parent->isMethod()) {
+                $parentClass =& $this->_parent->containingClass();
+                if ($parentClass) {
                     $superClassname = $parentClass->superclass();
                     if ($superClassname) {
                         $superClass =& $this->_root->classNamed($superClassname);
@@ -102,9 +102,9 @@ class InheritDocTag extends Tag
                         }
                     }
                 }
-		    } elseif ($this->_parent->isField()) {
-		        $parentClass =& $this->_parent->containingClass();
-		        if ($parentClass) {
+            } elseif ($this->_parent->isField()) {
+                $parentClass =& $this->_parent->containingClass();
+                if ($parentClass) {
                     $superClassname = $parentClass->superclass();
                     if ($superClassname) {
                         $superClass =& $this->_root->classNamed($superClassname);
@@ -135,73 +135,71 @@ class InheritDocTag extends Tag
                         }
                     }
                 }
-		    }
-		}
-	}
-	
-	/** Return true if this Taglet is used in constructor documentation.
-     *
-     * @return bool
-     */
-	function inConstructor()
-    {
-		return TRUE;
-	}
+            }
+        }
+    }
 
-	/** Return true if this Taglet is used in field documentation.
+    /** Return true if this Taglet is used in constructor documentation.
      *
      * @return bool
      */
-	function inField()
+    public function inConstructor()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in method documentation.          
+    /** Return true if this Taglet is used in field documentation.
      *
      * @return bool
      */
-	function inMethod()
+    public function inField()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in overview documentation.
+    /** Return true if this Taglet is used in method documentation.
      *
      * @return bool
      */
-	function inOverview()
+    public function inMethod()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in package documentation.
+    /** Return true if this Taglet is used in overview documentation.
      *
      * @return bool
      */
-	function inPackage()
+    public function inOverview()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in class or interface documentation.
+    /** Return true if this Taglet is used in package documentation.
      *
      * @return bool
      */
-	function inType()
+    public function inPackage()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is an inline tag.
+    /** Return true if this Taglet is used in class or interface documentation.
      *
      * @return bool
      */
-	function isInlineTag()
+    public function inType()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
+
+    /** Return true if this Taglet is an inline tag.
+     *
+     * @return bool
+     */
+    public function isInlineTag()
+    {
+        return TRUE;
+    }
 
 }
-
-?>

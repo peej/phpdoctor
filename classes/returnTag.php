@@ -22,104 +22,102 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor\Tags
  */
-class ReturnTag extends Tag
+class returnTag extends Tag
 {
 
-	/**
-	 * Constructor
-	 *
-	 * @param str text The contents of the tag
-	 * @param str[] data Reference to doc comment data array
-	 * @param RootDoc root The root object
-	 */
-	function returnTag($text, &$data, &$root)
-    {
-		$explode = preg_split('/[ \t]+/', $text);
-		$data['return'] = array_shift($explode);
-		parent::tag('@return', join(' ', $explode), $root);
-	}
-	
-	/** Get display name of this tag.
-	 *
-	 * @return str
-	 */
-	function displayName()
-    {
-		return 'Returns';
-	}
-	
-	/** Return true if this Taglet is used in constructor documentation.
+    /**
+     * Constructor
      *
-     * @return bool
+     * @param str text The contents of the tag
+     * @param str[] data Reference to doc comment data array
+     * @param RootDoc root The root object
      */
-	function inConstructor()
+    public function returnTag($text, &$data, &$root)
     {
-		return TRUE;
-	}
+        $explode = preg_split('/[ \t]+/', $text);
+        $data['return'] = array_shift($explode);
+        parent::tag('@return', join(' ', $explode), $root);
+    }
 
-	/** Return true if this Taglet is used in field documentation.
+    /** Get display name of this tag.
      *
-     * @return bool
+     * @return str
      */
-	function inField()
+    public function displayName()
     {
-		return FALSE;
-	}
+        return 'Returns';
+    }
 
-	/** Return true if this Taglet is used in method documentation.
+    /** Return true if this Taglet is used in constructor documentation.
      *
      * @return bool
      */
-	function inMethod()
+    public function inConstructor()
     {
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in overview documentation.
+    /** Return true if this Taglet is used in field documentation.
      *
      * @return bool
      */
-	function inOverview()
+    public function inField()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is used in package documentation.
+    /** Return true if this Taglet is used in method documentation.
      *
      * @return bool
      */
-	function inPackage()
+    public function inMethod()
     {
-		return FALSE;
-	}
+        return TRUE;
+    }
 
-	/** Return true if this Taglet is used in class or interface documentation.
+    /** Return true if this Taglet is used in overview documentation.
      *
      * @return bool
      */
-	function inType()
+    public function inOverview()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet is an inline tag.
+    /** Return true if this Taglet is used in package documentation.
      *
      * @return bool
      */
-	function isInlineTag()
+    public function inPackage()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	/** Return true if this Taglet should be outputted even if it has no text content.
+    /** Return true if this Taglet is used in class or interface documentation.
      *
      * @return bool
      */
-	function displayEmpty()
+    public function inType()
     {
-		return FALSE;
-	}
+        return FALSE;
+    }
+
+    /** Return true if this Taglet is an inline tag.
+     *
+     * @return bool
+     */
+    public function isInlineTag()
+    {
+        return FALSE;
+    }
+
+    /** Return true if this Taglet should be outputted even if it has no text content.
+     *
+     * @return bool
+     */
+    public function displayEmpty()
+    {
+        return FALSE;
+    }
 
 }
-
-?>

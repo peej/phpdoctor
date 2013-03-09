@@ -26,141 +26,142 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor
  */
-class ClassDoc extends ProgramElementDoc
+class classDoc extends ProgramElementDoc
 {
 
-	/** The super class.
-	 *
-	 * @var str
-	 */
-	var $_superclass = NULL;
+    /** The super class.
+     *
+     * @var str
+     */
+    public $_superclass = NULL;
 
-	/** Is this an interface?
-	 *
-	 * @var bool
-	 */
-	var $_interface = FALSE;
-	
-	/** The class constants.
-	 *
-	 * @var fieldDoc[]
-	 */
-	var $_constants = array();
-	
-	/** The class fields.
-	 *
-	 * @var fieldDoc[]
-	 */
-	var $_fields = array();
-	
-	/** The class methods.
-	 *
-	 * @var methodDoc[]
-	 */
-	var $_methods = array();
-	
-	/** Interfaces this class implements or this interface extends.
-	 *
-	 * @var classDoc[]
-	 */
-	var $_interfaces = array();
-	
-	/** Is this class abstract.
-	 *
-	 * @var bool
-	 */
-	var $_abstract = FALSE;
-	
-	/** Constructor
-	 *
-	 * @param str name Name of this element
-	 * @param RootDoc root The root element
-	 * @param str filename The filename of the source file this element is in
-	 * @param int lineNumber The line number of the source file this element is at
-	 * @param str sourcePath The source path containing the source file
-	 */
-	function classDoc($name, &$root, $filename, $lineNumber, $sourcePath)
+    /** Is this an interface?
+     *
+     * @var bool
+     */
+    public $_interface = FALSE;
+
+    /** The class constants.
+     *
+     * @var fieldDoc[]
+     */
+    public $_constants = array();
+
+    /** The class fields.
+     *
+     * @var fieldDoc[]
+     */
+    public $_fields = array();
+
+    /** The class methods.
+     *
+     * @var methodDoc[]
+     */
+    public $_methods = array();
+
+    /** Interfaces this class implements or this interface extends.
+     *
+     * @var classDoc[]
+     */
+    public $_interfaces = array();
+
+    /** Is this class abstract.
+     *
+     * @var bool
+     */
+    public $_abstract = FALSE;
+
+    /** Constructor
+     *
+     * @param str name Name of this element
+     * @param RootDoc root The root element
+     * @param str filename The filename of the source file this element is in
+     * @param int lineNumber The line number of the source file this element is at
+     * @param str sourcePath The source path containing the source file
+     */
+    public function classDoc($name, &$root, $filename, $lineNumber, $sourcePath)
     {
-		$this->_name = $name;
-		$this->_root =& $root;
-		$this->_filename = $filename;
-		$this->_lineNumber = $lineNumber;
-		$this->_sourcePath = $sourcePath;
-	}
-	
-	/** Add a constant to this class.
-	 *
-	 * @param FieldDoc field
-	 */
-	function addConstant(&$constant)
+        $this->_name = $name;
+        $this->_root =& $root;
+        $this->_filename = $filename;
+        $this->_lineNumber = $lineNumber;
+        $this->_sourcePath = $sourcePath;
+    }
+
+    /** Add a constant to this class.
+     *
+     * @param FieldDoc field
+     */
+    public function addConstant(&$constant)
     {
         if (!isset($this->_constants[$constant->name()])) {
             $this->_constants[$constant->name()] =& $constant;
         }
-	}
-	
-	/** Add a field to this class.
-	 *
-	 * @param FieldDoc field
-	 */
-	function addField(&$field)
+    }
+
+    /** Add a field to this class.
+     *
+     * @param FieldDoc field
+     */
+    public function addField(&$field)
     {
         if (!isset($this->_fields[$field->name()])) {
             $this->_fields[$field->name()] =& $field;
         }
-	}
-	
-	/** Add a method to this class.
-	 *
-	 * @param MethodDoc method
-	 */
-	function addMethod(&$method)
+    }
+
+    /** Add a method to this class.
+     *
+     * @param MethodDoc method
+     */
+    public function addMethod(&$method)
     {
         if (isset($this->_methods[$method->name()])) {
             $phpdoctor =& $this->_root->phpdoctor();
             echo "\n";
             $phpdoctor->warning('Found method '.$method->name().' again, overwriting previous version');
         }
-		$this->_methods[$method->name()] =& $method;
-	}
-	
-	/** Return constants in this class.
-	 *
-	 * @return FieldDoc[]
-	 */
-	function &constants()
+        $this->_methods[$method->name()] =& $method;
+    }
+
+    /** Return constants in this class.
+     *
+     * @return FieldDoc[]
+     */
+    function &constants()
     {
-		return $this->_constants;
-	}
-	
-	/** Return fields in this class.
-	 *
-	 * @return FieldDoc[]
-	 */
-	function &fields()
+        return $this->_constants;
+    }
+
+    /** Return fields in this class.
+     *
+     * @return FieldDoc[]
+     */
+    function &fields()
     {
-		return $this->_fields;
-	}
-	
-	/** Return a field in this class.
-	 *
-	 * @return FieldDoc
-	 */
-	function &fieldNamed($fieldName)
+        return $this->_fields;
+    }
+
+    /** Return a field in this class.
+     *
+     * @return FieldDoc
+     */
+    function &fieldNamed($fieldName)
     {
         $return = NULL;
         if (isset($this->_fields[$fieldName])) {
             $return =& $this->_fields[$fieldName];
         }
+
         return $return;
-	}
-    
-	/** Return the methods in this class.
-	 *
-	 * @param bool regularOnly Do not return constructors and destructors
-	 * @return MethodDoc[]
-	 */
-	function &methods($regularOnly = FALSE)
+    }
+
+    /** Return the methods in this class.
+     *
+     * @param bool regularOnly Do not return constructors and destructors
+     * @return MethodDoc[]
+     */
+    function &methods($regularOnly = FALSE)
     {
         if ($regularOnly) {
             $return = array();
@@ -172,27 +173,29 @@ class ClassDoc extends ProgramElementDoc
         } else {
             $return = $this->_methods;
         }
-		return $return;
-	}
 
-	/** Return a method in this class.
-	 *
-	 * @return MethodDoc
-	 */
-	function &methodNamed($methodName)
+        return $return;
+    }
+
+    /** Return a method in this class.
+     *
+     * @return MethodDoc
+     */
+    function &methodNamed($methodName)
     {
         $return = NULL;
         if (isset($this->_methods[$methodName])) {
             $return =& $this->_methods[$methodName];
         }
+
         return $return;
-	}
-	
-	/** Return constructor for this class.
-	 *
-	 * @return MethodDoc
-	 */
-	function &constructor()
+    }
+
+    /** Return constructor for this class.
+     *
+     * @return MethodDoc
+     */
+    function &constructor()
     {
         $return = NULL;
         foreach ($this->_methods as $method) {
@@ -201,14 +204,15 @@ class ClassDoc extends ProgramElementDoc
                 break;
             }
         }
-		return $return;
-	}
-	
-	/** Return destructor for this class.
-	 *
-	 * @return MethodDoc
-	 */
-	function &destructor()
+
+        return $return;
+    }
+
+    /** Return destructor for this class.
+     *
+     * @return MethodDoc
+     */
+    function &destructor()
     {
         $return = NULL;
         foreach ($this->_methods as $method) {
@@ -217,127 +221,130 @@ class ClassDoc extends ProgramElementDoc
                 break;
             }
         }
-		return $return;
-	}
-    
-	/** Return interfaces implemented by this class or interfaces extended by this interface.
-	 *
-	 * @return ClassDoc[]
-	 */
-	function &interfaces()
-    {
-		return $this->_interfaces;
-	}
 
-	/** Return an interface in this class.
-	 *
-	 * @return ClassDoc
-	 */
-	function &interfaceNamed($interfaceName)
+        return $return;
+    }
+
+    /** Return interfaces implemented by this class or interfaces extended by this interface.
+     *
+     * @return ClassDoc[]
+     */
+    function &interfaces()
+    {
+        return $this->_interfaces;
+    }
+
+    /** Return an interface in this class.
+     *
+     * @return ClassDoc
+     */
+    function &interfaceNamed($interfaceName)
     {
         $return = NULL;
         if (isset($this->_interfaces[$interfaceName])) {
             $return =& $this->_interfaces[$interfaceName];
         }
+
         return $return;
-	}
-    
-	/** Return true if this class is abstract.
-	 *
-	 * @return bool
-	 */
-	function isAbstract()
-    {
-		return $this->_abstract;
-	}
+    }
 
-	/** Return true if this element is an interface.
-	 *
-	 * @return bool
-	 */
-	function isInterface()
+    /** Return true if this class is abstract.
+     *
+     * @return bool
+     */
+    public function isAbstract()
     {
-		return $this->_interface;
-	}
+        return $this->_abstract;
+    }
 
-	/** Test whether this class is a subclass of the specified class.
-	 *
-	 * @param ClassDoc cd
-	 * @return bool
-	 */
-	function subclassOf($cd)
+    /** Return true if this element is an interface.
+     *
+     * @return bool
+     */
+    public function isInterface()
     {
-		if ($this->_superclass == $cd->name()) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
+        return $this->_interface;
+    }
 
-	/** Return the superclass of this class.
-	 *
-	 * @return ClassDoc
-	 */
-	function superclass()
+    /** Test whether this class is a subclass of the specified class.
+     *
+     * @param ClassDoc cd
+     * @return bool
+     */
+    public function subclassOf($cd)
     {
-		return $this->_superclass;
-	}
-	
-	/** Is this construct a class. Note: interfaces are not classes.
-	 *
-	 * @return bool
-	 */
-	function isClass()
-    {
-		return !$this->_interface;
-	}
-	
-	/** Is this construct an ordinary class (not an interface or an exception).
-	 *
-	 * @return bool
-	 */
-	function isOrdinaryClass()
-    {
-		if ($this->isClass() && !$this->isException()) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
+        if ($this->_superclass == $cd->name()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 
-	/** Is this construct an exception.
-	 *
-	 * @return bool
-	 */
-	function isException()
+    /** Return the superclass of this class.
+     *
+     * @return ClassDoc
+     */
+    public function superclass()
     {
-		if (strtolower($this->_superclass) == 'exception') {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
-    
-	/** Return the known subclasses of this class
-	 *
-	 * @return classDoc[]
-	 */
-	function subclasses()
-	{
-	    $return = array();
-	    foreach ($this->_root->classes() as $classDoc) {
-	        if ($classDoc->subclassOf($this)) {
-	            $return[] = $classDoc;
-	        }
-	    }
-	    return $return;
-	}
-	
+        return $this->_superclass;
+    }
+
+    /** Is this construct a class. Note: interfaces are not classes.
+     *
+     * @return bool
+     */
+    public function isClass()
+    {
+        return !$this->_interface;
+    }
+
+    /** Is this construct an ordinary class (not an interface or an exception).
+     *
+     * @return bool
+     */
+    public function isOrdinaryClass()
+    {
+        if ($this->isClass() && !$this->isException()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /** Is this construct an exception.
+     *
+     * @return bool
+     */
+    public function isException()
+    {
+        if (strtolower($this->_superclass) == 'exception') {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /** Return the known subclasses of this class
+     *
+     * @return classDoc[]
+     */
+    public function subclasses()
+    {
+        $return = array();
+        foreach ($this->_root->classes() as $classDoc) {
+            if ($classDoc->subclassOf($this)) {
+                $return[] = $classDoc;
+            }
+        }
+
+        return $return;
+    }
+
     /**
      * Merge the details of the superclass with this class.
      * @param str superClassName
      */
-	function mergeSuperClassData($superClassName = NULL)
+    public function mergeSuperClassData($superClassName = NULL)
     {
         if (!$superClassName) {
             $superClassName = $this->superclass();
@@ -348,14 +355,14 @@ class ClassDoc extends ProgramElementDoc
                $this->mergeSuperClassData($parent->superclass());
            }
         }
-  
+
         if (isset($parent)) {
             $phpdoctor = $this->_root->phpdoctor();
 
-			// merge class tags array
+            // merge class tags array
             $tags =& $parent->tags();
-			if ($tags) {
-				foreach ($tags as $name => $tag) {
+            if ($tags) {
+                foreach ($tags as $name => $tag) {
                     if (!isset($this->_tags[$name])) {
                         $phpdoctor->verbose('> Merging class '.$this->name().' with tags from parent '.$parent->name());
                         if (is_array($tag)) {
@@ -368,9 +375,9 @@ class ClassDoc extends ProgramElementDoc
                             $this->_tags[$name]->setParent($this);
                         }
                     }
-				}
-			}
-            
+                }
+            }
+
             // merge method data
             $methods =& $this->methods();
             foreach ($methods as $name => $method) {
@@ -395,7 +402,7 @@ class ClassDoc extends ProgramElementDoc
                         }
                     }
                     // method parameters
-                    foreach($parentMethod->parameters() as $paramName => $param) {
+                    foreach ($parentMethod->parameters() as $paramName => $param) {
                         if (isset($methods[$name]->_parameters[$paramName])) {
                             $type =& $methods[$name]->_parameters[$paramName]->type();
                         }
@@ -412,7 +419,7 @@ class ClassDoc extends ProgramElementDoc
                         $methods[$name]->_returnType = $parentMethod->returnType();
                     }
                     // method thrown exceptions
-                    foreach($parentMethod->thrownExceptions() as $exceptionName => $exception) {
+                    foreach ($parentMethod->thrownExceptions() as $exceptionName => $exception) {
                         if (!isset($methods[$name]->_throws[$exceptionName])) {
                             $phpdoctor->verbose('> Merging method '.$this->name().':'.$name.' with exception '.$exceptionName.' from parent '.$parent->name().':'.$parentMethod->name());
                             $methods[$name]->_throws[$exceptionName] =& $exception;
@@ -420,10 +427,8 @@ class ClassDoc extends ProgramElementDoc
                     }
                 }
             }
-            
+
         }
     }
 
 }
-
-?>

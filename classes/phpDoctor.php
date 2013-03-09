@@ -37,16 +37,16 @@ if (!defined('T_USE')) define('T_USE', 0);
 if (!defined('GLOB_ONLYDIR')) define('GLOB_ONLYDIR', FALSE);
 
 // load classes
-require('classes/doc.php');
-require('classes/rootDoc.php');
-require('classes/packageDoc.php');
-require('classes/programElementDoc.php');
-require('classes/fieldDoc.php');
-require('classes/classDoc.php');
-require('classes/executableDoc.php');
-require('classes/methodDoc.php');
-require('classes/type.php');
-require('classes/tag.php');
+require 'classes/doc.php';
+require 'classes/rootDoc.php';
+require 'classes/packageDoc.php';
+require 'classes/programElementDoc.php';
+require 'classes/fieldDoc.php';
+require 'classes/classDoc.php';
+require 'classes/executableDoc.php';
+require 'classes/methodDoc.php';
+require 'classes/type.php';
+require 'classes/tag.php';
 
 /** This class holds the information from one run of PHPDoctor. Particularly
  * the packages, classes and options specified by the user. It is the root
@@ -55,94 +55,94 @@ require('classes/tag.php');
  *
  * @package PHPDoctor
  */
-class PHPDoctor
+class phpDoctor
 {
 
     /** The version of PHPDoctor.
      *
      * @var str
      */
-    var $_version = '2RC4';
+    public $_version = '2RC4';
 
     /** The path PHPDoctor is running from.
      *
      * @var str
      */
-    var $_path = '.';
+    public $_path = '.';
 
     /** The time in microseconds at the start of execution.
      *
      * @var int
      */
-    var $_startTime = NULL;
+    public $_startTime = NULL;
 
     /** Options from config file.
      *
      * @var str[]
      */
-    var $_options = array();
+    public $_options = array();
 
     /** Turn on verbose output.
      *
      * @var bool
      */
-    var $_verbose = FALSE;
+    public $_verbose = FALSE;
 
     /** Turn off all output other than warnings and errors.
      *
      * @var bool
      */
-    var $_quiet = FALSE;
+    public $_quiet = FALSE;
 
     /** Array of files to parse.
      *
      * @var str[]
      */
-    var $_files = array();
+    public $_files = array();
 
     /** Array of files not to parse.
      *
      * @var str[]
      */
-    var $_ignore = array();
+    public $_ignore = array();
 
     /** Directory containing files for parsing.
      *
      * @var str
      */
-    var $_sourcePath = array('./');
-    var $_sourceIndex = 0;
+    public $_sourcePath = array('./');
+    public $_sourceIndex = 0;
 
     /** Traverse sub-directories
      *
      * @var bool
      */
-    var $_subdirs = TRUE;
+    public $_subdirs = TRUE;
 
     /** Package to use for elements not in a package.
      *
      * @var str
      */
-    var $_defaultPackage = 'The Unknown Package';
+    public $_defaultPackage = 'The Unknown Package';
 
     /** Use the filesystem path of the class as the package it should be in.
      *
      * @var bool
      */
-    var $_useClassPathAsPackage = FALSE;
+    public $_useClassPathAsPackage = FALSE;
 
     /** Ignore any package tags in the source code.
      *
      * @var bool
      */
-    var $_ignorePackageTags = FALSE;
+    public $_ignorePackageTags = FALSE;
 
     /** Overview file. The "source" file that contains the overview
      * documentation.
      *
      * @var str
      */
-    var $_overview = NULL;
+    public $_overview = NULL;
 
     /** Package comment directory. if set, PHPDoctor will look in this directory
      * for package comment files. Otherwise it looks in a directory named after
@@ -150,56 +150,56 @@ class PHPDoctor
      *
      * @var str
      */
-    var $_packageCommentDir = NULL;
+    public $_packageCommentDir = NULL;
 
     /** Parse out global variables.
      *
      * @var bool
      */
-    var $_globals = TRUE;
+    public $_globals = TRUE;
 
     /** Parse out global constants.
      *
      * @var bool
      */
-    var $_constants = TRUE;
+    public $_constants = TRUE;
 
     /** Display class tree.
      *
      * @var bool
      */
-    var $_tree = TRUE;
+    public $_tree = TRUE;
 
     /** Parse only public classes and members.
      *
      * @var bool
      */
-    var $_public = TRUE;
+    public $_public = TRUE;
 
     /** Parse protected and public classes and members.
      *
      * @var bool
      */
-    var $_protected = FALSE;
+    public $_protected = FALSE;
 
     /** Parse all classes and members.
      *
      * @var bool
      */
-    var $_private = FALSE;
+    public $_private = FALSE;
 
     /** Specifies the name of the class that starts the doclet used in generating
      * the documentation.
      *
      * @var str
      */
-    var $_doclet = 'standard';
+    public $_doclet = 'standard';
 
     /** Specifies the name of the text formatter class.
      *
      * @var str
      */
-    var $_formatter = 'htmlStandardFormatter';
+    public $_formatter = 'htmlStandardFormatter';
 
     /** Specifies the path to the doclet starting class file. If the doclet class
      * is not in a file named <_doclet>/<_doclet>.php then this path should
@@ -207,37 +207,37 @@ class PHPDoctor
      *
      * @var str
      */
-    var $_docletPath = 'doclets';
+    public $_docletPath = 'doclets';
 
     /** Specifies the path to the taglets to use.
      *
      * @var str
      */
-    var $_tagletPath = 'taglets';
+    public $_tagletPath = 'taglets';
 
     /** Specifies the path to the formatters to use.
      *
      * @var str
      */
-    var $_formatterPath = 'formatters';
+    public $_formatterPath = 'formatters';
 
     /** The path and filename of the current file being parsed.
      *
      * @var str
      */
-    var $_currentFilename = NULL;
+    public $_currentFilename = NULL;
 
     /** Whether or not to use PEAR compatibility mode for first sentence tags.
      *
      * @var boolean
      */
-    var $_pearCompat = FALSE;
+    public $_pearCompat = FALSE;
 
     /** Constructor
      *
      * @param str config The configuration file to use for this run of PHPDoctor
      */
-    function phpDoctor($config = 'default.ini')
+    public function phpDoctor($config = 'default.ini')
     {
 
         // record start time
@@ -338,7 +338,7 @@ class PHPDoctor
      *
      * @param str[] files Array of filenames to expand
      */
-    function _buildFileList($files, $dir)
+    public function _buildFileList($files, $dir)
     {
         $list = array();
 
@@ -393,7 +393,7 @@ class PHPDoctor
      *
      * @param str msg Message to output
      */
-    function message($msg)
+    public function message($msg)
     {
         if (!$this->_quiet) {
             echo $msg, "\n";
@@ -405,7 +405,7 @@ class PHPDoctor
      *
      * @param str msg Message to output
      */
-    function verbose($msg)
+    public function verbose($msg)
     {
         if ($this->_verbose) {
             echo $msg, "\n";
@@ -417,7 +417,7 @@ class PHPDoctor
      *
      * @param str msg Warning message to output
      */
-    function warning($msg)
+    public function warning($msg)
     {
         if (!defined('STDERR')) define('STDERR', fopen("php://stderr", "wb"));
         fwrite(STDERR, 'WARNING: '.$msg."\n");
@@ -428,7 +428,7 @@ class PHPDoctor
      *
      * @param str msg Error message to output
      */
-    function error($msg)
+    public function error($msg)
     {
         if (!defined('STDERR')) define('STDERR', fopen("php://stderr", "wb"));
         fwrite(STDERR, 'ERROR: '.$msg."\n");
@@ -439,9 +439,10 @@ class PHPDoctor
      *
      * @return int
      */
-    function _getTime()
+    public function _getTime()
     {
         $microtime = explode(' ', microtime());
+
         return $microtime[0] + $microtime[1];
     }
 
@@ -452,7 +453,7 @@ class PHPDoctor
      * @param str prefix Absolute path to append to relative path
      * @return str
      */
-    function makeAbsolutePath($path, $prefix)
+    public function makeAbsolutePath($path, $prefix)
     {
         if (
             substr($path, 0, 1) == '/' || // unix root
@@ -471,6 +472,7 @@ class PHPDoctor
             while ($count > 0) {
                 $absPath = preg_replace('|\w+/\.\./|', '', $absPath, -1, $count);
             }
+
             return $absPath;
         }
     }
@@ -481,7 +483,7 @@ class PHPDoctor
      * @param str path Path to postfix
      * @return str
      */
-    function fixPath($path)
+    public function fixPath($path)
     {
         if (substr($path, -1, 1) != '/' && substr($path, -1, 1) != '\\') {
             return $path.'/';
@@ -494,7 +496,7 @@ class PHPDoctor
      *
      * @return str
      */
-    function docletPath()
+    public function docletPath()
     {
         //return $this->makeAbsolutePath($this->fixPath($this->_docletPath).$this->fixPath($this->_doclet), $this->_path);
         return realpath($this->fixPath($this->_docletPath).$this->fixPath($this->_doclet)).'/';
@@ -504,7 +506,7 @@ class PHPDoctor
      *
      * @return str
      */
-    function sourcePath()
+    public function sourcePath()
     {
         return realpath($this->_sourcePath[$this->_sourceIndex]);
     }
@@ -513,7 +515,7 @@ class PHPDoctor
      *
      * @return str
      */
-    function version()
+    public function version()
     {
         return $this->_version;
     }
@@ -522,7 +524,7 @@ class PHPDoctor
      *
      * @return str
      */
-    function defaultPackage()
+    public function defaultPackage()
     {
         return $this->_defaultPackage;
     }
@@ -541,9 +543,10 @@ class PHPDoctor
      * @param str option
      * @return str
      */
-    function getOption($option)
+    public function getOption($option)
     {
         $option = '_'.$option;
+
         return $this->$option;
     }
 
@@ -746,7 +749,7 @@ class PHPDoctor
                                     $namespace = '';
                                     while($tokens[++$key][0] != T_STRING);
                                     $namespace = $tokens[$key++][1];
-                                    while($tokens[$key][0] == T_NS_SEPARATOR) {
+                                    while ($tokens[$key][0] == T_NS_SEPARATOR) {
                                         $namespace .= $tokens[$key++][1] . $tokens[$key++][1];
                                     }
                                     $currentPackage = $defaultPackage = $oldDefaultPackage = $namespace;
@@ -817,9 +820,9 @@ class PHPDoctor
                                         $value = '';
                                         do {
                                             $key++;
-                                        } while(isset($tokens[$key]) && $tokens[$key] != ',');
+                                        } while (isset($tokens[$key]) && $tokens[$key] != ',');
                                         $key++;
-                                        while(isset($tokens[$key]) && $tokens[$key] != ')') {
+                                        while (isset($tokens[$key]) && $tokens[$key] != ')') {
                                             if (is_array($tokens[$key])) {
                                                 $value .= $tokens[$key][1];
                                             } else {
@@ -866,7 +869,7 @@ class PHPDoctor
                                             if ($tokens[$key] == '=') {
                                                 $name = $this->_getPrev($tokens, $key, array(T_VARIABLE, T_STRING));
                                                 $value = '';
-                                            } elseif(isset($value) && $tokens[$key] != ',' && $tokens[$key] != ';') { // set value
+                                            } elseif (isset($value) && $tokens[$key] != ',' && $tokens[$key] != ';') { // set value
                                                 if (is_array($tokens[$key])) {
                                                     $value .= $tokens[$key][1];
                                                 } else {
@@ -911,7 +914,7 @@ class PHPDoctor
                                                 unset($name);
                                                 unset($value);
                                             }
-                                        } while(isset($tokens[$key]) && $tokens[$key] != ';');
+                                        } while (isset($tokens[$key]) && $tokens[$key] != ';');
                                         $currentData = array(); // empty data store
 
                                     // function parameter
@@ -958,7 +961,7 @@ class PHPDoctor
                                                     }
                                                 }
                                             }
-                                        } while(isset($tokens[$key]) && $tokens[$key] != ')');
+                                        } while (isset($tokens[$key]) && $tokens[$key] != ')');
                                         $currentData = array(); // empty data store
                                     }
                                     break;
@@ -970,8 +973,7 @@ class PHPDoctor
                                         $this->verbose('Found '.get_class($global).': global variable '.$global->name());
                                         if (isset($tokens[$key - 1][0]) && isset($tokens[$key - 2][0]) && $tokens[$key - 2][0] == T_STRING && $tokens[$key - 1][0] == T_WHITESPACE) {
                                             $global->set('type', new type($tokens[$key - 2][1], $rootDoc));
-                                        }
-                                        while (isset($tokens[$key]) && $tokens[$key] != '=' && $tokens[$key] != ';') {
+                                        } while (isset($tokens[$key]) && $tokens[$key] != '=' && $tokens[$key] != ';') {
                                             $key++;
                                         }
                                         if (isset($tokens[$key]) && $tokens[$key] == '=') {
@@ -984,7 +986,7 @@ class PHPDoctor
                                                     if ($tokens[$key2] != '=') $default .= $tokens[$key2];
                                                 }
                                                 $key2++;
-                                            } while(isset($tokens[$key2]) && $tokens[$key2] != ';' && $tokens[$key2] != ',' && $tokens[$key2] != ')');
+                                            } while (isset($tokens[$key2]) && $tokens[$key2] != ';' && $tokens[$key2] != ',' && $tokens[$key2] != ')');
                                             $global->set('value', trim($default, ' ()')); // set value
                                         }
                                         if (isset($currentData['docComment'])) { // set doc comment
@@ -1053,7 +1055,7 @@ class PHPDoctor
                                                 unset($name);
                                                 unset($value);
                                             }
-                                        } while(isset($tokens[$key]) && $tokens[$key] != ';');
+                                        } while (isset($tokens[$key]) && $tokens[$key] != ';');
                                         $currentData = array(); // empty data store
 
                                     }
@@ -1143,7 +1145,7 @@ class PHPDoctor
      * @param RootDoc rootDoc
      * @return bool
      */
-    function execute(&$rootDoc)
+    public function execute(&$rootDoc)
     {
         $docletFile = $this->fixPath($this->_docletPath).$this->_doclet.'/'.$this->_doclet.'.php';
         if (is_file($docletFile)) { // load doclet
@@ -1161,11 +1163,12 @@ class PHPDoctor
      *
      * @return TextFormatter
      */
-    function getFormatter()
+    public function getFormatter()
     {
         $formatterFile = $this->fixPath($this->_formatterPath).$this->_formatter.'.php';
         if (is_file($formatterFile)) {
             require_once($formatterFile);
+
             return new $this->_formatter();
         } else {
             $this->error('Could not find formatter "'.$formatterFile.'"');
@@ -1177,7 +1180,7 @@ class PHPDoctor
      * @param rootDoc rootDoc
      * @param str parent
      */
-    function _mergeSuperClassData(&$rootDoc, $parent = NULL)
+    public function _mergeSuperClassData(&$rootDoc, $parent = NULL)
     {
         $classes =& $rootDoc->classes();
         foreach ($classes as $name => $class) {
@@ -1199,7 +1202,7 @@ class PHPDoctor
      *
      * @return mixed[] Merged array
      */
-    function _mergeArrays($one, $two)
+    public function _mergeArrays($one, $two)
     {
         foreach ($two as $key => $item) {
             if (isset($one[$key]) && is_array($one[$key]) && is_array($item)) {
@@ -1208,6 +1211,7 @@ class PHPDoctor
                 $one[$key] = $item;
             }
         }
+
         return $one;
     }
 
@@ -1220,15 +1224,16 @@ class PHPDoctor
      * @param int maxDist Optional max distance from key to look at; default is 0 for all.
      * @return str Value of found token
      */
-    function _getNext(&$tokens, $key, $whatToGet, $maxDist=0)
+    public function _getNext(&$tokens, $key, $whatToGet, $maxDist=0)
     {
     $start = $key;
         $key++;
         if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
-        while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
+        while (!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
             $key++;
             if (!isset($tokens[$key]) || (0 < $maxDist && (($key-$start) > $maxDist))) return FALSE;
         }
+
         return $tokens[$key][1];
     }
 
@@ -1240,14 +1245,15 @@ class PHPDoctor
      * @param int whatToGet Type of token to look for
      * @return str Value of found token
      */
-    function _getPrev(&$tokens, $key, $whatToGet)
+    public function _getPrev(&$tokens, $key, $whatToGet)
     {
         $key--;
         if (!is_array($whatToGet)) $whatToGet = array($whatToGet);
-        while(!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
+        while (!is_array($tokens[$key]) || !in_array($tokens[$key][0], $whatToGet)) {
             $key--;
             if (!isset($tokens[$key])) return FALSE;
         }
+
         return $tokens[$key][1];
     }
 
@@ -1258,7 +1264,8 @@ class PHPDoctor
      * @param int key
      * @return str
      */
-    function _getProgramElementName(&$tokens, $key) {
+    public function _getProgramElementName(&$tokens, $key)
+    {
         $name = '';
         $key++;
         while (
@@ -1276,6 +1283,7 @@ class PHPDoctor
             }
             $key++;
         }
+
         return trim($name);
     }
 
@@ -1286,7 +1294,7 @@ class PHPDoctor
      * @param RootDoc root The root object
      * @return mixed[] Array of doc comment data
      */
-    function processDocComment($comment, &$root)
+    public function processDocComment($comment, &$root)
     {
         if (substr(trim($comment), 0, 3) != '/**') return array(); // not doc comment, abort
 
@@ -1349,6 +1357,7 @@ class PHPDoctor
                 }
             }
         }
+
         return $data;
     }
 
@@ -1372,6 +1381,7 @@ class PHPDoctor
             if (is_file($tagletFile)) { // load taglet for this tag
                 if (!class_exists($class)) require_once($tagletFile);
                 $tag =& new $class($text, $data, $root);
+
                 return $tag;
             } else {
                 $tagFile = $this->makeAbsolutePath('classes/'.$class.'Tag.php', $this->_path);
@@ -1379,9 +1389,11 @@ class PHPDoctor
                     $class .= 'Tag';
                     if (!class_exists($class)) require_once($tagFile);
                     $tag =& new $class($text, $data, $root);
+
                     return $tag;
                 } else { // create standard tag
                     $tag =& new tag($name, $text, $root);
+
                     return $tag;
                 }
             }
@@ -1395,7 +1407,7 @@ class PHPDoctor
      * @param ProgramElementDoc element The element to check
      * @return bool
      */
-    function _includeElements(&$element)
+    public function _includeElements(&$element)
     {
         if ($element->isGlobal() && !$element->isFinal() && !$this->_globals) {
             return FALSE;
@@ -1410,6 +1422,7 @@ class PHPDoctor
         } elseif ($this->_public && $element->isPublic()) {
             return TRUE;
         }
+
         return FALSE;
     }
 
@@ -1420,11 +1433,9 @@ class PHPDoctor
      * @param str name The name to check
      * @return bool
      */
-    function _hasPrivateName($name)
+    public function _hasPrivateName($name)
     {
         return substr($name, 0, 1) == '_';
     }
 
 }
-
-?>

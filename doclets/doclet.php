@@ -22,9 +22,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package PHPDoctor\Doclets
  */
-class Doclet
+class doclet
 {
-    
+
     /**
      * Format a URL link
      *
@@ -32,20 +32,20 @@ class Doclet
      * @param str text
      * @return str
      */
-    function formatLink($url, $text)
+    public function formatLink($url, $text)
     {
         return $text.' ('.$url.')';
     }
-    
+
     /**
      * Format text as a piece of code
      *
      * @param str text
      * @return str
      */
-    function asCode($text)
+    public function asCode($text)
     {
         return $text;
     }
-	
+
 }
