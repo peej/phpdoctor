@@ -1,7 +1,5 @@
 <?php
 
-require_once '..'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'lastcraft'.DIRECTORY_SEPARATOR.'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
-
 /**
  * Base test class to run PHPDoctor and capture output
  *
@@ -183,7 +181,6 @@ class DoctorTestCase extends UnitTestCase {
 
     function clearOutputDir() {
         $this->removeDir($this->outputDir);
-        @mkdir($this->outputDir, 0777, true);
     }
 
     function removeDir($dir) {

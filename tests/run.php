@@ -12,7 +12,12 @@ error_reporting(error_reporting() & ~2048 & ~8192); // Make sure E_STRICT and E_
 $baseDir = dirname(__FILE__).DIRECTORY_SEPARATOR;
 
 // make sure the phpDoctor dirs are in the include path
-set_include_path(get_include_path().PATH_SEPARATOR.$baseDir.PATH_SEPARATOR.dirname($baseDir));
+set_include_path(
+    dirname($baseDir).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'lastcraft'.PATH_SEPARATOR.
+    $baseDir.PATH_SEPARATOR.
+    dirname($baseDir).PATH_SEPARATOR.
+    get_include_path()
+);
 
 chdir($baseDir);
 

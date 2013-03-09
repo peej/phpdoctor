@@ -3,9 +3,9 @@
 // Run forever if we need to
 ini_set('max_execution_time', 0);
 
-require_once '..'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'lastcraft'.DIRECTORY_SEPARATOR.'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
-require_once '..'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'lastcraft'.DIRECTORY_SEPARATOR.'simpletest'.DIRECTORY_SEPARATOR.'mock_objects.php';
-require_once '..'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'lastcraft'.DIRECTORY_SEPARATOR.'simpletest'.DIRECTORY_SEPARATOR.'reporter.php';
+require_once 'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
+require_once 'simpletest'.DIRECTORY_SEPARATOR.'mock_objects.php';
+require_once 'simpletest'.DIRECTORY_SEPARATOR.'reporter.php';
 
 require_once 'doctorTestCase.php';
 
