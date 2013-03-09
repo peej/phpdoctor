@@ -1295,7 +1295,7 @@ class PHPDoctor
             'tags' => array()
         );
 
-        $explodedComment = preg_split('/\n[ \n\t\/]*\*[ \t]*@/', "\n".$comment);
+        $explodedComment = preg_split('/\n[ \n\t\/]*\*+[ \t]*@/', "\n".$comment);
 
         preg_match_all('/^[ \t]*[\/*]*\**( ?.*)[ \t\/*]*$/m', array_shift($explodedComment), $matches); // changed; we need the leading whitespace to detect multi-line list entries
         if (isset($matches[1])) {

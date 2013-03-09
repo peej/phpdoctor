@@ -60,13 +60,13 @@ interface anInterface {
 }
 
 /**
- * This is aClass that implements anInterface. This is a second part of the
- * docComment to be part of the long description after the first fullstop.
- *
- * This line however should always be only in the long description.
- *
- * @package PHPDoctor\Tests\Data
- */
+*** This is aClass that implements anInterface. This is a second part of the
+*** docComment to be part of the long description after the first fullstop.
+***
+*** This line however should always be only in the long description.
+***
+*** @package PHPDoctor\Tests\Data
+**/
 class aClass implements anInterface {
 	
     const booleanClassConstant = TRUE;
