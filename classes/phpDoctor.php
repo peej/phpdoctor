@@ -62,7 +62,7 @@ class phpDoctor
      *
      * @var str
      */
-    public $_version = '2RC4';
+    public $_version = '2.0.5';
 
     /** The path PHPDoctor is running from.
      *
