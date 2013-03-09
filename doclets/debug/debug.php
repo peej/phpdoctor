@@ -46,7 +46,7 @@ class Debug extends Doclet
 			echo '- Namespace ', $package->name(), "\n";
 			$this->fieldDoc($package->globals());
 			$this->methodDoc($package->functions());
-			$this->classDoc($package->allClasses());
+			$this->classDoc($package->allClasses(), $rootDoc);
 
 		}
 		
@@ -149,7 +149,7 @@ class Debug extends Doclet
 	 *
 	 * @param ClassDoc[] classes
 	 */
-	function classDoc(&$classes)
+	function classDoc(&$classes, &$rootDoc)
     {
 		$this->depth++;
 		if ($classes) {
@@ -172,8 +172,13 @@ class Debug extends Doclet
 				$interfaces =& $class->interfaces();
 				if ($interfaces) {
 					echo ' implements ';
-					foreach($interfaces as $interface) {
-						echo $interface->packageName(), '\\', $interface->name(), ' ';
+					foreach($interfaces as $interfaceName) {
+            $interface = $rootDoc->classNamed($interfaceName);
+            if ($interface) {
+              echo $interface->packageName(), '\\', $interface->name(), ' ';
+            } else {
+              echo $interfaceName;
+            }
 					}
 				}
 				echo ' [', $class->location(), ']';
