@@ -16,51 +16,64 @@ exec(PHP.' -v', $versionInfo);
 preg_match('/PHP ([0-9]+\.[0-9]+\.[0-9]+)/', $versionInfo[0], $versionInfo);
 define('EXEC_VERSION', $versionInfo[1]);
 
+$selected = array();
 if (TextReporter::inCli()) {
-	$reporter = new TextReporter();
+    $reporter = new TextReporter();
+    // take parameters as tests to run
+    while (1 < count($argv)) {
+        $selected[] = array_pop($argv);
+    }
 } else {
     $reporter = new HtmlReporter();
+    // run.php?selected[]=zerovalue&selected[]=lastline
+    if (isset($_GET) && array_key_exists('selected', $_GET)) {
+        $selected = (array)$_GET['selected'];
+    }
 }
 
+// All tests, grouped
+$allTests = array(
+    'Base' => array(
+        'parser',
+        'config',
+        'ignorePackageTags',
+        'useClassPathAsPackage',
+        'namespaceSyntax',
+        'namespaceNameOverlap',
+        #'dynamicDefine'
+    ),
+    'Standard Doclet' => array(
+        'standardDoclet',
+        'accessLevel',
+        'accessLevelPHP5',
+        'throwsTag'
+    ),
+    // these tests will work with PHP5 < 5.3
+    'Bugfixes' => array(
+        'linefeed',
+        'lastLine',
+        'zeroValue',
+        'todoTag',
+        'commentLinks'
+    ),
+    'Formatters' => array(
+        'listsUl',
+        'markdown'
+    )
+);
 
-$parser = new TestSuite('Parser');
-$parser->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'parser.php');
-$parser->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'config.php');
-$parser->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'ignore-package-tags.php');
-$parser->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'use-class-path-as-package.php');
-$parser->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'namespace-syntax.php');
-
-$standardDoclet = new TestSuite('Standard Doclet');
-$standardDoclet->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'standard-doclet.php');
-$standardDoclet->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'access.php');
-$standardDoclet->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'access-php5.php');
-$standardDoclet->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'throws-tag.php');
-
-$fixes = new TestSuite('Bugfixes'); // these tests will work with PHP5 < 5.3
-$fixes->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'linefeed.php');
-$fixes->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lastline.php');
-$fixes->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'zerovalue.php');
-$fixes->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'todo.php');
-$fixes->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'comment-links.php');
-
-$formatters = new TestSuite('Formatters'); // these tests will work with PHP5 < 5.3
-$formatters->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'lists-ul.php');
-include_once "markdown.php";
-if (function_exists('Markdown')) {
-    $formatters->addFile('tests'.DIRECTORY_SEPARATOR.'cases'.DIRECTORY_SEPARATOR.'markdown.php');
-} else {
-    $reporter->paintMessage("Not running Markdown test, Markdown not available on system");
+$suite = new TestSuite('PHPDoctor');
+foreach ($allTests as $name => $tests) {
+    $group = new TestSuite($name);
+    foreach ($tests as $test) {
+        if (!$selected || in_array($test, $selected)) {
+            $group->addFile(sprintf('tests/cases/Test%s.php', ucwords($test)));
+        }
+    }
+    $suite->add($group);
 }
-
-$test = new TestSuite('PHPDoctor');
-$test->add($parser);
-$test->add($standardDoclet);
-$test->add($fixes);
-$test->add($formatters);
 
 if (TextReporter::inCli()) {
-	exit ($test->run($reporter) ? 0 : 1);
+    exit ($suite->run($reporter) ? 0 : 1);
 }
-$test->run($reporter);
-
-?>
+$suite->run($reporter);

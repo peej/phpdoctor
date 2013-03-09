@@ -5,26 +5,28 @@
  */
 class TestListsUl extends DoctorTestCase
 {
-	
     var $output;
-    
-	function __construct() {
+
+    function TestListsUl() {
+        $this->__construct();
+    }
+
+    function __construct() {
         parent::__construct('List (ul) tests');
-		
-		$this->clearOutputDir();
-		
-		$this->setIniFile('lists-ul.ini');
-		$this->runPhpDoctor();
-		
-		$this->output = $this->readOutputFile('phpdoctor/tests/listsul.html');
-	}
-	
-	function testListConversion() {
-		
-		// This is actually not the way it should be done, but I'm a bit short of time. So here's just a check that
-		// the testcase doc as a whole comes out as expected, instead of testing one issue at a time.
-		
-		$expected = <<<EXPECTED
+
+        $this->clearOutputDir();
+
+        $this->setIniFile('lists-ul.ini');
+        $this->runPhpDoctor();
+
+        $this->output = $this->readOutputFile('phpdoctor/tests/listsul.html');
+    }
+
+    function testListConversion() {
+        // This is actually not the way it should be done, but I'm a bit short of time. So here's just a check that
+        // the testcase doc as a whole comes out as expected, instead of testing one issue at a time.
+
+        $expected = <<<EXPECTED
 <p>class ListsUl.</p>|<p>Process a *doc comment* with unordered lists.</p>
 
 <ul>
@@ -96,9 +98,7 @@ a list. Because it takes at least two ...</p>|<p>- ... to tango. This is not a l
 </dl>
 EXPECTED;
 
-		$this->assertStringContains($expected, $this->output, true); 
-	}
-	
-}
+        $this->assertStringContains($expected, $this->output, true);
+    }
 
-?>
+}
