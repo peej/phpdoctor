@@ -8,9 +8,9 @@ class TestUseClassPathAsPackage extends DoctorTestCase
 	
     var $output;
     
-	function testUseClassPathAsPackage() {
+	function __construct() {
         
-		$this->DoctorTestCase('Test use class path as package option');
+		parent::__construct('Test use class path as package option');
 		
 		$this->setIniFile('use-class-path-as-package.ini');
 		$this->output = $this->runPhpDoctor();

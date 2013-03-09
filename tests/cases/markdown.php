@@ -8,8 +8,8 @@ class TestMarkdown extends DoctorTestCase
 	
     var $output;
     
-	function testMarkdown() {
-        $this->DoctorTestCase('Markdown formatter tests');
+	function __construct() {
+        parent::__construct('Markdown formatter tests');
 		
 		$this->clearOutputDir();
 		

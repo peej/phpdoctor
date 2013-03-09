@@ -8,9 +8,9 @@ class TestPHP5 extends DoctorTestCase
 	
     var $output;
     
-	function testPHP5() {
+	function __construct() {
 	    
-		$this->DoctorTestCase('PHP5 parser tests');
+		parent::__construct('PHP5 parser tests');
 		
 		$this->setIniFile('parser.ini');
 		$this->output = $this->runPhpDoctor();

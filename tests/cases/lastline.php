@@ -8,8 +8,8 @@ class TestLastLine extends DoctorTestCase
 	
     var $output;
     
-	function testLastLine() {
-        $this->DoctorTestCase('Last line tests');
+	function __construct() {
+        parent::__construct('Last line tests');
 		
 		$this->clearOutputDir();
 		

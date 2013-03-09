@@ -8,8 +8,8 @@ class TestAccessLevelPHP5 extends DoctorTestCase
 	
     var $output;
     
-	function testAccessLevelPHP5() {
-        $this->DoctorTestCase('Access level PHP5 tests');
+	function __construct() {
+        parent::__construct('Access level PHP5 tests');
 		
 		$this->clearOutputDir();
 		

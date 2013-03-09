@@ -8,8 +8,8 @@ class TestLinefeed extends DoctorTestCase
 	
     var $src, $cmd;
     
-	function testLinefeed() {
-        $this->DoctorTestCase('Linefeed tests');
+	function __construct() {
+        parent::__construct('Linefeed tests');
 		
 		// The source file must be generated on the fly because the line endings are converted to Unix when
 		// pulling/pushing the repo. 

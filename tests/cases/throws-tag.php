@@ -8,8 +8,8 @@ class TestThrowsTag extends DoctorTestCase
 	
     var $output;
     
-	function testThrowsTag() {
-        $this->DoctorTestCase('Throws tag tests');
+	function __construct() {
+        parent::__construct('Throws tag tests');
 		
 		$this->clearOutputDir();
 		

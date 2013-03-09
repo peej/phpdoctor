@@ -6,9 +6,9 @@
 class TestNamespaceSyntax extends DoctorTestCase
 {
 	
-	function testNamespaceSyntax() {
+	function __construct() {
         
-		$this->DoctorTestCase('Test use of the namespace syntaxes');
+		parent::__construct('Test use of the namespace syntaxes');
 		
 	}
 	

@@ -1,0 +1,19 @@
+{
+    "name": "peej/phpdoctor",
+    "description": "PHPDoctor: The PHP Documentation Creator",
+    "keywords": ["documentation", "api"],
+    "homepage": "http://peej.github.com/phpdoctor",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul James",
+            "email": "paul@peej.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.0"
+    },
+    "require-dev": {
+        "lastcraft/simpletest": "1.1.*"
+    }
+}

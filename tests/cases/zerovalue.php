@@ -8,8 +8,8 @@ class TestZeroValue extends DoctorTestCase
 	
     var $output;
     
-	function testZeroValue() {
-        $this->DoctorTestCase('Zero Value tests');
+	function __construct() {
+        parent::__construct('Zero Value tests');
 		
 		$this->clearOutputDir();
 		

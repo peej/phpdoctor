@@ -8,8 +8,8 @@ class TestListsUl extends DoctorTestCase
 	
     var $output;
     
-	function testListsUl() {
-        $this->DoctorTestCase('List (ul) tests');
+	function __construct() {
+        parent::__construct('List (ul) tests');
 		
 		$this->clearOutputDir();
 		

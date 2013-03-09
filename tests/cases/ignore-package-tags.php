@@ -8,8 +8,8 @@ class TestIgnorePackageTags extends DoctorTestCase
 	
     var $output;
     
-	function testIgnorePackageTags() {
-	    $this->DoctorTestCase('Ignore package tags option');
+	function __construct() {
+	    parent::__construct('Ignore package tags option');
 		
 		$this->setIniFile('ignore-package-tags.ini');
 		$this->output = $this->runPhpDoctor();

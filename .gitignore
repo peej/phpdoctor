@@ -3,5 +3,8 @@ testdocs
 tests/cases/output
 tests/cases/tmp
 doclets/standard/geshi
+vendor
+composer.lock
+composer.phar
 *.komodoproject
 *.komodotools

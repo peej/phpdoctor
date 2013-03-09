@@ -6,8 +6,8 @@
 class TestStandardDoclet extends DoctorTestCase
 {
 	
-	function testStandardDoclet() {
-	    $this->DoctorTestCase('Standard doclet tests');
+	function __construct() {
+	    parent::__construct('Standard doclet tests');
 		
 		$this->clearOutputDir();
 		

@@ -8,8 +8,8 @@ class TestCommentLinks extends DoctorTestCase
 	
     var $output;
     
-	function testCommentLinks() {
-        $this->DoctorTestCase('Comment links tests');
+	function __construct() {
+        parent::__construct('Comment links tests');
 		
 		$this->clearOutputDir();
 		

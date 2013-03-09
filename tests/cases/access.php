@@ -8,8 +8,8 @@ class TestAccessLevel extends DoctorTestCase
 	
     var $output;
     
-	function testAccessLevel() {
-        $this->DoctorTestCase('Access level tests');
+	function __construct() {
+        parent::__construct('Access level tests');
 		
 		$this->clearOutputDir();
 		

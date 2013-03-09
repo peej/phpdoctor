@@ -8,8 +8,8 @@ class TestTodoTag extends DoctorTestCase
 	
     var $output;
     
-	function testTodoTag() {
-        $this->DoctorTestCase('Todo tag tests');
+	function __construct() {
+        parent::__construct('Todo tag tests');
 		
 		$this->clearOutputDir();
 		

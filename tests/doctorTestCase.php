@@ -1,5 +1,5 @@
 <?php
-    require_once 'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
+    require_once '..'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'lastcraft'.DIRECTORY_SEPARATOR.'simpletest'.DIRECTORY_SEPARATOR.'unit_tester.php';
 	
     /**
      * Base test class to run PHPDoctor and capture output
@@ -10,8 +10,8 @@
         
         var $iniPath, $appDir, $testDir, $caseDir, $iniDir, $outputDir, $tempDir;
         
-        function DoctorTestCase ($label = false) {
-			$this->UnitTestCase($label);
+        function __construct($label = false) {
+			parent::__construct($label);
 			
             $this->appDir    = dirname(dirname(__file__)).DIRECTORY_SEPARATOR;
 			$this->testDir   = $this->appDir.'tests'.DIRECTORY_SEPARATOR;

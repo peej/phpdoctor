@@ -8,8 +8,8 @@ require_once 'classes'.DIRECTORY_SEPARATOR.'phpDoctor.php';
 class TestConfig extends UnitTestCase
 {
 	
-	function testConfig() {
-        $this->UnitTestCase('Configuration option tests');
+	function __construct() {
+        parent::__construct('Configuration option tests');
 	}
 	
 	function testMakeAbsolutePath() {
