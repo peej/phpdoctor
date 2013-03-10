@@ -21,7 +21,7 @@
 
 /** This generates the element index.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\Github
  */
 class IndexWriter extends MDWriter {
 

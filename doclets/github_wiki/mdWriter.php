@@ -22,7 +22,7 @@
 /** This generates the index.md file used for presenting the frame-formated
  * "cover page" of the API documentation.
  *
- * @package PHPDoctor\Doclets\Github
+ * @package PHPDoctor\Doclets\GithubWiki
  * @todo Refactor this class to MDWriter
  */
 class MDWriter {

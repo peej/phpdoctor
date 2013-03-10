@@ -22,7 +22,7 @@
 /** This generates the HTML API documentation for each individual interface
  * and class.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\GithubWiki
  */
 class ClassWriter extends MDWriter {
 

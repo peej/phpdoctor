@@ -32,7 +32,7 @@ require("todoWriter.php");
 /** The standard doclet. This doclet generates HTML output similar to that
  * produced by the Javadoc standard doclet.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\GithubWiki
  */
 class Github_wiki extends Doclet {
 

@@ -21,7 +21,7 @@
 
 /** This generates the HTML API documentation for each global variable.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\GithubWiki
  */
 class GlobalWriter extends MDWriter {
 
