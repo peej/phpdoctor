@@ -235,6 +235,15 @@ class doc
         return FALSE;
     }
 
+    /** Is this construct an trait. False until overridden.
+     *
+     * @return bool
+     */
+    public function isTrait()
+    {
+        return FALSE;
+    }
+
     /** Is this construct a method. False until overridden.
      *
      * @return bool

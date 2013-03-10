@@ -257,7 +257,7 @@ modifiers() would return:
      */
     public function asPath()
     {
-        if ($this->isClass() || $this->isInterface() || $this->isException()) {
+        if ($this->isClass() || $this->isInterface() || $this->isTrait() || $this->isException()) {
             return strtolower(str_replace('.', '/', str_replace('\\', '/', $this->_package)).'/'.$this->_name.'.html');
         } elseif ($this->isField()) {
             $class =& $this->containingClass();
