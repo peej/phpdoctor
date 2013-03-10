@@ -16,5 +16,5 @@
     "require-dev": {
         "lastcraft/simpletest": "1.1.*"
     },
-    "bin": ["phpdoc.php"]
+    "bin": ["phpdoc"]
 }

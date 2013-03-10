@@ -41,10 +41,10 @@ if (!isset($argv[1])) {
         $argv[1] = $_ENV['PHPDoctor'];
     } elseif (is_file(getcwd().'/phpdoctor.ini')) {
         $argv[1] = getcwd().'/phpdoctor.ini';
-    } elseif (is_file('default.ini')) {
-        $argv[1] = 'default.ini';
+    } elseif (is_file(dirname(__FILE__).'/phpdoctor.ini')) {
+        $argv[1] = dirname(__FILE__).'/phpdoctor.ini';
     } else {
-        die('Usage: phpdoc.php [config_file]');
+        die("Usage: phpdoc [config_file]\n");
     }
 }
 
