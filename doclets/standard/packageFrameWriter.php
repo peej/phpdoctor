@@ -89,6 +89,17 @@ class packageFrameWriter extends HTMLWriter
             echo "</ul>\n\n";
         }
 
+        $traits =& $package->traits();
+        if ($traits && is_array($traits)) {
+            ksort($traits);
+            echo "<h2>Traits</h2>\n";
+            echo "<ul>\n";
+            foreach ($traits as $name => $trait) {
+                echo '<li><a href="', str_repeat('../', $package->depth() + 1), $traits[$name]->asPath(), '" target="main">', $traits[$name]->name(), "</a></li>\n";
+            }
+            echo "</ul>\n\n";
+        }
+
         $exceptions =& $package->exceptions();
         if ($exceptions && is_array($exceptions)) {
             ksort($exceptions);
@@ -150,6 +161,8 @@ class packageFrameWriter extends HTMLWriter
             foreach ($classes as $name => $class) {
                 $package =& $classes[$name]->containingPackage();
                 if ($class->isInterface()) {
+                    echo '<li><em><a href="', $classes[$name]->asPath(), '" title="', $classes[$name]->packageName(),'" target="main">', $classes[$name]->name(), "</a></em></li>\n";
+                } elseif ($class->isTrait()) {
                     echo '<li><em><a href="', $classes[$name]->asPath(), '" title="', $classes[$name]->packageName(),'" target="main">', $classes[$name]->name(), "</a></em></li>\n";
                 } else {
                     echo '<li><a href="', $classes[$name]->asPath(), '" title="', $classes[$name]->packageName(),'" target="main">', $classes[$name]->name(), "</a></li>\n";

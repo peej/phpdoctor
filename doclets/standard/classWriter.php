@@ -97,6 +97,22 @@ class classWriter extends HTMLWriter
                         echo "</dl>\n\n";
                     }
 
+                    $traits =& $class->traits();
+                    if (count($traits) > 0) {
+                        echo "<dl>\n";
+                        echo "<dt>All Used Traits:</dt>\n";
+                        echo '<dd>';
+                        foreach ($traits as $trait) {
+                            echo '<a href="', str_repeat('../', $this->_depth), $trait->asPath(), '">';
+                            if ($trait->packageName() != $class->packageName()) {
+                                echo $trait->packageName(), '\\';
+                            }
+                            echo $trait->name(), '</a> ';
+                        }
+                        echo "</dd>\n";
+                        echo "</dl>\n\n";
+                    }
+
                     $subclasses = $class->subclasses();
                     if ($subclasses) {
                         echo "<dl>\n";
@@ -117,6 +133,8 @@ class classWriter extends HTMLWriter
 
                     if ($class->isInterface()) {
                         echo '<p class="signature">', $class->modifiers(), ' interface <strong>', $class->name(), '</strong>';
+                    } elseif ($class->isTrait()) {
+                        echo '<p class="signature">', $class->modifiers(), ' trait <strong>', $class->name(), '</strong>';
                     } else {
                         echo '<p class="signature">', $class->modifiers(), ' class <strong>', $class->name(), '</strong>';
                     }
