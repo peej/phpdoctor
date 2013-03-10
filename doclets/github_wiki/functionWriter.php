@@ -21,7 +21,7 @@
 
 /** This generates the HTML API documentation for each global function.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\GithubWiki
  */
 class FunctionWriter extends MDWriter {
 

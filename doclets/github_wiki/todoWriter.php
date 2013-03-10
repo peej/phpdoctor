@@ -21,7 +21,7 @@
 
 /** This generates the todo elements index.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\GithubWiki
  */
 class TodoWriter extends MDWriter {
 

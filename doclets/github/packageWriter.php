@@ -22,7 +22,7 @@
 /** This generates the README.md files that list the interfaces and
  * classes for a given package.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\Github
  */
 class PackageWriter extends MDWriter {
 

@@ -21,7 +21,7 @@
 
 /** This generates the deprecated elements index.
  *
- * @package PHPDoctor\Doclets\Standard
+ * @package PHPDoctor\Doclets\GithubWiki
  */
 class DeprecatedWriter extends MDWriter {
 
