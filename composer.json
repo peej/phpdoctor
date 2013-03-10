@@ -3,7 +3,7 @@
     "description": "PHPDoctor: The PHP Documentation Creator",
     "keywords": ["documentation", "api"],
     "homepage": "http://peej.github.com/phpdoctor",
-    "license": "MIT",
+    "license": "GPL-2.0+",
     "authors": [
         {
             "name": "Paul James",
@@ -15,5 +15,6 @@
     },
     "require-dev": {
         "lastcraft/simpletest": "1.1.*"
-    }
+    },
+    "bin": ["phpdoc.php"]
 }
