@@ -23,7 +23,7 @@ class TestTraits extends DoctorTestCase
         $this->setIniFile('traits.ini');
         $this->output = $this->runPhpDoctor();
 
-        $this->assertTrue(strpos($this->output, 'public class PHPDoctor\Tests\traitTestClass uses PHPDoctor\Tests\myTrait PHPDoctor\Tests\myOtherTrait'));
+        $this->assertTrue(strpos($this->output, 'public class PHPDoctor\Tests\Parser\traitTestClass uses PHPDoctor\Tests\Parser\myTrait PHPDoctor\Tests\Parser\myOtherTrait'));
     }
 
 }
