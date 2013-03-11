@@ -106,6 +106,8 @@ class indexWriter extends HTMLWriter
                         echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Class in ', $in, "</dt>\n";
                     } elseif ($element->isInterface()) {
                         echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Interface in ', $in, "</dt>\n";
+                    } elseif ($element->isTrait()) {
+                        echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Trait in ', $in, "</dt>\n";
                     } elseif ($element->isException()) {
                         echo '<dt><a href="', $element->asPath(), '">', $element->name(), '()</a> - Exception in ', $in, "</dt>\n";
                     }

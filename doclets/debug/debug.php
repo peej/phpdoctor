@@ -157,6 +157,8 @@ class debug extends Doclet
                 echo $this->showDepth(), '- ', $class->modifiers();
                 if ($class->isInterface()) {
                     echo 'interface ';
+                } elseif ($class->isTrait()) {
+                    echo 'trait ';
                 } else {
                     echo 'class ';
                 }
@@ -171,9 +173,16 @@ class debug extends Doclet
                 }
                 $interfaces =& $class->interfaces();
                 if ($interfaces) {
-                    echo ' implements ';
+                    echo ' implements';
                     foreach ($interfaces as $interface) {
-                        echo $interface->packageName(), '\\', $interface->name(), ' ';
+                        echo ' ', $interface->packageName(), '\\', $interface->name();
+                    }
+                }
+                $traits =& $class->traits();
+                if ($traits) {
+                    echo ' uses';
+                    foreach ($traits as $trait) {
+                        echo ' ', $trait->packageName(), '\\', $trait->name();
                     }
                 }
                 echo ' [', $class->location(), ']';

@@ -41,6 +41,12 @@ class classDoc extends ProgramElementDoc
      */
     public $_interface = FALSE;
 
+    /** Is this a trait?
+     *
+     * @var bool
+     */
+    public $_trait = FALSE;
+
     /** The class constants.
      *
      * @var fieldDoc[]
@@ -64,6 +70,12 @@ class classDoc extends ProgramElementDoc
      * @var classDoc[]
      */
     public $_interfaces = array();
+
+    /** Traits this class uses.
+     *
+     * @var classDoc[]
+     */
+    public $_traits = array();
 
     /** Is this class abstract.
      *
@@ -248,6 +260,29 @@ class classDoc extends ProgramElementDoc
         return $return;
     }
 
+    /** Return traits used by this class
+     *
+     * @return ClassDoc[]
+     */
+    function &traits()
+    {
+        return $this->_traits;
+    }
+
+    /** Return an interface in this class.
+     *
+     * @return ClassDoc
+     */
+    function &traitNamed($traitName)
+    {
+        $return = NULL;
+        if (isset($this->_traits[$traitName])) {
+            $return =& $this->__traits[$traitName];
+        }
+
+        return $return;
+    }
+
     /** Return true if this class is abstract.
      *
      * @return bool
@@ -264,6 +299,15 @@ class classDoc extends ProgramElementDoc
     public function isInterface()
     {
         return $this->_interface;
+    }
+
+    /** Return true if this element is a trait.
+     *
+     * @return bool
+     */
+    public function isTrait()
+    {
+        return $this->_trait;
     }
 
     /** Test whether this class is a subclass of the specified class.
@@ -295,7 +339,7 @@ class classDoc extends ProgramElementDoc
      */
     public function isClass()
     {
-        return !$this->_interface;
+        return !$this->_interface && !$this->_trait;
     }
 
     /** Is this construct an ordinary class (not an interface or an exception).

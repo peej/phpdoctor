@@ -135,6 +135,21 @@ class packageWriter extends HTMLWriter
                 echo "</table>\n\n";
             }
 
+            $traits =& $package->traits();
+            if ($traits) {
+                ksort($traits);
+                echo '<table class="title">'."\n";
+                echo '<tr><th colspan="2" class="title">Trait Summary</th></tr>'."\n";
+                foreach ($traits as $name => $trait) {
+                    $textTag =& $traits[$name]->tags('@text');
+                    echo '<tr><td class="name"><a href="', str_repeat('../', $this->_depth), $traits[$name]->asPath(), '">', $traits[$name]->name(), '</a></td>';
+                    echo '<td class="description">';
+                    if ($textTag) echo strip_tags($this->_processInlineTags($textTag, TRUE), '<a><b><strong><u><em>');
+                    echo "</td></tr>\n";
+                }
+                echo "</table>\n\n";
+            }
+
             $exceptions =& $package->exceptions();
             if ($exceptions) {
                 ksort($exceptions);

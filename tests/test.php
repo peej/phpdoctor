@@ -40,6 +40,7 @@ $allTests = array(
         'useClassPathAsPackage',
         'namespaceSyntax',
         'namespaceNameOverlap',
+        'traits',
         #'dynamicDefine'
     ),
     'Standard Doclet' => array(

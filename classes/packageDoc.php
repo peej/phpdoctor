@@ -181,6 +181,22 @@ class packageDoc extends Doc
         return $interfaces;
     }
 
+    /** Get traits in this package.
+     *
+     * @return ClassDoc[] An array of traits
+     */
+    function &traits()
+    {
+        $traits = NULL;
+        foreach ($this->_classes as $name => $trait) {
+            if ($trait->isTrait()) {
+                $traits[$name] =& $this->_classes[$name];
+            }
+        }
+
+        return $traits;
+    }
+
     /** Get ordinary classes (excluding exceptions and interfaces) in this package.
      *
      * @return ClassDoc[] An array of classes
