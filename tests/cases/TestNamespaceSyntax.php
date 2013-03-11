@@ -32,6 +32,11 @@ class TestNamespaceSyntax extends DoctorTestCase
 
         $this->assertTrue(strpos($output, 'public final static int PHPDoctor\Tests\woo\yay\ZERO'));
         $this->assertTrue(strpos($output, 'public final static int PHPDoctor\Tests\woo\yay\ONE = 1'));
+
+        $this->assertTrue(strpos($output, 'public class PHPDoctor\Tests\A\Bar_A extends PHPDoctor\Tests\A\Foo'));
+        $this->assertTrue(strpos($output, 'public class PHPDoctor\Tests\B\Bar_B extends PHPDoctor\Tests\B\Foo'));
+        $this->assertTrue(strpos($output, 'public class PHPDoctor\Tests\A\C\Bar_C extends PHPDoctor\Tests\A\C\Foo'));
+
     }
 
 }
