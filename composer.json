@@ -1,7 +1,7 @@
 {
     "name": "peej/phpdoctor",
     "description": "PHPDoctor: The PHP Documentation Creator",
-    "keywords": ["documentation", "api"],
+    "keywords": ["phpdoc", "documentation", "documentor", "api"],
     "homepage": "http://peej.github.com/phpdoctor",
     "license": "GPL-2.0+",
     "authors": [
