@@ -1,5 +1,5 @@
 <?php
-namespace a\b\c;
+namespace PHPDoctor\Tests\a\b\c;
 
 /**
  * @author DerManoMann

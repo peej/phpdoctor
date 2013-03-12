@@ -1,10 +1,10 @@
 <?php
-namespace c\de\f;
+namespace PHPDoctor\Tests\c\de\f;
 
 /**
  * @author DerManoMann
  */
-class Foo extends a\b\c\Foo {
+class Foo extends PHPDoctor\Tests\a\b\c\Foo {
 }
 
 ?>
