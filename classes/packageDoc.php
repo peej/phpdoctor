@@ -71,8 +71,8 @@ class packageDoc extends Doc
         }
         if (is_file($overviewFile)) {
             $phpdoctor->message("\n".'Reading package overview file "'.$overviewFile.'".');
-            if ($html = $this->getHTMLContents($overviewFile)) {
-                $this->_data = $phpdoctor->processDocComment('/** '.$html.' */', $this->_root);
+            if ($text = $this->getFileContents($overviewFile)) {
+                $this->_data = $phpdoctor->processDocComment('/** '.$text.' */', $this->_root);
                 $this->mergeData();
             }
         }

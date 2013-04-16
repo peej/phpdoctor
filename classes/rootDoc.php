@@ -61,8 +61,8 @@ class rootDoc extends Doc
         if (isset($overview)) {
             if (is_file($overview)) {
                 $phpdoctor->message('Reading overview file "'.$overview.'".');
-                if ($html = $this->getHTMLContents($overview)) {
-                    $this->_data = $phpdoctor->processDocComment('/** '.$html.' */', $this);
+                if ($text = $this->getFileContents($overview)) {
+                    $this->_data = $phpdoctor->processDocComment('/** '.$text.' */', $this);
                     $this->mergeData();
                 }
             } else {

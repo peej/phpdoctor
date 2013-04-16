@@ -343,23 +343,21 @@ class doc
     }
 
     /**
-     * Get body of a HTML document
+     * Get body of a text document
      *
      * @param str filename
      * @return str
      */
-    public function getHTMLContents($filename)
+    public function getFileContents($filename)
     {
-            if ($contents = file_get_contents($filename)) {
-                if (preg_match('/<body ?.*?>(.+)<\/body>/s', $contents, $matches)) {
-                    return $matches[1];
-                } else { // it's not HTML, so output it as plain text
-
-                    return '<pre>'.$contents.'</pre>';
-                }
+        if ($contents = file_get_contents($filename)) {
+            if (preg_match('/<body ?.*?>(.+)<\/body>/s', $contents, $matches)) {
+                return $matches[1];
+            } else { // it's not HTML, so output it as plain text
+                return $contents;
             }
-
-            return FALSE;
+        }
+        return FALSE;
     }
 
 }

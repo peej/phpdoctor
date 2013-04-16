@@ -301,8 +301,8 @@ class phpDoctor
         if (isset($this->_options['ignore_package_tags'])) $this->_ignorePackageTags = $this->_options['ignore_package_tags'];
 
     // use first path element
-        //if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->_sourcePath[0]);
-        //if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->_sourcePath[0]);
+        if (isset($this->_options['overview'])) $this->_overview = $this->makeAbsolutePath($this->_options['overview'], $this->_sourcePath[0]);
+        if (isset($this->_options['package_comment_dir'])) $this->_packageCommentDir = $this->makeAbsolutePath($this->_options['package_comment_dir'], $this->_sourcePath[0]);
 
         if (isset($this->_options['globals'])) $this->_globals = $this->_options['globals'];
         if (isset($this->_options['constants'])) $this->_constants = $this->_options['constants'];
