@@ -13,9 +13,16 @@ class markdownFormatter extends TextFormatter
 
     public function toFormattedText($text)
     {
-        require_once 'markdown.php';
-        @define('MARKDOWN_EMPTY_ELEMENT_SUFFIX', '>');
-
-        return Markdown($text);
+        $autoloader = realpath(dirname(__file__).'/../vendor/autoload.php');
+        
+        if (file_exists('Markdown.php')) {
+            require_once 'Markdown.php';
+        } else if (file_exists($autoloader)) {
+            require_once $autoloader;
+        }
+        
+        $md = new \Michelf\Markdown;
+        $md->empty_element_suffix = '>';
+        return $md->transform(trim($text));
     }
 }
