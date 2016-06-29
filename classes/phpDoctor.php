@@ -269,7 +269,7 @@ class phpDoctor
         if (isset($this->_options['source_path'])) {
             $this->_sourcePath = array();
             foreach (explode(',', $this->_options['source_path']) as $path) {
-                $this->_sourcePath[] = $this->fixPath($path, getcwd());
+                $this->_sourcePath[] = $this->makeAbsolutePath($path, getcwd());
             }
         }
 
@@ -487,7 +487,7 @@ class phpDoctor
     public function fixPath($path)
     {
         if (substr($path, -1, 1) != '/' && substr($path, -1, 1) != '\\') {
-            return $path.'/';
+            return $path.DIRECTORY_SEPARATOR;
         } else {
             return $path;
         }

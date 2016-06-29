@@ -45,10 +45,10 @@ if (is_readable($phpg)) {
 if (!isset($argv[1])) {
     if (isset($_ENV['PHPDoctor'])) {
         $argv[1] = $_ENV['PHPDoctor'];
-    } elseif (is_file(getcwd().'/phpdoctor.ini')) {
-        $argv[1] = getcwd().'/phpdoctor.ini';
-    } elseif (is_file(dirname(__FILE__).'/phpdoctor.ini')) {
-        $argv[1] = dirname(__FILE__).'/phpdoctor.ini';
+    } elseif (is_file(getcwd().DIRECTORY_SEPARATOR.'phpdoctor.ini')) {
+        $argv[1] = getcwd().DIRECTORY_SEPARATOR.'phpdoctor.ini';
+    } elseif (is_file(dirname(__FILE__).DIRECTORY_SEPARATOR.'phpdoctor.ini')) {
+        $argv[1] = dirname(__FILE__).DIRECTORY_SEPARATOR.'phpdoctor.ini';
     } else {
         die("Usage: phpdoc [config_file]\n");
     }
