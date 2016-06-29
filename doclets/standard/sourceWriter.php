@@ -90,7 +90,7 @@ class sourceWriter extends HTMLWriter
                 $geshi = new GeSHi($data[0], 'php');
                 $source = $geshi->parse_code();
             } else {
-                $source = '<pre>'.$data[0].'</pre>';
+                $source = '<pre>'.htmlspecialchars($data[0]).'</pre>';
             }
 
             ob_start();
