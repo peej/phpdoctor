@@ -24,7 +24,7 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 // check we are running from the command line
 if (!isset($argv[0])) {
     die('This program must be run from the command line using the CLI version of PHP');
-    
+
 // check we are using the correct version of PHP
 } elseif (!defined('T_COMMENT') || !extension_loaded('tokenizer') || version_compare(phpversion(), '5', '<')) {
     error('You need PHP version 5 or greater with the "tokenizer" extension to run this script, please upgrade');
@@ -34,6 +34,12 @@ if (!isset($argv[0])) {
 // include PHPDoctor class
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__));
 require('classes'.DIRECTORY_SEPARATOR.'phpDoctor.php');
+
+// include geshi from composer if it exists
+$phpg = 'vendor'.DIRECTORY_SEPARATOR.'easybook'.DIRECTORY_SEPARATOR.'geshi'.DIRECTORY_SEPARATOR.'geshi.php';
+if (is_readable($phpg)) {
+    include($phpg);
+}
 
 // get name of config file to use
 if (!isset($argv[1])) {
