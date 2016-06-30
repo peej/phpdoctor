@@ -38,7 +38,7 @@ require('classes'.DIRECTORY_SEPARATOR.'phpDoctor.php');
 // include Composer autoloader
 $autoloader = dirname(__FILE__).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
 if (is_readable($autoloader)) {
-    include($autoloader);
+    require_once($autoloader);
 }
 
 // get name of config file to use
