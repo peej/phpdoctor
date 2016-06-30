@@ -24,7 +24,7 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 // check we are running from the command line
 if (!isset($argv[0])) {
     die('This program must be run from the command line using the CLI version of PHP');
-    
+
 // check we are using the correct version of PHP
 } elseif (!defined('T_COMMENT') || !extension_loaded('tokenizer') || version_compare(phpversion(), '5', '<')) {
     error('You need PHP version 5 or greater with the "tokenizer" extension to run this script, please upgrade');
@@ -35,14 +35,20 @@ if (!isset($argv[0])) {
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__));
 require('classes'.DIRECTORY_SEPARATOR.'phpDoctor.php');
 
+// include Composer autoloader
+$autoloader = dirname(__FILE__).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
+if (is_readable($autoloader)) {
+    require_once($autoloader);
+}
+
 // get name of config file to use
 if (!isset($argv[1])) {
     if (isset($_ENV['PHPDoctor'])) {
         $argv[1] = $_ENV['PHPDoctor'];
-    } elseif (is_file(getcwd().'/phpdoctor.ini')) {
-        $argv[1] = getcwd().'/phpdoctor.ini';
-    } elseif (is_file(dirname(__FILE__).'/phpdoctor.ini')) {
-        $argv[1] = dirname(__FILE__).'/phpdoctor.ini';
+    } elseif (is_file(getcwd().DIRECTORY_SEPARATOR.'phpdoctor.ini')) {
+        $argv[1] = getcwd().DIRECTORY_SEPARATOR.'phpdoctor.ini';
+    } elseif (is_file(dirname(__FILE__).DIRECTORY_SEPARATOR.'phpdoctor.ini')) {
+        $argv[1] = dirname(__FILE__).DIRECTORY_SEPARATOR.'phpdoctor.ini';
     } else {
         die("Usage: phpdoc [config_file]\n");
     }

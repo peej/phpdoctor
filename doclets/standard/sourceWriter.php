@@ -84,13 +84,13 @@ class sourceWriter extends HTMLWriter
             $this->_sections[7] = array('title' => 'Todo', 'url' => 'todo-list.html');
             $this->_sections[8] = array('title' => 'Index', 'url' => 'index-all.html');
 
-            $this->_depth = substr_count($filename, '/') + 1;
+            $this->_depth = substr_count(str_replace('\\', '/', $filename), '/') + 1;
 
             if (class_exists('GeSHi')) {
                 $geshi = new GeSHi($data[0], 'php');
                 $source = $geshi->parse_code();
             } else {
-                $source = '<pre>'.$data[0].'</pre>';
+                $source = '<pre>'.htmlspecialchars($data[0]).'</pre>';
             }
 
             ob_start();

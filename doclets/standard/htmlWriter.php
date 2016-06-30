@@ -168,7 +168,7 @@ class htmlWriter
 
         $output .= '<div class="small_links">'."\n";
         $output .= '<a href="'.str_repeat('../', $this->_depth).'index.html" target="_top">Frames</a>'."\n";
-        $output .= '<a href="'.str_repeat('../', $this->_depth).$path.'" target="_top">No frames</a>'."\n";
+        $output .= '<a href="'.str_repeat('../', $this->_depth).str_replace('\\', '/', $path).'" target="_top">No frames</a>'."\n";
         $output .= "</div>\n";
         $thisClass = strtolower(get_class($this));
         if ($thisClass == 'classwriter') {

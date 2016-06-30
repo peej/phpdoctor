@@ -142,7 +142,7 @@ class standard extends Doclet
 
         if (isset($options['include_source'])) $this->_includeSource = $options['include_source'];
         if ($this->_includeSource) {
-            @include_once 'geshi/geshi.php';
+            if (!class_exists('GeSHi')) @include_once 'geshi/geshi.php';
             if (!class_exists('GeSHi')) {
                 $phpdoctor->warning('Could not find GeSHi in "geshi/geshi.php", not pretty printing source');
             }
