@@ -35,10 +35,10 @@ if (!isset($argv[0])) {
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__));
 require('classes'.DIRECTORY_SEPARATOR.'phpDoctor.php');
 
-// include geshi from composer if it exists
-$phpg = 'vendor'.DIRECTORY_SEPARATOR.'easybook'.DIRECTORY_SEPARATOR.'geshi'.DIRECTORY_SEPARATOR.'geshi.php';
-if (is_readable($phpg)) {
-    include($phpg);
+// include Composer autoloader
+$autoloader = dirname(__FILE__).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
+if (is_readable($autoloader)) {
+    include($autoloader);
 }
 
 // get name of config file to use
